@@ -4,10 +4,14 @@
 ## **Technology Stack**
 - ***C#***
 - ***.NET MAUI***
-- ***Linq***
+- ***Xaml***
 
 ## Nuget Packages
-- ***Unknown (ToDo)***
+- ***MongoDB.Bson***
+- ***Newtonsoft.Json***
+- ***sqlite-net-pcl***
+- ***.NET MAUI Community Toolkit***
+
 ## **Back-End**
 ![GitHub All Releases](https://img.shields.io/badge/Project-Node.js-darkgreen) <br />
 Link won't work until project will be public.
