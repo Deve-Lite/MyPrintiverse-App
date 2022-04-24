@@ -5,12 +5,14 @@
 - ***C#***
 - ***.NET MAUI***
 - ***Xaml***
+- ***xUnit***
 
 ## Nuget Packages
 - ***MongoDB.Bson***
 - ***Newtonsoft.Json***
 - ***sqlite-net-pcl***
 - ***.NET MAUI Community Toolkit***
+- ***Fluent Assertions***
 
 ## **Back-End**
 ![GitHub All Releases](https://img.shields.io/badge/Project-Node.js-darkgreen) <br />
