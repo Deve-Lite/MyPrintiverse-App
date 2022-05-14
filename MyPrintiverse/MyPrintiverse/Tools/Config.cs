@@ -23,7 +23,7 @@ public class Config : IConfig
 	/// </summary>
 	/// <exception cref="ArgumentException" />
 	/// <exception cref="FileNotFoundException" />
-	/// <param name="filePath"></param>
+	/// <param name="filePath">Config file disc path.</param>
 	/// <returns><see cref="Config" /> instance.</returns>
 	public static Config GetInstance(string filePath)
 	{
