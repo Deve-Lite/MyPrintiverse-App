@@ -19,13 +19,13 @@ public class Config : IConfig
 	#endregion
 
 	/// <summary>
-	/// Create singleton instance.
+	/// Create <see cref="Config" /> instance.
 	/// </summary>
 	/// <exception cref="ArgumentException" />
 	/// <exception cref="FileNotFoundException" />
 	/// <param name="filePath"></param>
-	/// <returns></returns>
-	public static IConfig GetInstance(string filePath)
+	/// <returns><see cref="Config" /> instance.</returns>
+	public static Config GetInstance(string filePath)
 	{
 		switch (_configInstance)
 		{
