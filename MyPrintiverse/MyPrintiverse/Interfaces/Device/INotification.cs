@@ -7,8 +7,8 @@ namespace MyPrintiverse.Interfaces.Device
     public interface INotification
     {
         event EventHandler NotificationReceived;
-        void Initialize();
-        void SendNotification(string title, string message, DateTime? notifyTime = null);
-        void ReceiveNotification(string title, string message);
+        INotification Initialize();
+        INotification SendNotification(string title, string message, DateTime? notifyTime = null);
+        INotification ReceiveNotification(string title, string message);
     }
 }

@@ -4,8 +4,7 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
-		var builder = MauiApp.CreateBuilder();
-		builder
+		var builder = MauiApp.CreateBuilder()
 			.UseMauiApp<App>()
 			.ConfigureServices()
 			.ConfigureViews()
@@ -16,6 +15,6 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+		return builder;
 	}
 }

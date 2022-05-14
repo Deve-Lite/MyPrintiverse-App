@@ -12,7 +12,6 @@
         {
             // template
             // builder.Services.AddSingleton<...ViewModel>();
-            
 
             return builder;
         }

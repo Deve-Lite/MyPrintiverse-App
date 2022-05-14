@@ -5,6 +5,12 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPrintiverse", "MyPrintiverse\MyPrintiverse.csproj", "{C9D5E537-4C7B-45ED-A47C-98D157877757}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Develite.Utilities", "Develite.Utilities\Develite.Utilities.csproj", "{EF880B8B-2E80-48A3-8DA6-C3C737B8BD2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Develite.Utilities.Tests", "Develite.Utilities.Tests\Develite.Utilities.Tests.csproj", "{5B52F67D-19C7-4979-AF13-B29B41E3E86C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPrintiverse.Tests", "MyPrintiverse.Tests\MyPrintiverse.Tests.csproj", "{61F21450-6807-45DC-9DF5-FF49FB47143B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +23,18 @@ Global
 		{C9D5E537-4C7B-45ED-A47C-98D157877757}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9D5E537-4C7B-45ED-A47C-98D157877757}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9D5E537-4C7B-45ED-A47C-98D157877757}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EF880B8B-2E80-48A3-8DA6-C3C737B8BD2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF880B8B-2E80-48A3-8DA6-C3C737B8BD2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF880B8B-2E80-48A3-8DA6-C3C737B8BD2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF880B8B-2E80-48A3-8DA6-C3C737B8BD2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B52F67D-19C7-4979-AF13-B29B41E3E86C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B52F67D-19C7-4979-AF13-B29B41E3E86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B52F67D-19C7-4979-AF13-B29B41E3E86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B52F67D-19C7-4979-AF13-B29B41E3E86C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F21450-6807-45DC-9DF5-FF49FB47143B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F21450-6807-45DC-9DF5-FF49FB47143B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F21450-6807-45DC-9DF5-FF49FB47143B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F21450-6807-45DC-9DF5-FF49FB47143B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
