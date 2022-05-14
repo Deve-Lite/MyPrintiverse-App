@@ -1,0 +1,31 @@
+name: MyPrintiverse Builder
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  working-dictionary: ./MyPrintiverse
+  dotnet-version: 6.0.x
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET ${{ env.dotnet-version }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.dotnet-version }}
+    - name: Install .NET MAUI workload
+      run: dotnet workload install maui
+    - name: Install dependecies
+      run: dotnet restore 
+      working-directory: ${{ env.working-dictionary }}
+    - name: Build Android
+      run: dotnet build -c Release -f:net6.0-android
+      working-directory: ${{ env.working-dictionary }}
