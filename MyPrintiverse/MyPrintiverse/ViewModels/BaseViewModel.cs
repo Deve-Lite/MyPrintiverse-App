@@ -7,7 +7,7 @@ namespace MyPrintiverse.ViewModels
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
         /// <summary>
-        /// Default dealy.
+        /// Default delay in milliseconds.
         /// </summary>
         protected const int DELAY = 500;
 
@@ -37,9 +37,9 @@ namespace MyPrintiverse.ViewModels
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged(string propertyName = null)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
+            var handler = PropertyChanged;
+
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace MyPrintiverse.ViewModels
         {
             IsBusy = true;
 
-            bool value = await Shell.Current.DisplayAlert(title, message, "Yes", "No");
+            var value = await Shell.Current.DisplayAlert(title, message, "Yes", "No");
 
             IsBusy = false;
             return value;
