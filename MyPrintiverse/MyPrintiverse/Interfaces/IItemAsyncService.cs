@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.Interfaces.DeviceService
+namespace MyPrintiverse.Interfaces
 {
     /// <summary>
-    /// Default interface for internet service.
+    /// Default interface for device service with standard CRUD operations.
     /// </summary>
     /// <typeparam name="Item"></typeparam>
     public interface IItemAsyncService<Item>
@@ -23,18 +23,21 @@ namespace MyPrintiverse.Interfaces.DeviceService
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<Item>> GetItemsAsync();
+
         /// <summary>
         /// Adds item to sqlite db.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
         Task AddItemAsync(Item item);
+
         /// <summary>
         /// Updates item in sqlite db. Should update only when exists! 
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
         Task UpdateItemAsync(Item item);
+
         /// <summary>
         /// Deletes item by id in sqlite db.
         /// </summary>

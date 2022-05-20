@@ -1,5 +1,4 @@
-﻿
-namespace MyPrintiverse.ViewModels
+﻿namespace MyPrintiverse.Utils.Base
 {
     /// <summary>
     /// Base viewmodel for any page.
@@ -29,7 +28,7 @@ namespace MyPrintiverse.ViewModels
 
 
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Standard method for notifying view when property value has changed.

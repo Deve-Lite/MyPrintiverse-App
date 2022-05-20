@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.Interfaces.InternetService
+namespace MyPrintiverse.FilamentsModule.Rolls
 {
-    internal class ToDelete
+    internal class FilamentRoll
     {
-        // When other file in folder then delete.
     }
 }
