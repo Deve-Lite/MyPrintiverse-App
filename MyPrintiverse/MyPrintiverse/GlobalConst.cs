@@ -16,14 +16,14 @@ namespace MyPrintiverse
         /// <summary>
         /// Returns true if app user is logged else flase.
         /// </summary>
-        public static bool IsLogged { get => isLogged; set { isLogged = value; } }
+        public static bool IsLogged { get => isLogged; set => isLogged = value; }
 
 
         private static bool hasConnection;
         /// <summary>
         /// Returns true if device is connected to internet else false.
         /// </summary>
-        public static bool HasConnection { get => hasConnection; set { hasConnection = value; } }
+        public static bool HasConnection { get => hasConnection; set => hasConnection = value;  }
 
     }
 }
