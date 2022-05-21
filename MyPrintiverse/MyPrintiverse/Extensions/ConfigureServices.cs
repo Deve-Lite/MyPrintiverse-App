@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Hosting;
+﻿using MyPrintiverse.Core.Utilities;
 
 namespace MyPrintiverse.Extensions;
 
@@ -19,7 +19,6 @@ public static class ServicesExtensions
 
         builder.Services.AddSingleton<BaseService>();
         builder.Services.AddSingleton<MessageService>();
-        builder.Services.AddSingleton<Logger>();
         builder.Services.AddSingleton<Session>();
 
         return builder;

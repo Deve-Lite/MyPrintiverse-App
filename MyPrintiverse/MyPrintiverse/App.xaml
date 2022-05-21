@@ -17,8 +17,8 @@
     </Application.Resources>
 
 
-    <Application.MainPage>
-        <Shell>
+  <Application.MainPage>
+    <Shell>
 
             <!--  
             
