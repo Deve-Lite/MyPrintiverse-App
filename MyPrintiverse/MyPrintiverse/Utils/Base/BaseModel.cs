@@ -1,6 +1,4 @@
-﻿
-
-namespace MyPrintiverse.Models
+﻿namespace MyPrintiverse.Utils.Base
 {
     /// <summary>
     /// Base model for data objects.

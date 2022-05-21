@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.Services.DeviceService
+namespace MyPrintiverse.FilamentsModule.Statistics
 {
-    internal class ToDelete
+    internal class FilamentStatisticsInternetService
     {
-        // When other file in folder then delete.
     }
 }

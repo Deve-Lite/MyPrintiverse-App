@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.Interfaces.DeviceService
+namespace MyPrintiverse.Interfaces
 {
     /// <summary>
     /// Interface with base methods for groupped items with 'key'.

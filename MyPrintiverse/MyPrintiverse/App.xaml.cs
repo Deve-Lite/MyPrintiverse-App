@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse;
+﻿using MyPrintiverse.FilamentsModule.Filaments.Views;
+
+namespace MyPrintiverse;
 
 public partial class App : Application
 {
@@ -21,5 +23,10 @@ public partial class App : Application
     {
         // template
         // Routing.RegisterRoute(nameof(...View), typeof(...View));
+
+        /*Filament Module*/
+        Routing.RegisterRoute(nameof(FilamentsView), typeof(FilamentsView));
+
+        /*Authorization Module*/
     }
 }

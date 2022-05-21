@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Services
+﻿namespace MyPrintiverse.Extensions
 {
     public static class ServicesExtensions
     {
