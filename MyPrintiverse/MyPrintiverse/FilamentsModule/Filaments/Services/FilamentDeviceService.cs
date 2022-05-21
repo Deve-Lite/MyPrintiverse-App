@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace MyPrintiverse.FilamentsModule.Filaments.Services;
 
-namespace MyPrintiverse.FilamentsModule.Filaments.Services
+public class FilamentDeviceService : BaseDeviceService<Filament>
 {
-    internal class FilamentDeviceService
+    public FilamentDeviceService()
     {
+        dbName = $"{nameof(Filament)}.db";
     }
 }
+

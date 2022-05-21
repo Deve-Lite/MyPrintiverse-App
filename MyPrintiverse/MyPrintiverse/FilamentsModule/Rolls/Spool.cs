@@ -4,7 +4,7 @@
 /// <summary>
 /// Filament roll model for storing filament roll data.
 /// </summary>
-public class FilamentSpool : BaseModel
+public class Spool : BaseModel
 {
     [JsonProperty("filamentId")]
     public string FilamentId { get; set; }

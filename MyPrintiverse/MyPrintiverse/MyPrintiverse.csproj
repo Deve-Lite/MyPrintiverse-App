@@ -59,11 +59,12 @@
 	<ItemGroup>
 	  <Folder Include="AuthorizationModule\ViewModels\" />
 	  <Folder Include="AuthorizationModule\Views\" />
+	  <Folder Include="FilamentsModule\Prints\ViewModels\" />
+	  <Folder Include="FilamentsModule\Prints\Views\" />
 	  <Folder Include="FilamentsModule\Rolls\ViewModels\" />
 	  <Folder Include="FilamentsModule\Rolls\Views\" />
 	  <Folder Include="FilamentsModule\Statistics\ViewModels\" />
 	  <Folder Include="FilamentsModule\Statistics\Views\" />
-	  <Folder Include="FilamentsModule\Types\Services\" />
 	  <Folder Include="FilamentsModule\Types\ViewModels\" />
 	  <Folder Include="FilamentsModule\Types\Views\" />
 	  <Folder Include="Tools\" />
