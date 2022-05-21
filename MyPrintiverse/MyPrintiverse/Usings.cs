@@ -11,4 +11,5 @@ global using Microsoft.Extensions.DependencyInjection.Extensions;
 
 global using MyPrintiverse.Extensions;
 global using CommunityToolkit.Maui;
+global using MyPrintiverse.Utils.Base;
 global using MyPrintiverse.Utils;
