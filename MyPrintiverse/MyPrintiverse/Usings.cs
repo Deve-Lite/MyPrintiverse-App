@@ -13,3 +13,8 @@ global using MyPrintiverse.Extensions;
 global using CommunityToolkit.Maui;
 global using MyPrintiverse.Utils.Base;
 global using MyPrintiverse.Utils;
+
+global using MyPrintiverse.FilamentsModule.Filaments.Services;
+global using MyPrintiverse.FilamentsModule.Prints.Service;
+global using MyPrintiverse.FilamentsModule.Rolls.Services;
+global using MyPrintiverse.FilamentsModule.Types.Services;

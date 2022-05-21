@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.Interfaces
+namespace MyPrintiverse.FilamentsModule.Rolls
 {
     /// <summary>
     /// Interface with base methods for groupped items with 'key'.
     /// </summary>
-    public interface IGroupKeyAsyncService<Item>
+    public interface IItemKeyAsyncService<Item>
     {
         /// <summary>
         /// Returns IEnumerable  with items with specified key
