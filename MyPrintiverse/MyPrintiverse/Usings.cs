@@ -8,11 +8,13 @@ global using MongoDB.Bson;
 global using Newtonsoft.Json;
 global using SQLite;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using RestSharp;
 
 global using MyPrintiverse.Extensions;
 global using CommunityToolkit.Maui;
 global using MyPrintiverse.Utils.Base;
 global using MyPrintiverse.Utils;
+global using MyPrintiverse.Interfaces;
 
 global using MyPrintiverse.FilamentsModule.Filaments.Services;
 global using MyPrintiverse.FilamentsModule.Prints.Service;

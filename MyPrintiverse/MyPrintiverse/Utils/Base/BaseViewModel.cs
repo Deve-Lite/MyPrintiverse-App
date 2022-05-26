@@ -10,7 +10,6 @@
         /// </summary>
         protected const int DELAY = 500;
 
-
         /// <summary>
         /// Standard functions to do when page appears.
         /// </summary>
@@ -19,14 +18,17 @@
             IsBusy = false;
         }
 
-
         private bool isBusy;
         /// <summary>
         /// Field to terminate if any action started on page.
         /// </summary>
         protected bool IsBusy { get => isBusy; set => SetProperty(ref isBusy, value); }
 
-
+        private bool iRefreshing;
+        /// <summary>
+        /// Field to terminate if any action started on page.
+        /// </summary>
+        protected bool IsRefreshing { get => iRefreshing; set => SetProperty(ref iRefreshing, value); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

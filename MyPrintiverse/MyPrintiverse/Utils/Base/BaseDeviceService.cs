@@ -7,7 +7,7 @@ namespace MyPrintiverse.Utils.Base
     /// <summary>
     /// Generic service for device databases.
     /// </summary>
-    public abstract class BaseDeviceService<Item> : IItemAsyncService<Item> where Item : class, new()
+    public abstract class BaseDeviceService<Item> : IDeviceItemAsyncService<Item> where Item : class, new()
     {
         /// <summary>
         /// Database name. (If not set it creates random database)
