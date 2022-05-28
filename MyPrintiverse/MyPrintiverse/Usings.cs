@@ -17,4 +17,5 @@ global using MyPrintiverse.Base.Models;
 global using MyPrintiverse.Base.Services;
 global using MyPrintiverse.Base.ViewModels;
 global using MyPrintiverse.Interfaces;
+global using MyPrintiverse.Tools;
 

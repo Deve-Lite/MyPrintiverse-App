@@ -12,14 +12,14 @@
     {
         public ObservableCollection<GrouppedItem<Model>> Items { get; set; }
 
-        public Command RefreshItemsCommand { get; set; }
-        public Command AddItemCommand { get; set; }
+        public AsyncCommand RefreshItemsCommand { get; set; }
+        public AsyncCommand AddItemCommand { get; set; }
 
-        public Command<Model> EditItemCommand { get; set; }
-        public Command<Model> OpenItemCommand { get; set; }
-        public Command<Model> DeleteItemCommand { get; set; }
+        public AsyncCommand<Model> EditItemCommand { get; set; }
+        public AsyncCommand<Model> OpenItemCommand { get; set; }
+        public AsyncCommand<Model> DeleteItemCommand { get; set; }
 
-        protected IItemAsyncService<Model> ItemService;
+        protected IItemAsyncService<Model> ItemsService;
 
         protected internal override async void OnAppearing()
         {
@@ -27,16 +27,16 @@
             Items = new ObservableCollection<GrouppedItem<Model>>();
             IsBusy = false;
 
-            RefreshItemsCommand = new Command(RefreshItems);
-            AddItemCommand = new Command(AddItem);
-            EditItemCommand = new Command<Model>(EditItem);
-            OpenItemCommand = new Command<Model>(OpenItem);
-            DeleteItemCommand = new Command<Model>(DeleteItem);
+            RefreshItemsCommand = new AsyncCommand(RefreshItems);
+            AddItemCommand = new AsyncCommand(AddItem);
+            EditItemCommand = new AsyncCommand<Model>(EditItem);
+            OpenItemCommand = new AsyncCommand<Model>(OpenItem);
+            DeleteItemCommand = new AsyncCommand<Model>(DeleteItem);
 
             await UpdateItemsOnAppearing();
         }
 
-        protected virtual async void AddItem()
+        protected virtual async Task AddItem()
         {
             if (IsBusy)
                 return;
@@ -47,9 +47,10 @@
 
         protected virtual async Task UpdateItemsOnAppearing()
         {
+            IsBusy = true;
+            IsRefreshing = true;
 
-
-            List<Model> data = (List<Model>)await ItemService.GetItemsAsync();
+            List<Model> data = (List<Model>)await ItemsService.GetItemsAsync();
 
             int i = 0;
             foreach (GrouppedItem<Model> group in new List<GrouppedItem<Model>>(Items))
@@ -71,13 +72,14 @@
                 }
             }
 
-
             foreach (Model item in data)
                 AddToItems(item);
 
+            IsBusy = false;
+            IsRefreshing = false;
         }
 
-        protected virtual async void RefreshItems()
+        protected virtual async Task RefreshItems()
         {
             if (IsBusy)
                 return;
@@ -87,7 +89,7 @@
 
             Items.Clear();
 
-            foreach (Model item in await ItemService.GetItemsAsync())
+            foreach (Model item in await ItemsService.GetItemsAsync())
                 AddToItems(item);
 
             IsBusy = false;
@@ -95,7 +97,7 @@
         }
 
 
-        protected virtual async void EditItem(Model item)
+        protected virtual async Task EditItem(Model item)
         {
             if (IsBusy)
                 return;
@@ -104,21 +106,21 @@
         }
 
 
-        protected virtual async void DeleteItem(Model item)
+        protected virtual async Task DeleteItem(Model item)
         {
             if (IsBusy)
                 return;
 
             IsBusy = true;
 
-            if (await ItemService.DeleteItemAsync((item as BaseModel).Id))
+            if (await ItemsService.DeleteItemAsync((item as BaseModel).Id))
                 DeleteItem(item);
 
             IsBusy = false;
         }
 
 
-        protected virtual async void OpenItem(Model item)
+        protected virtual async Task OpenItem(Model item)
         {
             if (IsBusy)
                 return;
@@ -154,7 +156,6 @@
         /// <returns></returns>
         protected virtual string GetNewGroupName(Model item)
         {
-            
             return "Error";
         }
 

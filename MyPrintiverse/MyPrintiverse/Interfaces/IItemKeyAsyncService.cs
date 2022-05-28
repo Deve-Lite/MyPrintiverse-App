@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.FilamentsModule.Rolls
+namespace MyPrintiverse.Interfaces
 {
     /// <summary>
-    /// Interface with base methods for groupped items with 'key'.
+    /// Interface with base methods for groupped items with 'key'. (Designed for Groupped CollectionViews)
     /// </summary>
-    public interface IItemKeyAsyncService<Item>
+    public interface IKeyItemAsyncService<Item>
     {
         /// <summary>
-        /// Returns IEnumerable  with items with specified key
+        /// Returns IEnumerable with items with specified key
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -22,6 +22,6 @@ namespace MyPrintiverse.FilamentsModule.Rolls
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        Task DeleteItemsByKeyAsync(string key);
+        Task<bool> DeleteItemsByKeyAsync(string key);
     }
 }

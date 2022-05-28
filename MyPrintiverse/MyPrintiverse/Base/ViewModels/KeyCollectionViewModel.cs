@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using MyPrintiverse.Base.Models;
-using MyPrintiverse.Interfaces;
+﻿
 
 namespace MyPrintiverse.Base.ViewModels
 {
     /// <summary>
-    /// View model for displaying single Collection with base commands.
+    /// Base ViewModel for view displaying collection with key service.
     /// </summary>
     /// <typeparam name="Model"></typeparam>
     /// <typeparam name="AddViewModel"></typeparam>
     /// <typeparam name="EditViewModel"></typeparam>
     /// <typeparam name="DisplayViewModel"></typeparam>
-    public abstract class CollectionViewModel<Model, AddViewModel, EditViewModel, DisplayViewModel> : BaseViewModel
+    [QueryProperty(nameof(Id), nameof(Id))]
+    public class KeyCollectionViewModel<Model, AddViewModel, EditViewModel, DisplayViewModel> : BaseViewModel
     {
         public ObservableCollection<Model> Items { get; set; }
 
@@ -23,7 +21,11 @@ namespace MyPrintiverse.Base.ViewModels
         public AsyncCommand<Model> OpenItemCommand { get; set; }
         public AsyncCommand<Model> DeleteItemCommand { get; set; }
 
+        string PrevId;
+        public string Id { get; set; }
+
         protected IItemAsyncService<Model> ItemService;
+        protected IKeyItemAsyncService<Model> KeyItemsService;
 
         protected internal override async void OnAppearing()
         {
@@ -49,10 +51,13 @@ namespace MyPrintiverse.Base.ViewModels
 
         protected virtual async Task UpdateItemsOnAppearing()
         {
+            if (Id != PrevId)
+                await RefreshItems();
+
             IsBusy = true;
             IsRefreshing = true;
 
-            List<Model> data = (List<Model>)await ItemService.GetItemsAsync();
+            List<Model> data = (List<Model>)await KeyItemsService.GetItemsByKeyAsync(Id);
 
             int i = 0;
             foreach (Model item in new List<Model>(Items))
@@ -88,7 +93,7 @@ namespace MyPrintiverse.Base.ViewModels
 
             Items.Clear();
 
-            foreach (var item in await ItemService.GetItemsAsync())
+            foreach (var item in await KeyItemsService.GetItemsByKeyAsync(Id))
                 Items.Add(item);
 
             IsBusy = false;
@@ -129,4 +134,3 @@ namespace MyPrintiverse.Base.ViewModels
         }
     }
 }
-

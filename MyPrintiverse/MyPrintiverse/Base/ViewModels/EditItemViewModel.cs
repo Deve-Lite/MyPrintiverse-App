@@ -12,7 +12,7 @@
         protected Model item;
         public Model Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
-        public Command AddItemCommand { get; set; }
+        public AsyncCommand AddItemCommand { get; set; }
 
         protected IItemAsyncService<Model> ItemService;
 
@@ -22,25 +22,22 @@
 
             Item = await ItemService.GetItemAsync(Id);
 
-            AddItemCommand = new Command(AddItem);
+            AddItemCommand = new AsyncCommand(EditItem);
         }
 
 
-        public virtual async void AddItem()
+        public virtual async Task EditItem()
         {
             if (IsBusy)
                 return;
 
             // Open loading popup / activity indicator
-            IsRefreshing = true;
             IsBusy = true;
 
             if (await ItemService.UpdateItemAsync(Item))
-            {
                 await Shell.Current.GoToAsync("..");
-            }
+            
 
-            IsRefreshing = false;
             IsBusy = false;
         }
 
