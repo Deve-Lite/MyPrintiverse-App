@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.FilamentsModule.Statistics;
+﻿using MyPrintiverse.Base.Models;
+
+namespace MyPrintiverse.FilamentsModule.Statistics;
 
 /// <summary>
 /// Filament statistics model for storing statistics data.

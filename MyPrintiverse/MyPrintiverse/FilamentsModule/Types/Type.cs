@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.FilamentsModule.Types;
+﻿using MyPrintiverse.Base.Models;
+
+namespace MyPrintiverse.FilamentsModule.Types;
 
 /// <summary>
 /// Model for storing data about type of filament.

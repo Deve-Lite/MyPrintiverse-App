@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MyPrintiverse.Tools;
+using MyPrintiverse.Tools.Exceptions;
 using System.Net;
 
-namespace MyPrintiverse.Utils.Base
+namespace MyPrintiverse.Base.Services
 {
-    public class BaseInternetService<Item> : IInternetItemAsyncService<Item> where Item : class, new()
+    /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
+    public class BaseInternetService<Item> //: IInternetItemAsyncService<Item> where Item : class, new()
     {
         // protected static string ConnectionString { get; set; } = "http://localhost:3000/api/";
         // protected string ConnectionString { get; set; } = "http://10.0.2.2:3000/api/";

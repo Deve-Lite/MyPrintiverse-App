@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace MyPrintiverse.Utils.Base
+namespace MyPrintiverse.Tools.Exceptions
 {
     [Serializable]
     internal class RefreshTokenException : Exception

@@ -1,46 +1,54 @@
 ﻿using System;
 namespace MyPrintiverse.Interfaces
 {
+    /// <summary>
+    /// Base interface for Internet Service 
+    /// </summary>
+    /// <typeparam name="Model"></typeparam>
 	public interface IInternetItemAsyncService<Model>
 	{
+
+        /* Tutaj ewentualny problem z tym co bedziemy zwracać -> najprawdopodobniej trzeba bedzie inaczej parsować dane i zwracać nasz Response a nie RestResponse */
+        /* isFirst -> determinuje czy to bylo pierwsze czy drugie zapytanie (jezeli error z tokenem to ponawaimy zapytanie inaczej zapytanie nie udane ) */
+
         /// <summary>
-        /// Returns sqlite db item by id.
+        /// Returns response with data about item specified with objectId (if succesfull).
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         Task<RestResponse<Model>> GetItemAsync(string objectId, bool isFirst);
         /// <summary>
-        /// Returns IEnumerable of items from sqlite db.
+        /// Returns response with items (if succesfull).
         /// </summary>
         /// <returns></returns>
         Task<RestResponse<IEnumerable<Model>>> GetItemsAsync(bool isFirst);
 
         /// <summary>
-        /// Adds item to sqlite db.
+        /// Adds item to database and returns if action was succesfull.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<RestResponse<Model>> AddItemAsync(Model item, bool isFirst);
+        Task<bool> AddItemAsync(Model item, bool isFirst);
 
         /// <summary>
-        /// Updates item in sqlite db. Should update only when exists! 
+        /// Updates item to database and returns if action was succesfull.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<RestResponse<Model>> UpdateItemAsync(Model item, bool isFirst);
+        Task<bool> UpdateItemAsync(Model item, bool isFirst);
 
         /// <summary>
-        /// Deletes item by id in sqlite db.
+        /// Deletes item specified by objectId and returns if action was succesfull.
         /// </summary>
         /// <param name="objectId"></param>
         /// <returns></returns>
-        Task<RestResponse<bool>> DeleteItemAsync(string objectId, bool isFirst);
+        Task<bool> DeleteItemAsync(string objectId, bool isFirst);
 
         /// <summary>
-        /// Methods drops table (item database).
+        /// Deletes all items and returns if action was succesfull.
         /// </summary>
         /// <returns></returns>
-        Task<RestResponse<bool>> DeleteAllAsync(bool isFirst);
+        Task<bool> DeleteAllAsync(bool isFirst);
     }
 }
 

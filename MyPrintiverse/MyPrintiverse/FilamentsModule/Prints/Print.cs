@@ -1,4 +1,6 @@
 ﻿
+using MyPrintiverse.Base.Models;
+
 namespace MyPrintiverse.FilamentsModule.Prints;
 
 /// <summary>

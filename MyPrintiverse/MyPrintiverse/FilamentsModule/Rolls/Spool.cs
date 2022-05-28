@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.FilamentsModule.Rolls;
+﻿using MyPrintiverse.Base.Models;
+
+namespace MyPrintiverse.FilamentsModule.Rolls;
 
 
 /// <summary>

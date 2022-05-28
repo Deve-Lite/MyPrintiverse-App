@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Utils.Base
+﻿namespace MyPrintiverse.Base.ViewModels
 {
     /// <summary>
     /// Base viewmodel for any page.
@@ -24,9 +24,10 @@
         /// </summary>
         protected bool IsBusy { get => isBusy; set => SetProperty(ref isBusy, value); }
 
+
         private bool iRefreshing;
         /// <summary>
-        /// Field to terminate if any action started on page.
+        /// Field to terminate if collection refresh started on page.
         /// </summary>
         protected bool IsRefreshing { get => iRefreshing; set => SetProperty(ref iRefreshing, value); }
 

@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.FilamentsModule.Filaments;
+﻿using MyPrintiverse.Base.Models;
+
+namespace MyPrintiverse.FilamentsModule.Filaments;
 
 /// <summary>
 /// Filament model for storing filament data.

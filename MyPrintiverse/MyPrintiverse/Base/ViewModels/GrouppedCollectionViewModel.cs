@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using MyPrintiverse.Interfaces;
-
-namespace MyPrintiverse.Utils.Base
+﻿namespace MyPrintiverse.Base.ViewModels
 {
-
     /// <summary>
-    /// Model powinien miec w sobie liste obiektów
+    /// Base model for view with groupped CollectionView.
     /// </summary>
     /// <typeparam name="Model"></typeparam>
+    /// <typeparam name="GrouppedModel"></typeparam>
+    /// <typeparam name="AddViewModel"></typeparam>
+    /// <typeparam name="EditViewModel"></typeparam>
+    /// <typeparam name="DisplayViewModel"></typeparam>
 	public class GroupedCollectionViewModel<Model, GrouppedModel, AddViewModel, EditViewModel, DisplayViewModel> : BaseViewModel
     {
         public ObservableCollection<GrouppedItem<Model>> Items { get; set; }
@@ -139,25 +138,33 @@ namespace MyPrintiverse.Utils.Base
             }
             else
             {
-                Items[x].Collection.Add(item);
+                Items[x].Items.Add(item);
             }
         }
 
         protected virtual void DeleteFromItems(Model item)
         {
-            Items[GetIndex(item)].Collection.Remove(item);
+            Items[GetIndex(item)].Items.Remove(item);
         }
 
+        /// <summary>
+        /// Method creates new group name. (MUST BE IMPLEMENTED EACH TIME)
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected virtual string GetNewGroupName(Model item)
         {
-            // TO IMPLEMENT 
+            
             return "Error";
         }
 
+        /// <summary>
+        /// Method returns group index. (MUST BE IMPLEMENTED EACH TIME)
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected virtual int GetIndex(Model item)
         {
-            // TO IMPLEMENT
-            // ma zwracac albo index grupy albo -1
             return 0;
         }
     }

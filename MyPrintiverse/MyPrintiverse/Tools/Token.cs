@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace MyPrintiverse.Utils
+namespace MyPrintiverse.Tools
 {
+    /// <summary>
+    /// Class for managing token and refreshtoken.
+    /// </summary>
     public static class Token
     {
         public static string Id { get; set; }

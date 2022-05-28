@@ -1,8 +1,4 @@
-﻿
-
-using MyPrintiverse.Interfaces;
-
-namespace MyPrintiverse.Utils.Base
+﻿namespace MyPrintiverse.Base.Services
 {
     /// <summary>
     /// Generic service for device databases.
@@ -30,21 +26,21 @@ namespace MyPrintiverse.Utils.Base
             await db.CreateTableAsync<Item>();
         }
 
-        public async Task AddItemAsync(Item item)
+        public virtual async Task AddItemAsync(Item item)
         {
             if (item == null || string.IsNullOrEmpty((item as BaseModel).Id))
                 return;
 
             await ConnectToDatabase();
-            await db.InsertAsync(item,typeof(Item));
+            await db.InsertAsync(item, typeof(Item));
         }
 
-        public async Task DeleteAllAsync()
+        public virtual async Task DeleteAllAsync()
         {
             await ConnectToDatabase();
             await db.DeleteAllAsync<Item>();
         }
-        public async Task DeleteItemAsync(string objectId)
+        public virtual async Task DeleteItemAsync(string objectId)
         {
             if (string.IsNullOrEmpty(objectId))
                 return;
@@ -53,20 +49,20 @@ namespace MyPrintiverse.Utils.Base
             await db.DeleteAsync<Item>(objectId);
         }
 
-        public async Task<Item> GetItemAsync(string objectId)
+        public virtual async Task<Item> GetItemAsync(string objectId)
         {
             await ConnectToDatabase();
             return await db.GetAsync<Item>(objectId);
             /*Do sprawdzenia która metoda lepsza */
             //return await db.Table<Item>().FirstOrDefaultAsync(x => (x as BaseModel).Id == objectId);
         }
-        public async Task<IEnumerable<Item>> GetItemsAsync()
+        public virtual async Task<IEnumerable<Item>> GetItemsAsync()
         {
             await ConnectToDatabase();
             return await db.Table<Item>().ToListAsync();
         }
 
-        public async Task UpdateItemAsync(Item item)
+        public virtual async Task UpdateItemAsync(Item item)
         {
             if (item == null || string.IsNullOrEmpty((item as BaseModel).Id))
                 return;

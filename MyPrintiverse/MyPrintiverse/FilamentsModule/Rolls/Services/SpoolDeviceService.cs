@@ -1,5 +1,7 @@
 ﻿
 
+using MyPrintiverse.Base.Services;
+
 namespace MyPrintiverse.FilamentsModule.Rolls.Services;
 public class SpoolDeviceService : BaseDeviceService<Spool>, IItemKeyAsyncService<Spool>
 {

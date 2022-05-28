@@ -1,11 +1,12 @@
-﻿using System;
-using MyPrintiverse.Interfaces;
-
-namespace MyPrintiverse.Utils.Base
+﻿namespace MyPrintiverse.Base.ViewModels
 {
+    /// <summary>
+    /// Base view model for editing any item.
+    /// </summary>
+    /// <typeparam name="Model"></typeparam>
     [QueryProperty(nameof(Id), nameof(Id))]
     public class EditItemViewModel<Model> : BaseViewModel
-	{
+    {
         public string Id { get; set; }
 
         protected Model item;

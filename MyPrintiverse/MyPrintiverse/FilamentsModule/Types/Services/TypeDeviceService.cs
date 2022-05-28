@@ -1,4 +1,6 @@
 ﻿
+using MyPrintiverse.Base.Services;
+
 namespace MyPrintiverse.FilamentsModule.Types.Services;
 
 public class TypeDeviceService : BaseDeviceService<Type>

@@ -66,9 +66,7 @@
 	  <Folder Include="FilamentsModule\Statistics\Views\" />
 	  <Folder Include="FilamentsModule\Types\ViewModels\" />
 	  <Folder Include="FilamentsModule\Types\Views\" />
-	  <Folder Include="Tools\" />
-	  <Folder Include="Utils\Exceptions\" />
-	  <Folder Include="Utils\Base\ItemBase\" />
+	  <Folder Include="Tools\Exceptions\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -80,7 +78,5 @@
 	<ItemGroup>
 	  <None Remove="RestSharp" />
 	  <None Remove="System.IdentityModel.Tokens.Jwt" />
-	  <None Remove="Utils\Exceptions\" />
-	  <None Remove="Utils\Base\ItemBase\" />
 	</ItemGroup>
 </Project>

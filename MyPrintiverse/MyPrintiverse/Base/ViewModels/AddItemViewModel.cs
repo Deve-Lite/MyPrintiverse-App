@@ -1,10 +1,11 @@
-﻿using System;
-using MyPrintiverse.Interfaces;
-
-namespace MyPrintiverse.Utils.Base
+﻿namespace MyPrintiverse.Base.ViewModels
 {
-	public class AddItemViewModel<Model> : BaseViewModel
-	{
+    /// <summary>
+    /// Base view model for adding new item.
+    /// </summary>
+    /// <typeparam name="Model"></typeparam>
+    public class AddItemViewModel<Model> : BaseViewModel
+    {
         protected Model item;
         public Model Item { get => item; set => SetProperty(ref item, value); }
 

@@ -1,4 +1,4 @@
-﻿using MyPrintiverse.Utils.Base;
+﻿using MyPrintiverse.Base.ViewModels;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.ViewModels
 {

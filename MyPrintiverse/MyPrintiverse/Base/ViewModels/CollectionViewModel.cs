@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using MyPrintiverse.Base.Models;
 using MyPrintiverse.Interfaces;
 
-namespace MyPrintiverse.Utils.Base
+namespace MyPrintiverse.Base.ViewModels
 {
     /// <summary>
-    /// View model for displaying single Collection.
+    /// View model for displaying single Collection with base commands.
     /// </summary>
     /// <typeparam name="Model"></typeparam>
     /// <typeparam name="AddViewModel"></typeparam>
@@ -108,7 +109,7 @@ namespace MyPrintiverse.Utils.Base
 
             IsBusy = true;
 
-            if(await ItemService.DeleteItemAsync((item as BaseModel).Id))
+            if (await ItemService.DeleteItemAsync((item as BaseModel).Id))
                 Items.Remove(item);
 
             IsBusy = false;
