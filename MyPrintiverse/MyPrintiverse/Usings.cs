@@ -8,7 +8,14 @@ global using MongoDB.Bson;
 global using Newtonsoft.Json;
 global using SQLite;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using RestSharp;
+global using CommunityToolkit.Maui;
+global using System.Collections.ObjectModel;
 
 global using MyPrintiverse.Extensions;
-global using CommunityToolkit.Maui;
-global using MyPrintiverse.Utils;
+global using MyPrintiverse.Base.Models;
+global using MyPrintiverse.Base.Services;
+global using MyPrintiverse.Base.ViewModels;
+global using MyPrintiverse.Interfaces;
+global using MyPrintiverse.Tools;
+

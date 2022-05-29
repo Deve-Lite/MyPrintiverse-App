@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.Helpers
+namespace MyPrintiverse.Tools
 {
     /// <summary>
-    /// Class for random helper methods.
+    /// Class for validation methods.
     /// </summary>
-    public static class Helper
+    public static class Validation
     {
     }
 }

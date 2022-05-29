@@ -39,9 +39,6 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-
-		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
@@ -54,19 +51,21 @@
 	  <PackageReference Include="MongoDB.Bson" Version="2.15.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+	  <PackageReference Include="RestSharp" Version="106.15.0" />
+	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.18.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="AuthorizationModule\ViewModels\" />
 	  <Folder Include="AuthorizationModule\Views\" />
+	  <Folder Include="FilamentsModule\Prints\ViewModels\" />
+	  <Folder Include="FilamentsModule\Prints\Views\" />
 	  <Folder Include="FilamentsModule\Rolls\ViewModels\" />
 	  <Folder Include="FilamentsModule\Rolls\Views\" />
 	  <Folder Include="FilamentsModule\Statistics\ViewModels\" />
 	  <Folder Include="FilamentsModule\Statistics\Views\" />
-	  <Folder Include="FilamentsModule\Types\Services\" />
 	  <Folder Include="FilamentsModule\Types\ViewModels\" />
 	  <Folder Include="FilamentsModule\Types\Views\" />
-	  <Folder Include="Tools\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,4 +74,8 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="RestSharp" />
+	  <None Remove="System.IdentityModel.Tokens.Jwt" />
+	</ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.Extensions
+﻿
+
+namespace MyPrintiverse.Extensions
 {
     public static class ServicesExtensions
     {
@@ -13,7 +15,14 @@
             // Template
             // builder.Services.TryAddTransient<...Service>();
             // builder.Services.AddSingleton<...Service>();
-            /* Implementation */
+
+            /* Filament Services */
+            builder.Services.AddSingleton<FilamentDeviceService>();
+            builder.Services.AddSingleton<SpoolDeviceService>();
+            builder.Services.AddSingleton<PrintDeviceService>();
+            builder.Services.AddSingleton<TypeDeviceService>();
+
+
 
 
             return builder;
