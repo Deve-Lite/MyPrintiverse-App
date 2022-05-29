@@ -8,22 +8,22 @@ namespace MyPrintiverse.Base.ViewModels
     /// <summary>
     /// View model for displaying single Collection with base commands.
     /// </summary>
-    /// <typeparam name="T"> Model </typeparam>
+    /// <typeparam name="TBaseModel"> Model </typeparam>
     /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
     /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
     /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-    public abstract class CollectionViewModel<T, TAdd, TEdit, TDisplay> : BaseViewModel where T : BaseModel
+    public abstract class CollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
     {
-        public ObservableCollection<T> Items { get; set; }
+        public ObservableCollection<TBaseModel> Items { get; set; }
 
         public AsyncCommand RefreshItemsCommand { get; set; }
         public AsyncCommand AddItemCommand { get; set; }
 
-        public AsyncCommand<T> EditItemCommand { get; set; }
-        public AsyncCommand<T> OpenItemCommand { get; set; }
-        public AsyncCommand<T> DeleteItemCommand { get; set; }
+        public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
+        public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
+        public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
 
-        protected IItemAsyncService<T> ItemService;
+        protected IItemAsyncService<TBaseModel> ItemService;
 
         protected internal override async void OnAppearing()
         {
@@ -31,9 +31,9 @@ namespace MyPrintiverse.Base.ViewModels
 
             RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);
             AddItemCommand = new AsyncCommand(AddItem, CanExecute);
-            EditItemCommand = new AsyncCommand<T>(EditItem, CanExecute);
-            OpenItemCommand = new AsyncCommand<T>(OpenItem, CanExecute);
-            DeleteItemCommand = new AsyncCommand<T>(DeleteItem, CanExecute);
+            EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
+            OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
+            DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);
 
             await UpdateItemsOnAppearing();
         }
@@ -45,12 +45,12 @@ namespace MyPrintiverse.Base.ViewModels
             IsBusy = true;
             IsRefreshing = true;
 
-            List<T> data = (List<T>)await ItemService.GetItemsAsync();
+            List<TBaseModel> data = (List<TBaseModel>)await ItemService.GetItemsAsync();
 
             int i = 0;
-            foreach (T item in new List<T>(Items))
+            foreach (TBaseModel item in new List<TBaseModel>(Items))
             {
-                T newItem = data.First(x => x.Id == item.Id);
+                TBaseModel newItem = data.First(x => x.Id == item.Id);
 
                 if (newItem == null)
                 {
@@ -64,7 +64,7 @@ namespace MyPrintiverse.Base.ViewModels
                 }
             }
 
-            foreach (T item in data)
+            foreach (TBaseModel item in data)
                 Items.Add(item);
 
             IsRefreshing = false;
@@ -86,10 +86,10 @@ namespace MyPrintiverse.Base.ViewModels
         }
 
 
-        protected virtual async Task EditItem(T item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
+        protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
 
 
-        protected virtual async Task DeleteItem(T item)
+        protected virtual async Task DeleteItem(TBaseModel item)
         {
 
             if (await ItemService.DeleteItemAsync(item.Id))
@@ -99,7 +99,7 @@ namespace MyPrintiverse.Base.ViewModels
         }
 
 
-        protected virtual async Task OpenItem(T item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
+        protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
     }
 }
 

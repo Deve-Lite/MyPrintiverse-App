@@ -3,34 +3,34 @@
     /// <summary>
     /// Base model for view with groupped CollectionView.
     /// </summary>
-    /// <typeparam name="T"> Collection model. </typeparam>
+    /// <typeparam name="TBaseModel"> Model inheriting from BaseModel. </typeparam>
     /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
     /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
     /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-	public class GroupedCollectionViewModel<T, TAdd, TEdit, TDisplay> : BaseViewModel where T : BaseModel
+	public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
     {
-        public ObservableCollection<GrouppedItem<T>> Items { get; set; }
+        public ObservableCollection<GrouppedItem<TBaseModel>> Items { get; set; }
 
         public AsyncCommand RefreshItemsCommand { get; set; }
         public AsyncCommand AddItemCommand { get; set; }
 
-        public AsyncCommand<T> EditItemCommand { get; set; }
-        public AsyncCommand<T> OpenItemCommand { get; set; }
-        public AsyncCommand<T> DeleteItemCommand { get; set; }
+        public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
+        public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
+        public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
 
-        protected IItemAsyncService<T> ItemsService;
+        protected IItemAsyncService<TBaseModel> ItemsService;
 
         protected internal override async void OnAppearing()
         {
             base.OnAppearing();
-            Items = new ObservableCollection<GrouppedItem<T>>();
+            Items = new ObservableCollection<GrouppedItem<TBaseModel>>();
             IsBusy = false;
 
             RefreshItemsCommand = new AsyncCommand(RefreshItems,CanExecute);
             AddItemCommand = new AsyncCommand(AddItem, CanExecute);
-            EditItemCommand = new AsyncCommand<T>(EditItem, CanExecute);
-            OpenItemCommand = new AsyncCommand<T>(OpenItem, CanExecute);
-            DeleteItemCommand = new AsyncCommand<T>(DeleteItem, CanExecute);
+            EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
+            OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
+            DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);
 
             await UpdateItemsOnAppearing();
         }
@@ -42,14 +42,14 @@
             IsBusy = true;
             IsRefreshing = true;
 
-            List<T> data = (List<T>)await ItemsService.GetItemsAsync();
+            List<TBaseModel> data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
             int i = 0;
-            foreach (GrouppedItem<T> group in new List<GrouppedItem<T>>(Items))
+            foreach (GrouppedItem<TBaseModel> group in new List<GrouppedItem<TBaseModel>>(Items))
             {
-                foreach (T item in group)
+                foreach (TBaseModel item in group)
                 {
-                    T newItem = data.FirstOrDefault(x => x.Id == item.Id);
+                    TBaseModel newItem = data.FirstOrDefault(x => x.Id == item.Id);
 
                     if (newItem == null)
                     {
@@ -64,7 +64,7 @@
                 }
             }
 
-            foreach (T item in data)
+            foreach (TBaseModel item in data)
                 AddToItems(item);
 
             IsBusy = false;
@@ -78,7 +78,7 @@
 
             Items.Clear();
 
-            foreach (T item in await ItemsService.GetItemsAsync())
+            foreach (TBaseModel item in await ItemsService.GetItemsAsync())
                 AddToItems(item);
 
             IsBusy = false;
@@ -86,10 +86,10 @@
         }
 
 
-        protected virtual async Task EditItem(T item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
+        protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
 
 
-        protected virtual async Task DeleteItem(T item)
+        protected virtual async Task DeleteItem(TBaseModel item)
         {
 
             if (await ItemsService.DeleteItemAsync(item.Id))
@@ -99,16 +99,16 @@
         }
 
 
-        protected virtual async Task OpenItem(T item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
+        protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
 
-        protected virtual void AddToItems(T item)
+        protected virtual void AddToItems(TBaseModel item)
         {
             int x = GetIndex(item);
             if (x == -1)
             {
-                ObservableCollection<T> model = new ObservableCollection<T>();
+                ObservableCollection<TBaseModel> model = new ObservableCollection<TBaseModel>();
                 model.Add(item);
-                Items.Add(new GrouppedItem<T>(GetNewGroupName(item), model));
+                Items.Add(new GrouppedItem<TBaseModel>(GetNewGroupName(item), model));
             }
             else
             {
@@ -116,7 +116,7 @@
             }
         }
 
-        protected virtual void DeleteFromItems(T item)
+        protected virtual void DeleteFromItems(TBaseModel item)
         {
             Items[GetIndex(item)].Items.Remove(item);
         }
@@ -126,7 +126,7 @@
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected virtual string GetNewGroupName(T item)
+        protected virtual string GetNewGroupName(TBaseModel item)
         {
             return "Error";
         }
@@ -136,7 +136,7 @@
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected virtual int GetIndex(T item)
+        protected virtual int GetIndex(TBaseModel item)
         {
             return 0;
         }

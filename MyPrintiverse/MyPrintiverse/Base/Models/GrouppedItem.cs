@@ -7,7 +7,7 @@
     public class GrouppedItem<T> : ObservableCollection<T>
     {
         /// <summary>
-        /// Identify group by name.
+        /// Stores group name for display in view and group identification.
         /// </summary>
         public string Name { get; set; }
 
