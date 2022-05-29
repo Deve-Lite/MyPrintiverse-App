@@ -6,7 +6,7 @@
     /// <typeparam name="T"> Model. </typeparam>
     public class AddItemViewModel<T> : BaseViewModel
     {
-        protected T item;
+        private T item;
         public T Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
         public AsyncCommand AddItemCommand { get; set; }

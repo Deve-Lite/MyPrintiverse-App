@@ -9,7 +9,7 @@
     {
         public string Id { get; set; }
 
-        protected T item;
+        private T item;
         public T Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
         public AsyncCommand AddItemCommand { get; set; }

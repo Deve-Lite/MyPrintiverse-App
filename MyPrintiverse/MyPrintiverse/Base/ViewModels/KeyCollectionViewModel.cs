@@ -21,7 +21,7 @@ namespace MyPrintiverse.Base.ViewModels
         public AsyncCommand<T> OpenItemCommand { get; set; }
         public AsyncCommand<T> DeleteItemCommand { get; set; }
 
-        string PrevId;
+        private string PrevId;
         public string Id { get; set; }
 
         protected IItemAsyncService<T> ItemService;

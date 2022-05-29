@@ -9,7 +9,7 @@ namespace MyPrintiverse.Base.ViewModels
     [QueryProperty(nameof(Id), nameof(Id))]
     public class DisplayItemViewModel<T, TEdit> : BaseViewModel
     {
-        T item;
+        private T item;
         public T Item { get => item; set => SetProperty(ref item, value); }
 
         public AsyncCommand EditItemCommand { get; set; }
@@ -17,7 +17,7 @@ namespace MyPrintiverse.Base.ViewModels
 
         public string Id { get; set; }
 
-        IItemAsyncService<T> ItemService { get; set; }
+        protected IItemAsyncService<T> ItemService { get; set; }
 
         protected internal override async void OnAppearing()
         {
