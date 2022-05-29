@@ -3,32 +3,28 @@
     /// <summary>
     /// Base view model for adding new item.
     /// </summary>
-    /// <typeparam name="Model"></typeparam>
-    public class AddItemViewModel<Model> : BaseViewModel
+    /// <typeparam name="T"> Model. </typeparam>
+    public class AddItemViewModel<T> : BaseViewModel
     {
-        protected Model item;
-        public Model Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+        protected T item;
+        public T Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
         public AsyncCommand AddItemCommand { get; set; }
 
-        protected IItemAsyncService<Model> ItemService;
+        protected IItemAsyncService<T> ItemService;
 
         protected internal override void OnAppearing()
         {
             base.OnAppearing();
 
-            AddItemCommand = new AsyncCommand(AddItem);
+            AddItemCommand = new AsyncCommand(AddItem, CanExecute);
         }
+
 
 
         public virtual async Task AddItem()
         {
-            if (IsBusy)
-                return;
-
             // Open loading popup/ activity indicator
-
-            IsBusy = true;
 
             if (await ItemService.AddItemAsync(Item))
                 await Shell.Current.GoToAsync("..");

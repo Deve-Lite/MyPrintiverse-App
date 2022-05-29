@@ -26,12 +26,16 @@ namespace MyPrintiverse.Tools
 
             return string.IsNullOrEmpty(RefreshToken);
         }
+
         public static bool GetTokenId(string token)
         {
             token = token.Replace("Bearer", "").Trim();
+
             var handler = new JwtSecurityTokenHandler();
-            JwtSecurityToken tokenS = handler.ReadToken(token) as JwtSecurityToken;
-            Id = tokenS.Claims.First(claim => claim.Type == "_id").Value.ToString();
+            var webToken = handler.ReadToken(token) as JwtSecurityToken;
+
+            Id = webToken.Claims.First(claim => claim.Type == "_id").Value.ToString();
+
             return string.IsNullOrEmpty(Id);
         }
     }

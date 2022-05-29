@@ -5,7 +5,7 @@ using System.Net;
 namespace MyPrintiverse.Base.Services
 {
     /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
-    public class BaseInternetService<Item> //: IInternetItemAsyncService<Item> where Item : class, new()
+    public class BaseInternetService<T> //: IInternetItemAsyncService<Item> where Item : class, new()
     {
         // protected static string ConnectionString { get; set; } = "http://localhost:3000/api/";
         // protected string ConnectionString { get; set; } = "http://10.0.2.2:3000/api/";
@@ -93,12 +93,12 @@ namespace MyPrintiverse.Base.Services
                 throw new TokenException();
         }
 
-        public async Task<RestResponse<Item>> ExecuteRequest<Param>(RestRequest request, bool isFirst = true)
+        public async Task<RestResponse<T>> ExecuteRequest<Param>(RestRequest request, bool isFirst = true)
         {
-            RestResponse<Item> response = new RestResponse<Item>();
+            RestResponse<T> response = new RestResponse<T>();
             try
             {
-                response = (RestResponse<Item>)await Client.ExecuteAsync(request);
+                response = (RestResponse<T>)await Client.ExecuteAsync(request);
 
                 return response;
             }
@@ -121,12 +121,12 @@ namespace MyPrintiverse.Base.Services
                 return response;
             }
         }
-        public async Task<RestResponse<Item>> ExecuteRequest<Param>(RestRequest request, Param param, bool isFirst = true)
+        public async Task<RestResponse<T>> ExecuteRequest<Param>(RestRequest request, Param param, bool isFirst = true)
         {
-            RestResponse<Item> response = new RestResponse<Item>();
+            RestResponse<T> response = new RestResponse<T>();
             try
             {
-                response = (RestResponse<Item>)await Client.ExecuteAsync(request);
+                response = (RestResponse<T>)await Client.ExecuteAsync(request);
 
                 return response;
             }
@@ -150,14 +150,14 @@ namespace MyPrintiverse.Base.Services
             }
         }
 
-        public async Task<RestResponse<Item>> GetItemAsync(string objectId, bool isFirst = true)
+        public async Task<RestResponse<T>> GetItemAsync(string objectId, bool isFirst = true)
         {
             InitializeClient();
             RestRequest request = new RestRequest("Link");
-            RestResponse<Item> response = new RestResponse<Item>();
+            RestResponse<T> response = new RestResponse<T>();
             try
             {
-                response = (RestResponse<Item>)await Client.ExecuteAsync(request);
+                response = (RestResponse<T>)await Client.ExecuteAsync(request);
 
                 return response;
             }

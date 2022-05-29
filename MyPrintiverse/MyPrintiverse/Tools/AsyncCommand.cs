@@ -8,10 +8,6 @@ namespace MyPrintiverse.Tools
     /// AsyncCommand from MVVM helpers.
     /// https://github.com/jamesmontemagno/mvvm-helpers
     /// </summary> 
-    
-    /// <summary>
-	/// Implementation of an Async Command
-	/// </summary>
 	public class AsyncCommand : IAsyncCommand
     {
         readonly Func<Task> execute;
@@ -70,7 +66,8 @@ namespace MyPrintiverse.Tools
         #endregion
     }
     /// <summary>
-    /// Implementation of a generic Async Command
+    /// Implementation of a generic Async Command.
+    /// https://github.com/jamesmontemagno/mvvm-helpers
     /// </summary>
     public class AsyncCommand<T> : IAsyncCommand<T>
     {
@@ -140,7 +137,7 @@ namespace MyPrintiverse.Tools
     /// <summary>
     /// Extension Utils
     /// </summary>
-    public static class Utils
+    public static class AsyncCommandUtils
     {
         /// <summary>
         /// Task extension to add a timeout.
@@ -149,14 +146,12 @@ namespace MyPrintiverse.Tools
         /// <param name="task">Task.</param>
         /// <param name="timeoutInMilliseconds">Timeout duration in Milliseconds.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public async static Task<T> WithTimeout<T>(this Task<T> task, int timeoutInMilliseconds)
+        public async static Task<T> WithTimeout<T>(this Task<T>? task, int timeoutInMilliseconds)
         {
             var retTask = await Task.WhenAny(task, Task.Delay(timeoutInMilliseconds))
                 .ConfigureAwait(false);
 
-#pragma warning disable CS8603 // Possible null reference return.
             return retTask is Task<T> ? task.Result : default;
-#pragma warning restore CS8603 // Possible null reference return.
         }
 
         /// <summary>

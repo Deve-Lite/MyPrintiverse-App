@@ -3,7 +3,8 @@
     /// <summary>
     /// Generic service for device databases.
     /// </summary>
-    public abstract class BaseDeviceService<Item> : IDeviceItemAsyncService<Item> where Item : class, new()
+    /// <typeparam name="T"> Model. </typeparam>
+    public abstract class BaseDeviceService<T> : IDeviceItemAsyncService<T> where T : BaseModel, new()
     {
         /// <summary>
         /// Database name. (If not set it creates random database)
@@ -23,22 +24,22 @@
                 return;
 
             db = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, dbName));
-            await db.CreateTableAsync<Item>();
+            await db.CreateTableAsync<T>();
         }
 
-        public virtual async Task AddItemAsync(Item item)
+        public virtual async Task AddItemAsync(T item)
         {
-            if (item == null || string.IsNullOrEmpty((item as BaseModel).Id))
+            if (item == null || string.IsNullOrEmpty(item.Id))
                 return;
 
             await ConnectToDatabase();
-            await db.InsertAsync(item, typeof(Item));
+            await db.InsertAsync(item, typeof(T));
         }
 
         public virtual async Task DeleteAllAsync()
         {
             await ConnectToDatabase();
-            await db.DeleteAllAsync<Item>();
+            await db.DeleteAllAsync<T>();
         }
         public virtual async Task DeleteItemAsync(string objectId)
         {
@@ -46,29 +47,29 @@
                 return;
 
             await ConnectToDatabase();
-            await db.DeleteAsync<Item>(objectId);
+            await db.DeleteAsync<T>(objectId);
         }
 
-        public virtual async Task<Item> GetItemAsync(string objectId)
+        public virtual async Task<T> GetItemAsync(string objectId)
         {
             await ConnectToDatabase();
-            return await db.GetAsync<Item>(objectId);
+            return await db.GetAsync<T>(objectId);
             /*Do sprawdzenia która metoda lepsza */
             //return await db.Table<Item>().FirstOrDefaultAsync(x => (x as BaseModel).Id == objectId);
         }
-        public virtual async Task<IEnumerable<Item>> GetItemsAsync()
+        public virtual async Task<IEnumerable<T>> GetItemsAsync()
         {
             await ConnectToDatabase();
-            return await db.Table<Item>().ToListAsync();
+            return await db.Table<T>().ToListAsync();
         }
 
-        public virtual async Task UpdateItemAsync(Item item)
+        public virtual async Task UpdateItemAsync(T item)
         {
-            if (item == null || string.IsNullOrEmpty((item as BaseModel).Id))
+            if (item == null || string.IsNullOrEmpty(item.Id))
                 return;
 
             await ConnectToDatabase();
-            await db.UpdateAsync(item, typeof(Item));
+            await db.UpdateAsync(item, typeof(T));
         }
     }
 }

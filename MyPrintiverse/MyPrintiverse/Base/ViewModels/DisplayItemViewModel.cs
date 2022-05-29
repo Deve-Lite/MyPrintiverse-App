@@ -4,44 +4,36 @@ namespace MyPrintiverse.Base.ViewModels
     /// <summary>
     /// Base ViewModel for View displaying Item.
     /// </summary>
+    /// <typeparam name="T"> Model. </typeparam>
+    /// <typeparam name="TEdit"> Class (View) editing model. </typeparam>
     [QueryProperty(nameof(Id), nameof(Id))]
-    public class DisplayItemViewModel<Model, EditViewModel> : BaseViewModel
+    public class DisplayItemViewModel<T, TEdit> : BaseViewModel
     {
-        Model item;
-        public Model Item { get => item; set => SetProperty(ref item, value); }
+        T item;
+        public T Item { get => item; set => SetProperty(ref item, value); }
 
         public AsyncCommand EditItemCommand { get; set; }
         public AsyncCommand DeleteItemCommand { get; set; }
 
         public string Id { get; set; }
 
-        IItemAsyncService<Model> ItemService { get; set; }
+        IItemAsyncService<T> ItemService { get; set; }
 
         protected internal override async void OnAppearing()
         {
             base.OnAppearing();
 
-            EditItemCommand = new AsyncCommand(EditItem);
-            DeleteItemCommand = new AsyncCommand(DeleteItem);
+            EditItemCommand = new AsyncCommand(EditItem, CanExecute);
+            DeleteItemCommand = new AsyncCommand(DeleteItem, CanExecute);
 
             Item = await ItemService.GetItemAsync(Id);
         }
 
 
-        protected virtual async Task EditItem()
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            await Shell.Current.GoToAsync($"{nameof(EditViewModel)}");
-        }
+        protected virtual async Task EditItem() => await Shell.Current.GoToAsync($"{nameof(TEdit)}");
 
         protected virtual async Task DeleteItem()
         {
-            if (IsBusy)
-                return;
-            IsBusy = true;
 
             if (await ItemService.DeleteItemAsync(Id))
                 await Shell.Current.GoToAsync("..");

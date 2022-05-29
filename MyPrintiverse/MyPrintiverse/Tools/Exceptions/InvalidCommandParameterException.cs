@@ -12,7 +12,7 @@ namespace MyPrintiverse.Tools.Exceptions
 	public class InvalidCommandParameterException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of theclass.
+        /// Initializes a new instance of the class.
         /// </summary>
         /// <param name="expectedType">Expected parameter type for AsyncCommand.Execute.</param>
         /// <param name="actualType">Actual parameter type for AsyncCommand.Execute.</param>
@@ -23,7 +23,7 @@ namespace MyPrintiverse.Tools.Exceptions
         }
 
         /// <summary>
-        /// Initializes a new instance of the  class.
+        /// Initializes a new instance of the class.
         /// </summary>
         /// <param name="expectedType">Expected parameter type for AsyncCommand.Execute.</param>
         /// <param name="innerException">Inner Exception</param>

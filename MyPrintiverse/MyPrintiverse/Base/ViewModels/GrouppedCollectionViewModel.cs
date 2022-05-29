@@ -3,68 +3,60 @@
     /// <summary>
     /// Base model for view with groupped CollectionView.
     /// </summary>
-    /// <typeparam name="Model"></typeparam>
-    /// <typeparam name="GrouppedModel"></typeparam>
-    /// <typeparam name="AddViewModel"></typeparam>
-    /// <typeparam name="EditViewModel"></typeparam>
-    /// <typeparam name="DisplayViewModel"></typeparam>
-	public class GroupedCollectionViewModel<Model, GrouppedModel, AddViewModel, EditViewModel, DisplayViewModel> : BaseViewModel
+    /// <typeparam name="T"> Collection model. </typeparam>
+    /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
+    /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
+    /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
+	public class GroupedCollectionViewModel<T, TAdd, TEdit, TDisplay> : BaseViewModel where T : BaseModel
     {
-        public ObservableCollection<GrouppedItem<Model>> Items { get; set; }
+        public ObservableCollection<GrouppedItem<T>> Items { get; set; }
 
         public AsyncCommand RefreshItemsCommand { get; set; }
         public AsyncCommand AddItemCommand { get; set; }
 
-        public AsyncCommand<Model> EditItemCommand { get; set; }
-        public AsyncCommand<Model> OpenItemCommand { get; set; }
-        public AsyncCommand<Model> DeleteItemCommand { get; set; }
+        public AsyncCommand<T> EditItemCommand { get; set; }
+        public AsyncCommand<T> OpenItemCommand { get; set; }
+        public AsyncCommand<T> DeleteItemCommand { get; set; }
 
-        protected IItemAsyncService<Model> ItemsService;
+        protected IItemAsyncService<T> ItemsService;
 
         protected internal override async void OnAppearing()
         {
             base.OnAppearing();
-            Items = new ObservableCollection<GrouppedItem<Model>>();
+            Items = new ObservableCollection<GrouppedItem<T>>();
             IsBusy = false;
 
-            RefreshItemsCommand = new AsyncCommand(RefreshItems);
-            AddItemCommand = new AsyncCommand(AddItem);
-            EditItemCommand = new AsyncCommand<Model>(EditItem);
-            OpenItemCommand = new AsyncCommand<Model>(OpenItem);
-            DeleteItemCommand = new AsyncCommand<Model>(DeleteItem);
+            RefreshItemsCommand = new AsyncCommand(RefreshItems,CanExecute);
+            AddItemCommand = new AsyncCommand(AddItem, CanExecute);
+            EditItemCommand = new AsyncCommand<T>(EditItem, CanExecute);
+            OpenItemCommand = new AsyncCommand<T>(OpenItem, CanExecute);
+            DeleteItemCommand = new AsyncCommand<T>(DeleteItem, CanExecute);
 
             await UpdateItemsOnAppearing();
         }
 
-        protected virtual async Task AddItem()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(AddViewModel)}");
-        }
+        protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(TAdd)}");
 
         protected virtual async Task UpdateItemsOnAppearing()
         {
             IsBusy = true;
             IsRefreshing = true;
 
-            List<Model> data = (List<Model>)await ItemsService.GetItemsAsync();
+            List<T> data = (List<T>)await ItemsService.GetItemsAsync();
 
             int i = 0;
-            foreach (GrouppedItem<Model> group in new List<GrouppedItem<Model>>(Items))
+            foreach (GrouppedItem<T> group in new List<GrouppedItem<T>>(Items))
             {
-                foreach (Model item in group)
+                foreach (T item in group)
                 {
-                    Model newItem = data.FirstOrDefault(x => (x as BaseModel).Id == (item as BaseModel).Id);
+                    T newItem = data.FirstOrDefault(x => x.Id == item.Id);
 
                     if (newItem == null)
                     {
                         int x = GetIndex(item);
                         Items[x].Remove(item);
                     }
-                    else if ((newItem as BaseModel).EditedAt != (item as BaseModel).EditedAt)
+                    else if (newItem.EditedAt != item.EditedAt)
                     {
                         int x = GetIndex(item);
                         Items[x][Items[x].IndexOf(item)] = newItem;
@@ -72,7 +64,7 @@
                 }
             }
 
-            foreach (Model item in data)
+            foreach (T item in data)
                 AddToItems(item);
 
             IsBusy = false;
@@ -81,15 +73,12 @@
 
         protected virtual async Task RefreshItems()
         {
-            if (IsBusy)
-                return;
 
             IsRefreshing = true;
-            IsBusy = true;
 
             Items.Clear();
 
-            foreach (Model item in await ItemsService.GetItemsAsync())
+            foreach (T item in await ItemsService.GetItemsAsync())
                 AddToItems(item);
 
             IsBusy = false;
@@ -97,46 +86,29 @@
         }
 
 
-        protected virtual async Task EditItem(Model item)
+        protected virtual async Task EditItem(T item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
+
+
+        protected virtual async Task DeleteItem(T item)
         {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(EditViewModel)}?Id={(item as BaseModel).Id}");
-        }
 
-
-        protected virtual async Task DeleteItem(Model item)
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-
-            if (await ItemsService.DeleteItemAsync((item as BaseModel).Id))
-                DeleteItem(item);
+            if (await ItemsService.DeleteItemAsync(item.Id))
+                await DeleteItem(item);
 
             IsBusy = false;
         }
 
 
-        protected virtual async Task OpenItem(Model item)
-        {
-            if (IsBusy)
-                return;
+        protected virtual async Task OpenItem(T item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
 
-            IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(DisplayViewModel)}?Id={(item as BaseModel).Id}");
-        }
-
-        protected virtual void AddToItems(Model item)
+        protected virtual void AddToItems(T item)
         {
             int x = GetIndex(item);
             if (x == -1)
             {
-                ObservableCollection<Model> model = new ObservableCollection<Model>();
+                ObservableCollection<T> model = new ObservableCollection<T>();
                 model.Add(item);
-                Items.Add(new GrouppedItem<Model>(GetNewGroupName(item), model));
+                Items.Add(new GrouppedItem<T>(GetNewGroupName(item), model));
             }
             else
             {
@@ -144,7 +116,7 @@
             }
         }
 
-        protected virtual void DeleteFromItems(Model item)
+        protected virtual void DeleteFromItems(T item)
         {
             Items[GetIndex(item)].Items.Remove(item);
         }
@@ -154,7 +126,7 @@
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected virtual string GetNewGroupName(Model item)
+        protected virtual string GetNewGroupName(T item)
         {
             return "Error";
         }
@@ -164,7 +136,7 @@
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected virtual int GetIndex(Model item)
+        protected virtual int GetIndex(T item)
         {
             return 0;
         }

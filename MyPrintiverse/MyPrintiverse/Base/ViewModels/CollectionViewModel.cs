@@ -8,70 +8,63 @@ namespace MyPrintiverse.Base.ViewModels
     /// <summary>
     /// View model for displaying single Collection with base commands.
     /// </summary>
-    /// <typeparam name="Model"></typeparam>
-    /// <typeparam name="AddViewModel"></typeparam>
-    /// <typeparam name="EditViewModel"></typeparam>
-    /// <typeparam name="DisplayViewModel"></typeparam>
-    public abstract class CollectionViewModel<Model, AddViewModel, EditViewModel, DisplayViewModel> : BaseViewModel
+    /// <typeparam name="T"> Model </typeparam>
+    /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
+    /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
+    /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
+    public abstract class CollectionViewModel<T, TAdd, TEdit, TDisplay> : BaseViewModel where T : BaseModel
     {
-        public ObservableCollection<Model> Items { get; set; }
+        public ObservableCollection<T> Items { get; set; }
 
         public AsyncCommand RefreshItemsCommand { get; set; }
         public AsyncCommand AddItemCommand { get; set; }
 
-        public AsyncCommand<Model> EditItemCommand { get; set; }
-        public AsyncCommand<Model> OpenItemCommand { get; set; }
-        public AsyncCommand<Model> DeleteItemCommand { get; set; }
+        public AsyncCommand<T> EditItemCommand { get; set; }
+        public AsyncCommand<T> OpenItemCommand { get; set; }
+        public AsyncCommand<T> DeleteItemCommand { get; set; }
 
-        protected IItemAsyncService<Model> ItemService;
+        protected IItemAsyncService<T> ItemService;
 
         protected internal override async void OnAppearing()
         {
             base.OnAppearing();
 
-            RefreshItemsCommand = new AsyncCommand(RefreshItems);
-            AddItemCommand = new AsyncCommand(AddItem);
-            EditItemCommand = new AsyncCommand<Model>(EditItem);
-            OpenItemCommand = new AsyncCommand<Model>(OpenItem);
-            DeleteItemCommand = new AsyncCommand<Model>(DeleteItem);
+            RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);
+            AddItemCommand = new AsyncCommand(AddItem, CanExecute);
+            EditItemCommand = new AsyncCommand<T>(EditItem, CanExecute);
+            OpenItemCommand = new AsyncCommand<T>(OpenItem, CanExecute);
+            DeleteItemCommand = new AsyncCommand<T>(DeleteItem, CanExecute);
 
             await UpdateItemsOnAppearing();
         }
 
-        protected virtual async Task AddItem()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(AddViewModel)}");
-        }
+        protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(TAdd)}");
 
         protected virtual async Task UpdateItemsOnAppearing()
         {
             IsBusy = true;
             IsRefreshing = true;
 
-            List<Model> data = (List<Model>)await ItemService.GetItemsAsync();
+            List<T> data = (List<T>)await ItemService.GetItemsAsync();
 
             int i = 0;
-            foreach (Model item in new List<Model>(Items))
+            foreach (T item in new List<T>(Items))
             {
-                Model newItem = data.First(x => (x as BaseModel).Id == (item as BaseModel).Id);
+                T newItem = data.First(x => x.Id == item.Id);
 
                 if (newItem == null)
                 {
                     Items.Remove(item);
                     data.Remove(item);
                 }
-                else if ((item as BaseModel).EditedAt == (newItem as BaseModel).EditedAt)
+                else if (item.EditedAt == newItem.EditedAt)
                 {
                     Items[Items.IndexOf(item)] = newItem;
                     data.Remove(item);
                 }
             }
 
-            foreach (Model item in data)
+            foreach (T item in data)
                 Items.Add(item);
 
             IsRefreshing = false;
@@ -80,11 +73,8 @@ namespace MyPrintiverse.Base.ViewModels
 
         protected virtual async Task RefreshItems()
         {
-            if (IsBusy)
-                return;
 
             IsRefreshing = true;
-            IsBusy = true;
 
             Items.Clear();
 
@@ -96,37 +86,20 @@ namespace MyPrintiverse.Base.ViewModels
         }
 
 
-        protected virtual async Task EditItem(Model item)
+        protected virtual async Task EditItem(T item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
+
+
+        protected virtual async Task DeleteItem(T item)
         {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(EditViewModel)}?Id={(item as BaseModel).Id}");
-        }
 
-
-        protected virtual async Task DeleteItem(Model item)
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-
-            if (await ItemService.DeleteItemAsync((item as BaseModel).Id))
+            if (await ItemService.DeleteItemAsync(item.Id))
                 Items.Remove(item);
 
             IsBusy = false;
         }
 
 
-        protected virtual async Task OpenItem(Model item)
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(DisplayViewModel)}?Id={(item as BaseModel).Id}");
-        }
+        protected virtual async Task OpenItem(T item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
     }
 }
 

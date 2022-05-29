@@ -3,26 +3,26 @@
     /// <summary>
     /// Base model for groupped CollectionView.
     /// </summary>
-    /// <typeparam name="Model"></typeparam>
-    public class GrouppedItem<Model> : ObservableCollection<Model>
+    /// <typeparam name="T"> Collection Model </typeparam>
+    public class GrouppedItem<T> : ObservableCollection<T>
     {
         /// <summary>
         /// Identify group by name.
         /// </summary>
         public string Name { get; set; }
 
-        public ObservableCollection<Model> Items { get; set; }
+        public ObservableCollection<T> Items { get; set; }
 
-        public GrouppedItem(string name, ObservableCollection<Model> collection)
+        public GrouppedItem(string name, ObservableCollection<T> collection)
         {
             Name = name;
-            Items = new ObservableCollection<Model>(collection);
+            Items = new ObservableCollection<T>(collection);
         }
 
         public GrouppedItem(string name)
         {
             Name = name;
-            Items = new ObservableCollection<Model>();
+            Items = new ObservableCollection<T>();
         }
     }
 }

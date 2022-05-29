@@ -3,18 +3,18 @@
     /// <summary>
     /// Base view model for editing any item.
     /// </summary>
-    /// <typeparam name="Model"></typeparam>
+    /// <typeparam name="T"> Model. </typeparam>
     [QueryProperty(nameof(Id), nameof(Id))]
-    public class EditItemViewModel<Model> : BaseViewModel
+    public class EditItemViewModel<T> : BaseViewModel
     {
         public string Id { get; set; }
 
-        protected Model item;
-        public Model Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+        protected T item;
+        public T Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
         public AsyncCommand AddItemCommand { get; set; }
 
-        protected IItemAsyncService<Model> ItemService;
+        protected IItemAsyncService<T> ItemService;
 
         protected internal override async void OnAppearing()
         {
@@ -22,17 +22,14 @@
 
             Item = await ItemService.GetItemAsync(Id);
 
-            AddItemCommand = new AsyncCommand(EditItem);
+            AddItemCommand = new AsyncCommand(EditItem, CanExecute);
         }
 
 
         public virtual async Task EditItem()
         {
-            if (IsBusy)
-                return;
 
             // Open loading popup / activity indicator
-            IsBusy = true;
 
             if (await ItemService.UpdateItemAsync(Item))
                 await Shell.Current.GoToAsync("..");
