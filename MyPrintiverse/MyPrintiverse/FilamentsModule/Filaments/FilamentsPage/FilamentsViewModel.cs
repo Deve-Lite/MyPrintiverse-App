@@ -2,7 +2,7 @@
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 
-namespace MyPrintiverse.FilamentsModule.Filaments.ViewModels
+namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
 {
     public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
     {

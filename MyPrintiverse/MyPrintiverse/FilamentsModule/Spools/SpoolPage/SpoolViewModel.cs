@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.FilamentsModule.Spools.SpoolPage
+﻿using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
+
+namespace MyPrintiverse.FilamentsModule.Spools.SpoolPage
 {
     public class SpoolViewModel : DisplayItemViewModel<Spool, EditSpoolView>
     {

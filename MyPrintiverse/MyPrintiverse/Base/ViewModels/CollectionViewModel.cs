@@ -23,7 +23,7 @@ namespace MyPrintiverse.Base.ViewModels
         public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
         public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
 
-        protected IItemAsyncService<TBaseModel> ItemService;
+        protected IItemAsyncService<TBaseModel> ItemsService;
 
         protected internal override async void OnAppearing()
         {
@@ -45,7 +45,7 @@ namespace MyPrintiverse.Base.ViewModels
             IsBusy = true;
             IsRefreshing = true;
 
-            List<TBaseModel> data = (List<TBaseModel>)await ItemService.GetItemsAsync();
+            List<TBaseModel> data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
             int i = 0;
             foreach (TBaseModel item in new List<TBaseModel>(Items))
@@ -78,7 +78,7 @@ namespace MyPrintiverse.Base.ViewModels
 
             Items.Clear();
 
-            foreach (var item in await ItemService.GetItemsAsync())
+            foreach (var item in await ItemsService.GetItemsAsync())
                 Items.Add(item);
 
             IsBusy = false;
@@ -92,7 +92,7 @@ namespace MyPrintiverse.Base.ViewModels
         protected virtual async Task DeleteItem(TBaseModel item)
         {
 
-            if (await ItemService.DeleteItemAsync(item.Id))
+            if (await ItemsService.DeleteItemAsync(item.Id))
                 Items.Remove(item);
 
             IsBusy = false;

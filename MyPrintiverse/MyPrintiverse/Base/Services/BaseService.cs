@@ -12,6 +12,8 @@ namespace MyPrintiverse.Base.Services
             if (GlobalConst.IsLogged)
             {
                 // TODO
+                // Tutaj wstępne sprawdzanie requesta
+                // Jak error to messaging center wyswietla problem itd.
                 return false;
             }
             else
@@ -57,7 +59,7 @@ namespace MyPrintiverse.Base.Services
         {
             if (GlobalConst.IsLogged)
             {
-                // Quick request ??
+                // Quick request to check if updated ????
                 return await ItemDeviceService.GetItemAsync(objectId);
             }
             else

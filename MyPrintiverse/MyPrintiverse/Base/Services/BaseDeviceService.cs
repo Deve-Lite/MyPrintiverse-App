@@ -7,14 +7,14 @@
     public abstract class BaseDeviceService<T> : IDeviceItemAsyncService<T> where T : BaseModel, new()
     {
         /// <summary>
-        /// Database name. (If not set it creates random database)
+        /// Database name. (If not set it creates random T database)
         /// </summary>
         protected string dbName = DateTime.Now.Ticks.ToString() + ".db";
 
         protected SQLiteAsyncConnection db;
 
         /// <summary>
-        /// Method creates and connects to <c> Item </c> database.
+        /// Method creates and connects to <c> T </c> database.
         /// </summary>
         /// <typeparam name="Item"></typeparam>
         /// <param name="dbName"></param>

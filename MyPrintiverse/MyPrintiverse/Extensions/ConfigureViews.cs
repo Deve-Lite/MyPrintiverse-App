@@ -1,7 +1,6 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
-using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
-using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
-using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+﻿
+
+using MyPrintiverse.FilamentsModule;
 
 namespace MyPrintiverse.Extensions
 {
@@ -15,16 +14,7 @@ namespace MyPrintiverse.Extensions
         /// <returns></returns>
         public static MauiAppBuilder ConfigureViews(this MauiAppBuilder builder)
         {
-            // template
-            // builder.Services.AddSingleton<...View>();
-
-            builder.Services.AddSingleton<FilamentsView>();
-            builder.Services.AddSingleton<FilamentView>();
-            builder.Services.AddSingleton<AddFilamentView>();
-            builder.Services.AddSingleton<EditFilamentView>();
-
-
-            return builder;
+            return builder.ConfigureFilamentViews();
         }
     }
 }

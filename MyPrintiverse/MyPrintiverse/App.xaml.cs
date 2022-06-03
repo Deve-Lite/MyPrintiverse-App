@@ -1,5 +1,6 @@
 ﻿
 
+using MyPrintiverse.FilamentsModule;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 namespace MyPrintiverse;
@@ -23,12 +24,6 @@ public partial class App : Application
     /// </summary>
     private void RegisterRoutes()
     {
-        // template
-        // Routing.RegisterRoute(nameof(...View), typeof(...View));
-
-        /*Filament Module*/
-        Routing.RegisterRoute(nameof(FilamentsView), typeof(FilamentsView));
-
-        /*Authorization Module*/
+        FilamentExtensions.RegisterFilamentRoutes();
     }
 }

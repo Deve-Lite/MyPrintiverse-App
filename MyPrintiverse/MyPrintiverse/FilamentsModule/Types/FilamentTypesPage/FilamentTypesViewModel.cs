@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage;
+using MyPrintiverse.FilamentsModule.Types.EditFilamentTypePage;
+using MyPrintiverse.FilamentsModule.Types.FilamentTypePage;
 
 namespace MyPrintiverse.FilamentsModule.Types.FilamentTypesPage
 {
-    internal class FilamentTypesViewModel
+    public class FilamentTypesViewModel : CollectionViewModel<FilamentType, AddFilamentTypeView,EditFilamentTypeView, FilamentTypeView>
     {
+        public FilamentTypesViewModel(FilamentTypeService filamentTypeService)
+        {
+            ItemsService = filamentTypeService;
+        }
     }
 }

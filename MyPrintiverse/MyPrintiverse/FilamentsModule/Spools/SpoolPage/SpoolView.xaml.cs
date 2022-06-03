@@ -1,9 +1,19 @@
-namespace MyPrintiverse.FilamentsModule.Spools;
+
+namespace MyPrintiverse.FilamentsModule.Spools.SpoolPage;
 
 public partial class SpoolView : ContentPage
 {
-	public SpoolView()
+	private SpoolViewModel ViewModel => BindingContext as SpoolViewModel;
+
+    public SpoolView(SpoolViewModel vm)
 	{
 		InitializeComponent();
+		BindingContext = vm;
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        ViewModel.OnAppearing();
+    }
 }

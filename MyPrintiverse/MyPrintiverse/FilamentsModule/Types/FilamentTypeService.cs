@@ -1,11 +1,14 @@
 ﻿
+using MyPrintiverse.FilamentsModule.Types.Services;
+
 namespace MyPrintiverse.FilamentsModule.Types
 {
     public class FilamentTypeService : BaseService<FilamentType>
     {
-        public FilamentTypeService() 
+        public FilamentTypeService(FilamentTypeDeviceService filamentTypeDeviceService, FilamentTypeInternetService filamentTypeInternetService) 
         {
-            //TODO
+            ItemInternetService = filamentTypeInternetService;
+            ItemDeviceService = filamentTypeDeviceService;
         }
     }
 }

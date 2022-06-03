@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MyPrintiverse.FilamentsModule.Spools.AddSpoolPage
 {
-    internal class AddSpoolViewModel
+    public class AddSpoolViewModel : AddItemViewModel<Spool>
     {
+        public AddSpoolViewModel(SpoolService spoolService)
+        {
+            ItemService = spoolService;
+        }
     }
 }
