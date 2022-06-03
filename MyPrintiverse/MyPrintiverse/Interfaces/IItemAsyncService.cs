@@ -3,35 +3,35 @@
     /// <summary>
     /// Global service which connects Internet Service and Device Service.
     /// </summary>
-    /// <typeparam name="Model"></typeparam>
-    public interface IItemAsyncService<Model>
+    /// <typeparam name="T"></typeparam>
+    public interface IItemAsyncService<T>
     {
         /// <summary>
         /// Gets item by objectId. (returns null if unsuccesful)
         /// </summary>
         /// <param name="objectId"></param>
         /// <returns></returns>
-        Task<Model> GetItemAsync(string objectId);
+        Task<T> GetItemAsync(string objectId);
 
         /// <summary>
         /// Get all items from database. (returns null if unsuccesful)
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Model>> GetItemsAsync();
+        Task<IEnumerable<T>> GetItemsAsync();
 
         /// <summary>
         /// Adds new item and returns true if action was successful.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<bool> AddItemAsync(Model item);
+        Task<bool> AddItemAsync(T item);
 
         /// <summary>
         /// Updates item and returns true if action was successful)
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<bool> UpdateItemAsync(Model item);
+        Task<bool> UpdateItemAsync(T item);
 
         /// <summary>
         /// Deletes item and returns true if action was successful.

@@ -1,10 +1,5 @@
-﻿
-
-using MyPrintiverse.Base.Services;
-using MyPrintiverse.FilamentsModule.Spools;
-
-namespace MyPrintiverse.FilamentsModule.Rolls.Services;
-public class SpoolDeviceService : BaseDeviceService<Spool>, IKeyItemAsyncService<Spool>
+﻿namespace MyPrintiverse.FilamentsModule.Spools.Services;
+public class SpoolDeviceService : BaseDeviceService<Spool>, IDeviceItemKeyAsyncService<Spool>
 {
     public SpoolDeviceService()
     {
@@ -25,7 +20,5 @@ public class SpoolDeviceService : BaseDeviceService<Spool>, IKeyItemAsyncService
         /* Do sprawdzenia czy zwraca wszystkie elementy*/
         return await db.Table<Spool>().Where(x => x.FilamentId == key).ToListAsync();
     }
-
-
 }
 

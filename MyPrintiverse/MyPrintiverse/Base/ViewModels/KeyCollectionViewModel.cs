@@ -1,5 +1,7 @@
 ﻿
 
+using MyPrintiverse.FilamentsModule.Spools;
+
 namespace MyPrintiverse.Base.ViewModels
 {
     /// <summary>
