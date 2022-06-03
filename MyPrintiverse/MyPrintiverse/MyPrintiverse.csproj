@@ -58,14 +58,6 @@
 	<ItemGroup>
 	  <Folder Include="AuthorizationModule\ViewModels\" />
 	  <Folder Include="AuthorizationModule\Views\" />
-	  <Folder Include="FilamentsModule\Prints\ViewModels\" />
-	  <Folder Include="FilamentsModule\Prints\Views\" />
-	  <Folder Include="FilamentsModule\Rolls\ViewModels\" />
-	  <Folder Include="FilamentsModule\Rolls\Views\" />
-	  <Folder Include="FilamentsModule\Statistics\ViewModels\" />
-	  <Folder Include="FilamentsModule\Statistics\Views\" />
-	  <Folder Include="FilamentsModule\Types\ViewModels\" />
-	  <Folder Include="FilamentsModule\Types\Views\" />
 	  <Folder Include="FilamentsModule\Filaments\FilamentsPage\" />
 	</ItemGroup>
 
@@ -80,6 +72,36 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="FilamentsModule\Filaments\FilamentsPage\FilamentsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Prints\AddPrintPage\AddPrintView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Prints\EditPrintPage\EditPrintView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Spools\AddSpoolPage\AddSpoolView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Spools\EditSpoolPage\EditSpoolView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Spools\SpoolPage\SpoolView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Statistics\FilamentStatisticPage\FilamentStatisticsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Types\AddFilamentTypePage\AddFilamentTypeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Types\EditFilamentTypePage\EditFilamentTypeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Types\FilamentTypePage\FilamentTypeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Types\FilamentTypesPage\FilamentTypesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

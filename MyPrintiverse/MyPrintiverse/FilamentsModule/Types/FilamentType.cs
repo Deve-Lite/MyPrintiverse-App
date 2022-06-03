@@ -5,7 +5,7 @@ namespace MyPrintiverse.FilamentsModule.Types;
 /// <summary>
 /// Model for storing data about type of filament.
 /// </summary>
-public class Type : BaseModel
+public class FilamentType : BaseModel
 {
     [JsonProperty("filamentId")]
     public string FilamentId { get; set; }
