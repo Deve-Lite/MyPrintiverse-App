@@ -1,8 +1,4 @@
-﻿
-
-using MyPrintiverse.FilamentsModule;
-using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
-
+﻿using MyPrintiverse.FilamentsModule;
 namespace MyPrintiverse;
 
 public partial class App : Application

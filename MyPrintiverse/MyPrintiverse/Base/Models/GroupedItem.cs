@@ -1,10 +1,10 @@
 ﻿namespace MyPrintiverse.Base.Models
 {
     /// <summary>
-    /// Base model for groupped CollectionView.
+    /// Base model for grouped CollectionView.
     /// </summary>
     /// <typeparam name="T"> Collection Model </typeparam>
-    public class GrouppedItem<T> : ObservableCollection<T>
+    public class GroupedItem<T> : ObservableCollection<T>
     {
         /// <summary>
         /// Stores group name for display in view and group identification.
@@ -13,13 +13,13 @@
 
         public ObservableCollection<T> Items { get; set; }
 
-        public GrouppedItem(string name, ObservableCollection<T> collection)
+        public GroupedItem(string name, ObservableCollection<T> collection)
         {
             Name = name;
             Items = new ObservableCollection<T>(collection);
         }
 
-        public GrouppedItem(string name)
+        public GroupedItem(string name)
         {
             Name = name;
             Items = new ObservableCollection<T>();

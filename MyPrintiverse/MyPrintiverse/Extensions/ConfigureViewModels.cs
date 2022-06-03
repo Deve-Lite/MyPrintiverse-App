@@ -14,10 +14,6 @@ namespace MyPrintiverse.Extensions
         /// <returns></returns>
         public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
         {
-            // template
-            // builder.Services.AddSingleton<...ViewModel>();
-            
-
             return builder.ConfigureFilamentViewModels();
         }
     }

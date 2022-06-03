@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments;
+﻿using MyPrintiverse.FilamentsModule;
+using MyPrintiverse.FilamentsModule.Filaments;
 using MyPrintiverse.FilamentsModule.Filaments.Services;
 
 namespace MyPrintiverse.Extensions
@@ -13,20 +14,7 @@ namespace MyPrintiverse.Extensions
         /// <returns></returns>
         public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
         {
-            // Template
-            // builder.Services.TryAddTransient<...Service>();
-            // builder.Services.AddSingleton<...Service>();
-
-            /* Filament Services */
-            builder.Services.AddSingleton<FilamentDeviceService>();
-            builder.Services.AddSingleton<FilamentInternetService>();
-            builder.Services.AddSingleton<FilamentService>();
-            
-
-
-
-
-            return builder;
+            return builder.ConfigureFilamentServices();
         }
     }
 }

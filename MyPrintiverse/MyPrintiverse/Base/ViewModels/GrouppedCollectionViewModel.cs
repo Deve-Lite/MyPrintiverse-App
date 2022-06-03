@@ -9,7 +9,7 @@
     /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
 	public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
     {
-        public ObservableCollection<GrouppedItem<TBaseModel>> Items { get; set; }
+        public ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
 
         public AsyncCommand RefreshItemsCommand { get; set; }
         public AsyncCommand AddItemCommand { get; set; }
@@ -23,7 +23,7 @@
         protected internal override async void OnAppearing()
         {
             base.OnAppearing();
-            Items = new ObservableCollection<GrouppedItem<TBaseModel>>();
+            Items = new ObservableCollection<GroupedItem<TBaseModel>>();
             IsBusy = false;
 
             RefreshItemsCommand = new AsyncCommand(RefreshItems,CanExecute);
@@ -45,7 +45,7 @@
             List<TBaseModel> data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
             int i = 0;
-            foreach (GrouppedItem<TBaseModel> group in new List<GrouppedItem<TBaseModel>>(Items))
+            foreach (GroupedItem<TBaseModel> group in new List<GroupedItem<TBaseModel>>(Items))
             {
                 foreach (TBaseModel item in group)
                 {
@@ -122,7 +122,7 @@
             {
                 ObservableCollection<TBaseModel> model = new ObservableCollection<TBaseModel>();
                 model.Add(item);
-                Items.Add(new GrouppedItem<TBaseModel>(GetNewGroupName(item), model));
+                Items.Add(new GroupedItem<TBaseModel>(GetNewGroupName(item), model));
             }
             else
             {
