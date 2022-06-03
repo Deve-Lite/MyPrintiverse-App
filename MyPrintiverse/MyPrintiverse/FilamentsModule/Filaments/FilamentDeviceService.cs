@@ -1,7 +1,7 @@
 ﻿
 using MyPrintiverse.Base.Services;
 
-namespace MyPrintiverse.FilamentsModule.Filaments.Services;
+namespace MyPrintiverse.FilamentsModule.Filaments;
 
 public class FilamentDeviceService : BaseDeviceService<Filament>
 {

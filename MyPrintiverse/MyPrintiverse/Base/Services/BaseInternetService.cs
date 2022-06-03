@@ -5,7 +5,7 @@ using System.Net;
 namespace MyPrintiverse.Base.Services
 {
     /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
-    public class BaseInternetService<T> //: IInternetItemAsyncService<Item> where Item : class, new()
+    public class BaseInternetService<T> : IInternetItemAsyncService<T> where T : class, new()
     {
         // protected static string ConnectionString { get; set; } = "http://localhost:3000/api/";
         // protected string ConnectionString { get; set; } = "http://10.0.2.2:3000/api/";
@@ -178,6 +178,30 @@ namespace MyPrintiverse.Base.Services
             }
         }
 
+        public Task<RestResponse<IEnumerable<T>>> GetItemsAsync(bool isFirst)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AddItemAsync(T item, bool isFirst)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateItemAsync(T item, bool isFirst)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteItemAsync(string objectId, bool isFirst)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAllAsync(bool isFirst)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

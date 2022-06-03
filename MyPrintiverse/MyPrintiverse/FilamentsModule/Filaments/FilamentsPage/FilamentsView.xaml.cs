@@ -1,6 +1,6 @@
 using MyPrintiverse.FilamentsModule.Filaments.ViewModels;
 
-namespace MyPrintiverse.FilamentsModule.Filaments.Views;
+namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 public partial class FilamentsView : ContentPage
 {

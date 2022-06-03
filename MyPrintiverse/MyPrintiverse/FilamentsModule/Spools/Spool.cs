@@ -1,6 +1,5 @@
-﻿using MyPrintiverse.Base.Models;
-
-namespace MyPrintiverse.FilamentsModule.Rolls;
+﻿
+namespace MyPrintiverse.FilamentsModule.Spools;
 
 
 /// <summary>

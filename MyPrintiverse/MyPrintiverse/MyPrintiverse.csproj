@@ -66,10 +66,14 @@
 	  <Folder Include="FilamentsModule\Statistics\Views\" />
 	  <Folder Include="FilamentsModule\Types\ViewModels\" />
 	  <Folder Include="FilamentsModule\Types\Views\" />
+	  <Folder Include="FilamentsModule\Filaments\FilamentsPage\" />
+	  <Folder Include="FilamentsModule\Filaments\FilamentPage\" />
+	  <Folder Include="FilamentsModule\Filaments\AddFilamentPage\" />
+	  <Folder Include="FilamentsModule\Filaments\EditFilamentPage\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="FilamentsModule\Filaments\Views\FilamentsView.xaml">
+	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="FilamentsModule\Filaments\FilamentsPage\FilamentsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -77,5 +81,9 @@
 	<ItemGroup>
 	  <None Remove="RestSharp" />
 	  <None Remove="System.IdentityModel.Tokens.Jwt" />
+	  <None Remove="FilamentsModule\Filaments\FilamentsPage\" />
+	  <None Remove="FilamentsModule\Filaments\FilamentPage\" />
+	  <None Remove="FilamentsModule\Filaments\AddFilamentPage\" />
+	  <None Remove="FilamentsModule\Filaments\EditFilamentPage\" />
 	</ItemGroup>
 </Project>

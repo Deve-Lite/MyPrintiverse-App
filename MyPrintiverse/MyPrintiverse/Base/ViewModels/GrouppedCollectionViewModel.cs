@@ -53,13 +53,27 @@
 
                     if (newItem == null)
                     {
-                        int x = GetIndex(item);
-                        Items[x].Remove(item);
+                        int index = GetIndex(item);
+
+                        if (index == -1)
+                        {
+                            // Loading Error Message
+                            continue;
+                        }
+
+                        Items[index].Remove(item);
                     }
                     else if (newItem.EditedAt != item.EditedAt)
                     {
-                        int x = GetIndex(item);
-                        Items[x][Items[x].IndexOf(item)] = newItem;
+                        int index = GetIndex(item);
+
+                        if (index == -1)
+                        {
+                            // Loading Error Message
+                            continue;
+                        }
+
+                        Items[index][Items[index].IndexOf(item)] = newItem;
                     }
                 }
             }
@@ -118,14 +132,22 @@
 
         protected virtual void DeleteFromItems(TBaseModel item)
         {
-            Items[GetIndex(item)].Items.Remove(item);
+            int index = GetIndex(item);
+
+            if (index == -1)
+            {
+                // Loading Error Message
+                return;
+            }
+
+            Items[index].Items.Remove(item);
         }
 
         /// <summary>
         /// Method creates new group name. (MUST BE IMPLEMENTED EACH TIME)
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns> New group name. </returns>
         protected virtual string GetNewGroupName(TBaseModel item)
         {
             return "Error";
@@ -135,7 +157,7 @@
         /// Method returns group index. (MUST BE IMPLEMENTED EACH TIME)
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns> Group Index else -1. </returns>
         protected virtual int GetIndex(TBaseModel item)
         {
             return 0;
