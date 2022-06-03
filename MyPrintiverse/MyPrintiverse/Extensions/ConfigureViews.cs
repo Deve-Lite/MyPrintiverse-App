@@ -1,4 +1,7 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments.Views;
+﻿using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
+using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
+using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
+using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 namespace MyPrintiverse.Extensions
 {
@@ -16,6 +19,10 @@ namespace MyPrintiverse.Extensions
             // builder.Services.AddSingleton<...View>();
 
             builder.Services.AddSingleton<FilamentsView>();
+            builder.Services.AddSingleton<FilamentView>();
+            builder.Services.AddSingleton<AddFilamentView>();
+            builder.Services.AddSingleton<EditFilamentView>();
+
 
             return builder;
         }

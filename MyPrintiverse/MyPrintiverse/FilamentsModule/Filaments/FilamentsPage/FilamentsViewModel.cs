@@ -1,5 +1,6 @@
-﻿using MyPrintiverse.Base.ViewModels;
-using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+﻿using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
+using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
+using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.ViewModels
 {

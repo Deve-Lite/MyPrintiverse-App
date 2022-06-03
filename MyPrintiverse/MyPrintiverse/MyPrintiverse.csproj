@@ -67,12 +67,18 @@
 	  <Folder Include="FilamentsModule\Types\ViewModels\" />
 	  <Folder Include="FilamentsModule\Types\Views\" />
 	  <Folder Include="FilamentsModule\Filaments\FilamentsPage\" />
-	  <Folder Include="FilamentsModule\Filaments\FilamentPage\" />
-	  <Folder Include="FilamentsModule\Filaments\AddFilamentPage\" />
-	  <Folder Include="FilamentsModule\Filaments\EditFilamentPage\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="FilamentsModule\Filaments\AddFilamentPage\AddFilamentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Filaments\EditFilamentPage\EditFilamentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Filaments\FilamentPage\FilamentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="FilamentsModule\Filaments\FilamentsPage\FilamentsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -85,5 +91,11 @@
 	  <None Remove="FilamentsModule\Filaments\FilamentPage\" />
 	  <None Remove="FilamentsModule\Filaments\AddFilamentPage\" />
 	  <None Remove="FilamentsModule\Filaments\EditFilamentPage\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="FilamentsModule\Filaments\EditFilamentPage\EditFilamentVIew.xaml.cs">
+	    <DependentUpon>EditFilamentView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>

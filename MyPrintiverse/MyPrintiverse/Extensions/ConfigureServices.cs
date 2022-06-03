@@ -1,4 +1,5 @@
-﻿
+﻿using MyPrintiverse.FilamentsModule.Filaments;
+using MyPrintiverse.FilamentsModule.Filaments.Services;
 
 namespace MyPrintiverse.Extensions
 {
@@ -18,9 +19,9 @@ namespace MyPrintiverse.Extensions
 
             /* Filament Services */
             builder.Services.AddSingleton<FilamentDeviceService>();
-            builder.Services.AddSingleton<SpoolDeviceService>();
-            builder.Services.AddSingleton<PrintDeviceService>();
-            builder.Services.AddSingleton<TypeDeviceService>();
+            builder.Services.AddSingleton<FilamentInternetService>();
+            builder.Services.AddSingleton<FilamentService>();
+            
 
 
 

@@ -22,6 +22,6 @@ namespace MyPrintiverse.Interfaces
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        Task<bool> DeleteItemsByKeyAsync(string key);
+        Task DeleteItemsByKeyAsync(string key);
     }
 }
