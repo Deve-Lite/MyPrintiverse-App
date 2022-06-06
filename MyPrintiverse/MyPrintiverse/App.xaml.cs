@@ -20,6 +20,6 @@ public partial class App : Application
     /// </summary>
     private void RegisterRoutes()
     {
-        FilamentExtensions.RegisterFilamentRoutes();
+        FilamentRouteConfig.RegisterFilamentRoutes();
     }
 }

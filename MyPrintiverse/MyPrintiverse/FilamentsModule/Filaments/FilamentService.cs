@@ -2,7 +2,7 @@
 
 namespace MyPrintiverse.FilamentsModule.Filaments
 {
-    public class FilamentService : BaseService<Filament>
+    public class FilamentService : BaseItemService<Filament>
 	{
         public FilamentService(FilamentDeviceService filamentDeviceService, FilamentInternetService filamentInternetService)
 		{

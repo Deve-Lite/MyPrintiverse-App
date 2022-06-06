@@ -1,6 +1,4 @@
 ﻿using MyPrintiverse.FilamentsModule;
-using MyPrintiverse.FilamentsModule.Filaments;
-using MyPrintiverse.FilamentsModule.Filaments.Services;
 
 namespace MyPrintiverse.Extensions
 {

@@ -3,7 +3,7 @@ using MyPrintiverse.FilamentsModule.Types.Services;
 
 namespace MyPrintiverse.FilamentsModule.Types
 {
-    public class FilamentTypeService : BaseService<FilamentType>
+    public class FilamentTypeService : BaseItemService<FilamentType>
     {
         public FilamentTypeService(FilamentTypeDeviceService filamentTypeDeviceService, FilamentTypeInternetService filamentTypeInternetService) 
         {

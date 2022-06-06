@@ -3,7 +3,7 @@ using MyPrintiverse.FilamentsModule.Spools.Services;
 
 namespace MyPrintiverse.FilamentsModule.Spools
 {
-    public class SpoolService : BaseService<Spool>, IItemKeyAsyncService<Spool>
+    public class SpoolService : BaseItemService<Spool>, IItemKeyAsyncService<Spool>
     {
         private IInternetItemKeyAsyncService<Spool> InternetItemKeyAsyncService;
         private IDeviceItemKeyAsyncService<Spool> DeviceItemKeyAsyncService;

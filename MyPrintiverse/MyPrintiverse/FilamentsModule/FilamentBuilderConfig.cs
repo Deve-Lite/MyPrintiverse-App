@@ -8,7 +8,6 @@ using MyPrintiverse.FilamentsModule.Prints;
 using MyPrintiverse.FilamentsModule.Prints.AddPrintPage;
 using MyPrintiverse.FilamentsModule.Prints.EditPrintPage;
 using MyPrintiverse.FilamentsModule.Prints.Services;
-using MyPrintiverse.FilamentsModule.Rolls.Services;
 using MyPrintiverse.FilamentsModule.Spools;
 using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
@@ -24,7 +23,7 @@ using MyPrintiverse.FilamentsModule.Types.Services;
 
 namespace MyPrintiverse.FilamentsModule
 {
-    public static class FilamentExtensions
+    public static class FilamentBuilderConfig
     {
 
         /// <summary>
@@ -114,32 +113,6 @@ namespace MyPrintiverse.FilamentsModule
             builder.Services.AddSingleton<EditPrintViewModel>();
 
             return builder;
-        }
-
-
-        /// <summary>
-        /// Registering Filament routes.
-        /// </summary>
-        public static void RegisterFilamentRoutes()
-        {
-            Routing.RegisterRoute(nameof(FilamentsView), typeof(FilamentsView));
-            Routing.RegisterRoute(nameof(FilamentView), typeof(FilamentView));
-            Routing.RegisterRoute(nameof(AddFilamentView), typeof(AddFilamentView));
-            Routing.RegisterRoute(nameof(EditFilamentView), typeof(EditFilamentView));
-
-            Routing.RegisterRoute(nameof(SpoolView), typeof(SpoolView));
-            Routing.RegisterRoute(nameof(AddSpoolView), typeof(AddSpoolView));
-            Routing.RegisterRoute(nameof(EditSpoolView), typeof(EditSpoolView));
-
-            Routing.RegisterRoute(nameof(FilamentTypesView), typeof(FilamentTypesView));
-            Routing.RegisterRoute(nameof(FilamentTypeView), typeof(FilamentTypeView));
-            Routing.RegisterRoute(nameof(AddFilamentTypeView), typeof(AddFilamentTypeView));
-            Routing.RegisterRoute(nameof(EditFilamentTypeView), typeof(EditFilamentTypeView));
-
-            Routing.RegisterRoute(nameof(AddPrintView), typeof(AddPrintView));
-            Routing.RegisterRoute(nameof(EditPrintView), typeof(EditPrintView));
-
-            Routing.RegisterRoute(nameof(FilamentStatisticsView), typeof(FilamentStatisticsView));
         }
     }
 }

@@ -2,10 +2,12 @@
 
 namespace MyPrintiverse.Base.Services
 {
-    public class BaseService<T> : IItemAsyncService<T> where T : BaseModel
+    public class BaseItemService<T> : IItemAsyncService<T> where T : BaseModel
     {
         protected IInternetItemAsyncService<T> ItemInternetService;
         protected IDeviceItemAsyncService<T> ItemDeviceService;
+
+        // prote ISession<>
 
         public async Task<bool> AddItemAsync(T item)
         {

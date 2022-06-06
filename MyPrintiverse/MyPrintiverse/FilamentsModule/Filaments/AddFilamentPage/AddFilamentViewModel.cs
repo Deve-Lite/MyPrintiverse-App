@@ -5,7 +5,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage
 	{
 		public AddFilamentViewModel(FilamentService filamentService)
 		{
-			ItemService = (IItemAsyncService<Filament>) filamentService;
+			ItemService = filamentService;
 		}
 	}
 }
