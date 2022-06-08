@@ -1,6 +1,6 @@
 ﻿namespace MyPrintiverse.FilamentsModule.Spools.Services
 {
-    public class SpoolInternetService : BaseInternetService<Spool>, IInternetItemKeyAsyncService<Spool>
+    public class SpoolInternetService : BaseInternetAsyncService<Spool>, IInternetItemKeyAsyncService<Spool>
     {
         public SpoolInternetService()
         {

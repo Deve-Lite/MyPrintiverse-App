@@ -1,5 +1,5 @@
-﻿
-namespace MyPrintiverse.FilamentsModule.Spools
+﻿using System;
+namespace MyPrintiverse.Interfaces
 {
     /// <summary>
     /// Interface with base methods for groupped items with 'key'. (Designed for Groupped CollectionViews)
@@ -21,3 +21,4 @@ namespace MyPrintiverse.FilamentsModule.Spools
         Task<bool> DeleteItemsByKeyAsync(string key);
     }
 }
+

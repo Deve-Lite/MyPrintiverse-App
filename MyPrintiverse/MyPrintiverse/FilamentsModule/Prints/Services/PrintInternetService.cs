@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyPrintiverse.FilamentsModule.Prints.Services
 {
-    public class PrintInternetService : BaseInternetService<Print>
+    public class PrintInternetService : BaseInternetAsyncService<Print>
     {
         public PrintInternetService()
         {

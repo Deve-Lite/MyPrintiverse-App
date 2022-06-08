@@ -1,40 +1,125 @@
-﻿using MyPrintiverse.Tools;
-using MyPrintiverse.Tools.Exceptions;
-using System.Net;
+﻿using System.Net;
 
 namespace MyPrintiverse.Base.Services
 {
-    //TODO Dziedziczenie z BaseService
-    public class BaseInternetService<T> : IInternetItemAsyncService<T> where T : class, new()
+    /// <summary>
+    /// Base Service for managing Items.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class BaseInternetAsyncService<T> : IInternetItemAsyncService<T> where T : BaseModel
     {
-        public Task<bool> AddItemAsync(T item, bool isFirst)
+
+        // Work in Progress
+        
+
+        protected string ModuleUrl;
+
+        public virtual async Task<bool> AddItemAsync(T item)
         {
-            throw new NotImplementedException();
+            string url = Path.Combine(ModuleUrl, "");
+
+            RestResponse response = new RestResponse();
+
+            if (ReturnStatus(response.StatusCode))
+                return true;
+
+            await DisplayMessage(response.Content);
+            
+            return false;
         }
 
-        public Task<bool> DeleteAllAsync(bool isFirst)
+        public virtual async Task<bool> DeleteAllAsync()
         {
-            throw new NotImplementedException();
+            string url = Path.Combine(ModuleUrl, "");
+
+            RestResponse response = new RestResponse();
+
+            if (ReturnStatus(response.StatusCode))
+                return true;
+
+            await DisplayMessage(response.Content);
+
+            return false;
         }
 
-        public Task<bool> DeleteItemAsync(string objectId, bool isFirst)
+        public virtual async Task<bool> DeleteItemAsync(string objectId)
         {
-            throw new NotImplementedException();
+            string url = Path.Combine(ModuleUrl, "", objectId);
+
+            RestResponse response = new RestResponse();
+
+            if (ReturnStatus(response.StatusCode))
+                return true;
+
+            await DisplayMessage(response.Content);
+
+            return false;
         }
 
-        public Task<RestResponse<T>> GetItemAsync(string objectId, bool isFirst)
+        public virtual async Task<(bool, T)> GetItemAsync(string objectId)
         {
-            throw new NotImplementedException();
+            string url = Path.Combine(ModuleUrl, "", objectId);
+
+            RestResponse response = new RestResponse();
+
+            if (ReturnStatus(response.StatusCode))
+            {
+                // Parse response
+                return (true, null);
+            }
+
+            await DisplayMessage(response.Content);
+
+            return (false, null);
         }
 
-        public Task<RestResponse<IEnumerable<T>>> GetItemsAsync(bool isFirst)
+        public virtual async Task<(bool, IEnumerable<T>)> GetItemsAsync()
         {
-            throw new NotImplementedException();
+            string url = Path.Combine(ModuleUrl, "");
+
+            RestResponse response = new RestResponse();
+
+            if (ReturnStatus(response.StatusCode))
+            {
+
+                //Parse Response 
+
+                return (true, null);
+            }
+
+            await DisplayMessage(response.Content);
+
+            return (false, null);
         }
 
-        public Task<bool> UpdateItemAsync(T item, bool isFirst)
+        public virtual async Task<bool> UpdateItemAsync(T item)
         {
-            throw new NotImplementedException();
+            string url = Path.Combine(ModuleUrl, "", item.Id);
+
+            RestResponse response = new RestResponse();
+
+            if (ReturnStatus(response.StatusCode))
+                return true;
+
+            await DisplayMessage(response.Content);
+
+            return false;
+        }
+
+
+        protected virtual bool ReturnStatus(HttpStatusCode statusCode)
+        {
+            if (statusCode == HttpStatusCode.Continue || statusCode == HttpStatusCode.OK ||
+                statusCode == HttpStatusCode.Created || statusCode == HttpStatusCode.NoContent)
+                return true;
+
+
+            return false;
+        }
+
+        protected virtual async Task DisplayMessage(string message)
+        {
+            //TODO
         }
     }
 }

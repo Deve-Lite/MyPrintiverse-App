@@ -27,7 +27,7 @@ namespace MyPrintiverse.Base.ViewModels
         public string Id { get; set; }
 
         protected IItemAsyncService<TBaseModel> ItemService;
-        protected IKeyItemAsyncService<TBaseModel> KeyItemsService;
+        protected IItemKeyAsyncService<TBaseModel> KeyItemsService;
 
         protected internal override async void OnAppearing()
         {

@@ -1,11 +1,11 @@
 ﻿using System;
 namespace MyPrintiverse.FilamentsModule.Filaments.Services
 {
-    public class FilamentInternetService : BaseInternetService<Filament>
+    public class FilamentInternetService : BaseInternetAsyncService<Filament>
     {
         public FilamentInternetService()
         {
-            BaseConnectionString = "";
+            // TODO
         }
     }
 }

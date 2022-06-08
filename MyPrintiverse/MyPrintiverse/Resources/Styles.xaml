@@ -4,6 +4,33 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+
+    <Style TargetType="RefreshView">
+        <Setter Property="RefreshColor" Value="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource LightGray}}" />
+        <Setter Property="IsRefreshing" Value="{Binding IsRefreshing}"/>
+        <Setter Property="Command" Value="{Binding RefreshItemsCommand}"/>
+        <Setter Property="CommandParameter" Value="{Binding .}"/>
+    </Style>
+
+    <Style TargetType="CollectionView">
+        <Setter Property="ItemsSource" Value="{Binding Items}"/>
+        <Setter Property="ItemsLayout">
+            <Setter.Value>
+                <!-- To do sprawdzenia co zamaist Layout Options -->
+                <OnIdiom x:TypeArguments="LayoutOptions">
+                    <OnIdiom.Phone> VerticalGrid, 2 </OnIdiom.Phone>
+                    <OnIdiom.Desktop> HorzontalGrid, 3 </OnIdiom.Desktop>
+                </OnIdiom>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BaseGroupedCollectionView" TargetType="CollectionView">
+        <Setter Property="IsGrouped" Value="True"/>
+    </Style>
+
+    <!-- Default Styles -->
+
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
@@ -206,10 +233,6 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
-    </Style>
-
-    <Style TargetType="RefreshView">
-        <Setter Property="RefreshColor" Value="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource LightGray}}" />
     </Style>
 
     <Style TargetType="SearchBar">
