@@ -7,7 +7,7 @@ namespace MyPrintiverse.FilamentsModule.Types.Services
         public FilamentTypeInternetService()
         {
             //TODO
-            BaseConnectionString = "";
+            //BaseConnectionString = "";
         }
     }
 }

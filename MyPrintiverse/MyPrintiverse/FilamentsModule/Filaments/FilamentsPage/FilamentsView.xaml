@@ -1,15 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Filaments"
+             xmlns:viewmodel ="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.FilamentsPage.FilamentsView"
              Title="Filaments">
 
-    <Grid>
-        <RefreshView>
-            <CollectionView>
+    <StackLayout BackgroundColor="Gray">
 
+        <RefreshView>
+            <CollectionView ItemsSource="{Binding Items, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentsViewModel}}}"
+                            IsGrouped="True">
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame>
+                                <Grid>
+                                    <Label Text="{Binding Name}"/>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Filament">
+                        <StackLayout>
+                            <Frame Margin="5">
+                                <Grid>
+                                    <Label Text="{Binding Brand}" />
+
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
             </CollectionView>
         </RefreshView>
-    </Grid>
+
+        <Button Text="tesxas"
+                Margin="10"
+                IsEnabled="True"
+                Command="{Binding AddItemCommand}" />
+
+    </StackLayout>
 </ContentPage>

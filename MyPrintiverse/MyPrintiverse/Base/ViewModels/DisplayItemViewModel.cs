@@ -30,7 +30,7 @@ namespace MyPrintiverse.Base.ViewModels
         }
 
 
-        protected virtual async Task EditItem() => await Shell.Current.GoToAsync($"{nameof(TEdit)}");
+        protected virtual async Task EditItem() => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}");
 
         protected virtual async Task DeleteItem()
         {

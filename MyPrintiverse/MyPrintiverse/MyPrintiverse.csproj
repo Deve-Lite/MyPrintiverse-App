@@ -50,7 +50,7 @@
 	  <PackageReference Include="FluentValidation" Version="11.0.1" />
 	  <PackageReference Include="MongoDB.Bson" Version="2.15.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
 	  <PackageReference Include="RestSharp" Version="106.15.0" />
 	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.18.0" />
 	</ItemGroup>

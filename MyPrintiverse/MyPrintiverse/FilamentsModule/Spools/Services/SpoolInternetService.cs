@@ -4,7 +4,7 @@
     {
         public SpoolInternetService()
         {
-            BaseConnectionString = "";
+            //BaseConnectionString = "";
         }
 
         public async Task<RestResponse<Spool>> DeleteItemsByKeyAsync(string key)

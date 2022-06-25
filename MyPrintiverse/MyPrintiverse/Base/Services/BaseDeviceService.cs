@@ -23,7 +23,9 @@
             if (db != null)
                 return;
 
-            db = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, dbName));
+            var path = Path.Combine(FileSystem.AppDataDirectory, dbName);
+            db = new SQLiteAsyncConnection(path);
+
             await db.CreateTableAsync<T>();
         }
 

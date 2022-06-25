@@ -9,20 +9,12 @@
         /// <summary>
         /// Stores group name for display in view and group identification.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public ObservableCollection<T> Items { get; set; }
 
-        public GroupedItem(string name, ObservableCollection<T> collection)
+        public GroupedItem(string name, ObservableCollection<T> collection) : base(collection)
         {
             Name = name;
-            Items = new ObservableCollection<T>(collection);
-        }
-
-        public GroupedItem(string name)
-        {
-            Name = name;
-            Items = new ObservableCollection<T>();
         }
     }
 }

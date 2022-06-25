@@ -42,7 +42,7 @@ namespace MyPrintiverse.Base.ViewModels
             await UpdateItemsOnAppearing();
         }
 
-        protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(TAdd)}");
+        protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAdd).Name}");
 
         protected virtual async Task UpdateItemsOnAppearing()
         {
@@ -92,7 +92,7 @@ namespace MyPrintiverse.Base.ViewModels
             IsRefreshing = false;
         }
 
-        protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
+        protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}?Id={item.Id}");
 
         protected virtual async Task DeleteItem(TBaseModel item)
         {
@@ -103,6 +103,6 @@ namespace MyPrintiverse.Base.ViewModels
             IsBusy = false;
         }
 
-        protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
+        protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TDisplay).Name}?Id={item.Id}");
     }
 }

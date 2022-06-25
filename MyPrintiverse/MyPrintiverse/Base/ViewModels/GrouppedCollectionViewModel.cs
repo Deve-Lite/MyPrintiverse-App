@@ -35,7 +35,8 @@
             await UpdateItemsOnAppearing();
         }
 
-        protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(TAdd)}");
+        protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAdd).Name}");
+        
 
         protected virtual async Task UpdateItemsOnAppearing()
         {
@@ -100,7 +101,7 @@
         }
 
 
-        protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TEdit)}?Id={item.Id}");
+        protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}?Id={item.Id}");
 
 
         protected virtual async Task DeleteItem(TBaseModel item)
@@ -113,7 +114,7 @@
         }
 
 
-        protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{nameof(TDisplay)}?Id={item.Id}");
+        protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TDisplay).Name}?Id={item.Id}");
 
         protected virtual void AddToItems(TBaseModel item)
         {
@@ -126,7 +127,7 @@
             }
             else
             {
-                Items[x].Items.Add(item);
+                Items[x].Add(item);
             }
         }
 
@@ -140,7 +141,7 @@
                 return;
             }
 
-            Items[index].Items.Remove(item);
+            Items[index].Remove(item);
         }
 
         /// <summary>
@@ -150,7 +151,7 @@
         /// <returns> New group name. </returns>
         protected virtual string GetNewGroupName(TBaseModel item)
         {
-            return "Error";
+            throw new NotImplementedException("Method GetNewGroupName must be implemented.");
         }
 
         /// <summary>
@@ -160,7 +161,7 @@
         /// <returns> Group Index else -1. </returns>
         protected virtual int GetIndex(TBaseModel item)
         {
-            return 0;
+            throw new NotImplementedException("Method GetIndex must be implemented.");
         }
     }
 }
