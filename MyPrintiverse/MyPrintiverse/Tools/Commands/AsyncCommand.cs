@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Input;
 
-namespace MyPrintiverse.Tools
+namespace MyPrintiverse.Tools.Commands
 {
     /// <summary>
     /// AsyncCommand from MVVM helpers.
@@ -11,8 +11,8 @@ namespace MyPrintiverse.Tools
 	public class AsyncCommand : IAsyncCommand
     {
         readonly Func<Task> execute;
-        readonly Func<object, bool>? canExecute;
-        readonly Action<Exception>? onException;
+        readonly Func<object, bool> canExecute;
+        readonly Action<Exception> onException;
         readonly bool continueOnCapturedContext;
         readonly WeakEventManager weakEventManager = new WeakEventManager();
 
@@ -24,8 +24,8 @@ namespace MyPrintiverse.Tools
         /// <param name="onException">Action callback when an exception occurs</param>
         /// <param name="continueOnCapturedContext">If the context should be captured on exception</param>
         public AsyncCommand(Func<Task> execute,
-                            Func<object, bool>? canExecute = null,
-                            Action<Exception>? onException = null,
+                            Func<object, bool> canExecute = null,
+                            Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
@@ -73,8 +73,8 @@ namespace MyPrintiverse.Tools
     {
 
         readonly Func<T, Task> execute;
-        readonly Func<object, bool>? canExecute;
-        readonly Action<Exception>? onException;
+        readonly Func<object, bool> canExecute;
+        readonly Action<Exception> onException;
         readonly bool continueOnCapturedContext;
         readonly WeakEventManager weakEventManager = new WeakEventManager();
 
@@ -86,8 +86,8 @@ namespace MyPrintiverse.Tools
         /// <param name="onException">Action callback when an exception occurs</param>
         /// <param name="continueOnCapturedContext">If the context should be captured on exception</param>
         public AsyncCommand(Func<T, Task> execute,
-                            Func<object, bool>? canExecute = null,
-                            Action<Exception>? onException = null,
+                            Func<object, bool> canExecute = null,
+                            Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
@@ -145,7 +145,7 @@ namespace MyPrintiverse.Tools
         /// <param name="task">Task to execute</param>
         /// <param name="onException">What to do when method has an exception</param>
         /// <param name="continueOnCapturedContext">If the context should be captured.</param>
-        public static async void SafeFireAndForget(this Task task, Action<Exception>? onException = null, bool continueOnCapturedContext = false)
+        public static async void SafeFireAndForget(this Task task, Action<Exception> onException = null, bool continueOnCapturedContext = false)
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
         {
             try

@@ -1,5 +1,7 @@
 ﻿#nullable enable
-namespace MyPrintiverse.Tools;
+using MyPrintiverse;
+
+namespace MyPrintiverse.BaseServices.Interfaces;
 
 public interface IConfig
 {

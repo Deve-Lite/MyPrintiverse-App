@@ -5,7 +5,7 @@ using System.Net;
 namespace MyPrintiverse.Base.Services
 {
     /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
-    public class BaseInternetService<T> //: IInternetItemAsyncService<Item> where Item : class, new()
+    public class BaseItemInternetService<T> //: IInternetItemAsyncService<Item> where Item : class, new()
     {
         // protected static string ConnectionString { get; set; } = "http://localhost:3000/api/";
         // protected string ConnectionString { get; set; } = "http://10.0.2.2:3000/api/";

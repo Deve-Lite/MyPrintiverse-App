@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace MyPrintiverse.Interfaces
+namespace MyPrintiverse.Tools.Commands
 {
     /// <summary>
     /// Iterface for async command.

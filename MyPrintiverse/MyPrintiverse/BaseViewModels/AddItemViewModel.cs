@@ -1,4 +1,7 @@
-﻿namespace MyPrintiverse.Base.ViewModels
+﻿using MyPrintiverse.BaseServices.Interfaces;
+using MyPrintiverse.Tools.Commands;
+
+namespace MyPrintiverse.Base.ViewModels
 {
     /// <summary>
     /// Base view model for adding new item.

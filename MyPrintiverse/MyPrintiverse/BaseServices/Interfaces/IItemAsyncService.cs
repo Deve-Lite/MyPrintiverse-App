@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Interfaces
+﻿namespace MyPrintiverse.BaseServices.Interfaces
 {
     /// <summary>
     /// Global service which connects Internet Service and Device Service.

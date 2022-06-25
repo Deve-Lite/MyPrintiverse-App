@@ -1,4 +1,6 @@
-﻿
+﻿using MyPrintiverse.BaseServices.Interfaces;
+using MyPrintiverse.Tools.Commands;
+
 namespace MyPrintiverse.Base.ViewModels
 {
     /// <summary>

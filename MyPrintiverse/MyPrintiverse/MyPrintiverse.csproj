@@ -46,36 +46,46 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="1.0.0-rc3" />
+	  <AndroidResource Remove="FilamentsModule\**" />
+	  <AndroidResource Remove="ModuleAuthorization\**" />
+	  <Compile Remove="FilamentsModule\**" />
+	  <Compile Remove="ModuleAuthorization\**" />
+	  <EmbeddedResource Remove="FilamentsModule\**" />
+	  <EmbeddedResource Remove="ModuleAuthorization\**" />
+	  <MauiCss Remove="FilamentsModule\**" />
+	  <MauiCss Remove="ModuleAuthorization\**" />
+	  <MauiXaml Remove="FilamentsModule\**" />
+	  <MauiXaml Remove="ModuleAuthorization\**" />
+	  <None Remove="FilamentsModule\**" />
+	  <None Remove="ModuleAuthorization\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="1.0.0" />
 	  <PackageReference Include="FluentValidation" Version="11.0.1" />
 	  <PackageReference Include="MongoDB.Bson" Version="2.15.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-	  <PackageReference Include="RestSharp" Version="106.15.0" />
-	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.18.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ModuleAuthorization\ViewModels\" />
-	  <Folder Include="ModuleAuthorization\Views\" />
-	  <Folder Include="FilamentsModule\Prints\ViewModels\" />
-	  <Folder Include="FilamentsModule\Prints\Views\" />
-	  <Folder Include="FilamentsModule\Rolls\ViewModels\" />
-	  <Folder Include="FilamentsModule\Rolls\Views\" />
-	  <Folder Include="FilamentsModule\Statistics\ViewModels\" />
-	  <Folder Include="FilamentsModule\Statistics\Views\" />
-	  <Folder Include="FilamentsModule\Types\ViewModels\" />
-	  <Folder Include="FilamentsModule\Types\Views\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="FilamentsModule\Filaments\Views\FilamentsView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+	  <PackageReference Include="RestSharp" Version="108.0.1" />
+	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.20.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="RestSharp" />
 	  <None Remove="System.IdentityModel.Tokens.Jwt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\appicon.svg" />
+	  <MauiImage Include="Resources\appiconfg.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="BaseViews\Editor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="BaseViews\Entry.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

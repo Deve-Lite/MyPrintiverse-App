@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyPrintiverse.Interfaces
+namespace MyPrintiverse.BaseServices.Interfaces
 {
     /// <summary>
     /// Default interface for device service with standard CRUD operations.

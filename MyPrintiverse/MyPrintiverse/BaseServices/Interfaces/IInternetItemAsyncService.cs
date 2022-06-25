@@ -1,12 +1,13 @@
 ﻿using System;
-namespace MyPrintiverse.Interfaces
+
+namespace MyPrintiverse.BaseServices.Interfaces
 {
     /// <summary>
     /// Base interface for Internet Service 
     /// </summary>
     /// <typeparam name="Model"></typeparam>
 	public interface IInternetItemAsyncService<Model>
-	{
+    {
 
         /* Tutaj ewentualny problem z tym co bedziemy zwracać -> najprawdopodobniej trzeba bedzie inaczej parsować dane i zwracać nasz Response a nie RestResponse */
         /* isFirst -> determinuje czy to bylo pierwsze czy drugie zapytanie (jezeli error z tokenem to ponawaimy zapytanie inaczej zapytanie nie udane ) */

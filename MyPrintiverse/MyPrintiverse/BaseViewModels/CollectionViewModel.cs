@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using MyPrintiverse.Base.Models;
-using MyPrintiverse.Interfaces;
+using MyPrintiverse.BaseServices.Interfaces;
+using MyPrintiverse.Tools.Commands;
 
 namespace MyPrintiverse.Base.ViewModels
 {
