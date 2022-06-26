@@ -1,12 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0-android</TargetFramework>
+    <TargetFramework>net6.0-androidnet6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFramework>
+	<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+	  
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tools\**" />
+    <Content Remove="Tools\**" />
+    <EmbeddedResource Remove="Tools\**" />
+    <None Remove="Tools\**" />
+    <Page Remove="Tools\**" />
+    <PRIResource Remove="Tools\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.6.0" />
@@ -29,8 +40,6 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-
-		<Folder Include="Tools\" />
 		<Folder Include="LogInPage\" />
 		<Folder Include="ConfirmPasswordPage\" />
 		<Folder Include="AuthorizationModuleTests\" />

@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace MyPrintiverse.BaseServices;
+﻿namespace MyPrintiverse.BaseServices;
 
 public class Config : IHttpConfig
 {

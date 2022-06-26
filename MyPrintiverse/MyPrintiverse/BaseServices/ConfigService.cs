@@ -23,28 +23,15 @@ public class ConfigService<T> : IConfigService<T>
 	/// <param name="filePath">ConfigServiceService file disc path.</param>
 	/// <param name="logger">ILogger instance.</param>
 	/// <returns><see cref="ConfigServiceServiceService{T}" /> instance.</returns>
-	public static ConfigService<T> GetInstance()
+	public static ConfigService<T> GetInstance(string filePath)
 	{
-		if (_configInstance == null)
-			throw new NotInitializeException();
+		if (_configInstance == null) 
+		{
+			_configInstance = new ConfigService<T>(filePath);
+		}
 		
 		return _configInstance;
 	}
-
-	/// <summary>
-	/// Release (delete) instance.
-	/// </summary>
-	public static void ReleaseInstance() => _configInstance = null;
-
-	/// <summary>
-	/// Create <see cref="ConfigServiceServiceService{T}" /> instance.
-	/// </summary>
-	/// <exception cref="ArgumentException" />
-	/// <exception cref="FileNotFoundException" />
-	/// <param name="filePath">ConfigServiceService file disc path.</param>
-	/// <param name="logger">ILogger instance.</param>
-	public static void Initialize(string configFilePath) =>
-		_configInstance ??= new ConfigService<T>(configFilePath);
 
 	protected ConfigService(string configFilePath)
 	{
