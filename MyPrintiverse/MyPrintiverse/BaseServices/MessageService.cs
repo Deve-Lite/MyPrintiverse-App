@@ -1,6 +1,6 @@
 ﻿
 /// <inheritdoc />
-namespace MyPrintiverse.Tools;
+namespace MyPrintiverse.BaseServices;
 
 public class MessageService : IMessageService
 {

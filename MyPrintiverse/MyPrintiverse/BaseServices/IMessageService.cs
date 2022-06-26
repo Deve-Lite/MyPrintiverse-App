@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Tools;
+﻿namespace MyPrintiverse.BaseServices;
 
 /// <summary>
 /// Service for creating pop-up windows.

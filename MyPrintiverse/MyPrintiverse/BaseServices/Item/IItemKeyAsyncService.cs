@@ -1,9 +1,9 @@
-﻿namespace MyPrintiverse.ModuleFilaments;
+﻿namespace MyPrintiverse.BaseServices.Item;
 
 /// <summary>
 /// Interface with base methods for groupped items with 'key'.
 /// </summary>
-public interface IGroupKeyAsyncService<TItem>
+public interface IItemKeyAsyncService<TItem>
 {
     /// <summary>
     /// Returns IEnumerable  with items with specified key

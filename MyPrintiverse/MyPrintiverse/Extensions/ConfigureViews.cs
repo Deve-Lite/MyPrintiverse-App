@@ -1,4 +1,4 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments.Views;
+﻿
 
 namespace MyPrintiverse.Extensions;
 
@@ -15,7 +15,6 @@ public static class ConfigureView
 		// template
 		// builder.Services.AddSingleton<...View>();
 
-		builder.Services.AddSingleton<FilamentsView>();
 
 		return builder;
 	}

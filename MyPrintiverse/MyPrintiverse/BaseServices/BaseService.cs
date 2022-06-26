@@ -1,9 +1,8 @@
-﻿using MyPrintiverse.AuthorizationModule;
-using FileSystem = Microsoft.Maui.Storage.FileSystem;
+﻿using FileSystem = Microsoft.Maui.Storage.FileSystem;
 
 #nullable enable
 
-namespace MyPrintiverse;
+namespace MyPrintiverse.BaseServices;
 
 /// <summary>
 /// Base service for device databases.

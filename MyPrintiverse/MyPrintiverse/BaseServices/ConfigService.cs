@@ -1,8 +1,8 @@
 ﻿#nullable enable
 
-using Develite.Utilities.Exceptions;
+//using Develite.Utilities.Exceptions;
 
-namespace MyPrintiverse.Tools;
+namespace MyPrintiverse.BaseServices;
 
 /// <inheritdoc />
 public class ConfigService<T> : IConfigService<T>
@@ -26,7 +26,7 @@ public class ConfigService<T> : IConfigService<T>
 	public static ConfigService<T> GetInstance()
 	{
 		if (_configInstance == null)
-			throw new NotInitializeException();
+			throw new Develite.Utilities.NotInitializeException();
 		
 		return _configInstance;
 	}

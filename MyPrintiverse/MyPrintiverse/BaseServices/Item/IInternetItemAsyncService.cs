@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Interfaces;
+﻿namespace MyPrintiverse.BaseServices.Item;
 
 /// <summary>
 /// Base interface for Internet Service 

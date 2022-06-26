@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.AuthorizationModule;
+﻿namespace MyPrintiverse.BaseServices;
 
 public interface IBaseService
 {

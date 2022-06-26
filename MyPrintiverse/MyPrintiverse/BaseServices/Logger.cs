@@ -1,7 +1,6 @@
 ﻿
-using Microsoft.Extensions.Logging;
 
-namespace MyPrintiverse.Tools;
+namespace MyPrintiverse.BaseServices;
 
 public class Logger : ILogger
 {

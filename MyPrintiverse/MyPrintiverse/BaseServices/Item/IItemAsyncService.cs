@@ -1,46 +1,48 @@
-﻿namespace MyPrintiverse.Interfaces;
+﻿namespace MyPrintiverse.BaseServices.Item;
 
 /// <summary>
-/// Default interface for device service with standard CRUD operations.
+/// Global service which connects Internet Service and Device Service.
 /// </summary>
-/// <typeparam name="Item"></typeparam>
-public interface IItemAsyncService<Item>
+/// <typeparam name="T"></typeparam>
+public interface IItemAsyncService<T>
 {
-	/// <summary>
-	/// Returns sqlite _dataBaseConnection item by id.
-	/// </summary>
-	/// <param name="id"></param>
-	/// <returns></returns>
-	Task<Item> GetItemAsync(string objectId);
-	/// <summary>
-	/// Returns IEnumerable of items from sqlite _dataBaseConnection.
-	/// </summary>
-	/// <returns></returns>
-	Task<IEnumerable<Item>> GetItemsAsync();
+    /// <summary>
+    /// Gets item by objectId. (returns null if unsuccesful)
+    /// </summary>
+    /// <param name="objectId"></param>
+    /// <returns></returns>
+    Task<T> GetItemAsync(string objectId);
 
-	/// <summary>
-	/// Adds item to sqlite _dataBaseConnection.
-	/// </summary>
-	/// <param name="item"></param>
-	/// <returns></returns>
-	Task AddItemAsync(Item item);
+    /// <summary>
+    /// Get all items from database. (returns null if unsuccesful)
+    /// </summary>
+    /// <returns></returns>
+    Task<IEnumerable<T>> GetItemsAsync();
 
-	/// <summary>
-	/// Updates item in sqlite _dataBaseConnection. Should update only when exists! 
-	/// </summary>
-	/// <param name="item"></param>
-	/// <returns></returns>
-	Task UpdateItemAsync(Item item);
+    /// <summary>
+    /// Adds new item and returns true if action was successful.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    Task<bool> AddItemAsync(T item);
 
-	/// <summary>
-	/// Deletes item by id in sqlite _dataBaseConnection.
-	/// </summary>
-	/// <param name="objectId"></param>
-	/// <returns></returns>
-	Task DeleteItemAsync(string objectId);
-	/// <summary>
-	/// Methods drops table (item database).
-	/// </summary>
-	/// <returns></returns>
-	Task DeleteAllAsync();
+    /// <summary>
+    /// Updates item and returns true if action was successful)
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    Task<bool> UpdateItemAsync(T item);
+
+    /// <summary>
+    /// Deletes item and returns true if action was successful.
+    /// </summary>
+    /// <param name="objectId"></param>
+    /// <returns></returns>
+    Task<bool> DeleteItemAsync(string objectId);
+
+    /// <summary>
+    /// Deletes items and returns true if action was successful.
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> DeleteAllAsync();
 }

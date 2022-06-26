@@ -11,10 +11,14 @@ global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using RestSharp;
 global using CommunityToolkit.Maui;
 global using System.Collections.ObjectModel;
+global using Microsoft.Extensions.Logging;
+global using System.Windows.Input;
 
 global using MyPrintiverse.BaseModels;
 global using MyPrintiverse.Tools.Others;
 global using MyPrintiverse.Extensions;
 global using MyPrintiverse.BaseServices;
-global using MyPrintiverse.BaseViewModels;
+global using MyPrintiverse.BaseServices.Item;
+global using MyPrintiverse.BaseViewModels.Item;
+global using MyPrintiverse.BaseViewModels.Collection;
 

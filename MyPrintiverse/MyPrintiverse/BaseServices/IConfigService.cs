@@ -1,5 +1,5 @@
 ﻿#nullable enable
-namespace MyPrintiverse.Tools;
+namespace MyPrintiverse.BaseServices;
 
 /// <summary>
 /// ConfigServiceService manager.

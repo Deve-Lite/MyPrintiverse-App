@@ -1,5 +1,4 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments.ViewModels;
-
+﻿
 namespace MyPrintiverse.Extensions;
 
 public static class ConfigureViewModel
@@ -14,7 +13,6 @@ public static class ConfigureViewModel
 	{
 		// template
 		// builder.Services.AddSingleton<...ViewModel>();
-		builder.Services.AddSingleton<FilamentsViewModel>();
 
 		return builder;
 	}
