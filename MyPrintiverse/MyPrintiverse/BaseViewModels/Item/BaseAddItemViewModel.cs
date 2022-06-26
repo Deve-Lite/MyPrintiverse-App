@@ -1,14 +1,11 @@
 ﻿namespace MyPrintiverse.BaseViewModels.Item;
 
 /// <summary>
-/// Base view model for editing any item.
+/// Base view model for adding new item.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-[QueryProperty(nameof(Id), nameof(Id))]
-public class EditItemViewModel<T> : BaseViewModel
+public class BaseAddItemViewModel<T> : BaseViewModel
 {
-    public string Id { get; set; }
-
     private T item;
     public T Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
@@ -16,22 +13,20 @@ public class EditItemViewModel<T> : BaseViewModel
 
     protected IItemAsyncService<T> ItemService;
 
-    protected internal override async void OnAppearing()
+    protected internal override void OnAppearing()
     {
         base.OnAppearing();
 
-        Item = await ItemService.GetItemAsync(Id);
-
-        AddItemCommand = new AsyncCommand(EditItem, CanExecute);
+        AddItemCommand = new AsyncCommand(AddItem, CanExecute);
     }
 
 
-    public virtual async Task EditItem()
+
+    public virtual async Task AddItem()
     {
+        // Open loading popup/ activity indicator
 
-        // Open loading popup / activity indicator
-
-        if (await ItemService.UpdateItemAsync(Item))
+        if (await ItemService.AddItemAsync(Item))
             await Shell.Current.GoToAsync("..");
 
 

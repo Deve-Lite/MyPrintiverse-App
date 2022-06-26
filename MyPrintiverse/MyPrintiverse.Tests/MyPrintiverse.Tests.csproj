@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-android</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -24,4 +24,19 @@
     </PackageReference>
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\MyPrintiverse\MyPrintiverse.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+
+		<Folder Include="Tools\" />
+		<Folder Include="LogInPage\" />
+		<Folder Include="ConfirmPasswordPage\" />
+		<Folder Include="AuthorizationModuleTests\" />
+		<Folder Include="SettingsPage\" />
+		<Folder Include="RemindPasswordPage\" />
+		<Folder Include="SignInPage\" />
+	</ItemGroup>
+	
 </Project>

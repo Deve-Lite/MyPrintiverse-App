@@ -9,8 +9,8 @@ public partial class App : Application
 		InitializeComponent();
 
         // Tutaj ewentualnie opcja rozbicia na 2 pliki AppShell osobno Dekstop osobno Mobile.
-        if (DeviceInfo.Idiom == DeviceIdiom.Phone)
-            Shell.Current.CurrentItem = PhoneTabs;
+        //if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+           // Shell.Current.CurrentItem = PhoneTabs;
 
         RegisterRoutes();
     }

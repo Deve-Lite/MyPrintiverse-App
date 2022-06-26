@@ -14,6 +14,7 @@ public abstract class BaseService : IBaseService
 	public IConfigService<Config> ConfigService { get; }
 	public ILogger Logger { get; }
 	public IMessageService MessageService { get; }
+	public ISession Session { get; }
 
 	protected BaseService(IConfigService<Config> configService, ILogger logger, IMessageService messageService)
 	{

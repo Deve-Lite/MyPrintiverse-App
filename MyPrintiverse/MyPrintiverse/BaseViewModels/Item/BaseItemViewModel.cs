@@ -6,7 +6,7 @@
 /// <typeparam name="TBaseModel"> Model inheriting from BaseModel. </typeparam>
 /// <typeparam name="TEdit"> Class (View) editing model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public class DisplayItemViewModel<TBaseModel, TEdit> : BaseViewModel
+public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel
 {
     private TBaseModel item;
     public TBaseModel Item { get => item; set => SetProperty(ref item, value); }
