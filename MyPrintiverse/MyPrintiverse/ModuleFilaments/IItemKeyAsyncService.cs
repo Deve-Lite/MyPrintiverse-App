@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MyPrintiverse.ModuleFilaments;
 
-namespace MyPrintiverse.ModuleFilaments
+/// <summary>
+/// Interface with base methods for groupped items with 'key'.
+/// </summary>
+public interface IGroupKeyAsyncService<TItem>
 {
     /// <summary>
-    /// Interface with base methods for groupped items with 'key'. (Designed for Groupped CollectionViews)
+    /// Returns IEnumerable  with items with specified key
     /// </summary>
-    public interface IKeyItemAsyncService<Item>
-    {
-        /// <summary>
-        /// Returns IEnumerable with items with specified key
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        Task<IEnumerable<Item>> GetItemsByKeyAsync(string key);
+    /// <param name="key"></param>
+    /// <returns></returns>
+    Task<IEnumerable<TItem>> GetItemsByKeyAsync(string key);
 
-        /// <summary>
-        /// Deletes All Items in db with specified key.
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        Task<bool> DeleteItemsByKeyAsync(string key);
-    }
+    /// <summary>
+    /// Deletes All Items in _dataBaseConnection with specified key.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    Task DeleteItemsByKeyAsync(string key);
 }

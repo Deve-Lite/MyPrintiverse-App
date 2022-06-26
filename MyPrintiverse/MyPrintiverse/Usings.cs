@@ -12,10 +12,9 @@ global using RestSharp;
 global using CommunityToolkit.Maui;
 global using System.Collections.ObjectModel;
 
+global using MyPrintiverse.BaseModels;
+global using MyPrintiverse.Tools.Others;
 global using MyPrintiverse.Extensions;
-global using MyPrintiverse.Base.Models;
-global using MyPrintiverse.Base.Services;
-global using MyPrintiverse.Base.ViewModels;
-global using MyPrintiverse.Interfaces;
-global using MyPrintiverse.Tools;
+global using MyPrintiverse.BaseServices;
+global using MyPrintiverse.BaseViewModels;
 

@@ -47,17 +47,11 @@
 
 	<ItemGroup>
 	  <AndroidResource Remove="FilamentsModule\**" />
-	  <AndroidResource Remove="ModuleAuthorization\**" />
 	  <Compile Remove="FilamentsModule\**" />
-	  <Compile Remove="ModuleAuthorization\**" />
 	  <EmbeddedResource Remove="FilamentsModule\**" />
-	  <EmbeddedResource Remove="ModuleAuthorization\**" />
 	  <MauiCss Remove="FilamentsModule\**" />
-	  <MauiCss Remove="ModuleAuthorization\**" />
 	  <MauiXaml Remove="FilamentsModule\**" />
-	  <MauiXaml Remove="ModuleAuthorization\**" />
 	  <None Remove="FilamentsModule\**" />
-	  <None Remove="ModuleAuthorization\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -78,14 +72,5 @@
 	<ItemGroup>
 	  <MauiImage Include="Resources\appicon.svg" />
 	  <MauiImage Include="Resources\appiconfg.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="BaseViews\Editor.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="BaseViews\Entry.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 </Project>

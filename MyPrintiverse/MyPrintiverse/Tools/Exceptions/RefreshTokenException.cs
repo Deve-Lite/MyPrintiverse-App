@@ -1,24 +1,23 @@
 ﻿using System.Runtime.Serialization;
 
-namespace MyPrintiverse.Tools.Exceptions
+namespace MyPrintiverse.Tools.Exceptions;
+
+[Serializable]
+internal class RefreshTokenException : Exception
 {
-    [Serializable]
-    internal class RefreshTokenException : Exception
-    {
-        public RefreshTokenException()
-        {
-        }
+	public RefreshTokenException()
+	{
+	}
 
-        public RefreshTokenException(string message) : base(message)
-        {
-        }
+	public RefreshTokenException(string message) : base(message)
+	{
+	}
 
-        public RefreshTokenException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+	public RefreshTokenException(string message, Exception innerException) : base(message, innerException)
+	{
+	}
 
-        protected RefreshTokenException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-    }
+	protected RefreshTokenException(SerializationInfo info, StreamingContext context) : base(info, context)
+	{
+	}
 }
