@@ -7,7 +7,7 @@ public abstract class BaseItemService<T> : BaseService, IItemAsyncService<T> whe
     protected IInternetItemAsyncService<T> ItemInternetService;
     protected IDeviceItemAsyncService<T> ItemDeviceService;
 
-    public BaseItemService(IConfigService<Config> configService, ILogger logger, IMessageService messageService) : base(configService, logger, messageService)
+    public BaseItemService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
     {
 
     }

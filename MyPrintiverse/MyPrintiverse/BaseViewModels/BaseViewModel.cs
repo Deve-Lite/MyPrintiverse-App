@@ -96,18 +96,11 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Standard alert to get true/false value from user.
+    /// Creates exception message.
     /// </summary>
-    /// <param name="title"></param>
-    /// <returns></returns>
-    protected async Task<bool> GetBoolFromUser(string title, string message)
-    {
-        IsBusy = true;
-
-        var value = await Shell.Current.DisplayAlert(title, message, "Yes", "No");
-
-        IsBusy = false;
-        return value;
-    }
+    /// <typeparam name="T">Class type where exception is thrown.</typeparam>
+    /// <param name="propertyName"></param>
+    /// <returns>exception message.</returns>
+    protected string GetExceptionMessage<T>(string propertyName) => $"{nameof(T)} - {propertyName}";
 
 }

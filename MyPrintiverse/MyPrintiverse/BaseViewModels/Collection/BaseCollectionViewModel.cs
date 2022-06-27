@@ -25,13 +25,15 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
 
     protected IItemAsyncService<TBaseModel> ItemsService;
 
-    protected MessageService MessageService;
+    protected IMessageService MessageService;
 
-    public BaseCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService)
+    public BaseCollectionViewModel(IMessageService messageService, IItemAsyncService<TBaseModel> itemsService)
     {
-        MessageService = messagingService ?? throw new ArgumentNullException("Messaging Center cannot be null.");
+        var messageServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>>(nameof(messageService));
+        MessageService = messageService ?? throw new ArgumentNullException();
 
-        ItemsService = itemsService ?? throw new ArgumentNullException("Item Service cannot be null.");
+        var itemsServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>>(nameof(itemsService));
+        ItemsService = itemsService ?? throw new ArgumentNullException(itemsServiceExceptionMessage);
     }
 
     protected internal override async void OnAppearing()

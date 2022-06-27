@@ -19,7 +19,8 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
 
     public BaseKeyCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService, IItemKeyAsyncService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
     {
-        KeyItemsService = keyItemsService ?? throw new ArgumentNullException("Item Service cannot be null.");
+        var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>>(nameof(itemsService));
+        KeyItemsService = keyItemsService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
     }
 
     protected internal override async void OnAppearing()

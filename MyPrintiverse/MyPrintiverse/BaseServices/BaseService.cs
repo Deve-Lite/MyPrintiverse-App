@@ -16,7 +16,7 @@ public abstract class BaseService : IBaseService
 	public IMessageService MessageService { get; }
 	public ISession Session { get; }
 
-	protected BaseService(IConfigService<Config> configService, ILogger logger, IMessageService messageService)
+	protected BaseService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session)
 	{
 		var configServiceExceptionMessage = GetExceptionMessage<BaseService>(nameof(configService));
 		ConfigService = configService ?? throw new ArgumentNullException(configServiceExceptionMessage);
@@ -26,7 +26,10 @@ public abstract class BaseService : IBaseService
 
 		var messageServiceExceptionMessage = GetExceptionMessage<BaseService>(nameof(messageService));
 		MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
-	}
+
+        var sessionExceptionMessage = GetExceptionMessage<BaseService>(nameof(session));
+        Session = session ?? throw new ArgumentNullException(messageServiceExceptionMessage);
+    }
 
 	/// <summary>
 	/// Try run operation (function) if it throw exception, function catch it if app is not in developer mode and will show error message.

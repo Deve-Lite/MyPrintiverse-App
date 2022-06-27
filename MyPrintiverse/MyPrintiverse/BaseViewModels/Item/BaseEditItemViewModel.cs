@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.BaseViewModels.Item;
+﻿using MyPrintiverse.BaseModels;
+
+namespace MyPrintiverse.BaseViewModels.Item;
 
 /// <summary>
 /// Base view model for editing any item.
@@ -15,6 +17,12 @@ public class BaseEditItemViewModel<T> : BaseViewModel
     public AsyncCommand AddItemCommand { get; set; }
 
     protected IItemAsyncService<T> ItemService;
+
+    public BaseEditItemViewModel(IItemAsyncService<T> itemService)
+{
+        var itemServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(itemService));
+        ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
+    }
 
     protected internal override async void OnAppearing()
     {
