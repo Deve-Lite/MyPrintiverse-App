@@ -1,4 +1,5 @@
 ﻿using MyPrintiverse.BaseModels;
+using Plugin.ValidationRules;
 
 namespace MyPrintiverse.BaseViewModels.Item;
 
@@ -6,10 +7,10 @@ namespace MyPrintiverse.BaseViewModels.Item;
 /// Base view model for adding new item.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public class BaseAddItemViewModel<T> : BaseViewModel
+public class BaseAddItemViewModel<T> : BaseViewModel where T : new()
 {
-    private T item;
-    public T Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+    private Validatable<T> item;
+    public Validatable<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
     public AsyncCommand AddItemCommand { get; set; }
 
@@ -25,16 +26,26 @@ public class BaseAddItemViewModel<T> : BaseViewModel
     {
         base.OnAppearing();
 
+        Item.Value = new T();
         AddItemCommand = new AsyncCommand(AddItem, CanExecute);
+        AddValidation();
     }
 
+    protected virtual void AddValidation()
+    {
+        throw new NotImplementedException("Validation must be implemented.");
+    }
 
+    protected virtual bool Validate()
+    {
+        return Item.Validate();
+    }
 
     public virtual async Task AddItem()
     {
         // Open loading popup/ activity indicator
 
-        if (await ItemService.AddItemAsync(Item))
+        if (await ItemService.AddItemAsync(Item.Value))
             await Shell.Current.GoToAsync("..", true);
 
 

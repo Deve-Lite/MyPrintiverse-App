@@ -1,4 +1,5 @@
 ﻿using MyPrintiverse.BaseModels;
+using Plugin.ValidationRules;
 
 namespace MyPrintiverse.BaseViewModels.Item;
 
@@ -11,10 +12,10 @@ public class BaseEditItemViewModel<T> : BaseViewModel
 {
     public string Id { get; set; }
 
-    private T item;
-    public T Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+    private Validatable<T> item;
+    public Validatable<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
-    public AsyncCommand AddItemCommand { get; set; }
+    public AsyncCommand EditItemCommand { get; set; }
 
     protected IItemAsyncService<T> ItemService;
 
@@ -28,18 +29,28 @@ public class BaseEditItemViewModel<T> : BaseViewModel
     {
         base.OnAppearing();
 
-        Item = await ItemService.GetItemAsync(Id);
+        Item.Value = await ItemService.GetItemAsync(Id);
 
-        AddItemCommand = new AsyncCommand(EditItem, CanExecute);
+        EditItemCommand = new AsyncCommand(EditItem, CanExecute);
+        AddValidation();
     }
 
+    protected virtual void AddValidation()
+    {
+        throw new NotImplementedException("Validation must be implemented.");
+    }
+
+    protected virtual bool Validate()
+    {
+        return Item.Validate();
+    }
 
     public virtual async Task EditItem()
     {
 
         // Open loading popup / activity indicator
 
-        if (await ItemService.UpdateItemAsync(Item))
+        if (await ItemService.UpdateItemAsync(Item.Value))
             await Shell.Current.GoToAsync("..", true);
 
 

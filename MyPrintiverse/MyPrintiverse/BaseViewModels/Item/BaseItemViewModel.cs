@@ -1,6 +1,4 @@
-﻿using MyPrintiverse.BaseServices;
-
-namespace MyPrintiverse.BaseViewModels.Item;
+﻿namespace MyPrintiverse.BaseViewModels.Item;
 
 /// <summary>
 /// Base ViewModel for View displaying Item.
