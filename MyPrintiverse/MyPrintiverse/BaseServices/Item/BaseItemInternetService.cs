@@ -4,7 +4,7 @@ using System.Net;
 namespace MyPrintiverse.BaseServices.Item;
 
 /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
-public abstract class BaseItemInternetService<T> : BaseService, IInternetItemAsyncService<T> where T : BaseModel, new()
+public abstract class BaseItemInternetService<T> : BaseService, IInternetItemAsyncService<T> where T : IBaseModel, new()
 {
     public BaseItemInternetService(IConfigService<Config> configService, ILogger logger, IMessageService messageService) : base(configService, logger, messageService)
     {

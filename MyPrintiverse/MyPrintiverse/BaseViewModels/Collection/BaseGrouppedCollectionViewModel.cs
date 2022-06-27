@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.BaseViewModels.Collection;
+﻿using MyPrintiverse.Tools.Enums;
+
+namespace MyPrintiverse.BaseViewModels.Collection;
 
 /// <summary>
 /// Base model for view with groupped CollectionView.
@@ -7,18 +9,13 @@
 /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
 /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
+public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : IBaseModel
 {
-    public ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
+    public new ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
 
-    public AsyncCommand RefreshItemsCommand { get; set; }
-    public AsyncCommand AddItemCommand { get; set; }
-
-    public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
-    public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
-    public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
-
-    protected IItemAsyncService<TBaseModel> ItemsService;
+    public GroupedCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService) : base(messagingService, itemsService)
+    {
+    }
 
     protected internal override async void OnAppearing()
     {
@@ -31,26 +28,24 @@ public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
         OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
         DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);
+        ItemOptionsCommand = new AsyncCommand<TBaseModel>(ItemOptions, CanExecute);
 
         await UpdateItemsOnAppearing();
     }
 
-    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAdd).Name}");
-
-
-    protected virtual async Task UpdateItemsOnAppearing()
+    protected override async Task UpdateItemsOnAppearing()
     {
         IsBusy = true;
         IsRefreshing = true;
 
-        List<TBaseModel> data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
+        var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
         int i = 0;
-        foreach (GroupedItem<TBaseModel> group in new List<GroupedItem<TBaseModel>>(Items))
+        foreach (var group in new List<GroupedItem<TBaseModel>>(Items))
         {
             foreach (TBaseModel item in group)
             {
-                TBaseModel newItem = data.FirstOrDefault(x => x.Id == item.Id);
+                var newItem = data.FirstOrDefault(x => x.Id == item.Id);
 
                 if (newItem == null)
                 {
@@ -86,35 +81,19 @@ public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         IsRefreshing = false;
     }
 
-    protected virtual async Task RefreshItems()
+    protected override async Task RefreshItems()
     {
 
         IsRefreshing = true;
 
         Items.Clear();
 
-        foreach (TBaseModel item in await ItemsService.GetItemsAsync())
+        foreach (var item in await ItemsService.GetItemsAsync())
             AddToItems(item);
 
         IsBusy = false;
         IsRefreshing = false;
     }
-
-
-    protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}?Id={item.Id}");
-
-
-    protected virtual async Task DeleteItem(TBaseModel item)
-    {
-
-        if (await ItemsService.DeleteItemAsync(item.Id))
-            await DeleteItem(item);
-
-        IsBusy = false;
-    }
-
-
-    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TDisplay).Name}?Id={item.Id}");
 
     protected virtual void AddToItems(TBaseModel item)
     {

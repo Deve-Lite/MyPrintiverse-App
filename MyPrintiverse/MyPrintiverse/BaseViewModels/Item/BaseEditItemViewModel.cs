@@ -32,7 +32,7 @@ public class BaseEditItemViewModel<T> : BaseViewModel
         // Open loading popup / activity indicator
 
         if (await ItemService.UpdateItemAsync(Item))
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("..", true);
 
 
         IsBusy = false;

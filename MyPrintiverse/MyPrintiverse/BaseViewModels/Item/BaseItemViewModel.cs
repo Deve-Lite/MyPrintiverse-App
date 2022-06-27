@@ -35,7 +35,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel
     {
 
         if (await ItemService.DeleteItemAsync(Id))
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("..", true);
 
         IsBusy = false;
     }

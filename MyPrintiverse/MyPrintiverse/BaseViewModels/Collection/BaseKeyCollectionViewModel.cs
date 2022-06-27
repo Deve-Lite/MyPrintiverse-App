@@ -8,22 +8,19 @@
 /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
+public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : IBaseModel
 {
-    public ObservableCollection<TBaseModel> Items { get; set; }
-
-    public AsyncCommand RefreshItemsCommand { get; set; }
-    public AsyncCommand AddItemCommand { get; set; }
-
-    public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
-    public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
-    public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
 
     private string PrevId;
     public string Id { get; set; }
 
-    protected IItemAsyncService<TBaseModel> ItemService;
     protected IItemKeyAsyncService<TBaseModel> KeyItemsService;
+
+
+    public BaseKeyCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService, IItemKeyAsyncService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
+    {
+        KeyItemsService = keyItemsService ?? throw new ArgumentNullException("Item Service cannot be null.");
+    }
 
     protected internal override async void OnAppearing()
     {
@@ -38,9 +35,8 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         await UpdateItemsOnAppearing();
     }
 
-    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAdd).Name}");
 
-    protected virtual async Task UpdateItemsOnAppearing()
+    protected override async Task UpdateItemsOnAppearing()
     {
         if (Id != PrevId)
             await RefreshItems();
@@ -74,7 +70,7 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         IsBusy = false;
     }
 
-    protected virtual async Task RefreshItems()
+    protected override async Task RefreshItems()
     {
 
         IsRefreshing = true;
@@ -88,16 +84,5 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         IsRefreshing = false;
     }
 
-    protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}?Id={item.Id}");
 
-    protected virtual async Task DeleteItem(TBaseModel item)
-    {
-
-        if (await ItemService.DeleteItemAsync(item.Id))
-            Items.Remove(item);
-
-        IsBusy = false;
-    }
-
-    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TDisplay).Name}?Id={item.Id}");
 }

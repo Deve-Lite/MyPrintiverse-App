@@ -1,5 +1,7 @@
 ﻿
 
+using MyPrintiverse.Tools.Enums;
+
 namespace MyPrintiverse.BaseViewModels.Collection;
 
 /// <summary>
@@ -9,18 +11,28 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
 /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
+public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : IBaseModel
 {
     public ObservableCollection<TBaseModel> Items { get; set; }
 
     public AsyncCommand RefreshItemsCommand { get; set; }
     public AsyncCommand AddItemCommand { get; set; }
 
-    public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
+    public AsyncCommand<TBaseModel> ItemOptionsCommand { get; set; }
     public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
     public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
+    public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
 
     protected IItemAsyncService<TBaseModel> ItemsService;
+
+    protected MessageService MessageService;
+
+    public BaseCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService)
+    {
+        MessageService = messagingService ?? throw new ArgumentNullException("Messaging Center cannot be null.");
+
+        ItemsService = itemsService ?? throw new ArgumentNullException("Item Service cannot be null.");
+    }
 
     protected internal override async void OnAppearing()
     {
@@ -33,6 +45,20 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
         DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);
 
         await UpdateItemsOnAppearing();
+    }
+
+    protected virtual async Task ItemOptions(TBaseModel item)
+    {
+        var action = await MessageService.ShowActionSheetAsync<BaseItemActions>("Actions:");
+
+        if (action == BaseItemActions.Open)
+            await OpenItem(item);
+        else if (action == BaseItemActions.Delete)
+            await DeleteItem(item);
+        else if (action == BaseItemActions.Edit)
+            await EditItem(item);
+
+        IsBusy = false;
     }
 
     protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAdd).Name}");
