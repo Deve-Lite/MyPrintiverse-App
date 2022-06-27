@@ -8,7 +8,7 @@
 /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : IBaseModel
+public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : BaseModel
 {
 
     private string PrevId;

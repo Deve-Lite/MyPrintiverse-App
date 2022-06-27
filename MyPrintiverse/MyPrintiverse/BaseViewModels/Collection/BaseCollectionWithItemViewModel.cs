@@ -11,7 +11,7 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// <typeparam name="TCollectionAdd"> Add new collection item</typeparam>
 /// <typeparam name="TCollectionEdit">Edit new collection item</typeparam>
 /// <typeparam name="TCollectionDispaly"> Display item from collection </typeparam>
-public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEdit, TBaseCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDispaly> : BaseCollectionViewModel<TBaseCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDispaly> where TBaseModel : IBaseModel where TBaseCollectionModel : IBaseModel
+public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEdit, TBaseCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDispaly> : BaseCollectionViewModel<TBaseCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDispaly> where TBaseModel : BaseModel where TBaseCollectionModel : BaseModel
 {
     private TBaseModel item;
     public TBaseModel Item { get => item; set => SetProperty(ref item, value); }

@@ -2,7 +2,7 @@
 
 namespace MyPrintiverse.BaseServices.Item;
 
-public abstract class BaseItemService<T> : BaseService, IItemAsyncService<T> where T : IBaseModel
+public abstract class BaseItemService<T> : BaseService, IItemAsyncService<T> where T : BaseModel
 {
     protected IInternetItemAsyncService<T> ItemInternetService;
     protected IDeviceItemAsyncService<T> ItemDeviceService;

@@ -7,19 +7,12 @@ namespace MyPrintiverse.BaseViewModels.Item;
 /// Base view model for adding new item.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public class BaseAddItemViewModel<T> : BaseViewModel where T : new()
+public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
 {
-    private Validatable<T> item;
-    public Validatable<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
-
     public AsyncCommand AddItemCommand { get; set; }
 
-    protected IItemAsyncService<T> ItemService;
-
-    public BaseAddItemViewModel(IItemAsyncService<T> itemService)
-{
-        var itemServiceExceptionMessage = GetExceptionMessage<BaseAddItemViewModel<T>>(nameof(itemService));
-        ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
+    public BaseAddItemViewModel(IItemAsyncService<T> itemService) : base(itemService)
+    {
     }
 
     protected internal override void OnAppearing()
@@ -28,17 +21,8 @@ public class BaseAddItemViewModel<T> : BaseViewModel where T : new()
 
         Item.Value = new T();
         AddItemCommand = new AsyncCommand(AddItem, CanExecute);
+       
         AddValidation();
-    }
-
-    protected virtual void AddValidation()
-    {
-        throw new NotImplementedException("Validation must be implemented.");
-    }
-
-    protected virtual bool Validate()
-    {
-        return Item.Validate();
     }
 
     public virtual async Task AddItem()
@@ -50,11 +34,6 @@ public class BaseAddItemViewModel<T> : BaseViewModel where T : new()
 
 
         IsBusy = false;
-    }
-
-    protected virtual void OnChanged()
-    {
-
     }
 }
 

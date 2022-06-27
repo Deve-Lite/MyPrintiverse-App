@@ -3,7 +3,7 @@
 /// <summary>
 /// Base model for data objects.
 /// </summary>
-public interface IBaseModel
+public abstract class BaseModel
 {
 	[PrimaryKey, JsonProperty("_id")]
 	public string Id { get; set; }

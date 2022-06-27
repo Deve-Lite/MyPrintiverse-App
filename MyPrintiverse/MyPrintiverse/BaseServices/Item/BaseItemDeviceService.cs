@@ -4,7 +4,7 @@
 /// Generic service for device databases.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public abstract class BaseItemDeviceService<T> : IDeviceItemAsyncService<T> where T : IBaseModel, new()
+public abstract class BaseItemDeviceService<T> : IDeviceItemAsyncService<T> where T : BaseModel, new()
 {
     /// <summary>
     /// Database name. (If not set it creates random database)

@@ -11,7 +11,7 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
 /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : IBaseModel
+public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
 {
     public ObservableCollection<TBaseModel> Items { get; set; }
 

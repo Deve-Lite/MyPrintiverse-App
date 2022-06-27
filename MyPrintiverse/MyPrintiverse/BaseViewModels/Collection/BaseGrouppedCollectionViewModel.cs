@@ -9,7 +9,7 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
 /// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : IBaseModel
+public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : BaseModel
 {
     public new ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
 
