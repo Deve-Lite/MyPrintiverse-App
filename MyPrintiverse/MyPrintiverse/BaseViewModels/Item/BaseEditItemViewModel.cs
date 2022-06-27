@@ -8,7 +8,7 @@ namespace MyPrintiverse.BaseViewModels.Item;
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T>
+public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
 {
     public string Id { get; set; }
 

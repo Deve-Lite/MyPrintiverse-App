@@ -2,7 +2,11 @@
 
 namespace MyPrintiverse.BaseViewModels.Item;
 
-public abstract class BaseItemManageViewModel<T> : BaseViewModel
+/// <summary>
+/// Base model for add / edit view.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
 {
     private Validatable<T> item;
     public Validatable<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
