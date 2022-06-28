@@ -3,7 +3,7 @@
 namespace MyPrintiverse.BaseViewModels.Collection;
 
 /// <summary>
-/// Base model for view with groupped CollectionView.
+/// View model for displaying groupped collection.
 /// </summary>
 /// <typeparam name="TBaseModel"> Model inheriting from BaseModel. </typeparam>
 /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
@@ -11,6 +11,9 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
 public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : BaseModel
 {
+    /// <summary>
+    /// Collection of groupped items (TBaseModel).
+    /// </summary>
     public new ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
 
     public GroupedCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService) : base(messagingService, itemsService)
@@ -95,6 +98,11 @@ public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         IsRefreshing = false;
     }
 
+
+    /// <summary>
+    /// Method adds item to collection as new group or to existing group.
+    /// </summary>
+    /// <param name="item"></param>
     protected virtual void AddToItems(TBaseModel item)
     {
         int x = GetIndex(item);
@@ -110,6 +118,10 @@ public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         }
     }
 
+    /// <summary>
+    /// Method deletes item from collection.
+    /// </summary>
+    /// <param name="item"></param>
     protected virtual void DeleteFromItems(TBaseModel item)
     {
         int index = GetIndex(item);
@@ -121,23 +133,28 @@ public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         }
 
         Items[index].Remove(item);
+
+        if (Items[index].Count == 0)
+            Items.Remove(Items[index]);
     }
 
     /// <summary>
-    /// Method creates new group name. (MUST BE IMPLEMENTED EACH TIME)
+    /// Method creates item group name.
     /// </summary>
     /// <param name="item"></param>
-    /// <returns> New group name. </returns>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"> must be implemented each time </exception>
     protected virtual string GetNewGroupName(TBaseModel item)
     {
         throw new NotImplementedException("Method GetNewGroupName must be implemented.");
     }
 
     /// <summary>
-    /// Method returns group index. (MUST BE IMPLEMENTED EACH TIME)
+    /// method returns item group index or -1 if group is not existing.
     /// </summary>
     /// <param name="item"></param>
-    /// <returns> Group Index else -1. </returns>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"> must be implemented each time  </exception>
     protected virtual int GetIndex(TBaseModel item)
     {
         throw new NotImplementedException("Method GetIndex must be implemented.");

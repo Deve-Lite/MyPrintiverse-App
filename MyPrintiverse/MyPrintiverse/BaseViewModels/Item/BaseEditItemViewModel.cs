@@ -4,7 +4,8 @@ using Plugin.ValidationRules;
 namespace MyPrintiverse.BaseViewModels.Item;
 
 /// <summary>
-/// Base view model for editing any item.
+/// Base view model for editing item.
+/// <remarks> Id of item must be passed </remarks>
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]

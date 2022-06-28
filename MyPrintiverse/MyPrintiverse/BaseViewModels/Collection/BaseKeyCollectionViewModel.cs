@@ -1,7 +1,7 @@
 ﻿namespace MyPrintiverse.BaseViewModels.Collection;
 
 /// <summary>
-/// Base ViewModel for view displaying collection with key service.
+/// ViewModel for view displaying collection with key service.
 /// </summary>
 /// <typeparam name="TBaseModel"> Model inheriting from BaseModel. </typeparam>
 /// <typeparam name="TAdd"> Class (View) adding model.</typeparam>

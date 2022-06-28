@@ -1,8 +1,9 @@
 ﻿namespace MyPrintiverse.BaseViewModels.Item;
 
 /// <summary>
-/// Base ViewModel for View displaying Item.
+/// View Model for displaying Item with data.
 /// </summary>
+/// <remarks> Id of item must be passed </remarks>
 /// <typeparam name="TBaseModel"> Model inheriting from BaseModel. </typeparam>
 /// <typeparam name="TEdit"> Class (View) editing model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]

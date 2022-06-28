@@ -4,7 +4,7 @@ using Plugin.ValidationRules;
 namespace MyPrintiverse.BaseViewModels.Item;
 
 /// <summary>
-/// Base view model for adding new item.
+/// view model for adding item.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
 public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
