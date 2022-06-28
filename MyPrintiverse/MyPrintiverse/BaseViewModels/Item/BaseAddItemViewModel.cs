@@ -9,6 +9,9 @@ namespace MyPrintiverse.BaseViewModels.Item;
 /// <typeparam name="T"> Model. </typeparam>
 public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
 {
+    /// <summary>
+    /// Command for view, designed to save new item.
+    /// </summary>
     public AsyncCommand AddItemCommand { get; set; }
 
     public BaseAddItemViewModel(IItemAsyncService<T> itemService) : base(itemService)
@@ -25,6 +28,10 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
         AddValidation();
     }
 
+    /// <summary>
+    /// Task to perform with add command.
+    /// </summary>
+    /// <returns></returns>
     public virtual async Task AddItem()
     {
         // Open loading popup/ activity indicator

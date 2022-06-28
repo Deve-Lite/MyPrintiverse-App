@@ -8,14 +8,33 @@
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel
 {
+    /// <summary>
+    /// Item backing storage.
+    /// </summary>
     private TBaseModel item;
+
+    /// <summary>
+    /// Item with possibility to assign item properties in view.
+    /// </summary>
     public TBaseModel Item { get => item; set => SetProperty(ref item, value); }
 
+    /// <summary>
+    /// Command for view, designed to open page with item edition.
+    /// </summary>
     public AsyncCommand EditItemCommand { get; set; }
+    /// <summary>
+    /// Command for view, designed to delete item.
+    /// </summary>
     public AsyncCommand DeleteItemCommand { get; set; }
 
+    /// <summary>
+    /// Item id used for quering,
+    /// </summary>
     public string Id { get; set; }
 
+    /// <summary>
+    /// Service of item.
+    /// </summary>
     protected IItemAsyncService<TBaseModel> ItemService { get; set; }
 
     public BaseItemViewModel(IItemAsyncService<TBaseModel> itemService)
@@ -23,6 +42,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel
         var itemServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(itemService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
     }
+
 
     protected internal override async void OnAppearing()
     {
@@ -34,11 +54,19 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel
         Item = await ItemService.GetItemAsync(Id);
     }
 
-
+    /// <summary>
+    /// Task to perform with edit command.
+    /// </summary>
+    /// <returns></returns>
     protected virtual async Task EditItem() => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}");
 
+    /// <summary>
+    /// Task to perform with delete command.
+    /// </summary>
+    /// <returns></returns>
     protected virtual async Task DeleteItem()
     {
+        // make sure about 
 
         if (await ItemService.DeleteItemAsync(Id))
             await Shell.Current.GoToAsync("..", true);

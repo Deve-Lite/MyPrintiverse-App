@@ -10,10 +10,19 @@
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : BaseModel
 {
-
+    /// <summary>
+    /// Storing previous page id.
+    /// </summary>
     private string PrevId;
+
+    /// <summary>
+    /// Item id used for quering,
+    /// </summary>
     public string Id { get; set; }
 
+    /// <summary>
+    /// Service of item with Key conneced operations.
+    /// </summary>
     protected IItemKeyAsyncService<TBaseModel> KeyItemsService;
 
 
@@ -39,8 +48,11 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
 
     protected override async Task UpdateItemsOnAppearing()
     {
-        if (Id != PrevId)
+        if (Id != PrevId && !string.IsNullOrEmpty(PrevId)) 
+        {
+            PrevId = Id;
             await RefreshItems();
+        }
 
         IsBusy = true;
         IsRefreshing = true;
@@ -84,6 +96,4 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
         IsBusy = false;
         IsRefreshing = false;
     }
-
-
 }

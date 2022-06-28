@@ -8,11 +8,19 @@ namespace MyPrintiverse.BaseViewModels.Item;
 /// <typeparam name="T"></typeparam>
 public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
 {
-    private Validatable<T> item;
+    /// <summary>
+    /// Item backing storage. 
+    /// </summary>
+    private Validatable<T> item; 
+
+    /// <summary>
+    /// Validatable item for stashing item data 
+    /// </summary>
     public Validatable<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
-    public AsyncCommand EditItemCommand { get; set; }
-
+    /// <summary>
+    /// Service of item.
+    /// </summary>
     protected IItemAsyncService<T> ItemService;
 
     public BaseItemManageViewModel(IItemAsyncService<T> itemService)
@@ -22,20 +30,26 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
     }
 
     /// <summary>
-    /// You just need to create 1 Validation Rule for obiect or you can set all needed validation rules for object.
-    /// Method must be implemented.
+    /// Validation rule for item. (Item validation rule must be created)
     /// </summary>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="NotImplementedException"> Method must be implemented. </exception>
     protected virtual void AddValidation()
     {
         throw new NotImplementedException("Validation must be implemented.");
     }
 
+    /// <summary>
+    /// Method for item validation
+    /// </summary>
+    /// <returns></returns>
     protected virtual bool Validate()
     {
         return Item.Validate();
     }
 
+    /// <summary>
+    /// Actions to perform when item is changed.
+    /// </summary>
     protected virtual void OnChanged()
     {
 

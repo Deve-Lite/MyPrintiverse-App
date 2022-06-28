@@ -10,14 +10,21 @@ namespace MyPrintiverse.BaseViewModels.Item;
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
 {
+    /// <summary>
+    /// Item id used for quering,
+    /// </summary>
     public string Id { get; set; }
 
+    /// <summary>
+    /// Command for view, designed to save edited item.
+    /// </summary>
     public AsyncCommand EditItemCommand { get; set; }
 
     public BaseEditItemViewModel(IItemAsyncService<T> itemService) : base(itemService)
     {
     }
 
+    
     protected internal override async void OnAppearing()
     {
         base.OnAppearing();
@@ -28,6 +35,10 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
         AddValidation();
     }
 
+    /// <summary>
+    /// Task to perform with edit command.
+    /// </summary>
+    /// <returns></returns>
     public virtual async Task EditItem()
     {
         // Open loading popup / activity indicator

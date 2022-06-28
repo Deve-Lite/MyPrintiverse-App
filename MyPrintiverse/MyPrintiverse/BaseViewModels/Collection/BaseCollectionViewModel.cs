@@ -1,6 +1,4 @@
-﻿
-
-using MyPrintiverse.Tools.Enums;
+﻿using MyPrintiverse.Tools.Enums;
 
 namespace MyPrintiverse.BaseViewModels.Collection;
 
@@ -13,18 +11,43 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
 public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
 {
+    /// <summary>
+    /// Base collection of TBaseModel.
+    /// </summary>
     public ObservableCollection<TBaseModel> Items { get; set; }
 
+    /// <summary>
+    /// Command for refreshing collection.
+    /// </summary>
     public AsyncCommand RefreshItemsCommand { get; set; }
+    /// <summary>
+    /// Command for adding new item to collection.
+    /// </summary>
     public AsyncCommand AddItemCommand { get; set; }
-
+    /// <summary>
+    /// Command for displaying multiple manage options for collection item. 
+    /// </summary>
     public AsyncCommand<TBaseModel> ItemOptionsCommand { get; set; }
+    /// <summary>
+    /// Command for displaying single item from collection.
+    /// </summary>
     public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
+    /// <summary>
+    /// Command for deleting one item from collection.
+    /// </summary>
     public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
+    /// <summary>
+    /// Command for editing one item from collection.
+    /// </summary>
     public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
 
+    /// <summary>
+    /// Collection service.
+    /// </summary>
     protected IItemAsyncService<TBaseModel> ItemsService;
-
+    /// <summary>
+    /// Message service.
+    /// </summary>
     protected IMessageService MessageService;
 
     public BaseCollectionViewModel(IMessageService messageService, IItemAsyncService<TBaseModel> itemsService)
@@ -49,6 +72,11 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
         await UpdateItemsOnAppearing();
     }
 
+    /// <summary>
+    /// Task to perform when ItemOptionCommand occurs.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     protected virtual async Task ItemOptions(TBaseModel item)
     {
         var action = await MessageService.ShowActionSheetAsync<BaseItemActions>("Actions:");
@@ -63,8 +91,16 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
         IsBusy = false;
     }
 
+    /// <summary>
+    /// Task to perform when AddItemCommand occurs.
+    /// </summary>
+    /// <returns></returns>
     protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAdd).Name}");
 
+    /// <summary>
+    /// Task to perfrom when page is loading, designed for refresh collection with new data.
+    /// </summary>
+    /// <returns></returns>
     protected virtual async Task UpdateItemsOnAppearing()
     {
         IsBusy = true;
@@ -96,6 +132,10 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
         IsBusy = false;
     }
 
+    /// <summary>
+    /// Task to perform when RefreshItemsCommand occurs.
+    /// </summary>
+    /// <returns></returns>
     protected virtual async Task RefreshItems()
     {
 
@@ -110,10 +150,18 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
         IsRefreshing = false;
     }
 
-
+    /// <summary>
+    /// Task to perform when EditItemCommand occurs.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}?Id={item.Id}");
 
-
+    /// <summary>
+    /// Task to perform when DeleteItemCommand occurs.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     protected virtual async Task DeleteItem(TBaseModel item)
     {
 
@@ -123,7 +171,11 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
         IsBusy = false;
     }
 
-
+    /// <summary>
+    /// Task to perform when OpenItemCommand occurs.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TDisplay).Name}?Id={item.Id}");
 }
 
