@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.Extensions;
+﻿using Microsoft.Maui.Hosting;
+
+namespace MyPrintiverse.Extensions;
 
 public static class ServicesExtensions
 {
@@ -10,12 +12,16 @@ public static class ServicesExtensions
 	/// <returns></returns>
 	public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
 	{
-		// Template
-		// builder.Services.TryAddTransient<...Service>();
-		// builder.Services.AddSingleton<...Service>();
-		/* Implementation */
+        // Template
+        // builder.Services.TryAddTransient<...Service>();
+        // builder.Services.AddSingleton<...Service>();
+        /* Implementation */
 
+        builder.Services.AddSingleton<BaseService>();
+        builder.Services.AddSingleton<MessageService>();
+        builder.Services.AddSingleton<Logger>();
+        builder.Services.AddSingleton<Session>();
 
-		return builder;
+        return builder;
 	}
 }
