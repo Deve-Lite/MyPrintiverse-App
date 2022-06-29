@@ -11,7 +11,7 @@ public static class MauiProgram
 			.ConfigureServices()
 			.ConfigureViews()
 			.ConfigureViewModels()
-			.InitConfig(string.Empty, null)
+			.ConfigureConfig(string.Empty, null)
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{

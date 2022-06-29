@@ -6,12 +6,13 @@ namespace MyPrintiverse.BaseViewModels.Collection
     /// View Model for displaying item and collection of key service.
     /// </summary>
     /// <typeparam name="TBaseModel"> Model of displayed item </typeparam>
+    /// <typeparam name="TEditView"> Class (View) displaying collection item.</typeparam>
     /// <typeparam name="TCollectionModel"> Model inheriting from BaseModel. Displayed in Collection view </typeparam>
-    /// <typeparam name="TCollectionAdd"> Class (View) adding item.</typeparam>
-    /// <typeparam name="TEdit"> Class (View) editing item.</typeparam>
-    /// <typeparam name="TCollectionDisplay"> Class (View) displaying collection item.</typeparam>
-    public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEdit, TCollectionModel, TCollectionEdit, TCollectionAdd, TCollectionDisplay> :
-        BaseKeyCollectionViewModel<TCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDisplay> where TCollectionModel : BaseModel where TBaseModel : BaseModel
+    /// <typeparam name="TCollectionAddView"> Class (View) adding item.</typeparam>
+    /// <typeparam name="TCollectionEditView"> Class (View) editing item.</typeparam>
+    /// <typeparam name="TCollectionItemView"> Class (View) displaying collection item.</typeparam>
+    public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionEditView, TCollectionAddView, TCollectionItemView> :
+        BaseKeyCollectionViewModel<TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView> where TCollectionModel : BaseModel where TBaseModel : BaseModel
     {
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace MyPrintiverse.BaseViewModels.Collection
 
         public BaseKeyCollectionWithitemViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemService, IItemAsyncService<TCollectionModel> itemsService, IItemKeyAsyncService<TCollectionModel> keyItemsService) : base(messagingService, itemsService, keyItemsService)
         {
-            var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionWithitemViewModel<TBaseModel, TEdit, TCollectionModel, TCollectionEdit, TCollectionAdd, TCollectionDisplay>>(nameof(itemsService));
+            var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionEditView, TCollectionAddView, TCollectionItemView>>(nameof(itemsService));
             ItemService = itemService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
         }
 
@@ -62,7 +63,7 @@ namespace MyPrintiverse.BaseViewModels.Collection
         /// Task connected to EditDisplayItemCommand.
         /// </summary>
         /// <returns></returns>
-        protected virtual async Task EditDisplayItem() => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}", true);
+        protected virtual async Task EditDisplayItem() => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}", true);
 
         /// <summary>
         /// Task connected to DeleteDisplayedItemCommand. By default deletes only Item.

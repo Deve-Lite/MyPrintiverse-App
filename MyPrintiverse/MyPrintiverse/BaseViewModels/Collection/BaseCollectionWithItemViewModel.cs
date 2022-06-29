@@ -6,13 +6,13 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// Default view model for displaying item and connected collection.
 /// </summary>
 /// <typeparam name="TBaseModel"> Displayed item</typeparam>
-/// <typeparam name="TEdit"> Edit Item view.</typeparam>
+/// <typeparam name="TEditView"> Edit Item view.</typeparam>
 /// <typeparam name="TCollectionModel"> Base model for item in collection </typeparam>
-/// <typeparam name="TCollectionAdd"> Add new collection item</typeparam>
-/// <typeparam name="TCollectionEdit">Edit new collection item</typeparam>
-/// <typeparam name="TCollectionDispaly"> Display item from collection </typeparam>
+/// <typeparam name="TCollectionAddView"> Add new collection item</typeparam>
+/// <typeparam name="TCollectionEditView">Edit new collection item</typeparam>
+/// <typeparam name="TCollectionItemView"> Display item from collection </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEdit, TCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDispaly> : BaseCollectionViewModel<TCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDispaly> where TBaseModel : BaseModel where TCollectionModel : BaseModel
+public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView> : BaseCollectionViewModel<TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView> where TBaseModel : BaseModel where TCollectionModel : BaseModel
 {
     /// <summary>
     /// item backing storage.
@@ -44,7 +44,7 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEdit, TCollec
 
     public BaseCollectionWithItemViewModel(IMessageService messagingService, IItemAsyncService<TBaseModel> itemService, IItemAsyncService<TCollectionModel> itemsService) : base(messagingService, itemsService)
 {
-        var itemServiceExceptionMessage = GetExceptionMessage<BaseCollectionWithItemViewModel<TBaseModel, TEdit, TCollectionModel, TCollectionAdd, TCollectionEdit, TCollectionDispaly>>(nameof(itemsService));
+        var itemServiceExceptionMessage = GetExceptionMessage<BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView>>(nameof(itemsService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
     }
 
@@ -62,7 +62,7 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEdit, TCollec
     /// Task connected to EditDisplayItemCommand.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task EditDisplayItem() => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}", true);
+    protected virtual async Task EditDisplayItem() => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}", true);
 
     /// <summary>
     /// Task connected to DeleteDisplayedItemCommand. By default deletes only Item.

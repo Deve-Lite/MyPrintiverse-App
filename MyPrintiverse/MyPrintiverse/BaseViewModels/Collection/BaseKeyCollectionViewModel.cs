@@ -4,11 +4,11 @@
 /// ViewModel for view displaying collection with key service.
 /// </summary>
 /// <typeparam name="TBaseModel"> Model inheriting from BaseModel. </typeparam>
-/// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
-/// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
-/// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
+/// <typeparam name="TAddView"> Class (View) adding model.</typeparam>
+/// <typeparam name="TEditView"> Class (View) editing model.</typeparam>
+/// <typeparam name="TItemView"> Class (View) displaying model.</typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : BaseModel
+public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> where TBaseModel : BaseModel
 {
     /// <summary>
     /// Storing previous page id.
@@ -28,7 +28,7 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : Bas
 
     public BaseKeyCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService, IItemKeyAsyncService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
     {
-        var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>>(nameof(itemsService));
+        var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
         KeyItemsService = keyItemsService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
     }
 

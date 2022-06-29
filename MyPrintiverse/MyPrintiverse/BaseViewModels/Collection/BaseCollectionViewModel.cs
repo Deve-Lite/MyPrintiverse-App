@@ -6,10 +6,10 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// View model for displaying single Collection with base commands.
 /// </summary>
 /// <typeparam name="TBaseModel"> Model </typeparam>
-/// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
-/// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
-/// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseViewModel where TBaseModel : BaseModel
+/// <typeparam name="TAddView"> Class (View) adding model.</typeparam>
+/// <typeparam name="TEditView"> Class (View) editing model.</typeparam>
+/// <typeparam name="TItemView"> Class (View) displaying model.</typeparam>
+public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseViewModel where TBaseModel : BaseModel
 {
     /// <summary>
     /// Base collection of TBaseModel.
@@ -52,10 +52,10 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
 
     public BaseCollectionViewModel(IMessageService messageService, IItemAsyncService<TBaseModel> itemsService)
     {
-        var messageServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>>(nameof(messageService));
+        var messageServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(messageService));
         MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
 
-        var itemsServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>>(nameof(itemsService));
+        var itemsServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
         ItemsService = itemsService ?? throw new ArgumentNullException(itemsServiceExceptionMessage);
     }
 
@@ -97,7 +97,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
     /// Task to perform when AddItemCommand occurs.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAdd).Name}");
+    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAddView).Name}");
 
     /// <summary>
     /// Task to perfrom when page is loading, designed for refresh collection with new data.
@@ -157,7 +157,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}?Id={item.Id}");
+    protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}?Id={item.Id}");
 
     /// <summary>
     /// Task to perform when DeleteItemCommand occurs.
@@ -178,6 +178,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay>
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TDisplay).Name}?Id={item.Id}");
+    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TItemView).Name}?Id={item.Id}");
 }
 

@@ -6,10 +6,10 @@ namespace MyPrintiverse.BaseViewModels.Collection;
 /// View model for displaying groupped collection.
 /// </summary>
 /// <typeparam name="TBaseModel"> Model inheriting from BaseModel. </typeparam>
-/// <typeparam name="TAdd"> Class (View) adding model.</typeparam>
-/// <typeparam name="TEdit"> Class (View) editing model.</typeparam>
-/// <typeparam name="TDisplay"> Class (View) displaying model.</typeparam>
-public class GroupedCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> : BaseCollectionViewModel<TBaseModel, TAdd, TEdit, TDisplay> where TBaseModel : BaseModel
+/// <typeparam name="TAddView"> Class (View) adding model.</typeparam>
+/// <typeparam name="TEditView"> Class (View) editing model.</typeparam>
+/// <typeparam name="TItemView"> Class (View) displaying model.</typeparam>
+public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> where TBaseModel : BaseModel
 {
     /// <summary>
     /// Collection of groupped items (TBaseModel).
