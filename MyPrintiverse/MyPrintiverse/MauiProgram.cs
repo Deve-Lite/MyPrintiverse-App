@@ -11,8 +11,9 @@ public static class MauiProgram
 			.ConfigureServices()
 			.ConfigureViews()
 			.ConfigureViewModels()
+			.ConfigureConfig(string.Empty, null)
 			.UseMauiCommunityToolkit()
-            .ConfigureFonts(fonts =>
+			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

@@ -1,4 +1,4 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments.Views;
+﻿
 
 namespace MyPrintiverse;
 
@@ -9,8 +9,8 @@ public partial class App : Application
 		InitializeComponent();
 
         // Tutaj ewentualnie opcja rozbicia na 2 pliki AppShell osobno Dekstop osobno Mobile.
-        if (DeviceInfo.Idiom == DeviceIdiom.Phone)
-            Shell.Current.CurrentItem = PhoneTabs;
+        //if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+           // Shell.Current.CurrentItem = PhoneTabs;
 
         RegisterRoutes();
     }
@@ -25,7 +25,6 @@ public partial class App : Application
         // Routing.RegisterRoute(nameof(...View), typeof(...View));
 
         /*Filament Module*/
-        Routing.RegisterRoute(nameof(FilamentsView), typeof(FilamentsView));
 
         /*Authorization Module*/
     }
