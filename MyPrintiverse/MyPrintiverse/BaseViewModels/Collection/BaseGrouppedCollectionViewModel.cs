@@ -17,13 +17,13 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     public new ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
 
     public GroupedCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService) : base(messagingService, itemsService)
-    { 
-        Items = new ObservableCollection<GroupedItem<TBaseModel>>();
+    {
     }
 
     protected internal override async void OnAppearing()
     {
         base.OnAppearing();
+        Items = new ObservableCollection<GroupedItem<TBaseModel>>();
         IsBusy = false;
 
         RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);

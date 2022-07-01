@@ -38,10 +38,18 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// </summary>
     protected IItemService<TBaseModel> ItemService { get; set; }
 
-    public BaseItemViewModel(IItemService<TBaseModel> itemService)
+    /// <summary>
+    /// Message service.
+    /// </summary>
+    protected IMessageService MessageService;
+
+    public BaseItemViewModel(IMessageService messageService, IItemService<TBaseModel> itemService)
 {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(itemService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
+
+        var messageServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(messageService));
+        MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
     }
 
 

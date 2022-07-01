@@ -23,10 +23,18 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
     /// </summary>
     protected IItemService<T> ItemService;
 
-    public BaseItemManageViewModel(IItemService<T> itemService)
+    /// <summary>
+    /// Message service.
+    /// </summary>
+    protected IMessageService MessageService;
+
+    public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
     {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(itemService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
+
+        var messageServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(messageService));
+        MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
     }
 
     /// <summary>

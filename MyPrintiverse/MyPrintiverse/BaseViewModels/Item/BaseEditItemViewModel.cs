@@ -10,7 +10,8 @@ namespace MyPrintiverse.BaseViewModels.Item;
 /// <typeparam name="T"> Model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
-{
+{ 
+
     /// <summary>
     /// Item id used for quering,
     /// </summary>
@@ -21,11 +22,10 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
     /// </summary>
     public AsyncCommand EditItemCommand { get; set; }
 
-    public BaseEditItemViewModel(IItemService<T> itemService) : base(itemService)
+    public BaseEditItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
     }
 
-    
     protected internal override async void OnAppearing()
     {
         base.OnAppearing();

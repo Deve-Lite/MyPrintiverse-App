@@ -14,7 +14,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
     /// </summary>
     public AsyncCommand AddItemCommand { get; set; }
 
-    public BaseAddItemViewModel(IItemService<T> itemService) : base(itemService)
+    public BaseAddItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
     }
 
