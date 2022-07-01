@@ -21,7 +21,7 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
     /// </summary>
     public AsyncCommand EditItemCommand { get; set; }
 
-    public BaseEditItemViewModel(IItemAsyncService<T> itemService) : base(itemService)
+    public BaseEditItemViewModel(IItemService<T> itemService) : base(itemService)
     {
     }
 

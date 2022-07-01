@@ -4,7 +4,7 @@
 /// Global service which connects Internet Service and Device Service.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public interface IItemAsyncService<T>
+public interface IItemService<T>
 {
     /// <summary>
     /// Gets item by objectId. (returns null if unsuccesful)

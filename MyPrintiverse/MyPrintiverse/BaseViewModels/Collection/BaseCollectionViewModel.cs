@@ -44,13 +44,13 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <summary>
     /// Collection service.
     /// </summary>
-    protected IItemAsyncService<TBaseModel> ItemsService;
+    protected IItemService<TBaseModel> ItemsService;
     /// <summary>
     /// Message service.
     /// </summary>
     protected IMessageService MessageService;
 
-    public BaseCollectionViewModel(IMessageService messageService, IItemAsyncService<TBaseModel> itemsService)
+    public BaseCollectionViewModel(IMessageService messageService, IItemService<TBaseModel> itemsService)
     {
         var messageServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(messageService));
         MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);

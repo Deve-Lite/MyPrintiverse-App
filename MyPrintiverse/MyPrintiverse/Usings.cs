@@ -21,4 +21,4 @@ global using MyPrintiverse.BaseServices;
 global using MyPrintiverse.BaseServices.Item;
 global using MyPrintiverse.BaseViewModels.Item;
 global using MyPrintiverse.BaseViewModels.Collection;
-
+global using MyPrintiverse.BaseViewModels;

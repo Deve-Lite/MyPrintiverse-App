@@ -4,7 +4,7 @@
 /// Default interface for device service with standard CRUD operations.
 /// </summary>
 /// <typeparam name="Item"></typeparam>
-public interface IDeviceItemAsyncService<Item>
+public interface IDeviceItemService<Item>
 {
 	/// <summary>
 	/// Returns sqlite db item by id.

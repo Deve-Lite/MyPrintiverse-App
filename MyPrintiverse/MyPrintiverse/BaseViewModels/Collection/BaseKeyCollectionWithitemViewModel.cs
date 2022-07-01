@@ -41,9 +41,9 @@ namespace MyPrintiverse.BaseViewModels.Collection
         /// <summary>
         /// Service of diplayed Item.
         /// </summary>
-        IItemAsyncService<TBaseModel> ItemService;
+        IItemService<TBaseModel> ItemService;
 
-        public BaseKeyCollectionWithitemViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemService, IItemAsyncService<TCollectionModel> itemsService, IItemKeyAsyncService<TCollectionModel> keyItemsService) : base(messagingService, itemsService, keyItemsService)
+        public BaseKeyCollectionWithitemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService, IItemKeyService<TCollectionModel> keyItemsService) : base(messagingService, itemsService, keyItemsService)
         {
             var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionEditView, TCollectionAddView, TCollectionItemView>>(nameof(itemsService));
             ItemService = itemService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);

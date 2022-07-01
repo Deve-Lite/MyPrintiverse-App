@@ -36,9 +36,9 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// <summary>
     /// Service of item.
     /// </summary>
-    protected IItemAsyncService<TBaseModel> ItemService { get; set; }
+    protected IItemService<TBaseModel> ItemService { get; set; }
 
-    public BaseItemViewModel(IItemAsyncService<TBaseModel> itemService)
+    public BaseItemViewModel(IItemService<TBaseModel> itemService)
 {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(itemService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);

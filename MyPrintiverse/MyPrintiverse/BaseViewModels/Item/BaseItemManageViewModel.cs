@@ -21,9 +21,9 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
     /// <summary>
     /// Service of item.
     /// </summary>
-    protected IItemAsyncService<T> ItemService;
+    protected IItemService<T> ItemService;
 
-    public BaseItemManageViewModel(IItemAsyncService<T> itemService)
+    public BaseItemManageViewModel(IItemService<T> itemService)
     {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(itemService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
