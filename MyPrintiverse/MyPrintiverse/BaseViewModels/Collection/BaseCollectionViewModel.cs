@@ -57,13 +57,14 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
         var itemsServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
         ItemsService = itemsService ?? throw new ArgumentNullException(itemsServiceExceptionMessage);
+
+        Items = new ObservableCollection<TBaseModel>();
     }
 
     protected internal override async void OnAppearing()
     {
         base.OnAppearing();
 
-        Items = new ObservableCollection<TBaseModel>();
 
         RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);
         AddItemCommand = new AsyncCommand(AddItem, CanExecute);
