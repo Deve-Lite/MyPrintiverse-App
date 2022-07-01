@@ -1,11 +1,10 @@
 ﻿
 
 namespace MyPrintiverse.FilamentsModule.Prints.Services;
-public class PrintDeviceService : BaseItemDeviceService<Print>
+public class PrintDeviceService : BaseItemDeviceAsyncService<Print>
 {
-    public PrintDeviceService()
+    public PrintDeviceService() : base(nameof(Print))
     {
-        dbName = $"{nameof(Print)}.db";
     }
 }
 

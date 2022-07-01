@@ -2,10 +2,11 @@
 
 namespace MyPrintiverse.FilamentsModule.Filaments
 {
-    public class FilamentService : BaseItemService<Filament>
+    public class FilamentService : BaseItemAsyncService<Filament>
 	{
 		public FilamentService(FilamentDeviceService filamentDeviceService, FilamentInternetService filamentInternetService,IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
 		{
+			//do poprawy base item service
 		}
 	}
 }
