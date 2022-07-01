@@ -25,11 +25,6 @@ namespace MyPrintiverse.BaseViewModels.Collection
         public TBaseModel Item { get => item; set => SetProperty(ref item, value); }
 
         /// <summary>
-        /// Item id from querry.
-        /// </summary>
-        public string Id { get; set; }
-
-        /// <summary>
         /// Command for view, designed to open page with item edition.
         /// </summary>
         public AsyncCommand EditDisplayItemCommand { get; set; }
