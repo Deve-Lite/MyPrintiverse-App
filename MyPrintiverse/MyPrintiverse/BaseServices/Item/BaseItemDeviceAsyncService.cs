@@ -4,14 +4,14 @@
 /// Generic service for device databases.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public abstract class BaseItemDeviceService<T> : IDeviceItemService<T> where T : BaseModel, new()
+public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> where T : BaseModel, new()
 {
     /// <summary>
     /// Database name. (If not set it creates random database)
     /// </summary>
     protected string DatabasePath { get; private set; }
 
-    public BaseItemDeviceService(string name)
+    public BaseItemDeviceAsyncService(string name)
     {
         if (!name.EndsWith(".db"))
             name += ".db";

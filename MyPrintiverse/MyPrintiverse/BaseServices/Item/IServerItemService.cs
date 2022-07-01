@@ -4,7 +4,7 @@
 /// Base interface for Internet Service 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public interface IInternetItemService<T>
+public interface IServerItemService<T>
 {
 
 	/* Tutaj ewentualny problem z tym co bedziemy zwracać -> najprawdopodobniej trzeba bedzie inaczej parsować dane i zwracać nasz Response a nie RestResponse */

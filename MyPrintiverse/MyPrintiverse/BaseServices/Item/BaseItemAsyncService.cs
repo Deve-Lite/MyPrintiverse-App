@@ -3,17 +3,17 @@ using System;
 
 namespace MyPrintiverse.BaseServices.Item;
 
-public abstract class BaseItemService<T> : BaseService, IItemService<T> where T : BaseModel
+public abstract class BaseItemAsyncService<T> : BaseService, IItemService<T> where T : BaseModel
 {
-    protected IInternetItemService<T> ItemInternetService;
+    protected IServerItemService<T> ItemInternetService;
     protected IDeviceItemService<T> ItemDeviceService;
 
-    public BaseItemService(IInternetItemService<T> itemInternetService, IDeviceItemService<T> itemDeviceService, IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
+    public BaseItemAsyncService(IServerItemService<T> itemInternetService, IDeviceItemService<T> itemDeviceService, IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
 {
-        var itemInternetServiceExceptionMessage = GetExceptionMessage<BaseItemService<T>>(nameof(itemInternetService));
+        var itemInternetServiceExceptionMessage = GetExceptionMessage<BaseItemAsyncService<T>>(nameof(itemInternetService));
         ItemInternetService = itemInternetService ?? throw new ArgumentNullException(itemInternetServiceExceptionMessage);
 
-        var itemDeviceServiceExceptionMessage = GetExceptionMessage<BaseItemService<T>>(nameof(itemDeviceService));
+        var itemDeviceServiceExceptionMessage = GetExceptionMessage<BaseItemAsyncService<T>>(nameof(itemDeviceService));
         ItemDeviceService = itemDeviceService ?? throw new ArgumentNullException(itemDeviceServiceExceptionMessage);
     }
 
