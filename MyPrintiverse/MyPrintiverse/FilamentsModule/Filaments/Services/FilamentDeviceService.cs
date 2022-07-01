@@ -2,10 +2,11 @@
 
 namespace MyPrintiverse.FilamentsModule.Filaments.Services;
 
-public class FilamentDeviceService : BaseItemDeviceAsyncService<Filament>
+public class FilamentDeviceService : BaseItemDeviceService<Filament>
 {
-    public FilamentDeviceService() : base(nameof(Filament))
+    public FilamentDeviceService()
     {
+        dbName = "Filament.db";
     }
 }
 

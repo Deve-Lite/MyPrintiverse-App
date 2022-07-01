@@ -7,7 +7,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentPage
 	{
 		public AsyncCommand<Spool> DisplaySpoolCommand;
 
-		public FilamentViewModel(MessageService messageService, FilamentService itemService) : base(messageService, itemService)
+		public FilamentViewModel(FilamentService itemService) : base(itemService)
 		{
             DisplaySpoolCommand = new AsyncCommand<Spool>(DisplaySpool, CanExecute);
         }

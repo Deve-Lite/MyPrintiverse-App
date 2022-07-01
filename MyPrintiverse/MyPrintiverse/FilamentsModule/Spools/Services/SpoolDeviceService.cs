@@ -1,9 +1,12 @@
 ﻿namespace MyPrintiverse.FilamentsModule.Spools.Services;
-public class SpoolDeviceService : BaseItemDeviceAsyncService<Spool>, IItemKeyDeviceService<Spool> 
-{ 
-    public SpoolDeviceService() : base(nameof(Spool))
+public class SpoolDeviceService : BaseItemDeviceService<Spool>//, IDeviceItemKeyAsyncService<Spool> Interface to add to base service
+{
+    public SpoolDeviceService()
     {
+        dbName = $"{nameof(Spool)}.db";
     }
+
+
 
     public async Task DeleteItemsByKeyAsync(string key)
     {
