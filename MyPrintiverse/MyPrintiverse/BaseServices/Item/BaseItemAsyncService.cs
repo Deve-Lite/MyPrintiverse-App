@@ -1,15 +1,20 @@
-﻿using System;
+﻿using MyPrintiverse.BaseModels;
+using System;
 
 namespace MyPrintiverse.BaseServices.Item;
 
-public abstract class BaseItemService<T> : BaseService, IItemAsyncService<T> where T : BaseModel
+public abstract class BaseItemAsyncService<T> : BaseService, IItemService<T> where T : BaseModel
 {
-    protected IInternetItemAsyncService<T> ItemInternetService;
-    protected IDeviceItemAsyncService<T> ItemDeviceService;
+    protected IServerItemService<T> ItemInternetService;
+    protected IDeviceItemService<T> ItemDeviceService;
 
-    public BaseItemService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
-    {
+    public BaseItemAsyncService(IServerItemService<T> itemInternetService, IDeviceItemService<T> itemDeviceService, IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
+{
+        var itemInternetServiceExceptionMessage = GetExceptionMessage<BaseItemAsyncService<T>>(nameof(itemInternetService));
+        ItemInternetService = itemInternetService ?? throw new ArgumentNullException(itemInternetServiceExceptionMessage);
 
+        var itemDeviceServiceExceptionMessage = GetExceptionMessage<BaseItemAsyncService<T>>(nameof(itemDeviceService));
+        ItemDeviceService = itemDeviceService ?? throw new ArgumentNullException(itemDeviceServiceExceptionMessage);
     }
 
     public async Task<bool> AddItemAsync(T item)

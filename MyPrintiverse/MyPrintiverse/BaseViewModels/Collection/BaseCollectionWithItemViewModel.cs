@@ -40,9 +40,9 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
     /// <summary>
     /// Service of diplayed Item.
     /// </summary>
-    IItemAsyncService<TBaseModel> ItemService;
+    IItemService<TBaseModel> ItemService;
 
-    public BaseCollectionWithItemViewModel(IMessageService messagingService, IItemAsyncService<TBaseModel> itemService, IItemAsyncService<TCollectionModel> itemsService) : base(messagingService, itemsService)
+    public BaseCollectionWithItemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService) : base(messagingService, itemsService)
 {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView>>(nameof(itemsService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);

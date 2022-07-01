@@ -23,10 +23,10 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// <summary>
     /// Service of item with Key conneced operations.
     /// </summary>
-    protected IItemKeyAsyncService<TBaseModel> KeyItemsService;
+    protected IItemKeyService<TBaseModel> KeyItemsService;
 
 
-    public BaseKeyCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService, IItemKeyAsyncService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
+    public BaseKeyCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService, IItemKeyService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
     {
         var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
         KeyItemsService = keyItemsService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);

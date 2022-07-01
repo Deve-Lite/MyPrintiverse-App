@@ -4,12 +4,20 @@
 /// Generic service for device databases.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public abstract class BaseItemDeviceService<T> : IDeviceItemAsyncService<T> where T : BaseModel, new()
+public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> where T : BaseModel, new()
 {
     /// <summary>
     /// Database name. (If not set it creates random database)
     /// </summary>
-    protected string dbName = DateTime.Now.Ticks.ToString() + ".db";
+    protected string DatabasePath { get; private set; }
+
+    public BaseItemDeviceAsyncService(string name)
+    {
+        if (!name.EndsWith(".db"))
+            name += ".db";
+
+        DatabasePath = Path.Combine(FileSystem.AppDataDirectory, name);
+    }
 
     protected SQLiteAsyncConnection db;
 
@@ -23,7 +31,7 @@ public abstract class BaseItemDeviceService<T> : IDeviceItemAsyncService<T> wher
         if (db != null)
             return;
 
-        db = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, dbName));
+        db = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DatabasePath));
         await db.CreateTableAsync<T>();
     }
 

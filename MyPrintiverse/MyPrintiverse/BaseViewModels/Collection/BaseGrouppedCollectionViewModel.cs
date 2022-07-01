@@ -16,7 +16,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// </summary>
     public new ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
 
-    public GroupedCollectionViewModel(MessageService messagingService, IItemAsyncService<TBaseModel> itemsService) : base(messagingService, itemsService)
+    public GroupedCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService) : base(messagingService, itemsService)
     {
     }
 
