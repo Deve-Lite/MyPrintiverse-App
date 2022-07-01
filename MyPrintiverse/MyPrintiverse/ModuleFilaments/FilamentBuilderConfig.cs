@@ -34,19 +34,19 @@ namespace MyPrintiverse.FilamentsModule
         public static MauiAppBuilder ConfigureFilamentServices(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<FilamentDeviceService>();
-            builder.Services.AddSingleton<FilamentInternetService>();
+            builder.Services.AddSingleton<FilamentServerService>();
             builder.Services.AddSingleton<FilamentService>();
 
             builder.Services.AddSingleton<SpoolDeviceService>();
-            builder.Services.AddSingleton<SpoolInternetService>();
+            builder.Services.AddSingleton<SpoolServerService>();
             builder.Services.AddSingleton<SpoolService>();
 
             builder.Services.AddSingleton<FilamentTypeDeviceService>();
-            builder.Services.AddSingleton<FilamentTypeInternetService>();
+            builder.Services.AddSingleton<FilamentTypeServerService>();
             builder.Services.AddSingleton<FilamentTypeService>();
 
             builder.Services.AddSingleton<PrintDeviceService>();
-            builder.Services.AddSingleton<PrintInternetService>();
+            builder.Services.AddSingleton<PrintServiceService>();
             builder.Services.AddSingleton<PrintService>();
 
             // TODO FilamentStatistic Service
