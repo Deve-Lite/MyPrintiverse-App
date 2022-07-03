@@ -44,6 +44,6 @@ public partial class MessageEntry : ContentView
 
 	public MessageEntry()
 	{
-		//InitializeComponent();
+		InitializeComponent();
 	}
 }
