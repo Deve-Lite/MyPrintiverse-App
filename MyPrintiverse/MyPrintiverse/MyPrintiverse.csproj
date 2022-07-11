@@ -86,7 +86,7 @@
 	  <MauiXaml Update="AdminModule\AdminView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AuthorizationModule\MessageEntry.xaml">
+	  <MauiXaml Update="Templates\MessageEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AuthorizationModule\ChangePasswordPage\ChangePasswordView.xaml">

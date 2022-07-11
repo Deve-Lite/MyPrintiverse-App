@@ -2,8 +2,18 @@ namespace MyPrintiverse.AuthorizationModule.RemindPasswordPage;
 
 public partial class RemindPasswordView : ContentPage
 {
-	public RemindPasswordView()
+	private RemindPasswordViewModel? ViewModel => BindingContext as RemindPasswordViewModel;
+
+	public RemindPasswordView(RemindPasswordViewModel viewmodel)
 	{
+		BindingContext = viewmodel;
+
 		InitializeComponent();
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		ViewModel?.OnAppearing();
 	}
 }

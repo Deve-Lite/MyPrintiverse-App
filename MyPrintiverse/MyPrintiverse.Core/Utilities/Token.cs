@@ -5,7 +5,7 @@ namespace MyPrintiverse.Core.Utilities;
 /// <summary>
 /// Class for managing token and refresh token.
 /// </summary>
-public static class Token
+public class Token
 {
 	public static string Id { get; set; }
 	public static string AccessToken { get; set; }

@@ -2,6 +2,7 @@
 
 #nullable enable
 
+using MyPrintiverse.Core.Exceptions;
 using MyPrintiverse.Core.Utilities;
 using FileSystem = Microsoft.Maui.Storage.FileSystem;
 namespace MyPrintiverse.Core;
@@ -44,11 +45,24 @@ public abstract class BaseService : IBaseService
 		{
 			return await function();
 		}
+		catch (TokenException)
+		{
+			try
+			{
+				var token = Session.RefreshToken();
+			}
+			catch (RefreshTokenException)
+			{
+				// TODO: Logic
+				
+			}
+		}
 		catch (Exception) when (!ConfigService.Config.IsDeveloperMode)
 		{
 			await MessageService.ShowErrorAsync();
-			return await Task.Run(() => false);
 		}
+
+		return await Task.Run(() => false);
 	}
 
 	/// <summary>

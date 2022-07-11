@@ -3,7 +3,7 @@
 namespace MyPrintiverse.Core.Utilities;
 
 /// <inheritdoc />
-public class ConfigService<T> : IConfigService<T>
+public class ConfigService<T> : IConfigService<T> // TODO: Refactor this shit
 {
 	protected static ConfigService<T>? _configInstance;
 
@@ -11,7 +11,7 @@ public class ConfigService<T> : IConfigService<T>
 	protected readonly string _filePath;
 
 	/// <inheritdoc />
-	public T Config { get; set; }
+	public T Config { get; set; } 
 
 	/// <summary>
 	/// Create and return <see cref="ConfigServiceServiceService{T}" /> instance.

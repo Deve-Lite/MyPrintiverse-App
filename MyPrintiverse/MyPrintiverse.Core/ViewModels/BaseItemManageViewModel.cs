@@ -2,7 +2,7 @@
 using MyPrintiverse.Core.Utilities;
 using Plugin.ValidationRules;
 
-namespace MyPrintiverse.Core.ViewModels.Items;
+namespace MyPrintiverse.Core.ViewModels;
 
 /// <summary>
 /// View model for add / edit view.
@@ -13,7 +13,7 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
     /// <summary>
     /// Item backing storage. 
     /// </summary>
-    private Validatable<T> item; 
+    private Validatable<T> item;
 
     /// <summary>
     /// Validatable item for stashing item data 

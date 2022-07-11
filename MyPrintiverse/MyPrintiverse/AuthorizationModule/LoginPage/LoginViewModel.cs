@@ -10,11 +10,11 @@ public class LoginViewModel : BaseViewModel
 
 	public ICommand LogInCommand { get; }
 
-	private readonly ILogInService _logInService;
+	private readonly ILoginService _loginService;
 
-	public LoginViewModel(ILogInService logInService)
+	public LoginViewModel(ILoginService loginService)
 	{
-		_logInService = logInService;
+		_loginService = loginService;
 
 		LogInCommand = new AsyncCommand(LogIn, CanExecute, shellExecute: ExecuteBlockade);
 
@@ -33,11 +33,11 @@ public class LoginViewModel : BaseViewModel
 		if (!Email.IsValid || !Password.IsValid)
 			return;
 
-		var isLogInSuccessful = await _logInService.LogInAsync(Email.Value, Password.Value);
+		var isLogInSuccessful = await _loginService.LogInAsync(Email.Value, Password.Value);
 
 		if (isLogInSuccessful)
 			return; // TODO: Add navigation
 
-		await _logInService.MessageService.ShowErrorAsync();
+		await _loginService.MessageService.ShowErrorAsync();
 	}
 }

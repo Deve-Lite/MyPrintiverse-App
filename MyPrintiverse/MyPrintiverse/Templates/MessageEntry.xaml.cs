@@ -1,4 +1,4 @@
-namespace MyPrintiverse.AuthorizationModule;
+namespace MyPrintiverse.Templates;
 
 public partial class MessageEntry : ContentView
 {

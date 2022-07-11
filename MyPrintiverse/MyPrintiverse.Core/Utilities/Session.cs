@@ -31,4 +31,10 @@ public class Session : ISession
 	/// </summary>
 	public bool HasConnection { get; set; }
 
+	public Token RefreshToken()
+	{
+		// TODO: Logic
+
+		return new Token();
+	}
 }

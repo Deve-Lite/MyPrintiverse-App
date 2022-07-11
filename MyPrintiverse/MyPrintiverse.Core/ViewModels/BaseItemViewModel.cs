@@ -1,7 +1,17 @@
 ﻿using MyPrintiverse.Core.Items;
+
+/* Unmerged change from project 'MyPrintiverse.Core (net6.0-maccatalyst)'
+Before:
+using MyPrintiverse.Core.Utilities;
+After:
+using MyPrintiverse.Core.Utilities;
+using MyPrintiverse.Core.ViewModels;
+using MyPrintiverse.Core.ViewModels;
+using MyPrintiverse.Core.ViewModels.Items;
+*/
 using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Core.ViewModels.Items;
+namespace MyPrintiverse.Core.ViewModels;
 
 /// <summary>
 /// View Model for displaying Item with data.
@@ -47,7 +57,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     protected IMessageService MessageService;
 
     public BaseItemViewModel(IMessageService messageService, IItemService<TBaseModel> itemService)
-{
+    {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(itemService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
 

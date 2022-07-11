@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.Core.Utilities;
+﻿using MyPrintiverse.AuthorizationModule;
+using MyPrintiverse.Core.Utilities;
 
 namespace MyPrintiverse.Extensions;
 
@@ -20,6 +21,8 @@ public static class ServicesExtensions
         builder.Services.AddSingleton<BaseService>();
         builder.Services.AddSingleton<MessageService>();
         builder.Services.AddSingleton<Session>();
+
+        builder.ConfigureAuthorizationServices();
 
         return builder;
 	}

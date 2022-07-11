@@ -2,8 +2,18 @@ namespace MyPrintiverse.AuthorizationModule.SignInPage;
 
 public partial class SignInView : ContentPage
 {
-	public SignInView()
+	private SignInViewModel? ViewModel => BindingContext as SignInViewModel;
+
+	public SignInView(SignInViewModel viewmodel)
 	{
+		BindingContext = viewmodel;
+
 		InitializeComponent();
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		ViewModel?.OnAppearing();
 	}
 }

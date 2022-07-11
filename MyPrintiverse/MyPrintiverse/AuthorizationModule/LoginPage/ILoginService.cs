@@ -1,8 +1,6 @@
-﻿using MyPrintiverse.Core;
+﻿namespace MyPrintiverse.AuthorizationModule.LoginPage;
 
-namespace MyPrintiverse.AuthorizationModule.LoginPage;
-
-public interface ILogInService : IBaseService
+public interface ILoginService : IBaseService
 {
 	/// <summary>
 	/// Login/Authorize user.

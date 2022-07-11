@@ -2,9 +2,9 @@
 
 namespace MyPrintiverse.AuthorizationModule.LoginPage;
 
-public class LogInService : BaseService, ILogInService
+public class LoginService : BaseService, ILoginService
 {
-	public LogInService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession sessionService) : base(configService, logger, messageService, sessionService)
+	public LoginService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession sessionService) : base(configService, logger, messageService, sessionService)
 	{
 	}
 

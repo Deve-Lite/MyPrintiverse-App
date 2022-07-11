@@ -1,7 +1,7 @@
 ﻿using MyPrintiverse.Core.Items;
 using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Core.ViewModels.Items;
+namespace MyPrintiverse.Core.ViewModels;
 
 /// <summary>
 /// Base view model for editing item.
@@ -10,7 +10,7 @@ namespace MyPrintiverse.Core.ViewModels.Items;
 /// <typeparam name="T"> Model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
-{ 
+{
 
     /// <summary>
     /// Item id used for quering,

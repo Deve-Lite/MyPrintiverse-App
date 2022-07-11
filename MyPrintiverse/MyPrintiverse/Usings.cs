@@ -9,9 +9,12 @@ global using System.Windows.Input;
 
 global using MyPrintiverse.Core;
 global using MyPrintiverse.Extensions;
+global using MyPrintiverse.Templates;
+
 global using System.Reflection;
 global using System.Resources;
 
 global using Plugin.ValidationRules;
 global using Plugin.ValidationRules.Extensions;
 global using Plugin.ValidationRules.Rules;
+

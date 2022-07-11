@@ -10,65 +10,50 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	/// </summary>
 	protected const int DELAY = 500;
 
-	/// <summary>
-	/// Standard functions to do when page appears.
-	/// </summary>
-	protected internal virtual void OnAppearing()
-	{
-		IsBusy = false;
-	}
+	protected internal virtual void OnAppearing() => IsBusy = false;
 
-	private bool isBusy;
+	private bool _isBusy;
+
 	/// <summary>
 	/// Terminate if any action started on page.
 	/// </summary>
-	protected bool IsBusy { get => isBusy; set => SetProperty(ref isBusy, value); }
+	protected bool IsBusy
+	{
+		get => _isBusy; 
+		set => SetProperty(ref _isBusy, value);
+	}
 
-	private bool iRefreshing;
+	private bool _isRefreshing;
+
 	/// <summary>
 	/// Terminate if collection refresh started on page.
 	/// </summary>
-	protected bool IsRefreshing { get => iRefreshing; set => SetProperty(ref iRefreshing, value); }
+	protected bool IsRefreshing
+	{
+		get => _isRefreshing; 
+		set => SetProperty(ref _isRefreshing, value);
+	}
 
+	/// <summary>
+	/// Check if command can be executed.
+	/// </summary>
+	/// <returns><see langword="true" /> if command can be executed, otherwise <see langword="false" /></returns>
+	protected bool CanExecute(object obj) => !IsBusy;
 
 	/// <summary>
 	/// Terminate if action can start on page.
 	/// </summary>
 	/// <param name="arg"></param>
 	/// <returns></returns>
-	protected virtual bool CanExecute(object arg) 
-	{
-		if (IsBusy)
-			return false;
-
-		IsBusy = true;
-
-		return true;
-	}
-
-	/// <summary>
-	/// Terminate if action can start on page.
-	/// </summary>
-	/// <param name="arg"></param>
-	/// <returns></returns>
-	protected virtual bool CanExecute<T>(T arg)
-	{
-		if (IsBusy)
-			return false;
-
-		IsBusy = true;
-
-		return true;
-	}
-
-
-	public event PropertyChangedEventHandler PropertyChanged;
+	protected virtual bool CanExecute<T>(T arg) => !IsBusy;
+	 
+	public event PropertyChangedEventHandler? PropertyChanged;
 
 	/// <summary>
 	/// Standard method for notifying view when property value has changed.
 	/// </summary>
 	/// <param name="propertyName"></param>
-	protected virtual void OnPropertyChanged(string propertyName = null)
+	protected virtual void OnPropertyChanged(string? propertyName = null)
 	{
 		var handler = PropertyChanged;
 
@@ -84,7 +69,7 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	/// <param name="propertyName"></param>
 	/// <param name="onChanged"></param>
 	/// <returns></returns>
-	protected virtual bool SetProperty<T>(ref T backingStore, T value, Action onChanged = null, string propertyName = "")
+	protected virtual bool SetProperty<T>(ref T backingStore, T value, Action? onChanged = null, string propertyName = "")
 	{
 		if (EqualityComparer<T>.Default.Equals(backingStore, value))
 			return false;
@@ -96,18 +81,28 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	}
 
 	/// <summary>
-	/// Standard alert to get true/false value from user.
+	/// 
 	/// </summary>
-	/// <param name="title"></param>
-	/// <returns></returns>
-	protected async Task<bool> GetBoolFromUser(string title, string message)
+	/// <param name="act">Action to execute.</param>
+	protected void ExecuteBlockade(Action act)
 	{
 		IsBusy = true;
 
-		var value = await Shell.Current.DisplayAlert(title, message, "Yes", "No");
+		act();
 
 		IsBusy = false;
-		return value;
 	}
 
+	/// <summary>
+	/// Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
+	/// </summary>
+	/// <param name="act">Action to execute.</param>
+	protected async Task ExecuteBlockade(Func<Task> act)
+	{
+		IsBusy = true;
+
+		await act();
+
+		IsBusy = false;
+	}
 }

@@ -1,7 +1,7 @@
 ﻿using MyPrintiverse.Core.Items;
 using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Core.ViewModels.Items;
+namespace MyPrintiverse.Core.ViewModels;
 
 /// <summary>
 /// view model for adding item.
@@ -24,7 +24,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
 
         Item.Value = new T();
         AddItemCommand = new AsyncCommand(AddItem, CanExecute);
-       
+
         AddValidation();
     }
 
