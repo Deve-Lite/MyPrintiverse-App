@@ -12,6 +12,6 @@
     <module:MessageEntry Message="{Binding VerificationCode.Error}" Text="{Binding VerificationCode.Value, Mode=TwoWay}" />
 
     <Button Command="{Binding VerifyEmailCommand}" />
-
+    
   </StackLayout>
 </ContentPage>
