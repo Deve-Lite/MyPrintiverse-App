@@ -10,7 +10,7 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	/// </summary>
 	protected const int DELAY = 500;
 
-	protected internal virtual void OnAppearing() => IsBusy = false;
+	public virtual void OnAppearing() => IsBusy = false;
 
 	private bool _isBusy;
 

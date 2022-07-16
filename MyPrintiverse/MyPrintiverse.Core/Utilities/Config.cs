@@ -1,6 +1,7 @@
 ﻿#nullable enable
 namespace MyPrintiverse.Core.Utilities;
 
+
 public class Config : IHttpConfig
 {
 	public bool IsDeveloperMode { get; set; }

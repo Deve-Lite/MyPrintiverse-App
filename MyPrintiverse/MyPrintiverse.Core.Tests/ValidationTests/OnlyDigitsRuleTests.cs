@@ -35,7 +35,7 @@ public class OnlyDigitsRuleTests
 		var result = _rule.Check(value);
 
 		result.Should()
-			.BeTrue();
+			.BeFalse();
 	}
 
 	[Theory]

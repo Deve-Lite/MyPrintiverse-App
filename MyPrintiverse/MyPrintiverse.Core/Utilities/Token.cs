@@ -2,39 +2,68 @@
 
 namespace MyPrintiverse.Core.Utilities;
 
-/// <summary>
-/// Class for managing token and refresh token.
-/// </summary>
-public class Token
+/// <inheritdoc />
+public class Token : IToken
 {
-	public static string Id { get; set; }
-	public static string AccessToken { get; set; }
-	public static string RefreshToken { get; set; }
+	public string? Id { get; private set; }
+	public string? Value { get; private set; }
 
-	public static bool SetAccessToken(List<Parameter> list)
+	public bool IsValid { get; private set; }
+
+	public TokenType TokenType { get; }
+
+	public Token(TokenType tokenType)
 	{
-		AccessToken = list.Find(x => x.Name == "Authorization")?.Value?.ToString();
-		var isGetTokenIdSuccessful = GetTokenId(AccessToken);
-
-		return string.IsNullOrEmpty(AccessToken) && isGetTokenIdSuccessful;
+		TokenType = tokenType;
+		IsValid = false;
 	}
 
-	public static bool SetRefreshToken(List<Parameter> list)
-	{
-		RefreshToken = list.Find(x => x.Name == "Refresh-Token")?.Value?.ToString();
+	public event IToken.SetHandler? OnSuccessfulSet;
+	public event IToken.SetHandler? OnFailedSet;
 
-		return string.IsNullOrEmpty(RefreshToken);
+	private string TokenName => TokenType == TokenType.Authorization ? "Authorization" : "Refresh-Token";
+
+	public bool Set(List<Parameter> parameters)
+	{
+		Value = parameters.Find(param => param.Name == TokenName)?.Value?.ToString();
+
+		return CheckToken();
 	}
 
-	public static bool GetTokenId(string token)
+	public bool Set(Parameter parameter)
 	{
-		token = token.Replace("Bearer", "").Trim();
+		if (parameter.Name == TokenName)
+		{
+			Value = parameter.Value?.ToString();
+		}
+
+		return CheckToken();
+	}
+
+	private bool CheckToken()
+	{
+		IsValid = !string.IsNullOrEmpty(Value);
+
+		if (IsValid)
+		{
+			OnSuccessfulSet?.Invoke();
+			SetTokenId(Value!);
+		}
+		else
+		{
+			OnFailedSet?.Invoke();
+		}
+
+		return IsValid;
+	}
+
+	private void SetTokenId(string token)
+	{
+		token = token.Replace("Bearer", string.Empty).Trim();
 
 		var handler = new JwtSecurityTokenHandler();
 		var webToken = handler.ReadToken(token) as JwtSecurityToken;
 
 		Id = webToken?.Claims.First(claim => claim.Type == "_id").Value.ToString();
-
-		return string.IsNullOrEmpty(Id);
 	}
 }

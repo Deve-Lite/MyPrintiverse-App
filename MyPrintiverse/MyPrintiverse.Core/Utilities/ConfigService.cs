@@ -10,7 +10,6 @@ public class ConfigService<T> : IConfigService<T> // TODO: Refactor this shit
 	protected Dictionary<string, string> _config = new();
 	protected readonly string _filePath;
 
-	/// <inheritdoc />
 	public T Config { get; set; } 
 
 	/// <summary>
