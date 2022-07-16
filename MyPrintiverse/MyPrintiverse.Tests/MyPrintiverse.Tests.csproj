@@ -8,6 +8,8 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +27,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -35,17 +37,17 @@
     </PackageReference>
   </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\MyPrintiverse\MyPrintiverse.csproj" />
-	</ItemGroup>
-	
-	<ItemGroup>
-		<Folder Include="LogInPage\" />
-		<Folder Include="ConfirmPasswordPage\" />
-		<Folder Include="AuthorizationModuleTests\" />
-		<Folder Include="SettingsPage\" />
-		<Folder Include="RemindPasswordPage\" />
-		<Folder Include="SignInPage\" />
-	</ItemGroup>
-	
+  <ItemGroup>
+    <ProjectReference Include="..\MyPrintiverse\MyPrintiverse.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="LogInPage\" />
+    <Folder Include="ConfirmPasswordPage\" />
+    <Folder Include="AuthorizationModuleTests\" />
+    <Folder Include="SettingsPage\" />
+    <Folder Include="RemindPasswordPage\" />
+    <Folder Include="SignInPage\" />
+  </ItemGroup>
+
 </Project>

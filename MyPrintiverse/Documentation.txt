@@ -1,0 +1,9 @@
+== Error handling ==
+1. Je¿eli wyst¹pi b³¹d podczas kompilacji
+  - PRI175 0x80073b0f - processing resources failed with error duplicate entry 
+  - lub z opisem - unkown error
+
+* Aby naprawiæ b³¹d trzeba zaaktualizowaæ nuget CommunityToolkit.Maui
+* Link https://github.com/dotnet/maui/issues/7420
+
+2.

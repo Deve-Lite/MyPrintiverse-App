@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse;
+﻿using MyPrintiverse.Core.Utilities;
+
+namespace MyPrintiverse.Extensions;
 
 public static class MauiAppExtensions
 {

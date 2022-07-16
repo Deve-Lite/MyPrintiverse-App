@@ -46,7 +46,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="FilamentsModule\**" />
+	  <AndroidResource Remove="AuthorizationModule\ViewModels\**" />
+	  <AndroidResource Remove="AuthorizationModule\Views\**" />
+	  <Compile Remove="AuthorizationModule\ViewModels\**" />
+	  <Compile Remove="AuthorizationModule\Views\**" />
+	  <EmbeddedResource Remove="AuthorizationModule\ViewModels\**" />
+	  <EmbeddedResource Remove="AuthorizationModule\Views\**" />
+	  <MauiCss Remove="AuthorizationModule\ViewModels\**" />
+	  <MauiCss Remove="AuthorizationModule\Views\**" />
+	  <MauiXaml Remove="AuthorizationModule\ViewModels\**" />
+	  <MauiXaml Remove="AuthorizationModule\Views\**" />
+	  <None Remove="AuthorizationModule\ViewModels\**" />
+	  <None Remove="AuthorizationModule\Views\**" />
+    <AndroidResource Remove="FilamentsModule\**" />
 	  <Compile Remove="FilamentsModule\**" />
 	  <EmbeddedResource Remove="FilamentsModule\**" />
 	  <MauiCss Remove="FilamentsModule\**" />
@@ -56,13 +68,48 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.0.0" />
-	  <PackageReference Include="FluentValidation" Version="11.0.1" />
-	  <PackageReference Include="MongoDB.Bson" Version="2.15.1" />
+	  <PackageReference Include="MongoDB.Bson" Version="2.16.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="Plugin.ValidationRules" Version="1.5.0.1" />
-	  <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	  <PackageReference Include="RestSharp" Version="108.0.1" />
-	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.20.0" />
+	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.21.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="AuthorizationModule\SettingsPage\SettingsView.xaml.cs">
+	    <DependentUpon>SettingsView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AdminModule\AdminView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Templates\MessageEntry.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AuthorizationModule\ChangePasswordPage\ChangePasswordView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AuthorizationModule\ConfirmEmailPage\ConfirmEmailView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AuthorizationModule\LoginPage\LoginView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AuthorizationModule\RemindPasswordPage\RemindPasswordView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AuthorizationModule\SettingsPage\SettingsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AuthorizationModule\SignInPage\SignInView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FilamentsModule\Filaments\Views\FilamentsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,10 +122,10 @@
 	  <MauiImage Include="Resources\appiconfg.svg" />
 	</ItemGroup>
 
-	<!-- Project Includes -->
-	
 	<ItemGroup>
-		<ProjectReference Include="..\Develite.Utilities\Develite.Utilities.csproj" />
+	  <ProjectReference Include="..\MyPrintiverse.Core\MyPrintiverse.Core.csproj" />
 	</ItemGroup>
+
+	<!-- Project Includes -->
 	
 </Project>

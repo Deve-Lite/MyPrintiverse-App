@@ -1,4 +1,6 @@
 ﻿
+using MyPrintiverse.AuthorizationModule;
+
 namespace MyPrintiverse.Extensions;
 
 public static class ConfigureViewModel
@@ -13,6 +15,8 @@ public static class ConfigureViewModel
 	{
 		// template
 		// builder.Services.AddSingleton<...ViewModel>();
+
+		builder.ConfigureAuthorizationViewModels();
 
 		return builder;
 	}
