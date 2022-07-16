@@ -18,12 +18,12 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
     {
     }
 
-    protected internal override void OnAppearing()
+    public override void OnAppearing()
     {
         base.OnAppearing();
 
         Item.Value = new T();
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute);
+        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
 
         AddValidation();
     }
@@ -39,8 +39,6 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
         if (await ItemService.AddItemAsync(Item.Value))
             await Shell.Current.GoToAsync("..", true);
 
-
-        IsBusy = false;
     }
 }
 

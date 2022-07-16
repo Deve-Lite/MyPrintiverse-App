@@ -62,13 +62,13 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         Items = new ObservableCollection<TBaseModel>();
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
         base.OnAppearing();
 
 
-        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute);
+        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
+        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
         EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
         OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
         DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);

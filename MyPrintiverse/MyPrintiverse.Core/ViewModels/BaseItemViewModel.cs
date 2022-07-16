@@ -1,15 +1,8 @@
 ﻿using MyPrintiverse.Core.Items;
 
-/* Unmerged change from project 'MyPrintiverse.Core (net6.0-maccatalyst)'
-Before:
+
 using MyPrintiverse.Core.Utilities;
-After:
-using MyPrintiverse.Core.Utilities;
-using MyPrintiverse.Core.ViewModels;
-using MyPrintiverse.Core.ViewModels;
-using MyPrintiverse.Core.ViewModels.Items;
-*/
-using MyPrintiverse.Core.Utilities;
+using MyPrintiverse.Core;
 
 namespace MyPrintiverse.Core.ViewModels;
 
@@ -66,12 +59,12 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     }
 
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
         base.OnAppearing();
 
-        EditItemCommand = new AsyncCommand(EditItem, CanExecute);
-        DeleteItemCommand = new AsyncCommand(DeleteItem, CanExecute);
+        EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteItemCommand = new AsyncCommand(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
 
         Item = await ItemService.GetItemAsync(Id);
     }
@@ -93,7 +86,6 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
         if (await ItemService.DeleteItemAsync(Id))
             await Shell.Current.GoToAsync("..", true);
 
-        IsBusy = false;
     }
 
 }

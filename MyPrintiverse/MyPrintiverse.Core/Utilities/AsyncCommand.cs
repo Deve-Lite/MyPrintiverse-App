@@ -71,6 +71,12 @@ public class AsyncCommand : IAsyncCommand
 	#endregion
 }
 
+
+
+
+
+
+// TODO AsyncCommand<T>
 public class AsyncCommand<T> : IAsyncCommand<T>
 {
 	private readonly Func<T, Task> _execute;
@@ -78,23 +84,27 @@ public class AsyncCommand<T> : IAsyncCommand<T>
 	private readonly Action<Exception>? _onException;
 	private readonly bool _continueOnCapturedContext;
 	private readonly WeakEventManager _weakEventManager = new();
+    private readonly Func<Func<T, Task>, T, Task>? _shellExecute;
 
-	/// <summary>
-	/// Create a new AsyncCommand
+    /// <summary>
+	/// Create a new AsyncCommand.
 	/// </summary>
 	/// <param name="execute">Function to _execute</param>
-	/// <param name="canExecute">Function to call to determine if it can be executed</param>
-	/// <param name="onException">Action callback when an exception occurs</param>
-	/// <param name="continueOnCapturedContext">If the context should be captured on exception</param>
+	/// <param name="canExecute">Function to call to determine if it can be executed.</param>
+	/// <param name="onException">Action callback when an exception occurs.</param>
+	/// <param name="continueOnCapturedContext">If the context should be captured on exception.</param>
+	/// <param name="shellExecute">Function to execute something before or/and after execution.</param>
 	public AsyncCommand(Func<T, Task> execute,
 		Func<object, bool>? canExecute = null,
 		Action<Exception>? onException = null,
-		bool continueOnCapturedContext = false)
+		bool continueOnCapturedContext = false,
+		Func<Func<T, Task>, T, Task>? shellExecute = null)
 	{
 		_execute = execute ?? throw new ArgumentNullException(nameof(execute));
 		_canExecute = canExecute;
 		_onException = onException;
 		_continueOnCapturedContext = continueOnCapturedContext;
+		_shellExecute = shellExecute;
 	}
 
 	/// <summary>
@@ -111,18 +121,25 @@ public class AsyncCommand<T> : IAsyncCommand<T>
 	/// </summary>
 	/// <param name="parameter">Parameter to pass to CanExecute.</param>
 	/// <returns>If it can be executed</returns>
-	public bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? true;
+	public bool CanExecute(object? parameter)
+    {
+        if (parameter is not null)
+            return _canExecute?.Invoke(parameter) ?? true;
 
-	/// <summary>
-	/// Execute the command async.
-	/// </summary>
-	/// <returns>Task that is executing and can be awaited.</returns>
-	public Task ExecuteAsync(T parameter) => _execute(parameter);
+        return false;
+    }
 
-	/// <summary>
-	/// Raise a CanExecute change event.
-	/// </summary>
-	public void RaiseCanExecuteChanged() => _weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
+    /// <summary>
+    /// Execute the command async.
+    /// </summary>
+    /// <returns>Task that is executing and can be awaited.</returns>
+    /// TODO Sprawdzenie czy to działa bo chyba jakos powinno sie jeszcze przekazac parametr
+    public Task ExecuteAsync(T parameter) => _shellExecute is not null ? _shellExecute(_execute, parameter) : _execute(parameter);
+
+    /// <summary>
+    /// Raise a CanExecute change event.
+    /// </summary>
+    public void RaiseCanExecuteChanged() => _weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
 
 	#region Explicit implementations
 
@@ -136,7 +153,7 @@ public class AsyncCommand<T> : IAsyncCommand<T>
 }
 
 /// <summary>
-/// Extension Utils
+/// Extension Utils.
 /// </summary>
 public static class AsyncCommandUtils
 {

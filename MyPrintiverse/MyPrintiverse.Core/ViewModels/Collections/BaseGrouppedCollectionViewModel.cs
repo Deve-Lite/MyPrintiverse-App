@@ -21,14 +21,14 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     {
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
         base.OnAppearing();
         Items = new ObservableCollection<GroupedItem<TBaseModel>>();
         IsBusy = false;
 
-        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute);
+        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
+        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
         EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
         OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
         DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);

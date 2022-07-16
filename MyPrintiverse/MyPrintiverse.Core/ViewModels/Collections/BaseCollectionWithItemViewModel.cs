@@ -51,7 +51,7 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
         EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute);
         DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute);

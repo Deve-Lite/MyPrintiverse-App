@@ -105,4 +105,25 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 
 		IsBusy = false;
 	}
+
+    /// <summary>
+    /// Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
+    /// </summary>
+    /// <param name="act">Action to execute.</param>
+    protected async Task ExecuteBlockade<T>(Func<T, Task> act, T value)
+    {
+        IsBusy = true;
+
+        await act(value);
+
+        IsBusy = false;
+    }
+
+    /// <summary>
+    /// Creates exception message.
+    /// </summary>
+    /// <typeparam name="T">Class type where exception is thrown.</typeparam>
+    /// <param name="propertyName"></param>
+    /// <returns>exception message.</returns>
+    protected string GetExceptionMessage<T>(string propertyName) => $"{nameof(T)} - {propertyName}";
 }

@@ -47,10 +47,10 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
         ItemService = itemService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
-        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute);
-        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute);
+        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
 
         Item = await ItemService.GetItemAsync(Id);
 
@@ -73,7 +73,6 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
         if (await ItemService.DeleteItemAsync(Item.Id))
             await Shell.Current.GoToAsync("..", true);
 
-        IsBusy = false;
     }
 }
 
