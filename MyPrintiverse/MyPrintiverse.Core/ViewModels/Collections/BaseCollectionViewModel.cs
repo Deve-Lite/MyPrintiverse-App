@@ -62,16 +62,15 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         Items = new ObservableCollection<TBaseModel>();
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
         base.OnAppearing();
 
-
-        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute);
-        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
-        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
-        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);
+        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
+        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
+        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
+        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
 
         await UpdateItemsOnAppearing();
     }
@@ -92,7 +91,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         else if (action == BaseItemActions.Edit)
             await EditItem(item);
 
-        IsBusy = false;
     }
 
     /// <summary>
@@ -107,7 +105,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <returns></returns>
     protected virtual async Task UpdateItemsOnAppearing()
     {
-        IsBusy = true;
         IsRefreshing = true;
 
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
@@ -120,20 +117,20 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             if (newItem == null)
             {
                 Items.Remove(item);
-                data.Remove(item);
             }
-            else if (item.EditedAt == newItem.EditedAt)
+            else if (item.EditedAt != newItem.EditedAt)
             {
                 Items[Items.IndexOf(item)] = newItem;
                 data.Remove(item);
             }
+            else if (newItem.EditedAt == item.EditedAt)
+                data.Remove(newItem);
         }
 
         foreach (TBaseModel item in data)
             Items.Add(item);
 
         IsRefreshing = false;
-        IsBusy = false;
     }
 
     /// <summary>
@@ -150,7 +147,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         foreach (var item in await ItemsService.GetItemsAsync())
             Items.Add(item);
 
-        IsBusy = false;
         IsRefreshing = false;
     }
 
@@ -168,11 +164,11 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <returns></returns>
     protected virtual async Task DeleteItem(TBaseModel item)
     {
+        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+            return;
 
         if (await ItemsService.DeleteItemAsync(item.Id))
             Items.Remove(item);
-
-        IsBusy = false;
     }
 
     /// <summary>

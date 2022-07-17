@@ -26,13 +26,14 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
     {
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
         base.OnAppearing();
 
         Item.Value = await ItemService.GetItemAsync(Id);
 
-        EditItemCommand = new AsyncCommand(EditItem, CanExecute);
+        EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
+
         AddValidation();
     }
 
@@ -42,13 +43,11 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
     /// <returns></returns>
     public virtual async Task EditItem()
     {
-        // Open loading popup / activity indicator
+        // TODO activity button
 
         if (await ItemService.UpdateItemAsync(Item.Value))
             await Shell.Current.GoToAsync("..", true);
 
-
-        IsBusy = false;
     }
 
 }

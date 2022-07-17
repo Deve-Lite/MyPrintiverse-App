@@ -35,15 +35,15 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         KeyItemsService = keyItemsService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
         base.OnAppearing();
 
-        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute);
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute);
-        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
-        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
-        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);
+        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
+        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
+        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
+        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
 
         await UpdateItemsOnAppearing();
     }
@@ -57,7 +57,6 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
             await RefreshItems();
         }
 
-        IsBusy = true;
         IsRefreshing = true;
 
         List<TBaseModel> data = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
@@ -70,20 +69,20 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
             if (newItem == null)
             {
                 Items.Remove(item);
-                data.Remove(item);
             }
-            else if (item.EditedAt == newItem.EditedAt)
+            else if (item.EditedAt != newItem.EditedAt)
             {
                 Items[Items.IndexOf(item)] = newItem;
                 data.Remove(item);
             }
+            else if (newItem.EditedAt == item.EditedAt)
+                data.Remove(newItem);
         }
 
         foreach (TBaseModel item in data)
             Items.Add(item);
 
         IsRefreshing = false;
-        IsBusy = false;
     }
 
     protected override async Task RefreshItems()
@@ -96,7 +95,6 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         foreach (var item in await KeyItemsService.GetItemsByKeyAsync(Id))
             Items.Add(item);
 
-        IsBusy = false;
         IsRefreshing = false;
     }
 }

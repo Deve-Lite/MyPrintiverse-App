@@ -51,14 +51,14 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
     }
 
-    protected internal override async void OnAppearing()
+    public override async void OnAppearing()
     {
-        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute);
-        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute);
+        base.OnAppearing();
+
+        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
 
         Item = await ItemService.GetItemAsync(Id);
-
-        base.OnAppearing();
     }
 
     /// <summary>
@@ -73,10 +73,11 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
     /// <returns></returns>
     protected virtual async Task DeleteDisplayItem()
     {
-        // make sure to delete
-        if(await ItemService.DeleteItemAsync(Item.Id))
+        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+            return;
+
+        if (await ItemService.DeleteItemAsync(Item.Id))
             await Shell.Current.GoToAsync("..", true);
         
-        IsBusy = false;
     }
 }
