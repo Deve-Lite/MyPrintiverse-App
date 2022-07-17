@@ -49,12 +49,12 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
 
     public override async void OnAppearing()
     {
+        base.OnAppearing();
+
         EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
         DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
 
         Item = await ItemService.GetItemAsync(Id);
-
-        base.OnAppearing();
     }
 
     /// <summary>
@@ -69,7 +69,9 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     /// <returns></returns>
     protected virtual async Task DeleteDisplayItem()
     {
-        // make sure to delete
+        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+            return;
+
         if (await ItemService.DeleteItemAsync(Item.Id))
             await Shell.Current.GoToAsync("..", true);
 

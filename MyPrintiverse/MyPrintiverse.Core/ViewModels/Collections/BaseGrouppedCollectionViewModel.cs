@@ -19,75 +19,64 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     public GroupedCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService) : base(messagingService, itemsService)
     {
+        Items = new ObservableCollection<GroupedItem<TBaseModel>>();
     }
 
     public override async void OnAppearing()
     {
         base.OnAppearing();
-        Items = new ObservableCollection<GroupedItem<TBaseModel>>();
-        IsBusy = false;
 
         RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
         AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
-        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute);
-        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute);
-        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute);
-        ItemOptionsCommand = new AsyncCommand<TBaseModel>(ItemOptions, CanExecute);
+        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
+        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
+        ItemOptionsCommand = new AsyncCommand<TBaseModel>(ItemOptions, CanExecute, shellExecute: ExecuteBlockade);
 
         await UpdateItemsOnAppearing();
     }
 
     protected override async Task UpdateItemsOnAppearing()
     {
-        IsBusy = true;
         IsRefreshing = true;
 
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
-        int i = 0;
-        foreach (var group in new List<GroupedItem<TBaseModel>>(Items))
+        var iterableItems = new List<GroupedItem<TBaseModel>>(Items);
+
+        for (int i = 0; i < iterableItems.Count; i++) 
         {
-            foreach (TBaseModel item in group)
+            for (int j = 0; j < iterableItems[i].Count; j++)
             {
+                var item = iterableItems[i][j];
+
                 var newItem = data.FirstOrDefault(x => x.Id == item.Id);
 
                 if (newItem == null)
                 {
-                    int index = GetIndex(item);
-
-                    if (index == -1)
-                    {
-                        // Loading Error Message
-                        continue;
-                    }
-
-                    Items[index].Remove(item);
+                    DeleteFromItems(item);
                 }
-                else if (newItem.EditedAt != item.EditedAt)
+                else if (newItem.EditedAt != item.EditedAt) 
                 {
-                    int index = GetIndex(item);
+                    Items[i][Items[i].IndexOf(item)] = newItem;
 
-                    if (index == -1)
-                    {
-                        // Loading Error Message
-                        continue;
-                    }
-
-                    Items[index][Items[index].IndexOf(item)] = newItem;
+                    data.Remove(newItem);
                 }
+                else if (newItem.EditedAt == item.EditedAt)
+                    data.Remove(newItem);
             }
         }
 
-        foreach (TBaseModel item in data)
+        foreach (var item in data)
             AddToItems(item);
 
-        IsBusy = false;
+        SortGroups();
+
         IsRefreshing = false;
     }
 
     protected override async Task RefreshItems()
     {
-
         IsRefreshing = true;
 
         Items.Clear();
@@ -95,10 +84,10 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         foreach (var item in await ItemsService.GetItemsAsync())
             AddToItems(item);
 
-        IsBusy = false;
+        SortGroups();
+
         IsRefreshing = false;
     }
-
 
     /// <summary>
     /// Method adds item to collection as new group or to existing group.
@@ -106,17 +95,15 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// <param name="item"></param>
     protected virtual void AddToItems(TBaseModel item)
     {
-        int x = GetIndex(item);
-        if (x == -1)
+        int i = GetIndex(item);
+        if (i == -1)
         {
-            ObservableCollection<TBaseModel> model = new ObservableCollection<TBaseModel>();
-            model.Add(item);
-            Items.Add(new GroupedItem<TBaseModel>(GetNewGroupName(item), model));
+            ObservableCollection<TBaseModel> newItems = new ObservableCollection<TBaseModel>();
+            newItems.Add(item);
+            Items.Add(new GroupedItem<TBaseModel>(GetNewGroupName(item), newItems));
         }
         else
-        {
-            Items[x].Add(item);
-        }
+            Items[i].Add(item);
     }
 
     /// <summary>
@@ -125,18 +112,20 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// <param name="item"></param>
     protected virtual void DeleteFromItems(TBaseModel item)
     {
-        int index = GetIndex(item);
+        int i = GetIndex(item);
 
-        if (index == -1)
-        {
-            // Loading Error Message
-            return;
-        }
+        Items[i].Remove(item);
 
-        Items[index].Remove(item);
+        if (Items[i].Count == 0)
+            Items.Remove(Items[i]);
+    }
 
-        if (Items[index].Count == 0)
-            Items.Remove(Items[index]);
+    /// <summary>
+    /// After updating or refreshing, list of Items is sorted by this function.
+    /// </summary>
+    protected virtual void SortGroups()
+    {
+        Items.OrderBy(x => x.Name);
     }
 
     /// <summary>
@@ -145,20 +134,14 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// <param name="item"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"> must be implemented each time </exception>
-    protected virtual string GetNewGroupName(TBaseModel item)
-    {
-        throw new NotImplementedException("Method GetNewGroupName must be implemented.");
-    }
+    protected virtual string GetNewGroupName(TBaseModel item) => throw new NotImplementedException("Method GetNewGroupName must be implemented.");
 
     /// <summary>
-    /// method returns item group index or -1 if group is not existing.
+    /// Method returns item group index or -1 if group is not existing.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"> must be implemented each time  </exception>
-    protected virtual int GetIndex(TBaseModel item)
-    {
-        throw new NotImplementedException("Method GetIndex must be implemented.");
-    }
+    protected virtual int GetIndex(TBaseModel item) => throw new NotImplementedException("Method GetIndex must be implemented.");
 }
 

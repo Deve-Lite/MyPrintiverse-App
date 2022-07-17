@@ -9,11 +9,20 @@ public class Session : ISession
 {
 	public IToken? AccessToken { get; }
 	public IToken? RefreshToken { get; }
-	
-	public 
+
+
+
+	public bool IsLogged => throw new NotImplementedException();
+
+	public bool HasConnection { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 	public void AuthorizeUser()
 	{
 		
+	}
+
+	Token ISession.RefreshToken()
+	{
+		throw new NotImplementedException();
 	}
 }

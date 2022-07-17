@@ -81,7 +81,8 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// <returns></returns>
     protected virtual async Task DeleteItem()
     {
-        // make sure about 
+        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+            return;
 
         if (await ItemService.DeleteItemAsync(Id))
             await Shell.Current.GoToAsync("..", true);

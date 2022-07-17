@@ -58,7 +58,7 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
     }
 
     /// <summary>
-    /// Actions to perform when item is changed.
+    /// Additional actions to perform when item is changed.
     /// </summary>
     protected virtual void OnChanged()
     {

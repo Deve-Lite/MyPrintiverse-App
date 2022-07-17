@@ -10,7 +10,10 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	/// </summary>
 	protected const int DELAY = 500;
 
-	public virtual void OnAppearing() => IsBusy = false;
+	public virtual void OnAppearing() 
+	{
+		//Perform On Appearing
+	}
 
 	private bool _isBusy;
 
@@ -107,14 +110,33 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	}
 
     /// <summary>
-    /// Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
-    /// </summary>
-    /// <param name="act">Action to execute.</param>
+	///  Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="act">Action to execute.</param>
+	/// <param name="value"> Action parameter.</param>
+	/// <returns></returns>
     protected async Task ExecuteBlockade<T>(Func<T, Task> act, T value)
     {
         IsBusy = true;
 
         await act(value);
+
+        IsBusy = false;
+    }
+
+    /// <summary>
+    ///  Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="act">Action to execute.</param>
+    /// <param name="value"> Action parameter.</param>
+    /// <returns></returns>
+    protected void ExecuteBlockade<T>(Action<T> act, T value)
+    {
+        IsBusy = true;
+
+        act(value);
 
         IsBusy = false;
     }

@@ -72,11 +72,6 @@ public class AsyncCommand : IAsyncCommand
 }
 
 
-
-
-
-
-// TODO AsyncCommand<T>
 public class AsyncCommand<T> : IAsyncCommand<T>
 {
 	private readonly Func<T, Task> _execute;
@@ -133,7 +128,6 @@ public class AsyncCommand<T> : IAsyncCommand<T>
     /// Execute the command async.
     /// </summary>
     /// <returns>Task that is executing and can be awaited.</returns>
-    /// TODO Sprawdzenie czy to działa bo chyba jakos powinno sie jeszcze przekazac parametr
     public Task ExecuteAsync(T parameter) => _shellExecute is not null ? _shellExecute(_execute, parameter) : _execute(parameter);
 
     /// <summary>
