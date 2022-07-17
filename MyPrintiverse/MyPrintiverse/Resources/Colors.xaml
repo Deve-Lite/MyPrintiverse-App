@@ -3,15 +3,70 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <!-- Light Mode -->
 
-    <Color x:Key="Primary">#512BD4</Color>
+    <Color x:Key="Primary">#80DBBB</Color>
+    <Color x:Key="PrimaryVariant">#80DBBB</Color>
+    <Color x:Key="OnPrimary">Black</Color>
+
+    <Color x:Key="Secondary">#A3E1BF</Color>
+    <Color x:Key="SecondaryVariant">#A3E1BF</Color>
+    <Color x:Key="OnSecondary">Black</Color>
+
+    <Color x:Key="Tetruary">#A9BFDB</Color>
+    <Color x:Key="TetruaryVariant">#A9BFDB</Color>
+    <Color x:Key="OnTetruary">Black</Color>
+
+    <Color x:Key="Background">#E7E9EF</Color>
+    <Color x:Key="OnBackground">#E7E9EF</Color>
+
+    <Color x:Key="BackgroundVariant">White</Color>
+    <Color x:Key="OnBackgroundVariant">White</Color>
+
+    <Color x:Key="PriamryText">Black</Color>
+    <Color x:Key="SecondaryText">Black</Color>
+
+    <!-- Dark Mode -->
+
+    <Color x:Key="PrimaryDark">#228160</Color>
+    <Color x:Key="PrimaryVariantDark">#228160</Color>
+    <Color x:Key="OnPrimaryDark">White</Color>
+
+    <Color x:Key="SecondaryDark">#36A665</Color>
+    <Color x:Key="SecondaryVariantDark">#36A665</Color>
+    <Color x:Key="OnSecondaryDark">White</Color>
+
+    <Color x:Key="TetruaryDark">#374474</Color>
+    <Color x:Key="TetruaryVariantDark">#374474</Color>
+    <Color x:Key="OnTetruaryDark">White</Color>
+
+    <Color x:Key="BackgroundDark">#1F2432</Color>
+    <Color x:Key="OnBackgroundDark">#1F2432</Color>
+
+    <Color x:Key="BackgroundVariantDark">Black</Color>
+    <Color x:Key="OnBackgroundVariantDark">Black</Color>
+
+    <Color x:Key="PriamryTextDark">White</Color>
+    <Color x:Key="SecondaryTextDark">White</Color>
+
+    <!-- Universal -->
+
+    <Color x:Key="Error">#D42121</Color>
+    <Color x:Key="Warning">#FFE500</Color>
+    <Color x:Key="Accept">#61CC33</Color>
+    
+    <Color x:Key="LightGray">#E5E5E1</Color>
+    <Color x:Key="MidGray">#969696</Color>
+    <Color x:Key="DarkGray">#505050</Color>
+    
+    <!-- Old narazie nie usuwane bo sa uzywane w starych stylach -->
+
     <Color x:Key="Light">#DFD8F7</Color>
     <Color x:Key="Dark">#2B0B98</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
-    <Color x:Key="LightGray">#E5E5E1</Color>
-    <Color x:Key="MidGray">#969696</Color>
-    <Color x:Key="DarkGray">#505050</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="LightBrush" Color="{StaticResource Light}"/>
     <SolidColorBrush x:Key="DarkBrush" Color="{StaticResource Dark}"/>

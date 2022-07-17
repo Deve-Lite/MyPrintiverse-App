@@ -7,6 +7,15 @@
 
     <!-- New Sytles -->
 
+    <Style TargetType="Button" 
+           x:Key="Default">
+        
+    </Style>
+
+    <Style TargetType="ImageButton"
+           x:Key="AddButton">
+
+    </Style>
 
 
     <!-- Old Sytles TODELETE AFTER SOME TIME -->
