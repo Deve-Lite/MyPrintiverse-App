@@ -37,7 +37,8 @@ public class ConfigService<T> : IConfigService<T> // TODO: Refactor this shit
 		lock (_config)
 		{
 			if (_config.Count is 0)
-				throw new FileNotFoundException(nameof(_filePath));
+				return;
+				//throw new FileNotFoundException(nameof(_filePath));
 		}
 	}
 

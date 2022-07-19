@@ -18,7 +18,6 @@ public static class ServicesExtensions
         // builder.Services.AddSingleton<...Service>();
         /* Implementation */
 
-        builder.Services.AddSingleton<BaseService>();
         builder.Services.AddSingleton<MessageService>();
         builder.Services.AddSingleton<Session>();
 
