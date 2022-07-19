@@ -1,6 +1,7 @@
 ﻿
 
 using MyPrintiverse.AuthorizationModule;
+using MyPrintiverse.FilamentsModule;
 
 namespace MyPrintiverse.Extensions;
 
@@ -18,7 +19,8 @@ public static class ConfigureView
 		// builder.Services.AddSingleton<...View>();
 
 		builder.ConfigureAuthorizationViews();
+        builder.ConfigureFilamentViews();
 
-		return builder;
+        return builder;
 	}
 }

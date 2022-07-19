@@ -1,6 +1,6 @@
 ﻿
 
-namespace MyPrintiverse.Core.Items;
+namespace MyPrintiverse.Core.Services;
 
 /// <summary>
 /// Base interface for Internet Service 

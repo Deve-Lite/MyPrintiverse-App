@@ -1,6 +1,6 @@
 ﻿using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Core.Items;
+namespace MyPrintiverse.Core.Services;
 
 public abstract class BaseItemAsyncService<T> : BaseService, IItemService<T> where T : BaseModel
 {

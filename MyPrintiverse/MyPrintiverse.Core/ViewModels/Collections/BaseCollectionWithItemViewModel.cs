@@ -1,6 +1,6 @@
 ﻿
 
-using MyPrintiverse.Core.Items;
+using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
 
 namespace MyPrintiverse.Core.ViewModels.Collections;

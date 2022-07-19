@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Core.Items;
+﻿namespace MyPrintiverse.Core.Services;
 
 /// <summary>
 /// Default interface for device service with standard CRUD operations.

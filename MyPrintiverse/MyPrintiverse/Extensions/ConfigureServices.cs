@@ -1,5 +1,5 @@
 ﻿using MyPrintiverse.AuthorizationModule;
-using MyPrintiverse.Core.Utilities;
+using MyPrintiverse.FilamentsModule;
 
 namespace MyPrintiverse.Extensions;
 
@@ -23,6 +23,7 @@ public static class ServicesExtensions
         builder.Services.AddSingleton<Session>();
 
         builder.ConfigureAuthorizationServices();
+        builder.ConfigureFilamentServices();
 
         return builder;
 	}

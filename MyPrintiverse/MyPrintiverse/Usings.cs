@@ -8,6 +8,12 @@ global using Microsoft.Extensions.Logging;
 global using System.Windows.Input;
 
 global using MyPrintiverse.Core;
+global using MyPrintiverse.Core.ViewModels;
+global using MyPrintiverse.Core.ViewModels.Collections;
+global using MyPrintiverse.Core.Utilities;
+global using MyPrintiverse.Core.Validation;
+global using MyPrintiverse.Core.Services;
+
 global using MyPrintiverse.Extensions;
 global using MyPrintiverse.Templates;
 

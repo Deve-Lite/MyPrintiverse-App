@@ -1,8 +1,8 @@
-﻿using MyPrintiverse.Core.Items;
+﻿
 
 
 using MyPrintiverse.Core.Utilities;
-using MyPrintiverse.Core;
+using MyPrintiverse.Core.Services;
 
 namespace MyPrintiverse.Core.ViewModels;
 
