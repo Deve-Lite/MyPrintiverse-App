@@ -6,21 +6,21 @@ namespace MyPrintiverse.Tools.Http;
 
 public class HttpService : IHttpService
 {
-	private readonly IConfigService<IHttpConfig> _configService;
+	private readonly IConfigService<IServerConfig> _configService;
 	private readonly CancellationToken _cancellationToken;
 	private readonly RestClient _restClient;
 
-	public HttpService(IConfigService<IHttpConfig> configService)
+	public HttpService(IConfigService<IServerConfig> configService)
 		: this(configService, new RestClientOptions())
 	{
 	}
 
-	public HttpService(IConfigService<IHttpConfig> configService, RestClientOptions options)
+	public HttpService(IConfigService<IServerConfig> configService, RestClientOptions options)
 		: this(configService, options, new CancellationToken())
 	{
 	}
 
-	public HttpService(IConfigService<IHttpConfig> configService, RestClientOptions options, CancellationToken cancellationToken)
+	public HttpService(IConfigService<IServerConfig> configService, RestClientOptions options, CancellationToken cancellationToken)
 	{
 		_configService = configService;
 		_cancellationToken = cancellationToken;

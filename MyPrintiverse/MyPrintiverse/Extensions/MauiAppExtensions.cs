@@ -13,7 +13,7 @@ public static class MauiAppExtensions
 	/// <returns></returns>
 	public static MauiAppBuilder ConfigureConfig(this MauiAppBuilder builder, string filePath, ILogger logger)
 	{
-		var configInstance = ConfigService<Config>.GetInstance(filePath);
+		var configInstance = new ConfigService<Config>(filePath);
 		builder.Services.AddSingleton(configInstance);
 
 		return builder;

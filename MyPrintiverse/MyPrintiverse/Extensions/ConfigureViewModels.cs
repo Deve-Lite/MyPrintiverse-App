@@ -19,7 +19,7 @@ public static class ConfigureViewModel
 		builder.ConfigureAuthorizationViewModels();
         builder.ConfigureFilamentViewModels();
 
-		builder.Services.AddSingleton<MainTestViewModel>();
+		//builder.Services.AddSingleton<MainTestViewModel>();
 
         return builder;
 	}

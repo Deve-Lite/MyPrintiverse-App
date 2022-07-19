@@ -28,7 +28,7 @@ public interface IMessageService
 	/// <param name="accept">Button text which return <see langword="true" />.</param>
 	/// <param name="cancel">Button text which return <see langword="false" />.</param>
 	/// <param name="flowDirection"></param>
-	/// <returns></returns>
+	/// <returns>user choice</returns>
 	Task<bool> ShowSelectAlertAsync(string title, string message, string accept = "Accept",
 		string cancel = "Cancel", FlowDirection flowDirection = FlowDirection.MatchParent);
 

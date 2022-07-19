@@ -21,7 +21,7 @@ public partial class App : Application
     {
         // template
         // Routing.RegisterRoute(nameof(...View), typeof(...View));
-        Routing.RegisterRoute(nameof(MainTestPage), typeof(MainTestPage));
+        //Routing.RegisterRoute(nameof(MainTestPage), typeof(MainTestPage));
 
         FilamentRouteConfig.RegisterFilamentRoutes();
     }
