@@ -1,6 +1,7 @@
 ﻿using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
+using System.Collections.ObjectModel;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
 {
@@ -12,7 +13,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
             Items = new ObservableCollection<GroupedItem<Filament>>();
         }
 
-        protected internal override void OnAppearing()
+        public override void OnAppearing()
         {
             base.OnAppearing();
 
