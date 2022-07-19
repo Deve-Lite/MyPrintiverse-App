@@ -20,9 +20,6 @@
     <Application.MainPage>
         <Shell>
 
-        
-            
-            
             <FlyoutItem Title="Home">
                 <ShellContent Title="Home"
                               ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
