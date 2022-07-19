@@ -9,7 +9,6 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
     {
         public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
         {
-            // przeniesienie inicjalizacji na base view
             Items = new ObservableCollection<GroupedItem<Filament>>();
         }
 
