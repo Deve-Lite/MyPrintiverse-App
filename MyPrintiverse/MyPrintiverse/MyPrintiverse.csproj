@@ -80,9 +80,6 @@
 	  <MauiXaml Update="AdminModule\AdminView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MainTestPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Templates\MessageEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
