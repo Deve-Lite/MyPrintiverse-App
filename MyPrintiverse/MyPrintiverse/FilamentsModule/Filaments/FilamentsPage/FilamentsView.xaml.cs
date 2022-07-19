@@ -12,6 +12,6 @@ public partial class FilamentsView : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-		ViewModel.OnAppearing();
+		//ViewModel.OnAppearing();
     }
 }
