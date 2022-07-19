@@ -5,45 +5,45 @@ using System.Collections.ObjectModel;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
 {
-    public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
+    public class FilamentsViewModel //: GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
     {
-        public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
+        public FilamentsViewModel()//MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
         {
-            Items = new ObservableCollection<GroupedItem<Filament>>();
+            //Items = new ObservableCollection<GroupedItem<Filament>>();
         }
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
+        //public override void OnAppearing()
+        //{
+        //    base.OnAppearing();
 
-            var f = new Filament { Brand = "Brand", ColorName="Color", Diameter=1.75, TypeName="Name", ShortDescription="Description", ColorHex="#fdb913" };
-            var l = new ObservableCollection<Filament>();
-            l.Add(f);
-            l.Add(f);
-            l.Add(f);
-            l.Add(f);
-            GroupedItem<Filament> x = new GroupedItem<Filament>("Devil", l);
-            Items.Add(x);
+        //    var f = new Filament { Brand = "Brand", ColorName="Color", Diameter=1.75, TypeName="Name", ShortDescription="Description", ColorHex="#fdb913" };
+        //    var l = new ObservableCollection<Filament>();
+        //    l.Add(f);
+        //    l.Add(f);
+        //    l.Add(f);
+        //    l.Add(f);
+        //    GroupedItem<Filament> x = new GroupedItem<Filament>("Devil", l);
+        //    Items.Add(x);
 
-            var f1 = new Filament { Brand = "Brand", ColorName="Color", Diameter=1.75, TypeName="Name", ShortDescription="Description", ColorHex="#fdb913" };
-            var l1 = new ObservableCollection<Filament>();
-            l.Add(f1);
-            l.Add(f1);
-            var x1 = new GroupedItem<Filament>("Devil22", l1);
-            Items.Add(x1);
+        //    var f1 = new Filament { Brand = "Brand", ColorName="Color", Diameter=1.75, TypeName="Name", ShortDescription="Description", ColorHex="#fdb913" };
+        //    var l1 = new ObservableCollection<Filament>();
+        //    l.Add(f1);
+        //    l.Add(f1);
+        //    var x1 = new GroupedItem<Filament>("Devil22", l1);
+        //    Items.Add(x1);
 
-            IsBusy = false;
+        //    IsBusy = false;
 
-        }
+        //}
 
-        protected override string GetNewGroupName(Filament item)
-        {
-            return item.Brand;
-        }
+        //protected override string GetNewGroupName(Filament item)
+        //{
+        //    return item.Brand;
+        //}
 
-        protected override int GetIndex(Filament item)
-        {
-            return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
-        }
+        //protected override int GetIndex(Filament item)
+        //{
+        //    return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
+        //}
     }
 }

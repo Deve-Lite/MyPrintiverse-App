@@ -7,8 +7,6 @@
              xmlns:test="clr-namespace:MyPrintiverse"
              x:Class="MyPrintiverse.App">
 
-
-
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,17 +20,14 @@
     <Application.MainPage>
         <Shell>
 
-            <FlyoutItem Title="Test">
-                <ShellContent Title="Test" 
-                              ContentTemplate="{DataTemplate test:MainTestPage}"/>
-            </FlyoutItem>
+        
             
-            <!-- Config Error
+            
             <FlyoutItem Title="Home">
                 <ShellContent Title="Home"
                               ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
             </FlyoutItem>
-            -->
+            
         </Shell>
     </Application.MainPage>
 </Application>
