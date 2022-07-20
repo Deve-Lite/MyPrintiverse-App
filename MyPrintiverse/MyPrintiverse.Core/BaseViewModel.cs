@@ -37,14 +37,6 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 		set => SetProperty(ref _isRefreshing, value);
 	}
 
-	private string _title;
-
-	public string Title
-	{
-        get => _title;
-        set => SetProperty(ref _title, value);
-    }
-
     /// <summary>
     /// Check if command can be executed.
     /// </summary>

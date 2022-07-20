@@ -1,18 +1,36 @@
-﻿#nullable enable
-namespace MyPrintiverse.Core.Utilities;
+﻿namespace MyPrintiverse.Core.Utilities;
 
-
-public class Config : IHttpConfig
+/// <inheritdoc cref="IConfig"/>
+public class Config : IConfig, IServerConfig
 {
-	public bool IsDeveloperMode { get; set; }
+	public bool DeveloperMode { get; set; }
 	public string Culture { get; set; }
 	public string Version { get; set; }
 	public string BaseApiUrl { get; set; }
 	public string ClientSecret { get; set; }
-}
 
-public interface IHttpConfig
-{
-	public string? BaseApiUrl { get; set; }
-	public string? ClientSecret { get; set; }
+	private Config()
+	{
+		Culture = string.Empty;
+		Version = string.Empty;
+		BaseApiUrl = string.Empty;
+		ClientSecret = string.Empty;
+	}
+
+	public bool Verify()
+	{
+		foreach (var property in GetType().GetProperties())
+		{
+			var propertyValue = property.GetValue(this, null);
+
+			switch (propertyValue)
+			{
+				case null:
+				case string stringPropertyValue when string.IsNullOrEmpty(stringPropertyValue):
+					return false;
+			}
+		}
+
+		return true;
+	}
 }

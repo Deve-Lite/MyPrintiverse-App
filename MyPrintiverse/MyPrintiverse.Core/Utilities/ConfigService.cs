@@ -1,75 +1,40 @@
 ﻿#nullable enable
 
+using MyPrintiverse.Core.Exceptions;
+
 namespace MyPrintiverse.Core.Utilities;
 
 /// <inheritdoc />
-public class ConfigService<T> : IConfigService<T> // TODO: Refactor this shit
+public class ConfigService<T> : IConfigService<T> where T : class, IConfig
 {
-	protected static ConfigService<T>? _configInstance;
+	public T Config { get; }
 
-	protected Dictionary<string, string> _config = new();
-	protected readonly string _filePath;
-
-	public T Config { get; set; } 
-
-	/// <summary>
-	/// Create and return <see cref="ConfigServiceServiceService{T}" /> instance.
-	/// </summary>
-	/// <exception cref="ArgumentException" />
-	/// <exception cref="FileNotFoundException" />
-	/// <param name="filePath">ConfigServiceService file disc path.</param>
-	/// <param name="logger">ILogger instance.</param>
-	/// <returns><see cref="ConfigServiceServiceService{T}" /> instance.</returns>
-	public static ConfigService<T> GetInstance(string filePath)
+	public ConfigService(string filePath) : this(new FileStream(filePath, FileMode.Open))
 	{
-		if (_configInstance == null)
-			_configInstance = new ConfigService<T>(filePath);
-
-		return _configInstance;
 	}
-
-	protected ConfigService(string configFilePath)
+	
+	public ConfigService(Stream fileStream)
 	{
-		_filePath = configFilePath;
+		var streamReader = new StreamReader(fileStream);
+		var configJson = streamReader.ReadToEnd();
 
-		ReadConfigAsync();
+		if (string.IsNullOrEmpty(configJson)) 
+			return;
+		
+		var config = configJson.ToObject<T>();
 
-		lock (_config)
-		{
-			if (_config.Count is 0)
-				return;
-				//throw new FileNotFoundException(nameof(_filePath));
-		}
-	}
+		if (config is null)
+			return;
 
-	private async void ReadConfigAsync()
-	{
-		await Task.Run(async () =>
-		{
-			using var streamReader = new StreamReader(_filePath);
-			var configJson = await streamReader.ReadToEndAsync();
+		if (!config.Verify())
+			throw new InvalidConfigException();
 
-			lock (_config)
-			{
-				_config = JsonConvert.DeserializeObject<Dictionary<string, string>>(configJson) ?? new Dictionary<string, string>();
-			}
-		});
-	}
-
-	private async void SaveConfigAsync()
-	{
-		await Task.Run(async () =>
-		{
-			await using var streamWriter = new StreamWriter(_filePath);
-			string? configJson;
-
-			lock (_config)
-			{
-				configJson = JsonConvert.SerializeObject(_config);
-			}
-
-			if (string.IsNullOrWhiteSpace(configJson))
-				await streamWriter.WriteAsync(configJson);
-		});
+		Config = config;
+		
+#if DEBUG
+		Config.DeveloperMode = true;
+#else
+		Config.DeveloperMode = false;
+#endif
 	}
 }

@@ -49,7 +49,7 @@ public abstract class BaseService : IBaseService
 		{
 			try
 			{
-				var token = Session.RefreshToken();
+				var token = Session.ReAuthorize();
 			}
 			catch (RefreshTokenException)
 			{
@@ -57,7 +57,7 @@ public abstract class BaseService : IBaseService
 				
 			}
 		}
-		catch (Exception) when (!ConfigService.Config.IsDeveloperMode)
+		catch (Exception) when (!ConfigService.Config.DeveloperMode)
 		{
 			await MessageService.ShowErrorAsync();
 		}

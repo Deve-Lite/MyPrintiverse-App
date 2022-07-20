@@ -2,27 +2,39 @@
 
 namespace MyPrintiverse.Core.Utilities;
 
-/// <summary>
-/// Session manager.
-/// </summary>
+
+/// <inheritdoc />
 public class Session : ISession
 {
 	public IToken? AccessToken { get; }
 	public IToken? RefreshToken { get; }
 
-
-
-	public bool IsLogged => throw new NotImplementedException();
-
-	public bool HasConnection { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-	public void AuthorizeUser()
+	public bool IsLogged => AccessToken != null && RefreshToken != null;
+	public bool HasConnection { get; set; }
+	
+	public IConfigService<IConfig> Config { get; }
+	
+	public delegate void LoggoutHandler();
+	public event LoggoutHandler OnAuthorizationFail;
+	
+	public Session(IConfigService<IConfig> config)
 	{
-		
+		Config = config;
 	}
 
-	Token ISession.RefreshToken()
+	public bool Authorize(string login, string password)
 	{
-		throw new NotImplementedException();
+		return false;
+	}
+
+	public bool ReAuthorize()
+	{
+		if (true)
+		{
+			OnAuthorizationFail?.Invoke();
+			return false;
+		}
+
+		return true;
 	}
 }
