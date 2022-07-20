@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Core.Items;
+﻿namespace MyPrintiverse.Core.Services;
 
 /// <summary>
 /// Generic service for device databases.

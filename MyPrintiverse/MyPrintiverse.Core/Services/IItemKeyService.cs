@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Core.Items;
+﻿namespace MyPrintiverse.Core.Services;
 
 /// <summary>
 /// Interface with base methods for items groupped with 'key'.

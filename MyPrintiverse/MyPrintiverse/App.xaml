@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyPrintiverse"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:filamentsmodule="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
+             xmlns:test="clr-namespace:MyPrintiverse"
              x:Class="MyPrintiverse.App">
-
-    <!-- xmlns:filamentsmodule="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.Views" -->
 
     <Application.Resources>
         <ResourceDictionary>
@@ -17,22 +17,14 @@
     </Application.Resources>
 
 
-  <Application.MainPage>
-    <Shell>
+    <Application.MainPage>
+        <Shell>
 
-            <!--  
-            
             <FlyoutItem Title="Home">
                 <ShellContent Title="Home"
                               ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
             </FlyoutItem>
-
-            <TabBar x:Name="PhoneTabs">
-                <ShellContent Title="Home"
-                              ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
-            </TabBar> 
             
-            -->
         </Shell>
     </Application.MainPage>
 </Application>

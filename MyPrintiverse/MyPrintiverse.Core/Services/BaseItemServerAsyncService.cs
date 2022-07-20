@@ -1,6 +1,6 @@
 ﻿using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Core.Items;
+namespace MyPrintiverse.Core.Services;
 
 /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
 public abstract class BaseItemServerAsyncService<T> : BaseService, IServerItemService<T> where T : BaseModel, new()

@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Core.Items;
+﻿namespace MyPrintiverse.Core.Services;
 
 /// <summary>
 /// Global service which connects Internet Service and Device Service.

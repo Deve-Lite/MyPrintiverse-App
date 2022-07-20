@@ -37,11 +37,19 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 		set => SetProperty(ref _isRefreshing, value);
 	}
 
-	/// <summary>
-	/// Check if command can be executed.
-	/// </summary>
-	/// <returns><see langword="true" /> if command can be executed, otherwise <see langword="false" /></returns>
-	protected bool CanExecute(object obj) => !IsBusy;
+	private string _title;
+
+	public string Title
+	{
+        get => _title;
+        set => SetProperty(ref _title, value);
+    }
+
+    /// <summary>
+    /// Check if command can be executed.
+    /// </summary>
+    /// <returns><see langword="true" /> if command can be executed, otherwise <see langword="false" /></returns>
+    protected bool CanExecute(object obj) => !IsBusy;
 
 	/// <summary>
 	/// Terminate if action can start on page.

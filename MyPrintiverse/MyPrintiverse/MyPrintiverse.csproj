@@ -58,12 +58,6 @@
 	  <MauiXaml Remove="AuthorizationModule\Views\**" />
 	  <None Remove="AuthorizationModule\ViewModels\**" />
 	  <None Remove="AuthorizationModule\Views\**" />
-    <AndroidResource Remove="FilamentsModule\**" />
-	  <Compile Remove="FilamentsModule\**" />
-	  <EmbeddedResource Remove="FilamentsModule\**" />
-	  <MauiCss Remove="FilamentsModule\**" />
-	  <MauiXaml Remove="FilamentsModule\**" />
-	  <None Remove="FilamentsModule\**" />
 	</ItemGroup>
 
 	<ItemGroup>
