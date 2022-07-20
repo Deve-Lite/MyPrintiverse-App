@@ -17,9 +17,12 @@ public static class ServicesExtensions
         // builder.Services.TryAddTransient<...Service>();
         // builder.Services.AddSingleton<...Service>();
         /* Implementation */
-
+        var messageService = new MessageService();
+        builder.Services.AddSingleton<IMessageService>(messageService);
         builder.Services.AddSingleton<MessageService>();
-        builder.Services.AddSingleton<Session>();
+
+        var session = new Session();
+        builder.Services.AddSingleton<ISession>(session);
 
         builder.ConfigureAuthorizationServices();
         builder.ConfigureFilamentServices();
