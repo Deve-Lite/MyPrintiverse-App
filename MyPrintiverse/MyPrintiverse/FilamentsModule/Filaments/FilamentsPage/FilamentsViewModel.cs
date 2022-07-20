@@ -32,8 +32,11 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
             var x1 = new GroupedItem<Filament>("Devil22", l1);
             Items.Add(x1);
 
-            IsBusy = false;
+        }
 
+        protected override async Task UpdateItemsOnAppearing()
+        {
+            //return base.UpdateItemsOnAppearing();
         }
 
         protected override string GetNewGroupName(Filament item)
