@@ -1,6 +1,4 @@
-﻿using MyPrintiverse.Core.Utilities;
-using MyPrintiverse.Core.Validation;
-
+﻿
 namespace MyPrintiverse.AuthorizationModule.ConfirmEmailPage;
 
 public class ConfirmEmailViewModel : BaseViewModel
