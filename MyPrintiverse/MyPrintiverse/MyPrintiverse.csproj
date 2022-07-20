@@ -114,6 +114,8 @@
 
 	<ItemGroup>
 	  <None Remove="config.json" />
+	  <None Remove="Resources\Fonts\Oswald-VariableFont.ttf" />
+	  <None Remove="Resources\Fonts\Raleway-VariableFont.ttf" />
 	  <None Remove="RestSharp" />
 	  <None Remove="System.IdentityModel.Tokens.Jwt" />
 	</ItemGroup>
