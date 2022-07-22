@@ -1,5 +1,4 @@
-﻿using MyPrintiverse.Core.Utilities;
-using MyPrintiverse.Tools.Http;
+﻿using MyPrintiverse.Core.Http;
 
 namespace MyPrintiverse.AuthorizationModule.ConfirmEmailPage;
 

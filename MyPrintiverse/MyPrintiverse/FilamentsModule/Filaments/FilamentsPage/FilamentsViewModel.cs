@@ -2,54 +2,54 @@
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 using MyPrintiverse.Tools.Mock;
-using MyPrintiverse.Tools.Settings;
 using System.Collections.ObjectModel;
+using MyPrintiverse.Tools;
 
-namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
+namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+
+public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
 {
-    public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
-    {
-        bool isEnabled;
-        public bool IsEnabled { get=> isEnabled; set=> SetProperty(ref isEnabled, value); }
+	private bool _isEnabled;
+	public bool IsEnabled { get => _isEnabled; set => SetProperty(ref _isEnabled, value); }
 
-        public AsyncCommand SwapThemeCommand { get; }
+	public AsyncCommand SwapThemeCommand { get; }
 
-        public async Task SwapTheme()
-        {
-            Theme theme = new Theme();
+	private ISettingsService SettingsService { get;}
 
-            if (App.Current.UserAppTheme == AppTheme.Dark)
-                theme.SetTheme(AppTheme.Light);
-            else
-                theme.SetTheme(AppTheme.Dark);
-        }
+	public async Task SwapTheme()
+	{
+		await Task.Run(() =>
+		{
+			SettingsService.AppTheme = SettingsService.AppTheme == AppTheme.Light ? AppTheme.Dark : AppTheme.Light;
+		});
+	}
 
-        public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
-        { 
-            Items = new ObservableCollection<GroupedItem<Filament>>();
-            SwapThemeCommand = new AsyncCommand(SwapTheme);
-        }
+	public FilamentsViewModel(IMessageService messagingService, FilamentService itemsService, ISettingsService settingsService) : base(messagingService, itemsService)
+	{
+		SettingsService = settingsService;
+		Items = new ObservableCollection<GroupedItem<Filament>>();
+		SwapThemeCommand = new AsyncCommand(SwapTheme);
+	}
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-            IsEnabled = true;
-        }
+	public override void OnAppearing()
+	{
+		base.OnAppearing();
+		IsEnabled = true;
+	}
 
-        protected override async Task AddItem()
-        {
-            await ItemsService.AddItemAsync(FilamentMock.GenerateFilament());
-            await UpdateItemsOnAppearing();
-        }
+	protected override async Task AddItem()
+	{
+		await ItemsService.AddItemAsync(FilamentMock.GenerateFilament());
+		await UpdateItemsOnAppearing();
+	}
 
-        protected override string GetNewGroupName(Filament item)
-        {
-            return item.Brand.Trim();
-        }
+	protected override string GetNewGroupName(Filament item)
+	{
+		return item.Brand.Trim();
+	}
 
-        protected override int GetIndex(Filament item)
-        {
-            return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
-        }
-    }
+	protected override int GetIndex(Filament item)
+	{
+		return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
+	}
 }

@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyPrintiverse.FilamentsModule.Filaments.Services;
+﻿namespace MyPrintiverse.FilamentsModule.Filaments.Services;
 
 public class FilamentServerService : BaseItemServerAsyncService<Filament>
 {

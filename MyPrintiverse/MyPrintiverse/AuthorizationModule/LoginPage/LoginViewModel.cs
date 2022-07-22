@@ -1,7 +1,4 @@
-﻿using MyPrintiverse.Core.Utilities;
-using MyPrintiverse.Core.Validation;
-
-namespace MyPrintiverse.AuthorizationModule.LoginPage;
+﻿namespace MyPrintiverse.AuthorizationModule.LoginPage;
 
 public class LoginViewModel : BaseViewModel
 {
@@ -30,14 +27,15 @@ public class LoginViewModel : BaseViewModel
 
 	private async Task LogIn()
 	{
-		if (!Email.IsValid || !Password.IsValid)
-			return;
+		if (!_loginService.ConfigService.Config.DeveloperMode)
+		{
+			if (!Email.IsValid || !Password.IsValid)
+				return;
 
-		var isLogInSuccessful = await _loginService.LogInAsync(Email.Value, Password.Value);
+			var isLogInSuccessful = await _loginService.LogInAsync(Email.Value, Password.Value);
 
-		if (isLogInSuccessful)
-			return; // TODO: Add navigation
-
-		await _loginService.MessageService.ShowErrorAsync();
+			if (!isLogInSuccessful)
+				await _loginService.MessageService.ShowErrorAsync();
+		}
 	}
 }

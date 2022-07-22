@@ -1,10 +1,7 @@
-
-
 namespace MyPrintiverse.Templates;
 
 public partial class ActivityButton : ContentView
 {
-    //TODO
     #region FontSizeProperty
 
     public static readonly BindableProperty FontSizeProperty =
@@ -15,11 +12,23 @@ public partial class ActivityButton : ContentView
         set => SetValue(FontSizeProperty, value);
     }
 
-    #endregion
+	#endregion
 
-    #region CommandProperty
+	#region TextProperty
 
-    public static readonly BindableProperty CommandProperty =
+	public static readonly BindableProperty TextProperty =
+		BindableProperty.Create(nameof(Text), typeof(string), typeof(ActivityButton), "Default text");
+	public string Text
+	{
+		get => (string)GetValue(TextProperty);
+		set => SetValue(TextProperty, value);
+	}
+
+	#endregion
+
+	#region CommandProperty
+
+	public static readonly BindableProperty CommandProperty =
         BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ActivityButton), default(ICommand));
     public ICommand Command
     {
@@ -91,12 +100,5 @@ public partial class ActivityButton : ContentView
     public ActivityButton()
 	{
         InitializeComponent();
-
-        IsVisible = true;
-
-        
-        Grid.SetBinding(Grid.WidthProperty, new Binding(nameof(Width), source: this));
-        Grid.SetBinding(Grid.HeightProperty, new Binding(nameof(Height), source: this));
-        Grid.SetBinding(Grid.IsVisibleProperty, new Binding(nameof(IsVisible), source: this));
     }
 }

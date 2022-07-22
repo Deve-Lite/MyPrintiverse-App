@@ -2,11 +2,12 @@
 
 using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Tools.Http;
+namespace MyPrintiverse.Core.Http;
 
 public class HttpService : IHttpService
 {
-	private readonly IConfigService<IServerConfig> _configService;
+	protected IConfigService<IServerConfig> ConfigService { get; }
+
 	private readonly CancellationToken _cancellationToken;
 	private readonly RestClient _restClient;
 
@@ -22,10 +23,10 @@ public class HttpService : IHttpService
 
 	public HttpService(IConfigService<IServerConfig> configService, RestClientOptions options, CancellationToken cancellationToken)
 	{
-		_configService = configService;
+		ConfigService = configService;
 		_cancellationToken = cancellationToken;
 
-		var apiBaseUrl = _configService.Config.BaseApiUrl ?? throw new ArgumentNullException();
+		var apiBaseUrl = ConfigService.Config.BaseApiUrl ?? throw new ArgumentNullException();
 		_restClient = new RestClient(apiBaseUrl);
 	}
 
@@ -80,7 +81,7 @@ public class HttpService : IHttpService
 	private static HttpResponse<T> GetHttpResponse<T>(RestResponseBase response)
 	{
 		var responseValue = response.Content;
-		var value = JsonConvert.DeserializeObject<T>(responseValue);
+		var value = responseValue != null ? JsonConvert.DeserializeObject<T>(responseValue) : default;
 
 		return new HttpResponse<T>
 		{

@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyPrintiverse.Templates.ActivityButton">
+<ContentView
+  x:Class="MyPrintiverse.Templates.ActivityButton"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:module="clr-namespace:MyPrintiverse.Templates"
+  xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+  x:DataType="module:ActivityButton">
 
-    <ContentView.Content>
-        <Grid x:Name="Grid"
-              WidthRequest="{Binding Width}"
-              HeightRequest="{Binding Height}"
-              BackgroundColor="Transparent"
-              Padding="{Binding Padding}"
-              IsVisible="{Binding IsVisible}">
-            
-            <Button x:Name="Button"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Text="{Binding Text}"
-                    Command="{Binding Command}"
-                    FontSize="{Binding FontSize}"
-                    BorderWidth="{Binding BorderWidth}"
-                    BorderColor="{Binding BorderColor}"/>
-            
-            <ActivityIndicator x:Name="ActivityIndicator"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               IsRunning="{Binding Loading}"
-                               IsVisible="{Binding Loading}"
-                               Color="{Binding ActivityIndicatorColor}"/>
-        </Grid>
-    </ContentView.Content>
+  <ContentView.Resources>
+    <ResourceDictionary>
+      <toolkit:BoolToObjectConverter
+        x:Key="BoolToObjectConverter"
+        FalseObject="0"
+        TrueObject="42" />
+    </ResourceDictionary>
+  </ContentView.Resources>
+
+  <ContentView.Content>
+    <Grid
+      x:Name="Grid"
+      Padding="{Binding Padding}"
+      BackgroundColor="Transparent"
+      HeightRequest="{Binding Height}"
+      IsVisible="{Binding IsVisible}"
+      WidthRequest="{Binding Width}">
+
+      <Button
+        x:Name="Button"
+        BorderColor="{Binding BorderColor}"
+        BorderWidth="{Binding BorderWidth}"
+        Command="{Binding Command}"
+        FontSize="{Binding FontSize}"
+        HorizontalOptions="Center"
+        IsVisible="{Binding Loading, Converter={StaticResource BoolToObjectConverter}}"
+        Text="{Binding Text}"
+        VerticalOptions="Center" />
+
+      <ActivityIndicator
+        x:Name="ActivityIndicator"
+        HorizontalOptions="Center"
+        IsRunning="{Binding Loading}"
+        IsVisible="{Binding Loading}"
+        VerticalOptions="Center"
+        Color="{Binding ActivityIndicatorColor}" />
+    </Grid>
+  </ContentView.Content>
 </ContentView>
