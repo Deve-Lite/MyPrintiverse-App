@@ -2,7 +2,8 @@ namespace MyPrintiverse.Templates;
 
 public partial class MessageEntry : ContentView
 {
-	public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(MessageEntry), string.Empty);
+    //TODO
+    public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(MessageEntry), string.Empty);
 
 	public string Message
 	{

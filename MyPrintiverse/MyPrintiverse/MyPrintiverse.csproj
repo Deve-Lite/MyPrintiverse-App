@@ -88,6 +88,12 @@
 		<MauiXaml Update="Resources\LabelStyles.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Resources\PageStyles.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\ActivityButton.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Templates\EntryWithButton.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

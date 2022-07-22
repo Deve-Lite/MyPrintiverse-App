@@ -7,12 +7,16 @@
              x:Class="MyPrintiverse.FilamentsModule.Filaments.FilamentsPage.FilamentsView"
              Title="Filaments">
 
-    <StackLayout BackgroundColor="Gray">
 
-        <RefreshView windows:RefreshView.RefreshPullDirection="TopToBottom"
-                     Style="{StaticResource DefaultRefreshView}">
-            <CollectionView ItemsSource="{Binding Items, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentsViewModel}}}"
+
+    <Grid VerticalOptions="Fill">
+        <RefreshView Style="{StaticResource DefaultRefreshView}"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <CollectionView Style="{StaticResource DefaultCollectionView}"
                             IsGrouped="True">
+
+
 
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
@@ -44,23 +48,34 @@
             </CollectionView>
         </RefreshView>
 
+        <ImageButton Style="{StaticResource CollectionAddImageButton}" />
 
+    </Grid>
+
+    <!--
         <HorizontalStackLayout>
 
 
             <Button Text="StandardAdd"
                     BackgroundColor="Yellow"
-                    IsEnabled="{Binding IsEnabled}"
                     Margin="10"
+                    IsEnabled="{Binding IsEnabled}"
                     Command="{Binding AddItemCommand}" />
 
             <Button Text="Refresh"
                     BackgroundColor="Red"
                     Margin="10"
                     IsEnabled="{Binding IsEnabled}"
-                    Command="{Binding RefreshItemsCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentsViewModel}}}" />
+                    Command="{Binding RefreshItemsCommand}" />
+
+            <Button Text="swaptheme"
+                    BackgroundColor="Green"
+                    Margin="10"
+                    IsEnabled="{Binding IsEnabled}"
+                    Command="{Binding SwapThemeCommand}" />
         </HorizontalStackLayout>
+        
+        -->
 
 
-    </StackLayout>
 </ContentPage>

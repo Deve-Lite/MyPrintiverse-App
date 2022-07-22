@@ -8,7 +8,7 @@ public class Theme
     /// Sets App theme.
     /// </summary>
     /// <param name="theme">Theme to set.</param>
-    public static void SetTheme(AppTheme theme)
+    public void SetTheme(AppTheme theme)
     {
 
         switch (theme)
