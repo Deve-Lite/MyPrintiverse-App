@@ -8,7 +8,7 @@ public class Sha256Service : IHashingService
 	/// <inheritdoc />
 	public string ComputeHash(string str)
 	{
-		byte[] result = { };
+		byte[] result;
 
 		using (var sha256 = SHA256.Create())
 		{

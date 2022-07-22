@@ -1,16 +1,14 @@
 ﻿
 
-using Plugin.ValidationRules.Extensions;
-
 namespace MyPrintiverse.Templates.Test;
 
 public class TestViewModel : BaseViewModel
 {
     bool boolValue;
-    public bool BoolValue { get => boolValue; set => SetProperty(ref boolValue, value, test); }
+    public bool BoolValue { get => boolValue; set => SetProperty(ref boolValue, value); }
 
     Color color;
-    public Color Color { get => color; set => SetProperty(ref color, value, test); }
+    public Color Color { get => color; set => SetProperty(ref color, value); }
 
     public void test()
     {

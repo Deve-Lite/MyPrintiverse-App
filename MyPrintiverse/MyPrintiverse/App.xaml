@@ -1,30 +1,42 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MyPrintiverse"
-             xmlns:sys="clr-namespace:System;assembly=netstandard"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:filaments="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage" 
-             xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
-             xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
-             x:Class="MyPrintiverse.App">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application
+  x:Class="MyPrintiverse.App"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:admin="clr-namespace:MyPrintiverse.Admin"
+  xmlns:filaments="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
+  xmlns:local="clr-namespace:MyPrintiverse"
+  xmlns:sys="clr-namespace:System;assembly=netstandard"
+  xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
+  xmlns:login="clr-namespace:MyPrintiverse.Authorization.Login"
+  xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
+  xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Colors.xaml" />
-                <ResourceDictionary Source="Resources/ShellStyles.xaml" />
-                <ResourceDictionary Source="Resources/LabelStyles.xaml" />
-                <ResourceDictionary Source="Resources/Styles.xaml" />
-                <ResourceDictionary Source="Resources/TemplatesStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources/Colors.xaml" />
+        <ResourceDictionary Source="Resources/PageStyles.xaml" />
+        <ResourceDictionary Source="Resources/ShellStyles.xaml" />
+        <ResourceDictionary Source="Resources/LabelStyles.xaml" />
+        <ResourceDictionary Source="Resources/Styles.xaml" />
+        <ResourceDictionary Source="Resources/TemplatesStyles.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
 
 
-    <Application.MainPage>
-        <Shell>
+  <Application.MainPage>
+    <Shell>
 
+      <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate login:LoginView}"
+        FlyoutItemIsVisible="False" />
+
+      <FlyoutItem Title="Home">
+        <ShellContent Title="Home" ContentTemplate="{DataTemplate filamentsModule:FilamentsView}" />
+      </FlyoutItem>
             <Shell.FlyoutHeaderTemplate>
                 <DataTemplate>
                     <Grid>
@@ -63,12 +75,17 @@
 
             </FlyoutItem>
 
-            <FlyoutItem Title="Test"
-                        Icon="spool.png">
-                <ShellContent Title="Test"
-                              ContentTemplate="{DataTemplate test:TestPage}" />
-            </FlyoutItem>
+      <FlyoutItem Title="Test" Icon="spool.png">
+        <ShellContent Title="Test" ContentTemplate="{DataTemplate test:TestPage}" />
+      </FlyoutItem>
 
-        </Shell>
-    </Application.MainPage>
+      <FlyoutItem Title="Admin Panel (Dev Mode)" Icon="spool.png">
+        <ShellContent
+          Title="Admin Panel"
+          ContentTemplate="{DataTemplate admin:AdminView}"
+          Route="admin" />
+      </FlyoutItem>
+
+    </Shell>
+  </Application.MainPage>
 </Application>

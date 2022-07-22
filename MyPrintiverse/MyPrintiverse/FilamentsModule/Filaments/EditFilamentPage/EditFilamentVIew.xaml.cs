@@ -2,7 +2,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 
 public partial class EditFilamentView : ContentPage
 {
-    private EditFilamentViewModel ViewModel => BindingContext as EditFilamentViewModel;
+    private EditFilamentViewModel? ViewModel => BindingContext as EditFilamentViewModel;
     public EditFilamentView(EditFilamentViewModel vm)
 	{
 		InitializeComponent();
@@ -12,6 +12,6 @@ public partial class EditFilamentView : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ViewModel.OnAppearing();
+        ViewModel?.OnAppearing();
     }
 }

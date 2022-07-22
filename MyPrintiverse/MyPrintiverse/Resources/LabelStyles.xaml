@@ -1,159 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <?xaml-comp compile="true" ?>
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!-- Only for Label Styles -->
-    
-    <Style TargetType="Label" x:Key="Base">
-        <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
+  <!--  Only for Label Styles  -->
 
-        <Setter Property="FontSize"
-                Value="14" />
-        
-    </Style>
+  <Style x:Key="Base" TargetType="Label">
+    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
 
-    <Style TargetType="Label"
-           x:Key="BaseRaleway"
-           BasedOn="{StaticResource Base}">
-        <Setter Property="FontFamily"
-                Value="Raleway" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="BaseOswald"
-           BasedOn="{StaticResource Base}">
-        <Setter Property="FontFamily"
-                Value="Oswald" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="BaseComplementary"
-           BasedOn="{StaticResource Base}">
+    <Setter Property="FontSize" Value="14" />
 
-        <Setter Property="TextColor"
-                Value="{StaticResource Error}" />
+  </Style>
 
-        <!-- TO SET -->
-        
-        <Setter Property="FontFamily"
-                Value="OpenSansRegular" />
-    </Style>
+  <Style
+    x:Key="BaseRaleway"
+    BasedOn="{StaticResource Base}"
+    TargetType="Label">
+    <Setter Property="FontFamily" Value="Raleway" />
+  </Style>
+  <Style
+    x:Key="BaseOswald"
+    BasedOn="{StaticResource Base}"
+    TargetType="Label">
+    <Setter Property="FontFamily" Value="Oswald" />
+  </Style>
+  <Style
+    x:Key="BaseComplementary"
+    BasedOn="{StaticResource Base}"
+    TargetType="Label">
+
+    <Setter Property="TextColor" Value="{StaticResource Error}" />
+
+    <!--  TO SET  -->
+
+    <Setter Property="FontFamily" Value="OpenSansRegular" />
+  </Style>
 
 
 
-    <Style TargetType="Label"
-           x:Key="HeaderRaleway"
-           BasedOn="{StaticResource BaseRaleway}">
-        <Setter Property="FontSize"
-                Value="40" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="TitleRaleway"
-           BasedOn="{StaticResource BaseRaleway}">
-        <Setter Property="FontSize"
-                Value="26" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="LargeRaleway"
-           BasedOn="{StaticResource BaseRaleway}">
-        <Setter Property="FontSize"
-                Value="18" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="MediumRaleway"
-           BasedOn="{StaticResource BaseRaleway}">
+  <Style
+    x:Key="HeaderRaleway"
+    BasedOn="{StaticResource BaseRaleway}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="40" />
+  </Style>
+  <Style
+    x:Key="TitleRaleway"
+    BasedOn="{StaticResource BaseRaleway}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="26" />
+  </Style>
+  <Style
+    x:Key="LargeRaleway"
+    BasedOn="{StaticResource BaseRaleway}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="18" />
+  </Style>
+  <Style
+    x:Key="MediumRaleway"
+    BasedOn="{StaticResource BaseRaleway}"
+    TargetType="Label" />
+  <Style
+    x:Key="SmallRaleway"
+    BasedOn="{StaticResource BaseRaleway}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="11" />
+  </Style>
+  <Style
+    x:Key="MicroRaleway"
+    BasedOn="{StaticResource BaseRaleway}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="9" />
 
-    </Style>
-    <Style TargetType="Label"
-           x:Key="SmallRaleway"
-           BasedOn="{StaticResource BaseRaleway}">
-        <Setter Property="FontSize"
-                Value="11" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="MicroRaleway"
-           BasedOn="{StaticResource BaseRaleway}">
-        <Setter Property="FontSize"
-                Value="9" />
+    <Setter Property="HorizontalOptions" Value="End" />
+  </Style>
 
-        <Setter Property="HorizontalOptions"
-                Value="End" />
-    </Style>
 
-    
-    
-    <Style TargetType="Label"
-           x:Key="HeaderOswald"
-           BasedOn="{StaticResource BaseOswald}">
-        <Setter Property="FontSize"
-                Value="40" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="TitleOswald"
-           BasedOn="{StaticResource BaseOswald}">
-        <Setter Property="FontSize"
-                Value="26" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="LargeOswald"
-           BasedOn="{StaticResource BaseOswald}">
-        <Setter Property="FontSize"
-                Value="18" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="MediumOswald"
-           BasedOn="{StaticResource BaseOswald}">
 
-    </Style>
-    <Style TargetType="Label"
-           x:Key="SmallOswald"
-           BasedOn="{StaticResource BaseOswald}">
-        <Setter Property="FontSize"
-                Value="11" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="MicroOswald"
-           BasedOn="{StaticResource BaseOswald}">
-        <Setter Property="FontSize"
-                Value="9" />
-    </Style>
+  <Style
+    x:Key="HeaderOswald"
+    BasedOn="{StaticResource BaseOswald}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="40" />
+  </Style>
+  <Style
+    x:Key="TitleOswald"
+    BasedOn="{StaticResource BaseOswald}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="26" />
+  </Style>
+  <Style
+    x:Key="LargeOswald"
+    BasedOn="{StaticResource BaseOswald}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="18" />
+  </Style>
+  <Style
+    x:Key="MediumOswald"
+    BasedOn="{StaticResource BaseOswald}"
+    TargetType="Label" />
+  <Style
+    x:Key="SmallOswald"
+    BasedOn="{StaticResource BaseOswald}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="11" />
+  </Style>
+  <Style
+    x:Key="MicroOswald"
+    BasedOn="{StaticResource BaseOswald}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="9" />
+  </Style>
 
-    
-    
-    <Style TargetType="Label"
-           x:Key="HeaderComplementary"
-           BasedOn="{StaticResource BaseComplementary}">
-        <Setter Property="FontSize"
-                Value="40" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="TitleComplementary"
-           BasedOn="{StaticResource BaseComplementary}">
-        <Setter Property="FontSize"
-                Value="26" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="LargeComplementary"
-           BasedOn="{StaticResource BaseComplementary}">
-        <Setter Property="FontSize"
-                Value="18" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="MediumComplementary"
-           BasedOn="{StaticResource BaseComplementary}">
 
-    </Style>
-    <Style TargetType="Label"
-           x:Key="SmallComplementary"
-           BasedOn="{StaticResource BaseComplementary}">
-        <Setter Property="FontSize"
-                Value="11" />
-    </Style>
-    <Style TargetType="Label"
-           x:Key="MicroComplementary"
-           BasedOn="{StaticResource BaseComplementary}">
-        <Setter Property="FontSize"
-                Value="9" />
-    </Style>
+
+  <Style
+    x:Key="HeaderComplementary"
+    BasedOn="{StaticResource BaseComplementary}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="40" />
+  </Style>
+  <Style
+    x:Key="TitleComplementary"
+    BasedOn="{StaticResource BaseComplementary}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="26" />
+  </Style>
+  <Style
+    x:Key="LargeComplementary"
+    BasedOn="{StaticResource BaseComplementary}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="18" />
+  </Style>
+  <Style
+    x:Key="MediumComplementary"
+    BasedOn="{StaticResource BaseComplementary}"
+    TargetType="Label" />
+  <Style
+    x:Key="SmallComplementary"
+    BasedOn="{StaticResource BaseComplementary}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="11" />
+  </Style>
+  <Style
+    x:Key="MicroComplementary"
+    BasedOn="{StaticResource BaseComplementary}"
+    TargetType="Label">
+    <Setter Property="FontSize" Value="9" />
+  </Style>
 
 </ResourceDictionary>

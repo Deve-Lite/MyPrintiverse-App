@@ -28,6 +28,9 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<Nullable>enable</Nullable>
+		<Platforms>AnyCPU;x64</Platforms>
+		<Authors>Kacper Żabiński, Łukasz Kolber</Authors>
+		<Copyright>Copyright © Develite 2022</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -46,18 +49,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<AndroidResource Remove="AuthorizationModule\ViewModels\**" />
-		<AndroidResource Remove="AuthorizationModule\Views\**" />
-		<Compile Remove="AuthorizationModule\ViewModels\**" />
-		<Compile Remove="AuthorizationModule\Views\**" />
-		<EmbeddedResource Remove="AuthorizationModule\ViewModels\**" />
-		<EmbeddedResource Remove="AuthorizationModule\Views\**" />
-		<MauiCss Remove="AuthorizationModule\ViewModels\**" />
-		<MauiCss Remove="AuthorizationModule\Views\**" />
-		<MauiXaml Remove="AuthorizationModule\ViewModels\**" />
-		<MauiXaml Remove="AuthorizationModule\Views\**" />
-		<None Remove="AuthorizationModule\ViewModels\**" />
-		<None Remove="AuthorizationModule\Views\**" />
+		<AndroidResource Remove="Authorization\ViewModels\**" />
+		<AndroidResource Remove="Authorization\Views\**" />
+		<Compile Remove="Authorization\ViewModels\**" />
+		<Compile Remove="Authorization\Views\**" />
+		<EmbeddedResource Remove="Authorization\ViewModels\**" />
+		<EmbeddedResource Remove="Authorization\Views\**" />
+		<MauiCss Remove="Authorization\ViewModels\**" />
+		<MauiCss Remove="Authorization\Views\**" />
+		<MauiXaml Remove="Authorization\ViewModels\**" />
+		<MauiXaml Remove="Authorization\Views\**" />
+		<None Remove="Authorization\ViewModels\**" />
+		<None Remove="Authorization\Views\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -77,7 +80,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="AuthorizationModule\SettingsPage\SettingsView.xaml.cs">
+		<Compile Update="AdminModule\AdminTile.xaml.cs">
+		  <DependentUpon>AdminTile.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Authorization\Settings\SettingsView.xaml.cs">
 			<DependentUpon>SettingsView.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
@@ -89,10 +95,22 @@
 		<MauiXaml Update="AdminModule\AdminView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="FilamentsModule\Filaments\AddFilamentPage\AddFilamentView.xaml">
+		<MauiXaml Update="AdminModule\AdminTile.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="FilamentsModule\Filaments\FilamentsPage\FilamentsView.xaml">
+		<MauiXaml Update="AdminModule\Tests\AndromedaView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="AdminModule\Tests\OdysseyView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="AdminModule\Tests\OrionView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="FilamentsModule\Filaments\AddFilament\AddFilamentView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="FilamentsModule\Filaments\Filaments\FilamentsView.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Resources\Colors.xaml">
@@ -110,22 +128,22 @@
 		<MauiXaml Update="Resources\TemplatesStyles.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="AuthorizationModule\ChangePasswordPage\ChangePasswordView.xaml">
+		<MauiXaml Update="Authorization\ChangePassword\ChangePasswordView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="AuthorizationModule\ConfirmEmailPage\ConfirmEmailView.xaml">
+		<MauiXaml Update="Authorization\ConfirmEmail\ConfirmEmailView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="AuthorizationModule\LoginPage\LoginView.xaml">
+		<MauiXaml Update="Authorization\Login\LoginView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="AuthorizationModule\RemindPasswordPage\RemindPasswordView.xaml">
+		<MauiXaml Update="Authorization\RemindPassword\RemindPasswordView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="AuthorizationModule\SettingsPage\SettingsView.xaml">
+		<MauiXaml Update="Authorization\Settings\SettingsView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="AuthorizationModule\SignInPage\SignInView.xaml">
+		<MauiXaml Update="Authorization\SignIn\SignInView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="FilamentsModule\Filaments\Views\FilamentsView.xaml">
@@ -157,14 +175,31 @@
 	<ItemGroup>
 		<None Remove="config.json" />
 		<None Remove="Resources\Fonts\Oswald-Regular.ttf" />
+		<None Remove="Resources\Fonts\Raleway-Black.ttf" />
+		<None Remove="Resources\Fonts\Raleway-BlackItalic.ttf" />
+		<None Remove="Resources\Fonts\Raleway-Bold.ttf" />
+		<None Remove="Resources\Fonts\Raleway-BoldItalic.ttf" />
+		<None Remove="Resources\Fonts\Raleway-ExtraBold.ttf" />
+		<None Remove="Resources\Fonts\Raleway-ExtraBoldItalic.ttf" />
+		<None Remove="Resources\Fonts\Raleway-ExtraLight.ttf" />
+		<None Remove="Resources\Fonts\Raleway-ExtraLightItalic.ttf" />
+		<None Remove="Resources\Fonts\Raleway-Italic.ttf" />
+		<None Remove="Resources\Fonts\Raleway-Light.ttf" />
+		<None Remove="Resources\Fonts\Raleway-LightItalic.ttf" />
+		<None Remove="Resources\Fonts\Raleway-Medium.ttf" />
+		<None Remove="Resources\Fonts\Raleway-MediumItalic.ttf" />
 		<None Remove="Resources\Fonts\Raleway-Regular.ttf" />
+		<None Remove="Resources\Fonts\Raleway-SemiBold.ttf" />
+		<None Remove="Resources\Fonts\Raleway-SemiBoldItalic.ttf" />
+		<None Remove="Resources\Fonts\Raleway-Thin.ttf" />
+		<None Remove="Resources\Fonts\Raleway-ThinItalic.ttf" />
 		<None Remove="Resources\Images\res.png" />
 		<None Remove="RestSharp" />
 		<None Remove="System.IdentityModel.Tokens.Jwt" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="config.json" />
+	  <EmbeddedResource Include="config.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -175,6 +210,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\MyPrintiverse.Core\MyPrintiverse.Core.csproj" />
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyPrintiverseHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 	<!-- Project Includes -->
 

@@ -5,7 +5,6 @@ global using System.Collections.ObjectModel;
 global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
-global using System.Windows.Input;
 global using System.ComponentModel;
 global using System.Text.RegularExpressions;
 // Newtonsoft

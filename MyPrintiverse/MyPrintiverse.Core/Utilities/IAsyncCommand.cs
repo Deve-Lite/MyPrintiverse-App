@@ -1,8 +1,11 @@
-﻿namespace MyPrintiverse.Core.Utilities;
+﻿using System.Windows.Input;
+
+namespace MyPrintiverse.Core.Utilities;
 
 /// <summary>
 /// Interface for async command.
 /// </summary>
+[Obsolete]
 public interface IAsyncCommand : ICommand
 {
 	/// <summary>

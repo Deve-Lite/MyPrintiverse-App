@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  x:Class="MyPrintiverse.Authorization.Login.LoginView"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:module="clr-namespace:MyPrintiverse.Templates"
+  xmlns:settingsPage="clr-namespace:MyPrintiverse.Authorization.Login"
+  x:DataType="settingsPage:LoginViewModel"
+  Shell.FlyoutBehavior="Disabled"
+  Shell.NavBarIsVisible="False">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="MainWrapper" TargetType="StackLayout">
+        <Setter Property="Padding" Value="30, 0, 30, 0" />
+      </Style>
+      <Style x:Key="MainLabel" TargetType="Label">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="FontSize" Value="{x:OnPlatform Android='16', iOS='16'}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+      </Style>
+      <Style TargetType="Label">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="FontSize" Value="{x:OnPlatform Android='16', iOS='16'}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="RalewaySemiBold" />
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <StackLayout Style="{StaticResource MainWrapper}">
+
+    <module:MessageEntry Message="{Binding Email.Error}" Text="{Binding Email.Value, Mode=TwoWay}" />
+    <module:MessageEntry Message="{Binding Password.Error}" Text="{Binding Password.Value, Mode=TwoWay}" />
+
+    <Button Command="{Binding LogInCommand}" Text="LOGIN" />
+
+    <Label Style="{StaticResource MainLabel}">
+      <Label.FormattedText>
+        <FormattedString>
+          <FormattedString.Spans>
+            <Span FontFamily="RalewaySemiBold" Text="Don't have and account yet?&#10;Create " />
+            <Span
+              FontFamily="RalewayBold"
+              Text="free"
+              TextColor="#80DBBB"
+              TextDecorations="Underline" />
+            <Span FontFamily="RalewaySemiBold" Text=" account and get access to new features!" />
+          </FormattedString.Spans>
+        </FormattedString>
+      </Label.FormattedText>
+    </Label>
+
+    <Button Command="{Binding SignInCommand}" Text="REGISTER NOW!" />
+
+    <Label Text="or" />
+    <Label
+      Margin="0"
+      Padding="5"
+      Text="try it without logging in"
+      TextDecorations="Underline">
+      <Label.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding GoToMainPageCommand}" />
+      </Label.GestureRecognizers>
+    </Label>
+
+  </StackLayout>
+</ContentPage>

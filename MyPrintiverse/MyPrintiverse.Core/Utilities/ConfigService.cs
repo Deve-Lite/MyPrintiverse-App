@@ -1,41 +1,39 @@
 ﻿#nullable enable
 
+using System.Reflection;
 using MyPrintiverse.Core.Exceptions;
+using MyPrintiverse.Core.File;
 
 namespace MyPrintiverse.Core.Utilities;
 
 /// <inheritdoc />
 public class ConfigService<T> : IConfigService<T> where T : class, IConfig
 {
-    public T Config { get; }
+	public T Config { get; }
 
-    public ConfigService(string filePath) : this(new FileStream(filePath, FileMode.OpenOrCreate))
+    public ConfigService(Assembly assembly, string configResourcePath)
     {
-    }
+		using var configResourceStream = new EmbeddedResourceReader(assembly).GetResourceStream(configResourcePath);
+		using var streamReader = new StreamReader(configResourceStream);
 
-    public ConfigService(Stream fileStream)
-    {
-        var streamReader = new StreamReader(fileStream);
-        var configJson = streamReader.ReadToEnd();
+		var configJson = streamReader.ReadToEnd();
 
-        if (string.IsNullOrEmpty(configJson))
-            return;
+	    if (string.IsNullOrEmpty(configJson))
+		    return;
 
-        var config = configJson.ToObject<T>();
+	    if (!VerifyConfig(configJson))
+		    throw new InvalidConfigException();
 
-        if (config is null)
-            return;
+		var config = configJson.ToObject<T>();
 
-        if (!config.Verify())
-            throw new InvalidConfigException();
-
-
-        Config = config;
+		Config = config ?? throw new InvalidConfigException();
 
 #if DEBUG
-        Config.DeveloperMode = true;
+	    Config.DeveloperMode = true;
 #else
 		Config.DeveloperMode = false;
 #endif
     }
+
+    private static bool VerifyConfig(string configAsJson) => !Regex.IsMatch(configAsJson, @"\:\snull");
 }

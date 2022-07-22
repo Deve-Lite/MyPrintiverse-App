@@ -1,6 +1,11 @@
 ﻿{
-  "Culture": "en",
-  "Version": "1",
-  "BaseApiUrl": "https://docs.microsoft.com/",
-  "ClientSecret":  "null"
+  "Culture": "pl-PL",
+  "Version": "0.0.1",
+  "Api": {
+    "Protocol": "https",
+    "Address": "10.0.0.2",
+    "Port": "5000",
+    "Base": "api/v1/"
+  },
+  "ClientSecret": ""
 }

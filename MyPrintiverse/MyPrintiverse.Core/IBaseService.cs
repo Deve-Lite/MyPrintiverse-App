@@ -11,12 +11,7 @@ public interface IBaseService
 	/// Message handler e.g alerts, prompts.
 	/// </summary>
 	public IMessageService MessageService { get; }
-	
-	/// <summary>
-	/// Logger handler
-	/// </summary>
-	public ILogger Logger { get; }
-	
+
 	/// <summary>
 	/// Config handler.
 	/// </summary>

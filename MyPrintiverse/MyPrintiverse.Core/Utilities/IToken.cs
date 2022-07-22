@@ -14,10 +14,6 @@ public interface IToken
 	/// Gets value that indicates whether this <see cref="IToken"/> is valid.
 	/// </summary>
 	public bool IsValid { get; }
-	/// <summary>
-	/// Token type.
-	/// </summary>
-	public TokenType TokenType { get; }
 
 	public delegate void SetHandler();
 
@@ -31,16 +27,9 @@ public interface IToken
 	public event SetHandler? OnFailedSet;
 
 	/// <summary>
-	/// Sets token from given <paramref name="parameter"/>.
+	/// Sets token.
 	/// </summary>
-	/// <param name="parameter">RestSharp parameter.</param>
+	/// <param name="token">Token to set.</param>
 	/// <returns><see langword="true" /> if operation went successful, otherwise <see langword="false" />.</returns>
-	public bool Set(Parameter parameter);
-
-	/// <summary>
-	/// Sets token from given <paramref name="parameters"/>.
-	/// </summary>
-	/// <param name="parameters">RestSharp parameter list.</param>
-	/// <returns><see langword="true" /> if operation went successful, otherwise <see langword="false" />.</returns>
-	public bool Set(List<Parameter> parameters);
+	public bool Set(string? token);
 }

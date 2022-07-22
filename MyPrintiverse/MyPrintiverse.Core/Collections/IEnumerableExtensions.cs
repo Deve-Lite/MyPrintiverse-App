@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-
-namespace MyPrintiverse.Core.Collections;
+﻿namespace MyPrintiverse.Core.Collections;
 
 public static class IEnumerableExtensions
 {

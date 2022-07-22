@@ -2,7 +2,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 
 public partial class FilamentView : ContentPage
 {
-    private FilamentViewModel ViewModel => BindingContext as FilamentViewModel;
+    private FilamentViewModel? ViewModel => BindingContext as FilamentViewModel;
     public FilamentView(FilamentViewModel vm)
 	{
 		InitializeComponent();
@@ -12,6 +12,6 @@ public partial class FilamentView : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ViewModel.OnAppearing();
+        ViewModel?.OnAppearing();
     }
 }

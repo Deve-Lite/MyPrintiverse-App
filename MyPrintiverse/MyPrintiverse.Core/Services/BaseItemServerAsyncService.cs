@@ -5,7 +5,7 @@ namespace MyPrintiverse.Core.Services;
 /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
 public abstract class BaseItemServerAsyncService<T> : BaseService, IServerItemService<T> where T : BaseModel, new()
 {
-    public BaseItemServerAsyncService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
+    public BaseItemServerAsyncService(IConfigService<Config> configService, IMessageService messageService, ISession session) : base(configService, messageService, session)
     {
     }
 

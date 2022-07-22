@@ -2,7 +2,7 @@
 
 public class FilamentServerService : BaseItemServerAsyncService<Filament>
 {
-    public FilamentServerService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(configService, logger, messageService, session)
+    public FilamentServerService(IConfigService<Config> configService, IMessageService messageService, ISession session) : base(configService, messageService, session)
     {
     }
 }

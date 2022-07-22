@@ -10,32 +10,17 @@ public class Token : IToken
 
 	public bool IsValid { get; private set; }
 
-	public TokenType TokenType { get; }
-
-	public Token(TokenType tokenType)
+	public Token()
 	{
-		TokenType = tokenType;
 		IsValid = false;
 	}
 
 	public event IToken.SetHandler? OnSuccessfulSet;
 	public event IToken.SetHandler? OnFailedSet;
 
-	private string TokenName => TokenType == TokenType.Authorization ? "Authorization" : "Refresh-Token";
-
-	public bool Set(List<Parameter> parameters)
+	public bool Set(string? token)
 	{
-		Value = parameters.Find(param => param.Name == TokenName)?.Value?.ToString();
-
-		return CheckToken();
-	}
-
-	public bool Set(Parameter parameter)
-	{
-		if (parameter.Name == TokenName)
-		{
-			Value = parameter.Value?.ToString();
-		}
+		Value = token;
 
 		return CheckToken();
 	}
@@ -59,8 +44,6 @@ public class Token : IToken
 
 	private void SetTokenId(string token)
 	{
-		token = token.Replace("Bearer", string.Empty).Trim();
-
 		var handler = new JwtSecurityTokenHandler();
 		var webToken = handler.ReadToken(token) as JwtSecurityToken;
 

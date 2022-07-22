@@ -1,6 +1,4 @@
-﻿
-
-namespace MyPrintiverse.Tools.Settings;
+﻿namespace MyPrintiverse.Tools.Settings;
 
 public class Theme
 {
@@ -10,17 +8,15 @@ public class Theme
     /// <param name="theme">Theme to set.</param>
     public void SetTheme(AppTheme theme)
     {
+	    if (Application.Current == null) 
+		    return;
 
-        switch (theme)
-        {
-            default:
-            case AppTheme.Light:
-                App.Current.UserAppTheme = AppTheme.Light;
-                break;
-            case AppTheme.Dark:
-                App.Current.UserAppTheme = AppTheme.Dark;
-                break;
-        }
+	    Application.Current.UserAppTheme = theme switch
+	    {
+		    AppTheme.Dark => AppTheme.Dark,
+		    AppTheme.Unspecified => AppTheme.Light,
+		    AppTheme.Light => AppTheme.Light,
+		    _ => AppTheme.Light
+	    };
     }
-
 }

@@ -2,7 +2,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 
 public partial class AddFilamentView : ContentPage
 {
-    private AddFilamentViewModel ViewModel => BindingContext as AddFilamentViewModel;
+    private AddFilamentViewModel? ViewModel => BindingContext as AddFilamentViewModel;
     public AddFilamentView(AddFilamentViewModel vm)
 	{
 		InitializeComponent();
@@ -12,6 +12,6 @@ public partial class AddFilamentView : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ViewModel.OnAppearing();
+        ViewModel?.OnAppearing();
     }
 }

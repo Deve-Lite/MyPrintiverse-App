@@ -1,6 +1,7 @@
-﻿using MyPrintiverse.FilamentsModule;
+﻿using MyPrintiverse.Admin;
+using MyPrintiverse.Authorization;
+using MyPrintiverse.FilamentsModule;
 using MyPrintiverse.Templates.Test;
-using static MyPrintiverse.AuthorizationModule.AuthorizationModule;
 
 namespace MyPrintiverse;
 
@@ -17,13 +18,15 @@ public partial class App : Application
     /// Register routes for routing system.
     /// Each view should be registered here.
     /// </summary>
-    private void RegisterRoutes()
+    private static void RegisterRoutes()
     {
-        // template
-        // Routing.RegisterRoute(nameof(...View), typeof(...View));
-
         FilamentRouteConfig.RegisterFilamentRoutes();
-        AuthorizationConfigureRoutes();
         TestRouteConfig.RegisterTestRoutes();
-    }
+        
+        new AdminRouteRegister()
+	        .RegisterRoutes();
+
+        new AuthorizationRouteRegister()
+	        .RegisterRoutes();
+	}
 }

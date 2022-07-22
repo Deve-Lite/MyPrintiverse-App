@@ -4,13 +4,11 @@ using System.Security.Cryptography;
 namespace MyPrintiverse.Core.Cryptography;
 
 /// <inheritdoc />
-/// <inheritdoc />
 public sealed class AesService : ICipherService
 {
 	private const string _key = @"fUjWnZr4u7x!A%D*G-KaPdSgVkYp2s5v";
 	private const string _IV = @"5u8x/A?D(G+KaPdS";
 
-	/// <inheritdoc />
 	public string Decrypt(string encryptedString)
 	{
 		string plaintext;
@@ -33,13 +31,11 @@ public sealed class AesService : ICipherService
 					}
 				}
 			}
-
 		}
 
 		return plaintext;
 	}
 
-	/// <inheritdoc />
 	public string Encrypt(string str)
 	{
 		byte[] encrypted;

@@ -6,7 +6,7 @@ namespace MyPrintiverse.FilamentsModule.Prints;
 //TODO
 public class PrintService : BaseItemAsyncService<Print>, IItemKeyService<Print>
 {
-	public PrintService(PrintDeviceService printDeviceService, PrintServiceService printServerService, IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(printServerService, printDeviceService, configService, logger, messageService, session)
+	public PrintService(PrintDeviceService printDeviceService, PrintServiceService printServerService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(printServerService, printDeviceService, configService, messageService, session)
 	{
 	}
 

@@ -1,9 +1,11 @@
-﻿namespace MyPrintiverse.Core;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace MyPrintiverse.Core;
 
 /// <summary>
 /// Base viewmodel for any page.
 /// </summary>
-public abstract class BaseViewModel : INotifyPropertyChanged
+public abstract partial class BaseViewModel : ObservableObject
 {
     #region Const
     /// <summary>
@@ -20,150 +22,39 @@ public abstract class BaseViewModel : INotifyPropertyChanged
         IsRunning = false;
     }
 
-    #region Properties
+	/// <summary>
+	/// Terminate if any action started on page.
+	/// </summary>
+	[ObservableProperty]
+	private bool _isBusy;
 
-    private bool _isBusy;
-
-    /// <summary>
-    /// Terminate if any action started on page.
-    /// </summary>
-    public bool IsBusy
-	{
-		get => _isBusy; 
-		set => SetProperty(ref _isBusy, value);
-	}
-
+	[ObservableProperty]
 	private bool _isRefreshing;
 
 	/// <summary>
-	/// Terminate if collection refresh started on page.
+	/// Terminate if loading action on page is started.
 	/// </summary>
-	public bool IsRefreshing
-	{
-		get => _isRefreshing; 
-		set => SetProperty(ref _isRefreshing, value);
-	}
-
-    private bool _isRunning;
-
-    /// <summary>
-    /// Terminate if loading action on page is started.
-    /// </summary>
-    public bool IsRunning
-    {
-        get => _isRunning;
-        set => SetProperty(ref _isRunning, value);
-    }
-
-
-    bool isEnabled;
-    /// <summary>
-    /// Terminate if buttons on page are on.
-    /// </summary>
-    public bool IsEnabled
-    {
-        get => isEnabled;
-        set => SetProperty(ref isEnabled, value);
-    }
-
-    #endregion
-
-    #region Observable Methods
-
-    /// <summary>
-    /// Terminate if action can start on page.
-    /// </summary>
-    /// <param name="arg"></param>
-    /// <returns></returns>
-
-    public event PropertyChangedEventHandler? PropertyChanged;
+	[ObservableProperty]
+	private bool _isRunning;
 
 	/// <summary>
-	/// Standard method for notifying view when property value has changed.
+	/// Terminate if buttons on page are on.
 	/// </summary>
-	/// <param name="propertyName"></param>
-	protected virtual void OnPropertyChanged(string? propertyName = null)
-	{
-		var handler = PropertyChanged;
-
-		handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	/// <summary>
-	/// Method for notifying view when any value has changed, with possibility to take action when value changed.
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <param name="backingStore"></param>
-	/// <param name="value"></param>
-	/// <param name="propertyName"></param>
-	/// <param name="onChanged"></param>
-	/// <returns></returns>
-	protected virtual bool SetProperty<T>(ref T backingStore, T value, Action? onChanged = null, string propertyName = "")
-	{
-		if (EqualityComparer<T>.Default.Equals(backingStore, value))
-			return false;
-
-		onChanged?.Invoke();
-		backingStore = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-
-    #endregion
-
-    #region Command Methods
-
-    /// <summary>
-    /// Performs GoToAsync action with specified route.
-    /// </summary>
-    /// <param name="route"></param>
-    /// <returns></returns>
-    protected virtual async Task OpenPage(string route) => await Shell.Current.GoToAsync(route, true);
-
-    /// <summary>
-    /// Terminate if action can start on page.
-    /// </summary>
-    /// <param name="arg"></param>
-    /// <returns></returns>
-    protected virtual bool CanExecute() => !IsBusy;
-
-    /// <summary>
-    /// If other commands can't perform use this function to block action.
-    /// </summary>
-    /// <returns></returns>
-    protected virtual bool AnyActionStartedCommand()
-    {
-        if (IsBusy)
-            return true;
-
-        IsBusy = true;
-        return false;
-    }
-
-
-    // Do usunięcia Start 
-    // Kacper musi pozmieniac z asynccommandów w adminmodule i authmodule
-   
-
-
-    /// <summary>
-    /// Terminate if action can start on page.
-    /// </summary>
-    /// <param name="arg"></param>
-    /// <returns></returns>
-    protected virtual bool CanExecute<T>(T arg) => !IsBusy;
+	[ObservableProperty]
+	private bool _isEnabled;
 
     /// <summary>
     /// Check if command can be executed.
     /// </summary>
     /// <returns><see langword="true" /> if command can be executed, otherwise <see langword="false" /></returns>
+    protected bool CanExecute() => !IsBusy;
     protected bool CanExecute(object obj) => !IsBusy;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="act">Action to execute.</param>
-    protected void ExecuteBlockade(Action act)
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="act">Action to execute.</param>
+	protected void ExecuteBlockade(Action act)
 	{
 		IsBusy = true;
 
