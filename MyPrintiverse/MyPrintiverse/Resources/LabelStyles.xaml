@@ -69,6 +69,9 @@
            BasedOn="{StaticResource BaseRaleway}">
         <Setter Property="FontSize"
                 Value="9" />
+
+        <Setter Property="HorizontalOptions"
+                Value="End" />
     </Style>
 
     

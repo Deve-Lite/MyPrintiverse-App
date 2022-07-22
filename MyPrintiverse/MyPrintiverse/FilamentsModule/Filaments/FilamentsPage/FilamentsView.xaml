@@ -21,12 +21,9 @@
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Frame>
-                                <StackLayout>
-                                    <Label Style="{StaticResource HeaderOswald}"
-                                           Text="{Binding Name}" />
-
-                                </StackLayout>
+                            <Frame Style="{StaticResource CollectionGroupHeaderFrame}">
+                                <Label Style="{StaticResource LargeOswald}"
+                                       Text="{Binding Name}" />
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
@@ -35,20 +32,43 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filament">
                         <StackLayout>
-                            <Frame Margin="5">
-                                <Grid>
-                                    <Label Text="{Binding Brand}" />
+                            <Frame Style="{StaticResource CollectionGroupItemFrame}">
+                                <StackLayout>
 
-                                </Grid>
+                                    <StackLayout HeightRequest="80" BackgroundColor="{Binding ColorHex}" />
+
+                                    <Label Style="{StaticResource SmallRaleway}"
+                                           Text="{Binding Diameter,StringFormat='Diameter: {0} mm'}" />
+                                    
+                                    <Label Style="{StaticResource SmallRaleway}"
+                                           Text="{Binding TypeName,StringFormat='Type: {0}'}" />
+                                    
+                                    <Label Style="{StaticResource SmallRaleway}"
+                                           Text="{Binding ColorName,StringFormat='Color: {0}'}" />
+                                    
+                                    <Label Style="{StaticResource MicroRaleway}"
+                                           Margin="0,5,0,0"
+                                           Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yyyy HH:mm}'}" />
+
+                                </StackLayout>
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
+                <CollectionView.FooterTemplate>
+                    <DataTemplate>
+                        <StackLayout HeightRequest="100">
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.FooterTemplate>
+
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Style="{StaticResource CollectionAddImageButton}" />
+        <ImageButton Style="{StaticResource CollectionAddImageButton}"
+                     Command="{Binding SwapThemeCommand}" />
 
     </Grid>
 
