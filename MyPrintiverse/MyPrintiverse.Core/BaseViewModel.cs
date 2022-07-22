@@ -17,10 +17,10 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 
 	private bool _isBusy;
 
-	/// <summary>
-	/// Terminate if any action started on page.
-	/// </summary>
-	protected bool IsBusy
+    /// <summary>
+    /// Terminate if any action started on page.
+    /// </summary>
+    public bool IsBusy
 	{
 		get => _isBusy; 
 		set => SetProperty(ref _isBusy, value);
@@ -31,7 +31,7 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	/// <summary>
 	/// Terminate if collection refresh started on page.
 	/// </summary>
-	protected bool IsRefreshing
+	public bool IsRefreshing
 	{
 		get => _isRefreshing; 
 		set => SetProperty(ref _isRefreshing, value);

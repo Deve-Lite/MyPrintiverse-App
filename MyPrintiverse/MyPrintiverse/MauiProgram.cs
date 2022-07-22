@@ -17,8 +17,8 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("Raleway-VariableFont", "Raleway");
-                fonts.AddFont("Oswald-VariableFont.ttf", "Oswald");
+                fonts.AddFont("Raleway-Regular.ttf", "Raleway");
+                fonts.AddFont("Oswald-Regular.ttf", "Oswald");
             })
 			.Build();
 
