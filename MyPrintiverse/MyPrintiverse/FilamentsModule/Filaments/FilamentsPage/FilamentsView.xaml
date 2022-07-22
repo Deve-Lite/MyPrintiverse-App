@@ -35,9 +35,10 @@
                             <Frame Style="{StaticResource CollectionGroupItemFrame}">
                                 <StackLayout>
 
-                                    <StackLayout HeightRequest="80" BackgroundColor="{Binding ColorHex}" />
+                                    <Image HeightRequest="80" Source="spool.png"/>
 
                                     <Label Style="{StaticResource SmallRaleway}"
+                                           Margin="0,5,0,0"
                                            Text="{Binding Diameter,StringFormat='Diameter: {0} mm'}" />
                                     
                                     <Label Style="{StaticResource SmallRaleway}"
@@ -48,7 +49,7 @@
                                     
                                     <Label Style="{StaticResource MicroRaleway}"
                                            Margin="0,5,0,0"
-                                           Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yyyy HH:mm}'}" />
+                                           Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
 
                                 </StackLayout>
                             </Frame>
@@ -58,7 +59,8 @@
 
                 <CollectionView.FooterTemplate>
                     <DataTemplate>
-                        <StackLayout HeightRequest="100">
+                        <StackLayout HeightRequest="100"
+                                     BackgroundColor="Transparent">
 
                         </StackLayout>
                     </DataTemplate>

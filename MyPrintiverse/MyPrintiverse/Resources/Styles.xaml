@@ -63,7 +63,6 @@
         <Setter Property="Padding"
                 Value="18,8" />
 
-
     </Style>
 
     <Style TargetType="Frame"
@@ -71,7 +70,7 @@
            BasedOn="{StaticResource DefaultFrame}">
 
         <Setter Property="Padding"
-                Value="18,8" />
+                Value="18,12" />
         
         <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
@@ -178,16 +177,22 @@
                 Value="Transparent" />
 
         <Setter Property="HeightRequest"
-                Value="50" />
+                Value="65" />
 
         <Setter Property="WidthRequest"
-                Value="50" />
+                Value="65" />
 
         <Setter Property="HorizontalOptions"
                 Value="Start" />
 
         <Setter Property="VerticalOptions"
                 Value="End" />
+
+        <Setter Property="Source"
+                Value="spool.png" />
+
+        <Setter Property="Padding"
+                Value="5" />
 
         <Setter Property="Command"
                 Value="{Binding AddItemCommand}" />
