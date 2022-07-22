@@ -20,6 +20,11 @@ public static class MauiAppExtensions
         builder.Services.AddSingleton<ISession>(session);
         var loggerInst = new Logger();
         builder.Services.AddSingleton<ILogger>(loggerInst);
+
+        var messageService = new MessageService();
+        builder.Services.AddSingleton<IMessageService>(messageService);
+        builder.Services.AddSingleton<MessageService>();
+
         return builder;
 	}
 }
