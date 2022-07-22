@@ -2,48 +2,100 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Filaments"
-             xmlns:viewmodel ="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
+             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
+             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.FilamentsPage.FilamentsView"
              Title="Filaments">
 
-    <StackLayout BackgroundColor="Gray">
 
-        <RefreshView>
-            <CollectionView ItemsSource="{Binding Items, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentsViewModel}}}"
+
+    <Grid VerticalOptions="Fill">
+        <RefreshView Style="{StaticResource DefaultRefreshView}"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <CollectionView Style="{StaticResource DefaultCollectionView}"
                             IsGrouped="True">
 
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Frame>
-                                <Grid>
-                                    <Label Text="{Binding Name}"/>
-                                </Grid>
+                            <Frame Style="{StaticResource CollectionGroupHeaderFrame}">
+                                <Label Style="{StaticResource LargeOswald}"
+                                       Text="{Binding Name}" />
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
-                
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filament">
                         <StackLayout>
-                            <Frame Margin="5">
-                                <Grid>
-                                    <Label Text="{Binding Brand}" />
+                            <Frame Style="{StaticResource CollectionGroupItemFrame}">
+                                <StackLayout>
 
-                                </Grid>
+                                    <Image HeightRequest="80" Source="spool.png"/>
+
+                                    <Label Style="{StaticResource SmallRaleway}"
+                                           Margin="0,5,0,0"
+                                           Text="{Binding Diameter,StringFormat='Diameter: {0} mm'}" />
+                                    
+                                    <Label Style="{StaticResource SmallRaleway}"
+                                           Text="{Binding TypeName,StringFormat='Type: {0}'}" />
+                                    
+                                    <Label Style="{StaticResource SmallRaleway}"
+                                           Text="{Binding ColorName,StringFormat='Color: {0}'}" />
+                                    
+                                    <Label Style="{StaticResource MicroRaleway}"
+                                           Margin="0,5,0,0"
+                                           Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
+
+                                </StackLayout>
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
+                <CollectionView.FooterTemplate>
+                    <DataTemplate>
+                        <StackLayout HeightRequest="100"
+                                     BackgroundColor="Transparent">
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.FooterTemplate>
+
             </CollectionView>
         </RefreshView>
 
-        <Button Text="tesxas"
-                Margin="10"
-                IsEnabled="True"
-                Command="{Binding AddItemCommand}" />
+        <ImageButton Style="{StaticResource CollectionAddImageButton}"
+                     Command="{Binding SwapThemeCommand}" />
 
-    </StackLayout>
+    </Grid>
+
+    <!--
+        <HorizontalStackLayout>
+
+
+            <Button Text="StandardAdd"
+                    BackgroundColor="Yellow"
+                    Margin="10"
+                    IsEnabled="{Binding IsEnabled}"
+                    Command="{Binding AddItemCommand}" />
+
+            <Button Text="Refresh"
+                    BackgroundColor="Red"
+                    Margin="10"
+                    IsEnabled="{Binding IsEnabled}"
+                    Command="{Binding RefreshItemsCommand}" />
+
+            <Button Text="swaptheme"
+                    BackgroundColor="Green"
+                    Margin="10"
+                    IsEnabled="{Binding IsEnabled}"
+                    Command="{Binding SwapThemeCommand}" />
+        </HorizontalStackLayout>
+        
+        -->
+
+
 </ContentPage>

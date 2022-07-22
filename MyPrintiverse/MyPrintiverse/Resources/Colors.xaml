@@ -24,7 +24,7 @@
     <Color x:Key="BackgroundVariant">White</Color>
     <Color x:Key="OnBackgroundVariant">White</Color>
 
-    <Color x:Key="PriamryText">Black</Color>
+    <Color x:Key="PrimaryText">Black</Color>
     <Color x:Key="SecondaryText">Black</Color>
 
     <!-- Dark Mode -->
@@ -47,7 +47,7 @@
     <Color x:Key="BackgroundVariantDark">Black</Color>
     <Color x:Key="OnBackgroundVariantDark">Black</Color>
 
-    <Color x:Key="PriamryTextDark">White</Color>
+    <Color x:Key="PrimaryTextDark">White</Color>
     <Color x:Key="SecondaryTextDark">White</Color>
 
     <!-- Universal -->

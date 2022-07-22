@@ -11,13 +11,15 @@ public static class MauiProgram
 			.ConfigureServices()
 			.ConfigureViews()
 			.ConfigureViewModels()
-			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}\config.json", null)
+			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}/config.json", null)
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			})
+                fonts.AddFont("Raleway-Regular.ttf", "Raleway");
+                fonts.AddFont("Oswald-Regular.ttf", "Oswald");
+            })
 			.Build();
 
 		return appInstance;

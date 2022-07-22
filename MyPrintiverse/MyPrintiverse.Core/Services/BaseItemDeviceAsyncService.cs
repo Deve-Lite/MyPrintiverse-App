@@ -29,7 +29,7 @@ public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> wher
         if (db != null)
             return;
 
-        db = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DatabasePath));
+        db = new SQLiteAsyncConnection(DatabasePath);
         await db.CreateTableAsync<T>();
     }
 
