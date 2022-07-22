@@ -21,9 +21,6 @@ public static class ServicesExtensions
         builder.Services.AddSingleton<IMessageService>(messageService);
         builder.Services.AddSingleton<MessageService>();
 
-        var session = new Session();
-        builder.Services.AddSingleton<ISession>(session);
-
         builder.ConfigureAuthorizationServices();
         builder.ConfigureFilamentServices();
 

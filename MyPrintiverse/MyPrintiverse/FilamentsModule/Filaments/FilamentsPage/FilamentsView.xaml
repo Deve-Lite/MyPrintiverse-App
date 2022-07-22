@@ -16,8 +16,6 @@
             <CollectionView Style="{StaticResource DefaultCollectionView}"
                             IsGrouped="True">
 
-
-
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
                         <StackLayout>

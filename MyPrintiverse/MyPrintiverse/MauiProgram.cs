@@ -11,7 +11,7 @@ public static class MauiProgram
 			.ConfigureServices()
 			.ConfigureViews()
 			.ConfigureViewModels()
-			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}\config.json", null)
+			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}/config.json", null)
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{

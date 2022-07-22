@@ -14,16 +14,18 @@ public static class MauiAppExtensions
 	/// <returns></returns>
 	public static MauiAppBuilder ConfigureConfig(this MauiAppBuilder builder, string filePath, ILogger logger)
 	{
-
-		var configInstance = new ConfigService<Config>(filePath);
-		builder.Services.AddSingleton(configInstance);
-		var loggerInst = new Logger();
+        var configInstance = new ConfigService<Config>(filePath);
+		builder.Services.AddSingleton<IConfigService<Config>>(configInstance);
+        var session = new Session(configInstance);
+        builder.Services.AddSingleton<ISession>(session);
+        var loggerInst = new Logger();
         builder.Services.AddSingleton<ILogger>(loggerInst);
         return builder;
 	}
 }
 
 
+// Do usuniecia zrobione tylko po to zeby nie wyrzucało błędu.
 public class Logger : ILogger
 {
 	public IDisposable BeginScope<TState>(TState state)
