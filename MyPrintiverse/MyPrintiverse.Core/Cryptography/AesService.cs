@@ -4,25 +4,21 @@ using System.Security.Cryptography;
 namespace MyPrintiverse.Core.Cryptography;
 
 /// <inheritdoc />
-public class AesService : ICipherService
+/// <inheritdoc />
+public sealed class AesService : ICipherService
 {
-	private readonly byte[] _key;
-	private readonly byte[] _IV;
-
-	public AesService()
-	{
-
-	}
+	private const string _key = @"fUjWnZr4u7x!A%D*G-KaPdSgVkYp2s5v";
+	private const string _IV = @"5u8x/A?D(G+KaPdS";
 
 	/// <inheritdoc />
 	public string Decrypt(string encryptedString)
 	{
-		string plainText;
+		string plaintext;
 
 		using (var aes = Aes.Create())
 		{
-			aes.Key = _key;
-			aes.IV = _IV;
+			aes.Key = _key.Select(e => (byte)e).ToArray();
+			aes.IV = _IV.Select(e => (byte)e).ToArray();
 
 			var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
@@ -32,14 +28,15 @@ public class AesService : ICipherService
 				{
 					using (var srDecrypt = new StreamReader(csDecrypt))
 					{
-						plainText = srDecrypt.ReadToEnd();
+
+						plaintext = srDecrypt.ReadToEnd();
 					}
 				}
 			}
 
 		}
 
-		return plainText;
+		return plaintext;
 	}
 
 	/// <inheritdoc />
@@ -49,8 +46,8 @@ public class AesService : ICipherService
 
 		using (var aes = Aes.Create())
 		{
-			aes.Key = _key;
-			aes.IV = _IV;
+			aes.Key = _key.Select(e => (byte)e).ToArray();
+			aes.IV = _IV.Select(e => (byte)e).ToArray();
 
 			var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
