@@ -1,6 +1,7 @@
 ﻿
 
 using MyPrintiverse.FilamentsModule;
+using MyPrintiverse.Templates.Test;
 
 namespace MyPrintiverse;
 
@@ -11,6 +12,7 @@ public partial class App : Application
         RegisterRoutes();
 
         InitializeComponent();
+
     }
 
     /// <summary>
@@ -23,5 +25,9 @@ public partial class App : Application
         // Routing.RegisterRoute(nameof(...View), typeof(...View));
 
         FilamentRouteConfig.RegisterFilamentRoutes();
+        TestRouteConfig.RegisterTestRoutes();
     }
+
+    // TODO 
+    // back button behaviour in PhoneShell (Shell will be divided into desktop and mobile for easier management)
 }

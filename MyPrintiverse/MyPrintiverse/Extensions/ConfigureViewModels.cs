@@ -1,6 +1,8 @@
 ﻿
 using MyPrintiverse.AuthorizationModule;
 using MyPrintiverse.FilamentsModule;
+using MyPrintiverse.Templates.Test;
+
 namespace MyPrintiverse.Extensions;
 
 public static class ConfigureViewModel
@@ -19,6 +21,7 @@ public static class ConfigureViewModel
 		builder.ConfigureAuthorizationViewModels();
         builder.ConfigureFilamentViewModels();
 
+		builder.ConfigureTestViewsModels();
         return builder;
 	}
 }

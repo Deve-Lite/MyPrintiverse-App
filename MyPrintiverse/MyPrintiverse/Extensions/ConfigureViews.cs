@@ -2,6 +2,7 @@
 
 using MyPrintiverse.AuthorizationModule;
 using MyPrintiverse.FilamentsModule;
+using MyPrintiverse.Templates.Test;
 
 namespace MyPrintiverse.Extensions;
 
@@ -20,6 +21,7 @@ public static class ConfigureView
 
 		builder.ConfigureAuthorizationViews();
         builder.ConfigureFilamentViews();
+		builder.ConfigureTestViews();
 
         return builder;
 	}

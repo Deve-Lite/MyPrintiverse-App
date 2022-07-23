@@ -7,23 +7,23 @@ public partial class MessageEntry : ContentView
 
 	public string Message
 	{
-		get => (string)GetValue(MessageProperty);
-		set => SetValue(MessageProperty, value);
+		get => (string)GetValue(MessageEntry.MessageProperty);
+		set => SetValue(MessageEntry.MessageProperty, value);
 	}
 
-	public static readonly BindableProperty MessageIsVisibleProperty = BindableProperty.Create(nameof(MessageIsVisible), typeof(bool), typeof(MessageEntry), string.Empty);
+	public static readonly BindableProperty MessageIsVisibleProperty = BindableProperty.Create(nameof(MessageIsVisible), typeof(bool), typeof(MessageEntry), false);
 
-	public string MessageIsVisible
+	public bool MessageIsVisible
 	{
-		get => (string)GetValue(MessageIsVisibleProperty);
+		get => (bool)GetValue(MessageIsVisibleProperty);
 		set => SetValue(MessageIsVisibleProperty, value);
 	}
 
-	public static readonly BindableProperty MessageColorProperty = BindableProperty.Create(nameof(MessageColor), typeof(Color), typeof(MessageEntry), string.Empty);
+	public static readonly BindableProperty MessageColorProperty = BindableProperty.Create(nameof(MessageColor), typeof(Color), typeof(MessageEntry), Color.FromRgb(255, 255, 255));
 
-	public string MessageColor
+	public Color MessageColor
 	{
-		get => (string)GetValue(MessageColorProperty);
+		get => (Color)GetValue(MessageColorProperty);
 		set => SetValue(MessageColorProperty, value);
 	}
 

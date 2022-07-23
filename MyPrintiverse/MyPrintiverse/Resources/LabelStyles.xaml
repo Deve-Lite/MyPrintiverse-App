@@ -29,6 +29,9 @@
     <Style TargetType="Label"
            x:Key="BaseComplementary"
            BasedOn="{StaticResource Base}">
+        
+        <!-- TO SET -->
+        
         <Setter Property="FontFamily"
                 Value="OpenSansRegular" />
     </Style>

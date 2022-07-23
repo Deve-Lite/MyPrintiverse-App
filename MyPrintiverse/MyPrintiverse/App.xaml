@@ -4,8 +4,9 @@
              xmlns:local="clr-namespace:MyPrintiverse"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:filamentsmodule="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
-             xmlns:test="clr-namespace:MyPrintiverse"
-             x:Class="MyPrintiverse.App">
+             xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
+             x:Class="MyPrintiverse.App"
+             >
 
     <Application.Resources>
         <ResourceDictionary>
@@ -20,13 +21,19 @@
 
 
     <Application.MainPage>
-        <Shell>
+        <Shell IconImageSource="spool.png">
 
-            <FlyoutItem Title="Home">
-                <ShellContent Title="Home"
+            <FlyoutItem Title="Filaments" Icon="spool.png">
+                <ShellContent Title="Filaments"
                               ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
             </FlyoutItem>
-            
+
+            <FlyoutItem Title="Test"
+                        Icon="spool.png">
+                <ShellContent Title="Test"
+                              ContentTemplate="{DataTemplate test:TestPage}" />
+            </FlyoutItem>
+
         </Shell>
     </Application.MainPage>
 </Application>
