@@ -1,5 +1,6 @@
 ﻿using MyPrintiverse.AuthorizationModule;
 using MyPrintiverse.FilamentsModule;
+using MyPrintiverse.Tools;
 
 namespace MyPrintiverse;
 
@@ -24,7 +25,10 @@ public static class MauiAppExtensions
         builder.Services.AddSingleton<IMessageService>(messageService);
         builder.Services.AddSingleton<MessageService>();
 
-        return builder;
+        var settingsService = new SettingsService();
+        builder.Services.AddSingleton<ISettingsService>(settingsService);
+
+		return builder;
     }
 
     /// <summary>

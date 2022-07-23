@@ -11,11 +11,11 @@ public class SettingsService : ISettingsService
 			_appTheme = value;
 
 			if (App != null) 
-				App.UserAppTheme = AppTheme.Light;
+				App.UserAppTheme = _appTheme;
 		}
 	}
 
-	private Application? App => Application.Current;
+	private static Application? App => Application.Current;
 
 	//TODO: Use DI to inject SQLite connection and read saved settings
 	public SettingsService()
