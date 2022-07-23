@@ -1,6 +1,4 @@
-﻿using MyPrintiverse.Core.Utilities;
-
-namespace MyPrintiverse.AdminModule;
+﻿namespace MyPrintiverse.AdminModule;
 
 public class AdminViewModel : BaseViewModel
 {

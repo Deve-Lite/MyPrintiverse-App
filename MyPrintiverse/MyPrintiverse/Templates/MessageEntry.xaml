@@ -6,12 +6,12 @@
   xmlns:module="clr-namespace:MyPrintiverse.Templates"
   x:DataType="module:MessageEntry">
 
-    <StackLayout>
-        <Entry Placeholder="{Binding Placeholder}"
-               Text="{Binding Text}" />
-        <Label IsVisible="{Binding MessageIsVisible}"
-               Text="{Binding Message}"
-               TextColor="{Binding MessageColor}" />
-    </StackLayout>
+  <StackLayout>
+    <Entry Placeholder="{Binding Placeholder}" Text="{Binding Text}" />
+    <Label
+      IsVisible="{Binding MessageIsVisible}"
+      Text="{Binding Message}"
+      TextColor="{Binding MessageColor}" />
+  </StackLayout>
 
 </ContentView>

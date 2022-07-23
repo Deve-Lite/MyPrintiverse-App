@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyPrintiverse.Templates.EntryWithButton">
-    <StackLayout>
-        <HorizontalStackLayout>
-            <Entry Placeholder="{Binding Placeholder}"
-                   HorizontalOptions="FillAndExpand"
-                   Text="{Binding Text}" />
+<ContentView
+  x:Class="MyPrintiverse.Templates.EntryWithButton"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:module="clr-namespace:MyPrintiverse.Templates"
+  x:DataType="module:EntryWithButton">
+  <StackLayout>
+    <!--<HorizontalStackLayout>
+      <Entry
+        HorizontalOptions="FillAndExpand"
+        Placeholder="{Binding Placeholder}"
+        Text="{Binding Text}" />
 
-            <ImageButton Source="{Binding ImageSource}"
-                         HorizontalOptions="End" 
-                         WidthRequest="60"/>
+      <ImageButton
+        HorizontalOptions="End"
+        Source="{Binding ImageSource}"
+        WidthRequest="60" />
 
-        </HorizontalStackLayout>
-        <Label IsVisible="{Binding MessageIsVisible}"
-               Text="{Binding Message}"
-               TextColor="{Binding MessageColor}" />
-    </StackLayout>
+    </HorizontalStackLayout>
+    <Label
+      IsVisible="{Binding MessageIsVisible}"
+      Text="{Binding Message}"
+      TextColor="{Binding MessageColor}" />-->
+  </StackLayout>
 </ContentView>
