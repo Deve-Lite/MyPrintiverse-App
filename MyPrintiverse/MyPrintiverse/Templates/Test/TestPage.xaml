@@ -5,25 +5,37 @@
              xmlns:module="clr-namespace:MyPrintiverse.Templates"
              Title="TestPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
         <module:TitledSwitch LabelStyle="{StaticResource BaseOswald}" 
                              SwitchStyle="{StaticResource DefaultSwitch}" 
-                             Padding="13"
-                             Margin="12"
-                             HeightRequest="60"
-                             IsToggled="{Binding BoolValue,Mode=TwoWay}"
+                             Padding="10"
+                             Margin="10"
+                             IsToggled="{Binding BoolValue, Mode=TwoWay}"
                              Title="tfgmndfgohnfhnmdfgh" />
 
-        <Label Text="{Binding BoolValue}"/>
+        <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
 
 
-        <module:MessageEntry Message="defesgdfd"
-                             MessageIsVisible="True"
-                             Text="defesgdfd" />
+        <module:ValidatableEntry Margin="10"
+                                 TitleStyle="{StaticResource MicroOswald}"
+                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
+                                 EntryStyle="{StaticResource DefaultEntry}"
+                                 ErrorMessage="{Binding Email.Error}"
+                                 Title="Email"
+                                 Text="{Binding Email.Value, Mode=TwoWay}"
+                                 EntryValidationCommand="{Binding EmailValidateCommand}"/>
+
+        <module:ValidatableEntry Margin="10"
+                                 TitleStyle="{StaticResource MicroOswald}"
+                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
+                                 EntryStyle="{StaticResource DefaultEntry}"
+                                 ErrorMessage="{Binding Password.Error}"
+                                 Title="Password"
+                                 Text="{Binding Password.Value, Mode=TwoWay}"
+                                 EntryValidationCommand="{Binding PasswordValidateCommand}"/>
+
+
+        <Button Style="{StaticResource DefaultButton}" Text="this is title" Command="{Binding TestCommand}"/>
 
     </VerticalStackLayout>
 </ContentPage>

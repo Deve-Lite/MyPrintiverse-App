@@ -15,6 +15,8 @@ public class RangeRule<T> : IValidationRule<T>
 
 	public bool Check(T value)
 	{
+		// TODO BUG
+		// nie wiem czemu tutaj wyrzuca false dla stringa 
 		if (!typeof(T).IsValueType) 
 			return false;
 		

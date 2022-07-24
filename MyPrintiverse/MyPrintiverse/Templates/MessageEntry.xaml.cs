@@ -12,7 +12,6 @@ public partial class MessageEntry : ContentView
 	}
 
 	public static readonly BindableProperty MessageIsVisibleProperty = BindableProperty.Create(nameof(MessageIsVisible), typeof(bool), typeof(MessageEntry), false);
-
 	public bool MessageIsVisible
 	{
 		get => (bool)GetValue(MessageIsVisibleProperty);

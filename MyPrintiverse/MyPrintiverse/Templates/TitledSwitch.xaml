@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Name="this"
              x:Class="MyPrintiverse.Templates.TitledSwitch">
+    
     <Grid BindingContext="{x:Reference this}" 
           WidthRequest="{Binding Width}"
           HeightRequest="{Binding Height}"
           Padding="{Binding Padding}"
-          Margin="{Binding Margin}"
-          BackgroundColor="Red">
+          Margin="{Binding Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>

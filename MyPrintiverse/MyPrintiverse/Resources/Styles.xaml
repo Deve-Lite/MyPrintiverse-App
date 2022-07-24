@@ -106,6 +106,12 @@
         <Setter Property="CornerRadius"
                 Value="8" />
 
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+
         <Setter Property="Padding"
                 Value="14,10" />
 
