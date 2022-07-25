@@ -1,6 +1,6 @@
 namespace MyPrintiverse.Templates;
 
-public partial class ValidatableEntry : ContentView
+public partial class ValidatableEntryWithButton : ContentView
 {
     #region Title
     public static readonly BindableProperty TitleStyleProperty = BindableProperty.Create(nameof(TitleStyle), typeof(Style), typeof(ValidatableEntry), null);
@@ -90,8 +90,33 @@ public partial class ValidatableEntry : ContentView
     }
 
     #endregion
-    public ValidatableEntry()
+
+    #region ImagineButton
+    public static readonly BindableProperty ImagineButtonProperty = BindableProperty.Create(nameof(ImagineButtonStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public Style ImagineButtonStyle
+    {
+        get => (Style)GetValue(ImagineButtonProperty);
+        set => SetValue(ImagineButtonProperty, value);
+    }
+
+    public static readonly BindableProperty ImageButtonCommandProperty = BindableProperty.Create(nameof(ImageButtonCommand), typeof(ICommand), typeof(ValidatableEntry), null);
+    public ICommand ImageButtonCommand
+    {
+        get => (ICommand)GetValue(ImageButtonCommandProperty);
+        set => SetValue(ImageButtonCommandProperty, value);
+    }
+
+    public static readonly BindableProperty ImageButtonSourceProperty = BindableProperty.Create(nameof(ImageButtonSource), typeof(string), typeof(ValidatableEntry), "spool.png");
+    public string ImageButtonSource
+    {
+        get => (string)GetValue(ImageButtonSourceProperty);
+        set => SetValue(ImageButtonSourceProperty, value);
+    }
+
+    #endregion
+
+    public ValidatableEntryWithButton()
 	{
 		InitializeComponent();
-    }
+	}
 }

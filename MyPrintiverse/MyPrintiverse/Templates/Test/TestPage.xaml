@@ -3,39 +3,142 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.Templates.Test.TestPage"
              xmlns:module="clr-namespace:MyPrintiverse.Templates"
+             xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
              Title="TestPage">
-    <VerticalStackLayout>
 
-        <module:TitledSwitch LabelStyle="{StaticResource BaseOswald}" 
-                             SwitchStyle="{StaticResource DefaultSwitch}" 
-                             Padding="10"
-                             Margin="10"
-                             IsToggled="{Binding BoolValue, Mode=TwoWay}"
-                             Title="tfgmndfgohnfhnmdfgh" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame" x:Key="TestFrame" BasedOn="{StaticResource BaseFrame}">
+                <Setter Property="Margin" Value="0, 3, 0, 2"/>
+            </Style>
 
-        <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
+            <Style BasedOn="{StaticResource ValidatableEntry}" TargetType="Entry" x:Key="keyboradentry">
+                <Setter Property="Keyboard" Value="Numeric"/>
+            </Style>
+            
+        </ResourceDictionary>
+
+        <test:TestConventer x:Key="testconverter"/>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Label Style="{StaticResource TitleOswald}" Text="Titled Switch" HorizontalOptions="Center"/>
+
+            <module:TitledSwitch TitleStyle="{StaticResource BaseOswald}" 
+                                 SwitchStyle="{StaticResource BaseSwitch}" 
+                                 Padding="0"
+                                 Margin="10,5,10,5"
+                                 IsToggled="{Binding BoolValue, Mode=TwoWay}"
+                                 Title="tfgmndfgohnfhnmdfgh" />
+
+            <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
 
 
-        <module:ValidatableEntry Margin="10"
-                                 TitleStyle="{StaticResource MicroOswald}"
-                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
-                                 EntryStyle="{StaticResource DefaultEntry}"
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+
+            <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry" HorizontalOptions="Center"/>
+
+            <module:ValidatableEntry Margin="10,2,10,4"
+                                     HeightRequest="70"
+                                     HorizontalOptions="FillAndExpand"
+                                     FrameStyle="{StaticResource ClearValidatableEntryFrame}"
+                                     TitleStyle="{StaticResource MicroOswald}"
+                                     ErrorMessageStyle="{StaticResource SmallComplementary}"
+                                 EntryStyle="{StaticResource BaseEntry}"
                                  ErrorMessage="{Binding Email.Error}"
-                                 Title="Email"
+                                 ErrorMessageIsVisible="{Binding Email.IsValid}"
+                                 Title="Email"       
                                  Text="{Binding Email.Value, Mode=TwoWay}"
                                  EntryValidationCommand="{Binding EmailValidateCommand}"/>
 
-        <module:ValidatableEntry Margin="10"
+            <module:ValidatableEntry Margin="10,2,10,4"
+                                     HeightRequest="70"
                                  TitleStyle="{StaticResource MicroOswald}"
+                                 FrameStyle="{StaticResource TestFrame}"
                                  ErrorMessageStyle="{StaticResource SmallComplementary}"
-                                 EntryStyle="{StaticResource DefaultEntry}"
+                                 EntryStyle="{StaticResource ValidatableEntry}"
                                  ErrorMessage="{Binding Password.Error}"
+                                 ErrorMessageIsVisible="{Binding Password.IsValid}"
                                  Title="Password"
                                  Text="{Binding Password.Value, Mode=TwoWay}"
                                  EntryValidationCommand="{Binding PasswordValidateCommand}"/>
 
+            <Button Style="{StaticResource BaseButton}" Margin="0,15,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
 
-        <Button Style="{StaticResource DefaultButton}" Text="this is title" Command="{Binding TestCommand}"/>
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
 
-    </VerticalStackLayout>
+            <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry with button" HorizontalOptions="Center"/>
+
+            <module:ValidatableEntryWithButton Padding="0"
+                                               Margin="10,2,10,4"
+                                               HeightRequest="70"
+                                 FrameStyle="{StaticResource ClearValidatableEntryFrame}"
+                                 TitleStyle="{StaticResource MicroOswald}"
+                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
+                                 EntryStyle="{StaticResource BaseEntry}"       
+                                 ImagineButtonStyle="{StaticResource ValidatableImageButton}"
+                                 ImageButtonCommand="{Binding AdditioalCommand}"          
+                                 ErrorMessage="{Binding Email.Error}"
+                                 ErrorMessageIsVisible="{Binding Email.IsValid}"
+                                 Title="Email"
+                                 Text="{Binding Email.Value, Mode=TwoWay}"
+                                 EntryValidationCommand="{Binding EmailValidateCommand}"/>
+
+            <module:ValidatableEntryWithButton Padding="0"
+                                               Margin="10,2,10,4"
+                                               HeightRequest="70"
+                                 TitleStyle="{StaticResource MicroOswald}"
+                                 FrameStyle="{StaticResource TestFrame}"
+                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
+                                 EntryStyle="{StaticResource ValidatableEntry}"
+                                 ImagineButtonStyle="{StaticResource ValidatableImageButton}"
+                                 ImageButtonCommand="{Binding AdditioalCommand}"  
+                                 ErrorMessage="{Binding Password.Error}"                                             
+                                 ErrorMessageIsVisible="{Binding Password.IsValid}"
+                                 Title="Password"
+                                 Text="{Binding Password.Value, Mode=TwoWay}"
+                                 EntryValidationCommand="{Binding PasswordValidateCommand}"/>
+
+            <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+
+            <Label Style="{StaticResource TitleOswald}" Text="Activity Button" HorizontalOptions="Center"/>
+
+            <module:ActivityButton Margin="10,5,10,0"
+                                   HeightRequest="50"
+                                   ButtonStyle="{StaticResource BaseButton}"
+                                   ButtonCommand="{Binding LoadUpCommand}"
+                                   ButtonIsEnabled="{Binding IsEnabled}"
+                                   Text="Dodaj nowy element"
+                                   TextStyle="{StaticResource BaseRaleway}"
+                                   ActivityIndicatorStyle="{StaticResource ButtonActivityIndicator}"
+                                   IsRunning="{Binding IsRunning}"/>
+
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+
+            <Label Style="{StaticResource TitleOswald}" Text="Numeric test" HorizontalOptions="Center"/>
+
+            <module:ValidatableEntry Margin="10,2,10,4"
+                                     HeightRequest="70"
+                                 TitleStyle="{StaticResource MicroOswald}"
+                                 FrameStyle="{StaticResource TestFrame}"
+                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
+                                 EntryStyle="{StaticResource keyboradentry}"
+                                 ErrorMessage="{Binding Numbers.Error}"
+                                 ErrorMessageIsVisible="{Binding Numbers.IsValid}"
+                                 Title="Password"
+                                 Text="{Binding Numbers.Value, Mode=TwoWay}"
+                                 EntryValidationCommand="{Binding NumbersValidateCommand}"/>
+
+
+            <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding NumbersValidateCommand}"/>
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,60"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

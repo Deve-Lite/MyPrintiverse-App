@@ -2,13 +2,13 @@ namespace MyPrintiverse.Templates;
 
 public partial class MessageEntry : ContentView
 {
-    //TODO
-    public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(MessageEntry), string.Empty);
+    //ZAMAINA NA ValidatableEntry
 
+    public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(MessageEntry), string.Empty);
 	public string Message
 	{
-		get => (string)GetValue(MessageEntry.MessageProperty);
-		set => SetValue(MessageEntry.MessageProperty, value);
+		get => (string)GetValue(MessageProperty);
+		set => SetValue(MessageProperty, value);
 	}
 
 	public static readonly BindableProperty MessageIsVisibleProperty = BindableProperty.Create(nameof(MessageIsVisible), typeof(bool), typeof(MessageEntry), false);

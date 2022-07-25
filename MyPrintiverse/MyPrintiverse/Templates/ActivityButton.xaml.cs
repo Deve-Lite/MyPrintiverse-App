@@ -4,86 +4,63 @@ namespace MyPrintiverse.Templates;
 
 public partial class ActivityButton : ContentView
 {
-    //TODO
-    #region FontSizeProperty
+    #region Button
 
-    public static readonly BindableProperty FontSizeProperty =
-        BindableProperty.Create(nameof(FontSize), typeof(int), typeof(ActivityButton), 16);
-    public int FontSize
+    public static readonly BindableProperty ButtonStyleProperty = BindableProperty.Create(nameof(ButtonStyle), typeof(Style), typeof(ActivityButton), null);
+    public Style ButtonStyle
     {
-        get => (int)GetValue(FontSizeProperty);
-        set => SetValue(FontSizeProperty, value);
+        get => (Style)GetValue(ButtonStyleProperty);
+        set => SetValue(ButtonStyleProperty, value);
+    }
+
+    public static readonly BindableProperty ButtonCommandProperty = BindableProperty.Create(nameof(ButtonCommand), typeof(ICommand), typeof(ActivityButton), null);
+    public ICommand ButtonCommand
+    {
+        get => (ICommand)GetValue(ButtonCommandProperty);
+        set => SetValue(ButtonCommandProperty, value);
+    }
+
+    public static readonly BindableProperty ButtonIsEnabledProperty = BindableProperty.Create(nameof(ButtonIsEnabled), typeof(bool), typeof(ActivityButton), false);
+    public bool ButtonIsEnabled
+    {
+        get => (bool)GetValue(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
     }
 
     #endregion
 
-    #region CommandProperty
+    #region ActivityIndicator
 
-    public static readonly BindableProperty CommandProperty =
-        BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ActivityButton), default(ICommand));
-    public ICommand Command
+    public static readonly BindableProperty ActivityIndicatorStyleProperty = BindableProperty.Create(nameof(ActivityIndicatorStyle), typeof(Style), typeof(ActivityButton), null);
+    public Style ActivityIndicatorStyle
     {
-        get => (ICommand)GetValue(CommandProperty);
-        set => SetValue(CommandProperty, value);
+        get => (Style)GetValue(ActivityIndicatorStyleProperty);
+        set => SetValue(ActivityIndicatorStyleProperty, value);
+    }
+
+    public static readonly BindableProperty IsRunningProperty = BindableProperty.Create(nameof(IsRunning), typeof(bool), typeof(ActivityButton), false);
+    public bool IsRunning
+    {
+        get => (bool)GetValue(IsRunningProperty);
+        set => SetValue(IsRunningProperty, value);
     }
 
     #endregion
 
-    #region LoadingProperty
+    #region Label
 
-    public static readonly BindableProperty LoadingProperty =
-        BindableProperty.Create(nameof(Loading), typeof(bool), typeof(ActivityButton), false);
-    public bool Loading
+    public static readonly BindableProperty TextStyleProperty = BindableProperty.Create(nameof(TextStyle), typeof(Style), typeof(ActivityButton), null);
+    public Style TextStyle
     {
-        get => (bool)GetValue(LoadingProperty);
-        set => SetValue(LoadingProperty, value);
+        get => (Style)GetValue(TextStyleProperty);
+        set => SetValue(TextStyleProperty, value);
     }
 
-    #endregion
-
-    #region LoaderColorProperty
-
-    public static readonly BindableProperty LoaderColorProperty =
-        BindableProperty.Create(nameof(ActivityIndicatorColor), typeof(Color), typeof(ActivityButton), new Color(0));
-    public Color ActivityIndicatorColor
+    public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(ActivityButton), "");
+    public string Text
     {
-        get => (Color)GetValue(LoaderColorProperty);
-        set => SetValue(LoaderColorProperty, value);
-    }
-
-    #endregion
-
-    #region BorderWidthProperty
-
-    public static readonly BindableProperty BorderWidthProperty =
-        BindableProperty.Create(nameof(BorderWidth), typeof(double), typeof(ActivityButton), default(double));
-    public double BorderWidth
-    {
-        get => (double)GetValue(BorderWidthProperty);
-        set => SetValue(BorderWidthProperty, value);
-    }
-
-    #endregion
-
-    #region BorderColorProperty
-
-    public static readonly BindableProperty BorderColorProperty =
-        BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(ActivityButton), new Color(0));
-    public Color BorderColor
-    {
-        get => (Color)GetValue(BorderColorProperty);
-        set => SetValue(BorderColorProperty, value);
-    }
-    #endregion
-
-    #region ButtonTextProperty
-
-    public static readonly BindableProperty ButtonTextProperty =
-        BindableProperty.Create(nameof(ButtonText), typeof(string), typeof(ActivityButton), "Save");
-    public string ButtonText
-    {
-        get => (string) GetValue(ButtonTextProperty);
-        set => SetValue(ButtonTextProperty, value);
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
     }
 
     #endregion
@@ -91,12 +68,5 @@ public partial class ActivityButton : ContentView
     public ActivityButton()
 	{
         InitializeComponent();
-
-        IsVisible = true;
-
-        
-        Grid.SetBinding(Grid.WidthProperty, new Binding(nameof(Width), source: this));
-        Grid.SetBinding(Grid.HeightProperty, new Binding(nameof(Height), source: this));
-        Grid.SetBinding(Grid.IsVisibleProperty, new Binding(nameof(IsVisible), source: this));
     }
 }

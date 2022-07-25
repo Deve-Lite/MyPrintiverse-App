@@ -12,13 +12,15 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 
 	public virtual void OnAppearing() 
 	{
-		//Perform On Appearing
+		IsEnabled = true;
+		IsRefreshing = false;
+		IsRunning = false;
 	}
 
 	private bool _isBusy;
 
     /// <summary>
-    /// Terminate if any action started on page.
+    /// Terminate if any action started on page is blocking.
     /// </summary>
     public bool IsBusy
 	{
@@ -35,6 +37,28 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 	{
 		get => _isRefreshing; 
 		set => SetProperty(ref _isRefreshing, value);
+	}
+
+    private bool _isRunning;
+
+    /// <summary>
+    /// Terminate if loading action on page is started.
+    /// </summary>
+    public bool IsRunning
+    {
+        get => _isRunning;
+        set => SetProperty(ref _isRunning, value);
+    }
+
+
+    bool isEnabled;
+	/// <summary>
+	/// Terminate if buttons on page are on.
+	/// </summary>
+    public bool IsEnabled 
+	{ 
+		get => isEnabled; 
+		set => SetProperty(ref isEnabled, value); 
 	}
 
     /// <summary>

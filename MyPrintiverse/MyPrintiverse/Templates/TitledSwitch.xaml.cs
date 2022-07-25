@@ -4,12 +4,12 @@ namespace MyPrintiverse.Templates;
 public partial class TitledSwitch : ContentView
 {
 
-    #region Label
-    public static readonly BindableProperty LabelStyleProperty = BindableProperty.Create(nameof(LabelStyle), typeof(Style), typeof(TitledSwitch), null);
-    public Style LabelStyle
+    #region Title
+    public static readonly BindableProperty TitleStyleProperty = BindableProperty.Create(nameof(TitleStyle), typeof(Style), typeof(TitledSwitch), null);
+    public Style TitleStyle
     {
-        get => (Style)GetValue(LabelStyleProperty);
-        set => SetValue(LabelStyleProperty, value);
+        get => (Style)GetValue(TitleStyleProperty);
+        set => SetValue(TitleStyleProperty, value);
     }
 
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(TitledSwitch), "Title not set.");

@@ -94,9 +94,6 @@
 		<MauiXaml Update="Templates\ActivityButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\EntryWithButton.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="Templates\MessageEntry.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -128,6 +125,9 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\ValidatableEntry.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\ValidatableEntryWithButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>

@@ -2,32 +2,34 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
-             x:Class="MyPrintiverse.Templates.ValidatableEntry"
+             x:Class="MyPrintiverse.Templates.ValidatableEntryWithButton"
              x:Name="this">
-
+    
     <StackLayout BindingContext="{x:Reference this}" 
                          WidthRequest="{Binding Width}"
                          HeightRequest="{Binding Height}"
-                         Padding="0"
+                         Padding="{Binding Padding}"
                          Margin="{Binding Margin}"
+                         HorizontalOptions="{Binding HorizontalOptions}"
+                         VerticalOptions="{Binding VerticalOptions}"
                          IsVisible="{Binding IsVisible}"
-                         BackgroundColor="Transparent">
-
+                         BackgroundColor="Transparent"
+                         Spacing="0">
 
         <Label Style="{Binding TitleStyle}" 
-               Grid.Row="0"
                Text="{Binding Title}" />
 
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Frame Style="{Binding FrameStyle}"  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.82*"/>
+                <ColumnDefinition Width="0.02*"/>
+                <ColumnDefinition Width="0.15*"/>
+            </Grid.ColumnDefinitions>
+            <Frame Style="{Binding FrameStyle}">
                 <Entry Style="{Binding EntryStyle}" 
-                   Text="{Binding Text, Mode=TwoWay, Converter={StaticResource EntryConverter}}"     
+                   Text="{Binding Text, Mode=TwoWay}"     
                    Placeholder="{Binding Placeholder}" 
-                   IsPassword="{Binding IsPassword}">
+                   IsPassword="{Binding IsPassword}" >
 
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="Unfocused" 
@@ -35,13 +37,18 @@
                     </Entry.Behaviors>
                 </Entry>
             </Frame>
+
+            <ImageButton Grid.Column="2" 
+                         Command="{Binding ImageButtonCommand}"
+                         Style="{Binding ImagineButtonStyle}"
+                         Source="{Binding ImageButtonSource}"/>
+
         </Grid>
 
         <Label Style="{Binding ErrorMessageStyle}" 
-               Grid.Row="2"
                IsVisible="{Binding ErrorMessageIsVisible, Converter={toolkit:InvertedBoolConverter}}"
                Text="{Binding ErrorMessage}" 
-               Margin="0,0,0,3"
+               Margin="0,0,0,4"
                HorizontalOptions="Center"/>
     </StackLayout>
 </ContentView>
