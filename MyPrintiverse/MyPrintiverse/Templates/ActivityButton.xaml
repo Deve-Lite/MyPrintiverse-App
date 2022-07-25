@@ -6,14 +6,7 @@
              x:Name="this">
 
     <ContentView.Content>
-        <Grid BindingContext="{x:Reference this}" 
-              WidthRequest="{Binding Width}"
-              HeightRequest="{Binding Height}"
-              Padding="{Binding Padding}"
-              Margin="{Binding Margin}"
-              IsVisible="{Binding IsVisible}"
-              HorizontalOptions="{Binding HorizontalOptions}"
-              VerticalOptions="{Binding VerticalOptions}"
+        <Grid BindingContext="{x:Reference this}"
               BackgroundColor="Transparent">
 
             <Button Style="{Binding ButtonStyle}"

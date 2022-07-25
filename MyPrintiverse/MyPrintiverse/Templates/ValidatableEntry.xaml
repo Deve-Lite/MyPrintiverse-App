@@ -6,13 +6,8 @@
              x:Class="MyPrintiverse.Templates.ValidatableEntry"
              x:Name="this">
 
-    <StackLayout BindingContext="{x:Reference this}" 
-                         WidthRequest="{Binding Width}"
-                         HeightRequest="{Binding Height}"
-                         Padding="0"
-                         Margin="{Binding Margin}"
-                         IsVisible="{Binding IsVisible}"
-                         BackgroundColor="Transparent">
+    <StackLayout BindingContext="{x:Reference this}"
+                 BackgroundColor="Transparent">
 
 
         <Label Style="{Binding TitleStyle}" 

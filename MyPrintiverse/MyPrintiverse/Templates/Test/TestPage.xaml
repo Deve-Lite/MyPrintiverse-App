@@ -67,6 +67,26 @@
 
             <Button Style="{StaticResource BaseButton}" Margin="0,15,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
 
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+
+            <Label Style="{StaticResource TitleOswald}" Text="Numeric test" HorizontalOptions="Center"/>
+
+            <module:ValidatableEntry Margin="10,2,10,4"
+                                     HeightRequest="70"
+                                 TitleStyle="{StaticResource MicroOswald}"
+                                 FrameStyle="{StaticResource TestFrame}"
+                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
+                                 EntryStyle="{StaticResource keyboradentry}"
+                                 ErrorMessage="{Binding Numbers.Error}"
+                                 ErrorMessageIsVisible="{Binding Numbers.IsValid}"
+                                 Title="Password"
+                                 Text="{Binding Numbers.Value, Mode=TwoWay}"
+                                 EntryValidationCommand="{Binding NumbersValidateCommand}"/>
+
+
+            <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding NumbersValidateCommand}"/>
+
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
 
             <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry with button" HorizontalOptions="Center"/>
@@ -107,7 +127,7 @@
 
             <Label Style="{StaticResource TitleOswald}" Text="Activity Button" HorizontalOptions="Center"/>
 
-            <module:ActivityButton Margin="10,5,10,0"
+            <module:ActivityButton Margin="10,0,10,0"
                                    HeightRequest="50"
                                    ButtonStyle="{StaticResource BaseButton}"
                                    ButtonCommand="{Binding LoadUpCommand}"
@@ -116,26 +136,6 @@
                                    TextStyle="{StaticResource BaseRaleway}"
                                    ActivityIndicatorStyle="{StaticResource ButtonActivityIndicator}"
                                    IsRunning="{Binding IsRunning}"/>
-
-
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
-
-            <Label Style="{StaticResource TitleOswald}" Text="Numeric test" HorizontalOptions="Center"/>
-
-            <module:ValidatableEntry Margin="10,2,10,4"
-                                     HeightRequest="70"
-                                 TitleStyle="{StaticResource MicroOswald}"
-                                 FrameStyle="{StaticResource TestFrame}"
-                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
-                                 EntryStyle="{StaticResource keyboradentry}"
-                                 ErrorMessage="{Binding Numbers.Error}"
-                                 ErrorMessageIsVisible="{Binding Numbers.IsValid}"
-                                 Title="Password"
-                                 Text="{Binding Numbers.Value, Mode=TwoWay}"
-                                 EntryValidationCommand="{Binding NumbersValidateCommand}"/>
-
-
-            <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding NumbersValidateCommand}"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,60"/>
 

@@ -4,11 +4,7 @@
              x:Name="this"
              x:Class="MyPrintiverse.Templates.TitledSwitch">
     
-    <Grid BindingContext="{x:Reference this}" 
-          WidthRequest="{Binding Width}"
-          HeightRequest="{Binding Height}"
-          Padding="{Binding Padding}"
-          Margin="{Binding Margin}">
+    <Grid BindingContext="{x:Reference this}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>

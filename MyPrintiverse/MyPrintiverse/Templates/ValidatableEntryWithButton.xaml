@@ -5,16 +5,9 @@
              x:Class="MyPrintiverse.Templates.ValidatableEntryWithButton"
              x:Name="this">
     
-    <StackLayout BindingContext="{x:Reference this}" 
-                         WidthRequest="{Binding Width}"
-                         HeightRequest="{Binding Height}"
-                         Padding="{Binding Padding}"
-                         Margin="{Binding Margin}"
-                         HorizontalOptions="{Binding HorizontalOptions}"
-                         VerticalOptions="{Binding VerticalOptions}"
-                         IsVisible="{Binding IsVisible}"
-                         BackgroundColor="Transparent"
-                         Spacing="0">
+    <StackLayout BindingContext="{x:Reference this}"
+                 BackgroundColor="Transparent"
+                 Spacing="0">
 
         <Label Style="{Binding TitleStyle}" 
                Text="{Binding Title}" />
