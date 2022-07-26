@@ -5,25 +5,28 @@
              x:Class="MyPrintiverse.Templates.TitledSwitch">
     
     <Grid BindingContext="{x:Reference this}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*" />
-            <ColumnDefinition Width="0.3*" />
-        </Grid.ColumnDefinitions>
+        <Frame Style="{Binding FrameStyle}" Margin="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <Label Style="{Binding TitleStyle}" 
-               Margin="0,0,10,0"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*" />
+                    <ColumnDefinition Width="0.3*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Style="{Binding TitleStyle}" 
+               Margin="10,0,10,0"
                VerticalOptions="Center"
                Text="{Binding Title}"/>
 
-        <Switch Style="{ Binding SwitchStyle}"
+                <Switch Style="{ Binding SwitchStyle}"
                 Grid.Column="1"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 IsToggled="{Binding IsToggled}"/>
-
+            </Grid>
+        </Frame>
     </Grid>
 </ContentView>

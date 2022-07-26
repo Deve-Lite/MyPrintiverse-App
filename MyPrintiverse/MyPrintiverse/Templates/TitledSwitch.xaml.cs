@@ -37,6 +37,15 @@ public partial class TitledSwitch : ContentView
 
     #endregion
 
+    #region Frame
+    public static readonly BindableProperty FrameStyleProperty = BindableProperty.Create(nameof(FrameStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public Style FrameStyle
+    {
+        get => (Style)GetValue(FrameStyleProperty);
+        set => SetValue(FrameStyleProperty, value);
+    }
+    #endregion
+
     public TitledSwitch()
 	{
 		InitializeComponent();
