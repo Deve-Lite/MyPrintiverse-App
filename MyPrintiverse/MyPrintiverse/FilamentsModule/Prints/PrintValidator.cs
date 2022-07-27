@@ -1,6 +1,4 @@
 ﻿
-
-using MyPrintiverse.FilamentsModule.Filaments;
 using Plugin.ValidationRules.Interfaces;
 
 namespace MyPrintiverse.FilamentsModule.Prints;
