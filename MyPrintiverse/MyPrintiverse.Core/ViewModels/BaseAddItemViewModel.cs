@@ -35,11 +35,12 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
     /// <returns></returns>
     public virtual async Task AddItem()
     {
-        // TODO activity button
+        IsRunning = true;
 
         if (await ItemService.AddItemAsync(Item.Value))
             await Shell.Current.GoToAsync("..", true);
 
+        IsRunning = false;
     }
 }
 

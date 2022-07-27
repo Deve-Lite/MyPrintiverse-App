@@ -43,11 +43,12 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
     /// <returns></returns>
     public virtual async Task EditItem()
     {
-        // TODO activity button
+        IsRunning = true;
 
         if (await ItemService.UpdateItemAsync(Item.Value))
             await Shell.Current.GoToAsync("..", true);
 
+        IsRunning = false;  
     }
 
 }
