@@ -16,7 +16,6 @@ public class FilamentMock
 
         filament.Brand = GetBrand();
         filament.ColorName = GetColorName();
-        filament.TypeName = GetType();
         filament.ColorHex = GetColorHex();
         filament.ShortDescription = GetDescription();
         filament.Diameter = 1.75;
@@ -101,25 +100,6 @@ public class FilamentMock
                 return "Black";
             default:
                 return "Dumb red";
-        }
-    }
-
-    private static string GetType()
-    {
-        switch (randint(0, 5))
-        {
-            case 0:
-                return "PLA";
-            case 1:
-                return "PET-G";
-            case 2:
-                return "ABS";
-            case 3:
-                return "ASA";
-            case 4:
-                return "Flex";
-            default:
-                return "Carbon";
         }
     }
 

@@ -8,7 +8,6 @@
              Title="Filaments">
 
 
-
     <Grid VerticalOptions="Fill">
         <RefreshView Style="{StaticResource BaseRefreshView}"
                      HorizontalOptions="FillAndExpand"
@@ -40,15 +39,17 @@
                                            Text="{Binding Diameter,StringFormat='Diameter: {0} mm'}" />
 
                                     <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding TypeName,  ,StringFormat='Type: {0}'}" />
+                                           Text="{Binding TypeId, Converter={StaticResource FilamentConverter}, StringFormat='Type: {0}'}" />
 
                                     <Label Style="{StaticResource SmallRaleway}"
                                            Text="{Binding ColorName,StringFormat='Color: {0}'}" />
 
+                                    <Frame BackgroundColor="{Binding ColorHex, Converter={StaticResource ColorConverter}}" HorizontalOptions="FillAndExpand" CornerRadius="4" HeightRequest="15" Margin="0,4,0,0" />
                                     <Label Style="{StaticResource MicroRaleway}"
                                            Margin="0,5,0,0"
                                            Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
 
+                                    
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
@@ -68,7 +69,7 @@
         </RefreshView>
 
         <ImageButton Style="{StaticResource CollectionAddImageButton}"
-                     Command="{Binding SwapThemeCommand}" />
+                     Command="{Binding AddItemCommand}" />
 
     </Grid>
 

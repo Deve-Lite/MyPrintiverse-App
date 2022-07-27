@@ -17,6 +17,10 @@ public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> wher
             name += ".db";
 
         DatabasePath = Path.Combine(FileSystem.AppDataDirectory, name);
+
+        db = new SQLiteAsyncConnection(DatabasePath);
+
+        Task.Run(async () => { await db.CreateTableAsync<T>(); });
     }
 
     protected SQLiteAsyncConnection? db;
@@ -38,13 +42,11 @@ public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> wher
         if (item == null || string.IsNullOrEmpty(item.Id))
             return;
 
-        await ConnectToDatabase();
         await db?.InsertAsync(item, typeof(T))!;
     }
 
     public virtual async Task DeleteAllAsync()
     {
-        await ConnectToDatabase();
         await db?.DeleteAllAsync<T>()!;
     }
     public virtual async Task DeleteItemAsync(string objectId)
@@ -52,20 +54,15 @@ public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> wher
         if (string.IsNullOrEmpty(objectId))
             return;
 
-        await ConnectToDatabase();
         await db?.DeleteAsync<T>(objectId)!;
     }
 
     public virtual async Task<T> GetItemAsync(string objectId)
     {
-        await ConnectToDatabase();
         return await db?.GetAsync<T>(objectId)!;
-        /*Do sprawdzenia która metoda lepsza */
-        //return await db.Table<Item>().FirstOrDefaultAsync(x => (x as BaseModel).Id == objectId);
     }
     public virtual async Task<IEnumerable<T>> GetItemsAsync()
     {
-        await ConnectToDatabase();
         return await db.Table<T>().ToListAsync();
     }
 
@@ -74,7 +71,6 @@ public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> wher
         if (item == null || string.IsNullOrEmpty(item.Id))
             return;
 
-        await ConnectToDatabase();
         await db?.UpdateAsync(item, typeof(T))!;
     }
 }

@@ -13,6 +13,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
         public bool IsEnabled { get=> isEnabled; set=> SetProperty(ref isEnabled, value); }
 
         public AsyncCommand SwapThemeCommand { get; }
+        public AsyncCommand AddItemCommand { get; }
 
         public async Task SwapTheme()
         {
@@ -27,6 +28,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
         public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
         { 
             Items = new ObservableCollection<GroupedItem<Filament>>();
+            AddItemCommand = new AsyncCommand(AddItem);
             SwapThemeCommand = new AsyncCommand(SwapTheme);
         }
 

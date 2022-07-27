@@ -24,13 +24,5 @@ public class Filament : BaseModel
 
     [JsonProperty("shortDescription")]
     public string ShortDescription { get; set; }
-
-    #region Only Bindable Vlues
-
-    [JsonProperty("type")]
-    public string TypeName { get; set; }
-
-    #endregion
-
 }
 

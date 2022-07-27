@@ -45,7 +45,7 @@
             <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
 
 
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+            <StackLayout HeightRequest="4" BackgroundColor="{Binding Color}" Margin="0,10,0,10"/>
 
             <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry" HorizontalOptions="Center"/>
 

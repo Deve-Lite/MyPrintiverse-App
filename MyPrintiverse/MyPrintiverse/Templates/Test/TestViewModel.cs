@@ -9,6 +9,9 @@ public class TestViewModel : BaseViewModel
     bool boolValue;
     public bool BoolValue { get => boolValue; set => SetProperty(ref boolValue, value, test); }
 
+    Color color;
+    public Color Color { get => color; set => SetProperty(ref color, value, test); }
+
     public void test()
     {
         Console.WriteLine("Pressed");
@@ -33,6 +36,7 @@ public class TestViewModel : BaseViewModel
         AdditioalCommand = new Command(Additioal);
         LoadUpCommand = new AsyncCommand(LoadUp);
         NumbersValidateCommand = new Command(() => { Numbers.Validate(); });
+
     }
 
     public Command EmailValidateCommand { get; set; }
@@ -55,8 +59,8 @@ public class TestViewModel : BaseViewModel
         // te pola trrzeba wyzerować inaczej ContainLowerRule,ContainUpperRule,ContainDigitsRule sie wywalą jezeli string jest null
         Email.Value = "";
         Password.Value = "";
-
         IsEnabled = true;
+
     }
 
     public void Test()
