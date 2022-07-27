@@ -1,6 +1,7 @@
 ﻿using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
 using Plugin.ValidationRules;
+using Plugin.ValidationRules.Interfaces;
 
 namespace MyPrintiverse.Core.ViewModels;
 
@@ -8,17 +9,17 @@ namespace MyPrintiverse.Core.ViewModels;
 /// View model for add / edit view.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
+public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new()
 {
     /// <summary>
     /// Item backing storage. 
     /// </summary>
-    private Validatable<T> item;
+    private IMapperValidator<T> item;
 
     /// <summary>
     /// Validatable item for stashing item data 
     /// </summary>
-    public Validatable<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+    public IMapperValidator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
     /// <summary>
     /// Service of item.
@@ -37,24 +38,6 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
 
         var messageServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(messageService));
         MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
-    }
-
-    /// <summary>
-    /// Validation rule for item. (Item validation rule must be created)
-    /// </summary>
-    /// <exception cref="NotImplementedException"> Method must be implemented. </exception>
-    protected virtual void AddValidation()
-    {
-        throw new NotImplementedException("Validation must be implemented.");
-    }
-
-    /// <summary>
-    /// Method for item validation
-    /// </summary>
-    /// <returns></returns>
-    protected virtual bool Validate()
-    {
-        return Item.Validate();
     }
 
     /// <summary>

@@ -1,20 +1,23 @@
-﻿namespace MyPrintiverse.FilamentsModule.Filaments;
+﻿using Plugin.ValidationRules.Interfaces;
 
-public class FilamentValidator : Validator<Filament>
+namespace MyPrintiverse.FilamentsModule.Filaments;
+
+public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filament>
 {
-    public Validatable<string> Id { get; set; }
+    private readonly ValidationMode _validatonMode;
+
     public Validatable<string> TypeId { get; set; }
-    public Validatable<DateTime> CreatedAt { get; set; }
-    public Validatable<DateTime> EditedAt { get; set; }
     public Validatable<double> Diameter { get; set; }
     public Validatable<string> Brand { get; set; }
-    public Validatable<string> ColorName { get; set; }
-    public Validatable<Color> Color { get; set; }
+    public Validatable<string> ColorHex { get; set; }
+    public Validatable<string> Color { get; set; }
     public Validatable<string> ShortDescription { get; set; }
 
     public FilamentValidator(ValidationMode validationMode)
     {
-        if(validationMode == ValidationMode.Full)
+        _validatonMode = validationMode;
+
+        if (validationMode == ValidationMode.Full)
         {
 
         }
@@ -25,6 +28,8 @@ public class FilamentValidator : Validator<Filament>
     }
     public FilamentValidator(Filament filament, ValidationMode validationMode)
     {
+        _validatonMode = validationMode;
+
         if (validationMode == ValidationMode.Full)
         {
 
@@ -35,12 +40,22 @@ public class FilamentValidator : Validator<Filament>
         }
     }
 
-    public override Filament Map()
+    public Filament Map()
     {
-        var fialmentMap = new Filament
+        var fialmentMap = new Filament();
+
+        if (_validatonMode == ValidationMode.Full)
         {
-            
-        };
+            BaseModelMap(fialmentMap);
+        }
+
+        fialmentMap.Diameter = Diameter.Value;
+        fialmentMap.Brand = Brand.Value;
+        fialmentMap.ShortDescription = ShortDescription.Value;
+        fialmentMap.Color = Color.Value;
+        fialmentMap.ColorHex = ColorHex.Value;
+        fialmentMap.TypeId = TypeId.Value;
+
         return fialmentMap;
     }
 }

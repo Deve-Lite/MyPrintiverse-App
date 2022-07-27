@@ -1,12 +1,12 @@
 ﻿
+using MyPrintiverse.FilamentsModule.Filaments;
 using Plugin.ValidationRules.Interfaces;
 
 namespace MyPrintiverse.FilamentsModule.Spools;
-public class SpoolRule : IValidationRule<Spool>
+public class SpoolValidator : BaseValidator<Spool>, IMapperValidator<Spool>
 {
-    public string ValidationMessage { get; set; }
 
-    public bool Check(Spool value)
+    public Spool Map()
     {
         throw new NotImplementedException();
     }

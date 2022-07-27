@@ -17,7 +17,7 @@ public class Filament : BaseModel
     public double Diameter { get; set; }
 
     [JsonProperty("color")]
-    public string ColorName { get; set; }
+    public string Color { get; set; }
 
     [JsonProperty("colorHex")]
     public string ColorHex { get; set; }

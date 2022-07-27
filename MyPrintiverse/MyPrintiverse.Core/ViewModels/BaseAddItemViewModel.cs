@@ -7,7 +7,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// view model for adding item.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
+public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : BaseModel, new()
 {
     /// <summary>
     /// Command for view, designed to save new item.
@@ -22,11 +22,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
     {
         base.OnAppearing();
 
-        Item.Value = new T();
-
         AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
-
-        AddValidation();
     }
 
     /// <summary>
@@ -37,7 +33,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : new(
     {
         IsRunning = true;
 
-        if (await ItemService.AddItemAsync(Item.Value))
+        if (await ItemService.AddItemAsync(Item.Map()))
             await Shell.Current.GoToAsync("..", true);
 
         IsRunning = false;
