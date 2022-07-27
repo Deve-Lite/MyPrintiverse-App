@@ -40,7 +40,7 @@
                                            Text="{Binding Diameter,StringFormat='Diameter: {0} mm'}" />
 
                                     <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding TypeName,StringFormat='Type: {0}'}" />
+                                           Text="{Binding TypeName,  ,StringFormat='Type: {0}'}" />
 
                                     <Label Style="{StaticResource SmallRaleway}"
                                            Text="{Binding ColorName,StringFormat='Color: {0}'}" />

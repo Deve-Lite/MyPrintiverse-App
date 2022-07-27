@@ -15,17 +15,16 @@ public class RangeRule<T> : IValidationRule<T>
 
 	public bool Check(T value)
 	{
-		// TODO BUG
-		// nie wiem czemu tutaj wyrzuca false dla stringa 
-		if (!typeof(T).IsValueType) 
+
+		if (typeof(T).IsValueType) 
 			return false;
 		
 		var numberLength = value.ToString().Length;
 
-		if (_minLength >= 0 && numberLength >= _minLength)
+		if (_minLength >= 0 && numberLength < _minLength)
 			return false;
 
-		if (_maxLength >= 0 && numberLength <= _maxLength)
+		if (_maxLength >= 0 && numberLength > _maxLength)
 			return false;
 
 		return true;

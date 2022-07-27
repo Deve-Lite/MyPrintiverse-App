@@ -7,5 +7,5 @@ public class ContainUpperRule : IValidationRule<string>
 {
 	public string ValidationMessage { get; set; }
 
-	public bool Check(string str) => str.Any(char.IsUpper);
+	public bool Check(string str) => str == null ? false : str.Any(char.IsUpper);
 }

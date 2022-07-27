@@ -7,8 +7,8 @@ namespace MyPrintiverse.FilamentsModule.Filaments;
 /// </summary>
 public class Filament : BaseModel
 {
-    [JsonProperty("type")]
-    public string TypeName { get; set; }
+    [JsonProperty("typeId")]
+    public string TypeId { get; set; }
 
     [JsonProperty("brand")]
     public string Brand { get; set; }
@@ -24,5 +24,13 @@ public class Filament : BaseModel
 
     [JsonProperty("shortDescription")]
     public string ShortDescription { get; set; }
+
+    #region Only Bindable Vlues
+
+    [JsonProperty("type")]
+    public string TypeName { get; set; }
+
+    #endregion
+
 }
 

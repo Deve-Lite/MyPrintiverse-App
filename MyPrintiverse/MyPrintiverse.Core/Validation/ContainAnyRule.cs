@@ -11,5 +11,5 @@ public class ContainAnyRule : IValidationRule<string>
 		_characters = characters;
 	}
 
-	public bool Check(string str) => _characters.Any(requiredCharacter => str.Any(character => character == requiredCharacter));
+	public bool Check(string str) => str == null ? false : _characters.Any(requiredCharacter => str.Any(character => character == requiredCharacter));
 }

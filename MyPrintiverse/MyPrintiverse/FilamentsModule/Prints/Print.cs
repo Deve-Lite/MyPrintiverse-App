@@ -5,7 +5,7 @@ namespace MyPrintiverse.FilamentsModule.Prints;
 /// <summary>
 /// Filament model for storing print data.
 /// </summary>
-public class Print : BaseModel
+public class Spool : BaseModel
 {
     [JsonProperty("weight")]
     public double Weight { get; set; }
