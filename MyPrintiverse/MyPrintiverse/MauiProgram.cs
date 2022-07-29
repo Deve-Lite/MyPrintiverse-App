@@ -1,6 +1,4 @@
-﻿
-
-namespace MyPrintiverse;
+﻿namespace MyPrintiverse;
 
 public static class MauiProgram
 {

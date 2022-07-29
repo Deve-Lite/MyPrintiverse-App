@@ -148,6 +148,10 @@
 		<ProjectReference Include="..\MyPrintiverse.Core\MyPrintiverse.Core.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Extensions\" />
+	</ItemGroup>
+
 	<!-- Project Includes -->
 
 </Project>
