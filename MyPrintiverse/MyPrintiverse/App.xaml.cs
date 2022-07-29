@@ -1,7 +1,9 @@
-﻿
+
 
 using MyPrintiverse.FilamentsModule;
 using MyPrintiverse.Templates.Test;
+using static MyPrintiverse.AuthorizationModule.AuthorizationModule;
+
 
 namespace MyPrintiverse;
 
@@ -26,6 +28,7 @@ public partial class App : Application
 
         FilamentRouteConfig.RegisterFilamentRoutes();
         TestRouteConfig.RegisterTestRoutes();
+        AuthorizationConfigureRoutes();
     }
 
     // TODO 

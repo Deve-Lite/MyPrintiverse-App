@@ -1,6 +1,4 @@
-﻿using MyPrintiverse.Core.Utilities;
-
-namespace MyPrintiverse.AuthorizationModule.SettingsPage;
+﻿namespace MyPrintiverse.AuthorizationModule.SettingsPage;
 
 public class SettingsViewModel : BaseViewModel
 {

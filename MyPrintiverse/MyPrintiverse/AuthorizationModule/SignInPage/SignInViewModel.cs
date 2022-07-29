@@ -1,7 +1,4 @@
-﻿using MyPrintiverse.Core.Utilities;
-using MyPrintiverse.Core.Validation;
-
-namespace MyPrintiverse.AuthorizationModule.SignInPage;
+﻿namespace MyPrintiverse.AuthorizationModule.SignInPage;
 
 public class SignInViewModel : BaseViewModel
 {

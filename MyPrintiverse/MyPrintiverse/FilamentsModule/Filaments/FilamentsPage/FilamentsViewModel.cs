@@ -4,8 +4,11 @@ using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 using MyPrintiverse.Tools.Mock;
 using MyPrintiverse.Tools.Settings;
 using System.Collections.ObjectModel;
+using MyPrintiverse.Tools;
 
-namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage
+namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+
+public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
 {
     public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
     {

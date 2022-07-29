@@ -47,7 +47,7 @@ public partial class ActivityButton : ContentView
 
     #endregion
 
-    #region Label
+    #region Text
 
     public static readonly BindableProperty TextStyleProperty = BindableProperty.Create(nameof(TextStyle), typeof(Style), typeof(ActivityButton), null);
     public Style TextStyle

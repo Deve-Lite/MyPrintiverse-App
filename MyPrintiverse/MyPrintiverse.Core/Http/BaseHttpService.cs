@@ -1,6 +1,6 @@
 ﻿using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Tools.Http;
+namespace MyPrintiverse.Core.Http;
 
 public class BaseHttpService : BaseService, IBaseHttpService
 {
