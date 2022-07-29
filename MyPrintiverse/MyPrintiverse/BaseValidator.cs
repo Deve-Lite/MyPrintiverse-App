@@ -2,16 +2,18 @@
 
 namespace MyPrintiverse;
 
-public class BaseValidator<T> where T : BaseModel, new()
+public abstract class BaseValidator<T> where T : BaseModel, new()
 {
-    public Validatable<string> Id { get; set; }
-    public Validatable<DateTime> CreatedAt { get; set; }
-    public Validatable<DateTime> EditedAt { get; set; }
+    protected ValidationMode _validatonMode;
+
+    public string Id { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime EditedAt { get; set; }
 
     public void BaseModelMap(T item)
     {
-        item.Id = Id.Value;
-        item.CreatedAt = CreatedAt.Value;
-        item.EditedAt = EditedAt.Value;
+        item.Id = Id;
+        item.CreatedAt = CreatedAt;
+        item.EditedAt = EditedAt;
     }
 }

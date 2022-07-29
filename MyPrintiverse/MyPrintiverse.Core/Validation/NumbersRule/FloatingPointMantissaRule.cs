@@ -6,7 +6,7 @@ namespace MyPrintiverse.Core.Validation.NumbersRule;
 /// Rule for validating mantissa length (after ,) in floating point value.
 /// </summary>
 /// <typeparam name="T"> Floating point type.</typeparam>
-public class FloatingPointMantissaRule<T> : IValidationRule<T>
+public class FloatingPointMantissaRule<T> : BaseNumberRule<T>, IValidationRule<T>
 {
     private readonly int _mantissaLength;
 
@@ -21,21 +21,4 @@ public class FloatingPointMantissaRule<T> : IValidationRule<T>
     public string ValidationMessage { get; set; }
 
     public bool Check(T value) => value == null ? false : value.ToString().Split(".,")[1].Length < _mantissaLength;
-
-    #region Privates
-
-    private bool IsFolatingPointType()
-    {
-        switch (Type.GetTypeCode(typeof(T)))
-        {
-            case TypeCode.Decimal:
-            case TypeCode.Double:
-            case TypeCode.Single:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    #endregion
 }

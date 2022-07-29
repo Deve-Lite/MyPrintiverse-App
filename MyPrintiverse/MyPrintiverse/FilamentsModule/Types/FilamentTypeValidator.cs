@@ -6,6 +6,6 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>, IMapperValidat
 {
     public FilamentType Map()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException("Implement FilamentTypeValidator.");
     }
 }

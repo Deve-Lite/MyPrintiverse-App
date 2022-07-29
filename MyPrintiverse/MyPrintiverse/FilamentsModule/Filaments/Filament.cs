@@ -24,5 +24,17 @@ public class Filament : BaseModel
 
     [JsonProperty("shortDescription")]
     public string ShortDescription { get; set; }
+
+    [JsonProperty("nozzleTemperature")]
+    public int NozzleTemperature { get; set; }
+
+    [JsonProperty("bedTemperature")]
+    public int BedTemperature { get; set; }
+
+    [JsonProperty("coolingTemperature")]
+    public int CoolingTemperature { get; set; }
+
+    [JsonProperty("rating")]
+    public int Rating { get; set; }
 }
 

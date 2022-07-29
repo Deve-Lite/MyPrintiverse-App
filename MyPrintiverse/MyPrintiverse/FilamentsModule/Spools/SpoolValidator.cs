@@ -7,6 +7,6 @@ public class SpoolValidator : BaseValidator<Spool>, IMapperValidator<Spool>
 
     public Spool Map()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException("Implement SpoolValidator.");
     }
 }
