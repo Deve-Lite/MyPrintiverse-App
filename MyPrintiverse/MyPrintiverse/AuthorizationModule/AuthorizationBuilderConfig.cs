@@ -6,9 +6,9 @@ using MyPrintiverse.AuthorizationModule.SettingsPage;
 
 namespace MyPrintiverse.AuthorizationModule;
 
-public static class MauiAppExtensions
+public static class AuthorizationBuilderConfig
 {
-	public static MauiAppBuilder AuthorizationConfigureServices(this MauiAppBuilder @this)
+	public static MauiAppBuilder ConfigureAuthorizationServices(this MauiAppBuilder @this)
 	{
 		@this.Services.AddSingleton<ChangePasswordService>();
 		@this.Services.AddSingleton<ConfirmEmailService>();
@@ -19,7 +19,7 @@ public static class MauiAppExtensions
 		return @this;
 	}
 
-	public static MauiAppBuilder AuthorizationConfigureViewModels(this MauiAppBuilder @this)
+	public static MauiAppBuilder ConfigureAuthorizationViewModels(this MauiAppBuilder @this)
 	{
 		@this.Services.AddSingleton<ChangePasswordViewModel>();
 		@this.Services.AddSingleton<ConfirmEmailViewModel>();
@@ -30,7 +30,7 @@ public static class MauiAppExtensions
 		return @this;
 	}
 
-	public static MauiAppBuilder AuthorizationConfigureViews(this MauiAppBuilder @this)
+	public static MauiAppBuilder ConfigureAuthorizationViews(this MauiAppBuilder @this)
 	{
 		@this.Services.AddSingleton<ChangePasswordView>();
 		@this.Services.AddSingleton<ConfirmEmailView>();

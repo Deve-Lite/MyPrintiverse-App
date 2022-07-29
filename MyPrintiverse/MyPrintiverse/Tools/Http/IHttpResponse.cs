@@ -1,9 +1,9 @@
 ﻿#nullable enable
 using System.Net;
 
-namespace MyPrintiverse.Core.Http;
+namespace MyPrintiverse.Tools.Http;
 
-public class HttpResponse<T> : IHttpResponse<T?>
+public interface IHttpResponse<T>
 {
 	public T? Value { get; set; }
 	public HttpStatusCode StatusCode { get; set; }

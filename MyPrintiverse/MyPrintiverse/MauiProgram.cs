@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse;
+﻿
+
+namespace MyPrintiverse;
 
 public static class MauiProgram
 {
@@ -9,7 +11,7 @@ public static class MauiProgram
 			.ConfigureServices()
 			.ConfigureViews()
 			.ConfigureViewModels()
-			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}/config.json")
+			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}/config.json", null)
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{

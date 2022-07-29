@@ -1,4 +1,7 @@
-﻿namespace MyPrintiverse.AuthorizationModule.RemindPasswordPage;
+﻿using MyPrintiverse.Core.Utilities;
+using MyPrintiverse.Core.Validation;
+
+namespace MyPrintiverse.AuthorizationModule.RemindPasswordPage;
 
 public class RemindPasswordViewModel : BaseViewModel
 {

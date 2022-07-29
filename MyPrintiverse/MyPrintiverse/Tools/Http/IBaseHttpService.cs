@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Core.Http;
+﻿namespace MyPrintiverse.Tools.Http;
 
 public interface IBaseHttpService : IBaseService
 {

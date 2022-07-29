@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.AuthorizationModule.ChangePasswordPage;
+﻿using MyPrintiverse.Core.Utilities;
+
+namespace MyPrintiverse.AuthorizationModule.ChangePasswordPage;
 
 public class ChangePasswordService : BaseService, IChangePasswordService
 {

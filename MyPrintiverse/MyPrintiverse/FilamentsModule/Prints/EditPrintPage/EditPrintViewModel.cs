@@ -1,10 +1,11 @@
 ﻿
 
-namespace MyPrintiverse.FilamentsModule.Prints.EditPrintPage;
-
-public class EditPrintViewModel : BaseEditItemViewModel<Print>
+namespace MyPrintiverse.FilamentsModule.Prints.EditPrintPage
 {
-	public EditPrintViewModel(MessageService messageService, PrintService itemService) : base(messageService, itemService)
-	{
-	}
+    public class EditPrintViewModel : BaseEditItemViewModel<Spool>
+    {
+        public EditPrintViewModel(MessageService messageService, PrintService itemService) : base(messageService, itemService)
+        {
+        }
+    }
 }

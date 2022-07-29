@@ -1,4 +1,7 @@
-﻿namespace MyPrintiverse.AuthorizationModule.ChangePasswordPage;
+﻿using MyPrintiverse.Core.Utilities;
+using MyPrintiverse.Core.Validation;
+
+namespace MyPrintiverse.AuthorizationModule.ChangePasswordPage;
 
 public class ChangePasswordViewModel : BaseViewModel
 {

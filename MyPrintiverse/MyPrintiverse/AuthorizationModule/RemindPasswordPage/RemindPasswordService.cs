@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.AuthorizationModule.RemindPasswordPage;
+﻿using MyPrintiverse.Core.Utilities;
+
+namespace MyPrintiverse.AuthorizationModule.RemindPasswordPage;
 
 /// <inheritdoc cref="IRemindPasswordService" />
 public class RemindPasswordService : BaseService, IRemindPasswordService

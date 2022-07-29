@@ -14,6 +14,7 @@ global using MyPrintiverse.Core.Utilities;
 global using MyPrintiverse.Core.Validation;
 global using MyPrintiverse.Core.Services;
 
+global using MyPrintiverse.Extensions;
 global using MyPrintiverse.Templates;
 
 global using System.Reflection;

@@ -1,9 +1,12 @@
-﻿namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
-
-public class AddFilamentViewModel : BaseAddItemViewModel<Filament>
+﻿using System;
+namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage
 {
-	public AddFilamentViewModel(MessageService messageService, FilamentService itemService) : base(messageService, itemService)
+	public class AddFilamentViewModel : BaseAddItemViewModel<Filament>
 	{
+		public AddFilamentViewModel(MessageService messageService, FilamentService itemService) : base(messageService, itemService)
+		{
 
-	}
+		}
+    }
 }
+

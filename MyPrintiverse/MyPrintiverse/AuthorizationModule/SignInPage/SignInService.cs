@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.AuthorizationModule.SignInPage;
+﻿using MyPrintiverse.Core.Utilities;
+
+namespace MyPrintiverse.AuthorizationModule.SignInPage;
 
 public class SignInService : BaseService, ISignInService
 {

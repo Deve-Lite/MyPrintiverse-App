@@ -1,9 +1,10 @@
 ﻿
-namespace MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
-
-public class AddSpoolViewModel : BaseAddItemViewModel<Spool>
+namespace MyPrintiverse.FilamentsModule.Spools.AddSpoolPage
 {
-	public AddSpoolViewModel(MessageService messageService, SpoolService itemService) : base(messageService, itemService)
-	{
-	}
+    public class AddSpoolViewModel : BaseAddItemViewModel<Spool>
+    {
+        public AddSpoolViewModel(MessageService messageService, SpoolService itemService) : base(messageService, itemService)
+        {
+        }
+    }
 }

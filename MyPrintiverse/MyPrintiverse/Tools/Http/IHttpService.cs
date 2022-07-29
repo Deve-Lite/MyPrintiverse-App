@@ -1,6 +1,6 @@
 ﻿#nullable enable
 
-namespace MyPrintiverse.Core.Http;
+namespace MyPrintiverse.Tools.Http;
 
 public interface IHttpService
 {
