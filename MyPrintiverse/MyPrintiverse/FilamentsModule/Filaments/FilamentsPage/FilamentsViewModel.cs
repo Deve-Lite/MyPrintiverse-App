@@ -7,6 +7,9 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
 {
+    private bool isEnabled;
+
+    public new bool IsEnabled { get=>isEnabled; set=>SetProperty(ref isEnabled, value); }
 
     public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
     { 

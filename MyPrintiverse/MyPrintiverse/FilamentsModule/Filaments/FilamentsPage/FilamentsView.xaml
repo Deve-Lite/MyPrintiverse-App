@@ -4,7 +4,6 @@
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Filaments"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
              xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
-             xmlns:module="clr-namespace:MyPrintiverse.Templates"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.FilamentsPage.FilamentsView"
              Title="Filaments">
 
@@ -69,8 +68,7 @@
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Style="{StaticResource CollectionAddImageButton}"
-                     Command="{Binding AddItemCommand}" />
+        <ImageButton Style="{StaticResource CollectionAddImageButton}" IsEnabled="{Binding IsEnabled}"/>
 
     </Grid>
 
