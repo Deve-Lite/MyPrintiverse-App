@@ -69,6 +69,7 @@
         </RefreshView>
 
         <ImageButton Style="{StaticResource CollectionAddImageButton}"
+                     IsEnabled="True"
                      Command="{Binding AddItemCommand}" />
 
     </Grid>

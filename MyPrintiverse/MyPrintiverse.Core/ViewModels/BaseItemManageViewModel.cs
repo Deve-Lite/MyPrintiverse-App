@@ -1,7 +1,5 @@
 ﻿using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
-using Plugin.ValidationRules;
-using Plugin.ValidationRules.Interfaces;
 
 namespace MyPrintiverse.Core.ViewModels;
 
@@ -9,7 +7,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// View model for add / edit view.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new()
+public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new() 
 {
     /// <summary>
     /// Item backing storage. 
@@ -31,6 +29,11 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     /// </summary>
     protected IMessageService MessageService;
 
+    /// <summary>
+    /// Command designed to go to previous page.
+    /// </summary>
+    public AsyncCommand? BackCommand { get; set; }
+
     public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
     {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(itemService));
@@ -40,10 +43,20 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
         MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
     }
 
+    public override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        BackCommand = new AsyncCommand(Back);
+    }
+
+
+    public virtual async Task Back() => await Shell.Current.GoToAsync("..");
+
     /// <summary>
     /// Additional actions to perform when item is changed.
     /// </summary>
-    protected virtual void OnChanged()
+    public virtual void OnChanged()
     {
 
     }

@@ -31,8 +31,8 @@ public class Filament : BaseModel
     [JsonProperty("bedTemperature")]
     public int BedTemperature { get; set; }
 
-    [JsonProperty("coolingTemperature")]
-    public int CoolingTemperature { get; set; }
+    [JsonProperty("coolingRate")]
+    public int CoolingRate { get; set; }
 
     [JsonProperty("rating")]
     public int Rating { get; set; }

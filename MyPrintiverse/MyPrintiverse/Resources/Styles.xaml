@@ -105,7 +105,7 @@
     </Style>
 
     <Style TargetType="Border"
-           x:Key="DefaultBorder">
+           x:Key="BaseBorder">
         <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
 
@@ -250,6 +250,10 @@
 
         <Setter Property="Padding"
                 Value="5" />
+
+        <Setter Property="IsEnabled"
+                Value="{Binding IsEnabled}" />
+
 
         <Setter Property="Command"
                 Value="{Binding AddItemCommand}" />
@@ -427,7 +431,7 @@
     </Style>
 
     <Style TargetType="Entry"
-           x:Key="DefaultEntry">
+           x:Key="BaseEntry">
 
         <Setter Property="TextColor"
                 Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />

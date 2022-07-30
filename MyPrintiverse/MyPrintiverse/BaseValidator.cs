@@ -10,10 +10,17 @@ public abstract class BaseValidator<T> where T : BaseModel, new()
     public DateTime CreatedAt { get; set; }
     public DateTime EditedAt { get; set; }
 
-    public void BaseModelMap(T item)
+    protected void BaseModelMap(T item)
     {
         item.Id = Id;
         item.CreatedAt = CreatedAt;
         item.EditedAt = EditedAt;
+    }
+
+    protected virtual void FillData(T filament)
+    {
+        Id = filament.Id;
+        CreatedAt = filament.CreatedAt;
+        EditedAt = filament.EditedAt;
     }
 }

@@ -11,7 +11,7 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
     public string ColorHex { get; set; }
     public Validatable<string> ShortDescription { get; set; }
     public Validatable<int> NozzleTemperature { get; set; }
-    public Validatable<int> CoolingTemperature { get; set; }
+    public Validatable<int> CoolingRate { get; set; }
     public Validatable<int> BedTemperature { get; set; }
     public Validatable<int> Rating { get; set; }
 
@@ -26,6 +26,8 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         _validatonMode = ValidationMode.Full;
 
         AddValidation();
+
+        FillData(filament);
     }
 
     public Filament Map()
@@ -44,7 +46,7 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         fialmentMap.Color = Color.Value;
         fialmentMap.ColorHex = ColorHex;
         fialmentMap.BedTemperature = BedTemperature.Value;
-        fialmentMap.CoolingTemperature = CoolingTemperature.Value;
+        fialmentMap.CoolingRate = CoolingRate.Value;
         fialmentMap.NozzleTemperature = NozzleTemperature.Value;
         fialmentMap.Rating = Rating.Value;
 
@@ -68,22 +70,46 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         {
             ShortDescription = Validator.Build<string>().WithRule(new RangeRule<string>(maxLength:100), "Description should be shorter than 100 characters.");
 
-            NozzleTemperature = Validator.Build<int>().WithLengthRule(1, 3, "Value rage 0-999");
+            NozzleTemperature = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 999));
 
-            BedTemperature = Validator.Build<int>().WithLengthRule(1, 3, "Value rage 0-999");
+            BedTemperature = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 999));
 
-            CoolingTemperature = Validator.Build<int>().WithLengthRule(1, 3, "Value rage 0-999");
+            CoolingRate = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 100));
 
             Rating = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 10));
         }
         else
         {
+            ShortDescription = Validator.Build<string>();
+            NozzleTemperature = Validator.Build<int>();
+            BedTemperature = Validator.Build<int>();
+            CoolingRate = Validator.Build<int>();
+            Rating = Validator.Build<int>();
+
             ShortDescription.IsValid = true;
             NozzleTemperature.IsValid = true;
             BedTemperature.IsValid = true;
-            CoolingTemperature.IsValid = true;
+            CoolingRate.IsValid = true;
             Rating.IsValid = true;
         }
+    }
+
+    protected override void FillData(Filament filament)
+    {
+        base.FillData(filament);
+
+        TypeId = filament.TypeId;
+        ColorHex = filament.ColorHex;
+
+        Color.Value = filament.Color;
+        Diameter.Value = filament.Diameter;
+        Brand.Value = filament.Brand;
+
+        ShortDescription.Value = filament.ShortDescription;
+        NozzleTemperature.Value = filament.NozzleTemperature;
+        BedTemperature.Value = filament.BedTemperature;
+        CoolingRate.Value = filament.CoolingRate;
+        Rating.Value = filament.Rating;
     }
 
     #endregion

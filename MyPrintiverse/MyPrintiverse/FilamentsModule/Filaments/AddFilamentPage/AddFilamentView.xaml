@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
-             Title="AddFilamentView">
-    <StackLayout>
-        <Label Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-    </StackLayout>
+             xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="templates:ActivityButton" x:Key="BaseActivityButton">
+                <Setter Property="ActivityIndicatorStyle" Value="{StaticResource BaseActivityIndicator}"/>
+                <Setter Property="ButtonStyle" Value="{StaticResource BaseButton}"/>
+                <Setter Property="TextStyle" Value="{StaticResource BaseRaleway}"/>
+                <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
+                <Setter Property="Text" Value="Add Filament"/>
+                <Setter Property="ButtonCommand" Value="{Binding AddItemCommand}"/>
+
+            </Style>
+
+            <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
+                
+                <Setter Property="EntryStyle" Value="{StaticResource BaseEntry}"/>
+                <Setter Property="ButtonStyle" Value="{StaticResource BaseButton}"/>
+                <Setter Property="TextStyle" Value="{StaticResource BaseRaleway}"/>
+                <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
+                <Setter Property="Text" Value="Add Filament"/>
+                <Setter Property="ButtonCommand" Value="{Binding AddItemCommand}"/>
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Style="{StaticResource HeaderLabel}" Text="New Filament" HorizontalOptions="Center"/>
+            <Button Style="{StaticResource BaseButton}" Text="Back" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" CornerRadius="8"/>
+
+
+            <Border Style="{StaticResource BaseBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20,20,0,0"/>
+                </Border.StrokeShape>
+                
+                <StackLayout>
+                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                                                Title="Brand"/>
+                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
+                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
+                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
+                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
+                    
+                    <templates:ActivityButton Style="{StaticResource BaseActivityButton}"/>
+                </StackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
+
 </ContentPage>
