@@ -17,13 +17,9 @@
             </Style>
 
             <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
-                
+
                 <Setter Property="EntryStyle" Value="{StaticResource BaseEntry}"/>
-                <Setter Property="ButtonStyle" Value="{StaticResource BaseButton}"/>
-                <Setter Property="TextStyle" Value="{StaticResource BaseRaleway}"/>
-                <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
-                <Setter Property="Text" Value="Add Filament"/>
-                <Setter Property="ButtonCommand" Value="{Binding AddItemCommand}"/>
+                <Setter Property="TitleStyle" Value="{StaticResource MicroOswald}"/>
 
             </Style>
         </ResourceDictionary>
@@ -32,7 +28,6 @@
 
     <ScrollView>
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -40,7 +35,6 @@
 
             <Label Style="{StaticResource HeaderLabel}" Text="New Filament" HorizontalOptions="Center"/>
             <Button Style="{StaticResource BaseButton}" Text="Back" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" CornerRadius="8"/>
-
 
             <Border Style="{StaticResource BaseBorder}">
                 <Border.StrokeShape>
