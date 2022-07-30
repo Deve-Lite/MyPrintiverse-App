@@ -1,5 +1,6 @@
 ﻿using MyPrintiverse.AuthorizationModule;
 using MyPrintiverse.FilamentsModule;
+using MyPrintiverse.Templates.Test;
 using MyPrintiverse.Tools;
 
 namespace MyPrintiverse;
@@ -44,6 +45,7 @@ public static class MauiAppExtensions
 
         builder.AuthorizationConfigureViewModels();
         builder.ConfigureFilamentViewModels();
+        builder.ConfigureTestViewsModels();
 
         return builder;
     }
@@ -61,6 +63,7 @@ public static class MauiAppExtensions
 
         builder.AuthorizationConfigureViews();
         builder.ConfigureFilamentViews();
+        builder.ConfigureTestViews();
 
         return builder;
     }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
+             x:Class="MyPrintiverse.Templates.ValidatableEntry"
+             x:Name="this">
+
+    <StackLayout BindingContext="{x:Reference this}"
+                 BackgroundColor="Transparent">
+
+
+        <Label Style="{Binding TitleStyle}" 
+               Grid.Row="0"
+               Text="{Binding Title}" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Frame Style="{Binding FrameStyle}"  Grid.Row="1">
+                <Entry Style="{Binding EntryStyle}" 
+                   Text="{Binding Text, Mode=TwoWay, Converter={StaticResource EntryConverter}}"     
+                   Placeholder="{Binding Placeholder}" 
+                   IsPassword="{Binding IsPassword}">
+
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                Command="{Binding EntryValidationCommand}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </Frame>
+        </Grid>
+
+        <Label Style="{Binding ErrorMessageStyle}" 
+               Grid.Row="2"
+               IsVisible="{Binding ErrorMessageIsVisible, Converter={toolkit:InvertedBoolConverter}}"
+               Text="{Binding ErrorMessage}" 
+               Margin="0,0,0,3"
+               HorizontalOptions="Center"/>
+    </StackLayout>
+</ContentView>

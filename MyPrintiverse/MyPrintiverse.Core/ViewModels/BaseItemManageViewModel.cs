@@ -1,6 +1,5 @@
 ﻿using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
-using Plugin.ValidationRules;
 
 namespace MyPrintiverse.Core.ViewModels;
 
@@ -8,17 +7,17 @@ namespace MyPrintiverse.Core.ViewModels;
 /// View model for add / edit view.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
+public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new() 
 {
     /// <summary>
     /// Item backing storage. 
     /// </summary>
-    private Validatable<T> item;
+    private IMapperValidator<T> item;
 
     /// <summary>
     /// Validatable item for stashing item data 
     /// </summary>
-    public Validatable<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+    public IMapperValidator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
     /// <summary>
     /// Service of item.
@@ -30,6 +29,11 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
     /// </summary>
     protected IMessageService MessageService;
 
+    /// <summary>
+    /// Command designed to go to previous page.
+    /// </summary>
+    public AsyncCommand? BackCommand { get; set; }
+
     public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
     {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(itemService));
@@ -39,28 +43,20 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : new()
         MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
     }
 
-    /// <summary>
-    /// Validation rule for item. (Item validation rule must be created)
-    /// </summary>
-    /// <exception cref="NotImplementedException"> Method must be implemented. </exception>
-    protected virtual void AddValidation()
+    public override void OnAppearing()
     {
-        throw new NotImplementedException("Validation must be implemented.");
+        base.OnAppearing();
+
+        BackCommand = new AsyncCommand(Back);
     }
 
-    /// <summary>
-    /// Method for item validation
-    /// </summary>
-    /// <returns></returns>
-    protected virtual bool Validate()
-    {
-        return Item.Validate();
-    }
+
+    public virtual async Task Back() => await Shell.Current.GoToAsync("..");
 
     /// <summary>
     /// Additional actions to perform when item is changed.
     /// </summary>
-    protected virtual void OnChanged()
+    public virtual void OnChanged()
     {
 
     }

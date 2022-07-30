@@ -15,8 +15,8 @@ public class FilamentMock
         filament.CreatedAt = DateTime.Now;
 
         filament.Brand = GetBrand();
-        filament.ColorName = GetColorName();
-        filament.TypeName = GetType();
+        filament.Color = GetColorName();
+        filament.TypeId = GetType();
         filament.ColorHex = GetColorHex();
         filament.ShortDescription = GetDescription();
         filament.Diameter = 1.75;

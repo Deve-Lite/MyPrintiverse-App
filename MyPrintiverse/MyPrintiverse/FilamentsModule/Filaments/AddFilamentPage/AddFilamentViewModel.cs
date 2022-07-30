@@ -2,8 +2,9 @@
 
 public class AddFilamentViewModel : BaseAddItemViewModel<Filament>
 {
-	public AddFilamentViewModel(MessageService messageService, FilamentService itemService) : base(messageService, itemService)
-	{
-
-	}
+    public AddFilamentViewModel(MessageService messageService, FilamentService itemService) : base(messageService, itemService)
+    {
+        Item = new FilamentValidator();
+    }
 }
+

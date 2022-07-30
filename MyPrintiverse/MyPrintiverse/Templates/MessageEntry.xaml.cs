@@ -2,28 +2,27 @@ namespace MyPrintiverse.Templates;
 
 public partial class MessageEntry : ContentView
 {
-    //TODO
-    public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(MessageEntry), string.Empty);
+    //ZAMAINA NA ValidatableEntry
 
+    public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(MessageEntry), string.Empty);
 	public string Message
 	{
 		get => (string)GetValue(MessageProperty);
 		set => SetValue(MessageProperty, value);
 	}
 
-	public static readonly BindableProperty MessageIsVisibleProperty = BindableProperty.Create(nameof(MessageIsVisible), typeof(bool), typeof(MessageEntry), string.Empty);
-
-	public string MessageIsVisible
+	public static readonly BindableProperty MessageIsVisibleProperty = BindableProperty.Create(nameof(MessageIsVisible), typeof(bool), typeof(MessageEntry), false);
+	public bool MessageIsVisible
 	{
-		get => (string)GetValue(MessageIsVisibleProperty);
+		get => (bool)GetValue(MessageIsVisibleProperty);
 		set => SetValue(MessageIsVisibleProperty, value);
 	}
 
-	public static readonly BindableProperty MessageColorProperty = BindableProperty.Create(nameof(MessageColor), typeof(Color), typeof(MessageEntry), string.Empty);
+	public static readonly BindableProperty MessageColorProperty = BindableProperty.Create(nameof(MessageColor), typeof(Color), typeof(MessageEntry), Color.FromRgb(255, 255, 255));
 
-	public string MessageColor
+	public Color MessageColor
 	{
-		get => (string)GetValue(MessageColorProperty);
+		get => (Color)GetValue(MessageColorProperty);
 		set => SetValue(MessageColorProperty, value);
 	}
 
