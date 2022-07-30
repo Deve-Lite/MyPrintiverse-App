@@ -37,6 +37,29 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 		set => SetProperty(ref _isRefreshing, value);
 	}
 
+    private bool _isRunning;
+
+    /// <summary>
+    /// Terminate if loading action on page is started.
+    /// </summary>
+    public bool IsRunning
+    {
+        get => _isRunning;
+        set => SetProperty(ref _isRunning, value);
+    }
+
+
+    bool isEnabled;
+    /// <summary>
+    /// Terminate if buttons on page are on.
+    /// </summary>
+    public bool IsEnabled
+    {
+        get => isEnabled;
+        set => SetProperty(ref isEnabled, value);
+    }
+
+
     /// <summary>
     /// Check if command can be executed.
     /// </summary>

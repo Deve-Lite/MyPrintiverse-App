@@ -29,6 +29,12 @@
     <Style TargetType="Label"
            x:Key="BaseComplementary"
            BasedOn="{StaticResource Base}">
+
+        <Setter Property="TextColor"
+                Value="{StaticResource Error}" />
+
+        <!-- TO SET -->
+        
         <Setter Property="FontFamily"
                 Value="OpenSansRegular" />
     </Style>
@@ -54,7 +60,7 @@
                 Value="18" />
     </Style>
     <Style TargetType="Label"
-           x:Key="DefaultRaleway"
+           x:Key="MediumRaleway"
            BasedOn="{StaticResource BaseRaleway}">
 
     </Style>
@@ -95,7 +101,7 @@
                 Value="18" />
     </Style>
     <Style TargetType="Label"
-           x:Key="DefaultOswald"
+           x:Key="MediumOswald"
            BasedOn="{StaticResource BaseOswald}">
 
     </Style>
@@ -133,7 +139,7 @@
                 Value="18" />
     </Style>
     <Style TargetType="Label"
-           x:Key="DefaultComplementary"
+           x:Key="MediumComplementary"
            BasedOn="{StaticResource BaseComplementary}">
 
     </Style>

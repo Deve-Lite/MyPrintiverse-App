@@ -4,16 +4,16 @@
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Filaments"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
              xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:module="clr-namespace:MyPrintiverse.Templates"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.FilamentsPage.FilamentsView"
              Title="Filaments">
 
 
-
     <Grid VerticalOptions="Fill">
-        <RefreshView Style="{StaticResource DefaultRefreshView}"
+        <RefreshView Style="{StaticResource BaseRefreshView}"
                      HorizontalOptions="FillAndExpand"
                      VerticalOptions="FillAndExpand">
-            <CollectionView Style="{StaticResource DefaultCollectionView}"
+            <CollectionView Style="{StaticResource BaseCollectionView}"
                             IsGrouped="True">
 
                 <CollectionView.GroupHeaderTemplate>
@@ -38,16 +38,18 @@
                                     <Label Style="{StaticResource SmallRaleway}"
                                            Margin="0,5,0,0"
                                            Text="{Binding Diameter,StringFormat='Diameter: {0} mm'}" />
-                                    
+
                                     <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding TypeName,StringFormat='Type: {0}'}" />
-                                    
+                                           Text="{Binding TypeId, Converter={StaticResource FilamentConverter}, StringFormat='Type: {0}'}" />
+
                                     <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding ColorName,StringFormat='Color: {0}'}" />
-                                    
+                                           Text="{Binding Color,StringFormat='Color: {0}'}" />
+
+                                    <Frame BackgroundColor="{Binding ColorHex, Converter={StaticResource ColorConverter}}" HorizontalOptions="FillAndExpand" CornerRadius="4" HeightRequest="15" Margin="0,4,0,0" />
                                     <Label Style="{StaticResource MicroRaleway}"
                                            Margin="0,5,0,0"
                                            Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
+
 
                                 </StackLayout>
                             </Frame>
@@ -68,34 +70,8 @@
         </RefreshView>
 
         <ImageButton Style="{StaticResource CollectionAddImageButton}"
-                     Command="{Binding SwapThemeCommand}" />
+                     Command="{Binding AddItemCommand}" />
 
     </Grid>
-
-    <!--
-        <HorizontalStackLayout>
-
-
-            <Button Text="StandardAdd"
-                    BackgroundColor="Yellow"
-                    Margin="10"
-                    IsEnabled="{Binding IsEnabled}"
-                    Command="{Binding AddItemCommand}" />
-
-            <Button Text="Refresh"
-                    BackgroundColor="Red"
-                    Margin="10"
-                    IsEnabled="{Binding IsEnabled}"
-                    Command="{Binding RefreshItemsCommand}" />
-
-            <Button Text="swaptheme"
-                    BackgroundColor="Green"
-                    Margin="10"
-                    IsEnabled="{Binding IsEnabled}"
-                    Command="{Binding SwapThemeCommand}" />
-        </HorizontalStackLayout>
-        
-        -->
-
 
 </ContentPage>

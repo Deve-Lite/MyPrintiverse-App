@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MyPrintiverse.Templates.ValidatableEntryWithButton"
+             x:Name="this">
+    
+    <StackLayout BindingContext="{x:Reference this}"
+                 BackgroundColor="Transparent"
+                 Spacing="0">
+
+        <Label Style="{Binding TitleStyle}" 
+               Text="{Binding Title}" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.82*"/>
+                <ColumnDefinition Width="0.02*"/>
+                <ColumnDefinition Width="0.15*"/>
+            </Grid.ColumnDefinitions>
+            <Frame Style="{Binding FrameStyle}">
+                <Entry Style="{Binding EntryStyle}" 
+                   Text="{Binding Text, Mode=TwoWay}"     
+                   Placeholder="{Binding Placeholder}" 
+                   IsPassword="{Binding IsPassword}" >
+
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                Command="{Binding EntryValidationCommand}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </Frame>
+
+            <ImageButton Grid.Column="2" 
+                         Command="{Binding ImageButtonCommand}"
+                         Style="{Binding ImagineButtonStyle}"
+                         Source="{Binding ImageButtonSource}"/>
+
+        </Grid>
+
+        <Label Style="{Binding ErrorMessageStyle}" 
+               IsVisible="{Binding ErrorMessageIsVisible, Converter={toolkit:InvertedBoolConverter}}"
+               Text="{Binding ErrorMessage}" 
+               Margin="0,0,0,4"
+               HorizontalOptions="Center"/>
+    </StackLayout>
+</ContentView>

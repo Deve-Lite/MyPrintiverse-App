@@ -15,18 +15,18 @@ public class RangeRule<T> : IValidationRule<T>
 
 	public bool Check(T value)
 	{
-		if (!typeof(T).IsValueType) 
-			return false;
-		
-		var numberLength = value.ToString().Length;
+        if (typeof(T).IsValueType)
+            return false;
 
-		if (_minLength >= 0 && numberLength >= _minLength)
-			return false;
+        var numberLength = value.ToString().Length;
 
-		if (_maxLength >= 0 && numberLength <= _maxLength)
-			return false;
+        if (_minLength >= 0 && numberLength < _minLength)
+            return false;
 
-		return true;
+        if (_maxLength >= 0 && numberLength > _maxLength)
+            return false;
 
-	}
+        return true;
+
+    }
 }

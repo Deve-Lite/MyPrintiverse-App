@@ -9,7 +9,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new()
+public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : BaseModel, new()
 {
 
     /// <summary>
@@ -30,11 +30,7 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
     {
         base.OnAppearing();
 
-        Item.Value = await ItemService.GetItemAsync(Id);
-
         EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
-
-        AddValidation();
     }
 
     /// <summary>
@@ -43,11 +39,12 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : new
     /// <returns></returns>
     public virtual async Task EditItem()
     {
-        // TODO activity button
+        IsRunning = true;
 
-        if (await ItemService.UpdateItemAsync(Item.Value))
+        if (await ItemService.UpdateItemAsync(Item.Map()))
             await Shell.Current.GoToAsync("..", true);
 
+        IsRunning = false;  
     }
 
 }
