@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="0.02*"/>
                 <ColumnDefinition Width="0.15*"/>
             </Grid.ColumnDefinitions>
-            <Frame Style="{Binding FrameStyle}">
+            <Frame Style="{Binding FrameStyle}" Padding="5,0,5,0">
                 <Entry Style="{Binding EntryStyle}" 
                    Text="{Binding Text, Mode=TwoWay}"     
                    Placeholder="{Binding Placeholder}" 
@@ -33,7 +33,7 @@
 
             <ImageButton Grid.Column="2" 
                          Command="{Binding ImageButtonCommand}"
-                         Style="{Binding ImagineButtonStyle}"
+                         Style="{Binding ImageButtonStyle}"
                          Source="{Binding ImageButtonSource}"/>
 
         </Grid>

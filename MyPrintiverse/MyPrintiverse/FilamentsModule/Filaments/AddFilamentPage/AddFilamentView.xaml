@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
-             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView">
+             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
+             Shell.FlyoutBehavior="Disabled" 
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -13,43 +15,90 @@
                 <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
                 <Setter Property="Text" Value="Add Filament"/>
                 <Setter Property="ButtonCommand" Value="{Binding AddItemCommand}"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
 
+            <Style TargetType="Frame" x:Key="AddPageFrame" BasedOn="{StaticResource BaseFrame}">
+                <Setter Property="Margin" Value="0, 3, 0, 2"/>
             </Style>
 
             <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
-
                 <Setter Property="EntryStyle" Value="{StaticResource BaseEntry}"/>
                 <Setter Property="TitleStyle" Value="{StaticResource MicroOswald}"/>
-
+                <Setter Property="FrameStyle" Value="{StaticResource AddPageFrame}"/>
+                <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
             </Style>
+
+            <Style TargetType="templates:ValidatableEntryWithButton" x:Key="BaseButtonValidatableEntry">
+                <Setter Property="EntryStyle" Value="{StaticResource BaseEntry}" />
+                <Setter Property="TitleStyle" Value="{StaticResource MicroOswald}" />
+                <Setter Property="FrameStyle" Value="{StaticResource AddPageFrame}" />
+                <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
+                <Setter Property="ImageButtonStyle" Value="{StaticResource ValidatableImageButton}" />
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
 
-    <ScrollView>
-        <Grid>
+    <ScrollView VerticalOptions="FillAndExpand">
+        <Grid VerticalOptions="FillAndExpand">
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Style="{StaticResource HeaderLabel}" Text="New Filament" HorizontalOptions="Center"/>
-            <Button Style="{StaticResource BaseButton}" Text="Back" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" CornerRadius="8"/>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.75*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                </Grid.ColumnDefinitions>
 
-            <Border Style="{StaticResource BaseBorder}">
+                <Label Grid.ColumnSpan="2" 
+                       Grid.Column="0" 
+                       Style="{StaticResource TitleOswald}"
+                       Margin="0" 
+                       HorizontalOptions="Center" 
+                       Text="New Filament" 
+                       VerticalOptions="Center"/>
+
+                <ImageButton Grid.Column="1" Style="{StaticResource BaseImageButton}"
+                             Command="{Binding BackCommand}"
+                             IsEnabled="{Binding IsEnabled}" 
+                             WidthRequest="50"
+                             HeightRequest="50"/>
+            </Grid>
+
+            <Border Grid.Row="2" Style="{StaticResource BaseBorder}" VerticalOptions="FillAndExpand">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20,20,0,0"/>
                 </Border.StrokeShape>
-                
-                <StackLayout>
+
+                <StackLayout Padding="10,30,10,0">
                     <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                Title="Brand"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    
-                    <templates:ActivityButton Style="{StaticResource BaseActivityButton}"/>
+                                                Title="Brand"
+                                                Text="{Binding Item.Brand.Value}"
+                                                ErrorMessage="{Binding Item.Brand.Error}"
+                                                ErrorMessageIsVisible="{Binding Item.Brand.IsValid}"
+                                                EntryValidationCommand="{Binding Item.Brand.ValidateCommand}"/>
+
+                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}" 
+                                                Title="Diameter"/>
+
+                    <Picker Style="{StaticResource BasePicker}"
+                            
+                            Title="Type"/>
+
+                    <templates:ValidatableEntryWithButton Style="{StaticResource BaseButtonValidatableEntry}"
+                                                          HeightRequest="65"
+                                                          Title="Color"/>
+
+                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                                                Title="Diameter"/>
+
+                    <templates:ActivityButton Style="{StaticResource BaseActivityButton}" 
+                                              IsEnabled="True"/>
                 </StackLayout>
             </Border>
         </Grid>

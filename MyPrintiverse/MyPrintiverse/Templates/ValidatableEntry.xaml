@@ -18,7 +18,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Frame Style="{Binding FrameStyle}"  Grid.Row="1">
+            <Frame Style="{Binding FrameStyle}"  Grid.Row="1" Padding="5,0,5,0">
                 <Entry Style="{Binding EntryStyle}" 
                    Text="{Binding Text, Mode=TwoWay, Converter={StaticResource EntryConverter}}"     
                    Placeholder="{Binding Placeholder}" 

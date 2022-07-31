@@ -28,7 +28,8 @@ public class TestViewModel : BaseViewModel
             .WithRule(new ContainDigitsRule(), "Password should contains at least one digit.")
             .WithRule(new RangeRule<string>(8, 20), "Password should be between 8-20 characters.");
 
-        Numbers = Validator.Build<double>().WithRule(new RangeRule<double>(8, 20), "must be digits");
+        Numbers = Validator.Build<double>().WithRule(new FloatingPointMantissaRule<double>(4), "too long mantissa");
+        Numbers = Validator.Build<double>().WithRule(new FloatinPointExponentRule<double>(4), "too long exponent");
 
         EmailValidateCommand = new Command(EmailValidate);
         PasswordValidateCommand = new Command(PasswordValidate);

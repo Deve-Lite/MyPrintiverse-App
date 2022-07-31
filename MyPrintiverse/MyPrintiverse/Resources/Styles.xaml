@@ -107,7 +107,7 @@
     <Style TargetType="Border"
            x:Key="BaseBorder">
         <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
 
     </Style>
 

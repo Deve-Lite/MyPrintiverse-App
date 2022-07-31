@@ -2,7 +2,7 @@
 
 namespace MyPrintiverse.FilamentsModule.Filaments;
 
-public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filament>
+public class FilamentValidator : BaseValidator<Filament>
 {
     public string TypeId { get; set; }
     public Validatable<double> Diameter { get; set; }
@@ -20,6 +20,8 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         _validatonMode = ValidationMode.Part;
 
         AddValidation();
+
+        InitUnit();
     }
     public FilamentValidator(Filament filament)
     {
@@ -28,6 +30,8 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         AddValidation();
 
         FillData(filament);
+
+        InitUnit();
     }
 
     public Filament Map()
@@ -35,9 +39,8 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         var fialmentMap = new Filament();
 
         if (_validatonMode == ValidationMode.Full)
-        {
             BaseModelMap(fialmentMap);
-        }
+        
 
         fialmentMap.TypeId = TypeId;
         fialmentMap.Diameter = Diameter.Value;

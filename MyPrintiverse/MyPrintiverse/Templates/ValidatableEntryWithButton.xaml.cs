@@ -91,12 +91,12 @@ public partial class ValidatableEntryWithButton : ContentView
 
     #endregion
 
-    #region ImagineButton
-    public static readonly BindableProperty ImagineButtonProperty = BindableProperty.Create(nameof(ImagineButtonStyle), typeof(Style), typeof(ValidatableEntry), null);
-    public Style ImagineButtonStyle
+    #region ImageButton
+    public static readonly BindableProperty ImageButtonStyleProperty = BindableProperty.Create(nameof(ImageButtonStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public Style ImageButtonStyle
     {
-        get => (Style)GetValue(ImagineButtonProperty);
-        set => SetValue(ImagineButtonProperty, value);
+        get => (Style)GetValue(ImageButtonStyleProperty);
+        set => SetValue(ImageButtonStyleProperty, value);
     }
 
     public static readonly BindableProperty ImageButtonCommandProperty = BindableProperty.Create(nameof(ImageButtonCommand), typeof(ICommand), typeof(ValidatableEntry), null);

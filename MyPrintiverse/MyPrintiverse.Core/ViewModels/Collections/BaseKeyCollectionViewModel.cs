@@ -57,8 +57,6 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
             await RefreshItems();
         }
 
-        IsRefreshing = true;
-
         List<TBaseModel> data = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
 
         int i = 0;
@@ -81,8 +79,6 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
         foreach (TBaseModel item in data)
             Items.Add(item);
-
-        IsRefreshing = false;
     }
 
     protected override async Task RefreshItems()

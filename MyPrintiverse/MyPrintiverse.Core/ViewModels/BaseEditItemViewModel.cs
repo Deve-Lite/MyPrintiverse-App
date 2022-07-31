@@ -24,14 +24,10 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
 
     public BaseEditItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
-    }
-
-    public override async void OnAppearing()
-    {
-        base.OnAppearing();
-
         EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
     }
+
+    public override async void OnAppearing() => base.OnAppearing();
 
     /// <summary>
     /// Task to perform with edit command.
@@ -40,6 +36,12 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     public virtual async Task EditItem()
     {
         IsRunning = true;
+
+        if (Item.Validate())
+        {
+            IsRunning = false;
+            return;
+        }
 
         if (await ItemService.UpdateItemAsync(Item.Map()))
             await Shell.Current.GoToAsync("..", true);

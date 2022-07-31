@@ -104,8 +104,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// </summary>
     /// <returns></returns>
     protected virtual async Task UpdateItemsOnAppearing()
-    {
-        IsRefreshing = true;
+    { 
 
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
@@ -129,8 +128,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
         foreach (TBaseModel item in data)
             Items.Add(item);
-
-        IsRefreshing = false;
     }
 
     /// <summary>

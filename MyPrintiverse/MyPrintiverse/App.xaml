@@ -21,9 +21,10 @@
 
 
     <Application.MainPage>
-        <Shell>
+        <Shell IconImageSource="spool.png">
 
-            <FlyoutItem Title="Home">
+            <FlyoutItem Title="Home"
+                        Icon="spool.png">
                 <ShellContent Title="Home"
                               ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
             </FlyoutItem>

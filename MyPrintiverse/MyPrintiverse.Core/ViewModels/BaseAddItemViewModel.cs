@@ -16,14 +16,10 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
 
     public BaseAddItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
-    }
-
-    public override void OnAppearing()
-    {
-        base.OnAppearing();
-
         AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
     }
+
+    public override void OnAppearing() => base.OnAppearing();
 
     /// <summary>
     /// Task to perform with add command.
@@ -32,6 +28,12 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
     public virtual async Task AddItem()
     {
         IsRunning = true;
+
+        if (Item.Validate())
+        {
+            IsRunning = false;
+            return;
+        }
 
         if (await ItemService.AddItemAsync(Item.Map()))
             await Shell.Current.GoToAsync("..", true);

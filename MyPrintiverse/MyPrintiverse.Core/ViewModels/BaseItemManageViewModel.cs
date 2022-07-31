@@ -1,5 +1,6 @@
 ﻿using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
+using Plugin.ValidationRules;
 
 namespace MyPrintiverse.Core.ViewModels;
 
@@ -12,12 +13,12 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     /// <summary>
     /// Item backing storage. 
     /// </summary>
-    private IMapperValidator<T> item;
+    private Validator<T> item;
 
     /// <summary>
     /// Validatable item for stashing item data 
     /// </summary>
-    public IMapperValidator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+    public Validator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
 
     /// <summary>
     /// Service of item.
@@ -41,15 +42,11 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
 
         var messageServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(messageService));
         MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
+
+        BackCommand = new AsyncCommand(Back, CanExecute, shellExecute: ExecuteBlockade);
     }
 
-    public override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        BackCommand = new AsyncCommand(Back);
-    }
-
+    public override void OnAppearing() => base.OnAppearing();
 
     public virtual async Task Back() => await Shell.Current.GoToAsync("..");
 

@@ -11,6 +11,7 @@
     <Grid VerticalOptions="Fill">
         <RefreshView Style="{StaticResource BaseRefreshView}"
                      HorizontalOptions="FillAndExpand"
+                     IsEnabled="True"
                      VerticalOptions="FillAndExpand">
             <CollectionView Style="{StaticResource BaseCollectionView}"
                             IsGrouped="True">
@@ -68,7 +69,7 @@
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Style="{StaticResource CollectionAddImageButton}" IsEnabled="{Binding IsEnabled}"/>
+        <ImageButton Style="{StaticResource CollectionAddImageButton}" IsEnabled="{Binding IsEnabled,Mode=OneWay}"/>
 
     </Grid>
 

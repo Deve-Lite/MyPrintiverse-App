@@ -32,14 +32,10 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
         DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
         ItemOptionsCommand = new AsyncCommand<TBaseModel>(ItemOptions, CanExecute, shellExecute: ExecuteBlockade);
-
-        await UpdateItemsOnAppearing();
     }
 
     protected override async Task UpdateItemsOnAppearing()
     {
-        IsRefreshing = true;
-
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
         var iterableItems = new List<GroupedItem<TBaseModel>>(Items);
@@ -72,7 +68,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
         SortGroups();
 
-        IsRefreshing = false;
+ 
     }
 
     protected override async Task RefreshItems()
