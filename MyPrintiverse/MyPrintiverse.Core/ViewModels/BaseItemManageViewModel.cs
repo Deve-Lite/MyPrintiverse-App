@@ -57,4 +57,9 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     {
 
     }
+
+    public virtual bool IsValid()
+    {
+        return Item.Validate();
+    }
 }

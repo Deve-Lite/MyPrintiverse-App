@@ -37,7 +37,7 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     {
         IsRunning = true;
 
-        if (Item.Validate())
+        if (!IsValid())
         {
             IsRunning = false;
             return;

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyPrintiverse"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:filamentsmodule="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
+             xmlns:filaments="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage" 
+             xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
              xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
              x:Class="MyPrintiverse.App">
 
@@ -23,10 +24,19 @@
     <Application.MainPage>
         <Shell IconImageSource="spool.png">
 
-            <FlyoutItem Title="Home"
+            <FlyoutItem Title="Filaments"
                         Icon="spool.png">
-                <ShellContent Title="Home"
-                              ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
+                <Tab>
+                    <ShellContent Title="Filaments"
+                                  
+                                  Icon="spool.png"
+                              ContentTemplate="{DataTemplate filaments:FilamentsView}" />
+                </Tab>
+                <Tab>
+                    <ShellContent Title="Types"
+                                  Icon="spool.png"
+                              ContentTemplate="{DataTemplate types:FilamentTypesView}" />
+                </Tab>
             </FlyoutItem>
 
             <FlyoutItem Title="Test"

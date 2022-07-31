@@ -34,7 +34,12 @@ public class FilamentValidator : BaseValidator<Filament>
         InitUnit();
     }
 
-    public Filament Map()
+    public override bool Validate()
+    {
+        return base.Validate();
+    }
+
+    public override Filament Map()
     {
         var fialmentMap = new Filament();
 

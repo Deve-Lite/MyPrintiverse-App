@@ -14,8 +14,6 @@
                 <Setter Property="TextStyle" Value="{StaticResource BaseRaleway}"/>
                 <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
                 <Setter Property="Text" Value="Add Filament"/>
-                <Setter Property="ButtonCommand" Value="{Binding AddItemCommand}"/>
-                <Setter Property="Margin" Value="10"/>
             </Style>
 
             <Style TargetType="Frame" x:Key="AddPageFrame" BasedOn="{StaticResource BaseFrame}">
@@ -45,7 +43,7 @@
         <Grid VerticalOptions="FillAndExpand">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="140"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -75,7 +73,7 @@
                     <RoundRectangle CornerRadius="20,20,0,0"/>
                 </Border.StrokeShape>
 
-                <StackLayout Padding="10,30,10,0">
+                <StackLayout Padding="10,50,10,0">
                     <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
                                                 Title="Brand"
                                                 Text="{Binding Item.Brand.Value}"
@@ -83,22 +81,24 @@
                                                 ErrorMessageIsVisible="{Binding Item.Brand.IsValid}"
                                                 EntryValidationCommand="{Binding Item.Brand.ValidateCommand}"/>
 
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}" 
-                                                Title="Diameter"/>
-
-                    <Picker Style="{StaticResource BasePicker}"
-                            
-                            Title="Type"/>
+                    <Label Style="{StaticResource MicroOswald}" Text="Type" Margin="0"/>
+                    <Frame Style="{StaticResource AddPageFrame}" Padding="5,0,5,0">
+                        <Picker Style="{StaticResource BasePicker}"
+                                ItemsSource="{Binding FilamentTypes}"
+                                Title="Filament Type"/>
+                    </Frame>
 
                     <templates:ValidatableEntryWithButton Style="{StaticResource BaseButtonValidatableEntry}"
                                                           HeightRequest="65"
+                                                          ImageButtonCommand="{Binding SelectColorCommand}"
                                                           Title="Color"/>
 
                     <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
                                                 Title="Diameter"/>
 
                     <templates:ActivityButton Style="{StaticResource BaseActivityButton}" 
-                                              IsEnabled="True"/>
+                                              ButtonCommand="{Binding AddItemCommand}"
+                                              ButtonIsEnabled="{Binding IsEnabled}"/>
                 </StackLayout>
             </Border>
         </Grid>

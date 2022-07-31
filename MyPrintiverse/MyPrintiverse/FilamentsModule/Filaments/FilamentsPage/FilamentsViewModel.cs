@@ -19,7 +19,6 @@ public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilame
     {
         IsEnabled = true;
         base.OnAppearing();
-        AddItemCommand = new AsyncCommand(AddItem);
     }
 
     protected override string GetNewGroupName(Filament item)

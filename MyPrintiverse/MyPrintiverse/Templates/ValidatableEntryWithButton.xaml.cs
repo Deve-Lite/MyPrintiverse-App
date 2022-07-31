@@ -106,7 +106,7 @@ public partial class ValidatableEntryWithButton : ContentView
         set => SetValue(ImageButtonCommandProperty, value);
     }
 
-    public static readonly BindableProperty ImageButtonSourceProperty = BindableProperty.Create(nameof(ImageButtonSource), typeof(string), typeof(ValidatableEntry), "spool.png");
+    public static readonly BindableProperty ImageButtonSourceProperty = BindableProperty.Create(nameof(ImageButtonSource), typeof(string), typeof(ValidatableEntry), "");
     public string ImageButtonSource
     {
         get => (string)GetValue(ImageButtonSourceProperty);

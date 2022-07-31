@@ -29,7 +29,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
     {
         IsRunning = true;
 
-        if (Item.Validate())
+        if (!IsValid())
         {
             IsRunning = false;
             return;

@@ -31,7 +31,8 @@
                 </Entry>
             </Frame>
 
-            <ImageButton Grid.Column="2" 
+            <ImageButton Grid.Column="2"
+                         IsEnabled="{Binding IsEnabled}"
                          Command="{Binding ImageButtonCommand}"
                          Style="{Binding ImageButtonStyle}"
                          Source="{Binding ImageButtonSource}"/>
