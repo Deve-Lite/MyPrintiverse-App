@@ -1,14 +1,15 @@
-﻿using MongoDB.Bson;
-using MyPrintiverse.FilamentsModule.Types;
-using System.Collections.ObjectModel;
+﻿using MyPrintiverse.FilamentsModule.Types;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 
 public class AddFilamentViewModel : BaseAddItemViewModel<Filament>
 {
     private FilamentTypeService TypeService;
-
     public List<FilamentTypeSelector> FilamentTypes { get; set; }
+
+
+    private FilamentTypeSelector selectedType;
+    public FilamentTypeSelector SelectedType { get=> selectedType; set=>SetProperty(ref selectedType, value); }
 
     public AsyncCommand SelectColorCommand { get; set; }
 
@@ -23,15 +24,22 @@ public class AddFilamentViewModel : BaseAddItemViewModel<Filament>
     public override void OnAppearing()
     {
         base.OnAppearing();
-        FilamentTypes = new List<FilamentTypeSelector>();
         IsEnabled = true;
+        Task.Run(async () => { await LoadData(); });
+    }
+
+    private async Task LoadData()
+    {
         Item = new FilamentValidator();
-        Task.Run(async () => { await LoadFilamentTypes(); });
+        (Item as FilamentValidator).ColorHex = "FFFFFF";
+        (Item as FilamentValidator).Diameter.Value = 1.75;
+
+        await LoadFilamentTypes();
     }
 
     private async Task SelectColor()
     {
-        var colorHex = await MessageService.ShowPromptAsync("Temporary", "Pass color hex:", keyboard:Keyboard.Chat, placeholder:"fdd3de");
+        var colorHex = await MessageService.ShowPromptAsync("Temporary", "Pass color hex:", keyboard:Keyboard.Chat, placeholder:"fdd3de",maxLength:6);
 
         if (string.IsNullOrEmpty(colorHex) || colorHex == "Cancel")
             return;
@@ -41,10 +49,15 @@ public class AddFilamentViewModel : BaseAddItemViewModel<Filament>
 
     private async Task LoadFilamentTypes()
     {
+        SelectedType = null;
+        FilamentTypes = new List<FilamentTypeSelector>();
         var types = await TypeService.GetItemsAsync();
 
         foreach (var type in types)
-            FilamentTypes.Append(new FilamentTypeSelector { TypeId = type.Id, ShortName = type.ShortName});
+            FilamentTypes.Add(new FilamentTypeSelector { TypeId = type.Id, ShortName = type.ShortName});
+
+        if (types.Count()!=0)
+            SelectedType = FilamentTypes[0];
     }
 
     public override bool IsValid()

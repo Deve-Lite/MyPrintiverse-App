@@ -44,14 +44,14 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     {
         var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionEditView, TCollectionAddView, TCollectionItemView>>(nameof(itemsService));
         ItemService = itemService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
+
+        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
     }
 
     public override async void OnAppearing()
     {
         base.OnAppearing();
-
-        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
 
         Item = await ItemService.GetItemAsync(Id);
     }

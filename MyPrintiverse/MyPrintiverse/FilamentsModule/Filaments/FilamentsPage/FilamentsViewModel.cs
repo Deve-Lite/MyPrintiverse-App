@@ -6,19 +6,17 @@ using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
-{
-    private bool isEnabled;
-
-    public new bool IsEnabled { get=>isEnabled; set=>SetProperty(ref isEnabled, value); }
+{ 
 
     public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
-    { 
+    {
+        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute:ExecuteBlockade);
     }
 
     public override void OnAppearing()
     {
-        IsEnabled = true;
         base.OnAppearing();
+        IsEnabled = true;
     }
 
     protected override string GetNewGroupName(Filament item)

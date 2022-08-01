@@ -26,17 +26,15 @@
 
             <FlyoutItem Title="Filaments"
                         Icon="spool.png">
-                <Tab>
-                    <ShellContent Title="Filaments"
-                                  
+
+                <ShellContent Title="Filaments"
                                   Icon="spool.png"
                               ContentTemplate="{DataTemplate filaments:FilamentsView}" />
-                </Tab>
-                <Tab>
-                    <ShellContent Title="Types"
-                                  Icon="spool.png"
+
+                <ShellContent Title="Types"
+                              Icon="spool.png"
                               ContentTemplate="{DataTemplate types:FilamentTypesView}" />
-                </Tab>
+
             </FlyoutItem>
 
             <FlyoutItem Title="Test"

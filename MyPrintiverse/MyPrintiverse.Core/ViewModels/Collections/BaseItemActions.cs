@@ -5,5 +5,6 @@ public enum BaseItemActions
 {
     Edit,
     Delete,
-    Open
+    Open,
+    Cancel
 }

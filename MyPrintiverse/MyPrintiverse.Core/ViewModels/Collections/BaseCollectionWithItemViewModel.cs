@@ -49,14 +49,15 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
 {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView>>(nameof(itemsService));
         ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
+
+        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
     }
 
     public override async void OnAppearing()
     {
         base.OnAppearing();
 
-        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
 
         Item = await ItemService.GetItemAsync(Id);
     }

@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
-             Shell.FlyoutBehavior="Disabled" 
-             Shell.NavBarIsVisible="False">
+             Shell.PresentationMode="ModalAnimated">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -85,20 +85,34 @@
                     <Frame Style="{StaticResource AddPageFrame}" Padding="5,0,5,0">
                         <Picker Style="{StaticResource BasePicker}"
                                 ItemsSource="{Binding FilamentTypes}"
+                                SelectedItem="{Binding SelectedType}"
+                                ItemDisplayBinding="{Binding ShortName}"
                                 Title="Filament Type"/>
+
+                        <!--ItemsSource="{Binding FilamentTypes, Source={RelativeSource AncestorType={x:Type viewmodel:AddFilamentViewModel}}}"-->
                     </Frame>
 
-                    <templates:ValidatableEntryWithButton Style="{StaticResource BaseButtonValidatableEntry}"
+                    <templates:ValidatableEntryWithButton Style="{StaticResource BaseButtonValidatableEntry}"          
+                                                          Title="Color"
+                                                          Text="{Binding Item.Color.Value}"
+                                                          ErrorMessage="{Binding Item.Color.Error}"
+                                                          ErrorMessageIsVisible="{Binding Item.Color.IsValid}"
+                                                          EntryValidationCommand="{Binding Item.Color.ValidateCommand}"
                                                           HeightRequest="65"
-                                                          ImageButtonCommand="{Binding SelectColorCommand}"
-                                                          Title="Color"/>
+                                                          ImageButtonCommand="{Binding SelectColorCommand}"/>
 
                     <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                Title="Diameter"/>
+                                                Title="Diameter"
+                                                Text="{Binding Item.Diameter.Value}"
+                                                ErrorMessage="{Binding Item.Diameter.Error}"
+                                                ErrorMessageIsVisible="{Binding Item.Diameter.IsValid}"
+                                                EntryValidationCommand="{Binding Item.Diameter.ValidateCommand}"/>
 
                     <templates:ActivityButton Style="{StaticResource BaseActivityButton}" 
+                                              Margin="0,10,0,0"
                                               ButtonCommand="{Binding AddItemCommand}"
                                               ButtonIsEnabled="{Binding IsEnabled}"/>
+
                 </StackLayout>
             </Border>
         </Grid>
