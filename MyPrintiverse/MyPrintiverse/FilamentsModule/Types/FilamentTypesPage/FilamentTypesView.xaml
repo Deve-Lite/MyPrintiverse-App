@@ -2,28 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
              x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypesPage.FilamentTypesView"
              Title="FilamentTypesView">
 
     <Grid>
         <RefreshView Style="{StaticResource BaseRefreshView}">
             <CollectionView Style="{StaticResource BaseCollectionView}">
-
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Frame Style="{StaticResource CollectionGroupHeaderFrame}">
-                                <Label Style="{StaticResource LargeOswald}"
-                                       Text="{Binding Name}" />
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:FilamentType">
                         <StackLayout>
                             <Frame Style="{StaticResource CollectionGroupItemFrame}">
+                                
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
+                                                          CommandParameter="{Binding .}"/>
+
+
+                                    <TapGestureRecognizer NumberOfTapsRequired="2" 
+                                                          Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
+                                                          CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                
                                 <StackLayout>
 
 
@@ -52,6 +53,7 @@
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Style="{StaticResource CollectionAddImageButton}"/>
+        <ImageButton Style="{StaticResource CollectionAddImageButton}"
+                     Command="{Binding AddItemCommand}"/>
     </Grid>
 </ContentPage>

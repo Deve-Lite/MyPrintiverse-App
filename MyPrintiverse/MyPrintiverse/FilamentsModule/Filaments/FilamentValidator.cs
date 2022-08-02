@@ -1,5 +1,4 @@
-﻿using Plugin.ValidationRules.Interfaces;
-
+﻿
 namespace MyPrintiverse.FilamentsModule.Filaments;
 
 public class FilamentValidator : BaseValidator<Filament>

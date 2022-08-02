@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse;
+﻿using MyPrintiverse.Tools.Mock;
+
+namespace MyPrintiverse;
 
 public static class MauiProgram
 {
@@ -10,7 +12,8 @@ public static class MauiProgram
 			.ConfigureViews()
 			.ConfigureViewModels()
 			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}/config.json")
-			.UseMauiCommunityToolkit()
+			.ConfigureMockServices()
+            .UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

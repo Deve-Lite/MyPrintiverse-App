@@ -44,11 +44,13 @@ public class MessageService : IMessageService
         if (!(strOptions[last]=="Cancel"))
 			throw new InvalidEnumArgumentException("Enum must have 'Cancel' option as last value.");
 
-		strOptions.RemoveAt(last);
+		var cancelOption = strOptions[last];
 
-        var result = await MainPage.DisplayActionSheet(title, cancel, strOptions[strOptions.Count()-1], strOptions.ToArray());
+        strOptions.RemoveAt(last);
 
-        return await Task.Run(() => Enum.Parse<TEnum>(result));
+        var result = await MainPage.DisplayActionSheet(title, cancel, null, strOptions.ToArray());
+
+        return await Task.Run(() => Enum.Parse<TEnum>(result == null? cancelOption : result));
 	}
 
 	public async Task<string> ShowPromptAsync(string title, string message, string accept = "OK", string cancel = "Cancel", string? placeholder = null, int maxLength = -1, Keyboard? keyboard = null, string initialValue = "")

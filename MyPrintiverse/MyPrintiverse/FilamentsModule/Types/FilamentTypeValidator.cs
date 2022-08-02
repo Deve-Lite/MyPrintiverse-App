@@ -73,7 +73,7 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
         FilamentTypeMap.IsFlexible = IsFlexible;
         FilamentTypeMap.IsFoodFriendly = IsFoodFriendly;
         FilamentTypeMap.IsHeatedBedRequired = IsHeatedBedRequired;
-        FilamentTypeMap.UVResistant = UVResistant;
+        FilamentTypeMap.IsUVResistant = UVResistant;
 
         return FilamentTypeMap;
     }
@@ -110,7 +110,7 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
         IsBio = filamentType.IsBio;
         IsFlexible= filamentType.IsFlexible;
         IsFoodFriendly = filamentType.IsFoodFriendly;
-        UVResistant = filamentType.UVResistant;
+        UVResistant = filamentType.IsUVResistant;
         IsHeatedBedRequired = filamentType.IsHeatedBedRequired;
     }
 

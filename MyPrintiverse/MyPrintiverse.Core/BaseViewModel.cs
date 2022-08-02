@@ -12,8 +12,8 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 
 	public virtual void OnAppearing() 
 	{
-		//Perform On Appearing
-	}
+        IsEnabled = true;
+    }
 
 	private bool _isBusy;
 

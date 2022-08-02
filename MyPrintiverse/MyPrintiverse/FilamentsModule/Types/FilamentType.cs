@@ -7,8 +7,6 @@ namespace MyPrintiverse.FilamentsModule.Types;
 /// </summary>
 public class FilamentType : BaseModel
 {
-    [JsonProperty("filamentId")]
-    public string FilamentId { get; set; }
 
     [JsonProperty("fullName")]
     public string FullName { get; set; }
@@ -27,6 +25,7 @@ public class FilamentType : BaseModel
     [JsonProperty("coolingRange")]
     public string CoolingRange { get; set; }
 
+
     [JsonProperty("maxServiceTempearature")]
     public double MaxServiceTempearature { get; set; }
     [JsonProperty("density")]
@@ -34,7 +33,7 @@ public class FilamentType : BaseModel
 
 
     [JsonProperty("UVResistant")]
-    public bool UVResistant { get; set; }
+    public bool IsUVResistant { get; set; }
     [JsonProperty("isFoodFriendly")]
     public bool IsFoodFriendly { get; set; }
     [JsonProperty("isBio")]

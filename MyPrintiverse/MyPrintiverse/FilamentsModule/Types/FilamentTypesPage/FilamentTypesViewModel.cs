@@ -8,5 +8,7 @@ public class FilamentTypesViewModel : BaseCollectionViewModel<FilamentType, AddF
 {
 	public FilamentTypesViewModel(MessageService messageService, FilamentTypeService itemsService) : base(messageService, itemsService)
 	{
-	}
+    }
+
+
 }
