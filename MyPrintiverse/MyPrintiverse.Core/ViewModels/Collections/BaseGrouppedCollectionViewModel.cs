@@ -22,13 +22,6 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         Items = new ObservableCollection<GroupedItem<TBaseModel>>();
     }
 
-    public override async void OnAppearing()
-    {
-        base.OnAppearing();
-
-  
-    }
-
     protected override async Task UpdateItemsOnAppearing()
     {
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
@@ -78,6 +71,15 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         SortGroups();
 
         IsRefreshing = false;
+    }
+
+    protected override async Task DeleteItem(TBaseModel item)
+    {
+        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+            return;
+
+        if (await ItemsService.DeleteItemAsync(item.Id))
+            DeleteFromItems(item);
     }
 
     /// <summary>

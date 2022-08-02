@@ -13,9 +13,6 @@ public class Filament : BaseModel
     [JsonProperty("brand")]
     public string Brand { get; set; }
 
-    [JsonProperty("diameter")]
-    public double Diameter { get; set; }
-
     [JsonProperty("color")]
     public string Color { get; set; }
 
@@ -24,6 +21,9 @@ public class Filament : BaseModel
 
     [JsonProperty("shortDescription")]
     public string ShortDescription { get; set; }
+
+    [JsonProperty("diameter")]
+    public double Diameter { get; set; }
 
     [JsonProperty("nozzleTemperature")]
     public int NozzleTemperature { get; set; }

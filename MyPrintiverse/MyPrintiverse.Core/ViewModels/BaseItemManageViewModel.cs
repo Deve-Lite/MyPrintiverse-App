@@ -8,6 +8,8 @@ namespace MyPrintiverse.Core.ViewModels;
 /// View model for add / edit view.
 /// </summary>
 /// <typeparam name="T"></typeparam>
+/// 
+/// zmiana na T i TValidataor
 public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new() 
 {
     /// <summary>

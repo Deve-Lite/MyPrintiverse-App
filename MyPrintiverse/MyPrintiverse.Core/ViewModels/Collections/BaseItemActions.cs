@@ -1,7 +1,7 @@
 ﻿
 namespace MyPrintiverse.Core.ViewModels.Collections;
 
-public enum BaseItemActions
+public enum BaseItemActions 
 {
     Edit,
     Delete,

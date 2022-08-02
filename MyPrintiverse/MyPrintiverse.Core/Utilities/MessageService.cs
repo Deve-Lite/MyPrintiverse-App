@@ -31,7 +31,7 @@ public class MessageService : IMessageService
 		return await MainPage.DisplayActionSheet(title, cancel, delete, flowDirection, buttons);
 	}
 
-	/* Uwaga w enum musi wystapic opcja 'Cancel'*/
+	/* Uwaga w enum musi wystapic opcja 'Cancel' na końcu!!!*/
 	public async Task<TEnum> ShowActionSheetAsync<TEnum>(string title, string cancel = "Cancel") where TEnum : struct, Enum
 	{
 		if (MainPage is null)
@@ -39,14 +39,14 @@ public class MessageService : IMessageService
 
 		//To nie działa InvalidCastException
 		var strOptions = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().Select(x => x.ToString()).ToList();
+		int last = strOptions.Count()-1;
 
-		bool hasCancel = strOptions.Any(x => x == "Cancel");
-		if (!strOptions.Any(x => x == "Cancel"))
-			throw new InvalidEnumArgumentException("Enum must have 'Cancel' option.");
+        if (!(strOptions[last]=="Cancel"))
+			throw new InvalidEnumArgumentException("Enum must have 'Cancel' option as last value.");
 
-		strOptions.Remove("Cancel");
+		strOptions.RemoveAt(last);
 
-        var result = await MainPage.DisplayActionSheet(title, cancel, null, strOptions.ToArray());
+        var result = await MainPage.DisplayActionSheet(title, cancel, strOptions[strOptions.Count()-1], strOptions.ToArray());
 
         return await Task.Run(() => Enum.Parse<TEnum>(result));
 	}

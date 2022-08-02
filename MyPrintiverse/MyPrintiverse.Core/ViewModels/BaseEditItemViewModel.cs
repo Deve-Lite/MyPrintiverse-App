@@ -27,7 +27,6 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
         EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
     }
 
-    public override async void OnAppearing() => base.OnAppearing();
 
     /// <summary>
     /// Task to perform with edit command.

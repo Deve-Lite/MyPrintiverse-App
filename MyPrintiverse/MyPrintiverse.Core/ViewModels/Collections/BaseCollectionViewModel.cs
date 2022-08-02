@@ -61,8 +61,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
         Items = new ObservableCollection<TBaseModel>();
 
-
-
         RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
         AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
         EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
