@@ -15,6 +15,8 @@ namespace MyPrintiverse.Core.ViewModels;
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseModel : BaseModel
 {
+    #region Fields
+
     /// <summary>
     /// Item backing storage.
     /// </summary>
@@ -26,6 +28,14 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     public TBaseModel Item { get => item; set => SetProperty(ref item, value); }
 
     /// <summary>
+    /// Item id used for quering,
+    /// </summary>
+    public string Id { get; set; }
+
+    #endregion
+
+    #region Commands
+    /// <summary>
     /// Command for view, designed to open page with item edition.
     /// </summary>
     public AsyncCommand EditItemCommand { get; set; }
@@ -34,10 +44,9 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// </summary>
     public AsyncCommand DeleteItemCommand { get; set; }
 
-    /// <summary>
-    /// Item id used for quering,
-    /// </summary>
-    public string Id { get; set; }
+    #endregion
+
+    #region Services
 
     /// <summary>
     /// Service of item.
@@ -49,6 +58,8 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// </summary>
     protected IMessageService MessageService;
 
+    #endregion
+
     public BaseItemViewModel(IMessageService messageService, IItemService<TBaseModel> itemService)
     {
         var itemServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(itemService));
@@ -56,18 +67,22 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
 
         var messageServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(messageService));
         MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
+
+        EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteItemCommand = new AsyncCommand(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
     }
 
-
+    #region Overrides
     public override async void OnAppearing()
     {
         base.OnAppearing();
 
-        EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteItemCommand = new AsyncCommand(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
-
         Item = await ItemService.GetItemAsync(Id);
     }
+
+    #endregion
+
+    #region Virtual Methods
 
     /// <summary>
     /// Task to perform with edit command.
@@ -88,5 +103,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
             await Shell.Current.GoToAsync("..", true);
 
     }
+
+    #endregion
 
 }

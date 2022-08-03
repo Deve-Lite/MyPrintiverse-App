@@ -49,9 +49,13 @@ public static class FilamentBuilderConfig
 		builder.Services.AddSingleton<PrintServiceService>();
 		builder.Services.AddSingleton<PrintService>();
 
-		// TODO FilamentStatistic Service
+        /*Mock Services*/
 
-		return builder;
+        builder.Services.AddSingleton<FilamentMock>();
+        builder.Services.AddSingleton<FilamentTypeMock>();
+        builder.Services.AddSingleton<SpoolMock>();
+
+        return builder;
 	}
 
 	/// <summary>

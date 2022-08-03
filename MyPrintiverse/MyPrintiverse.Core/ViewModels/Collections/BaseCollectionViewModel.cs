@@ -12,10 +12,15 @@ namespace MyPrintiverse.Core.ViewModels.Collections;
 /// <typeparam name="TItemView"> Class (View) displaying model.</typeparam>
 public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseViewModel where TBaseModel : BaseModel
 {
+    #region List
     /// <summary>
     /// Base collection of TBaseModel.
     /// </summary>
     public ObservableCollection<TBaseModel> Items { get; set; }
+
+    #endregion
+
+    #region Commands
 
     /// <summary>
     /// Command for refreshing collection.
@@ -42,6 +47,10 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// </summary>
     public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
 
+    #endregion
+
+    #region Services
+
     /// <summary>
     /// Collection service.
     /// </summary>
@@ -50,6 +59,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Message service.
     /// </summary>
     protected IMessageService MessageService;
+    #endregion
 
     public BaseCollectionViewModel(IMessageService messageService, IItemService<TBaseModel> itemsService)
     {
@@ -69,36 +79,14 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         ItemOptionsCommand = new AsyncCommand<TBaseModel>(ItemOptions, CanExecute, shellExecute: ExecuteBlockade);
     }
 
+    #region OnAppearing
+
     public override async void OnAppearing()
     {
         base.OnAppearing();
 
         await UpdateItemsOnAppearing();
     }
-
-    /// <summary>
-    /// Task to perform when ItemOptionCommand occurs.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    protected virtual async Task ItemOptions(TBaseModel item)
-    {
-        var action = await MessageService.ShowActionSheetAsync<BaseItemActions>("Actions:");
-
-        if (action == BaseItemActions.Open)
-            await OpenItem(item);
-        else if (action == BaseItemActions.Delete)
-            await DeleteItem(item);
-        else if (action == BaseItemActions.Edit)
-            await EditItem(item);
-
-    }
-
-    /// <summary>
-    /// Task to perform when AddItemCommand occurs.
-    /// </summary>
-    /// <returns></returns>
-    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAddView).Name}");
 
     /// <summary>
     /// Task to perfrom when page is loading, designed for refresh collection with new data.
@@ -131,6 +119,10 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             Items.Add(item);
     }
 
+    #endregion
+
+    #region CollectionRefresh
+
     /// <summary>
     /// Task to perform when RefreshItemsCommand occurs.
     /// </summary>
@@ -143,10 +135,52 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         Items.Clear();
 
         foreach (var item in await ItemsService.GetItemsAsync())
-            Items.Add(item);
+            AddToItems(item);
+
+        SortItems();
 
         IsRefreshing = false;
     }
+
+    /// <summary>
+    /// Method adds item to collection as new group or to existing group. Method used in DeleteItem.
+    /// </summary>
+    /// <param name="item"> Model. </param>
+    protected virtual void AddToItems(TBaseModel item) => Items.Add(item);
+
+    /// <summary>
+    /// After updating or refreshing, list of Items is sorted by this function.
+    /// </summary>
+    protected virtual void SortItems() { }
+
+    #endregion
+
+    #region ItemManage
+
+    /// <summary>
+    /// Task to perform when ItemOptionCommand occurs.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    protected virtual async Task ItemOptions(TBaseModel item)
+    {
+        var action = await MessageService.ShowActionSheetAsync<BaseItemActions>("Actions:");
+
+        if (action == BaseItemActions.Open)
+            await OpenItem(item);
+        else if (action == BaseItemActions.Delete)
+            await DeleteItem(item);
+        else if (action == BaseItemActions.Edit)
+            await EditItem(item);
+
+    }
+
+
+    /// <summary>
+    /// Task to perform when AddItemCommand occurs.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAddView).Name}");
 
     /// <summary>
     /// Task to perform when EditItemCommand occurs.
@@ -166,7 +200,16 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             return;
 
         if (await ItemsService.DeleteItemAsync(item.Id))
-            Items.Remove(item);
+            DeleteFromItems(item);
+    }
+
+    /// <summary>
+    /// Method deletes item from collection. Method used in DeleteItem.
+    /// </summary>
+    /// <param name="item"> Model. </param>
+    protected virtual void DeleteFromItems(TBaseModel item)
+    {
+        Items.Remove(item);
     }
 
     /// <summary>
@@ -175,5 +218,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <param name="item"></param>
     /// <returns></returns>
     protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TItemView).Name}?Id={item.Id}");
+
+    #endregion
 }
 

@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage"
              x:Class="MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage.AddFilamentTypeView"
              Title="AddFilamentTypeView">
-    <StackLayout>
-        <Label Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-    </StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="templates:ActivityButton" x:Key="BaseActivityButton">
+                <Setter Property="ActivityIndicatorStyle" Value="{StaticResource BaseActivityIndicator}"/>
+                <Setter Property="ButtonStyle" Value="{StaticResource BaseButton}"/>
+                <Setter Property="TextStyle" Value="{StaticResource BaseRaleway}"/>
+                <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
+                <Setter Property="Text" Value="Add Filament"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ScrollView VerticalOptions="FillAndExpand">
+        <Grid VerticalOptions="FillAndExpand">
+
+
+            
+
+        </Grid>
+    </ScrollView>
 </ContentPage>

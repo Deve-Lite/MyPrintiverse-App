@@ -9,17 +9,21 @@ namespace MyPrintiverse.Core.ViewModels;
 /// <typeparam name="T"> Model. </typeparam>
 public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : BaseModel, new()
 {
+    #region Commands
+
     /// <summary>
     /// Command for view, designed to save new item.
     /// </summary>
     public AsyncCommand? AddItemCommand { get; set; }
+
+    #endregion
 
     public BaseAddItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
         AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
     }
 
-    public override void OnAppearing() => base.OnAppearing();
+    #region Virtual Methods
 
     /// <summary>
     /// Task to perform with add command.
@@ -40,5 +44,6 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
 
         IsRunning = false;
     }
+    #endregion
 }
 

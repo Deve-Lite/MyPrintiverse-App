@@ -13,6 +13,8 @@ namespace MyPrintiverse.Core.ViewModels.Collections;
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> where TBaseModel : BaseModel
 {
+    #region Fields
+
     /// <summary>
     /// Storing previous page id.
     /// </summary>
@@ -23,11 +25,16 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// </summary>
     public string Id { get; set; }
 
+    #endregion
+
+    #region Services
+
     /// <summary>
     /// Service of item with Key conneced operations.
     /// </summary>
     protected IItemKeyService<TBaseModel> KeyItemsService;
 
+    #endregion
 
     public BaseKeyCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService, IItemKeyService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
     {
@@ -35,13 +42,7 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         KeyItemsService = keyItemsService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
     }
 
-    public override async void OnAppearing()
-    {
-        base.OnAppearing();
-
-        await UpdateItemsOnAppearing();
-    }
-
+    #region Overrides
 
     protected override async Task UpdateItemsOnAppearing()
     {
@@ -77,7 +78,6 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     protected override async Task RefreshItems()
     {
-
         IsRefreshing = true;
 
         Items.Clear();
@@ -87,4 +87,6 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
         IsRefreshing = false;
     }
+
+    #endregion
 }

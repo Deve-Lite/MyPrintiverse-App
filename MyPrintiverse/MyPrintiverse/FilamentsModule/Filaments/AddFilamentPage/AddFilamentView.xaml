@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage"
-             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
-             Shell.PresentationMode="ModalAnimated">
+             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,25 +15,6 @@
                 <Setter Property="Text" Value="Add Filament"/>
             </Style>
 
-            <Style TargetType="Frame" x:Key="AddPageFrame" BasedOn="{StaticResource BaseFrame}">
-                <Setter Property="Margin" Value="0, 3, 0, 2"/>
-            </Style>
-
-            <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
-                <Setter Property="EntryStyle" Value="{StaticResource BaseEntry}"/>
-                <Setter Property="TitleStyle" Value="{StaticResource MicroOswald}"/>
-                <Setter Property="FrameStyle" Value="{StaticResource AddPageFrame}"/>
-                <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
-            </Style>
-
-            <Style TargetType="templates:ValidatableEntryWithButton" x:Key="BaseButtonValidatableEntry">
-                <Setter Property="EntryStyle" Value="{StaticResource BaseEntry}" />
-                <Setter Property="TitleStyle" Value="{StaticResource MicroOswald}" />
-                <Setter Property="FrameStyle" Value="{StaticResource AddPageFrame}" />
-                <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
-                <Setter Property="ImageButtonStyle" Value="{StaticResource ValidatableImageButton}" />
-            </Style>
-
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -42,79 +22,8 @@
     <ScrollView VerticalOptions="FillAndExpand">
         <Grid VerticalOptions="FillAndExpand">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="140"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.75*"/>
-                    <ColumnDefinition Width="0.25*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Grid.ColumnSpan="2" 
-                       Grid.Column="0" 
-                       Style="{StaticResource TitleOswald}"
-                       Margin="0" 
-                       HorizontalOptions="Center" 
-                       Text="New Filament" 
-                       VerticalOptions="Center"/>
-
-                <ImageButton Grid.Column="1" Style="{StaticResource BaseImageButton}"
-                             Command="{Binding BackCommand}"
-                             IsEnabled="{Binding IsEnabled}" 
-                             WidthRequest="50"
-                             HeightRequest="50"/>
-            </Grid>
-
-            <Border Grid.Row="2" Style="{StaticResource BaseBorder}" VerticalOptions="FillAndExpand">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="20,20,0,0"/>
-                </Border.StrokeShape>
-
-                <StackLayout Padding="10,50,10,0">
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                Title="Brand"
-                                                Text="{Binding Item.Brand.Value}"
-                                                ErrorMessage="{Binding Item.Brand.Error}"
-                                                ErrorMessageIsVisible="{Binding Item.Brand.IsValid}"
-                                                EntryValidationCommand="{Binding Item.Brand.ValidateCommand}"/>
-
-                    <Label Style="{StaticResource MicroOswald}" Text="Type" Margin="0"/>
-                    <Frame Style="{StaticResource AddPageFrame}" Padding="5,0,5,0">
-                        <Picker Style="{StaticResource BasePicker}"
-                                ItemsSource="{Binding FilamentTypes}"
-                                SelectedItem="{Binding SelectedType}"
-                                ItemDisplayBinding="{Binding ShortName}"
-                                Title="Filament Type"/>
-
-                        <!--ItemsSource="{Binding FilamentTypes, Source={RelativeSource AncestorType={x:Type viewmodel:AddFilamentViewModel}}}"-->
-                    </Frame>
-
-                    <templates:ValidatableEntryWithButton Style="{StaticResource BaseButtonValidatableEntry}"          
-                                                          Title="Color"
-                                                          Text="{Binding Item.Color.Value}"
-                                                          ErrorMessage="{Binding Item.Color.Error}"
-                                                          ErrorMessageIsVisible="{Binding Item.Color.IsValid}"
-                                                          EntryValidationCommand="{Binding Item.Color.ValidateCommand}"
-                                                          HeightRequest="65"
-                                                          ImageButtonCommand="{Binding SelectColorCommand}"/>
-
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                Title="Diameter"
-                                                Text="{Binding Item.Diameter.Value}"
-                                                ErrorMessage="{Binding Item.Diameter.Error}"
-                                                ErrorMessageIsVisible="{Binding Item.Diameter.IsValid}"
-                                                EntryValidationCommand="{Binding Item.Diameter.ValidateCommand}"/>
-
-                    <templates:ActivityButton Style="{StaticResource BaseActivityButton}" 
-                                              Margin="0,10,0,0"
-                                              ButtonCommand="{Binding AddItemCommand}"
-                                              ButtonIsEnabled="{Binding IsEnabled}"/>
-
-                </StackLayout>
-            </Border>
+            
         </Grid>
     </ScrollView>
 

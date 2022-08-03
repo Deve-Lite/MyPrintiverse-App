@@ -12,16 +12,21 @@ namespace MyPrintiverse.Core.ViewModels.Collections;
 /// <typeparam name="TItemView"> Class (View) displaying model.</typeparam>
 public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> where TBaseModel : BaseModel
 {
+    #region List
+
     /// <summary>
     /// Collection of groupped items (TBaseModel).
     /// </summary>
     public new ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
+
+    #endregion
 
     public GroupedCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService) : base(messagingService, itemsService)
     {
         Items = new ObservableCollection<GroupedItem<TBaseModel>>();
     }
 
+    #region Overrides
     protected override async Task UpdateItemsOnAppearing()
     {
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
@@ -54,9 +59,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         foreach (var item in data)
             AddToItems(item);
 
-        SortGroups();
-
- 
+        SortItems();
     }
 
     protected override async Task RefreshItems()
@@ -68,25 +71,12 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         foreach (var item in await ItemsService.GetItemsAsync())
             AddToItems(item);
 
-        SortGroups();
+        SortItems();
 
         IsRefreshing = false;
     }
 
-    protected override async Task DeleteItem(TBaseModel item)
-    {
-        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
-            return;
-
-        if (await ItemsService.DeleteItemAsync(item.Id))
-            DeleteFromItems(item);
-    }
-
-    /// <summary>
-    /// Method adds item to collection as new group or to existing group.
-    /// </summary>
-    /// <param name="item"></param>
-    protected virtual void AddToItems(TBaseModel item)
+    protected override void AddToItems(TBaseModel item)
     {
         int i = GetIndex(item);
         if (i == -1)
@@ -99,11 +89,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
             Items[i].Add(item);
     }
 
-    /// <summary>
-    /// Method deletes item from collection.
-    /// </summary>
-    /// <param name="item"></param>
-    protected virtual void DeleteFromItems(TBaseModel item)
+    protected override void DeleteFromItems(TBaseModel item)
     {
         int i = GetIndex(item);
 
@@ -113,13 +99,11 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
             Items.Remove(Items[i]);
     }
 
-    /// <summary>
-    /// After updating or refreshing, list of Items is sorted by this function.
-    /// </summary>
-    protected virtual void SortGroups()
-    {
-        Items.OrderBy(x => x.Name);
-    }
+    protected override void SortItems() => Items.OrderBy(x => x.Name);
+
+    #endregion
+
+    #region TO IMPLEMENT
 
     /// <summary>
     /// Method creates item group name.
@@ -136,5 +120,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// <returns></returns>
     /// <exception cref="NotImplementedException"> must be implemented each time  </exception>
     protected virtual int GetIndex(TBaseModel item) => throw new NotImplementedException("Method GetIndex must be implemented.");
+
+    #endregion
 }
 

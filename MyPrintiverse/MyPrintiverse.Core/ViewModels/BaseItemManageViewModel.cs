@@ -12,6 +12,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// zmiana na T i TValidataor
 public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new() 
 {
+    #region Fields
     /// <summary>
     /// Item backing storage. 
     /// </summary>
@@ -21,6 +22,10 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     /// Validatable item for stashing item data 
     /// </summary>
     public Validator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+
+    #endregion
+
+    #region Services
 
     /// <summary>
     /// Service of item.
@@ -32,10 +37,16 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     /// </summary>
     protected IMessageService MessageService;
 
+    #endregion
+
+    #region Commands
+
     /// <summary>
     /// Command designed to go to previous page.
     /// </summary>
     public AsyncCommand? BackCommand { get; set; }
+
+    #endregion
 
     public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
     {
@@ -48,8 +59,7 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
         BackCommand = new AsyncCommand(Back, CanExecute, shellExecute: ExecuteBlockade);
     }
 
-    public override void OnAppearing() => base.OnAppearing();
-
+    #region Virtual Methods
     public virtual async Task Back() => await Shell.Current.GoToAsync("..");
 
     /// <summary>
@@ -64,4 +74,6 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     {
         return Item.Validate();
     }
+
+    #endregion
 }

@@ -17,6 +17,9 @@ namespace MyPrintiverse.Core.ViewModels.Collections;
 [QueryProperty(nameof(Id), nameof(Id))]
 public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView> : BaseCollectionViewModel<TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView> where TBaseModel : BaseModel where TCollectionModel : BaseModel
 {
+
+    #region Fields
+
     /// <summary>
     /// item backing storage.
     /// </summary>
@@ -31,6 +34,10 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
     /// </summary>
     public string Id { get; set; }
 
+    #endregion
+
+    #region Commands
+
     /// <summary>
     /// Command for view, designed to open page with item edition.
     /// </summary>
@@ -40,10 +47,16 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
     /// </summary>
     public AsyncCommand DeleteDisplayItemCommand { get; set; }
 
+    #endregion
+
+    #region Services
+
     /// <summary>
     /// Service of diplayed Item.
     /// </summary>
     IItemService<TBaseModel> ItemService;
+
+    #endregion
 
     public BaseCollectionWithItemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService) : base(messagingService, itemsService)
 {
@@ -54,13 +67,16 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
         DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
     }
 
+    #region Overrides
     public override async void OnAppearing()
     {
         base.OnAppearing();
-
-
         Item = await ItemService.GetItemAsync(Id);
     }
+
+    #endregion
+
+    #region Virtual Methods
 
     /// <summary>
     /// Task connected to EditDisplayItemCommand.
@@ -79,6 +95,7 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
 
         if (await ItemService.DeleteItemAsync(Item.Id))
             await Shell.Current.GoToAsync("..", true);
-        
     }
+
+    #endregion
 }

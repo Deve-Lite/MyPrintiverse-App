@@ -7,20 +7,11 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
 { 
-
     public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
     {
     }
 
+    protected override string GetNewGroupName(Filament item) => item.Brand.Trim();
 
-
-    protected override string GetNewGroupName(Filament item)
-    {
-        return item.Brand.Trim();
-    }
-
-    protected override int GetIndex(Filament item)
-    {
-        return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
-    }
+    protected override int GetIndex(Filament item) => Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
 }
