@@ -49,7 +49,7 @@ public class FilamentValidator : BaseValidator<Filament>
         fialmentMap.TypeId = TypeId;
         fialmentMap.Diameter = Diameter.Value;
         fialmentMap.Brand = Brand.Value;
-        fialmentMap.ShortDescription = ShortDescription.Value;
+        fialmentMap.Description = ShortDescription.Value;
         fialmentMap.Color = Color.Value;
         fialmentMap.ColorHex = ColorHex;
         fialmentMap.BedTemperature = BedTemperature.Value;
@@ -112,7 +112,7 @@ public class FilamentValidator : BaseValidator<Filament>
         Diameter.Value = filament.Diameter;
         Brand.Value = filament.Brand;
 
-        ShortDescription.Value = filament.ShortDescription;
+        ShortDescription.Value = filament.Description;
         NozzleTemperature.Value = filament.NozzleTemperature;
         BedTemperature.Value = filament.BedTemperature;
         CoolingRate.Value = filament.CoolingRate;

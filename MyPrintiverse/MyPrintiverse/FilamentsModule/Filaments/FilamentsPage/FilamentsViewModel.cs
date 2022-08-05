@@ -11,7 +11,11 @@ public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilame
     {
     }
 
+    #region Overrides
+
     protected override string GetNewGroupName(Filament item) => item.Brand.Trim();
 
     protected override int GetIndex(Filament item) => Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
+
+    #endregion
 }

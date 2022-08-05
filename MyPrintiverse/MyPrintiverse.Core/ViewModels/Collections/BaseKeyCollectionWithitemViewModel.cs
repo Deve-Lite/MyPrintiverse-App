@@ -87,8 +87,11 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
         if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
             return;
 
-        if (await ItemService.DeleteItemAsync(Item.Id))
+        if (await ItemService.DeleteItemAsync(Item.Id)) 
+        {
+            await KeyItemsService.DeleteItemsByKeyAsync(Item.Id);
             await Shell.Current.GoToAsync("..", true);
+        }
     }
 
     #endregion

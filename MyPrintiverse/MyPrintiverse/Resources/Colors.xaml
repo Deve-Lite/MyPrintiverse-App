@@ -21,8 +21,8 @@
     <Color x:Key="Background">#E7E9EF</Color>
     <Color x:Key="OnBackground">#E7E9EF</Color>
 
-    <Color x:Key="BackgroundVariant">White</Color>
-    <Color x:Key="OnBackgroundVariant">White</Color>
+    <Color x:Key="BackgroundVariant">#DADDE7</Color>
+    <Color x:Key="OnBackgroundVariant">#DADDE7</Color>
 
     <Color x:Key="PrimaryText">Black</Color>
     <Color x:Key="SecondaryText">Black</Color>

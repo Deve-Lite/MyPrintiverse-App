@@ -1,19 +1,20 @@
 ﻿using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Spools;
+using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
+using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
+using MyPrintiverse.FilamentsModule.Spools.SpoolPage;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 
-public class FilamentViewModel : BaseItemViewModel<Filament, EditFilamentView>
+public class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, EditFilamentView, Spool, AddSpoolView, EditSpoolView, SpoolView>
 {
-	public AsyncCommand<Spool> DisplaySpoolCommand;
+    public FilamentViewModel(MessageService messagingService, FilamentService itemService, SpoolService itemsService) : base(messagingService, itemService, itemsService, itemsService  )
+    {
+    }
 
-	public FilamentViewModel(MessageService messageService, FilamentService itemService) : base(messageService, itemService)
-	{
-		DisplaySpoolCommand = new AsyncCommand<Spool>(DisplaySpool, CanExecute);
-	}
+    #region Overrides
 
-	private async Task DisplaySpool(Spool item)
-	{
-		await Shell.Current.GoToAsync("");
-	}
+    
+
+    #endregion
 }

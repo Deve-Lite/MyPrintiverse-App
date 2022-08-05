@@ -101,7 +101,6 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
 
         if (await ItemService.DeleteItemAsync(Id))
             await Shell.Current.GoToAsync("..", true);
-
     }
 
     #endregion

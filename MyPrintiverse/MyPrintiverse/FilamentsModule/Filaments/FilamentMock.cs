@@ -22,7 +22,7 @@ public class FilamentMock : BaseMock<Filament>
         var color = GetRandomFromList(Colors);
         filament.Color = color.Item1;
         filament.ColorHex = color.Item2;
-        filament.ShortDescription = GetRandomFromList(Decriptions);
+        filament.Description = GetRandomFromList(Decriptions);
         filament.Diameter = Rand(2.85);
 
         filament.NozzleTemperature = Rand(190, 250);
