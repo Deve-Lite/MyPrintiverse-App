@@ -66,6 +66,7 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
         base.OnAppearing();
 
         Item = await ItemService.GetItemAsync(Id);
+
     }
 
     #endregion

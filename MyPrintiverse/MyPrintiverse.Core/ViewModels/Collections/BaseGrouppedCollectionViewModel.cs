@@ -27,56 +27,56 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     }
 
     #region Overrides
-    protected override async Task UpdateItemsOnAppearing()
+
+    protected override async Task UpdateCollectionsOnAppearing()
     {
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
-        var iterableItems = new List<GroupedItem<TBaseModel>>(Items);
+        var collections = new List<GroupedItem<TBaseModel>>(Items);
 
-        for (int i = 0; i < iterableItems.Count; i++) 
-        {
-            for (int j = 0; j < iterableItems[i].Count; j++)
-            {
-                var item = iterableItems[i][j];
-
-                var newItem = data.FirstOrDefault(x => x.Id == item.Id);
-
-                if (newItem == null)
-                {
-                    DeleteFromItems(item);
-                }
-                else if (newItem.EditedAt != item.EditedAt) 
-                {
-                    Items[i][Items[i].IndexOf(item)] = newItem;
-
-                    data.Remove(newItem);
-                }
-                else if (newItem.EditedAt == item.EditedAt)
-                    data.Remove(newItem);
-            }
-        }
+        foreach(var collection in collections)
+            await UpdateCollection(data, collection, false);
 
         foreach (var item in data)
-            AddToItems(item);
+            AddToCollection(Items,item);
 
-        SortItems();
+        SortCollection(Items);
     }
 
-    protected override async Task RefreshItems()
+    protected override async Task Refresh()
+    {
+        await RefreshCollection(Items, await ItemsService.GetItemsAsync());
+    }
+
+    protected override void DeleteFromItems(TBaseModel item)
+    {
+        int itemCollectionIndex = GetIndex(item);
+
+        RemoveFromCollection(Items[itemCollectionIndex], item);
+
+        if (Items[itemCollectionIndex].Count == 0)
+            Items.Remove(Items[itemCollectionIndex]);
+    }
+
+    #endregion
+
+    #region Virtual Methods
+
+    protected virtual async Task RefreshCollection(ObservableCollection<GroupedItem<TBaseModel>> Collection, IEnumerable<TBaseModel> newItems)
     {
         IsRefreshing = true;
 
-        Items.Clear();
+        Collection.Clear();
 
-        foreach (var item in await ItemsService.GetItemsAsync())
-            AddToItems(item);
+        foreach (var item in newItems)
+            AddToCollection(Collection, item);
 
-        SortItems();
+        SortCollection(Collection);
 
         IsRefreshing = false;
     }
 
-    protected override void AddToItems(TBaseModel item)
+    protected virtual void AddToCollection(ObservableCollection<GroupedItem<TBaseModel>> Collection, TBaseModel item)
     {
         int i = GetIndex(item);
         if (i == -1)
@@ -89,17 +89,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
             Items[i].Add(item);
     }
 
-    protected override void DeleteFromItems(TBaseModel item)
-    {
-        int i = GetIndex(item);
-
-        Items[i].Remove(item);
-
-        if (Items[i].Count == 0)
-            Items.Remove(Items[i]);
-    }
-
-    protected override void SortItems() => Items.OrderBy(x => x.Name);
+    protected virtual void SortCollection(ObservableCollection<GroupedItem<TBaseModel>> Collection) => Collection.OrderBy(x => x.Name);
 
     #endregion
 

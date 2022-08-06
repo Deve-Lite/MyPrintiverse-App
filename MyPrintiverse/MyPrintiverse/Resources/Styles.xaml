@@ -18,7 +18,7 @@
         <Setter Property="IsRefreshing"
                 Value="{Binding IsRefreshing}" />
         <Setter Property="Command"
-                Value="{Binding RefreshItemsCommand}" />
+                Value="{Binding RefreshCommand}" />
         <Setter Property="CommandParameter"
                 Value="{Binding .}" />
     </Style>

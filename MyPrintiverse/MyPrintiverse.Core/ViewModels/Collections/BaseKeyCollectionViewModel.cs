@@ -44,48 +44,15 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     #region Overrides
 
-    protected override async Task UpdateItemsOnAppearing()
+    protected override async Task UpdateCollectionsOnAppearing()
     {
         if (Id != PrevId || !string.IsNullOrEmpty(PrevId)) 
         {
             PrevId = Id;
-            await RefreshItems();
+            await RefreshCollection(Items, await KeyItemsService.GetItemsByKeyAsync(Id));
         }
-
-        List<TBaseModel> data = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
-
-        int i = 0;
-        foreach (TBaseModel item in new List<TBaseModel>(Items))
-        {
-            TBaseModel newItem = data.First(x => x.Id == item.Id);
-
-            if (newItem == null)
-            {
-                Items.Remove(item);
-            }
-            else if (item.EditedAt != newItem.EditedAt)
-            {
-                Items[Items.IndexOf(item)] = newItem;
-                data.Remove(item);
-            }
-            else if (newItem.EditedAt == item.EditedAt)
-                data.Remove(newItem);
-        }
-
-        foreach (TBaseModel item in data)
-            Items.Add(item);
-    }
-
-    protected override async Task RefreshItems()
-    {
-        IsRefreshing = true;
-
-        Items.Clear();
-
-        foreach (var item in await KeyItemsService.GetItemsByKeyAsync(Id))
-            Items.Add(item);
-
-        IsRefreshing = false;
+        else
+            await UpdateCollection((List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id), Items);
     }
 
     #endregion

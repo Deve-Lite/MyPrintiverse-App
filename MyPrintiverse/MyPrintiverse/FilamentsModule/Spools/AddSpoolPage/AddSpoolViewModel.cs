@@ -19,6 +19,7 @@ public class AddSpoolViewModel : BaseAddItemViewModel<Spool>
     public override async void OnAppearing()
     {
         base.OnAppearing();
+        
         await ItemService.AddItemAsync(SpoolMock.GenerateSpool(Id));
     }
 }

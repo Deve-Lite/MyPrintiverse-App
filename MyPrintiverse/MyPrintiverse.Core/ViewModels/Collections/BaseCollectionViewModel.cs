@@ -25,7 +25,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <summary>
     /// Command for refreshing collection.
     /// </summary>
-    public AsyncCommand RefreshItemsCommand { get; set; }
+    public AsyncCommand RefreshCommand { get; set; }
     /// <summary>
     /// Command for adding new item to collection.
     /// </summary>
@@ -71,7 +71,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
         Items = new ObservableCollection<TBaseModel>();
 
-        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
+        RefreshCommand = new AsyncCommand(Refresh, CanExecute, shellExecute: ExecuteBlockade);
         AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
         EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
         OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
@@ -85,72 +85,109 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     {
         base.OnAppearing();
 
-        await UpdateItemsOnAppearing();
+        await UpdateCollectionsOnAppearing();
     }
 
     /// <summary>
     /// Task to perfrom when page is loading, designed for refresh collection with new data.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task UpdateItemsOnAppearing()
+    protected virtual async Task UpdateCollectionsOnAppearing()
     { 
+        await UpdateCollection((List<TBaseModel>)await ItemsService.GetItemsAsync(), Items);
+    }
 
-        var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
-
-        foreach (var item in new List<TBaseModel>(Items))
-        {
-            var newItem = data.First(x => x.Id == item.Id);
-
-            if (newItem == null)
-            {
-                Items.Remove(item);
-            }
-            else if (item.EditedAt != newItem.EditedAt)
-            {
-                Items[Items.IndexOf(item)] = newItem;
-                data.Remove(item);
-            }
-            else if (newItem.EditedAt == item.EditedAt)
-                data.Remove(newItem);
-        }
-
-        foreach (TBaseModel item in data)
-            Items.Add(item);
+    /// <summary>
+    /// Task to perform when RefreshCommand occurs.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual async Task Refresh()
+    {
+        await RefreshCollection(Items, await ItemsService.GetItemsAsync());
     }
 
     #endregion
 
-    #region CollectionRefresh
+    #region Collection
 
     /// <summary>
-    /// Task to perform when RefreshItemsCommand occurs.
+    /// Updates colection with new items.
+    /// </summary>
+    /// <param name="newItems"> Items for update. </param>
+    /// <param name="Collection"> Collection with items to update. </param>
+    /// <returns></returns>
+    protected virtual async Task UpdateCollection(List<TBaseModel> newItems, ObservableCollection<TBaseModel> Collection, bool addRemaingItems = true)
+    {
+        foreach (var oldItem in new List<TBaseModel>(Collection))
+        {
+            var newItem = newItems.First(x => x.Id == oldItem.Id);
+
+            if (newItem == null)
+            {
+                RemoveFromCollection(Collection, oldItem);
+            }
+            else if (oldItem.EditedAt != newItem.EditedAt)
+            {
+                EditInCollection(Collection, newItem, oldItem);
+                newItems.Remove(newItem);
+            }
+            else if (newItem.EditedAt == oldItem.EditedAt)
+                newItems.Remove(newItem);
+        }
+
+        if (addRemaingItems)
+        {
+            foreach (TBaseModel item in newItems)
+                AddToCollection(Collection, item);
+        }
+
+        SortCollection(Collection);
+    }
+
+    /// <summary>
+    /// Refreshes collection by deleting all items and adding items again.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task RefreshItems()
+    protected virtual async Task RefreshCollection(ObservableCollection<TBaseModel> Collection, IEnumerable<TBaseModel> newItems)
     {
-
         IsRefreshing = true;
 
-        Items.Clear();
+        Collection.Clear();
 
-        foreach (var item in await ItemsService.GetItemsAsync())
-            AddToItems(item);
+        foreach (var item in newItems)
+            AddToCollection(Collection, item);
 
-        SortItems();
+        SortCollection(Collection);
 
         IsRefreshing = false;
     }
 
     /// <summary>
-    /// Method adds item to collection as new group or to existing group. Method used in DeleteItem.
+    /// Deletes item from spcified Collection.
     /// </summary>
-    /// <param name="item"> Model. </param>
-    protected virtual void AddToItems(TBaseModel item) => Items.Add(item);
+    /// <param name="Collection"></param>
+    /// <param name="item"></param>
+    protected virtual void RemoveFromCollection(ObservableCollection<TBaseModel> Collection, TBaseModel item) => Collection.Remove(item);
+
+    /// <summary>
+    /// Adds item to specified Collection.
+    /// </summary>
+    /// <param name="Collection"></param>
+    /// <param name="item"></param>
+    protected virtual void AddToCollection(ObservableCollection<TBaseModel> Collection, TBaseModel item) => Collection.Add(item);
+
+    /// <summary>
+    /// Edits item in specified Collection.
+    /// </summary>
+    /// <param name="Collection"></param>
+    /// <param name="newItem"></param>
+    /// <param name="oldItem"></param>
+    protected virtual void EditInCollection(ObservableCollection<TBaseModel> Collection, TBaseModel newItem, TBaseModel oldItem) => Collection[Collection.IndexOf(oldItem)] = newItem;
 
     /// <summary>
     /// After updating or refreshing, list of Items is sorted by this function.
     /// </summary>
-    protected virtual void SortItems() { }
+    protected virtual void SortCollection(ObservableCollection<TBaseModel> Collection) { }
 
     #endregion
 
@@ -174,7 +211,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
     }
 
-
     /// <summary>
     /// Task to perform when AddItemCommand occurs.
     /// </summary>
@@ -187,6 +223,13 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <param name="item"></param>
     /// <returns></returns>
     protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}?Id={item.Id}");
+
+    /// <summary>
+    /// Task to perform when OpenItemCommand occurs.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TItemView).Name}?Id={item.Id}");
 
     /// <summary>
     /// Task to perform when DeleteItemCommand occurs.
@@ -208,16 +251,9 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <param name="item"> Model. </param>
     protected virtual void DeleteFromItems(TBaseModel item)
     {
-        Items.Remove(item);
+        RemoveFromCollection(Items, item);
     }
-
-    /// <summary>
-    /// Task to perform when OpenItemCommand occurs.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TItemView).Name}?Id={item.Id}");
-
+   
     #endregion
 }
 

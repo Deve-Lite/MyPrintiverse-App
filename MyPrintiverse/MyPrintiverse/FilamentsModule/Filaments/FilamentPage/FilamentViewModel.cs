@@ -16,15 +16,15 @@ public class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, Ed
         FinishedFilaments = new ObservableCollection<Filament>();
     }
 
+
     #region Overrides
 
-    protected override Task UpdateItemsOnAppearing()
+    protected override Task UpdateCollectionsOnAppearing()
     {
-        return base.UpdateItemsOnAppearing();
+        return base.UpdateCollectionsOnAppearing();
     }
 
     protected override async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(AddSpoolView)}?Id={Item.Id}");
-
 
     #endregion
 }

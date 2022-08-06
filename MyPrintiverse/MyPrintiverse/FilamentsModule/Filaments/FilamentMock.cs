@@ -71,9 +71,7 @@ public class FilamentMock : BaseMock<Filament>
             items = (List<FilamentType>)await _filamentTypeService.GetItemsAsync();
         }
 
-        int count = items.Count;
-
-        return items[Rand(0, count - 1)].Id;
+        return items[Rand(0, items.Count - 1)].Id;
     }
 
 }
