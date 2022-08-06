@@ -9,7 +9,7 @@ public class ConfigService<T> : IConfigService<T> where T : class, IConfig
 {
     public T Config { get; }
 
-    public ConfigService(string filePath) : this(new FileStream(filePath, FileMode.Open))
+    public ConfigService(string filePath) : this(new FileStream(filePath, FileMode.OpenOrCreate))
     {
     }
 

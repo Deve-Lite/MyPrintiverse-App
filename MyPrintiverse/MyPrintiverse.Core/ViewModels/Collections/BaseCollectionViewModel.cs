@@ -97,7 +97,6 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
-        int i = 0;
         foreach (var item in new List<TBaseModel>(Items))
         {
             var newItem = data.First(x => x.Id == item.Id);

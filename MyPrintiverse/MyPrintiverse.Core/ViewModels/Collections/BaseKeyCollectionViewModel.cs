@@ -46,7 +46,7 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     protected override async Task UpdateItemsOnAppearing()
     {
-        if (Id != PrevId && !string.IsNullOrEmpty(PrevId)) 
+        if (Id != PrevId || !string.IsNullOrEmpty(PrevId)) 
         {
             PrevId = Id;
             await RefreshItems();
