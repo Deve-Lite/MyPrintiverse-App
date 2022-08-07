@@ -49,10 +49,17 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         if (Id != PrevId || !string.IsNullOrEmpty(PrevId)) 
         {
             PrevId = Id;
-            await RefreshCollection(Items, await KeyItemsService.GetItemsByKeyAsync(Id));
+            Items.Clear();
+            await RefreshCollection(Items, (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id), false);
+            //await UpdateCollection(Items, (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id));
         }
         else
-            await UpdateCollection((List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id), Items);
+            await UpdateCollection(Items, (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id));
+    }
+
+    protected override async Task Refresh()
+    {
+        await RefreshCollection(Items, await KeyItemsService.GetItemsByKeyAsync(Id));
     }
 
     #endregion

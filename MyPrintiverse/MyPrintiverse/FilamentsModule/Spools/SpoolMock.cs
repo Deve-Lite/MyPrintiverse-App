@@ -10,9 +10,14 @@ public class SpoolMock : BaseMock<Spool>
         item.IsSample = Rand();
         item.StandardWeight = Rand(1);
         double weight = Rand(1);
-        item.AvaliableWeight = weight > item.StandardWeight ? item.StandardWeight : weight;
+        if (Rand(-1, 2)>0)
+            item.AvaliableWeight = weight > item.StandardWeight ? item.StandardWeight : weight;
+        else
+            item.AvaliableWeight = 0;
         item.IsFinished = item.AvaliableWeight == 0;
         item.Description = GetRandomFromList(Decriptions);
+
+
 
         return item;
     }
