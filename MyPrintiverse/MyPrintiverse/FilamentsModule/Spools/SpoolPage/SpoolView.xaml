@@ -5,7 +5,6 @@
              x:Class="MyPrintiverse.FilamentsModule.Spools.SpoolPage.SpoolView"
              Title="SpoolView">
     <StackLayout>
-        
         <Frame Grid.Row="0" 
                Style="{StaticResource BaseFrame}" 
                Padding="15"

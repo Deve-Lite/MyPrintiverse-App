@@ -91,13 +91,13 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Task to perfrom when page is loading, designed for refresh collection with new data.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task UpdateCollectionsOnAppearing() => await UpdateCollection(Items, (List<TBaseModel>)await ItemsService.GetItemsAsync());
+    protected virtual async Task UpdateCollectionsOnAppearing() => UpdateCollection(Items, (List<TBaseModel>)await ItemsService.GetItemsAsync());
 
     /// <summary>
     /// Task to perform when RefreshCommand occurs.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task Refresh() => await RefreshCollection(Items, await ItemsService.GetItemsAsync());
+    protected virtual async Task Refresh() => RefreshCollection(Items, await ItemsService.GetItemsAsync());
 
 
     #endregion
@@ -111,7 +111,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <param name="items"> Items for collection update. </param>
     /// <param name="addRemaingItems"> Terminates if elements left in items are automatically added to collection. </param>
     /// <returns></returns>
-    protected virtual async Task UpdateCollection(ObservableCollection<TBaseModel> collection, List<TBaseModel> items, bool addRemaingItems = true)
+    protected virtual void UpdateCollection(ObservableCollection<TBaseModel> collection, List<TBaseModel> items, bool addRemaingItems = true)
     {
         foreach (var oldItem in new List<TBaseModel>(collection))
         {
@@ -146,7 +146,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <param name="items"> Items to add to Collection. </param>
     /// <param name="notifyCollection"> Terminate to notify RefreshView about refresh. </param>
     /// <returns></returns>
-    protected virtual async Task RefreshCollection(ObservableCollection<TBaseModel> collection, IEnumerable<TBaseModel> items, bool notifyCollection = true)
+    protected virtual void RefreshCollection(ObservableCollection<TBaseModel> collection, IEnumerable<TBaseModel> items, bool notifyCollection = true)
     {
         if(notifyCollection)
             IsRefreshing = true;

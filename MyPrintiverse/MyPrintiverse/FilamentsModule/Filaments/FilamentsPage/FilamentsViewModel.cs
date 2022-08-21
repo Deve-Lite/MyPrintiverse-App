@@ -15,7 +15,15 @@ public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilame
 
     protected override string GetNewGroupName(Filament item) => item.Brand.Trim();
 
-    protected override int GetIndex(Filament item) => Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
+    protected override int GetIndex(Filament item)
+    {
+        if (item== null)
+            return -1;
+
+        #pragma warning disable CS8604 // Possible null reference argument.
+        return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
+
+    }
 
     #endregion
 }

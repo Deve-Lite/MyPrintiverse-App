@@ -26,8 +26,8 @@ public class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, Ed
         SplitItems(normalCollection, finishedCollection, await KeyItemsService.GetItemsByKeyAsync(Id));
 
         IsRefreshing = true;
-        await RefreshCollection(Items, normalCollection, false);
-        await RefreshCollection(FinishedFilaments, finishedCollection, false);
+        RefreshCollection(Items, normalCollection, false);
+        RefreshCollection(FinishedFilaments, finishedCollection, false);
         IsRefreshing = false;
     }
 
@@ -38,16 +38,23 @@ public class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, Ed
 
         SplitItems(normalCollection, finishedCollection, await KeyItemsService.GetItemsByKeyAsync(Id));
 
-        await UpdateCollection(Items, normalCollection);
-        await UpdateCollection(FinishedFilaments, finishedCollection);
+        UpdateCollection(Items, normalCollection);
+        UpdateCollection(FinishedFilaments, finishedCollection);
     }
 
     protected override async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(AddSpoolView)}?Id={Item.Id}");
 
+    protected override void DeleteFromItems(Spool item)
+    {
+        if (Items.Any(x => x.Id==item.Id))
+            RemoveFromCollection(Items, item);
+        else
+            RemoveFromCollection(FinishedFilaments, item);
+    }
+
     #endregion
 
     #region Privates
-
     private void SplitItems(List<Spool> normalCollection, List<Spool> finishedCollection, IEnumerable<Spool> items)
     {
         foreach (var item in items)
