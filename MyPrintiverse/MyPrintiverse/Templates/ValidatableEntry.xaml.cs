@@ -3,7 +3,7 @@ namespace MyPrintiverse.Templates;
 public partial class ValidatableEntry : ContentView
 {
     #region Title
-    public static readonly BindableProperty TitleStyleProperty = BindableProperty.Create(nameof(TitleStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public static readonly BindableProperty TitleStyleProperty = BindableProperty.Create(nameof(TitleStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Label)) { });
     public Style TitleStyle
     {
         get => (Style)GetValue(TitleStyleProperty);
@@ -20,7 +20,7 @@ public partial class ValidatableEntry : ContentView
     #endregion
 
     #region ErrorMessage
-    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Label)) { });
     public Style ErrorMessageStyle
     {
         get => (Style)GetValue(ErrorMessageStyleProperty);
@@ -44,7 +44,7 @@ public partial class ValidatableEntry : ContentView
     #endregion
 
     #region Entry
-    public static readonly BindableProperty EntryStyleProperty = BindableProperty.Create(nameof(EntryStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public static readonly BindableProperty EntryStyleProperty = BindableProperty.Create(nameof(EntryStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Entry)) { });
     public Style EntryStyle
     {
         get => (Style)GetValue(EntryStyleProperty);
@@ -79,10 +79,17 @@ public partial class ValidatableEntry : ContentView
         set => SetValue(EntryValidationCommandProperty, value);
     }
 
+    public static readonly BindableProperty CommandParmeterProperty = BindableProperty.Create(nameof(CommandParmeter), typeof(object), typeof(ValidatableEntry), null);
+    public object CommandParmeter
+    {
+        get => GetValue(EntryValidationCommandProperty);
+        set => SetValue(EntryValidationCommandProperty, value);
+    }
+
     #endregion
 
     #region Frame
-    public static readonly BindableProperty FrameStyleProperty = BindableProperty.Create(nameof(FrameStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public static readonly BindableProperty FrameStyleProperty = BindableProperty.Create(nameof(FrameStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Frame)) { });
     public Style FrameStyle
     {
         get => (Style)GetValue(FrameStyleProperty);
@@ -90,6 +97,7 @@ public partial class ValidatableEntry : ContentView
     }
 
     #endregion
+
     public ValidatableEntry()
 	{
 		InitializeComponent();
