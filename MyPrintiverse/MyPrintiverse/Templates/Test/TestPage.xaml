@@ -75,6 +75,7 @@
                                              Title="Email"
                                              IsValid="{Binding Email.IsValid}"
                                              Text="{Binding Email.Value, Mode=TwoWay}"
+                                             ImageSource="{Binding ImageSource}"
                                              ValidationCommand="{Binding EmailValidateCommand}"
                                              ExtendingCommand="{Binding PaswordizeCommand}"/>
 
@@ -91,6 +92,28 @@
 
 
             <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+
+            <module:EntityValidatableEntry Style="{StaticResource BaseEntityValidatableEntry}"
+                                           Margin="10,2,10,4"
+                                           Entity="kg"
+                                           ErrorMessage="{Binding Email.Error}"
+                                           Title="Email"
+                                           IsValid="{Binding Email.IsValid}"
+                                           Text="{Binding Email.Value, Mode=TwoWay}"
+                                           ValidationCommand="{Binding EmailValidateCommand}"/>
+
+            <module:ExtendedEntityValidatableEntry Style="{StaticResource BaseExtendedEntityValidatableEntry}"
+                                                   Margin="10,2,10,4"
+                                                   Entity="kg"
+                                                   ImageSource="{Binding ImageSource}"
+                                                   ErrorMessage="{Binding Email.Error}"
+                                                   Title="Email"
+                                                   IsValid="{Binding Email.IsValid}"
+                                                   Text="{Binding Email.Value, Mode=TwoWay}"
+                                                   ValidationCommand="{Binding EmailValidateCommand}"
+                                                   ExtendingCommand="{Binding PaswordizeCommand}"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
 

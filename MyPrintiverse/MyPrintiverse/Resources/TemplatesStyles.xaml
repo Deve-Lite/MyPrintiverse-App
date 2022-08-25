@@ -70,6 +70,13 @@
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
+    <Style TargetType="Label" x:Key="EntityValidatableEntry" 
+           BasedOn="{StaticResource MediumRaleway}">
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
     <Style TargetType="Image" 
            x:Key="BaseImageValidatableEntry">
 
@@ -103,6 +110,32 @@
 
     <!-- End Validatable Entry -->
 
+    <!-- Entity Validatable Entry -->
+
+    <Style TargetType="templates:EntityValidatableEntry" 
+           x:Key="BaseEntityValidatableEntry">
+        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}"/>
+        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
+        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
+        <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>
+        <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}"/>
+    </Style>
+
+    <!-- End Entity Validatable Entry -->
+
+    <!-- Extended Entity Validatable Entry -->
+
+    <Style TargetType="templates:ExtendedEntityValidatableEntry" 
+           x:Key="BaseExtendedEntityValidatableEntry">
+        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}"/>
+        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
+        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
+        <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>
+        <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}"/>
+    </Style>
+
+    <!-- End Extended Entity Validatable Entry -->
+
     <!-- Extended Validatable Entry -->
 
     <Style TargetType="templates:ExtendedValidatableEntry" 
@@ -114,6 +147,7 @@
     </Style>
 
     <!-- End Extended Validatable Entry -->
+
 
     <!-- Activity Button -->
 

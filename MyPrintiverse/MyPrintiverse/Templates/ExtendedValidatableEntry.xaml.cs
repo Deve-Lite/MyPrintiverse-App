@@ -100,7 +100,7 @@ public partial class ExtendedValidatableEntry : ContentView
         set => SetValue(PlaceholderProperty, value);
     }
 
-    public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(ValidatableEntry), false);
+    public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(ExtendedValidatableEntry), false);
     public bool IsPassword
     {
         get => (bool)GetValue(IsPasswordProperty);
