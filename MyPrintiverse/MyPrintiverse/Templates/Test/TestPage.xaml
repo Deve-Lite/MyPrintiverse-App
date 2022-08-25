@@ -68,35 +68,27 @@
 
             <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry with button" HorizontalOptions="Center"/>
 
-            <module:ValidatableEntryWithButton Padding="0"
-                                               Margin="10,2,10,4"
-                                               HeightRequest="70"
-                                 FrameStyle="{StaticResource ClearValidatableEntryFrame}"
-                                 TitleStyle="{StaticResource MicroOswald}"
-                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
-                                 EntryStyle="{StaticResource BaseEntry}"       
-                                 ImageButtonStyle="{StaticResource ValidatableImageButton}"
-                                 ImageButtonCommand="{Binding AdditioalCommand}"          
-                                 ErrorMessage="{Binding Email.Error}"
-                                 ErrorMessageIsVisible="{Binding Email.IsValid}"
-                                 Title="Email"
-                                 Text="{Binding Email.Value, Mode=TwoWay}"
-                                 EntryValidationCommand="{Binding EmailValidateCommand}"/>
+            
+            <module:ExtendedValidatableEntry Style="{StaticResource BaseExtendedValidatableEntry}"
+                                             Margin="10,2,10,4"
+                                             ErrorMessage="{Binding Email.Error}"
+                                             Title="Email"
+                                             IsValid="{Binding Email.IsValid}"
+                                             Text="{Binding Email.Value, Mode=TwoWay}"
+                                             ValidationCommand="{Binding EmailValidateCommand}"
+                                             ExtendingCommand="{Binding PaswordizeCommand}"/>
 
-            <module:ValidatableEntryWithButton Padding="0"
-                                               Margin="10,2,10,4"
-                                               HeightRequest="70"
-                                 TitleStyle="{StaticResource MicroOswald}"
-                                 FrameStyle="{StaticResource TestFrame}"
-                                 ErrorMessageStyle="{StaticResource SmallComplementary}"
-                                 EntryStyle="{StaticResource ValidatableEntry}"
-                                 ImageButtonStyle="{StaticResource ValidatableImageButton}"
-                                 ImageButtonCommand="{Binding AdditioalCommand}"  
-                                 ErrorMessage="{Binding Password.Error}"                                             
-                                 ErrorMessageIsVisible="{Binding Password.IsValid}"
-                                 Title="Password"
-                                 Text="{Binding Password.Value, Mode=TwoWay}"
-                                 EntryValidationCommand="{Binding PasswordValidateCommand}"/>
+            <module:ExtendedValidatableEntry Style="{StaticResource BaseExtendedValidatableEntry}"
+                                             Margin="10,2,10,4"
+                                             ErrorMessage="{Binding Password.Error}"
+                                             Title="Password"
+                                             IsValid="{Binding Password.IsValid}"
+                                             Text="{Binding Password.Value, Mode=TwoWay}"
+                                             IsPassword="{Binding IsPassword}"
+                                             ValidationCommand="{Binding PasswordValidateCommand}"
+                                             ImageSource="{Binding ImageSource}"
+                                             ExtendingCommand="{Binding PaswordizeCommand}"/>
+
 
             <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
 
@@ -104,15 +96,12 @@
 
             <Label Style="{StaticResource TitleOswald}" Text="Activity Button" HorizontalOptions="Center"/>
 
-            <module:ActivityButton Margin="10,0,10,0"
+            <module:ActivityButton Style="{StaticResource BaseActivityButton}"
+                                   Margin="10,0,10,0"
+                                   
                                    HeightRequest="50"
-                                   ButtonStyle="{StaticResource BaseButton}"
                                    ButtonCommand="{Binding LoadUpCommand}"
-                                   ButtonIsEnabled="{Binding IsEnabled}"
-                                   Text="Dodaj nowy element"
-                                   TextStyle="{StaticResource BaseRaleway}"
-                                   ActivityIndicatorStyle="{StaticResource ButtonActivityIndicator}"
-                                   IsRunning="{Binding IsRunning}"/>
+                                   Text="Login"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,60"/>
 

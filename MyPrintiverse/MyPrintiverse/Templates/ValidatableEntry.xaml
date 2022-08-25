@@ -11,7 +11,7 @@
         <Label Style="{Binding TitleStyle}" 
                Text="{Binding Title}" />
 
-        <Grid>
+        <Grid HeightRequest="{Binding SupportHeight}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -19,7 +19,8 @@
                     Style="{Binding BorderStyle}">
 
                 <Entry Style="{Binding EntryStyle}" 
-                       Text="{Binding Text, Mode=TwoWay}"     
+                       Text="{Binding Text, Mode=TwoWay}" 
+                       IsPassword="{Binding IsPassword}"
                        Placeholder="{Binding Placeholder}">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="Unfocused" 
@@ -33,7 +34,7 @@
         <Label Style="{Binding ErrorMessageStyle}" 
                IsVisible="{Binding IsValid, Converter={toolkit:InvertedBoolConverter}}"
                Text="{Binding ErrorMessage}" 
-               Margin="0,0,0,4"/>
+               Margin="0,0,0,3"/>
 
     </StackLayout>
 </ContentView>

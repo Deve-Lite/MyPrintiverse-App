@@ -79,6 +79,9 @@
 		<Compile Update="AuthorizationModule\SettingsPage\SettingsView.xaml.cs">
 			<DependentUpon>SettingsView.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
+		  <DependentUpon>ExtendedValidatableEntry.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -139,7 +142,7 @@
 		<MauiXaml Update="Templates\ValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\ValidatableEntryWithButton.xaml">
+		<MauiXaml Update="Templates\ExtendedValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
@@ -148,6 +151,7 @@
 		<None Remove="config.json" />
 		<None Remove="Resources\Fonts\Oswald-Regular.ttf" />
 		<None Remove="Resources\Fonts\Raleway-Regular.ttf" />
+		<None Remove="Resources\Images\res.png" />
 		<None Remove="RestSharp" />
 		<None Remove="System.IdentityModel.Tokens.Jwt" />
 	</ItemGroup>

@@ -1,10 +1,20 @@
 namespace MyPrintiverse.Templates;
 
-public partial class ValidatableEntry : ContentView, INotifyPropertyChanged
+public partial class ValidatableEntry : ContentView
 {
-    #region Validation
+    #region Entry Grid
+    // sets height of entry grid (sometimes weird height problem)
 
-    private static Brush DefaultColor;
+    public static readonly BindableProperty SupportHeightProperty = BindableProperty.Create(nameof(SupportHeight), typeof(int), typeof(ValidatableEntry), 50);
+    public int SupportHeight
+    {
+        get => (int)GetValue(SupportHeightProperty);
+        set => SetValue(SupportHeightProperty, value);
+    }
+
+    #endregion
+
+    #region Validation
 
     public static readonly BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(ValidatableEntry), false, BindingMode.TwoWay, propertyChanged: OnIsValidChanged);
     public bool IsValid
@@ -17,11 +27,8 @@ public partial class ValidatableEntry : ContentView, INotifyPropertyChanged
     {
         var bindableEntry = (ValidatableEntry)bindable;
 
-        if (DefaultColor == null)
-            DefaultColor = bindableEntry.Border.Stroke;
-
         if (bindableEntry.IsValid)
-            bindableEntry.Border.Stroke = DefaultColor;
+            bindableEntry.Border.Stroke = Color.FromArgb("#00000000");
         else
             bindableEntry.Border.Stroke = Color.FromRgb(212, 33, 33);
     }
@@ -90,6 +97,13 @@ public partial class ValidatableEntry : ContentView, INotifyPropertyChanged
     {
         get => (string)GetValue(PlaceholderProperty);
         set => SetValue(PlaceholderProperty, value);
+    }
+
+    public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(ValidatableEntry), false);
+    public bool IsPassword
+    {
+        get => (bool)GetValue(IsPasswordProperty);
+        set => SetValue(IsPasswordProperty, value);
     }
 
     #endregion

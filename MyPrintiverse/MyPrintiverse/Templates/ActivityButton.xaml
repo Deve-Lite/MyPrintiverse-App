@@ -11,7 +11,7 @@
 
             <Button Style="{Binding ButtonStyle}"
                     Command="{Binding ButtonCommand}"
-                    IsEnabled="{Binding ButtonIsEnabled}"
+                    IsEnabled="{Binding IsButtonEnabled}"
                     HorizontalOptions="FillAndExpand"/>
 
             <Label Style="{Binding TextStyle}"
@@ -22,7 +22,7 @@
 
             <ActivityIndicator x:Name="ai"
                                Margin="0,5,0,5"
-                Style="{Binding ActivityIndicatorStyle}"
+                               Style="{Binding ActivityIndicatorStyle}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                IsRunning="{Binding IsRunning}"

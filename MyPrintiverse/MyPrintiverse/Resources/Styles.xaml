@@ -337,7 +337,7 @@
            x:Key="BaseActivityIndicator">
 
         <Setter Property="Color"
-                Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
 
         <Setter Property="BackgroundColor"
                 Value="Transparent" />
