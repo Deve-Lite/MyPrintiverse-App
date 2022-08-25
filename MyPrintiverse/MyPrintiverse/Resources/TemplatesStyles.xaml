@@ -1,8 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
-    
+                    xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Validatable Entry -->
+
+    <Style TargetType="Frame" x:Key="BaseFrameValidatableEntry">
+
+        <Setter Property="HasShadow"
+                Value="False" />
+
+        <Setter Property="BorderColor"
+                Value="Transparent" />
+
+        <Setter Property="CornerRadius"
+                Value="5" />
+
+        <Setter Property="Margin"
+                Value="0,3,0,2" />
+
+        <Setter Property="Padding"
+                Value="5,0,5,0" />
+
+        <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+
+    </Style>
+
+    <Style TargetType="Entry" x:Key="BaseEntryValidatableEntry">
+
+        <Setter Property="TextColor"
+                        Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
+        <Setter Property="FontFamily"
+                        Value="Raleway" />
+        <Setter Property="FontSize"
+                        Value="14" />
+        <Setter Property="PlaceholderColor"
+                        Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
+    </Style>
+
+    <Style TargetType="Entry" x:Key="NumericEntryValidatableEntry">
+
+        <Setter Property="TextColor"
+                        Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
+        <Setter Property="FontFamily"
+                        Value="Raleway" />
+        <Setter Property="FontSize"
+                        Value="14" />
+        <Setter Property="Keyboard" 
+                Value="Numeric" />
+        <Setter Property="PlaceholderColor"
+                        Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="SmallRalewayValidatableEntry" BasedOn="{StaticResource SmallRaleway}">
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
+        <Setter Property="FrameStyle" Value="{StaticResource BaseFrameValidatableEntry}"/>
+        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
+        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
+        <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>
+    </Style>
+
+    <Style TargetType="templates:ValidatableEntry" x:Key="NumericValidatableEntry" BasedOn="{StaticResource BaseValidatableEntry}">
+        <Setter Property="EntryStyle" Value="{StaticResource NumericEntryValidatableEntry}"/>
+    </Style>
+
+    <!-- End Validatable Entry -->
 
 </ResourceDictionary>

@@ -1,7 +1,40 @@
 namespace MyPrintiverse.Templates;
 
-public partial class ValidatableEntry : ContentView
+public partial class ValidatableEntry : ContentView, INotifyPropertyChanged
 {
+    #region Validation
+
+    private static Color DefaultColor;
+
+    public static readonly BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(ValidatableEntry), false, BindingMode.TwoWay, propertyChanged: OnIsValidChanged);
+    public bool IsValid
+    {
+        get => (bool)GetValue(IsValidProperty);
+        set => SetValue(IsValidProperty, value);
+    }
+
+    private static void OnIsValidChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var bindableEntry = (ValidatableEntry)bindable;
+
+        if (DefaultColor == null)
+            DefaultColor = bindableEntry.Frame.BorderColor;
+
+        if (bindableEntry.IsValid)
+            bindableEntry.Frame.BorderColor = DefaultColor;
+        else
+            bindableEntry.Frame.BorderColor = Color.FromRgb(212, 33, 33);
+    }
+
+    public static readonly BindableProperty ValidationCommandProperty = BindableProperty.Create(nameof(ValidationCommand), typeof(ICommand), typeof(ValidatableEntry), null);
+    public ICommand ValidationCommand
+    {
+        get => (ICommand)GetValue(ValidationCommandProperty);
+        set => SetValue(ValidationCommandProperty, value);
+    }
+
+    #endregion
+
     #region Title
     public static readonly BindableProperty TitleStyleProperty = BindableProperty.Create(nameof(TitleStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Label)) { });
     public Style TitleStyle
@@ -34,16 +67,10 @@ public partial class ValidatableEntry : ContentView
         set => SetValue(ErrorMessageProperty, value);
     }
 
-    public static readonly BindableProperty ErrorMessageIsVisibleProperty = BindableProperty.Create(nameof(ErrorMessageIsVisible), typeof(bool), typeof(ValidatableEntry), false);
-    public bool ErrorMessageIsVisible
-    {
-        get => (bool)GetValue(ErrorMessageIsVisibleProperty);
-        set => SetValue(ErrorMessageIsVisibleProperty, value);
-    }
-
     #endregion
 
     #region Entry
+
     public static readonly BindableProperty EntryStyleProperty = BindableProperty.Create(nameof(EntryStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Entry)) { });
     public Style EntryStyle
     {
@@ -65,31 +92,11 @@ public partial class ValidatableEntry : ContentView
         set => SetValue(PlaceholderProperty, value);
     }
 
-    public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(ValidatableEntry), false);
-    public bool IsPassword
-    {
-        get => (bool)GetValue(IsPasswordProperty);
-        set => SetValue(IsPasswordProperty, value);
-    }
-
-    public static readonly BindableProperty EntryValidationCommandProperty = BindableProperty.Create(nameof(EntryValidationCommand), typeof(ICommand), typeof(ValidatableEntry), null);
-    public ICommand EntryValidationCommand
-    {
-        get => (ICommand)GetValue(EntryValidationCommandProperty);
-        set => SetValue(EntryValidationCommandProperty, value);
-    }
-
-    public static readonly BindableProperty CommandParmeterProperty = BindableProperty.Create(nameof(CommandParmeter), typeof(object), typeof(ValidatableEntry), null);
-    public object CommandParmeter
-    {
-        get => GetValue(EntryValidationCommandProperty);
-        set => SetValue(EntryValidationCommandProperty, value);
-    }
-
     #endregion
 
     #region Frame
-    public static readonly BindableProperty FrameStyleProperty = BindableProperty.Create(nameof(FrameStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Frame)) { });
+
+    public static readonly BindableProperty FrameStyleProperty = BindableProperty.Create(nameof(FrameStyle), typeof(Style), typeof(ValidatableEntry), null);
     public Style FrameStyle
     {
         get => (Style)GetValue(FrameStyleProperty);
@@ -99,7 +106,7 @@ public partial class ValidatableEntry : ContentView
     #endregion
 
     public ValidatableEntry()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
     }
 }

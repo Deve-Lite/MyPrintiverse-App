@@ -24,7 +24,8 @@
     <Color x:Key="BackgroundVariant">#DADDE7</Color>
     <Color x:Key="OnBackgroundVariant">#DADDE7</Color>
 
-    <Color x:Key="PrimaryText">Black</Color>
+    <Color x:Key="PrimaryText">#1F2432</Color>
+    <Color x:Key="PrimaryPlaceholderText">#1f243c99</Color>
     <Color x:Key="SecondaryText">Black</Color>
 
     <!-- Dark Mode -->
@@ -47,7 +48,8 @@
     <Color x:Key="BackgroundVariantDark">Black</Color>
     <Color x:Key="OnBackgroundVariantDark">Black</Color>
 
-    <Color x:Key="PrimaryTextDark">White</Color>
+    <Color x:Key="PrimaryTextDark">#E7E9EF</Color>
+    <Color x:Key="PrimaryPlaceholderTextDark">#e7e9ef80</Color>
     <Color x:Key="SecondaryTextDark">White</Color>
 
     <!-- Universal -->
