@@ -50,11 +50,8 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
 
     public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
     {
-        var itemServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(itemService));
-        ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
-
-        var messageServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(messageService));
-        MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
+        ItemService = itemService;
+        MessageService = messageService;
 
         BackCommand = new AsyncCommand(Back, CanExecute, shellExecute: ExecuteBlockade);
     }

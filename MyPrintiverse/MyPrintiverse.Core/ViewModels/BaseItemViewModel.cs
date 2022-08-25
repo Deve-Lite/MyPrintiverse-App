@@ -62,11 +62,8 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
 
     public BaseItemViewModel(IMessageService messageService, IItemService<TBaseModel> itemService)
     {
-        var itemServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(itemService));
-        ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
-
-        var messageServiceExceptionMessage = GetExceptionMessage<BaseItemViewModel<TBaseModel, TEdit>>(nameof(messageService));
-        MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
+        ItemService = itemService;
+        MessageService = messageService;
 
         EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
         DeleteItemCommand = new AsyncCommand(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);

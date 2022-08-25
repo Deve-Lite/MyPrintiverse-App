@@ -63,11 +63,8 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
     public BaseCollectionViewModel(IMessageService messageService, IItemService<TBaseModel> itemsService)
     {
-        var messageServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(messageService));
-        MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
-
-        var itemsServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
-        ItemsService = itemsService ?? throw new ArgumentNullException(itemsServiceExceptionMessage);
+        MessageService = messageService;
+        ItemsService = itemsService;
 
         Items = new ObservableCollection<TBaseModel>();
 

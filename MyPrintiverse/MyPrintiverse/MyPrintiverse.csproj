@@ -133,6 +133,12 @@
 		<MauiXaml Update="Templates\ActivityButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Templates\EntityValidatableEntry.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Templates\MessageEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

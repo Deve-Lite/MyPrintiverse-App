@@ -60,8 +60,7 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
 
     public BaseCollectionWithItemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService) : base(messagingService, itemsService)
 {
-        var itemServiceExceptionMessage = GetExceptionMessage<BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView>>(nameof(itemsService));
-        ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
+        ItemService = itemService;
 
         EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
         DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);

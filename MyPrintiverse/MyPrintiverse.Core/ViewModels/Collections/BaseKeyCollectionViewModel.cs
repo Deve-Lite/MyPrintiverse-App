@@ -38,8 +38,7 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     public BaseKeyCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService, IItemKeyService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
     {
-        var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
-        KeyItemsService = keyItemsService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
+        KeyItemsService = keyItemsService;
     }
 
     #region Overrides

@@ -52,8 +52,7 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
 
     public BaseKeyCollectionWithitemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService, IItemKeyService<TCollectionModel> keyItemsService) : base(messagingService, itemsService, keyItemsService)
     {
-        var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionEditView, TCollectionAddView, TCollectionItemView>>(nameof(itemsService));
-        ItemService = itemService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
+        ItemService = itemService;
 
         EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
         DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
