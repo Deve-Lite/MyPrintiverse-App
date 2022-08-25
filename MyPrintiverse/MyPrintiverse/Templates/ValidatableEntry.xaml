@@ -15,8 +15,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Frame x:Name="Frame" 
-                   Style="{Binding FrameStyle}">
+            <Border x:Name="Border" 
+                    Style="{Binding BorderStyle}">
 
                 <Entry Style="{Binding EntryStyle}" 
                        Text="{Binding Text, Mode=TwoWay}"     
@@ -27,7 +27,7 @@
                     </Entry.Behaviors>
                 </Entry>
 
-            </Frame>
+            </Border>
         </Grid>
 
         <Label Style="{Binding ErrorMessageStyle}" 

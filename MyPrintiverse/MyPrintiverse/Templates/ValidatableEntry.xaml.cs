@@ -4,7 +4,7 @@ public partial class ValidatableEntry : ContentView, INotifyPropertyChanged
 {
     #region Validation
 
-    private static Color DefaultColor;
+    private static Brush DefaultColor;
 
     public static readonly BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(ValidatableEntry), false, BindingMode.TwoWay, propertyChanged: OnIsValidChanged);
     public bool IsValid
@@ -18,12 +18,12 @@ public partial class ValidatableEntry : ContentView, INotifyPropertyChanged
         var bindableEntry = (ValidatableEntry)bindable;
 
         if (DefaultColor == null)
-            DefaultColor = bindableEntry.Frame.BorderColor;
+            DefaultColor = bindableEntry.Border.Stroke;
 
         if (bindableEntry.IsValid)
-            bindableEntry.Frame.BorderColor = DefaultColor;
+            bindableEntry.Border.Stroke = DefaultColor;
         else
-            bindableEntry.Frame.BorderColor = Color.FromRgb(212, 33, 33);
+            bindableEntry.Border.Stroke = Color.FromRgb(212, 33, 33);
     }
 
     public static readonly BindableProperty ValidationCommandProperty = BindableProperty.Create(nameof(ValidationCommand), typeof(ICommand), typeof(ValidatableEntry), null);
@@ -94,13 +94,13 @@ public partial class ValidatableEntry : ContentView, INotifyPropertyChanged
 
     #endregion
 
-    #region Frame
+    #region Border
 
-    public static readonly BindableProperty FrameStyleProperty = BindableProperty.Create(nameof(FrameStyle), typeof(Style), typeof(ValidatableEntry), null);
-    public Style FrameStyle
+    public static readonly BindableProperty BorderStyleProperty = BindableProperty.Create(nameof(BorderStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public Style BorderStyle
     {
-        get => (Style)GetValue(FrameStyleProperty);
-        set => SetValue(FrameStyleProperty, value);
+        get => (Style)GetValue(BorderStyleProperty);
+        set => SetValue(BorderStyleProperty, value);
     }
 
     #endregion

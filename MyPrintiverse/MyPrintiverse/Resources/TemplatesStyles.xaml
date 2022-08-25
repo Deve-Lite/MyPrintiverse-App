@@ -6,16 +6,13 @@
 
     <!-- Validatable Entry -->
 
-    <Style TargetType="Frame" x:Key="BaseFrameValidatableEntry">
+    <Style TargetType="Border" x:Key="BaseBorderValidatableEntry">
 
-        <Setter Property="HasShadow"
-                Value="False" />
+        <Setter Property="StrokeShape" 
+                Value="RoundRectangle 5,5,5,5"/>
 
-        <Setter Property="BorderColor"
-                Value="Transparent" />
-
-        <Setter Property="CornerRadius"
-                Value="5" />
+        <Setter Property="StrokeThickness" 
+                Value="2"/>
 
         <Setter Property="Margin"
                 Value="0,3,0,2" />
@@ -54,12 +51,14 @@
                         Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
     </Style>
 
-    <Style TargetType="Label" x:Key="SmallRalewayValidatableEntry" BasedOn="{StaticResource SmallRaleway}">
+    <Style TargetType="Label" x:Key="SmallRalewayValidatableEntry" 
+           BasedOn="{StaticResource SmallRaleway}">
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
+    
     <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
-        <Setter Property="FrameStyle" Value="{StaticResource BaseFrameValidatableEntry}"/>
+        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}"/>
         <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
         <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
         <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>

@@ -47,11 +47,7 @@
             <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry" HorizontalOptions="Center"/>
 
             <module:ValidatableEntry Margin="10,2,10,0"
-                                     HorizontalOptions="FillAndExpand"
-                                     FrameStyle="{StaticResource ClearValidatableEntryFrame}"
-                                     TitleStyle="{StaticResource SmallRalewayValidatableEntry}"
-                                     ErrorMessageStyle="{StaticResource SmallComplementary}"
-                                     EntryStyle="{StaticResource BaseEntryValidatableEntry}"
+                                     Style="{StaticResource BaseValidatableEntry}"
                                      ErrorMessage="{Binding Email.Error}"
                                      IsValid="{Binding Email.IsValid}"
                                      Title="Email"       
