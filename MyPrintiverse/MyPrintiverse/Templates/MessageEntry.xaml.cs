@@ -3,6 +3,7 @@ namespace MyPrintiverse.Templates;
 public partial class MessageEntry : ContentView
 {
     //ZAMAINA NA ValidatableEntry
+	// Do Usuniêcia
 
     public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(MessageEntry), string.Empty);
 	public string Message

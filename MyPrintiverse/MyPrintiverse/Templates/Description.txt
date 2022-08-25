@@ -1,0 +1,1 @@
+﻿Templates are builded for aiming on passing styles of objects like style of frame etc.
