@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.Templates.ExtendedEntityValidatableEntry"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this">
+    
+    <StackLayout BindingContext="{x:Reference this}"
+                 BackgroundColor="Transparent">
+
+        <Label Style="{Binding TitleStyle}" 
+               Text="{Binding Title}" />
+
+        <Grid HeightRequest="{Binding SupportHeight}">
+            <Border x:Name="Border" 
+                    Style="{Binding BorderStyle}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.76*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.14*"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry Style="{Binding EntryStyle}" 
+                           Text="{Binding Text, Mode=TwoWay}"   
+                           IsPassword="{Binding IsPassword}"
+                           Placeholder="{Binding Placeholder}">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                        Command="{Binding ValidationCommand}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Grid.Column="1"
+                           Style="{Binding EntityStyle}"
+                           Text="{Binding Entity}" />
+
+                    <ImageButton x:Name="ExtendingButton" 
+                                 Grid.Column="2"
+                                 Margin="7" 
+                                 Source="{Binding ImageSource}"
+                                 Command="{Binding ExtendingCommand}"/>
+
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Label Style="{Binding ErrorMessageStyle}" 
+               IsVisible="{Binding IsValid, Converter={toolkit:InvertedBoolConverter}}"
+               Text="{Binding ErrorMessage}" 
+               Margin="0,0,0,3"/>
+
+    </StackLayout>
+</ContentView>

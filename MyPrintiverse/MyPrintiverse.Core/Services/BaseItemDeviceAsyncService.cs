@@ -33,26 +33,27 @@ public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> wher
         if (item == null || string.IsNullOrEmpty(item.Id))
             return;
 
-        await db?.InsertAsync(item, typeof(T))!;
+        await db!.InsertAsync(item, typeof(T));
     }
 
-    public virtual async Task DeleteAllAsync() => await db?.DeleteAllAsync<T>()!;
+    public virtual async Task DeleteAllAsync() => await db!.DeleteAllAsync<T>();
     public virtual async Task DeleteItemAsync(string objectId)
     {
         if (string.IsNullOrEmpty(objectId))
             return;
 
-        await db?.DeleteAsync<T>(objectId)!;
+        await db!.DeleteAsync<T>(objectId);
     }
 
-    public virtual async Task<T> GetItemAsync(string objectId) => await db?.GetAsync<T>(objectId)!;
-    public virtual async Task<IEnumerable<T>> GetItemsAsync() => await db.Table<T>().ToListAsync();
+    public virtual async Task<T> GetItemAsync(string objectId) => await db!.GetAsync<T>(objectId);
+
+    public virtual async Task<IEnumerable<T>> GetItemsAsync() => await db!.Table<T>().ToListAsync();
 
     public virtual async Task UpdateItemAsync(T? item)
     {
         if (item == null || string.IsNullOrEmpty(item.Id))
             return;
 
-        await db?.UpdateAsync(item, typeof(T))!;
+        await db!.UpdateAsync(item, typeof(T));
     }
 }

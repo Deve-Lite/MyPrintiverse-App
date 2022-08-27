@@ -6,26 +6,24 @@ using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
-{
-
+{ 
     public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
-    { 
+    {
     }
 
-    public override void OnAppearing()
-    {
-        IsEnabled = true;
-        base.OnAppearing();
-        AddItemCommand = new AsyncCommand(AddItem);
-    }
+    #region Overrides
 
-    protected override string GetNewGroupName(Filament item)
-    {
-        return item.Brand.Trim();
-    }
+    protected override string GetNewGroupName(Filament item) => item.Brand.Trim();
 
     protected override int GetIndex(Filament item)
     {
-        return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
+        var foundItem = Items.FirstOrDefault(x => x.Name == item.Brand);
+
+        if (foundItem == null)
+                return -1;
+
+        return Items.IndexOf(foundItem);
     }
+
+    #endregion
 }

@@ -13,6 +13,8 @@ namespace MyPrintiverse.Core.ViewModels.Collections;
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> where TBaseModel : BaseModel
 {
+    #region Fields
+
     /// <summary>
     /// Storing previous page id.
     /// </summary>
@@ -23,78 +25,40 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     /// </summary>
     public string Id { get; set; }
 
+    #endregion
+
+    #region Services
+
     /// <summary>
     /// Service of item with Key conneced operations.
     /// </summary>
     protected IItemKeyService<TBaseModel> KeyItemsService;
 
+    #endregion
 
     public BaseKeyCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService, IItemKeyService<TBaseModel> keyItemsService) : base(messagingService, itemsService)
     {
-        var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
-        KeyItemsService = keyItemsService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
+        KeyItemsService = keyItemsService;
     }
 
-    public override async void OnAppearing()
+    #region Overrides
+
+    protected override async Task UpdateCollectionsOnAppearing()
     {
-        base.OnAppearing();
-
-        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
-        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
-        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
-
-        await UpdateItemsOnAppearing();
-    }
-
-
-    protected override async Task UpdateItemsOnAppearing()
-    {
-        if (Id != PrevId && !string.IsNullOrEmpty(PrevId)) 
+        if (Id != PrevId || !string.IsNullOrEmpty(PrevId)) 
         {
             PrevId = Id;
-            await RefreshItems();
+            Items.Clear();
+            RefreshCollection(Items, (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id), false);
         }
-
-        IsRefreshing = true;
-
-        List<TBaseModel> data = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
-
-        int i = 0;
-        foreach (TBaseModel item in new List<TBaseModel>(Items))
-        {
-            TBaseModel newItem = data.First(x => x.Id == item.Id);
-
-            if (newItem == null)
-            {
-                Items.Remove(item);
-            }
-            else if (item.EditedAt != newItem.EditedAt)
-            {
-                Items[Items.IndexOf(item)] = newItem;
-                data.Remove(item);
-            }
-            else if (newItem.EditedAt == item.EditedAt)
-                data.Remove(newItem);
-        }
-
-        foreach (TBaseModel item in data)
-            Items.Add(item);
-
-        IsRefreshing = false;
+        else
+            UpdateCollection(Items, (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id));
     }
 
-    protected override async Task RefreshItems()
+    protected override async Task Refresh()
     {
-
-        IsRefreshing = true;
-
-        Items.Clear();
-
-        foreach (var item in await KeyItemsService.GetItemsByKeyAsync(Id))
-            Items.Add(item);
-
-        IsRefreshing = false;
+        RefreshCollection(Items, await KeyItemsService.GetItemsByKeyAsync(Id));
     }
+
+    #endregion
 }

@@ -5,17 +5,22 @@
 /// </summary>
 public abstract class BaseViewModel : INotifyPropertyChanged
 {
-	/// <summary>
-	/// Default delay in milliseconds.
-	/// </summary>
-	protected const int DELAY = 500;
+    #region Const
+    /// <summary>
+    /// Default delay in milliseconds.
+    /// </summary>
+    protected const int DELAY = 500;
 
-	public virtual void OnAppearing() 
+    #endregion
+
+    public virtual void OnAppearing() 
 	{
-		//Perform On Appearing
-	}
+        IsEnabled = true;
+    }
 
-	private bool _isBusy;
+    #region Fields
+
+    private bool _isBusy;
 
     /// <summary>
     /// Terminate if any action started on page.
@@ -59,19 +64,16 @@ public abstract class BaseViewModel : INotifyPropertyChanged
         set => SetProperty(ref isEnabled, value);
     }
 
+    #endregion
+
+    #region Observable Methods
 
     /// <summary>
-    /// Check if command can be executed.
+    /// Terminate if action can start on page.
     /// </summary>
-    /// <returns><see langword="true" /> if command can be executed, otherwise <see langword="false" /></returns>
-    protected bool CanExecute(object obj) => !IsBusy;
-
-	/// <summary>
-	/// Terminate if action can start on page.
-	/// </summary>
-	/// <param name="arg"></param>
-	/// <returns></returns>
-	protected virtual bool CanExecute<T>(T arg) => !IsBusy;
+    /// <param name="arg"></param>
+    /// <returns></returns>
+    protected virtual bool CanExecute<T>(T arg) => !IsBusy;
 	 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -106,11 +108,21 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 		return true;
 	}
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="act">Action to execute.</param>
-	protected void ExecuteBlockade(Action act)
+    #endregion
+
+    #region Command Methods
+
+    /// <summary>
+    /// Check if command can be executed.
+    /// </summary>
+    /// <returns><see langword="true" /> if command can be executed, otherwise <see langword="false" /></returns>
+    protected bool CanExecute(object obj) => !IsBusy;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="act">Action to execute.</param>
+    protected void ExecuteBlockade(Action act)
 	{
 		IsBusy = true;
 
@@ -164,6 +176,10 @@ public abstract class BaseViewModel : INotifyPropertyChanged
         IsBusy = false;
     }
 
+    #endregion
+
+    #region Exceptions Methods
+
     /// <summary>
     /// Creates exception message.
     /// </summary>
@@ -171,4 +187,6 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     /// <param name="propertyName"></param>
     /// <returns>exception message.</returns>
     protected string GetExceptionMessage<T>(string propertyName) => $"{nameof(T)} - {propertyName}";
+
+    #endregion
 }

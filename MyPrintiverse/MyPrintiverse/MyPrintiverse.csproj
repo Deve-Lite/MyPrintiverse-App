@@ -32,10 +32,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#A3E1BF" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#A3E1BF" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -79,6 +79,9 @@
 		<Compile Update="AuthorizationModule\SettingsPage\SettingsView.xaml.cs">
 			<DependentUpon>SettingsView.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
+		  <DependentUpon>ExtendedValidatableEntry.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -97,7 +100,7 @@
 		<MauiXaml Update="Resources\LabelStyles.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Resources\PageStyles.xaml">
+		<MauiXaml Update="Resources\ShellStyles.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Resources\Styles.xaml">
@@ -130,6 +133,12 @@
 		<MauiXaml Update="Templates\ActivityButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Templates\EntityValidatableEntry.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Templates\MessageEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -139,7 +148,7 @@
 		<MauiXaml Update="Templates\ValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\ValidatableEntryWithButton.xaml">
+		<MauiXaml Update="Templates\ExtendedValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
@@ -148,6 +157,7 @@
 		<None Remove="config.json" />
 		<None Remove="Resources\Fonts\Oswald-Regular.ttf" />
 		<None Remove="Resources\Fonts\Raleway-Regular.ttf" />
+		<None Remove="Resources\Images\res.png" />
 		<None Remove="RestSharp" />
 		<None Remove="System.IdentityModel.Tokens.Jwt" />
 	</ItemGroup>

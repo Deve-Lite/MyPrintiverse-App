@@ -2,8 +2,10 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyPrintiverse"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:filamentsmodule="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage"
+             xmlns:filaments="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentsPage" 
+             xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
              xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
              x:Class="MyPrintiverse.App">
 
@@ -11,7 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Colors.xaml" />
-                <ResourceDictionary Source="Resources/PageStyles.xaml" />
+                <ResourceDictionary Source="Resources/ShellStyles.xaml" />
                 <ResourceDictionary Source="Resources/LabelStyles.xaml" />
                 <ResourceDictionary Source="Resources/Styles.xaml" />
                 <ResourceDictionary Source="Resources/TemplatesStyles.xaml" />
@@ -23,9 +25,42 @@
     <Application.MainPage>
         <Shell>
 
-            <FlyoutItem Title="Home">
-                <ShellContent Title="Home"
-                              ContentTemplate="{DataTemplate filamentsmodule:FilamentsView}" />
+            <Shell.FlyoutHeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Frame Style="{StaticResource BaseFrame}">
+                            <Image Source="spool.png" HeightRequest="84" Margin="0,30,0,30"/>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </Shell.FlyoutHeaderTemplate>
+
+            <Shell.FlyoutFooterTemplate>
+                <DataTemplate>
+                    <StackLayout HeightRequest="60">
+                        <Label Style="{StaticResource SmallRaleway}"
+                       Margin="0,5,0,0"
+                       Text="My Printiverse"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                        <Label Style="{StaticResource SmallRaleway}"
+                               Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dddd, dd/MM/yyyy}'}"
+                       HorizontalOptions="Center" />
+                    </StackLayout>
+                </DataTemplate>
+            </Shell.FlyoutFooterTemplate>
+
+            <FlyoutItem Title="Filaments"
+                        Icon="spool.png">
+
+                <ShellContent Title="Filaments"
+                              Icon="spool.png"
+                              ContentTemplate="{DataTemplate filaments:FilamentsView}" />
+
+                <ShellContent Title="Types"
+                              Icon="spool.png"
+                              ContentTemplate="{DataTemplate types:FilamentTypesView}" />
+
             </FlyoutItem>
 
             <FlyoutItem Title="Test"

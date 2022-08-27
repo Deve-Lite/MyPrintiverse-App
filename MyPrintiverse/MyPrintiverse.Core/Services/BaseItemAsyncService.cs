@@ -27,9 +27,7 @@ public abstract class BaseItemAsyncService<T> : BaseService, IItemService<T> whe
         }
         else
         {
-            item.CreatedAt = DateTime.Now;
-            item.EditedAt = DateTime.Now;
-            item.Id = ObjectId.GenerateNewId().ToString();
+            FillBaseData(item);
 
             await ItemDeviceService.AddItemAsync(item);
             return true;
@@ -105,5 +103,15 @@ public abstract class BaseItemAsyncService<T> : BaseService, IItemService<T> whe
             return true;
         }
     }
+
+    #region Privates
+    public void FillBaseData(T item)
+    {
+        item.Id = ObjectId.GenerateNewId().ToString();
+        item.EditedAt = DateTime.Now;
+        item.CreatedAt = DateTime.Now;
+    }
+
+    #endregion
 }
 

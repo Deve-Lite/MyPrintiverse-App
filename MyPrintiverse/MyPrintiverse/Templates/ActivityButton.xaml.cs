@@ -20,11 +20,11 @@ public partial class ActivityButton : ContentView
         set => SetValue(ButtonCommandProperty, value);
     }
 
-    public static readonly BindableProperty ButtonIsEnabledProperty = BindableProperty.Create(nameof(ButtonIsEnabled), typeof(bool), typeof(ActivityButton), false);
-    public bool ButtonIsEnabled
+    public static readonly BindableProperty IsButtonEnabledProperty = BindableProperty.Create(nameof(IsButtonEnabled), typeof(bool), typeof(ActivityButton), false);
+    public bool IsButtonEnabled
     {
-        get => (bool)GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
+        get => (bool)GetValue(IsButtonEnabledProperty);
+        set => SetValue(IsButtonEnabledProperty, value);
     }
 
     #endregion

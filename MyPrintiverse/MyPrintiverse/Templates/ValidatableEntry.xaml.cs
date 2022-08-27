@@ -2,8 +2,48 @@ namespace MyPrintiverse.Templates;
 
 public partial class ValidatableEntry : ContentView
 {
+    #region Entry Grid
+    // sets height of entry grid (sometimes weird height problem)
+
+    public static readonly BindableProperty SupportHeightProperty = BindableProperty.Create(nameof(SupportHeight), typeof(int), typeof(ValidatableEntry), 50);
+    public int SupportHeight
+    {
+        get => (int)GetValue(SupportHeightProperty);
+        set => SetValue(SupportHeightProperty, value);
+    }
+
+    #endregion
+
+    #region Validation
+
+    public static readonly BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(ValidatableEntry), false, BindingMode.TwoWay, propertyChanged: OnIsValidChanged);
+    public bool IsValid
+    {
+        get => (bool)GetValue(IsValidProperty);
+        set => SetValue(IsValidProperty, value);
+    }
+
+    private static void OnIsValidChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var bindableEntry = (ValidatableEntry)bindable;
+
+        if (bindableEntry.IsValid)
+            bindableEntry.Border.Stroke = Color.FromArgb("#00000000");
+        else
+            bindableEntry.Border.Stroke = Color.FromRgb(212, 33, 33);
+    }
+
+    public static readonly BindableProperty ValidationCommandProperty = BindableProperty.Create(nameof(ValidationCommand), typeof(ICommand), typeof(ValidatableEntry), null);
+    public ICommand ValidationCommand
+    {
+        get => (ICommand)GetValue(ValidationCommandProperty);
+        set => SetValue(ValidationCommandProperty, value);
+    }
+
+    #endregion
+
     #region Title
-    public static readonly BindableProperty TitleStyleProperty = BindableProperty.Create(nameof(TitleStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public static readonly BindableProperty TitleStyleProperty = BindableProperty.Create(nameof(TitleStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Label)) { });
     public Style TitleStyle
     {
         get => (Style)GetValue(TitleStyleProperty);
@@ -20,7 +60,7 @@ public partial class ValidatableEntry : ContentView
     #endregion
 
     #region ErrorMessage
-    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Label)) { });
     public Style ErrorMessageStyle
     {
         get => (Style)GetValue(ErrorMessageStyleProperty);
@@ -34,17 +74,11 @@ public partial class ValidatableEntry : ContentView
         set => SetValue(ErrorMessageProperty, value);
     }
 
-    public static readonly BindableProperty ErrorMessageIsVisibleProperty = BindableProperty.Create(nameof(ErrorMessageIsVisible), typeof(bool), typeof(ValidatableEntry), false);
-    public bool ErrorMessageIsVisible
-    {
-        get => (bool)GetValue(ErrorMessageIsVisibleProperty);
-        set => SetValue(ErrorMessageIsVisibleProperty, value);
-    }
-
     #endregion
 
     #region Entry
-    public static readonly BindableProperty EntryStyleProperty = BindableProperty.Create(nameof(EntryStyle), typeof(Style), typeof(ValidatableEntry), null);
+
+    public static readonly BindableProperty EntryStyleProperty = BindableProperty.Create(nameof(EntryStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Entry)) { });
     public Style EntryStyle
     {
         get => (Style)GetValue(EntryStyleProperty);
@@ -72,26 +106,25 @@ public partial class ValidatableEntry : ContentView
         set => SetValue(IsPasswordProperty, value);
     }
 
-    public static readonly BindableProperty EntryValidationCommandProperty = BindableProperty.Create(nameof(EntryValidationCommand), typeof(ICommand), typeof(ValidatableEntry), null);
-    public ICommand EntryValidationCommand
+    #endregion
+
+    #region Border
+
+    public static readonly BindableProperty BorderStyleProperty = BindableProperty.Create(nameof(BorderStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public Style BorderStyle
     {
-        get => (ICommand)GetValue(EntryValidationCommandProperty);
-        set => SetValue(EntryValidationCommandProperty, value);
+        get => (Style)GetValue(BorderStyleProperty);
+        set => SetValue(BorderStyleProperty, value);
     }
 
     #endregion
 
-    #region Frame
-    public static readonly BindableProperty FrameStyleProperty = BindableProperty.Create(nameof(FrameStyle), typeof(Style), typeof(ValidatableEntry), null);
-    public Style FrameStyle
-    {
-        get => (Style)GetValue(FrameStyleProperty);
-        set => SetValue(FrameStyleProperty, value);
-    }
+    // TODO 
+    // property które oznacza liczbe zarezerwowanych lini na error message 
 
-    #endregion
     public ValidatableEntry()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
+        Margin = new Thickness(10, 5, 10, 4);
     }
 }

@@ -11,27 +11,29 @@ namespace MyPrintiverse.Core.ViewModels;
 [QueryProperty(nameof(Id), nameof(Id))]
 public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : BaseModel, new()
 {
-
+    #region Fields
     /// <summary>
     /// Item id used for quering,
     /// </summary>
     public string Id { get; set; }
+
+    #endregion
+
+    #region Commands
 
     /// <summary>
     /// Command for view, designed to save edited item.
     /// </summary>
     public AsyncCommand EditItemCommand { get; set; }
 
+    #endregion
+
     public BaseEditItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
-    }
-
-    public override async void OnAppearing()
-    {
-        base.OnAppearing();
-
         EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
     }
+
+    #region Virtual Methods
 
     /// <summary>
     /// Task to perform with edit command.
@@ -41,11 +43,18 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     {
         IsRunning = true;
 
+        if (!IsValid())
+        {
+            IsRunning = false;
+            return;
+        }
+
         if (await ItemService.UpdateItemAsync(Item.Map()))
             await Shell.Current.GoToAsync("..", true);
 
-        IsRunning = false;  
+        IsRunning = false;
     }
 
+    #endregion
 }
 

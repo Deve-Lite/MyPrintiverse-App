@@ -1,4 +1,5 @@
-﻿namespace MyPrintiverse;
+﻿
+namespace MyPrintiverse;
 
 public static class MauiProgram
 {
@@ -10,7 +11,7 @@ public static class MauiProgram
 			.ConfigureViews()
 			.ConfigureViewModels()
 			.ConfigureConfig($@"{AppDomain.CurrentDomain.BaseDirectory}/config.json")
-			.UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

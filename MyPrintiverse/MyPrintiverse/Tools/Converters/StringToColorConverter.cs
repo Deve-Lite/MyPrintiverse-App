@@ -3,12 +3,15 @@ using System.Globalization;
 
 namespace MyPrintiverse.Tools.Converters;
 
-public class ColorConverter : IValueConverter
+/// <summary>
+/// Converts string hex 'XXXXXX' to color.
+/// </summary>
+public class StringToColorConverter : IValueConverter
 {
-    string color;
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return Color.FromHex((string)value);
+        var color = (string)value;
+        return Color.FromArgb(color.Replace("#", ""));
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

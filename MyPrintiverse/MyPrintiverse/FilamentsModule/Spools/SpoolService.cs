@@ -5,42 +5,19 @@ namespace MyPrintiverse.FilamentsModule.Spools;
 
 public class SpoolService : BaseItemAsyncService<Spool>, IItemKeyService<Spool>
 {
+	protected IItemKeyDeviceService<Spool> ItemDeviceKeyService;
 
 	public SpoolService(SpoolServerService itemServerService, SpoolDeviceService itemDeviceService, IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session) : base(itemServerService, itemDeviceService, configService, logger, messageService, session)
 	{
-	}
-
+		ItemDeviceKeyService = itemDeviceService;
+    }
 
 
 	public async Task<bool> DeleteItemsByKeyAsync(string key)
 	{
-		//if (false)
-		//{
-		//    //TODO
-		//    await ItemInternetService.GetItemsByKeyAsync(key);
-		//    return true;
-		//}
-		//else
-		//{
-		//    await DeviceItemKeyAsyncService.GetItemsByKeyAsync(key);
-		//    return true;
-		//}
-
-		return false;
+		await ItemDeviceKeyService.GetItemsByKeyAsync(key);
+        return true;
 	}
 
-	public async Task<IEnumerable<Spool>> GetItemsByKeyAsync(string key)
-	{
-		//if (false)
-		//{
-		//    //TODO
-		//    return await DeviceItemKeyAsyncService.GetItemsByKeyAsync(key);
-		//}
-		//else
-		//{
-		//    return await DeviceItemKeyAsyncService.GetItemsByKeyAsync(key);
-		//}
-
-		return null;
-	}
+	public async Task<IEnumerable<Spool>> GetItemsByKeyAsync(string key) => await ItemDeviceKeyService.GetItemsByKeyAsync(key);
 }

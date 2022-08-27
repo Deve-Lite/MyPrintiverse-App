@@ -2,7 +2,7 @@
 
 namespace MyPrintiverse;
 
-public abstract class BaseValidator<T> where T : BaseModel, new()
+public abstract class BaseValidator<T> : Validator<T> where T : BaseModel, new()
 {
     protected ValidationMode _validatonMode;
 

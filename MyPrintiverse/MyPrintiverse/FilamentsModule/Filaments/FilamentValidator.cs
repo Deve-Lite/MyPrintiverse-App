@@ -1,8 +1,7 @@
-﻿using Plugin.ValidationRules.Interfaces;
-
+﻿
 namespace MyPrintiverse.FilamentsModule.Filaments;
 
-public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filament>
+public class FilamentValidator : BaseValidator<Filament>
 {
     public string TypeId { get; set; }
     public Validatable<double> Diameter { get; set; }
@@ -20,6 +19,8 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         _validatonMode = ValidationMode.Part;
 
         AddValidation();
+
+        InitUnit();
     }
     public FilamentValidator(Filament filament)
     {
@@ -28,21 +29,27 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         AddValidation();
 
         FillData(filament);
+
+        InitUnit();
     }
 
-    public Filament Map()
+    public override bool Validate()
+    {
+        return base.Validate();
+    }
+
+    public override Filament Map()
     {
         var fialmentMap = new Filament();
 
         if (_validatonMode == ValidationMode.Full)
-        {
             BaseModelMap(fialmentMap);
-        }
+        
 
         fialmentMap.TypeId = TypeId;
         fialmentMap.Diameter = Diameter.Value;
         fialmentMap.Brand = Brand.Value;
-        fialmentMap.ShortDescription = ShortDescription.Value;
+        fialmentMap.Description = ShortDescription.Value;
         fialmentMap.Color = Color.Value;
         fialmentMap.ColorHex = ColorHex;
         fialmentMap.BedTemperature = BedTemperature.Value;
@@ -105,7 +112,7 @@ public class FilamentValidator : BaseValidator<Filament>, IMapperValidator<Filam
         Diameter.Value = filament.Diameter;
         Brand.Value = filament.Brand;
 
-        ShortDescription.Value = filament.ShortDescription;
+        ShortDescription.Value = filament.Description;
         NozzleTemperature.Value = filament.NozzleTemperature;
         BedTemperature.Value = filament.BedTemperature;
         CoolingRate.Value = filament.CoolingRate;

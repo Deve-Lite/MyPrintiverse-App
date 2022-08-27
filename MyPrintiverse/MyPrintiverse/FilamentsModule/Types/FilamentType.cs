@@ -7,24 +7,23 @@ namespace MyPrintiverse.FilamentsModule.Types;
 /// </summary>
 public class FilamentType : BaseModel
 {
-    [JsonProperty("filamentId")]
-    public string FilamentId { get; set; }
-
 
     [JsonProperty("fullName")]
     public string FullName { get; set; }
+
     [JsonProperty("shortName")]
     public string ShortName { get; set; }
 
     /* These 2 fields are formated to 'xxx-xxx °C' ex. 100-120 °C */
     [JsonProperty("nozzleTemperatureRange")]
     public string NozzleTemperatureRange { get; set; }
-    [JsonProperty("coolingRange")]
-    public string CoolingRange { get; set; }
 
-    /* These field is formated to 'xx-xxx %' ex. 80-100 % ex. 40-90 %  */
     [JsonProperty("bedTemperatureRange")]
     public string BedTemperatureRange { get; set; }
+
+    /* These field is formated to 'xx-xxx %' ex. 80-100 % ex. 40-90 %  */
+    [JsonProperty("coolingRange")]
+    public string CoolingRange { get; set; }
 
 
     [JsonProperty("maxServiceTempearature")]
@@ -34,7 +33,7 @@ public class FilamentType : BaseModel
 
 
     [JsonProperty("UVResistant")]
-    public bool UVResistant { get; set; }
+    public bool IsUVResistant { get; set; }
     [JsonProperty("isFoodFriendly")]
     public bool IsFoodFriendly { get; set; }
     [JsonProperty("isBio")]

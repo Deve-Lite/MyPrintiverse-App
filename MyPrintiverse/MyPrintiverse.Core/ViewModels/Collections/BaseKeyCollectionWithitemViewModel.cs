@@ -16,7 +16,7 @@ namespace MyPrintiverse.Core.ViewModels.Collections;
 public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionEditView, TCollectionAddView, TCollectionItemView> :
     BaseKeyCollectionViewModel<TCollectionModel, TCollectionAddView, TCollectionEditView, TCollectionItemView> where TCollectionModel : BaseModel where TBaseModel : BaseModel
 {
-
+    #region Fields
     /// <summary>
     /// item backing storage.
     /// </summary>
@@ -25,6 +25,10 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     /// Item for displaying 
     /// </summary>
     public TBaseModel Item { get => item; set => SetProperty(ref item, value); }
+
+    #endregion
+
+    #region Commands
 
     /// <summary>
     /// Command for view, designed to open page with item edition.
@@ -35,26 +39,38 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     /// </summary>
     public AsyncCommand DeleteDisplayItemCommand { get; set; }
 
+    #endregion
+
+    #region Services
+
     /// <summary>
     /// Service of diplayed Item.
     /// </summary>
     IItemService<TBaseModel> ItemService;
 
+    #endregion
+
     public BaseKeyCollectionWithitemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService, IItemKeyService<TCollectionModel> keyItemsService) : base(messagingService, itemsService, keyItemsService)
     {
-        var keyItemServiceExceptionMessage = GetExceptionMessage<BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollectionModel, TCollectionEditView, TCollectionAddView, TCollectionItemView>>(nameof(itemsService));
-        ItemService = itemService ?? throw new ArgumentNullException(keyItemServiceExceptionMessage);
+        ItemService = itemService;
+
+        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
+        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
     }
+
+    #region Overrides
 
     public override async void OnAppearing()
     {
         base.OnAppearing();
 
-        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
-
         Item = await ItemService.GetItemAsync(Id);
+
     }
+
+    #endregion
+
+    #region Virtual Methods
 
     /// <summary>
     /// Task connected to EditDisplayItemCommand.
@@ -71,9 +87,13 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
         if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
             return;
 
-        if (await ItemService.DeleteItemAsync(Item.Id))
+        if (await ItemService.DeleteItemAsync(Item.Id)) 
+        {
+            await KeyItemsService.DeleteItemsByKeyAsync(Item.Id);
             await Shell.Current.GoToAsync("..", true);
-
+        }
     }
+
+    #endregion
 }
 

@@ -1,10 +1,31 @@
-﻿namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
+﻿using MyPrintiverse.FilamentsModule.Types;
 
-public class AddFilamentViewModel : BaseAddItemViewModel<Filament>
+namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
+
+
+public class AddFilamentViewModel : FilamentsManageViewModel
 {
-    public AddFilamentViewModel(MessageService messageService, FilamentService itemService) : base(messageService, itemService)
+    FilamentMock _filamentMock;
+    public AddFilamentViewModel(MessageService messageService, FilamentService itemService, FilamentTypeService typeService, FilamentMock filamentMock) : base(messageService, itemService, typeService)
     {
-        Item = new FilamentValidator();
+        _filamentMock = filamentMock;
+    }
+
+    protected override async Task LoadData()
+    {
+        base.LoadData();
+        (Item as FilamentValidator).ColorHex = "FFFFFF";
+        (Item as FilamentValidator).Diameter.Value = 1.75;
+    }
+    public override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Task.Run(async () =>
+        {
+            await Task.Delay(DELAY);
+            await ItemService.AddItemAsync(await _filamentMock.GenerateFilament());
+        });
     }
 }
 

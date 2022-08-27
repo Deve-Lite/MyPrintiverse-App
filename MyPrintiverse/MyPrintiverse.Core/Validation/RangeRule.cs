@@ -15,6 +15,9 @@ public class RangeRule<T> : IValidationRule<T>
 
 	public bool Check(T value)
 	{
+		if (value == null)
+			return false;
+
         if (typeof(T).IsValueType)
             return false;
 

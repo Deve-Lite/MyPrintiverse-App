@@ -14,25 +14,10 @@ public class Spool : BaseModel
     public string Description { get; set; }
 
 
-    [JsonProperty("prints")]
-    public string[] Prints { get; set; }
-
-
-    [JsonProperty("nozzleTemperature")]
-    public int NozzleTemperature { get; set; }
-    [JsonProperty("bedTemperature")]
-    public int BedTemperature { get; set; }
-
-    [JsonProperty("coolingSpeed")]
-    public int CoolingSpeed { get; set; }
-
-
     [JsonProperty("standardWeight")]
     public double StandardWeight { get; set; }
     [JsonProperty("leftWeight")]
-    public double LeftWeight { get; set; }
-    [JsonProperty("rating")]
-    public double Rating { get; set; }
+    public double AvaliableWeight { get; set; }
 
 
     [JsonProperty("isFinished")]

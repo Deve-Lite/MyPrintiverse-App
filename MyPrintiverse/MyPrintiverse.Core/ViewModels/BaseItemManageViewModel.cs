@@ -1,5 +1,6 @@
 ﻿using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
+using Plugin.ValidationRules;
 
 namespace MyPrintiverse.Core.ViewModels;
 
@@ -7,17 +8,24 @@ namespace MyPrintiverse.Core.ViewModels;
 /// View model for add / edit view.
 /// </summary>
 /// <typeparam name="T"></typeparam>
+/// 
+/// zmiana na T i TValidataor
 public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new() 
 {
+    #region Fields
     /// <summary>
     /// Item backing storage. 
     /// </summary>
-    private IMapperValidator<T> item;
+    private Validator<T> item;
 
     /// <summary>
     /// Validatable item for stashing item data 
     /// </summary>
-    public IMapperValidator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+    public Validator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+
+    #endregion
+
+    #region Services
 
     /// <summary>
     /// Service of item.
@@ -29,28 +37,26 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     /// </summary>
     protected IMessageService MessageService;
 
+    #endregion
+
+    #region Commands
+
     /// <summary>
     /// Command designed to go to previous page.
     /// </summary>
     public AsyncCommand? BackCommand { get; set; }
 
+    #endregion
+
     public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
     {
-        var itemServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(itemService));
-        ItemService = itemService ?? throw new ArgumentNullException(itemServiceExceptionMessage);
+        ItemService = itemService;
+        MessageService = messageService;
 
-        var messageServiceExceptionMessage = GetExceptionMessage<BaseEditItemViewModel<T>>(nameof(messageService));
-        MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
+        BackCommand = new AsyncCommand(Back, CanExecute, shellExecute: ExecuteBlockade);
     }
 
-    public override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        BackCommand = new AsyncCommand(Back);
-    }
-
-
+    #region Virtual Methods
     public virtual async Task Back() => await Shell.Current.GoToAsync("..");
 
     /// <summary>
@@ -60,4 +66,11 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     {
 
     }
+
+    public virtual bool IsValid()
+    {
+        return Item.Validate();
+    }
+
+    #endregion
 }

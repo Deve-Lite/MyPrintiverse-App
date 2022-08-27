@@ -12,15 +12,20 @@ namespace MyPrintiverse.Core.ViewModels.Collections;
 /// <typeparam name="TItemView"> Class (View) displaying model.</typeparam>
 public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView> : BaseViewModel where TBaseModel : BaseModel
 {
+    #region List
     /// <summary>
     /// Base collection of TBaseModel.
     /// </summary>
     public ObservableCollection<TBaseModel> Items { get; set; }
 
+    #endregion
+
+    #region Commands
+
     /// <summary>
     /// Command for refreshing collection.
     /// </summary>
-    public AsyncCommand RefreshItemsCommand { get; set; }
+    public AsyncCommand RefreshCommand { get; set; }
     /// <summary>
     /// Command for adding new item to collection.
     /// </summary>
@@ -42,6 +47,10 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// </summary>
     public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
 
+    #endregion
+
+    #region Services
+
     /// <summary>
     /// Collection service.
     /// </summary>
@@ -50,30 +59,136 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Message service.
     /// </summary>
     protected IMessageService MessageService;
+    #endregion
 
     public BaseCollectionViewModel(IMessageService messageService, IItemService<TBaseModel> itemsService)
     {
-        var messageServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(messageService));
-        MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
-
-        var itemsServiceExceptionMessage = GetExceptionMessage<BaseCollectionViewModel<TBaseModel, TAddView, TEditView, TItemView>>(nameof(itemsService));
-        ItemsService = itemsService ?? throw new ArgumentNullException(itemsServiceExceptionMessage);
+        MessageService = messageService;
+        ItemsService = itemsService;
 
         Items = new ObservableCollection<TBaseModel>();
-    }
 
-    public override async void OnAppearing()
-    {
-        base.OnAppearing();
-
-        RefreshItemsCommand = new AsyncCommand(RefreshItems, CanExecute, shellExecute: ExecuteBlockade);
+        RefreshCommand = new AsyncCommand(Refresh, CanExecute, shellExecute: ExecuteBlockade);
         AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
         EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
         OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
         DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
-
-        await UpdateItemsOnAppearing();
+        ItemOptionsCommand = new AsyncCommand<TBaseModel>(ItemOptions, CanExecute, shellExecute: ExecuteBlockade);
     }
+
+    #region OnAppearing
+
+    public override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await UpdateCollectionsOnAppearing();
+    }
+
+    /// <summary>
+    /// Task to perfrom when page is loading, designed for refresh collection with new data.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual async Task UpdateCollectionsOnAppearing() => UpdateCollection(Items, (List<TBaseModel>)await ItemsService.GetItemsAsync());
+
+    /// <summary>
+    /// Task to perform when RefreshCommand occurs.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual async Task Refresh() => RefreshCollection(Items, await ItemsService.GetItemsAsync());
+
+
+    #endregion
+
+    #region Collection
+
+    /// <summary>
+    /// Updates colection with new items and deletes items that not occure in items.
+    /// </summary>
+    /// <param name="collection"> Collction to update. </param>
+    /// <param name="items"> Items for collection update. </param>
+    /// <param name="addRemaingItems"> Terminates if elements left in items are automatically added to collection. </param>
+    /// <returns></returns>
+    protected virtual void UpdateCollection(ObservableCollection<TBaseModel> collection, List<TBaseModel> items, bool addRemaingItems = true)
+    {
+        foreach (var oldItem in new List<TBaseModel>(collection))
+        {
+            var newItem = items.FirstOrDefault(x => x.Id == oldItem.Id);
+
+            if (newItem == null)
+            {
+                RemoveFromCollection(collection, oldItem);
+            }
+            else if (oldItem.EditedAt != newItem.EditedAt)
+            {
+                EditInCollection(collection, newItem, oldItem);
+                items.Remove(newItem);
+            }
+            else if (newItem.EditedAt == oldItem.EditedAt)
+                items.Remove(newItem);
+        }
+
+        if (addRemaingItems)
+        {
+            foreach (TBaseModel item in items)
+                AddToCollection(collection, item);
+        }
+
+        SortCollection(collection);
+    }
+
+    /// <summary>
+    /// Refreshes collection by clearing collection and adding items again.
+    /// </summary>
+    /// <param name="collection"> Collection to refresh. </param>
+    /// <param name="items"> Items to add to Collection. </param>
+    /// <param name="notifyCollection"> Terminate to notify RefreshView about refresh. </param>
+    /// <returns></returns>
+    protected virtual void RefreshCollection(ObservableCollection<TBaseModel> collection, IEnumerable<TBaseModel> items, bool notifyCollection = true)
+    {
+        if(notifyCollection)
+            IsRefreshing = true;
+
+        collection.Clear();
+
+        foreach (var item in items)
+            AddToCollection(collection, item);
+
+        SortCollection(collection);
+
+        if (notifyCollection)
+            IsRefreshing = false;
+    }
+
+    /// <summary>
+    /// Deletes item from spcified Collection.
+    /// </summary>
+    /// <param name="Collection"></param>
+    /// <param name="item"></param>
+    protected virtual void RemoveFromCollection(ObservableCollection<TBaseModel> Collection, TBaseModel item) => Collection.Remove(item);
+
+    /// <summary>
+    /// Adds item to specified Collection.
+    /// </summary>
+    /// <param name="Collection"></param>
+    /// <param name="item"></param>
+    protected virtual void AddToCollection(ObservableCollection<TBaseModel> Collection, TBaseModel item) => Collection.Add(item);
+
+    /// <summary>
+    /// Edits item in specified Collection.
+    /// </summary>
+    /// <param name="Collection"></param>
+    /// <param name="newItem"></param>
+    /// <param name="oldItem"></param>
+    protected virtual void EditInCollection(ObservableCollection<TBaseModel> Collection, TBaseModel newItem, TBaseModel oldItem) => Collection[Collection.IndexOf(oldItem)] = newItem;
+
+    /// <summary>
+    /// After updating or refreshing, list of Items is sorted by this function.
+    /// </summary>
+    protected virtual void SortCollection(ObservableCollection<TBaseModel> Collection) { }
+
+    #endregion
+
+    #region ItemManage
 
     /// <summary>
     /// Task to perform when ItemOptionCommand occurs.
@@ -97,65 +212,21 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Task to perform when AddItemCommand occurs.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAddView).Name}");
-
-    /// <summary>
-    /// Task to perfrom when page is loading, designed for refresh collection with new data.
-    /// </summary>
-    /// <returns></returns>
-    protected virtual async Task UpdateItemsOnAppearing()
-    {
-        IsRefreshing = true;
-
-        var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
-
-        int i = 0;
-        foreach (var item in new List<TBaseModel>(Items))
-        {
-            var newItem = data.First(x => x.Id == item.Id);
-
-            if (newItem == null)
-            {
-                Items.Remove(item);
-            }
-            else if (item.EditedAt != newItem.EditedAt)
-            {
-                Items[Items.IndexOf(item)] = newItem;
-                data.Remove(item);
-            }
-            else if (newItem.EditedAt == item.EditedAt)
-                data.Remove(newItem);
-        }
-
-        foreach (TBaseModel item in data)
-            Items.Add(item);
-
-        IsRefreshing = false;
-    }
-
-    /// <summary>
-    /// Task to perform when RefreshItemsCommand occurs.
-    /// </summary>
-    /// <returns></returns>
-    protected virtual async Task RefreshItems()
-    {
-
-        IsRefreshing = true;
-
-        Items.Clear();
-
-        foreach (var item in await ItemsService.GetItemsAsync())
-            Items.Add(item);
-
-        IsRefreshing = false;
-    }
+    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAddView).Name}", true);
 
     /// <summary>
     /// Task to perform when EditItemCommand occurs.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}?Id={item.Id}");
+    protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}?Id={item.Id}", true);
+
+    /// <summary>
+    /// Task to perform when OpenItemCommand occurs.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TItemView).Name}?Id={item.Id}",true);
 
     /// <summary>
     /// Task to perform when DeleteItemCommand occurs.
@@ -168,14 +239,15 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             return;
 
         if (await ItemsService.DeleteItemAsync(item.Id))
-            Items.Remove(item);
+            DeleteFromItems(item);
     }
 
     /// <summary>
-    /// Task to perform when OpenItemCommand occurs.
+    /// Method deletes item from collection. Method used in DeleteItem.
     /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TItemView).Name}?Id={item.Id}");
+    /// <param name="item"> Model. </param>
+    protected virtual void DeleteFromItems(TBaseModel item) => RemoveFromCollection(Items, item);
+
+    #endregion
 }
 

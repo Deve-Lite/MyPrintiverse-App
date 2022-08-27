@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView">
 
     <ContentPage.Resources>
@@ -12,46 +13,17 @@
                 <Setter Property="TextStyle" Value="{StaticResource BaseRaleway}"/>
                 <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
                 <Setter Property="Text" Value="Add Filament"/>
-                <Setter Property="ButtonCommand" Value="{Binding AddItemCommand}"/>
-
             </Style>
 
-            <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
-
-                <Setter Property="EntryStyle" Value="{StaticResource BaseEntry}"/>
-                <Setter Property="TitleStyle" Value="{StaticResource MicroOswald}"/>
-
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
 
-    <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <ScrollView VerticalOptions="FillAndExpand">
+        <Grid VerticalOptions="FillAndExpand">
 
-            <Label Style="{StaticResource HeaderLabel}" Text="New Filament" HorizontalOptions="Center"/>
-            <Button Style="{StaticResource BaseButton}" Text="Back" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" CornerRadius="8"/>
 
-            <Border Style="{StaticResource BaseBorder}">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="20,20,0,0"/>
-                </Border.StrokeShape>
-                
-                <StackLayout>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                Title="Brand"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    <templates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"/>
-                    
-                    <templates:ActivityButton Style="{StaticResource BaseActivityButton}"/>
-                </StackLayout>
-            </Border>
+            
         </Grid>
     </ScrollView>
 
