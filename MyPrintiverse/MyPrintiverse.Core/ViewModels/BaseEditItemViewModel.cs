@@ -28,10 +28,14 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
 
     #endregion
 
+    #endregion
+
     public BaseEditItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
         EditItemCommand = new AsyncRelayCommand(EditItem, CanExecute);
     }
+
+    #region Virtual Methods
 
     #region Virtual Methods
 

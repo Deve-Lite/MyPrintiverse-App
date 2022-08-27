@@ -18,10 +18,14 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
 
     #endregion
 
+    #endregion
+
     public BaseAddItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
         AddItemCommand = new AsyncRelayCommand(AddItem, CanExecute);
     }
+
+    #region Virtual Methods
 
     #region Virtual Methods
 
