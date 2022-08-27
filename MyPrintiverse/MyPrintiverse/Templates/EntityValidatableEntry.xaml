@@ -37,10 +37,10 @@
             </Border>
         </Grid>
 
-        <Label Style="{Binding ErrorMessageStyle}" 
-               IsVisible="{Binding IsValid, Converter={toolkit:InvertedBoolConverter}}"
-               Text="{Binding ErrorMessage}" 
-               Margin="0,0,0,3"/>
+        <Label x:Name="errorMessage" 
+               Style="{Binding ErrorMessageStyle}" 
+               HeightRequest="{Binding ErrorMessageHeight}"
+               Text="{Binding ErrorMessage}"/>
 
     </StackLayout>
 </ContentView>

@@ -60,7 +60,7 @@ public partial class EntityValidatableEntry : ContentView
     #endregion
 
     #region ErrorMessage
-    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(EntityValidatableEntry), new Style(typeof(Label)) { });
+    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(EntityValidatableEntry), new Style(typeof(Label)) { }, propertyChanged: SetHeight);
     public Style ErrorMessageStyle
     {
         get => (Style)GetValue(ErrorMessageStyleProperty);
@@ -72,6 +72,20 @@ public partial class EntityValidatableEntry : ContentView
     {
         get => (string)GetValue(ErrorMessageProperty);
         set => SetValue(ErrorMessageProperty, value);
+    }
+
+    public static readonly BindableProperty ErrorMessageLinesProperty = BindableProperty.Create(nameof(ErrorMessageLines), typeof(int), typeof(EntityValidatableEntry), 1);
+    public int ErrorMessageLines
+    {
+        get => (int)GetValue(ErrorMessageLinesProperty);
+        set => SetValue(ErrorMessageLinesProperty, value);
+    }
+
+    private static void SetHeight(BindableObject bindable, object oldValue, object newValue)
+    {
+        var bindableEntry = (EntityValidatableEntry)bindable;
+
+        bindableEntry.errorMessage.HeightRequest = bindableEntry.ErrorMessageLines * ((int)bindableEntry.errorMessage.FontSize + 2);
     }
 
     #endregion
@@ -139,5 +153,6 @@ public partial class EntityValidatableEntry : ContentView
     public EntityValidatableEntry()
 	{
 		InitializeComponent();
-	}
+        Margin = new Thickness(10, 4, 10, 4);
+    }
 }
