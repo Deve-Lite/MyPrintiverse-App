@@ -48,8 +48,6 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
 
     #endregion
 
-    #endregion
-
     public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
     {
         ItemService = itemService;
