@@ -35,7 +35,7 @@ public class TestViewModel : BaseViewModel
         PasswordValidateCommand = new Command(PasswordValidate);
         TestCommand = new Command(Test);
         AdditioalCommand = new Command(Additioal);
-        LoadUpCommand = new AsyncCommand(LoadUp);
+        LoadUpCommand = new AsyncRelayCommand(LoadUp);
         NumbersValidateCommand = new Command(() => { Numbers.Validate(); });
         PaswordizeCommand = new Command(Passwordize);
     }
@@ -46,7 +46,7 @@ public class TestViewModel : BaseViewModel
     public Command PasswordValidateCommand { get; set; }
     public Command TestCommand { get; set; }
     public Command AdditioalCommand { get; set; }
-    public AsyncCommand LoadUpCommand { get; set; }
+    public AsyncRelayCommand LoadUpCommand { get; set; }
     public Command NumbersValidateCommand { get; set; }
 
     public Validatable<string> Email { get; set; }

@@ -24,13 +24,13 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     /// <summary>
     /// Command for view, designed to save edited item.
     /// </summary>
-    public AsyncCommand EditItemCommand { get; set; }
+    public AsyncRelayCommand EditItemCommand { get; }
 
     #endregion
 
     public BaseEditItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
-        EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
+        EditItemCommand = new AsyncRelayCommand(EditItem, CanExecute);
     }
 
     #region Virtual Methods
@@ -41,18 +41,17 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     /// <returns></returns>
     public virtual async Task EditItem()
     {
+        if (AnyActionStartedCommand())
+            return;
+
         IsRunning = true;
 
-        if (!IsValid())
-        {
-            IsRunning = false;
-            return;
-        }
-
-        if (await ItemService.UpdateItemAsync(Item.Map()))
-            await Shell.Current.GoToAsync("..", true);
+        if (IsValid())
+            if (await ItemService.UpdateItemAsync(Item.Map()))
+                await Shell.Current.GoToAsync("..", true);
 
         IsRunning = false;
+        IsBusy = false;
     }
 
     #endregion

@@ -93,7 +93,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     #endregion
 
-    #region TO IMPLEMENT
+    #region Must Be Implemented
 
     /// <summary>
     /// Method creates item group name.

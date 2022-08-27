@@ -16,9 +16,11 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     public virtual void OnAppearing() 
 	{
         IsEnabled = true;
+        IsBusy = false;
+        IsRunning = false;
     }
 
-    #region Fields
+    #region Properties
 
     private bool _isBusy;
 
@@ -73,9 +75,8 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     /// </summary>
     /// <param name="arg"></param>
     /// <returns></returns>
-    protected virtual bool CanExecute<T>(T arg) => !IsBusy;
-	 
-	public event PropertyChangedEventHandler? PropertyChanged;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
 	/// <summary>
 	/// Standard method for notifying view when property value has changed.
@@ -111,6 +112,46 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     #endregion
 
     #region Command Methods
+
+    /// <summary>
+    /// Performs GoToAsync action with specified route.
+    /// </summary>
+    /// <param name="route"></param>
+    /// <returns></returns>
+    protected virtual async Task OpenPage(string route) => await Shell.Current.GoToAsync(route, true);
+
+    /// <summary>
+    /// Terminate if action can start on page.
+    /// </summary>
+    /// <param name="arg"></param>
+    /// <returns></returns>
+    protected virtual bool CanExecute() => !IsBusy;
+
+    /// <summary>
+    /// If other commands can't perform use this function to block action.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual bool AnyActionStartedCommand()
+    {
+        if (IsBusy)
+            return true;
+
+        IsBusy = true;
+        return false;
+    }
+
+
+    // Do usunięcia Start 
+    // Kacper musi pozmieniac z asynccommandów w adminmodule i authmodule
+   
+
+
+    /// <summary>
+    /// Terminate if action can start on page.
+    /// </summary>
+    /// <param name="arg"></param>
+    /// <returns></returns>
+    protected virtual bool CanExecute<T>(T arg) => !IsBusy;
 
     /// <summary>
     /// Check if command can be executed.
@@ -175,6 +216,8 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 
         IsBusy = false;
     }
+
+    // Do usunięcia END
 
     #endregion
 

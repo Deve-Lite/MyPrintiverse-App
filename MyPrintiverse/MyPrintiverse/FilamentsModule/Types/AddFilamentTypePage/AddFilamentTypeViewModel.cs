@@ -6,7 +6,6 @@ public class AddFilamentTypeViewModel : BaseAddItemViewModel<FilamentType>
     public AddFilamentTypeViewModel(MessageService messageService, FilamentTypeService itemService, FilamentTypeMock filamentTypeMock) : base(messageService, itemService)
     {
         _filamentTypeMock= filamentTypeMock;
-        AddItemCommand = new AsyncCommand(AddItem);
     }
 
     public override void OnAppearing()

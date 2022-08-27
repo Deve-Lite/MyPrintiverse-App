@@ -20,3 +20,5 @@ global using RestSharp;
 global using MongoDB.Bson;
 // Plugin
 global using Plugin.ValidationRules.Interfaces;
+// CommunityToolkit
+global using CommunityToolkit.Mvvm.Input;

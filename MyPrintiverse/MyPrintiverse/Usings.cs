@@ -25,3 +25,5 @@ global using Plugin.ValidationRules.Rules;
 
 global using MyPrintiverse.Core.Validation.NumbersRule;
 
+global using CommunityToolkit.Mvvm.Input;
+

@@ -10,7 +10,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// <typeparam name="T"></typeparam>
 /// 
 /// zmiana na T i TValidataor
-public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new() 
+public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new()
 {
     #region Fields
     /// <summary>
@@ -44,7 +44,7 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     /// <summary>
     /// Command designed to go to previous page.
     /// </summary>
-    public AsyncCommand? BackCommand { get; set; }
+    public AsyncRelayCommand BackCommand { get; }
 
     #endregion
 
@@ -53,11 +53,17 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
         ItemService = itemService;
         MessageService = messageService;
 
-        BackCommand = new AsyncCommand(Back, CanExecute, shellExecute: ExecuteBlockade);
+        BackCommand = new AsyncRelayCommand(execute: Back, canExecute: CanExecute);
     }
 
     #region Virtual Methods
-    public virtual async Task Back() => await Shell.Current.GoToAsync("..");
+    public virtual async Task Back()
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        await Shell.Current.GoToAsync("..");
+    }
 
     /// <summary>
     /// Additional actions to perform when item is changed.
