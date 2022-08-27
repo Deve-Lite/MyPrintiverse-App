@@ -33,11 +33,11 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     /// <summary>
     /// Command for view, designed to open page with item edition.
     /// </summary>
-    public AsyncCommand EditDisplayItemCommand { get; set; }
+    public AsyncRelayCommand EditDisplayItemCommand { get; set; }
     /// <summary>
     /// Command for view, designed to delete item.
     /// </summary>
-    public AsyncCommand DeleteDisplayItemCommand { get; set; }
+    public AsyncRelayCommand DeleteDisplayItemCommand { get; set; }
 
     #endregion
 
@@ -54,8 +54,8 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     {
         ItemService = itemService;
 
-        EditDisplayItemCommand = new AsyncCommand(EditDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteDisplayItemCommand = new AsyncCommand(DeleteDisplayItem, CanExecute, shellExecute: ExecuteBlockade);
+        EditDisplayItemCommand = new AsyncRelayCommand(EditDisplayItem, CanExecute);
+        DeleteDisplayItemCommand = new AsyncRelayCommand(DeleteDisplayItem, CanExecute);
     }
 
     #region Overrides
@@ -63,9 +63,7 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     public override async void OnAppearing()
     {
         base.OnAppearing();
-
         Item = await ItemService.GetItemAsync(Id);
-
     }
 
     #endregion
@@ -76,7 +74,13 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     /// Task connected to EditDisplayItemCommand.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task EditDisplayItem() => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}", true);
+    protected virtual async Task EditDisplayItem()
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        await Shell.Current.GoToAsync($"{typeof(TEditView).Name}", true);
+    }
 
     /// <summary>
     /// Task connected to DeleteDisplayedItemCommand. By default deletes only Item.
@@ -84,14 +88,17 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
     /// <returns></returns>
     protected virtual async Task DeleteDisplayItem()
     {
-        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+        if (AnyActionStartedCommand())
             return;
 
-        if (await ItemService.DeleteItemAsync(Item.Id)) 
-        {
-            await KeyItemsService.DeleteItemsByKeyAsync(Item.Id);
-            await Shell.Current.GoToAsync("..", true);
-        }
+        if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
+            if (await ItemService.DeleteItemAsync(Item.Id)) 
+            {
+                await KeyItemsService.DeleteItemsByKeyAsync(Item.Id);
+                await Shell.Current.GoToAsync("..", true);
+            }
+
+        IsBusy = false;
     }
 
     #endregion

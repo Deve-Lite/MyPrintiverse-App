@@ -1,7 +1,4 @@
-﻿
-
-
-using MyPrintiverse.Core.Utilities;
+﻿using MyPrintiverse.Core.Utilities;
 using MyPrintiverse.Core.Services;
 
 namespace MyPrintiverse.Core.ViewModels;
@@ -38,11 +35,11 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// <summary>
     /// Command for view, designed to open page with item edition.
     /// </summary>
-    public AsyncCommand EditItemCommand { get; set; }
+    public AsyncRelayCommand EditItemCommand { get; }
     /// <summary>
     /// Command for view, designed to delete item.
     /// </summary>
-    public AsyncCommand DeleteItemCommand { get; set; }
+    public AsyncRelayCommand DeleteItemCommand { get; }
 
     #endregion
 
@@ -65,8 +62,8 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
         ItemService = itemService;
         MessageService = messageService;
 
-        EditItemCommand = new AsyncCommand(EditItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteItemCommand = new AsyncCommand(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
+        EditItemCommand = new AsyncRelayCommand(EditItem, CanExecute);
+        DeleteItemCommand = new AsyncRelayCommand(DeleteItem, CanExecute);
     }
 
     #region Overrides
@@ -85,7 +82,13 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// Task to perform with edit command.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task EditItem() => await Shell.Current.GoToAsync($"{typeof(TEdit).Name}");
+    protected virtual async Task EditItem()
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        await Shell.Current.GoToAsync($"{typeof(TEdit).Name}");
+    }
 
     /// <summary>
     /// Task to perform with delete command.
@@ -93,11 +96,14 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// <returns></returns>
     protected virtual async Task DeleteItem()
     {
-        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+        if (AnyActionStartedCommand())
             return;
 
-        if (await ItemService.DeleteItemAsync(Id))
-            await Shell.Current.GoToAsync("..", true);
+        if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
+            if (await ItemService.DeleteItemAsync(Id))
+                await Shell.Current.GoToAsync("..", true);
+
+        IsBusy = false;
     }
 
     #endregion

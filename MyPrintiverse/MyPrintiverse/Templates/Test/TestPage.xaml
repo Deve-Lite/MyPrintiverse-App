@@ -21,7 +21,8 @@
 
     <ScrollView>
         <VerticalStackLayout>
-
+            
+    
             <Label Style="{StaticResource TitleOswald}" Text="Titled Switch" HorizontalOptions="Center"/>
 
             <module:TitledSwitch TitleStyle="{StaticResource BaseOswald}" 
@@ -46,38 +47,12 @@
 
             <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry" HorizontalOptions="Center"/>
 
-            <module:ValidatableEntry HeightRequest="80"
-                                     Style="{StaticResource BaseValidatableEntry}"
+            <module:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
                                      ErrorMessage="{Binding Email.Error}"
                                      IsValid="{Binding Email.IsValid}"
                                      Title="Email"       
                                      Text="{Binding Email.Value, Mode=TwoWay}"
-                                     ValidationCommand="{Binding EmailValidateCommand}">
-            </module:ValidatableEntry>
-
-            <module:ValidatableEntry HeightRequest="80"
-                                     Style="{StaticResource BaseValidatableEntry}"
-                                     ErrorMessage="{Binding Email.Error}"
-                                     IsValid="{Binding Email.IsValid}"
-                                     ValidationCommand="{Binding EmailValidateCommand}"
-                                     Title="Email"       
-                                     Text="{Binding Email.Value, Mode=TwoWay}">
-            </module:ValidatableEntry>
-
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>
-
-            <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry with button" HorizontalOptions="Center"/>
-
-            
-            <module:ExtendedValidatableEntry Style="{StaticResource BaseExtendedValidatableEntry}"
-                                             Margin="10,2,10,4"
-                                             ErrorMessage="{Binding Email.Error}"
-                                             Title="Email"
-                                             IsValid="{Binding Email.IsValid}"
-                                             Text="{Binding Email.Value, Mode=TwoWay}"
-                                             ImageSource="{Binding ImageSource}"
-                                             ValidationCommand="{Binding EmailValidateCommand}"
-                                             ExtendingCommand="{Binding PaswordizeCommand}"/>
+                                     ValidationCommand="{Binding EmailValidateCommand}"/>
 
             <module:ExtendedValidatableEntry Style="{StaticResource BaseExtendedValidatableEntry}"
                                              Margin="10,2,10,4"
@@ -89,11 +64,6 @@
                                              ValidationCommand="{Binding PasswordValidateCommand}"
                                              ImageSource="{Binding ImageSource}"
                                              ExtendingCommand="{Binding PaswordizeCommand}"/>
-
-
-            <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
-
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>
 
             <module:EntityValidatableEntry Style="{StaticResource BaseEntityValidatableEntry}"
                                            Margin="10,2,10,4"
@@ -115,6 +85,8 @@
                                                    ValidationCommand="{Binding EmailValidateCommand}"
                                                    ExtendingCommand="{Binding PaswordizeCommand}"/>
 
+            <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
+
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>
 
             <Label Style="{StaticResource TitleOswald}" Text="Activity Button" HorizontalOptions="Center"/>
@@ -126,7 +98,6 @@
                                    Text="Login"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,60"/>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

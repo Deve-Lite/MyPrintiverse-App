@@ -17,8 +17,8 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.76*"/>
-                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.72*"/>
+                        <ColumnDefinition Width="0.14*"/>
                         <ColumnDefinition Width="0.14*"/>
                     </Grid.ColumnDefinitions>
                     <Entry Style="{Binding EntryStyle}" 
@@ -45,10 +45,10 @@
             </Border>
         </Grid>
 
-        <Label Style="{Binding ErrorMessageStyle}" 
-               IsVisible="{Binding IsValid, Converter={toolkit:InvertedBoolConverter}}"
-               Text="{Binding ErrorMessage}" 
-               Margin="0,0,0,3"/>
+        <Label x:Name="errorMessage" 
+               Style="{Binding ErrorMessageStyle}" 
+               HeightRequest="{Binding ErrorMessageHeight}"
+               Text="{Binding ErrorMessage}" />
 
     </StackLayout>
 </ContentView>

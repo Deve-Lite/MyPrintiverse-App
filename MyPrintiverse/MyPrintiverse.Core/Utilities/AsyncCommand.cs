@@ -3,6 +3,7 @@ using MyPrintiverse.Core.Exceptions;
 
 namespace MyPrintiverse.Core.Utilities;
 
+[Obsolete]
 public class AsyncCommand : IAsyncCommand
 {
 	private readonly Func<Task> _execute;
@@ -71,7 +72,7 @@ public class AsyncCommand : IAsyncCommand
 	#endregion
 }
 
-
+[Obsolete]
 public class AsyncCommand<T> : IAsyncCommand<T>
 {
 	private readonly Func<T, Task> _execute;

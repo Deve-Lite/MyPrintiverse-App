@@ -14,13 +14,13 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
     /// <summary>
     /// Command for view, designed to save new item.
     /// </summary>
-    public AsyncCommand? AddItemCommand { get; set; }
+    public AsyncRelayCommand AddItemCommand { get; }
 
     #endregion
 
     public BaseAddItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
+        AddItemCommand = new AsyncRelayCommand(AddItem, CanExecute);
     }
 
     #region Virtual Methods
@@ -31,18 +31,17 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
     /// <returns></returns>
     public virtual async Task AddItem()
     {
+        if (AnyActionStartedCommand())
+            return;
+
         IsRunning = true;
 
-        if (!IsValid())
-        {
-            IsRunning = false;
-            return;
-        }
-
-        if (await ItemService.AddItemAsync(Item.Map()))
-            await Shell.Current.GoToAsync("..", true);
-
+        if (IsValid())
+            if (await ItemService.AddItemAsync(Item.Map()))
+                await Shell.Current.GoToAsync("..", true);
+        
         IsRunning = false;
+        IsBusy = false;
     }
     #endregion
 }

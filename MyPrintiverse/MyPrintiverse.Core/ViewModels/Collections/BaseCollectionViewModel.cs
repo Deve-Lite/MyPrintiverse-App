@@ -25,27 +25,27 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <summary>
     /// Command for refreshing collection.
     /// </summary>
-    public AsyncCommand RefreshCommand { get; set; }
+    public AsyncRelayCommand RefreshCommand { get; }
     /// <summary>
     /// Command for adding new item to collection.
     /// </summary>
-    public AsyncCommand AddItemCommand { get; set; }
+    public AsyncRelayCommand AddItemCommand { get; }
     /// <summary>
     /// Command for displaying multiple manage options for collection item. 
     /// </summary>
-    public AsyncCommand<TBaseModel> ItemOptionsCommand { get; set; }
+    public AsyncRelayCommand<TBaseModel> ItemOptionsCommand { get; }
     /// <summary>
     /// Command for displaying single item from collection.
     /// </summary>
-    public AsyncCommand<TBaseModel> OpenItemCommand { get; set; }
+    public AsyncRelayCommand<TBaseModel> OpenItemCommand { get; }
     /// <summary>
     /// Command for deleting one item from collection.
     /// </summary>
-    public AsyncCommand<TBaseModel> DeleteItemCommand { get; set; }
+    public AsyncRelayCommand<TBaseModel> DeleteItemCommand { get; }
     /// <summary>
     /// Command for editing one item from collection.
     /// </summary>
-    public AsyncCommand<TBaseModel> EditItemCommand { get; set; }
+    public AsyncRelayCommand<TBaseModel> EditItemCommand { get; }
 
     #endregion
 
@@ -68,12 +68,12 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
         Items = new ObservableCollection<TBaseModel>();
 
-        RefreshCommand = new AsyncCommand(Refresh, CanExecute, shellExecute: ExecuteBlockade);
-        AddItemCommand = new AsyncCommand(AddItem, CanExecute, shellExecute: ExecuteBlockade);
-        EditItemCommand = new AsyncCommand<TBaseModel>(EditItem, CanExecute, shellExecute: ExecuteBlockade);
-        OpenItemCommand = new AsyncCommand<TBaseModel>(OpenItem, CanExecute, shellExecute: ExecuteBlockade);
-        DeleteItemCommand = new AsyncCommand<TBaseModel>(DeleteItem, CanExecute, shellExecute: ExecuteBlockade);
-        ItemOptionsCommand = new AsyncCommand<TBaseModel>(ItemOptions, CanExecute, shellExecute: ExecuteBlockade);
+        RefreshCommand = new AsyncRelayCommand(Refresh, CanExecute);
+        AddItemCommand = new AsyncRelayCommand(AddItem, CanExecute);
+        EditItemCommand = new AsyncRelayCommand<TBaseModel>(EditItem, CanExecute);
+        OpenItemCommand = new AsyncRelayCommand<TBaseModel>(OpenItem, CanExecute);
+        DeleteItemCommand = new AsyncRelayCommand<TBaseModel>(DeleteItem, CanExecute);
+        ItemOptionsCommand = new AsyncRelayCommand<TBaseModel>(ItemOptions, CanExecute);
     }
 
     #region OnAppearing
@@ -195,59 +195,87 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected virtual async Task ItemOptions(TBaseModel item)
+    protected virtual async Task ItemOptions(TBaseModel? item)
     {
+
         var action = await MessageService.ShowActionSheetAsync<BaseItemActions>("Actions:");
 
         if (action == BaseItemActions.Open)
-            await OpenItem(item);
+            await OpenPage($"{typeof(TItemView).Name}?Id={item?.Id}");
         else if (action == BaseItemActions.Delete)
-            await DeleteItem(item);
-        else if (action == BaseItemActions.Edit)
-            await EditItem(item);
+        {
+            if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
+                if (await ItemsService.DeleteItemAsync(item?.Id))
+                    DeleteFromItems(item);
 
+            IsBusy = false;
+        }
+        else if (action == BaseItemActions.Edit)
+            await OpenPage($"{typeof(TEditView).Name}?Id={item?.Id}");
     }
 
     /// <summary>
     /// Task to perform when AddItemCommand occurs.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task AddItem() => await Shell.Current.GoToAsync($"{typeof(TAddView).Name}", true);
+    protected virtual async Task AddItem()
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        await OpenPage($"{typeof(TAddView).Name}");
+    }
 
     /// <summary>
     /// Task to perform when EditItemCommand occurs.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected virtual async Task EditItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TEditView).Name}?Id={item.Id}", true);
+    protected virtual async Task EditItem(TBaseModel? item)
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        await OpenPage($"{typeof(TEditView).Name}?Id={item?.Id}");
+    }
 
     /// <summary>
     /// Task to perform when OpenItemCommand occurs.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected virtual async Task OpenItem(TBaseModel item) => await Shell.Current.GoToAsync($"{typeof(TItemView).Name}?Id={item.Id}",true);
+    protected virtual async Task OpenItem(TBaseModel? item) 
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        await OpenPage($"{typeof(TItemView).Name}?Id={item?.Id}");
+    }
 
     /// <summary>
     /// Task to perform when DeleteItemCommand occurs.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected virtual async Task DeleteItem(TBaseModel item)
+    protected virtual async Task DeleteItem(TBaseModel? item)
     {
-        if (!(await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete")))
+        if (AnyActionStartedCommand())
             return;
 
-        if (await ItemsService.DeleteItemAsync(item.Id))
-            DeleteFromItems(item);
+        if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
+            if (await ItemsService.DeleteItemAsync(item?.Id))
+                DeleteFromItems(item);
+
+        IsBusy = false;
     }
 
     /// <summary>
     /// Method deletes item from collection. Method used in DeleteItem.
     /// </summary>
     /// <param name="item"> Model. </param>
-    protected virtual void DeleteFromItems(TBaseModel item) => RemoveFromCollection(Items, item);
+    protected virtual void DeleteFromItems(TBaseModel? item) => RemoveFromCollection(Items, item);
 
     #endregion
+
 }
 

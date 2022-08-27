@@ -60,7 +60,7 @@ public partial class ValidatableEntry : ContentView
     #endregion
 
     #region ErrorMessage
-    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(ValidatableEntry), new Style(typeof(Label)) { });
+    public static readonly BindableProperty ErrorMessageStyleProperty = BindableProperty.Create(nameof(ErrorMessageStyle), typeof(Style), typeof(ValidatableEntry), new Style(targetType: typeof(Label)) { }, propertyChanged:SetHeight);
     public Style ErrorMessageStyle
     {
         get => (Style)GetValue(ErrorMessageStyleProperty);
@@ -72,6 +72,20 @@ public partial class ValidatableEntry : ContentView
     {
         get => (string)GetValue(ErrorMessageProperty);
         set => SetValue(ErrorMessageProperty, value);
+    }
+
+    public static readonly BindableProperty ErrorMessageLinesProperty = BindableProperty.Create(nameof(ErrorMessageLines), typeof(int), typeof(ValidatableEntry), 1);
+    public int ErrorMessageLines
+    {
+        get => (int)GetValue(ErrorMessageLinesProperty);
+        set => SetValue(ErrorMessageLinesProperty, value);
+    }
+
+    private static void SetHeight(BindableObject bindable, object oldValue, object newValue)
+    {
+        var bindableEntry = (ValidatableEntry)bindable;
+
+        bindableEntry.errorMessage.HeightRequest = bindableEntry.ErrorMessageLines * ((int)bindableEntry.errorMessage.FontSize + 2);
     }
 
     #endregion
@@ -119,12 +133,9 @@ public partial class ValidatableEntry : ContentView
 
     #endregion
 
-    // TODO 
-    // property które oznacza liczbe zarezerwowanych lini na error message 
-
     public ValidatableEntry()
     {
         InitializeComponent();
-        Margin = new Thickness(10, 5, 10, 4);
+        Margin = new Thickness(10, 4, 10, 4);
     }
 }
