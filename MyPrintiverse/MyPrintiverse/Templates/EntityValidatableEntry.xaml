@@ -16,8 +16,8 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.9*"/>
-                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.86*"/>
+                        <ColumnDefinition Width="0.14*"/>
                     </Grid.ColumnDefinitions>
                     <Entry Style="{Binding EntryStyle}" 
                            Text="{Binding Text, Mode=TwoWay}"   
