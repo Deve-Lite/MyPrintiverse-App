@@ -20,19 +20,5 @@ public class FloatingPointMantissaRule<T> : BaseNumberRule<T>, IValidationRule<T
 
     public string ValidationMessage { get; set; }
 
-    public bool Check(T value) 
-    {
-        if (value == null)
-            return false;
-
-        var x = value?.ToString().Split(".,");
-
-        if (x.Length == 1)
-            return true;
-
-        if(x[1].Length > _mantissaLength)
-            return false;
-
-        return true;
-    }
+    public bool Check(T value) => value == null ? false : value.ToString().Split(".,")[1].Length < _mantissaLength;
 }

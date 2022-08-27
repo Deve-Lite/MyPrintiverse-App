@@ -1,5 +1,6 @@
 namespace MyPrintiverse.Templates;
 
+[Obsolete]
 public partial class MessageEntry : ContentView
 {
     //ZAMAINA NA ValidatableEntry

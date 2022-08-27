@@ -119,8 +119,12 @@ public partial class ValidatableEntry : ContentView
 
     #endregion
 
+    // TODO 
+    // property które oznacza liczbe zarezerwowanych lini na error message 
+
     public ValidatableEntry()
     {
         InitializeComponent();
+        Margin = new Thickness(10, 5, 10, 4);
     }
 }

@@ -42,11 +42,11 @@
 
             <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
 
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>
 
             <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry" HorizontalOptions="Center"/>
 
-            <module:ValidatableEntry Margin="10,2,10,0"
+            <module:ValidatableEntry HeightRequest="80"
                                      Style="{StaticResource BaseValidatableEntry}"
                                      ErrorMessage="{Binding Email.Error}"
                                      IsValid="{Binding Email.IsValid}"
@@ -55,7 +55,7 @@
                                      ValidationCommand="{Binding EmailValidateCommand}">
             </module:ValidatableEntry>
 
-            <module:ValidatableEntry Margin="10,2,10,1"
+            <module:ValidatableEntry HeightRequest="80"
                                      Style="{StaticResource BaseValidatableEntry}"
                                      ErrorMessage="{Binding Email.Error}"
                                      IsValid="{Binding Email.IsValid}"
@@ -64,7 +64,7 @@
                                      Text="{Binding Email.Value, Mode=TwoWay}">
             </module:ValidatableEntry>
 
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>
 
             <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry with button" HorizontalOptions="Center"/>
 
@@ -93,7 +93,7 @@
 
             <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>
 
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>
 
             <module:EntityValidatableEntry Style="{StaticResource BaseEntityValidatableEntry}"
                                            Margin="10,2,10,4"
@@ -115,7 +115,7 @@
                                                    ValidationCommand="{Binding EmailValidateCommand}"
                                                    ExtendingCommand="{Binding PaswordizeCommand}"/>
 
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>
 
             <Label Style="{StaticResource TitleOswald}" Text="Activity Button" HorizontalOptions="Center"/>
 
@@ -125,7 +125,7 @@
                                    ButtonCommand="{Binding LoadUpCommand}"
                                    Text="Login"/>
 
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,60"/>
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,60"/>
 
         </VerticalStackLayout>
     </ScrollView>

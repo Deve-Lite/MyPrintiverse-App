@@ -16,10 +16,6 @@ public class SpoolService : BaseItemAsyncService<Spool>, IItemKeyService<Spool>
 	public async Task<bool> DeleteItemsByKeyAsync(string key)
 	{
 		await ItemDeviceKeyService.GetItemsByKeyAsync(key);
-
-		//TODO Check if deletes all 
-		var x = await ItemDeviceKeyService.GetItemsByKeyAsync(key);
-
         return true;
 	}
 

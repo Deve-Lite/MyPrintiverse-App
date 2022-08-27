@@ -11,7 +11,7 @@ public class StringToColorConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         var color = (string)value;
-        return Color.FromHex(color.Replace("#", ""));
+        return Color.FromArgb(color.Replace("#", ""));
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -24,9 +24,9 @@
         <Setter Property="Shell.TitleColor"
                 Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
         <Setter Property="Shell.DisabledColor"
-                Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
         <Setter Property="Shell.UnselectedColor"
-                Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
         <Setter Property="Shell.NavBarHasShadow"
                 Value="False" />
         <Setter Property="Shell.TabBarBackgroundColor"
@@ -36,7 +36,7 @@
         <Setter Property="Shell.TabBarTitleColor"
                 Value="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" />
         <Setter Property="Shell.TabBarUnselectedColor"
-                Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
         
     </Style>
 

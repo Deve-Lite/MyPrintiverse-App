@@ -37,7 +37,6 @@
                                  Span="2" />
             </Setter.Value>
         </Setter>
-
     </Style>
 
 
@@ -337,7 +336,7 @@
            x:Key="BaseActivityIndicator">
 
         <Setter Property="Color"
-                Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
 
         <Setter Property="BackgroundColor"
                 Value="Transparent" />
@@ -354,7 +353,7 @@
            x:Key="ButtonActivityIndicator" BasedOn="{StaticResource BaseActivityIndicator}">
 
         <Setter Property="Color"
-                Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
 
     </Style>
 
@@ -483,7 +482,7 @@
     <Style TargetType="Switch"
            x:Key="BaseSwitch">
         <Setter Property="OnColor"
-                Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+                Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
 
         <Setter Property="ThumbColor"
                 Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
@@ -505,7 +504,7 @@
                             <Setter Property="OnColor"
                                     Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
                             <Setter Property="ThumbColor"
-                                    Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+                                    Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="Off">

@@ -14,8 +14,8 @@
     <Color x:Key="SecondaryVariant">#A3E1BF</Color>
     <Color x:Key="OnSecondary">Black</Color>
 
-    <Color x:Key="Tetruary">#A9BFDB</Color>
-    <Color x:Key="TetruaryVariant">#A9BFDB</Color>
+    <Color x:Key="Tertiary">#A9BFDB</Color>
+    <Color x:Key="TertiaryVariant">#A9BFDB</Color>
     <Color x:Key="OnTetruary">Black</Color>
 
     <Color x:Key="Background">#E7E9EF</Color>
@@ -38,8 +38,8 @@
     <Color x:Key="SecondaryVariantDark">#36A665</Color>
     <Color x:Key="OnSecondaryDark">White</Color>
 
-    <Color x:Key="TetruaryDark">#374474</Color>
-    <Color x:Key="TetruaryVariantDark">#374474</Color>
+    <Color x:Key="TertiaryDark">#374474</Color>
+    <Color x:Key="TertiaryVariantDark">#374474</Color>
     <Color x:Key="OnTetruaryDark">White</Color>
 
     <Color x:Key="BackgroundDark">#1F2432</Color>

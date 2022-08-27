@@ -17,12 +17,12 @@ public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilame
 
     protected override int GetIndex(Filament item)
     {
-        if (item== null)
-            return -1;
+        var foundItem = Items.FirstOrDefault(x => x.Name == item.Brand);
 
-        #pragma warning disable CS8604 // Possible null reference argument.
-        return Items.IndexOf(Items.FirstOrDefault(x => x.Name == item.Brand));
+        if (foundItem == null)
+                return -1;
 
+        return Items.IndexOf(foundItem);
     }
 
     #endregion
