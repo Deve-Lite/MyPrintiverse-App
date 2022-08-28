@@ -22,15 +22,14 @@ public partial class ValidatableEntry : ContentView
         get => (bool)GetValue(IsValidProperty);
         set => SetValue(IsValidProperty, value);
     }
-
     private static void OnIsValidChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var bindableEntry = (ValidatableEntry)bindable;
 
         if (bindableEntry.IsValid)
-            bindableEntry.Border.Stroke = Color.FromArgb("#00000000");
+            bindableEntry.Border.Stroke = bindableEntry.ValidStrokeBrush;
         else
-            bindableEntry.Border.Stroke = Color.FromRgb(212, 33, 33);
+            bindableEntry.Border.Stroke = bindableEntry.InvalidStrokeBrush;
     }
 
     public static readonly BindableProperty ValidationCommandProperty = BindableProperty.Create(nameof(ValidationCommand), typeof(ICommand), typeof(ValidatableEntry), null);
@@ -124,11 +123,29 @@ public partial class ValidatableEntry : ContentView
 
     #region Border
 
-    public static readonly BindableProperty BorderStyleProperty = BindableProperty.Create(nameof(BorderStyle), typeof(Style), typeof(ValidatableEntry), null);
+    public static readonly BindableProperty BorderStyleProperty = BindableProperty.Create(nameof(BorderStyle), typeof(Style), typeof(ValidatableEntry), null, propertyChanged: OnBorderStyleChanged);
     public Style BorderStyle
     {
         get => (Style)GetValue(BorderStyleProperty);
         set => SetValue(BorderStyleProperty, value);
+    }
+
+    private static void OnBorderStyleChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var bindableEntry = (ValidatableEntry)bindable;
+
+        if (bindableEntry.Border.Stroke != null)
+            bindableEntry.ValidStrokeBrush = (bindableEntry.Border.Stroke as SolidColorBrush).Color;
+
+    }
+
+    public Color ValidStrokeBrush { get; set; }
+
+    public static readonly BindableProperty InvalidStrokeBrushProperty = BindableProperty.Create(nameof(InvalidStrokeBrush), typeof(Color), typeof(ValidatableEntry), Color.FromRgb(212, 33, 33));
+    public Color InvalidStrokeBrush
+    {
+        get => (Color)GetValue(InvalidStrokeBrushProperty);
+        set => SetValue(InvalidStrokeBrushProperty, value);
     }
 
     #endregion
@@ -137,5 +154,6 @@ public partial class ValidatableEntry : ContentView
     {
         InitializeComponent();
         Margin = new Thickness(10, 4, 10, 4);
+        ValidStrokeBrush = Color.FromArgb("#00000000");
     }
 }

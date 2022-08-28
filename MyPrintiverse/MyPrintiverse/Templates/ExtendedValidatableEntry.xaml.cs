@@ -125,11 +125,29 @@ public partial class ExtendedValidatableEntry : ContentView
 
     #region Border
 
-    public static readonly BindableProperty BorderStyleProperty = BindableProperty.Create(nameof(BorderStyle), typeof(Style), typeof(ExtendedValidatableEntry), null);
+    public static readonly BindableProperty BorderStyleProperty = BindableProperty.Create(nameof(BorderStyle), typeof(Style), typeof(ExtendedValidatableEntry), null, propertyChanged:OnBorderStyleChanged);
     public Style BorderStyle
     {
         get => (Style)GetValue(BorderStyleProperty);
         set => SetValue(BorderStyleProperty, value);
+    }
+
+    private static void OnBorderStyleChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var bindableEntry = (ExtendedValidatableEntry)bindable;
+
+        if (bindableEntry.Border.Stroke != null)
+            bindableEntry.ValidStrokeBrush = (bindableEntry.Border.Stroke as SolidColorBrush).Color;
+
+    }
+
+    public Color ValidStrokeBrush { get; set; }
+
+    public static readonly BindableProperty InvalidStrokeBrushProperty = BindableProperty.Create(nameof(InvalidStrokeBrush), typeof(Color), typeof(ExtendedValidatableEntry), Color.FromRgb(212, 33, 33));
+    public Color InvalidStrokeBrush
+    {
+        get => (Color)GetValue(InvalidStrokeBrushProperty);
+        set => SetValue(InvalidStrokeBrushProperty, value);
     }
 
     #endregion
@@ -164,5 +182,6 @@ public partial class ExtendedValidatableEntry : ContentView
 	{
 		InitializeComponent();
         Margin = new Thickness(10, 4, 10, 4);
+        ValidStrokeBrush = Color.FromArgb("#00000000");
     }
 }
