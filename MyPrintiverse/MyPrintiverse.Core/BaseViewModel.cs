@@ -108,19 +108,37 @@ public abstract partial class BaseViewModel : ObservableObject
         IsBusy = false;
     }
 
-    // Do usunięcia END
+    
 
-    #endregion
+	#region Exceptions Methods
 
-    #region Exceptions Methods
+	/// <summary>
+	/// Performs GoToAsync action with specified route.
+	/// </summary>
+	/// <param name="route"></param>
+	/// <returns></returns>
+	protected virtual async Task OpenPage(string route) => await Shell.Current.GoToAsync(route, true);
 
-    /// <summary>
-    /// Creates exception message.
-    /// </summary>
-    /// <typeparam name="T">Class type where exception is thrown.</typeparam>
-    /// <param name="propertyName"></param>
-    /// <returns>exception message.</returns>
-    protected string GetExceptionMessage<T>(string propertyName) => $"{nameof(T)} - {propertyName}";
+	/// <summary>
+	/// If other commands can't perform use this function to block action.
+	/// </summary>
+	/// <returns></returns>
+	protected virtual bool AnyActionStartedCommand()
+	{
+		if (IsBusy)
+			return true;
+
+		IsBusy = true;
+		return false;
+	}
+
+	/// <summary>
+	/// Creates exception message.
+	/// </summary>
+	/// <typeparam name="T">Class type where exception is thrown.</typeparam>
+	/// <param name="propertyName"></param>
+	/// <returns>exception message.</returns>
+	protected string GetExceptionMessage<T>(string propertyName) => $"{nameof(T)} - {propertyName}";
 
     #endregion
 }
