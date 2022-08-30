@@ -174,7 +174,12 @@
 
 	<ItemGroup>
 		<None Remove="config.json" />
+		<None Remove="Resources\Fonts\Oswald-Bold.ttf" />
+		<None Remove="Resources\Fonts\Oswald-ExtraLight.ttf" />
+		<None Remove="Resources\Fonts\Oswald-Light.ttf" />
+		<None Remove="Resources\Fonts\Oswald-Medium.ttf" />
 		<None Remove="Resources\Fonts\Oswald-Regular.ttf" />
+		<None Remove="Resources\Fonts\Oswald-SemiBold.ttf" />
 		<None Remove="Resources\Fonts\Raleway-Black.ttf" />
 		<None Remove="Resources\Fonts\Raleway-BlackItalic.ttf" />
 		<None Remove="Resources\Fonts\Raleway-Bold.ttf" />

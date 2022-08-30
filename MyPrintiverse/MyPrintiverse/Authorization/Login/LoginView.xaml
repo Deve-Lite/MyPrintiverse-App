@@ -25,10 +25,18 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="RalewaySemiBold" />
       </Style>
+      <Style x:Key="Title" TargetType="Label">
+        <Setter Property="TextColor" Value="#80DBBB" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="OswaldMedium" />
+      </Style>
     </ResourceDictionary>
   </ContentPage.Resources>
 
   <StackLayout Style="{StaticResource MainWrapper}">
+
+    <Label Style="{StaticResource Title}" Text="MyPrintiverse" />
 
     <module:MessageEntry Message="{Binding Email.Error}" Text="{Binding Email.Value, Mode=TwoWay}" />
     <module:MessageEntry Message="{Binding Password.Error}" Text="{Binding Password.Value, Mode=TwoWay}" />
