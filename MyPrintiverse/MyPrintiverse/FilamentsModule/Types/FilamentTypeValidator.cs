@@ -1,6 +1,4 @@
 ﻿
-using Plugin.ValidationRules.Extensions;
-
 namespace MyPrintiverse.FilamentsModule.Types;
 
 public class FilamentTypeValidator : BaseValidator<FilamentType>

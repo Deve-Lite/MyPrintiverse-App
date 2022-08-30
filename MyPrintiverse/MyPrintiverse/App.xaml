@@ -28,10 +28,12 @@
   <Application.MainPage>
     <Shell>
 
-      <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate login:LoginView}"
-        FlyoutItemIsVisible="False" />
+      <ShellItem>
+        <ShellContent
+          Title="Login"
+          ContentTemplate="{DataTemplate login:LoginView}"
+          FlyoutItemIsVisible="False" />
+      </ShellItem>
 
       <FlyoutItem Title="Home">
         <ShellContent Title="Home" ContentTemplate="{DataTemplate filaments:FilamentsView}" />

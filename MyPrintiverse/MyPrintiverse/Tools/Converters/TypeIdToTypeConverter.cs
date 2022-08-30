@@ -1,5 +1,4 @@
 ﻿using MyPrintiverse.FilamentsModule.Types;
-using MyPrintiverse.FilamentsModule.Types.Services;
 using SQLite;
 using System.Globalization;
 

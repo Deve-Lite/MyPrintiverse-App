@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-
-namespace MyPrintiverse.Authorization.ConfirmEmail;
+﻿namespace MyPrintiverse.Authorization.ConfirmEmail;
 
 public sealed partial class ConfirmEmailViewModel : BaseViewModel
 {
