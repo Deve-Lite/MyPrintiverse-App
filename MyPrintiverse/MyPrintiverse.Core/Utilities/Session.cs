@@ -12,17 +12,15 @@ public class Session : ISession
 	{
 		get
 		{
-			if (string.IsNullOrEmpty(AccessToken?.Value))
+			if (AccessToken?.IsValid ?? false)
 				return false;
 
-			if (string.IsNullOrEmpty(RefreshToken?.Value))
+			if (RefreshToken?.IsValid ?? false)
 				return false;
 
 			return true;
 		}
 	}
-
-	public bool HasConnection { get; set; }
 
 	public IConfigService<IConfig> Config { get; }
 

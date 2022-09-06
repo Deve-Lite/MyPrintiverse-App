@@ -3,12 +3,18 @@
 	/// <inheritdoc />
 	public class LocalStorage : ILocalStorage
 	{
-		public T? Get<T>(string key)
+		public T? Get<T>(string key, T? defaultValue = default)
 		{
 			if (!Preferences.ContainsKey(key)) 
 				return default;
 
-			var json = Preferences.Get(key, string.Empty);
+			var json = Preferences.Get(key, null);
+
+			if (json is null)
+			{
+				return defaultValue;
+			}
+
 			var value = JsonConvert.DeserializeObject<T>(json);
 
 			return value ?? default;

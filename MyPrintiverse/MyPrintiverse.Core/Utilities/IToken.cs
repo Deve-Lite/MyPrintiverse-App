@@ -6,10 +6,12 @@ public interface IToken
 	/// Token id.
 	/// </summary>
 	public string? Id { get; }
+
 	/// <summary>
 	/// Token.
 	/// </summary>
 	public string? Value { get; }
+
 	/// <summary>
 	/// Gets value that indicates whether this <see cref="IToken"/> is valid.
 	/// </summary>

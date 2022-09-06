@@ -33,7 +33,6 @@ namespace MyPrintiverse.Tools.Http
 		// User
 		public string GetUser() => CombineWithBase("/api/v1/users");
 	    public string GetUserById(string userId) => CombineWithBase($"/api/v1/users/{userId}");
-	    public string GetUserById(int userId) => CombineWithBase($"/api/v1/users/{userId}");
 	    public string ModifyUser() => CombineWithBase("/api/v1/users");
 	    public string DeleteUser() => CombineWithBase("/api/v1/users");
 

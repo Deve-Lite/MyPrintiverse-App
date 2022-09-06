@@ -11,7 +11,7 @@ public class Settings : ISettings
             if (App != null)
                 App.UserAppTheme = value;
 
-            _settingsService.Save(nameof(AppTheme), value);
+            _settingsService.Set(nameof(AppTheme), value);
         }
     }
 

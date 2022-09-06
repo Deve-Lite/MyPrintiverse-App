@@ -3,20 +3,23 @@
 /// <inheritdoc />
 public class SettingsStorage : ISettingsStorage
 {
-    public T? Get<T>(string key)
+    public T? Get<T>(string key, T? defaultValue = default)
     {
-        var defaultValue = JsonConvert.SerializeObject(default(T));
+        var json = Preferences.Get(key, null);
 
-        var json = Preferences.Get(key, defaultValue);
+		if (json is null)
+		{
+			return defaultValue;
+		}
 
-        var setting = JsonConvert.DeserializeObject<T>(json);
+		var setting = JsonConvert.DeserializeObject<T>(json);
 
         return setting;
     }
 
-    public void Save<T>(string key, T obj)
+    public void Set<T>(string key, T? value)
     {
-        var json = JsonConvert.SerializeObject(obj);
+        var json = JsonConvert.SerializeObject(value);
 
         Preferences.Set(key, json);
     }

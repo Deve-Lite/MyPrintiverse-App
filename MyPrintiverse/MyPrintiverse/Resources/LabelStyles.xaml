@@ -15,27 +15,20 @@
     x:Key="BaseRaleway"
     BasedOn="{StaticResource Base}"
     TargetType="Label">
-    <Setter Property="FontFamily" Value="Raleway" />
+    <Setter Property="FontFamily" Value="RalewayMedium" />
   </Style>
   <Style
     x:Key="BaseOswald"
     BasedOn="{StaticResource Base}"
     TargetType="Label">
-    <Setter Property="FontFamily" Value="Oswald" />
+    <Setter Property="FontFamily" Value="OswaldMedium" />
   </Style>
   <Style
     x:Key="BaseComplementary"
     BasedOn="{StaticResource Base}"
     TargetType="Label">
-
     <Setter Property="TextColor" Value="{StaticResource Error}" />
-
-    <!--  TO SET  -->
-
-    <Setter Property="FontFamily" Value="OpenSansRegular" />
   </Style>
-
-
 
   <Style
     x:Key="HeaderRaleway"
