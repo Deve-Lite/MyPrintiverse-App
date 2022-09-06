@@ -6,4 +6,21 @@
 * Aby naprawiæ b³¹d trzeba zaaktualizowaæ nuget CommunityToolkit.Maui
 * Link https://github.com/dotnet/maui/issues/7420
 
-2.
+== Ustawienia configu api ==
+1. Je¿eli u¿ywane publiczne api:
+- wystarczy podaæ wymagane dane i nie ma problemu.
+
+2. Je¿li u¿ywane lokalne api np. wystawione na Dockerze:
+	a) Android: 
+		Emulator) Zamiast localhost u¿yæ "10.0.0.2".
+		Fizyczne urz¹dzenie) Zamiast localhost u¿yæ ip komputera w lokalnej sieci.
+	b) iOS:
+		Emulator - lokalny na komputerze) Mo¿na zostawiæ localhost.
+		Emulator - lokalny w sieci)  Zamiast localhost u¿yæ ip komputera w lokalnej sieci.
+		Emulator - cloud) Jesteœ w dupie.
+		Fizyczne urz¹dzenie) Zamiast localhost u¿yæ ip komputera w lokalnej sieci.
+
+
+== Unicode Dictionary ==
+&#10; - Enter
+&#160; - No-Break Space (NBSP)

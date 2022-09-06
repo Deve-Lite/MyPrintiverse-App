@@ -2,12 +2,12 @@
 namespace MyPrintiverse.Core.Utilities;
 
 /// <summary>
-/// ConfigServiceService manager.
+/// Application config provider.
 /// </summary>
 public interface IConfigService<out T>
 {
 	/// <summary>
-	/// Loaded config from file.
+	/// Application config.
 	/// </summary>
-    public T Config { get; }
+	public T Config { get; }
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// Store configuration data.
 /// </summary>
-public interface IConfig
+public interface IConfig : IServerConfig
 {
 	/// <summary>
 	/// Specifies that app is running in developer mode.
@@ -19,10 +19,4 @@ public interface IConfig
 	/// Application version.
 	/// </summary>
 	public string Version { get; set; }
-
-	/// <summary>
-	/// Check if all <see cref="IConfig"/> properties are specified.
-	/// </summary>
-	/// <returns><see langword="false"/> if any property is null or empty, otherwise <see langword="true"/>.</returns>
-	public bool Verify();
 }

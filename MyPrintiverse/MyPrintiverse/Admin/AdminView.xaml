@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  x:Class="MyPrintiverse.Admin.AdminView"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:adminModule="clr-namespace:MyPrintiverse.Admin"
+  Title="Admin Panel"
+  x:DataType="adminModule:AdminViewModel">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="MainGrid" TargetType="Grid">
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="RowDefinitions" Value="*,*,*,*,*" />
+        <Setter Property="ColumnDefinitions" Value="*,*,*" />
+      </Style>
+      <Style x:Key="ButtonWrapper" TargetType="Frame">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="CornerRadius" Value="10" />
+      </Style>
+      <Style x:Key="TileButton" TargetType="Button">
+        <Setter Property="FontSize" Value="{OnPlatform iOS='16', Android='16', WinUI='24'}" />
+        <Setter Property="TextColor" Value="{x:StaticResource DarkGray}" />
+        <Setter Property="BackgroundColor" Value="White" />
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <Grid Style="{StaticResource MainGrid}">
+
+    <adminModule:AdminTile
+      Grid.Column="0"
+      Command="{Binding ShowLoadedAssetsCommand}"
+      Text="Loaded Assets" />
+    <adminModule:AdminTile
+      Grid.Column="1"
+      Command="{Binding TestApiConnectionCommand}"
+      Text="Test Api Connection" />
+    <adminModule:AdminTile
+      Grid.Column="2"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+
+    <adminModule:AdminTile
+      Grid.Row="1"
+      Grid.Column="0"
+      Command="{Binding OpenAndromedaCommand}"
+      Text="Andromeda" />
+    <adminModule:AdminTile
+      Grid.Row="1"
+      Grid.Column="1"
+      Command="{Binding OpenOdysseyCommand}"
+      Text="Odyssey" />
+    <adminModule:AdminTile
+      Grid.Row="1"
+      Grid.Column="2"
+      Command="{Binding OpenOrionCommand}"
+      Text="Orion" />
+
+    <adminModule:AdminTile
+      Grid.Row="2"
+      Grid.Column="0"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+    <adminModule:AdminTile
+      Grid.Row="2"
+      Grid.Column="1"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+    <adminModule:AdminTile
+      Grid.Row="2"
+      Grid.Column="2"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+
+    <adminModule:AdminTile
+      Grid.Row="3"
+      Grid.Column="0"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+    <adminModule:AdminTile
+      Grid.Row="3"
+      Grid.Column="1"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+    <adminModule:AdminTile
+      Grid.Row="3"
+      Grid.Column="2"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+
+    <adminModule:AdminTile
+      Grid.Row="4"
+      Grid.Column="0"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+    <adminModule:AdminTile
+      Grid.Row="4"
+      Grid.Column="1"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+    <adminModule:AdminTile
+      Grid.Row="4"
+      Grid.Column="2"
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
+  </Grid>
+</ContentPage>

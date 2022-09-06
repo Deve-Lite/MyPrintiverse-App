@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace MyPrintiverse.Templates;
 
 public partial class ValidatableEntry : ContentView

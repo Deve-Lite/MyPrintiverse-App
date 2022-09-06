@@ -1,219 +1,187 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <?xaml-comp compile="true" ?>
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:templates="clr-namespace:MyPrintiverse.Templates"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:templates="clr-namespace:MyPrintiverse.Templates">
 
-    <!-- Validatable Entry -->
+  <!--  Validatable Entry  -->
 
-    <Style TargetType="Border" x:Key="BaseBorderValidatableEntry">
+  <Style x:Key="BaseBorderValidatableEntry" TargetType="Border">
 
-        <Setter Property="StrokeShape" 
-                Value="RoundRectangle 5,5,5,5"/>
+    <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5" />
 
-        <Setter Property="StrokeThickness" 
-                Value="2"/>
+    <Setter Property="StrokeThickness" Value="2" />
 
-        <Setter Property="Margin"
-                Value="0,3,0,2" />
+    <Setter Property="Margin" Value="0,3,0,2" />
 
-        <Setter Property="Padding"
-                Value="5,0,5,0" />
+    <Setter Property="Padding" Value="5,0,5,0" />
 
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
+    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
 
-    </Style>
+  </Style>
 
-    <Style TargetType="Entry" x:Key="BaseEntryValidatableEntry">
+  <Style x:Key="BaseEntryValidatableEntry" TargetType="Entry">
 
-        <Setter Property="TextColor"
-                        Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
-        <Setter Property="FontFamily"
-                        Value="Raleway" />
-        <Setter Property="FontSize"
-                        Value="14" />
-        <Setter Property="PlaceholderColor"
-                        Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
-    </Style>
+    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
+    <Setter Property="FontFamily" Value="Raleway" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
+  </Style>
 
-    <Style TargetType="Entry" x:Key="PasswordEntryValidatableEntry">
+  <Style x:Key="PasswordEntryValidatableEntry" TargetType="Entry">
 
-        <Setter Property="TextColor"
-                        Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
-        <Setter Property="FontFamily"
-                        Value="Raleway" />
-        <Setter Property="IsPassword"
-                        Value="True" />
-        <Setter Property="FontSize"
-                        Value="14" />
-        <Setter Property="PlaceholderColor"
-                        Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
-    </Style>
+    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
+    <Setter Property="FontFamily" Value="Raleway" />
+    <Setter Property="IsPassword" Value="True" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
+  </Style>
 
-    <Style TargetType="Entry" x:Key="NumericEntryValidatableEntry">
+  <Style x:Key="NumericEntryValidatableEntry" TargetType="Entry">
 
-        <Setter Property="TextColor"
-                        Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
-        <Setter Property="FontFamily"
-                        Value="Raleway" />
-        <Setter Property="FontSize"
-                        Value="14" />
-        <Setter Property="Keyboard" 
-                Value="Numeric" />
-        <Setter Property="PlaceholderColor"
-                        Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
-    </Style>
+    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
+    <Setter Property="FontFamily" Value="Raleway" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Keyboard" Value="Numeric" />
+    <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
+  </Style>
 
-    <Style TargetType="Label" x:Key="SmallRalewayValidatableEntry" 
-           BasedOn="{StaticResource SmallRaleway}">
-        <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="Margin" Value="5,0,0,0"/>
-    </Style>
+  <Style
+    x:Key="SmallRalewayValidatableEntry"
+    BasedOn="{StaticResource SmallRaleway}"
+    TargetType="Label">
+    <Setter Property="FontAttributes" Value="Bold" />
+    <Setter Property="Margin" Value="5,0,0,0" />
+  </Style>
 
-    <Style TargetType="Label" x:Key="EntityValidatableEntry" 
-           BasedOn="{StaticResource MediumRaleway}">
-        <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="VerticalOptions" Value="Center"/>
-    </Style>
+  <Style
+    x:Key="EntityValidatableEntry"
+    BasedOn="{StaticResource MediumRaleway}"
+    TargetType="Label">
+    <Setter Property="FontAttributes" Value="Bold" />
+    <Setter Property="HorizontalOptions" Value="Center" />
+    <Setter Property="VerticalOptions" Value="Center" />
+  </Style>
 
-    <Style TargetType="Image" 
-           x:Key="BaseImageValidatableEntry">
+  <Style x:Key="BaseImageValidatableEntry" TargetType="Image">
 
-        <Setter Property="Aspect"
-                Value="AspectFill"/>
-        <Setter Property="Margin"
-                Value="7"/>
-        <Setter Property="VerticalOptions" 
-                Value="Center"/>
-        <Setter Property="HorizontalOptions"
-                Value="Center"/>
-        <Setter Property="Source" 
-                Value="spool.png"/>
+    <Setter Property="Aspect" Value="AspectFill" />
+    <Setter Property="Margin" Value="7" />
+    <Setter Property="VerticalOptions" Value="Center" />
+    <Setter Property="HorizontalOptions" Value="Center" />
+    <Setter Property="Source" Value="spool.png" />
 
-    </Style>
+  </Style>
 
 
 
-    <Style TargetType="templates:ValidatableEntry" x:Key="BaseValidatableEntry">
-        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}"/>
-        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
-        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
-        <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>
-    </Style>
+  <Style x:Key="BaseValidatableEntry" TargetType="templates:ValidatableEntry">
+    <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}" />
+    <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}" />
+    <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
+    <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}" />
+  </Style>
 
-    <Style TargetType="templates:ValidatableEntry" 
-           x:Key="NumericValidatableEntry" 
-           BasedOn="{StaticResource BaseValidatableEntry}">
-        <Setter Property="EntryStyle" Value="{StaticResource NumericEntryValidatableEntry}"/>
-    </Style>
+  <Style
+    x:Key="NumericValidatableEntry"
+    BasedOn="{StaticResource BaseValidatableEntry}"
+    TargetType="templates:ValidatableEntry">
+    <Setter Property="EntryStyle" Value="{StaticResource NumericEntryValidatableEntry}" />
+  </Style>
 
-    <!-- End Validatable Entry -->
+  <!--  End Validatable Entry  -->
 
-    <!-- Entity Validatable Entry -->
+  <!--  Entity Validatable Entry  -->
 
-    <Style TargetType="templates:EntityValidatableEntry" 
-           x:Key="BaseEntityValidatableEntry">
-        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}"/>
-        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
-        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
-        <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>
-        <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}"/>
-    </Style>
+  <Style x:Key="BaseEntityValidatableEntry" TargetType="templates:EntityValidatableEntry">
+    <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}" />
+    <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}" />
+    <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
+    <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}" />
+    <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}" />
+  </Style>
 
-    <!-- End Entity Validatable Entry -->
+  <!--  End Entity Validatable Entry  -->
 
-    <!-- Extended Entity Validatable Entry -->
+  <!--  Extended Entity Validatable Entry  -->
 
-    <Style TargetType="templates:ExtendedEntityValidatableEntry" 
-           x:Key="BaseExtendedEntityValidatableEntry">
-        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}"/>
-        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
-        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
-        <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>
-        <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}"/>
-    </Style>
+  <Style x:Key="BaseExtendedEntityValidatableEntry" TargetType="templates:ExtendedEntityValidatableEntry">
+    <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}" />
+    <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}" />
+    <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
+    <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}" />
+    <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}" />
+  </Style>
 
-    <!-- End Extended Entity Validatable Entry -->
+  <!--  End Extended Entity Validatable Entry  -->
 
-    <!-- Extended Validatable Entry -->
+  <!--  Extended Validatable Entry  -->
 
-    <Style TargetType="templates:ExtendedValidatableEntry" 
-           x:Key="BaseExtendedValidatableEntry">
-        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}"/>
-        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}"/>
-        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}"/>
-        <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}"/>
-    </Style>
+  <Style x:Key="BaseExtendedValidatableEntry" TargetType="templates:ExtendedValidatableEntry">
+    <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}" />
+    <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}" />
+    <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
+    <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}" />
+  </Style>
 
-    <!-- End Extended Validatable Entry -->
+  <!--  End Extended Validatable Entry  -->
 
 
-    <!-- Activity Button -->
+  <!--  Activity Button  -->
 
-    <Style TargetType="Button"
-           x:Key="BaseButtonActivityButton">
+  <Style x:Key="BaseButtonActivityButton" TargetType="Button">
 
-        <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
+    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
 
-        <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
+    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
 
-        <Setter Property="FontFamily"
-                Value="Raleway" />
-        <Setter Property="FontSize"
-                Value="14" />
+    <Setter Property="FontFamily" Value="Raleway" />
+    <Setter Property="FontSize" Value="14" />
 
-        <Setter Property="CornerRadius"
-                Value="5" />
+    <Setter Property="CornerRadius" Value="5" />
 
-        <Setter Property="HorizontalOptions"
-                Value="Center" />
+    <Setter Property="HorizontalOptions" Value="Center" />
 
-        <Setter Property="VerticalOptions"
-                Value="Center" />
+    <Setter Property="VerticalOptions" Value="Center" />
 
-        <Setter Property="Padding"
-                Value="14,10" />
+    <Setter Property="Padding" Value="14,10" />
 
-        <Setter Property="Opacity"
-                Value="1" />
+    <Setter Property="Opacity" Value="1" />
 
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor"
-                                    Value="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource LightGray}}" />
-                            <Setter Property="Opacity"
-                                    Value="0.5" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateGroupList>
-        </Setter>
+    <Setter Property="VisualStateManager.VisualStateGroups">
+      <VisualStateGroupList>
+        <VisualStateGroup x:Name="CommonStates">
+          <VisualState x:Name="Normal" />
+          <VisualState x:Name="Disabled">
+            <VisualState.Setters>
+              <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource LightGray}}" />
+              <Setter Property="Opacity" Value="0.5" />
+            </VisualState.Setters>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateGroupList>
+    </Setter>
 
-    </Style>
+  </Style>
 
-    <Style TargetType="Label" BasedOn="{StaticResource LargeRaleway}" x:Key="LargeActivityButtonLabel">
-        <Setter Property="FontAttributes" Value="Bold"/>
-    </Style>
+  <Style
+    x:Key="LargeActivityButtonLabel"
+    BasedOn="{StaticResource LargeRaleway}"
+    TargetType="Label">
+    <Setter Property="FontAttributes" Value="Bold" />
+  </Style>
 
 
-    <Style TargetType="templates:ActivityButton" 
-           x:Key="BaseActivityButton">
+  <Style x:Key="BaseActivityButton" TargetType="templates:ActivityButton">
 
-        <Setter Property="TextStyle" Value="{StaticResource LargeActivityButtonLabel}"/>
-        <Setter Property="ActivityIndicatorStyle" Value="{StaticResource BaseActivityIndicator}"/>
-        <Setter Property="ButtonStyle" Value="{StaticResource BaseButtonActivityButton}"/>
-        <Setter Property="IsButtonEnabled" Value="{Binding IsEnabled}"/>
-        <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
-    </Style>
+    <Setter Property="TextStyle" Value="{StaticResource LargeActivityButtonLabel}" />
+    <Setter Property="ActivityIndicatorStyle" Value="{StaticResource BaseActivityIndicator}" />
+    <Setter Property="ButtonStyle" Value="{StaticResource BaseButtonActivityButton}" />
+    <Setter Property="IsButtonEnabled" Value="{Binding IsEnabled}" />
+    <Setter Property="IsRunning" Value="{Binding IsRunning}" />
+  </Style>
 
-    <!-- End Activity Button -->
+  <!--  End Activity Button  -->
 
 </ResourceDictionary>

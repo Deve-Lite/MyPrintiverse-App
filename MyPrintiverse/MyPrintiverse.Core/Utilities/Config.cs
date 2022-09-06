@@ -1,36 +1,51 @@
 ﻿namespace MyPrintiverse.Core.Utilities;
 
 /// <inheritdoc cref="IConfig"/>
-public class Config : IConfig, IServerConfig
+public class Config : IConfig
 {
 	public bool DeveloperMode { get; set; }
 	public string Culture { get; set; }
 	public string Version { get; set; }
-	public string BaseApiUrl { get; set; }
 	public string ClientSecret { get; set; }
+	public Api Api { get; set; }
 
 	private Config()
 	{
 		Culture = string.Empty;
 		Version = string.Empty;
-		BaseApiUrl = string.Empty;
 		ClientSecret = string.Empty;
+		Api = new Api();
+	}
+}
+
+public class Api
+{
+	public string Protocol { get; set; }
+	public string Address { get; set; }
+	public string Port { get; set; }
+
+	public string FullPath
+	{
+		get
+		{
+			var stringBuilder = new StringBuilder();
+
+			if (!string.IsNullOrEmpty(Protocol))
+				stringBuilder.Append($"{Protocol}://");
+
+			stringBuilder.Append($"{Address}");
+
+			if (!string.IsNullOrWhiteSpace(Port))
+				stringBuilder.Append($":{Port}");
+
+			return stringBuilder.ToString();
+		}
 	}
 
-	public bool Verify()
+	internal Api()
 	{
-		foreach (var property in GetType().GetProperties())
-		{
-			var propertyValue = property.GetValue(this, null);
-
-			switch (propertyValue)
-			{
-				case null:
-				case string stringPropertyValue when string.IsNullOrEmpty(stringPropertyValue):
-					return false;
-			}
-		}
-
-		return true;
+		Protocol = string.Empty;
+		Address = string.Empty;
+		Port = string.Empty;
 	}
 }

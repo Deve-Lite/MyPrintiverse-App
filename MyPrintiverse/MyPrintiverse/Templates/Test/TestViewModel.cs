@@ -1,16 +1,14 @@
 ﻿
 
-using Plugin.ValidationRules.Extensions;
-
 namespace MyPrintiverse.Templates.Test;
 
 public class TestViewModel : BaseViewModel
 {
     bool boolValue;
-    public bool BoolValue { get => boolValue; set => SetProperty(ref boolValue, value, test); }
+    public bool BoolValue { get => boolValue; set => SetProperty(ref boolValue, value); }
 
     Color color;
-    public Color Color { get => color; set => SetProperty(ref color, value, test); }
+    public Color Color { get => color; set => SetProperty(ref color, value); }
 
     public void test()
     {
@@ -56,7 +54,7 @@ public class TestViewModel : BaseViewModel
 
 
     bool isPassword;
-    public bool IsPassword { get => isPassword; set => SetProperty(ref isPassword, value, test); }
+    public bool IsPassword { get => isPassword; set => SetProperty(ref isPassword, value); }
 
     public void Passwordize()
     {
@@ -72,7 +70,7 @@ public class TestViewModel : BaseViewModel
     }
 
     string imageSource;
-    public string ImageSource { get => imageSource; set => SetProperty(ref imageSource, value, test); }
+    public string ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
 
     public override void OnAppearing()

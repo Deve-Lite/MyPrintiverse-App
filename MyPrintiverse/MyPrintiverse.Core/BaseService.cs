@@ -2,7 +2,6 @@
 
 #nullable enable
 
-using MyPrintiverse.Core.Exceptions;
 using MyPrintiverse.Core.Utilities;
 using FileSystem = Microsoft.Maui.Storage.FileSystem;
 namespace MyPrintiverse.Core;
@@ -19,50 +18,16 @@ public abstract class BaseService : IBaseService
 	public IMessageService MessageService { get; }
 	public ISession Session { get; }
 
-	protected BaseService(IConfigService<Config> configService, ILogger logger, IMessageService messageService, ISession session)
+	protected BaseService(IConfigService<Config> configService, IMessageService messageService, ISession session)
 	{
 		var configServiceExceptionMessage = GetExceptionMessage<BaseService>(nameof(configService));
 		ConfigService = configService ?? throw new ArgumentNullException(configServiceExceptionMessage);
-
-		var loggerExceptionMessage = GetExceptionMessage<BaseService>(nameof(logger));
-		Logger = logger ?? throw new ArgumentNullException(loggerExceptionMessage);
 
 		var messageServiceExceptionMessage = GetExceptionMessage<BaseService>(nameof(messageService));
 		MessageService = messageService ?? throw new ArgumentNullException(messageServiceExceptionMessage);
 
 		var sessionExceptionMessage = GetExceptionMessage<BaseService>(nameof(session));
 		Session = session ?? throw new ArgumentNullException(messageServiceExceptionMessage);
-	}
-
-	/// <summary>
-	/// Try run operation (function) if it throw exception, function catch it if app is not in developer mode and will show error message.
-	/// </summary>
-	/// <param name="function"></param>
-	/// <returns><see langword="true"/> if operation is successful, otherwise <see langword="false"/>.</returns>
-	protected async Task<bool> TryRun(Func<Task<bool>> function)
-	{
-		try
-		{
-			return await function();
-		}
-		catch (TokenException)
-		{
-			try
-			{
-				var token = Session.ReAuthorize();
-			}
-			catch (RefreshTokenException)
-			{
-				// TODO: Logic
-				
-			}
-		}
-		catch (Exception) when (!ConfigService.Config.DeveloperMode)
-		{
-			await MessageService.ShowErrorAsync();
-		}
-
-		return await Task.Run(() => false);
 	}
 
 	/// <summary>

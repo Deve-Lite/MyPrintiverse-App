@@ -21,7 +21,7 @@ public abstract class BaseItemManageViewModel<T> : BaseViewModel where T : BaseM
     /// <summary>
     /// Validatable item for stashing item data 
     /// </summary>
-    public Validator<T> Item { get => item; set => SetProperty(ref item, value, OnChanged); }
+    public Validator<T> Item { get => item; set => SetProperty(ref item, value); }
 
     #endregion
 

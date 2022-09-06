@@ -3,12 +3,7 @@
 public interface IServerConfig
 {
 	/// <summary>
-	/// Base api url for api requests.
+	/// Api connection configuration
 	/// </summary>
-	public string BaseApiUrl { get; set; }
-
-	/// <summary>
-	/// Client secret for api authorization.
-	/// </summary>
-	public string ClientSecret { get; set; }
+	public Api Api { get; set; }
 }

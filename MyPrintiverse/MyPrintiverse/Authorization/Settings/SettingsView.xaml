@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  x:Class="MyPrintiverse.Authorization.Settings.SettingsView"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:settingsPage="clr-namespace:MyPrintiverse.Authorization.Settings"
+  x:DataType="settingsPage:SettingsViewModel">
+  <StackLayout>
+
+    <Switch />
+    <CheckBox />
+
+    <Button Command="{Binding SaveSettingsCommand}" />
+
+  </StackLayout>
+</ContentPage>

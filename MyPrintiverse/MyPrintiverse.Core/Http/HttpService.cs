@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using MyPrintiverse.Core.Utilities;
+using RestSharp.Authenticators;
 
 namespace MyPrintiverse.Core.Http;
 
@@ -25,63 +26,110 @@ public class HttpService : IHttpService
 	{
 		ConfigService = configService;
 		_cancellationToken = cancellationToken;
-
-		var apiBaseUrl = ConfigService.Config.BaseApiUrl ?? throw new ArgumentNullException();
-		_restClient = new RestClient(apiBaseUrl);
 	}
 
-	public async Task<IHttpResponse<T?>> Get<T>(string url)
+	#region Get Request
+
+	public async Task<IHttpResponse<T?>> Get<T>(string url, IToken? authenticationToken)
 	{
-		var restRequest = new RestRequest(url);
-		var response = await _restClient.GetAsync(restRequest, _cancellationToken);
+		var restClient = new RestClient(url);
+		var restRequest = new RestRequest();
+
+		await AuthenticateRequest(restRequest, authenticationToken);
+
+		var response = await restClient.GetAsync(restRequest, _cancellationToken);
 
 		var result = GetHttpResponse<T>(response);
 
 		return result;
 	}
 
-	public async Task<IHttpResponse<bool>> Delete(string url)
+
+	public async Task<IHttpResponse<T?>> Get<T>(string url) => await Get<T>(url, null);
+
+	#endregion
+
+	#region Delete Request
+
+	public async Task<IHttpResponse<TResponse?>> Delete<TResponse>(string url, IToken? authenticationToken)
 	{
 		var restRequest = new RestRequest(url, Method.Delete);
 		var response = await _restClient.DeleteAsync(restRequest, _cancellationToken);
 
-		var result = GetHttpResponse<bool>(response);
+		await AuthenticateRequest(restRequest, authenticationToken);
+
+		var result = GetHttpResponse<TResponse?>(response);
 
 		return result;
 	}
 
-	public async Task<IHttpResponse<bool>> Post<T>(string url, T obj)
+	public async Task<IHttpResponse<TResponse?>> Delete<TResponse>(string url) => await Delete<TResponse?>(url, null);
+
+	#endregion
+
+	#region Post Request
+
+	public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
 	{
 		var json = JsonConvert.SerializeObject(obj);
 
 		var restRequest = new RestRequest(url, Method.Post)
-			.AddStringBody(json, DataFormat.Json);
-			
+			.AddJsonBody(json);
+
+		await AuthenticateRequest(restRequest, authenticationToken);
+
 		var response = await _restClient.PostAsync(restRequest, _cancellationToken);
 
-		var result = GetHttpResponse<bool>(response);
+		var result = GetHttpResponse<TResponse?>(response);
 
 		return result;
 	}
 
-	public async Task<IHttpResponse<bool>> Put<T>(string url, T obj)
+	public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj) => await Post<TResponse?, TSender>(url, obj, null);
+
+	#endregion
+
+	#region Put Request
+
+	public async Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
 	{
 		var json = JsonConvert.SerializeObject(obj);
 
 		var restRequest = new RestRequest(url, Method.Post)
 			.AddStringBody(json, DataFormat.Json);
-			
+
+		await AuthenticateRequest(restRequest, authenticationToken);
+
 		var response = await _restClient.PutAsync(restRequest, _cancellationToken);
 
-		var result = GetHttpResponse<bool>(response);
+		var result = GetHttpResponse<TResponse?>(response);
 
 		return result;
+	}
+
+	public async Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj) => await Put<TResponse?, TSender>(url, obj, null);
+
+	#endregion
+
+	private async Task AuthenticateRequest(RestRequest request, IToken? authenticationToken)
+	{
+		if (authenticationToken?.Value == null)
+			return;
+
+		var authentication = new JwtAuthenticator(authenticationToken.Value);
+
+		await authentication.Authenticate(_restClient, request);
 	}
 
 	private static HttpResponse<T> GetHttpResponse<T>(RestResponseBase response)
 	{
 		var responseValue = response.Content;
-		var value = responseValue != null ? JsonConvert.DeserializeObject<T>(responseValue) : default;
+
+		var value = typeof(T) == typeof(bool)
+			? (T)(object)response.StatusCode.IsSuccessful()
+			: responseValue != null 
+				? JsonConvert.DeserializeObject<T>(responseValue) 
+				: default;
 
 		return new HttpResponse<T>
 		{

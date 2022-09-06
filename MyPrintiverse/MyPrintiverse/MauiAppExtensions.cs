@@ -1,7 +1,8 @@
-﻿using MyPrintiverse.AuthorizationModule;
+﻿using MyPrintiverse.Admin;
+using MyPrintiverse.Authorization;
 using MyPrintiverse.FilamentsModule;
 using MyPrintiverse.Templates.Test;
-using MyPrintiverse.Tools;
+using MyPrintiverse.Core.Http;
 
 namespace MyPrintiverse;
 
@@ -10,35 +11,36 @@ public static class MauiAppExtensions
     /// <summary>
     /// MAUI extension for initialization of config.
     /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="filePath"></param>
+    /// <param name="builder">Extension instance.</param>
+    /// <param name="configFilePath">Config file path.</param>
     /// <returns></returns>
-    public static MauiAppBuilder ConfigureConfig(this MauiAppBuilder builder, string filePath)
+    public static MauiAppBuilder ConfigureDI(this MauiAppBuilder builder, string configFilePath)
     {
-        var configInstance = new ConfigService<Config>(filePath);
-        builder.Services.AddSingleton<IConfigService<Config>>(configInstance);
-        var session = new Session(configInstance);
-        builder.Services.AddSingleton<ISession>(session);
-        var loggerInst = new Logger();
-        builder.Services.AddSingleton<ILogger>(loggerInst);
+		var assembly = Assembly.GetExecutingAssembly();
 
-        var messageService = new MessageService();
-        builder.Services.AddSingleton<IMessageService>(messageService);
+		var configInstance = new ConfigService<Config>(assembly, configFilePath);
+		builder.Services.AddSingleton<IConfigService<Config>>(configInstance);
+
+		var sessionInstance = new Session(configInstance);
+        builder.Services.AddSingleton<ISession>(sessionInstance);
+
+        var messageInstance = new MessageService();
+        builder.Services.AddSingleton<IMessageService>(messageInstance);
         builder.Services.AddSingleton<MessageService>();
 
-        var settingsService = new SettingsService();
-        builder.Services.AddSingleton<ISettingsService>(settingsService);
+        var httpService = new HttpService(configInstance);
+		builder.Services.AddSingleton<IHttpService>(httpService);
 
 		return builder;
     }
 
-    /// <summary>
-    /// Extension method for builder to enable constructor injection.
-    /// Each ViewModel must be initialized here.
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <returns></returns>
-    public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
+	/// <summary>
+	/// Extension method for builder to enable constructor injection.
+	/// Each ViewModel must be initialized here.
+	/// </summary>
+	/// <param name="builder"></param>
+	/// <returns></returns>
+	public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
     {
         // template
         // builder.Services.AddSingleton<...ViewModel>();
@@ -46,6 +48,7 @@ public static class MauiAppExtensions
         builder.AuthorizationConfigureViewModels();
         builder.ConfigureFilamentViewModels();
         builder.ConfigureTestViewsModels();
+        builder.AdminConfigureViewModels();
 
         return builder;
     }
@@ -64,6 +67,7 @@ public static class MauiAppExtensions
         builder.AuthorizationConfigureViews();
         builder.ConfigureFilamentViews();
         builder.ConfigureTestViews();
+        builder.AdminConfigureViews();
 
         return builder;
     }
@@ -83,27 +87,8 @@ public static class MauiAppExtensions
 
         builder.AuthorizationConfigureServices();
         builder.ConfigureFilamentServices();
+        builder.AdminConfigureServices();
 
-        return builder;
-    }
-}
-
-
-// Do usuniecia zrobione tylko po to zeby nie wyrzucało błędu.
-public class Logger : ILogger
-{
-    public IDisposable BeginScope<TState>(TState state)
-    {
-        return null;
-    }
-
-    public bool IsEnabled(LogLevel logLevel)
-    {
-        return false;
-    }
-
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-    {
-
+		return builder;
     }
 }
