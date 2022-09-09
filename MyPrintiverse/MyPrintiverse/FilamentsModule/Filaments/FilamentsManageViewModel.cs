@@ -5,7 +5,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments;
 
 public class FilamentsManageViewModel : BaseItemManageViewModel<Filament>
 {
-    private FilamentTypeService TypeService;
+    private IItemService<FilamentType> TypeService;
     public List<FilamentTypeSelector> FilamentTypes { get; set; }
 
 
@@ -13,10 +13,9 @@ public class FilamentsManageViewModel : BaseItemManageViewModel<Filament>
     public FilamentTypeSelector SelectedType { get => selectedType; set => SetProperty(ref selectedType, value); }
 
     public AsyncRelayCommand SelectColorCommand { get; set; }
-    public FilamentsManageViewModel(MessageService messageService, FilamentService itemService, FilamentTypeService typeService) : base(messageService, itemService)
+    public FilamentsManageViewModel(IMessageService messageService, IItemService<Filament> itemService, IItemService<FilamentType> typeService) : base(messageService, itemService)
     {
-        var typeServiceExceptionMessage = GetExceptionMessage<BaseAddItemViewModel<Filament>>(nameof(typeService));
-        TypeService = typeService ?? throw new ArgumentNullException(typeServiceExceptionMessage);
+        TypeService = typeService;
 
         SelectColorCommand = new AsyncRelayCommand(SelectColor);
     }

@@ -8,7 +8,7 @@
   x:DataType="settingsPage:ConfirmEmailViewModel">
   <StackLayout>
 
-    <module:MessageEntry Message="{Binding VerificationCode.Error}" Text="{Binding VerificationCode.Value, Mode=TwoWay}" />
+        <!-- <module:MessageEntry Message="{Binding VerificationCode.Error}" Text="{Binding VerificationCode.Value, Mode=TwoWay}" /> -->
 
     <Button Command="{Binding VerifyEmailCommand}" />
 

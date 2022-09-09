@@ -38,8 +38,8 @@
 
     <Label Style="{StaticResource Title}" Text="MyPrintiverse" />
 
-    <module:MessageEntry Message="{Binding Email.Error}" Text="{Binding Email.Value, Mode=TwoWay}" />
-    <module:MessageEntry Message="{Binding Password.Error}" Text="{Binding Password.Value, Mode=TwoWay}" />
+        <!-- <module:MessageEntry Message="{Binding Email.Error}" Text="{Binding Email.Value, Mode=TwoWay}" />
+    <module:MessageEntry Message="{Binding Password.Error}" Text="{Binding Password.Value, Mode=TwoWay}" /> -->
 
     <Button Command="{Binding LogInCommand}" Text="LOGIN" />
 

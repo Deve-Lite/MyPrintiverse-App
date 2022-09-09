@@ -35,21 +35,23 @@ public static class FilamentBuilderConfig
 	{
 		builder.Services.AddSingleton<FilamentDeviceService>();
 		builder.Services.AddSingleton<FilamentServerService>();
-		builder.Services.AddSingleton<FilamentService>();
+		builder.Services.AddSingleton<IItemService<Filament>, FilamentService>();
 
 		builder.Services.AddSingleton<SpoolDeviceService>();
 		builder.Services.AddSingleton<SpoolServerService>();
-		builder.Services.AddSingleton<SpoolService>();
+        builder.Services.AddSingleton<IItemService<Spool>, SpoolService>();
+        builder.Services.AddSingleton<IItemKeyService<Spool>, SpoolService>();
 
-		builder.Services.AddSingleton<FilamentTypeDeviceService>();
+        builder.Services.AddSingleton<FilamentTypeDeviceService>();
 		builder.Services.AddSingleton<FilamentTypeServerService>();
-		builder.Services.AddSingleton<FilamentTypeService>();
+		builder.Services.AddSingleton<IItemService<FilamentType>, FilamentTypeService>();
 
 		builder.Services.AddSingleton<PrintDeviceService>();
 		builder.Services.AddSingleton<PrintServiceService>();
-		builder.Services.AddSingleton<PrintService>();
+		builder.Services.AddSingleton<IItemService<Print>, PrintService>();
+        builder.Services.AddSingleton<IItemKeyService<Print>, PrintService>();
 
-        /*Mock Services*/
+        /* Mock Services */
 
         builder.Services.AddSingleton<FilamentMock>();
         builder.Services.AddSingleton<FilamentTypeMock>();
@@ -65,7 +67,7 @@ public static class FilamentBuilderConfig
 	/// <returns></returns>
 	public static MauiAppBuilder ConfigureFilamentViews(this MauiAppBuilder builder)
 	{
-		builder.Services.AddSingleton<FilamentsView>();
+		builder.Services.AddSingleton<FilamentCollectionView>();
 		builder.Services.AddSingleton<FilamentView>();
 		builder.Services.AddSingleton<AddFilamentView>();
 		builder.Services.AddSingleton<EditFilamentView>();

@@ -4,10 +4,10 @@ namespace MyPrintiverse.FilamentsModule.Filaments;
 
 public class FilamentMock : BaseMock<Filament>
 {
-    FilamentTypeService _filamentTypeService;
+    IItemService<FilamentType> _filamentTypeService;
     FilamentTypeMock _filamentTypeMock;
 
-    public FilamentMock(FilamentTypeMock filamentTypeMock, FilamentTypeService filamentTypeService)
+    public FilamentMock(FilamentTypeMock filamentTypeMock, IItemService<FilamentType> filamentTypeService)
     {
         _filamentTypeService = filamentTypeService;
         _filamentTypeMock = filamentTypeMock;

@@ -7,7 +7,7 @@ namespace MyPrintiverse.FilamentsModule.Spools.SpoolPage;
 
 public class SpoolViewModel : BaseKeyCollectionWithitemViewModel<Spool, EditSpoolView, Print, EditPrintView, AddPrintView, AddPrintView>
 {
-	public SpoolViewModel(MessageService messagingService, SpoolService itemService, PrintService itemsService, PrintService keyItemsService) : base(messagingService, itemService, itemsService, keyItemsService)
+	public SpoolViewModel(IMessageService messagingService, IItemService<Spool> itemService, IItemService<Print> itemsService, IItemKeyService<Print> keyItemsService) : base(messagingService, itemService, itemsService, keyItemsService)
 	{
 	}
 

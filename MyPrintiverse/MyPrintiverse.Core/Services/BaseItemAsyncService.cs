@@ -9,11 +9,8 @@ public abstract class BaseItemAsyncService<T> : BaseService, IItemService<T> whe
 
     protected BaseItemAsyncService(IServerItemService<T> itemInternetService, IDeviceItemService<T> itemDeviceService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(configService, messageService, session)
 	{
-        var itemInternetServiceExceptionMessage = GetExceptionMessage<BaseItemAsyncService<T>>(nameof(itemInternetService));
-        ItemInternetService = itemInternetService ?? throw new ArgumentNullException(itemInternetServiceExceptionMessage);
-
-        var itemDeviceServiceExceptionMessage = GetExceptionMessage<BaseItemAsyncService<T>>(nameof(itemDeviceService));
-        ItemDeviceService = itemDeviceService ?? throw new ArgumentNullException(itemDeviceServiceExceptionMessage);
+        ItemInternetService = itemInternetService;
+        ItemDeviceService = itemDeviceService;
     }
 
     public async Task<bool> AddItemAsync(T item)

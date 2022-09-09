@@ -11,7 +11,7 @@ public class AddSpoolViewModel : BaseAddItemViewModel<Spool>
     #endregion
 
     SpoolMock SpoolMock;
-    public AddSpoolViewModel(MessageService messageService, SpoolService itemService, SpoolMock spoolMock) : base(messageService, itemService)
+    public AddSpoolViewModel(IMessageService messageService, IItemService<Spool> itemService, SpoolMock spoolMock) : base(messageService, itemService)
 	{
         SpoolMock = spoolMock;
     }

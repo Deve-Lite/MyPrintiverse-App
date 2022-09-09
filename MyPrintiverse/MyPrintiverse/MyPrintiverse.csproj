@@ -86,6 +86,9 @@
 		<Compile Update="Authorization\Settings\SettingsView.xaml.cs">
 			<DependentUpon>SettingsView.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="FilamentsModule\Filaments\FilamentsPage\FilamentCollectionView.xaml.cs">
+		  <DependentUpon>FilamentCollectionView.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
 		  <DependentUpon>ExtendedValidatableEntry.xaml</DependentUpon>
 		</Compile>
@@ -156,9 +159,6 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Templates\MessageEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\TitledSwitch.xaml">

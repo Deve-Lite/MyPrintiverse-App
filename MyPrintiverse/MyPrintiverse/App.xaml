@@ -28,24 +28,25 @@
     <Application.MainPage>
         <Shell>
 
-            <!--<ShellItem>
+            <!-- 
+            <FlyoutItem Title="Login">
                 <ShellContent
-          Title="Login"
-          ContentTemplate="{DataTemplate login:LoginView}"
-          FlyoutItemIsVisible="False" />
-            </ShellItem> -->
+                      Title="Login"
+                      ContentTemplate="{DataTemplate login:LoginView}"
+                      FlyoutItemIsVisible="False" />
+            </FlyoutItem> -->
 
             <FlyoutItem Title="Filaments" Icon="spool.png">
                 <Tab  Title="Filaments" Icon="spool.png">
                     <ShellContent
-          Title="Filaments"
-          ContentTemplate="{DataTemplate filaments:FilamentsView}"
-     />
+                        Title="Filaments"  
+                        ContentTemplate="{DataTemplate filaments:FilamentCollectionView}"
+                        />
                 </Tab>
                 <Tab Title="Types" Icon="spool.png">
                     <ShellContent
-          Title="Types"
-          ContentTemplate="{DataTemplate types:FilamentTypesView}" />
+                        Title="Types" 
+                        ContentTemplate="{DataTemplate types:FilamentTypesView}" />
                 </Tab>
             </FlyoutItem>
 
@@ -56,9 +57,9 @@
 
             <FlyoutItem Title="Admin Panel (Dev Mode)" Icon="spool.png">
                 <ShellContent
-          Title="Admin Panel"
-          ContentTemplate="{DataTemplate admin:AdminView}"
-          Route="admin" />
+                    Title="Admin Panel"   
+                    ContentTemplate="{DataTemplate admin:AdminView}" 
+                    Route="admin" />
             </FlyoutItem>
 
             <Shell.FlyoutHeaderTemplate>
@@ -66,9 +67,9 @@
                     <Grid>
                         <Frame Style="{StaticResource BaseFrame}">
                             <Image
-                Margin="0,30,0,30"
-                HeightRequest="84"
-                Source="spool.png" />
+                                Margin="0,30,0,30"   
+                                HeightRequest="84"
+                                Source="spool.png" />
                         </Frame>
                     </Grid>
                 </DataTemplate>
@@ -78,15 +79,15 @@
                 <DataTemplate>
                     <StackLayout HeightRequest="60">
                         <Label
-              Margin="0,5,0,0"
-              FontAttributes="Bold"
-              HorizontalOptions="Center"
-              Style="{StaticResource SmallRaleway}"
-              Text="My Printiverse" />
+                            Margin="0,5,0,0"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource SmallRaleway}"
+                            Text="My Printiverse" />
                         <Label
-              HorizontalOptions="Center"
-              Style="{StaticResource SmallRaleway}"
-              Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dddd, dd/MM/yyyy}'}" />
+                            HorizontalOptions="Center"
+                            Style="{StaticResource SmallRaleway}"
+                            Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dddd, dd/MM/yyyy}'}" />
                     </StackLayout>
                 </DataTemplate>
             </Shell.FlyoutFooterTemplate>

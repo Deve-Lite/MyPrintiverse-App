@@ -10,9 +10,9 @@
   Shell.NavBarIsVisible="False">
   <StackLayout>
 
-    <module:MessageEntry Message="{Binding Email.Error}" Text="{Binding Email.Value, Mode=TwoWay}" />
+    <!--<module:MessageEntry Message="{Binding Email.Error}" Text="{Binding Email.Value, Mode=TwoWay}" />
     <module:MessageEntry Message="{Binding Password.Error}" Text="{Binding Password.Value, Mode=TwoWay}" />
-    <module:MessageEntry Message="{Binding ConfirmPassword.Error}" Text="{Binding ConfirmPassword.Value, Mode=TwoWay}" />
+    <module:MessageEntry Message="{Binding ConfirmPassword.Error}" Text="{Binding ConfirmPassword.Value, Mode=TwoWay}" /> -->
 
     <Button Command="{Binding SignInCommand}" />
 

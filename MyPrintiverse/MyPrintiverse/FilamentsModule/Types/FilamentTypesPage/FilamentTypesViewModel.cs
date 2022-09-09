@@ -6,7 +6,7 @@ namespace MyPrintiverse.FilamentsModule.Types.FilamentTypesPage;
 
 public class FilamentTypesViewModel : BaseCollectionViewModel<FilamentType, AddFilamentTypeView,EditFilamentTypeView, FilamentTypeView>
 {
-	public FilamentTypesViewModel(MessageService messageService, FilamentTypeService itemsService) : base(messageService, itemsService)
+	public FilamentTypesViewModel(IMessageService messageService, IItemService<FilamentType> itemsService) : base(messageService, itemsService)
 	{
     }
 

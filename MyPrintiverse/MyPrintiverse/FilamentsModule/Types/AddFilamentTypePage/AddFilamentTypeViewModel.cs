@@ -3,7 +3,7 @@
 public class AddFilamentTypeViewModel : BaseAddItemViewModel<FilamentType>
 {
     FilamentTypeMock _filamentTypeMock;
-    public AddFilamentTypeViewModel(MessageService messageService, FilamentTypeService itemService, FilamentTypeMock filamentTypeMock) : base(messageService, itemService)
+    public AddFilamentTypeViewModel(IMessageService messageService, IItemService<FilamentType> itemService, FilamentTypeMock filamentTypeMock) : base(messageService, itemService)
     {
         _filamentTypeMock= filamentTypeMock;
     }

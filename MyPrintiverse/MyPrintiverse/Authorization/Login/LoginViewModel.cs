@@ -41,12 +41,12 @@ public sealed partial class LoginViewModel : BaseViewModel
 	[RelayCommand]
 	private async Task SignIn()
 	{
-		await Shell.Current.GoToAsync($"/{nameof(FilamentsView)}");
+		await Shell.Current.GoToAsync($"/{nameof(FilamentCollectionView)}");
 	}
 
 	[RelayCommand]
 	private async Task GoToMainPage()
 	{
-		await Shell.Current.GoToAsync($"/{nameof(FilamentsView)}");
+		await Shell.Current.GoToAsync($"/{nameof(FilamentCollectionView)}");
 	}
 }

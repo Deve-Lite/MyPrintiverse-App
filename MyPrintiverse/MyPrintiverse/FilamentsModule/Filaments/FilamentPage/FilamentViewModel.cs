@@ -11,7 +11,7 @@ public class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, Ed
 {
     public ObservableCollection<Spool> FinishedFilaments { get; set; } 
 
-    public FilamentViewModel(MessageService messagingService, FilamentService itemService, SpoolService itemsService) : base(messagingService, itemService, itemsService, itemsService)
+    public FilamentViewModel(IMessageService messagingService, IItemService<Filament> itemService, IItemService<Spool> itemsService, IItemKeyService<Spool> itemsKeyService) : base(messagingService, itemService, itemsService, itemsKeyService)
     {
         FinishedFilaments = new ObservableCollection<Spool>();
     }

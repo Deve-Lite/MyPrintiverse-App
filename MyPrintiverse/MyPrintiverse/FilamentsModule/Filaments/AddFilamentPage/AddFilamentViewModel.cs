@@ -6,7 +6,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 public class AddFilamentViewModel : FilamentsManageViewModel
 {
     FilamentMock _filamentMock;
-    public AddFilamentViewModel(MessageService messageService, FilamentService itemService, FilamentTypeService typeService, FilamentMock filamentMock) : base(messageService, itemService, typeService)
+    public AddFilamentViewModel(IMessageService messageService, IItemService<Filament> itemService, IItemService<FilamentType> typeService, FilamentMock filamentMock) : base(messageService, itemService, typeService)
     {
         _filamentMock = filamentMock;
     }

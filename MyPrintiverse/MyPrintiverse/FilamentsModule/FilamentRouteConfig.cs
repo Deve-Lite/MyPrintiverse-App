@@ -23,7 +23,7 @@ public class FilamentRouteConfig : RouteRegister
     {
         var routes = new List<Type>()
         {
-            typeof(FilamentsView),
+            typeof(FilamentCollectionView),
             typeof(FilamentView),
             typeof(AddFilamentView),
             typeof(EditFilamentView),

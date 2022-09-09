@@ -1,9 +1,9 @@
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
-public partial class FilamentsView : ContentPage
+public partial class FilamentCollectionView : ContentPage
 {
     private FilamentsViewModel? ViewModel => BindingContext as FilamentsViewModel;
-	public FilamentsView(FilamentsViewModel vm)
+	public FilamentCollectionView(FilamentsViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

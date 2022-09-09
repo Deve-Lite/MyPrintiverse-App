@@ -12,6 +12,9 @@ public class Session : ISession
 	{
 		get
 		{
+			if (AccessToken == null || RefreshToken == null)
+				return false;
+
 			if (AccessToken?.IsValid ?? false)
 				return false;
 

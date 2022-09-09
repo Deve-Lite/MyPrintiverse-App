@@ -7,7 +7,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
 { 
-    public FilamentsViewModel(MessageService messagingService, FilamentService itemsService) : base(messagingService, itemsService)
+    public FilamentsViewModel(IMessageService messagingService, IItemService<Filament> itemsService) : base(messagingService, itemsService)
     {
     }
 
