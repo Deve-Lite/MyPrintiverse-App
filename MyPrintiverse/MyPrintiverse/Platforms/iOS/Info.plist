@@ -28,5 +28,14 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	
+	<!-- Only debug -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<!--Include to allow all connections (DANGER)-->
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	
 </dict>
 </plist>

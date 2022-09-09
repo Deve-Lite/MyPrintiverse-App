@@ -84,6 +84,10 @@ public class BaseHttpService : BaseService, IBaseHttpService
 			var test2 = ex;
 			await MessageService.ShowErrorAsync();
 		}
+		catch (TimeoutException timeoutException)
+		{
+            await MessageService.ShowAlertAsync("timeout","timeout");
+        }
 
 		return false;
 	}

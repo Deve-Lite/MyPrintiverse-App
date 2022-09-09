@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true" android:supportsRtl="true"></application>
+	<application android:allowBackup="true"
+				 android:supportsRtl="true" 
+				 
+				 android:networkSecurityConfig="@xml/network_security_config">
+		
+		<!-- newtwork_security_config - is on only when we want to use http -->
+		
+	</application>
 	<!-- android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round"  -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />

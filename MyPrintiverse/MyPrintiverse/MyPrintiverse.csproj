@@ -174,6 +174,7 @@
 
 	<ItemGroup>
 		<None Remove="config.json" />
+		<None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 		<None Remove="Resources\Fonts\Oswald-Bold.ttf" />
 		<None Remove="Resources\Fonts\Oswald-ExtraLight.ttf" />
 		<None Remove="Resources\Fonts\Oswald-Light.ttf" />

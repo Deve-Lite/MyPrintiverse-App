@@ -21,6 +21,10 @@
 		Fizyczne urz¹dzenie) Zamiast localhost u¿yæ ip komputera w lokalnej sieci.
 
 
+== Wa¿ne odnoœnie API ==
+Protokó³ http dzia³a ale zanim aplikacja zostanie wydana z manifestów platform musi zostaæ usuniête pozowlenia na uzywanie 
+niezabezpieczonego protoko³u.
+
 == Unicode Dictionary ==
 &#10; - Enter
 &#160; - No-Break Space (NBSP)

@@ -32,13 +32,17 @@ public class HttpService : IHttpService
 
 	public async Task<IHttpResponse<T?>> Get<T>(string url, IToken? authenticationToken)
 	{
-		var restClient = new RestClient(url);
+		//url = "https://api.punkapi.com/v2/beers?per_page=1";
+
+        var restClient = new RestClient(url);
         var restRequest = new RestRequest();
-		// TODO TIMEOUTS
+		restRequest.Timeout = 5000;
+		
 
         await AuthenticateRequest(restRequest, authenticationToken);
 
 		var response = await restClient.GetAsync(restRequest, _cancellationToken);
+
 
 		var result = GetHttpResponse<T>(response);
 
