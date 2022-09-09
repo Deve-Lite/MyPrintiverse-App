@@ -2,7 +2,7 @@
   "Culture": "pl-PL",
   "Version": "0.0.1",
   "Api": {
-    "Protocol": "https",
+    "Protocol": "http",
     "Address": "10.0.0.2",
     "Port": "5000",
     "Base": "api/v1/"

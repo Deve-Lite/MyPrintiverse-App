@@ -16,7 +16,7 @@ public class SignInViewModel : BaseViewModel
 	{
 		_signInService = signInService;
 
-		SignInCommand = new AsyncCommand(SignIn, CanExecute);
+		SignInCommand = new AsyncRelayCommand(SignIn, CanExecute);
 
 		SetupValidation();
 	}

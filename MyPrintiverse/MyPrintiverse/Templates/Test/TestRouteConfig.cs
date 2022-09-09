@@ -1,10 +1,15 @@
 ﻿
 namespace MyPrintiverse.Templates.Test;
 
-public static class TestRouteConfig
+public class TestRouteConfig : RouteRegister
 {
-    public static void RegisterTestRoutes()
+    public override void RegisterRoutes()
     {
-        Routing.RegisterRoute(nameof(TestPage), typeof(TestPage));
+        var routes = new List<Type>()
+        {
+            typeof(TestPage),
+        };
+
+        Register(routes);
     }
 }

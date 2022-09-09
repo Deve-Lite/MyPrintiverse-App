@@ -84,7 +84,7 @@
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Style="{StaticResource CollectionImageButton}"/>
+        <ImageButton Style="{StaticResource CollectionImageButton}" IsEnabled="{Binding IsEnabled}"/>
 
     </Grid>
 

@@ -20,13 +20,20 @@ public partial class App : Application
     /// </summary>
     private static void RegisterRoutes()
     {
-        FilamentRouteConfig.RegisterFilamentRoutes();
-        TestRouteConfig.RegisterTestRoutes();
-        
-        new AdminRouteRegister()
-	        .RegisterRoutes();
+        new FilamentRouteConfig()
+            .RegisterRoutes();
 
         new AuthorizationRouteRegister()
 	        .RegisterRoutes();
-	}
+
+
+        #region Dev
+        new TestRouteConfig()
+            .RegisterRoutes();
+
+        new AdminRouteRegister()
+            .RegisterRoutes();
+
+        #endregion
+    }
 }

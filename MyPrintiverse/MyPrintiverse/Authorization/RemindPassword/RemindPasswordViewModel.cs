@@ -16,8 +16,8 @@ public class RemindPasswordViewModel : BaseViewModel
 	{
 		_remindPasswordService = remindPasswordService;
 
-		RemindPasswordInitCommand = new AsyncCommand(RemindPasswordInit, CanExecute, shellExecute: ExecuteBlockade);
-		RemindPasswordWithCodeCommand = new AsyncCommand(RemindPasswordWithCode, CanExecute, shellExecute: ExecuteBlockade);
+		RemindPasswordInitCommand = new AsyncRelayCommand(RemindPasswordInit, CanExecute);
+		RemindPasswordWithCodeCommand = new AsyncRelayCommand(RemindPasswordWithCode, CanExecute);
 
 		SetupValidation();
 	}

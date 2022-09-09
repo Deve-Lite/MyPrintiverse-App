@@ -17,15 +17,18 @@ public abstract partial class BaseViewModel : ObservableObject
 
     public virtual void OnAppearing() 
 	{
+        IsEnabled = false;
         IsEnabled = true;
         IsBusy = false;
         IsRunning = false;
     }
 
-	/// <summary>
-	/// Terminate if any action started on page.
-	/// </summary>
-	[ObservableProperty]
+    #region Properties
+
+    /// <summary>
+    /// Terminate if any action started on page.
+    /// </summary>
+    [ObservableProperty]
 	private bool _isBusy;
 
 	[ObservableProperty]
@@ -42,7 +45,9 @@ public abstract partial class BaseViewModel : ObservableObject
 	/// </summary>
 	[ObservableProperty]
 	private bool _isEnabled;
+    #endregion
 
+    #region Methods
     /// <summary>
     /// Check if command can be executed.
     /// </summary>
@@ -51,79 +56,31 @@ public abstract partial class BaseViewModel : ObservableObject
     protected bool CanExecute(object obj) => !IsBusy;
 
 	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="act">Action to execute.</param>
-	protected void ExecuteBlockade(Action act)
-	{
-		IsBusy = true;
-
-		act();
-
-		IsBusy = false;
-	}
-
-	/// <summary>
-	/// Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
-	/// </summary>
-	/// <param name="act">Action to execute.</param>
-	protected async Task ExecuteBlockade(Func<Task> act)
-	{
-		IsBusy = true;
-
-		await act();
-
-		IsBusy = false;
-	}
-
-    /// <summary>
-	///  Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <param name="act">Action to execute.</param>
-	/// <param name="value"> Action parameter.</param>
-	/// <returns></returns>
-    protected async Task ExecuteBlockade<T>(Func<T, Task> act, T value)
-    {
-        IsBusy = true;
-
-        await act(value);
-
-        IsBusy = false;
-    }
-
-    /// <summary>
-    ///  Automatically change <see cref="IsBusy"/> execute <paramref name="act"/>.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="act">Action to execute.</param>
-    /// <param name="value"> Action parameter.</param>
-    /// <returns></returns>
-    protected void ExecuteBlockade<T>(Action<T> act, T value)
-    {
-        IsBusy = true;
-
-        act(value);
-
-        IsBusy = false;
-    }
-
-    
-
-	#region Exceptions Methods
-
-	/// <summary>
 	/// Performs GoToAsync action with specified route.
 	/// </summary>
 	/// <param name="route"></param>
 	/// <returns></returns>
-	protected virtual async Task OpenPage(string route) => await Shell.Current.GoToAsync(route, true);
+	protected virtual async Task OpenPage(string route, bool animated = true) => await Shell.Current.GoToAsync(route, animated);
 
-	/// <summary>
-	/// If other commands can't perform use this function to block action.
-	/// </summary>
-	/// <returns></returns>
-	protected virtual bool AnyActionStartedCommand()
+    /// <summary>
+    /// Performs GoToAsync action with specified route.
+    /// </summary>
+    /// <param name="page"></param>
+    /// <returns></returns>
+    protected virtual async Task OpenPage(Type page, bool animated = true) => await Shell.Current.GoToAsync(page.Name, animated);
+
+    /// <summary>
+    /// Performs GoToAsync action with specified route.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual async Task OpenPage<T>(bool animated = true) => await Shell.Current.GoToAsync(typeof(T).Name, animated);
+
+
+    /// <summary>
+    /// If other commands can't perform use this function to block action.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual bool AnyActionStartedCommand()
 	{
 		if (IsBusy)
 			return true;

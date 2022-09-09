@@ -14,7 +14,7 @@ public class SettingsViewModel : BaseViewModel
 	{
 		_settingsService = settingsService;
 
-		SaveSettingsCommand = new AsyncCommand(SaveSettings, CanExecute, shellExecute: ExecuteBlockade);
+		SaveSettingsCommand = new AsyncRelayCommand(SaveSettings, CanExecute);
 	}
 
 	private async Task SaveSettings()

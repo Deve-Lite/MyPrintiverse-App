@@ -33,9 +33,10 @@ public class HttpService : IHttpService
 	public async Task<IHttpResponse<T?>> Get<T>(string url, IToken? authenticationToken)
 	{
 		var restClient = new RestClient(url);
-		var restRequest = new RestRequest();
+        var restRequest = new RestRequest();
+		// TODO TIMEOUTS
 
-		await AuthenticateRequest(restRequest, authenticationToken);
+        await AuthenticateRequest(restRequest, authenticationToken);
 
 		var response = await restClient.GetAsync(restRequest, _cancellationToken);
 

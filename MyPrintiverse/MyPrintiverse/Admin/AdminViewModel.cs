@@ -28,7 +28,10 @@ public partial class AdminViewModel : BaseViewModel
 		var message = stringBuilder.ToString();
 
 		await _adminService.MessageService.ShowAlertAsync("Loaded Assets", message);
-	}
+
+		await TestApiConnection();
+
+    }
 
 	[RelayCommand]
 	private async Task OpenAndromeda() => await _adminService.OpenAndromeda();

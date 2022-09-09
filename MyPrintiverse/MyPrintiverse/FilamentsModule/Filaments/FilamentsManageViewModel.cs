@@ -12,13 +12,13 @@ public class FilamentsManageViewModel : BaseItemManageViewModel<Filament>
     private FilamentTypeSelector selectedType;
     public FilamentTypeSelector SelectedType { get => selectedType; set => SetProperty(ref selectedType, value); }
 
-    public AsyncCommand SelectColorCommand { get; set; }
+    public AsyncRelayCommand SelectColorCommand { get; set; }
     public FilamentsManageViewModel(MessageService messageService, FilamentService itemService, FilamentTypeService typeService) : base(messageService, itemService)
     {
         var typeServiceExceptionMessage = GetExceptionMessage<BaseAddItemViewModel<Filament>>(nameof(typeService));
         TypeService = typeService ?? throw new ArgumentNullException(typeServiceExceptionMessage);
 
-        SelectColorCommand = new AsyncCommand(SelectColor);
+        SelectColorCommand = new AsyncRelayCommand(SelectColor);
     }
 
     public override void OnAppearing()

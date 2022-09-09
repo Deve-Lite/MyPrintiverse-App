@@ -25,5 +25,13 @@ public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilame
         return Items.IndexOf(foundItem);
     }
 
+    protected override async Task AddItem()
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        await OpenPage<AddFilamentView>();
+    }
+
     #endregion
 }

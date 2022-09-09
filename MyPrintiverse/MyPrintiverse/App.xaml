@@ -12,86 +12,85 @@
   xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
   xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage">
 
-  <Application.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Resources/Colors.xaml" />
-        <ResourceDictionary Source="Resources/ShellStyles.xaml" />
-        <ResourceDictionary Source="Resources/LabelStyles.xaml" />
-        <ResourceDictionary Source="Resources/Styles.xaml" />
-        <ResourceDictionary Source="Resources/TemplatesStyles.xaml" />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-  </Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Colors.xaml" />
+                <ResourceDictionary Source="Resources/ShellStyles.xaml" />
+                <ResourceDictionary Source="Resources/LabelStyles.xaml" />
+                <ResourceDictionary Source="Resources/Styles.xaml" />
+                <ResourceDictionary Source="Resources/TemplatesStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 
 
-  <Application.MainPage>
-    <Shell>
+    <Application.MainPage>
+        <Shell>
 
-      <ShellItem>
-        <ShellContent
+            <!--<ShellItem>
+                <ShellContent
           Title="Login"
           ContentTemplate="{DataTemplate login:LoginView}"
           FlyoutItemIsVisible="False" />
-      </ShellItem>
+            </ShellItem> -->
 
-      <FlyoutItem Title="Home">
-        <ShellContent Title="Home" ContentTemplate="{DataTemplate filaments:FilamentsView}" />
-      </FlyoutItem>
-
-      <FlyoutItem Title="Filaments" Icon="spool.png">
-        <ShellContent
+            <FlyoutItem Title="Filaments" Icon="spool.png">
+                <Tab  Title="Filaments" Icon="spool.png">
+                    <ShellContent
           Title="Filaments"
           ContentTemplate="{DataTemplate filaments:FilamentsView}"
-          Icon="spool.png" />
-        <ShellContent
+     />
+                </Tab>
+                <Tab Title="Types" Icon="spool.png">
+                    <ShellContent
           Title="Types"
-          ContentTemplate="{DataTemplate types:FilamentTypesView}"
-          Icon="spool.png" />
-      </FlyoutItem>
+          ContentTemplate="{DataTemplate types:FilamentTypesView}" />
+                </Tab>
+            </FlyoutItem>
 
-      <FlyoutItem Title="Filaments" Icon="spool.png" />
-      <FlyoutItem Title="Test" Icon="spool.png">
-        <ShellContent Title="Test" ContentTemplate="{DataTemplate test:TestPage}" />
-      </FlyoutItem>
+            <FlyoutItem Title="Filaments" Icon="spool.png" />
+            <FlyoutItem Title="Test" Icon="spool.png">
+                <ShellContent Title="Test" ContentTemplate="{DataTemplate test:TestPage}" />
+            </FlyoutItem>
 
-      <FlyoutItem Title="Admin Panel (Dev Mode)" Icon="spool.png">
-        <ShellContent
+            <FlyoutItem Title="Admin Panel (Dev Mode)" Icon="spool.png">
+                <ShellContent
           Title="Admin Panel"
           ContentTemplate="{DataTemplate admin:AdminView}"
           Route="admin" />
-      </FlyoutItem>
+            </FlyoutItem>
 
-      <Shell.FlyoutHeaderTemplate>
-        <DataTemplate>
-          <Grid>
-            <Frame Style="{StaticResource BaseFrame}">
-              <Image
+            <Shell.FlyoutHeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Frame Style="{StaticResource BaseFrame}">
+                            <Image
                 Margin="0,30,0,30"
                 HeightRequest="84"
                 Source="spool.png" />
-            </Frame>
-          </Grid>
-        </DataTemplate>
-      </Shell.FlyoutHeaderTemplate>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </Shell.FlyoutHeaderTemplate>
 
-      <Shell.FlyoutFooterTemplate>
-        <DataTemplate>
-          <StackLayout HeightRequest="60">
-            <Label
+            <Shell.FlyoutFooterTemplate>
+                <DataTemplate>
+                    <StackLayout HeightRequest="60">
+                        <Label
               Margin="0,5,0,0"
               FontAttributes="Bold"
               HorizontalOptions="Center"
               Style="{StaticResource SmallRaleway}"
               Text="My Printiverse" />
-            <Label
+                        <Label
               HorizontalOptions="Center"
               Style="{StaticResource SmallRaleway}"
               Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dddd, dd/MM/yyyy}'}" />
-          </StackLayout>
-        </DataTemplate>
-      </Shell.FlyoutFooterTemplate>
+                    </StackLayout>
+                </DataTemplate>
+            </Shell.FlyoutFooterTemplate>
 
-    </Shell>
-  </Application.MainPage>
+        </Shell>
+    </Application.MainPage>
 </Application>
