@@ -61,29 +61,29 @@
     <adminModule:AdminTile
       Grid.Row="2"
       Grid.Column="0"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding DeleteFilamentsCommand}"
+      Text="Delete FilamentsCommand" />
     <adminModule:AdminTile
       Grid.Row="2"
       Grid.Column="1"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding DeleteFilamentTypesCommand}"
+      Text="Delete FilamentTypes" />
     <adminModule:AdminTile
       Grid.Row="2"
       Grid.Column="2"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding DeletePrintsCommand}"
+      Text="Delete Prints" />
 
     <adminModule:AdminTile
       Grid.Row="3"
       Grid.Column="0"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding DeleteSpoolsCommand}"
+      Text="Delete Spools" />
     <adminModule:AdminTile
       Grid.Row="3"
       Grid.Column="1"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding DeleteAllCommand}"
+      Text="Delete All" />
     <adminModule:AdminTile
       Grid.Row="3"
       Grid.Column="2"

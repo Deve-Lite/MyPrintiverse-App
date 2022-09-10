@@ -34,8 +34,12 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
         var collections = new List<GroupedItem<TBaseModel>>(Items);
 
-        foreach(var collection in collections)
+        foreach (var collection in collections)
+        {
             UpdateCollection(collection, data, false);
+            if (collection.Count == 0)
+                Items.Remove(collection);
+        }
 
         foreach (var item in data)
             AddToCollection(Items,item);

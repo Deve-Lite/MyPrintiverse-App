@@ -1,19 +1,31 @@
 ﻿using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
-
+using MyPrintiverse.FilamentsModule.Filaments;
+using MyPrintiverse.FilamentsModule.Spools;
+using MyPrintiverse.FilamentsModule.Types;
+using MyPrintiverse.FilamentsModule.Prints;
 namespace MyPrintiverse.Admin;
 
 public partial class AdminViewModel : BaseViewModel
 {
 	private readonly IAdminService _adminService;
+	private readonly IItemService<Filament> _filamentService;
+    private readonly IItemService<Print> _printService;
+    private readonly IItemService<Spool> _spoolService;
+    private readonly IItemService<FilamentType> _filamentTypeService;
 
-	[ObservableProperty] 
+
+    [ObservableProperty] 
 	private string? _testText;
 
-	public AdminViewModel(IAdminService adminService)
+	public AdminViewModel(IAdminService adminService, IItemService<Filament> filamentService, IItemService<Print> printService, IItemService<Spool> spoolService, IItemService<FilamentType> filamentTypeService)
 	{
 		_adminService = adminService;
-	}
+		_filamentTypeService = filamentTypeService;
+		_spoolService = spoolService;
+		_printService = printService;
+		_filamentService = filamentService;
+    }
 
 	[RelayCommand]
 	public async Task TestApiConnection() => await _adminService.PingApi();
@@ -44,5 +56,23 @@ public partial class AdminViewModel : BaseViewModel
 
 	[RelayCommand]
 	private async Task DoNothing() => await Task.Run(() => 1 + 1);
+
+	[RelayCommand]
+    private async Task DeleteFilamentTypes() => await _filamentTypeService.DeleteAllAsync();
+    [RelayCommand]
+    private async Task DeleteSpools() => await _spoolService.DeleteAllAsync();
+    [RelayCommand]
+    private async Task DeletePrints() => await _printService.DeleteAllAsync();
+    [RelayCommand]
+	private async Task DeleteFilaments() => await _filamentService.DeleteAllAsync();
+
+	[RelayCommand]
+	private async Task DeleteAll()
+	{
+		await DeleteSpools();
+		await DeleteFilaments();
+		await DeleteFilamentTypes();
+		await DeletePrints();
+    }
 
 }
