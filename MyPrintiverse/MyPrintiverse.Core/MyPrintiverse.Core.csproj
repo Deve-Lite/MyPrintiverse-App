@@ -19,6 +19,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Services\Item\g3yo5zx2.q3o~" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="MongoDB.Bson" Version="2.17.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

@@ -1,6 +1,4 @@
-﻿
-
-namespace MyPrintiverse.Core.Utilities;
+﻿namespace MyPrintiverse.Core.Services.Helpers;
 
 /// <summary>
 /// Class created for parsing json file to object

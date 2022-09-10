@@ -80,4 +80,25 @@ public interface IHttpService
 	/// <param name="authenticationToken">Authentication token.</param>
 	/// <returns></returns>
 	public Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken);
+
+    /// <summary>
+    /// Patch resource using api.
+    /// </summary>
+    /// <typeparam name="TSender">Object to send type.</typeparam>
+    /// <typeparam name="TResponse">Response object type.</typeparam>
+    /// <param name="url"></param>
+    /// <param name="obj">Value to be send.</param>
+    /// <returns></returns>
+    public Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj);
+
+    /// <summary>
+    /// Patch resource using api.
+    /// </summary>
+    /// <typeparam name="TSender">Object to send type.</typeparam>
+    /// <typeparam name="TResponse">Response object type.</typeparam>
+    /// <param name="url">Resource api link.</param>
+    /// <param name="obj">Value to be send.</param>
+    /// <param name="authenticationToken">Authentication token.</param>
+    /// <returns></returns>
+    public Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken);
 }

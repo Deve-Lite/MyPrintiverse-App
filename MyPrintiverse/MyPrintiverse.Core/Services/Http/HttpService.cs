@@ -1,8 +1,11 @@
 ﻿#nullable enable
 
 using MyPrintiverse.Core.Extensions;
+using MyPrintiverse.Core.Services.Helpers;
 using MyPrintiverse.Core.Utilities;
+using RestSharp;
 using RestSharp.Authenticators;
+using System.Text.Json.Nodes;
 
 namespace MyPrintiverse.Core.Http;
 
@@ -21,42 +24,45 @@ public class HttpService : IHttpService
 	public HttpService(IConfigService<IServerConfig> configService)
 		: this(configService, new RestClientOptions())
 	{
-	}
+        _restClient.AddDefaultHeader("Accept", "application/json");
+    }
 
 	public HttpService(IConfigService<IServerConfig> configService, RestClientOptions options)
 		: this(configService, options, new CancellationToken())
 	{
-	}
+        _restClient.AddDefaultHeader("Accept", "application/json");
+    }
 
 	public HttpService(IConfigService<IServerConfig> configService, RestClientOptions options, CancellationToken cancellationToken)
 	{
 		ConfigService = configService;
 		_cancellationToken = cancellationToken;
-	}
 
-	#region Get Request
+		_restClient = new RestClient(options);
+        _restClient.AddDefaultHeader("Accept", "application/json");
+    }
 
-	public async Task<IHttpResponse<T?>> Get<T>(string url, IToken? authenticationToken)
+    #region Get Request
+
+    public async Task<IHttpResponse<T?>> Get<T>(string url, IToken? authenticationToken)
 	{
-        var restClient = new RestClient(url);
-        var restRequest = new RestRequest();
-		restRequest.Timeout = TIMEOUT;
-		
-		await AuthenticateRequest(restRequest, authenticationToken);
-		var response = await restClient.GetAsync(restRequest, _cancellationToken);
+        var restRequest = new RestRequest(url);
+        restRequest.Timeout = TIMEOUT;
+
+        await AuthenticateRequest(restRequest, authenticationToken);
+		var response = await _restClient.GetAsync(restRequest, _cancellationToken);
         var result = GetHttpResponse<T>(response);
 		
 		return result;
 	}
 
+    public async Task<IHttpResponse<T?>> Get<T>(string url) => await Get<T>(url, null);
 
-	public async Task<IHttpResponse<T?>> Get<T>(string url) => await Get<T>(url, null);
+    #endregion
 
-	#endregion
+    #region Delete Request
 
-	#region Delete Request
-
-	public async Task<IHttpResponse<TResponse?>> Delete<TResponse>(string url, IToken? authenticationToken)
+    public async Task<IHttpResponse<TResponse?>> Delete<TResponse>(string url, IToken? authenticationToken)
 	{
 		var restRequest = new RestRequest(url, Method.Delete);
 		var response = await _restClient.DeleteAsync(restRequest, _cancellationToken);
@@ -71,11 +77,35 @@ public class HttpService : IHttpService
 
 	public async Task<IHttpResponse<TResponse?>> Delete<TResponse>(string url) => await Delete<TResponse?>(url, null);
 
-	#endregion
+    #endregion
 
-	#region Post Request
+    #region Patch Request
 
-	public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
+    public async Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
+    {
+        var json = JsonConvert.SerializeObject(obj);
+
+        var restRequest = new RestRequest(url, Method.Patch)
+            .AddStringBody(json, DataFormat.Json);
+        restRequest.Timeout = TIMEOUT;
+
+        await AuthenticateRequest(restRequest, authenticationToken);
+
+        var response = await _restClient.PatchAsync(restRequest, _cancellationToken);
+
+        var result = GetHttpResponse<TResponse?>(response);
+
+        return result;
+    }
+
+    public async Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj) => await Put<TResponse?, TSender>(url, obj, null);
+
+    #endregion
+
+
+    #region Post Request
+
+    public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
 	{
 		var json = JsonConvert.SerializeObject(obj);
 
@@ -128,18 +158,16 @@ public class HttpService : IHttpService
 
 		await authentication.Authenticate(_restClient, request);
 	}
+
 	private static HttpResponse<T> GetHttpResponse<T>(RestResponseBase response)
 	{
 		var responseValue = response.Content;
-
-		var value = JsonConvert.DeserializeObject<RequestParsator<T>>(responseValue).Value;
-
-		/*TODO Parsator
-		var value = typeof(T) == typeof(bool)
+		// TODO sprawdzaenie czy działa 
+        var value = typeof(T) == typeof(bool)
 			? (T)(object)response.StatusCode.IsSuccessful()
 			: responseValue != null 
-				? JsonConvert.DeserializeObject<T>(responseValue) 
-				: default;*/
+				? JsonConvert.DeserializeObject<RequestParsator<T>>(responseValue).Value
+				: default;
 
 		return new HttpResponse<T>
 		{

@@ -21,9 +21,10 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
         {
             var response = await ItemInternetService.AddItemAsync(item);
 
-            if (response.Item1)
+            if (response.IsSuccessful)
             {
-                await ItemDeviceService.AddItemAsync(response.Item2);
+
+                //await ItemDeviceService.AddItemAsync();
                 return true;
             }
 
@@ -83,9 +84,9 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
         {
             var response = await ItemInternetService.UpdateItemAsync(item);
 
-            if (response.Item1)
+            if (response.IsSuccessful)
             {
-                await ItemDeviceService.UpdateItemAsync(response.Item2);
+                //await ItemDeviceService.UpdateItemAsync(response.Item2);
                 return true;
             }
 

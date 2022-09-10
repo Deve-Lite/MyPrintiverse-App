@@ -102,7 +102,7 @@ public class BaseHttpService : BaseService, IBaseHttpService
     /// </summary>
     /// <param name="function"></param>
     /// <returns><see langword="true"/> if operation is successful, otherwise <see langword="false"/>.</returns>
-    protected async Task<HttpResponse<T>> TryRun<T>(Func<Task<HttpResponse<T>>> function)
+    protected async Task<IHttpResponse<T>> TryRun<T>(Func<Task<IHttpResponse<T>>> function)
     {
         try
         {

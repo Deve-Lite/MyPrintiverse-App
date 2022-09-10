@@ -7,4 +7,5 @@ public interface IHttpResponse<T>
 {
 	public T? Value { get; set; }
 	public HttpStatusCode StatusCode { get; set; }
+    public bool IsSuccessful { get; set; }
 }

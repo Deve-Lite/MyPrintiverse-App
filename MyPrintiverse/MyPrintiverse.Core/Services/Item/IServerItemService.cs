@@ -1,4 +1,7 @@
-﻿namespace MyPrintiverse.Core.Services.Server;
+﻿using MyPrintiverse.Core.Http;
+using MyPrintiverse.Core.Services.Helpers;
+
+namespace MyPrintiverse.Core.Services.Server;
 
 /// <summary>
 /// Base interface for Internet Service 
@@ -6,35 +9,31 @@
 /// <typeparam name="T"></typeparam>
 public interface IServerItemService<T>
 {
-
-    /* Tutaj ewentualny problem z tym co bedziemy zwracać -> najprawdopodobniej trzeba bedzie inaczej parsować dane i zwracać nasz Response a nie RestResponse */
-    /* isFirst -> determinuje czy to bylo pierwsze czy drugie zapytanie (jezeli error z tokenem to ponawaimy zapytanie inaczej zapytanie nie udane ) */
-
     /// <summary>
     /// Returns response with data about item specified with objectId (if succesfull).
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task<(bool, T)> GetItemAsync(string objectId);
+    Task<IHttpResponse<T>> GetItemAsync(string objectId);
     /// <summary>
     /// Returns response with items (if succesfull).
     /// </summary>
     /// <returns></returns>
-    Task<(bool, IEnumerable<T>)> GetItemsAsync();
+    Task<IHttpResponse<IEnumerable<T>>> GetItemsAsync();
 
     /// <summary>
     /// Adds item to database and returns if action was succesfull.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    Task<(bool, T)> AddItemAsync(T item);
+    Task<IHttpResponse<PostRequestData>> AddItemAsync(T item);
 
     /// <summary>
     /// Updates item to database and returns if action was succesfull.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    Task<(bool, T)> UpdateItemAsync(T item);
+    Task<IHttpResponse<PostRequestData>> UpdateItemAsync(T item);
 
     /// <summary>
     /// Deletes item specified by objectId and returns if action was succesfull.

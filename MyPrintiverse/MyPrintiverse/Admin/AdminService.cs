@@ -35,7 +35,33 @@ namespace MyPrintiverse.Admin
 			});
 		}
 
-		public async Task OpenAndromeda() => await Shell.Current.GoToAsync(nameof(AndromedaView));
+        public async Task<bool> Register()
+        {
+            return await TryRun(async () =>
+            {
+                var url = ApiLink
+                    .GetAuthorizationLink(ConfigService.Config.Api.FullPath).LoginUser();
+
+                var response = await HttpService.Get<string>(url);
+
+                return response.StatusCode.IsSuccessful();
+            });
+        }
+
+        public async Task<bool> LogIn()
+        {
+            return await TryRun(async () =>
+            {
+                var url = ApiLink
+                    .GetAuthorizationLink(ConfigService.Config.Api.FullPath).LoginUser();
+
+                var response = await HttpService.Get<string>(url);
+
+                return response.StatusCode.IsSuccessful();
+            });
+        }
+
+        public async Task OpenAndromeda() => await Shell.Current.GoToAsync(nameof(AndromedaView));
 
 		public async Task OpenOdyssey() => await Shell.Current.GoToAsync(nameof(OdysseyView));
 
