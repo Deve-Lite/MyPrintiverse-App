@@ -1,9 +1,9 @@
-﻿namespace MyPrintiverse.Core.Services;
+﻿namespace MyPrintiverse.Core.Services.Device;
 
 /// <summary>
 /// Interface with base methods for items groupped with 'key'. Designed for device service.
 /// </summary>
-public interface IItemKeyDeviceService<T>
+public interface IDeviceItemKeyService<T>
 {
     /// <summary>
     /// Returns IEnumerable  with items with specified key.

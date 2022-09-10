@@ -1,15 +1,15 @@
 ﻿using MyPrintiverse.Core.Utilities;
 
-namespace MyPrintiverse.Core.Services;
+namespace MyPrintiverse.Core.Services.Server;
 
 /* Work In Progress ale to tez zalezne jak ten session service wyjdzie  */
-public abstract class BaseItemServerAsyncService<T> : BaseService, IServerItemService<T> where T : BaseModel, new()
+public abstract class BaseServerItemService<T> : BaseService, IServerItemService<T> where T : BaseModel, new()
 {
-    public BaseItemServerAsyncService(IConfigService<Config> configService, IMessageService messageService, ISession session) : base(configService, messageService, session)
+    public BaseServerItemService(IConfigService<Config> configService, IMessageService messageService, ISession session) : base(configService, messageService, session)
     {
     }
 
-    public Task<bool> AddItemAsync(T item)
+    public Task<(bool, T)> AddItemAsync(T item)
     {
         throw new NotImplementedException();
     }
@@ -24,17 +24,17 @@ public abstract class BaseItemServerAsyncService<T> : BaseService, IServerItemSe
         throw new NotImplementedException();
     }
 
-    public Task<RestResponse<T>> GetItemAsync(string objectId)
+    public Task<(bool, T)> GetItemAsync(string objectId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<RestResponse<IEnumerable<T>>> GetItemsAsync()
+    public Task<(bool, IEnumerable<T>)> GetItemsAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateItemAsync(T item)
+    public Task<(bool, T)> UpdateItemAsync(T item)
     {
         throw new NotImplementedException();
     }

@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using MyPrintiverse.Core.Extensions;
 using MyPrintiverse.Core.Utilities;
 using RestSharp.Authenticators;
 
@@ -7,6 +8,11 @@ namespace MyPrintiverse.Core.Http;
 
 public class HttpService : IHttpService
 {
+	/// <summary>
+	/// Maximal length of operation
+	/// </summary>
+	private readonly int TIMEOUT = 10000;
+
 	protected IConfigService<IServerConfig> ConfigService { get; }
 
 	private readonly CancellationToken _cancellationToken;
@@ -32,20 +38,14 @@ public class HttpService : IHttpService
 
 	public async Task<IHttpResponse<T?>> Get<T>(string url, IToken? authenticationToken)
 	{
-		//url = "https://api.punkapi.com/v2/beers?per_page=1";
-
         var restClient = new RestClient(url);
         var restRequest = new RestRequest();
-		restRequest.Timeout = 5000;
+		restRequest.Timeout = TIMEOUT;
 		
-
-        await AuthenticateRequest(restRequest, authenticationToken);
-
+		await AuthenticateRequest(restRequest, authenticationToken);
 		var response = await restClient.GetAsync(restRequest, _cancellationToken);
-
-
-		var result = GetHttpResponse<T>(response);
-
+        var result = GetHttpResponse<T>(response);
+		
 		return result;
 	}
 
@@ -60,8 +60,9 @@ public class HttpService : IHttpService
 	{
 		var restRequest = new RestRequest(url, Method.Delete);
 		var response = await _restClient.DeleteAsync(restRequest, _cancellationToken);
+        restRequest.Timeout = TIMEOUT;
 
-		await AuthenticateRequest(restRequest, authenticationToken);
+        await AuthenticateRequest(restRequest, authenticationToken);
 
 		var result = GetHttpResponse<TResponse?>(response);
 
@@ -80,8 +81,9 @@ public class HttpService : IHttpService
 
 		var restRequest = new RestRequest(url, Method.Post)
 			.AddJsonBody(json);
+        restRequest.Timeout = TIMEOUT;
 
-		await AuthenticateRequest(restRequest, authenticationToken);
+        await AuthenticateRequest(restRequest, authenticationToken);
 
 		var response = await _restClient.PostAsync(restRequest, _cancellationToken);
 
@@ -102,8 +104,9 @@ public class HttpService : IHttpService
 
 		var restRequest = new RestRequest(url, Method.Post)
 			.AddStringBody(json, DataFormat.Json);
+        restRequest.Timeout = TIMEOUT;
 
-		await AuthenticateRequest(restRequest, authenticationToken);
+        await AuthenticateRequest(restRequest, authenticationToken);
 
 		var response = await _restClient.PutAsync(restRequest, _cancellationToken);
 
@@ -125,21 +128,24 @@ public class HttpService : IHttpService
 
 		await authentication.Authenticate(_restClient, request);
 	}
-
 	private static HttpResponse<T> GetHttpResponse<T>(RestResponseBase response)
 	{
 		var responseValue = response.Content;
 
+		var value = JsonConvert.DeserializeObject<RequestParsator<T>>(responseValue).Value;
+
+		/*TODO Parsator
 		var value = typeof(T) == typeof(bool)
 			? (T)(object)response.StatusCode.IsSuccessful()
 			: responseValue != null 
 				? JsonConvert.DeserializeObject<T>(responseValue) 
-				: default;
+				: default;*/
 
 		return new HttpResponse<T>
 		{
 			Value = value,
-			StatusCode = response.StatusCode
-		};
+			StatusCode = response.StatusCode,
+            IsSuccessful = response.IsSuccessful
+        };
 	}
 }

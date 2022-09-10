@@ -1,7 +1,7 @@
 ﻿
 namespace MyPrintiverse.Admin
 {
-	public static class MauiAppExtensions
+	public static class AdminPanelBuilderConfig
 	{
 		public static MauiAppBuilder AdminConfigureServices(this MauiAppBuilder @this)
 		{

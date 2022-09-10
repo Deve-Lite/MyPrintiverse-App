@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.Core.Http;
+﻿using MyPrintiverse.Core.Extensions;
+using MyPrintiverse.Core.Http;
 using MyPrintiverse.Tools.Http;
 
 namespace MyPrintiverse.Authorization.ChangePassword;

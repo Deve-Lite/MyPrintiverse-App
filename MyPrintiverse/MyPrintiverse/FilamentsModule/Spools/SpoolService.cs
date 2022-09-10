@@ -1,11 +1,12 @@
 ﻿
+using MyPrintiverse.Core.Services.Device;
 using MyPrintiverse.FilamentsModule.Spools.Services;
 
 namespace MyPrintiverse.FilamentsModule.Spools;
 
-public class SpoolService : BaseItemAsyncService<Spool>, IItemKeyService<Spool>
+public class SpoolService : BaseItemService<Spool>, IItemKeyService<Spool>
 {
-	protected IItemKeyDeviceService<Spool> ItemDeviceKeyService;
+	protected IDeviceItemKeyService<Spool> ItemDeviceKeyService;
 
 	public SpoolService(SpoolServerService itemServerService, SpoolDeviceService itemDeviceService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(itemServerService, itemDeviceService, configService, messageService, session)
 	{

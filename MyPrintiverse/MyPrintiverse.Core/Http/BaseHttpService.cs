@@ -48,6 +48,10 @@ public class BaseHttpService : BaseService, IBaseHttpService
 		{
 			await MessageService.ShowErrorAsync();
 		}
+		catch (TimeoutException)
+		{
+			await MessageService.ShowAlertAsync("Error", "Operation timed out, please try again.");
+        }
 
 		return false;
 	}
@@ -84,11 +88,51 @@ public class BaseHttpService : BaseService, IBaseHttpService
 			var test2 = ex;
 			await MessageService.ShowErrorAsync();
 		}
-		catch (TimeoutException timeoutException)
+		catch (TimeoutException)
 		{
-            await MessageService.ShowAlertAsync("timeout","timeout");
+            await MessageService.ShowAlertAsync("Error", "Operation timed out, please try again.");
         }
 
 		return false;
 	}
+
+
+    /// <summary>
+    /// Try run operation (function) if it throw exception, function catch it if app is not in developer mode and will show error message. For not authorized endpoints.
+    /// </summary>
+    /// <param name="function"></param>
+    /// <returns><see langword="true"/> if operation is successful, otherwise <see langword="false"/>.</returns>
+    protected async Task<HttpResponse<T>> TryRun<T>(Func<Task<HttpResponse<T>>> function)
+    {
+        try
+        {
+            return await function();
+        }
+        catch (TokenException)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(RefreshUrl))
+                    throw new RefreshTokenException();
+
+                await Session.ReAuthorize<Token>(HttpService, RefreshUrl);
+            }
+            catch (RefreshTokenException)
+            {
+                OnAuthorizeFail?.Invoke();
+            }
+        }
+        catch (Exception ex) when (!ConfigService.Config.DeveloperMode)
+        {
+            var test = ConfigService.Config.DeveloperMode;
+            var test2 = ex;
+            await MessageService.ShowErrorAsync();
+        }
+        catch (TimeoutException)
+        {
+            await MessageService.ShowAlertAsync("Error", "Operation timed out, please try again.");
+        }
+
+		return new HttpResponse<T> { IsSuccessful = false };
+    }
 }

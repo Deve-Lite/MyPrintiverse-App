@@ -1,10 +1,10 @@
-﻿namespace MyPrintiverse.Core.Services;
+﻿namespace MyPrintiverse.Core.Services.Device;
 
 /// <summary>
 /// Generic service for device databases.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> where T : BaseModel, new()
+public abstract class BaseDeviceItemService<T> : IDeviceItemService<T> where T : BaseModel, new()
 {
     /// <summary>
     /// Database name. (If not set it creates random database)
@@ -16,7 +16,7 @@ public abstract class BaseItemDeviceAsyncService<T> : IDeviceItemService<T> wher
     /// </summary>
     protected SQLiteAsyncConnection? db;
 
-    protected BaseItemDeviceAsyncService(string name)
+    protected BaseDeviceItemService(string name)
     {
         if (!name.EndsWith(".db"))
             name += ".db";

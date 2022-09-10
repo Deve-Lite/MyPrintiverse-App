@@ -3,6 +3,7 @@ using MyPrintiverse.Authorization;
 using MyPrintiverse.FilamentsModule;
 using MyPrintiverse.Templates.Test;
 using MyPrintiverse.Core.Http;
+using MyPrintiverse.Tools;
 
 namespace MyPrintiverse;
 
@@ -26,12 +27,13 @@ public static class MauiAppExtensions
 
         var messageInstance = new MessageService();
         builder.Services.AddSingleton<IMessageService>(messageInstance);
-        builder.Services.AddSingleton<MessageService>();
 
         var httpService = new HttpService(configInstance);
 		builder.Services.AddSingleton<IHttpService>(httpService);
 
-		return builder;
+        builder.Services.AddSingleton<IToast, ToastService>();
+
+        return builder;
     }
 
 	/// <summary>

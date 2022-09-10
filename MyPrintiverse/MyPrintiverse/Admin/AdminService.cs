@@ -1,12 +1,13 @@
 ﻿using MyPrintiverse.Admin.Tests;
+using MyPrintiverse.Core.Extensions;
 using MyPrintiverse.Core.File;
 using MyPrintiverse.Core.Http;
 using MyPrintiverse.Tools.Http;
 
 namespace MyPrintiverse.Admin
 {
-	/// <inheritdoc cref="IAdminService" />
-	public class AdminService : BaseHttpService, IAdminService
+    /// <inheritdoc cref="IAdminService" />
+    public class AdminService : BaseHttpService, IAdminService
 	{
 		public AdminService(IConfigService<Config> configService, IMessageService messageService, IHttpService httpService, ISession session) : base(configService, messageService, httpService, session)
 		{

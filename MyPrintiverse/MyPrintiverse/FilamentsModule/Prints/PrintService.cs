@@ -4,7 +4,7 @@ using MyPrintiverse.FilamentsModule.Prints.Services;
 namespace MyPrintiverse.FilamentsModule.Prints;
 
 //TODO
-public class PrintService : BaseItemAsyncService<Print>, IItemKeyService<Print>
+public class PrintService : BaseItemService<Print>, IItemKeyService<Print>
 {
 	public PrintService(PrintDeviceService printDeviceService, PrintServiceService printServerService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(printServerService, printDeviceService, configService, messageService, session)
 	{

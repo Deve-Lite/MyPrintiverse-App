@@ -1,5 +1,7 @@
-﻿namespace MyPrintiverse.FilamentsModule.Spools.Services;
-public class SpoolDeviceService : BaseItemDeviceAsyncService<Spool>, IItemKeyDeviceService<Spool> 
+﻿using MyPrintiverse.Core.Services.Device;
+
+namespace MyPrintiverse.FilamentsModule.Spools.Services;
+public class SpoolDeviceService : BaseDeviceItemService<Spool>, IDeviceItemKeyService<Spool> 
 { 
     public SpoolDeviceService() : base(nameof(Spool))
     {

@@ -1,4 +1,6 @@
-﻿namespace MyPrintiverse.Core.Tests;
+﻿using MyPrintiverse.Core.Extensions;
+
+namespace MyPrintiverse.Core.Tests;
 
 public class StringExtensionsTests
 {

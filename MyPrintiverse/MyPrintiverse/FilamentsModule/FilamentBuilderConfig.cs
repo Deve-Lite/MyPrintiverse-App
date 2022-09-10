@@ -52,7 +52,6 @@ public static class FilamentBuilderConfig
         builder.Services.AddSingleton<IItemKeyService<Print>, PrintService>();
 
         /* Mock Services */
-
         builder.Services.AddSingleton<FilamentMock>();
         builder.Services.AddSingleton<FilamentTypeMock>();
         builder.Services.AddSingleton<SpoolMock>();
@@ -98,7 +97,6 @@ public static class FilamentBuilderConfig
 	public static MauiAppBuilder ConfigureFilamentViewModels(this MauiAppBuilder builder)
 	{
 		// template
-		// builder.Services.AddSingleton<...ViewModel>();
 		builder.Services.AddSingleton<FilamentsViewModel>();
 		builder.Services.AddSingleton<FilamentViewModel>();
 		builder.Services.AddSingleton<AddFilamentViewModel>();
