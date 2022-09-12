@@ -24,13 +24,11 @@ public class HttpService : IHttpService
 	public HttpService(IConfigService<IServerConfig> configService)
 		: this(configService, new RestClientOptions())
 	{
-        _restClient.AddDefaultHeader("Accept", "application/json");
     }
 
 	public HttpService(IConfigService<IServerConfig> configService, RestClientOptions options)
 		: this(configService, options, new CancellationToken())
 	{
-        _restClient.AddDefaultHeader("Accept", "application/json");
     }
 
 	public HttpService(IConfigService<IServerConfig> configService, RestClientOptions options, CancellationToken cancellationToken)
@@ -39,7 +37,6 @@ public class HttpService : IHttpService
 		_cancellationToken = cancellationToken;
 
 		_restClient = new RestClient(options);
-        _restClient.AddDefaultHeader("Accept", "application/json");
     }
 
     #region Get Request

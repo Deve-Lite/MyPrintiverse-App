@@ -1,24 +1,12 @@
 ﻿
 using MyPrintiverse.Core.Services.Device;
-using MyPrintiverse.FilamentsModule.Spools.Services;
+using MyPrintiverse.Core.Services.Server;
 
 namespace MyPrintiverse.FilamentsModule.Spools;
 
-public class SpoolService : BaseItemService<Spool>, IItemKeyService<Spool>
+public class SpoolService : BaseItemKeyService<Spool>
 {
-	protected IDeviceItemKeyService<Spool> ItemDeviceKeyService;
-
-	public SpoolService(SpoolServerService itemServerService, SpoolDeviceService itemDeviceService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(itemServerService, itemDeviceService, configService, messageService, session)
+	public SpoolService(IServerItemService<Spool> itemServerService, IDeviceItemKeyService<Spool> deviceItemKeyService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(itemServerService, deviceItemKeyService, configService, messageService, session)
 	{
-		ItemDeviceKeyService = itemDeviceService;
-    }
-
-
-	public async Task<bool> DeleteItemsByKeyAsync(string key)
-	{
-		await ItemDeviceKeyService.GetItemsByKeyAsync(key);
-        return true;
 	}
-
-	public async Task<IEnumerable<Spool>> GetItemsByKeyAsync(string key) => await ItemDeviceKeyService.GetItemsByKeyAsync(key);
 }

@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.Core.Services.Device;
+﻿using MongoDB.Bson;
+using MyPrintiverse.Core.Services.Device;
 using MyPrintiverse.Core.Services.Server;
 using MyPrintiverse.Core.Utilities;
 
@@ -6,12 +7,12 @@ namespace MyPrintiverse.Core.Services;
 
 public abstract class BaseItemService<T> : BaseService, IItemService<T> where T : BaseModel
 {
-    protected IServerItemService<T> ItemInternetService;
+    protected  IServerItemService<T> ItemServerService;
     protected IDeviceItemService<T> ItemDeviceService;
 
-    protected BaseItemService(IServerItemService<T> itemInternetService, IDeviceItemService<T> itemDeviceService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(configService, messageService, session)
+    protected BaseItemService(IServerItemService<T> itemServerService, IDeviceItemService<T> itemDeviceService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(configService, messageService, session)
 	{
-        ItemInternetService = itemInternetService;
+        ItemServerService = itemServerService;
         ItemDeviceService = itemDeviceService;
     }
 
@@ -19,12 +20,13 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
     {
         if (Session.IsLogged)
         {
-            var response = await ItemInternetService.AddItemAsync(item);
+            var response = await ItemServerService.AddItemAsync(item);
 
             if (response.IsSuccessful)
             {
-
-                //await ItemDeviceService.AddItemAsync();
+                var newItemResponse = await ItemServerService.GetItemAsync(response.Value.Id);
+                if(newItemResponse.IsSuccessful)
+                    await ItemDeviceService.AddItemAsync(newItemResponse.Value);
                 return true;
             }
 
@@ -42,7 +44,7 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
     {
         if (Session.IsLogged)
         {
-            var response = await ItemInternetService.DeleteAllAsync();
+            var response = await ItemServerService.DeleteAllAsync();
 
             if (response)
             {
@@ -62,7 +64,7 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
     {
         if (Session.IsLogged)
         {
-            var response = await ItemInternetService.DeleteItemAsync(objectId);
+            var response = await ItemServerService.DeleteItemAsync(objectId);
 
             if (response)
             {
@@ -82,11 +84,13 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
     {
         if (Session.IsLogged)
         {
-            var response = await ItemInternetService.UpdateItemAsync(item);
+            var response = await ItemServerService.UpdateItemAsync(item);
 
             if (response.IsSuccessful)
             {
-                //await ItemDeviceService.UpdateItemAsync(response.Item2);
+                var newItemResponse = await ItemServerService.GetItemAsync(response.Value.Id);
+                if (newItemResponse.IsSuccessful)
+                    await ItemDeviceService.UpdateItemAsync(newItemResponse.Value);
                 return true;
             }
 
@@ -101,11 +105,18 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
         }
     }
 
-    // Do przemyslenia czy tutaj na szybko nie powinna pojsc jakas metoda do syncowania przy zalogowaniu 
     public async Task<T> GetItemAsync(string objectId)
     {
         if (Session.IsLogged)
         {
+            var response = await ItemServerService.GetItemAsync(objectId);
+            // TODO sync
+
+            if (response.IsSuccessful)
+            {
+                return response.Value;
+            }
+
             return await ItemDeviceService.GetItemAsync(objectId);
         }
         else
@@ -118,6 +129,14 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
     {
         if (Session.IsLogged)
         {
+            var response = await ItemServerService.GetItemsAsync();
+            // TODO sync
+
+            if (response.IsSuccessful)
+            {
+                return response.Value;
+            }
+
             return await ItemDeviceService.GetItemsAsync();
         }
         else

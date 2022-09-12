@@ -71,8 +71,8 @@
     <adminModule:AdminTile
       Grid.Row="2"
       Grid.Column="2"
-      Command="{Binding DeletePrintsCommand}"
-      Text="Delete Prints" />
+      Command="{Binding DoNothingCommand}"
+      Text="..." />
 
     <adminModule:AdminTile
       Grid.Row="3"

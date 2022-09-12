@@ -4,8 +4,6 @@ using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
-using MyPrintiverse.FilamentsModule.Prints.AddPrintPage;
-using MyPrintiverse.FilamentsModule.Prints.EditPrintPage;
 using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.SpoolPage;
@@ -36,9 +34,6 @@ public class FilamentRouteConfig : RouteRegister
             typeof(FilamentTypeView),
             typeof(AddFilamentTypeView),
             typeof(EditFilamentTypeView),
-
-            typeof(AddPrintView),
-            typeof(EditPrintView),
 
             typeof(FilamentStatisticsView)
         };

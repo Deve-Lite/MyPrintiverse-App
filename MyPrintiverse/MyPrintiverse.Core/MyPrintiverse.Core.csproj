@@ -19,7 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Services\Item\g3yo5zx2.q3o~" />
+	  <None Remove="Services\Server\g3yo5zx2.q3o~" />
 	</ItemGroup>
 
 	<ItemGroup>

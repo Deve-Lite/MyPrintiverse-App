@@ -3,7 +3,7 @@
 /// <summary>
 /// Interface with base methods for items groupped with 'key'.
 /// </summary>
-public interface IItemKeyService<T>
+public interface IItemKeyService<T> : IItemService<T>
 {
     /// <summary>
     /// Returns IEnumerable  with items with specified key.

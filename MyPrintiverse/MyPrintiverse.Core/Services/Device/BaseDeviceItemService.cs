@@ -4,7 +4,7 @@
 /// Generic service for device databases.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public abstract class BaseDeviceItemService<T> : IDeviceItemService<T> where T : BaseModel, new()
+public abstract class BaseDeviceItemService<T> : IDeviceItemService<T> where T : IBaseModel, new()
 {
     /// <summary>
     /// Database name. (If not set it creates random database)
@@ -42,7 +42,8 @@ public abstract class BaseDeviceItemService<T> : IDeviceItemService<T> where T :
         if (string.IsNullOrEmpty(objectId))
             return;
 
-        await db!.DeleteAsync<T>(objectId);
+        if (await db!.FindAsync<T>(objectId) != null)
+            await db!.DeleteAsync<T>(objectId);
     }
 
     public virtual async Task<T> GetItemAsync(string objectId) => await db!.GetAsync<T>(objectId);
@@ -54,6 +55,9 @@ public abstract class BaseDeviceItemService<T> : IDeviceItemService<T> where T :
         if (item == null || string.IsNullOrEmpty(item.Id))
             return;
 
-        await db!.UpdateAsync(item, typeof(T));
+        if (await db!.FindAsync<T>(item.Id) != null)
+            await db!.UpdateAsync(item, typeof(T));
+        else
+            await db!.InsertAsync(item, typeof(T));
     }
 }

@@ -1,14 +1,16 @@
 ﻿using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
-
+using MyPrintiverse.FilamentsModule.Spools;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
-{ 
-    public FilamentsViewModel(IMessageService messagingService, IItemService<Filament> itemsService) : base(messagingService, itemsService)
+{
+    private readonly IItemKeyService<Spool> _spoolService;
+    public FilamentsViewModel(IMessageService messagingService, IItemService<Filament> itemsService, IItemKeyService<Spool> spoolService) : base(messagingService, itemsService)
     {
+        _spoolService = spoolService;
     }
 
     #region Overrides
@@ -25,5 +27,10 @@ public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilame
         return Items.IndexOf(foundItem);
     }
 
+    protected override void DeleteFromItems(Filament item)
+    {
+        base.DeleteFromItems(item);
+        _spoolService.DeleteItemsByKeyAsync(item.Id);
+    }
     #endregion
 }

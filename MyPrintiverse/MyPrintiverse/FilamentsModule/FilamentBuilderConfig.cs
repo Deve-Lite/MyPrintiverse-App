@@ -1,13 +1,11 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments;
+﻿using MyPrintiverse.Core.Services.Link;
+using MyPrintiverse.Core.Services.Server;
+using MyPrintiverse.FilamentsModule.Filaments;
 using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 using MyPrintiverse.FilamentsModule.Filaments.Services;
-using MyPrintiverse.FilamentsModule.Prints;
-using MyPrintiverse.FilamentsModule.Prints.AddPrintPage;
-using MyPrintiverse.FilamentsModule.Prints.EditPrintPage;
-using MyPrintiverse.FilamentsModule.Prints.Services;
 using MyPrintiverse.FilamentsModule.Spools;
 using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
@@ -33,23 +31,23 @@ public static class FilamentBuilderConfig
 	/// <returns></returns>
 	public static MauiAppBuilder ConfigureFilamentServices(this MauiAppBuilder builder)
 	{
-		builder.Services.AddSingleton<FilamentDeviceService>();
-		builder.Services.AddSingleton<FilamentServerService>();
-		builder.Services.AddSingleton<IItemService<Filament>, FilamentService>();
+		builder.Services.AddSingleton<Core.Services.Device.IDeviceItemService<Filament>, FilamentDeviceService>();
+		builder.Services.AddSingleton<IServerItemService<Filament>,FilamentServerService>();
+        builder.Services.AddSingleton<ILink<Filament>, FilamentLinks>();
+        builder.Services.AddSingleton<IItemService<Filament>, FilamentService>();
 
-		builder.Services.AddSingleton<SpoolDeviceService>();
-		builder.Services.AddSingleton<SpoolServerService>();
+        builder.Services.AddSingleton<Core.Services.Device.IDeviceItemKeyService<Spool>, SpoolDeviceService>();
+        builder.Services.AddSingleton<Core.Services.Device.IDeviceItemService<Spool>, SpoolDeviceService>();
+		builder.Services.AddSingleton<IServerItemService<Spool>, SpoolServerService>();
+        builder.Services.AddSingleton<ILink<Spool>, SpoolLinks>();
         builder.Services.AddSingleton<IItemService<Spool>, SpoolService>();
         builder.Services.AddSingleton<IItemKeyService<Spool>, SpoolService>();
 
-        builder.Services.AddSingleton<FilamentTypeDeviceService>();
-		builder.Services.AddSingleton<FilamentTypeServerService>();
-		builder.Services.AddSingleton<IItemService<FilamentType>, FilamentTypeService>();
+        builder.Services.AddSingleton<Core.Services.Device.IDeviceItemService<FilamentType>, FilamentTypeDeviceService>();
+		builder.Services.AddSingleton<IServerItemService<FilamentType>, FilamentTypeServerService>();
+        builder.Services.AddSingleton<ILink<FilamentType>, FilamentTypeLinks>();
+        builder.Services.AddSingleton<IItemService<FilamentType>, FilamentTypeService>();
 
-		builder.Services.AddSingleton<PrintDeviceService>();
-		builder.Services.AddSingleton<PrintServiceService>();
-		builder.Services.AddSingleton<IItemService<Print>, PrintService>();
-        builder.Services.AddSingleton<IItemKeyService<Print>, PrintService>();
 
         /* Mock Services */
         builder.Services.AddSingleton<FilamentMock>();
@@ -82,10 +80,6 @@ public static class FilamentBuilderConfig
 
 		builder.Services.AddSingleton<FilamentStatisticsView>();
 
-		builder.Services.AddSingleton<AddPrintView>();
-		builder.Services.AddSingleton<EditPrintView>();
-
-
 		return builder;
 	}
 
@@ -112,9 +106,6 @@ public static class FilamentBuilderConfig
 		builder.Services.AddSingleton<EditSpoolViewModel>();
 
 		builder.Services.AddSingleton<FilamentStatisticsViewModel>();
-
-		builder.Services.AddSingleton<AddPrintViewModel>();
-		builder.Services.AddSingleton<EditPrintViewModel>();
 
 		return builder;
 	}
