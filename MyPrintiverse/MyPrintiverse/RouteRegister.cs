@@ -1,8 +1,8 @@
-﻿using MyPrintiverse.Core.Collections;
+﻿using MyPrintiverse.Core.Extensions;
 
 namespace MyPrintiverse
 {
-	public abstract class RouteRegister
+    public abstract class RouteRegister
 	{
 		public void Register(IEnumerable<Type> routes)
 		{
