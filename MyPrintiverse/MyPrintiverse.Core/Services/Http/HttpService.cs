@@ -1,11 +1,9 @@
 ﻿#nullable enable
 
-using MyPrintiverse.Core.Extensions;
 using MyPrintiverse.Core.Services.Helpers;
 using MyPrintiverse.Core.Utilities;
 using RestSharp;
 using RestSharp.Authenticators;
-using System.Text.Json.Nodes;
 
 namespace MyPrintiverse.Core.Http;
 
@@ -62,12 +60,11 @@ public class HttpService : IHttpService
     public async Task<IHttpResponse<TResponse?>> Delete<TResponse>(string url, IToken? authenticationToken)
 	{
 		var restRequest = new RestRequest(url, Method.Delete);
-		var response = await _restClient.DeleteAsync(restRequest, _cancellationToken);
         restRequest.Timeout = TIMEOUT;
 
         await AuthenticateRequest(restRequest, authenticationToken);
-
-		var result = GetHttpResponse<TResponse?>(response);
+        var response = await _restClient.DeleteAsync(restRequest, _cancellationToken);
+        var result = GetHttpResponse<TResponse?>(response);
 
 		return result;
 	}
@@ -95,16 +92,53 @@ public class HttpService : IHttpService
         return result;
     }
 
-    public async Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj) => await Put<TResponse?, TSender>(url, obj, null);
+    public async Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj) => await Patch<TResponse?, TSender>(url, obj, authenticationToken: null);
 
+    public async Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken, JsonSerializerSettings jsonSerializerSettings)
+    {
+        var json = JsonConvert.SerializeObject(obj, jsonSerializerSettings);
+
+        var restRequest = new RestRequest(url, Method.Patch)
+            .AddStringBody(json, DataFormat.Json);
+        restRequest.Timeout = TIMEOUT;
+
+        await AuthenticateRequest(restRequest, authenticationToken);
+
+        var response = await _restClient.PatchAsync(restRequest, _cancellationToken);
+
+        var result = GetHttpResponse<TResponse?>(response);
+
+        return result;
+    }
+
+    public async Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj, JsonSerializerSettings jsonSerializerSettings) => await Patch<TResponse?, TSender>(url, obj, null, jsonSerializerSettings);
     #endregion
 
 
     #region Post Request
 
+
+    // TODO : metoda Post która przyjmuje parametr JsonSerializerSettings a z tej metody usunięcie JsonSerializerSettings
+    public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken, JsonSerializerSettings jsonSerializerSettings)
+    {
+        var json = JsonConvert.SerializeObject(obj, jsonSerializerSettings);
+
+        var restRequest = new RestRequest(url, Method.Post)
+            .AddJsonBody(json);
+        restRequest.Timeout = TIMEOUT;
+
+        await AuthenticateRequest(restRequest, authenticationToken);
+
+        var response = await _restClient.PostAsync(restRequest, _cancellationToken);
+
+        var result = GetHttpResponse<TResponse?>(response);
+
+        return result;
+    }
+
     public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
 	{
-		var json = JsonConvert.SerializeObject(obj,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+		var json = JsonConvert.SerializeObject(obj);
 
 		var restRequest = new RestRequest(url, Method.Post)
 			.AddJsonBody(json);
@@ -119,13 +153,14 @@ public class HttpService : IHttpService
 		return result;
 	}
 
-	public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj) => await Post<TResponse?, TSender>(url, obj, null);
+	public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj) => await Post<TResponse?, TSender>(url, obj, authenticationToken: null);
 
-	#endregion
+    public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, JsonSerializerSettings jsonSerializerSettings) => await Post<TResponse?, TSender>(url, obj, null, jsonSerializerSettings);
+    #endregion
 
-	#region Put Request
+    #region Put Request
 
-	public async Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
+    public async Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
 	{
 		var json = JsonConvert.SerializeObject(obj);
 
@@ -142,11 +177,11 @@ public class HttpService : IHttpService
 		return result;
 	}
 
-	public async Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj) => await Put<TResponse?, TSender>(url, obj, null);
+	public async Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj) => await Put<TResponse?, TSender>(url, obj, authenticationToken:null);
 
-	#endregion
+    #endregion
 
-	private async Task AuthenticateRequest(RestRequest request, IToken? authenticationToken)
+    private async Task AuthenticateRequest(RestRequest request, IToken? authenticationToken)
 	{
 		if (authenticationToken?.Value == null)
 			return;
@@ -158,7 +193,7 @@ public class HttpService : IHttpService
 
 	private static HttpResponse<T> GetHttpResponse<T>(RestResponseBase response)
 	{
-		//TODO Do zmiany działanie -> wyrzuciło bład czy potwierdzeniu maila NullRefrence
+		//TODO: Do zmiany działanie -> wyrzuciło bład czy potwierdzeniu maila NullRefrence
 		var responseValue = response.Content;
 		T value;
 

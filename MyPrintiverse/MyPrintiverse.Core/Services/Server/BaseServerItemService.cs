@@ -20,7 +20,7 @@ public abstract class BaseServerItemService<T> : BaseHttpService, IServerItemSer
         {
             var url = Links.AddItem();
 
-            var response = await HttpService.Post<PostRequestData, T>(url, item, Session.AccessToken);
+            var response = await HttpService.Post<PostRequestData, T>(url, item, Session.AccessToken, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             return response;
         });
@@ -80,7 +80,7 @@ public abstract class BaseServerItemService<T> : BaseHttpService, IServerItemSer
         {
             var url = Links.UpdateItem(item.Id);
 
-            var response = await HttpService.Patch<PostRequestData, T>(url, item, Session.AccessToken);
+            var response = await HttpService.Patch<PostRequestData, T>(url, item, Session.AccessToken, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             return response;
         });

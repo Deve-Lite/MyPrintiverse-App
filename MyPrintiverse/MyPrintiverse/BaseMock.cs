@@ -11,11 +11,4 @@ public abstract class BaseMock<T> where T : BaseModel
 
 
     protected T GetRandomFromList<T>(List<T> data) => data[Rand(0, data.Count - 1)];
-
-    public void FillBaseData(T item)
-    {
-        item.Id = ObjectId.GenerateNewId().ToString();
-        item.EditedAt = DateTime.Now;
-        item.CreatedAt = DateTime.Now;
-    }
 }

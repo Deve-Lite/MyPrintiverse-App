@@ -7,20 +7,20 @@ public abstract class BaseValidator<T> : Validator<T> where T : BaseModel, new()
     protected ValidationMode _validatonMode;
 
     public string Id { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime EditedAt { get; set; }
+    public long CreatedAtTicks { get; set; }
+    public long EditedAtTicks { get; set; }
 
     protected void BaseModelMap(T item)
     {
         item.Id = Id;
-        item.CreatedAt = CreatedAt;
-        item.EditedAt = EditedAt;
+        item.CreatedAtTicks = CreatedAtTicks;
+        item.EditedAtTicks = EditedAtTicks;
     }
 
     protected virtual void FillData(T filament)
     {
         Id = filament.Id;
-        CreatedAt = (DateTime)filament.CreatedAt;
-        EditedAt = (DateTime)filament.EditedAt;
+        CreatedAtTicks = filament.CreatedAtTicks;
+        EditedAtTicks = filament.EditedAtTicks;
     }
 }

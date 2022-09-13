@@ -98,7 +98,7 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
         }
         else
         {
-            item.EditedAt = DateTime.Now;
+            item.EditedAtTicks = DateTime.Now.Ticks;
 
             await ItemDeviceService.UpdateItemAsync(item);
             return true;
@@ -129,11 +129,16 @@ public abstract class BaseItemService<T> : BaseService, IItemService<T> where T 
     {
         if (Session.IsLogged)
         {
+            var items = await ItemDeviceService.GetItemsAsync();
+
+            var newest_date = items.MaxBy(x=>x.EditedAtTicks);
+
             var response = await ItemServerService.GetItemsAsync();
             // TODO sync
 
             if (response.IsSuccessful)
             {
+                // sync items 
                 return response.Value;
             }
 

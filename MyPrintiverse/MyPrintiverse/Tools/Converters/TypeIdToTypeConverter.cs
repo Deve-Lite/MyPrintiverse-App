@@ -1,6 +1,7 @@
 ﻿using MyPrintiverse.FilamentsModule.Types;
 using SQLite;
 using System.Globalization;
+using System.Linq;
 
 namespace MyPrintiverse.Tools.Converters;
 
@@ -12,11 +13,12 @@ public class TypeIdToTypeConverter : IValueConverter
 
     public TypeIdToTypeConverter()
     {
-        db = new SQLiteConnection(Path.Combine(FileSystem.AppDataDirectory, $"{nameof(FilamentType)}.db"));
+        var link = Path.Combine(FileSystem.AppDataDirectory, $"{nameof(FilamentType)}.db");
+        db = new SQLiteConnection(Path.Combine(link));
         db.CreateTable<FilamentType>();
     }
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => GetItemAsync((string)value).ShortName;
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => GetItem((string)value);
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
@@ -24,15 +26,15 @@ public class TypeIdToTypeConverter : IValueConverter
     }
 
     #region Privates
-    private FilamentType GetItemAsync(string objectId)
+    private string GetItem(string objectId)
     {
         try
         {
-            return db?.Get<FilamentType>(objectId)!;
+            return db!.Table<FilamentType>().First(x => x.Id == objectId).ShortName;
         }
-        catch
+        catch (Exception e)
         {
-            return new FilamentType { ShortName = "Not Found"};
+            return "Not Found";
         }
     }
     #endregion

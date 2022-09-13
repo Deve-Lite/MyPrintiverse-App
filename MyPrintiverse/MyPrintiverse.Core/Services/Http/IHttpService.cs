@@ -60,15 +60,37 @@ public interface IHttpService
 	/// <returns></returns>
 	public Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken);
 
-	/// <summary>
-	/// Put resource using api.
-	/// </summary>
-	/// <typeparam name="TSender">Object to send type.</typeparam>
-	/// <typeparam name="TResponse">Response object type.</typeparam>
-	/// <param name="url"></param>
-	/// <param name="obj">Value to be send.</param>
-	/// <returns></returns>
-	public Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj);
+    /// <summary>
+    /// Post resource using api.
+    /// </summary>
+    /// <typeparam name="TSender">Object to send type.</typeparam>
+    /// <typeparam name="TResponse">Response object type.</typeparam>
+    /// <param name="url">Resource api link.</param>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, JsonSerializerSettings jsonSerializerSettings);
+
+    /// <summary>
+    /// Post resource using api.
+    /// </summary>
+    /// <typeparam name="TSender">Object to send type.</typeparam>
+    /// <typeparam name="TResponse">Response object type.</typeparam>
+    /// <param name="url">Resource api link.</param>
+    /// <param name="obj">Value to be send.</param>
+    /// <param name="authenticationToken"></param>
+    /// <returns></returns>
+    public Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken, JsonSerializerSettings jsonSerializerSettings);
+
+
+    /// <summary>
+    /// Put resource using api.
+    /// </summary>
+    /// <typeparam name="TSender">Object to send type.</typeparam>
+    /// <typeparam name="TResponse">Response object type.</typeparam>
+    /// <param name="url"></param>
+    /// <param name="obj">Value to be send.</param>
+    /// <returns></returns>
+    public Task<IHttpResponse<TResponse?>> Put<TResponse, TSender>(string url, TSender obj);
 
 	/// <summary>
 	/// Put resource using api.
@@ -101,4 +123,25 @@ public interface IHttpService
     /// <param name="authenticationToken">Authentication token.</param>
     /// <returns></returns>
     public Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken);
+
+    /// <summary>
+    /// Patch resource using api.
+    /// </summary>
+    /// <typeparam name="TSender">Object to send type.</typeparam>
+    /// <typeparam name="TResponse">Response object type.</typeparam>
+    /// <param name="url"></param>
+    /// <param name="obj">Value to be send.</param>
+    /// <returns></returns>
+    public Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj, JsonSerializerSettings jsonSerializerSettings);
+
+    /// <summary>
+    /// Patch resource using api.
+    /// </summary>
+    /// <typeparam name="TSender">Object to send type.</typeparam>
+    /// <typeparam name="TResponse">Response object type.</typeparam>
+    /// <param name="url">Resource api link.</param>
+    /// <param name="obj">Value to be send.</param>
+    /// <param name="authenticationToken">Authentication token.</param>
+    /// <returns></returns>
+    public Task<IHttpResponse<TResponse?>> Patch<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken, JsonSerializerSettings jsonSerializerSettings);
 }

@@ -9,9 +9,9 @@ public abstract class BaseModel : IBaseModel
 	public string Id { get; set; }
 
 
-	[JsonProperty("createdAt")]
+	[JsonProperty("createdAt"), JsonIgnore]
 	public long CreatedAtTicks { get; set; }
-    [JsonProperty("updatedAt")]
+    [JsonProperty("updatedAt"), JsonIgnore]
     public long EditedAtTicks { get; set; }
 
     [JsonIgnore]
