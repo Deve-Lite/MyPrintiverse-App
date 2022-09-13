@@ -25,7 +25,9 @@ public abstract class BaseService : IBaseService
     protected virtual void FillBaseData<T>(T item) where T : BaseModel
     {
         item.Id = ObjectId.GenerateNewId().ToString();
-        item.EditedAt = DateTime.Now;
-        item.CreatedAt = DateTime.Now;
+
+        long date = DateTime.Now.Ticks;
+        item.EditedAtTicks = date;
+        item.CreatedAtTicks = date;
     }
 }

@@ -8,8 +8,14 @@ public abstract class BaseModel : IBaseModel
 	[PrimaryKey, JsonProperty("_id")]
 	public string Id { get; set; }
 
+
 	[JsonProperty("createdAt")]
-	public DateTime CreatedAt { get; set; }
-	[JsonProperty("updatedAt")]
-	public DateTime EditedAt { get; set; }
+	public long CreatedAtTicks { get; set; }
+    [JsonProperty("updatedAt")]
+    public long EditedAtTicks { get; set; }
+
+    [JsonIgnore]
+    public DateTime CreatedAt => new DateTime(CreatedAtTicks);
+    [JsonIgnore]
+    public DateTime EditedAt => new DateTime(EditedAtTicks);
 }

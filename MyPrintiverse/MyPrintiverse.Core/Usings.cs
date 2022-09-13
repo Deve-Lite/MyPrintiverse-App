@@ -21,3 +21,6 @@ global using MongoDB.Bson;
 global using Plugin.ValidationRules.Interfaces;
 // CommunityToolkit
 global using CommunityToolkit.Mvvm.Input;
+
+// MyPrintiverse
+global using MyPrintiverse.Core.Extensions;

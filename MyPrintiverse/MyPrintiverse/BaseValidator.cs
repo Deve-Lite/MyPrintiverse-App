@@ -20,7 +20,7 @@ public abstract class BaseValidator<T> : Validator<T> where T : BaseModel, new()
     protected virtual void FillData(T filament)
     {
         Id = filament.Id;
-        CreatedAt = filament.CreatedAt;
-        EditedAt = filament.EditedAt;
+        CreatedAt = (DateTime)filament.CreatedAt;
+        EditedAt = (DateTime)filament.EditedAt;
     }
 }

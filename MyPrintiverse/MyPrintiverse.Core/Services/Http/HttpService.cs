@@ -104,7 +104,7 @@ public class HttpService : IHttpService
 
     public async Task<IHttpResponse<TResponse?>> Post<TResponse, TSender>(string url, TSender obj, IToken? authenticationToken)
 	{
-		var json = JsonConvert.SerializeObject(obj);
+		var json = JsonConvert.SerializeObject(obj,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
 		var restRequest = new RestRequest(url, Method.Post)
 			.AddJsonBody(json);
