@@ -1,5 +1,6 @@
 ﻿using MyPrintiverse.Core.Extensions;
 using MyPrintiverse.Core.Http;
+using Newtonsoft.Json.Serialization;
 
 namespace MyPrintiverse.Core.Utilities;
 
@@ -16,10 +17,10 @@ public class Session : ISession
 			if (AccessToken == null || RefreshToken == null)
 				return false;
 
-			if (AccessToken?.IsValid ?? false)
+			if (AccessToken?.IsValid == false)
 				return false;
 
-			if (RefreshToken?.IsValid ?? false)
+			if (RefreshToken?.IsValid == false)
 				return false;
 
 			return true;
@@ -36,9 +37,8 @@ public class Session : ISession
 		Config = config;
 	}
 
-	private record LogInDTO(string Login, string Password);
-	private record TokensDTO(DataDTO Data);
-	private record DataDTO(string AccessToken, string RefreshToken);
+	private record LogInDTO([property:JsonProperty("login")] string Login, [property: JsonProperty("password")] string Password);
+	private record TokensDTO([property: JsonProperty("accessToken")] string AccessToken, [property: JsonProperty("refreshToken")] string RefreshToken);
 
 	public async Task<bool> Authorize<TToken>(IHttpService httpService, string url, string login, string password) where TToken : IToken, new()
 	{
@@ -68,17 +68,17 @@ public class Session : ISession
 		if (!apiResponse.StatusCode.IsSuccessful())
 			return false;
 
-		if (apiResponse?.Value?.Data?.AccessToken is null)
+		if (apiResponse?.Value?.AccessToken is null)
 			return false;
 
-		if (apiResponse?.Value?.Data?.RefreshToken is null)
+		if (apiResponse?.Value?.RefreshToken is null)
 			return false;
 
 		var accessToken = new TToken();
-		accessToken.Set(apiResponse.Value.Data.AccessToken);
+		accessToken.Set(apiResponse.Value.AccessToken);
 
 		var refreshToken = new TToken();
-		refreshToken.Set(apiResponse.Value.Data.RefreshToken);
+		refreshToken.Set(apiResponse.Value.RefreshToken);
 
 		AccessToken = accessToken;
 		RefreshToken = refreshToken;

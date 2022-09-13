@@ -60,7 +60,7 @@
                                            Text="{Binding TypeId, Converter={StaticResource TypeIdToTypeConverter}, StringFormat='Type: {0}'}" />
 
                                     <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding Color,StringFormat='Color: {0}'}" />
+                                           Text="{Binding ColorName,StringFormat='Color: {0}'}" />
 
                                     <Frame BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}" HorizontalOptions="FillAndExpand" CornerRadius="4" HeightRequest="15" Margin="0,4,0,0" />
                                     <Label Style="{StaticResource MicroRaleway}"

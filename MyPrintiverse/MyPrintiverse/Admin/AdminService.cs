@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.Admin.Tests;
+﻿using MyPrintiverse.Admin.Models;
+using MyPrintiverse.Admin.Tests;
 using MyPrintiverse.Core.Extensions;
 using MyPrintiverse.Core.File;
 using MyPrintiverse.Core.Http;
@@ -35,29 +36,43 @@ namespace MyPrintiverse.Admin
 			});
 		}
 
-        public async Task<bool> Register()
+        public async Task<bool> Register(string email, string password, string username)
         {
             return await TryRun(async () =>
             {
                 var url = ApiLink
-                    .GetAuthorizationLink(ConfigService.Config.Api.FullPath).LoginUser();
+                    .GetAuthorizationLink(ConfigService.Config.Api.FullPath)
+                    .RegisterUser();
 
-                var response = await HttpService.Get<string>(url);
+                var response = await HttpService.Post<string, RegisterData>(url, new RegisterData { Email=email, Password=password, Username=username });
 
                 return response.StatusCode.IsSuccessful();
             });
         }
 
-        public async Task<bool> LogIn()
+        public async Task<bool> ConfirmMail(string email, string code)
         {
             return await TryRun(async () =>
             {
                 var url = ApiLink
-                    .GetAuthorizationLink(ConfigService.Config.Api.FullPath).LoginUser();
+                    .GetAuthorizationLink(ConfigService.Config.Api.FullPath)
+                    .ConfirmMail();
 
-                var response = await HttpService.Get<string>(url);
+                var response = await HttpService.Post<string, ConfirmData>(url, new ConfirmData { Email=email, Code=code });
 
                 return response.StatusCode.IsSuccessful();
+            });
+        }
+
+        public async Task<bool> LogIn(string email, string password)
+        {
+            return await TryRun(async authorizationToken =>
+            {
+                var url = ApiLink
+                    .GetAuthorizationLink(ConfigService.Config.Api.FullPath)
+                    .LoginUser();
+
+                return await Session.Authorize<Token>(HttpService, url, email, password);
             });
         }
 
@@ -68,3 +83,5 @@ namespace MyPrintiverse.Admin
 		public async Task OpenOrion() => await Shell.Current.GoToAsync(nameof(OrionView));
 	}
 }
+
+

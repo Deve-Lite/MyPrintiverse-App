@@ -28,4 +28,20 @@ public interface IAdminService : IBaseService
 	/// Open test page called "Orion".
 	/// </summary>
 	public Task OpenOrion();
+
+	/// <summary>
+	/// Registers new user.
+	/// </summary>
+	/// <returns></returns>
+	public Task<bool> Register(string email, string password, string username);
+    /// <summary>
+    /// Registers new user.
+    /// </summary>
+    /// <returns></returns>
+    public Task<bool> ConfirmMail(string email, string code);
+    /// <summary>
+    /// Registers new user.
+    /// </summary>
+    /// <returns></returns>
+    public Task<bool> LogIn(string email, string password);
 }

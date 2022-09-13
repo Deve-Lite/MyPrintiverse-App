@@ -6,14 +6,12 @@ public class Config : IConfig
 	public bool DeveloperMode { get; set; }
 	public string Culture { get; set; }
 	public string Version { get; set; }
-	public string ClientSecret { get; set; }
 	public Api Api { get; set; }
 
 	private Config()
 	{
 		Culture = string.Empty;
 		Version = string.Empty;
-		ClientSecret = string.Empty;
 		Api = new Api();
 	}
 }

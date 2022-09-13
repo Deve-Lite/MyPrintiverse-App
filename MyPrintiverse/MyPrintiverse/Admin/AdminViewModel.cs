@@ -63,6 +63,18 @@ public partial class AdminViewModel : BaseViewModel
 	private async Task DeleteFilaments() => await _filamentService.DeleteAllAsync();
 
 	[RelayCommand]
+	private async Task Register()
+	{
+		await _adminService.Register("", "", "");
+	}
+
+	[RelayCommand]
+    private async Task LogIn() => await _adminService.LogIn("psp515@wp.pl", "adminadmin");
+
+    [RelayCommand]
+    private async Task Confirm() => await _adminService.ConfirmMail("psp515@wp.pl", "125720");
+
+    [RelayCommand]
 	private async Task DeleteAll()
 	{
 		await DeleteSpools();

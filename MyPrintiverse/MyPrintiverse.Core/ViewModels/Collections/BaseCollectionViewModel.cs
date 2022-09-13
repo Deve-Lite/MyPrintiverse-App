@@ -263,7 +263,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             return;
 
         if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
-            if (await ItemsService.DeleteItemAsync(item?.Id))
+            if (await ItemsService.DeleteItemAsync(item!.Id))
                 DeleteFromItems(item);
 
         IsBusy = false;
@@ -273,7 +273,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Method deletes item from collection. Method used in DeleteItem.
     /// </summary>
     /// <param name="item"> Model. </param>
-    protected virtual void DeleteFromItems(TBaseModel? item) => RemoveFromCollection(Items, item);
+    protected virtual void DeleteFromItems(TBaseModel? item) => RemoveFromCollection(Items, item!);
 
     #endregion
 

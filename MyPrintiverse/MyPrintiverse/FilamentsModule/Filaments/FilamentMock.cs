@@ -20,7 +20,7 @@ public class FilamentMock : BaseMock<Filament>
         filament.Brand = GetRandomFromList(Brands);
         filament.TypeId = await GetType();
         var color = GetRandomFromList(Colors);
-        filament.Color = color.Item1;
+        filament.ColorName = color.Item1;
         filament.ColorHex = color.Item2;
         filament.Description = GetRandomFromList(Decriptions);
         filament.Diameter = Rand(2.85);

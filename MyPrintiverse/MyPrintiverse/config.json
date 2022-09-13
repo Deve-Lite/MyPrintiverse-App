@@ -6,6 +6,5 @@
     "Address": "10.0.2.2",
     "Port": "5000",
     "Base": "api/v1/"
-  },
-  "ClientSecret": ""
+  }
 }

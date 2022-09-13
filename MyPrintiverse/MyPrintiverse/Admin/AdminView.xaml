@@ -93,17 +93,17 @@
     <adminModule:AdminTile
       Grid.Row="4"
       Grid.Column="0"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding ConfirmCommand}"
+      Text="Confirm Mail" />
     <adminModule:AdminTile
       Grid.Row="4"
       Grid.Column="1"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding LogInCommand}"
+      Text="Log In" />
     <adminModule:AdminTile
       Grid.Row="4"
       Grid.Column="2"
-      Command="{Binding DoNothingCommand}"
-      Text="..." />
+      Command="{Binding RegisterCommand}"
+      Text="Register" />
   </Grid>
 </ContentPage>

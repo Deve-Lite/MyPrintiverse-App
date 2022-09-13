@@ -158,19 +158,25 @@ public class HttpService : IHttpService
 
 	private static HttpResponse<T> GetHttpResponse<T>(RestResponseBase response)
 	{
+		//TODO Do zmiany działanie -> wyrzuciło bład czy potwierdzeniu maila NullRefrence
 		var responseValue = response.Content;
-		// TODO sprawdzaenie czy działa 
-        var value = typeof(T) == typeof(bool)
+		T value;
+
+		if (!string.IsNullOrEmpty(responseValue))
+		{
+			value = typeof(T) == typeof(bool)
 			? (T)(object)response.StatusCode.IsSuccessful()
-			: responseValue != null 
-				? JsonConvert.DeserializeObject<RequestParsator<T>>(responseValue).Value
+			: responseValue != null
+				? JsonConvert.DeserializeObject<RequestData<T>>(responseValue).Value
 				: default;
+		}
+		else
+			value = default;
 
 		return new HttpResponse<T>
 		{
 			Value = value,
-			StatusCode = response.StatusCode,
-            IsSuccessful = response.IsSuccessful
+			StatusCode = response.StatusCode
         };
 	}
 }

@@ -7,7 +7,7 @@ namespace MyPrintiverse.Core.Services
 {
     public abstract class BaseItemKeyService<T> : BaseItemService<T>, IItemKeyService<T> where T : BaseModel
     {
-        protected IDeviceItemKeyService<T> ItemDeviceService;
+        protected new IDeviceItemKeyService<T> ItemDeviceService;
         protected BaseItemKeyService(IServerItemService<T> itemServerService, IDeviceItemKeyService<T> deviceItemKeyService, IConfigService<Config> configService, IMessageService messageService, ISession session) : base(itemServerService, deviceItemKeyService, configService, messageService, session)
         {
             ItemDeviceService = deviceItemKeyService;

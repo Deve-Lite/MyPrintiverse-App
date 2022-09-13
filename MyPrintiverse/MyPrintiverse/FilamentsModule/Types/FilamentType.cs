@@ -22,17 +22,17 @@ public class FilamentType : BaseModel
     public string BedTemperatureRange { get; set; }
 
     /* These field is formated to 'xx-xxx %' ex. 80-100 % ex. 40-90 %  */
-    [JsonProperty("coolingRange")]
+    [JsonProperty("collingTemperatureRange")]
     public string CoolingRange { get; set; }
 
 
-    [JsonProperty("maxServiceTempearature")]
+    [JsonProperty("maxServiceTemperature")]
     public double MaxServiceTempearature { get; set; }
     [JsonProperty("density")]
     public double Density { get; set; }
 
 
-    [JsonProperty("UVResistant")]
+    [JsonProperty("isUVResistant")]
     public bool IsUVResistant { get; set; }
     [JsonProperty("isFoodFriendly")]
     public bool IsFoodFriendly { get; set; }
@@ -44,7 +44,7 @@ public class FilamentType : BaseModel
     public bool IsHeatedBedRequired { get; set; }
 
 
-    [JsonProperty("description ")]
+    [JsonProperty("description")]
     public string Description { get; set; }
 }
 

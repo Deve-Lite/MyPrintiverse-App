@@ -95,8 +95,9 @@
 
     <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
 
-    <Setter Property="FontFamily" Value="Raleway" />
-    <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="Raleway" />
+
+        <Setter Property="FontSize" Value="14" />
 
     <Setter Property="CornerRadius" Value="8" />
 

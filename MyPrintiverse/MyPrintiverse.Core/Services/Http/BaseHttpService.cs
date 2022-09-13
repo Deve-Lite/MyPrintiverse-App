@@ -3,6 +3,8 @@ using MyPrintiverse.Core.Utilities;
 
 namespace MyPrintiverse.Core.Http;
 
+
+// TOCHECK
 public class BaseHttpService : BaseService, IBaseHttpService
 {
 	public IHttpService HttpService { get; set; }
@@ -133,6 +135,6 @@ public class BaseHttpService : BaseService, IBaseHttpService
             await MessageService.ShowAlertAsync("Error", "Operation timed out, please try again.");
         }
 
-		return new HttpResponse<T> { IsSuccessful = false };
+		return new HttpResponse<T> { };
     }
 }

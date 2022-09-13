@@ -7,19 +7,19 @@ namespace MyPrintiverse.FilamentsModule.Filaments;
 /// </summary>
 public class Filament : BaseModel
 {
-    [JsonProperty("typeId")]
+    [JsonProperty("filamentTypeId")]
     public string TypeId { get; set; }
 
     [JsonProperty("brand")]
     public string Brand { get; set; }
 
-    [JsonProperty("color")]
-    public string Color { get; set; }
+    [JsonProperty("colorName")]
+    public string ColorName { get; set; }
 
     [JsonProperty("colorHex")]
     public string ColorHex { get; set; }
 
-    [JsonProperty("shortDescription")]
+    [JsonProperty("description")]
     public string Description { get; set; }
 
     [JsonProperty("diameter")]
@@ -31,7 +31,7 @@ public class Filament : BaseModel
     [JsonProperty("bedTemperature")]
     public int BedTemperature { get; set; }
 
-    [JsonProperty("coolingRate")]
+    [JsonProperty("coolingTemperature")] // DO ZMIANY NA COOLING RATE U KAMILA
     public int CoolingRate { get; set; }
 
     [JsonProperty("rating")]
