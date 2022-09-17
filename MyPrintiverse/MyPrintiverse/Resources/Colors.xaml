@@ -17,7 +17,7 @@
   <Color x:Key="OnTetruary">Black</Color>
 
   <Color x:Key="Background">#E7E9EF</Color>
-  <Color x:Key="OnBackground">#E7E9EF</Color>
+  <Color x:Key="OnBackground">#1F2432</Color>
 
   <Color x:Key="BackgroundVariant">#DADDE7</Color>
   <Color x:Key="OnBackgroundVariant">#DADDE7</Color>

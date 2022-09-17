@@ -21,14 +21,13 @@
 
   <Style x:Key="BaseCollectionView" TargetType="CollectionView">
 
-    <Setter Property="ItemsSource" Value="{Binding Items}" />
-    <Setter Property="Margin" Value="10" />
+        <Setter Property="ItemsSource" Value="{Binding Items}" />
 
-    <Setter Property="ItemsLayout">
+        <!--<Setter Property="ItemsLayout">
       <Setter.Value>
         <GridItemsLayout Orientation="Vertical" Span="2" />
       </Setter.Value>
-    </Setter>
+    </Setter>-->
   </Style>
 
 
