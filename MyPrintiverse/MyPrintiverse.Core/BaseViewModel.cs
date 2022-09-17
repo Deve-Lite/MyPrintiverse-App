@@ -17,7 +17,6 @@ public abstract partial class BaseViewModel : ObservableObject
 
     public virtual void OnAppearing() 
 	{
-        IsEnabled = false;
         IsEnabled = true;
         IsBusy = false;
         IsRunning = false;
