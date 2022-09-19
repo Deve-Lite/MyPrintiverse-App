@@ -17,7 +17,7 @@
 
     <Setter Property="Padding" Value="5,0,5,0" />
 
-    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
 
   </Style>
 
@@ -64,19 +64,17 @@
     <Setter Property="VerticalOptions" Value="Center" />
   </Style>
 
-  <Style x:Key="BaseImageValidatableEntry" TargetType="Image">
+    <Style x:Key="BaseImageValidatableEntry" TargetType="Image">
 
-    <Setter Property="Aspect" Value="AspectFill" />
-    <Setter Property="Margin" Value="7" />
-    <Setter Property="VerticalOptions" Value="Center" />
-    <Setter Property="HorizontalOptions" Value="Center" />
-    <Setter Property="Source" Value="spool.png" />
+        <Setter Property="Aspect" Value="AspectFill" />
+        <Setter Property="Margin" Value="7" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Source" Value="spool.png" />
 
-  </Style>
+    </Style>
 
-
-
-  <Style x:Key="BaseValidatableEntry" TargetType="templates:ValidatableEntry">
+    <Style x:Key="BaseValidatableEntry" TargetType="templates:ValidatableEntry">
     <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}" />
     <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}" />
     <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
@@ -165,13 +163,11 @@
 
   </Style>
 
-  <Style
-    x:Key="LargeActivityButtonLabel"
+  <Style x:Key="LargeActivityButtonLabel"
     BasedOn="{StaticResource LargeRaleway}"
     TargetType="Label">
     <Setter Property="FontAttributes" Value="Bold" />
   </Style>
-
 
   <Style x:Key="BaseActivityButton" TargetType="templates:ActivityButton">
 

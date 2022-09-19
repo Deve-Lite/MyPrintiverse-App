@@ -2,62 +2,62 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-  <!--  Light Mode  -->
+    <!--  Light Mode  -->
 
-  <Color x:Key="Primary">#80DBBB</Color>
-  <Color x:Key="PrimaryVariant">#80DBBB</Color>
-  <Color x:Key="OnPrimary">Black</Color>
+    <Color x:Key="Primary">#80DBBB</Color>
+    <Color x:Key="PrimaryVariant">#80DBBB</Color>
+    <Color x:Key="OnPrimary">#228160</Color>
 
-  <Color x:Key="Secondary">#A3E1BF</Color>
-  <Color x:Key="SecondaryVariant">#A3E1BF</Color>
-  <Color x:Key="OnSecondary">Black</Color>
+    <Color x:Key="Secondary">#A3E1BF</Color>
+    <Color x:Key="SecondaryVariant">#A3E1BF</Color>
+    <Color x:Key="OnSecondary">#36A665</Color>
 
-  <Color x:Key="Tertiary">#A9BFDB</Color>
-  <Color x:Key="TertiaryVariant">#A9BFDB</Color>
-  <Color x:Key="OnTetruary">Black</Color>
+    <Color x:Key="Tetruary">#A9BFDB</Color>
+    <Color x:Key="TetruaryVariant">#A9BFDB</Color>
+    <Color x:Key="OnTetruary">#374474</Color>
 
-  <Color x:Key="Background">#E7E9EF</Color>
-  <Color x:Key="OnBackground">#1F2432</Color>
+    <Color x:Key="Background">#E7E9EF</Color>
+    <Color x:Key="OnBackground">#1F2432</Color>
 
-  <Color x:Key="BackgroundVariant">#DADDE7</Color>
-  <Color x:Key="OnBackgroundVariant">#DADDE7</Color>
+    <Color x:Key="BackgroundVariant">#DADDE7</Color>
+    <Color x:Key="OnBackgroundVariant">#DADDE7</Color>
 
-  <Color x:Key="PrimaryText">#1F2432</Color>
-  <Color x:Key="PrimaryPlaceholderText">#1f243c99</Color>
-  <Color x:Key="SecondaryText">Black</Color>
+    <Color x:Key="PrimaryText">#1F2432</Color>
+    <Color x:Key="PrimaryPlaceholderText">#1f243c99</Color>
+    <Color x:Key="SecondaryText">Black</Color>
 
-  <!--  Dark Mode  -->
+    <!--  Dark Mode  -->
 
-  <Color x:Key="PrimaryDark">#228160</Color>
-  <Color x:Key="PrimaryVariantDark">#228160</Color>
-  <Color x:Key="OnPrimaryDark">White</Color>
+    <Color x:Key="PrimaryDark">#228160</Color>
+    <Color x:Key="PrimaryVariantDark">#228160</Color>
+    <Color x:Key="OnPrimaryDark">#80DBBB</Color>
 
-  <Color x:Key="SecondaryDark">#36A665</Color>
-  <Color x:Key="SecondaryVariantDark">#36A665</Color>
-  <Color x:Key="OnSecondaryDark">White</Color>
+    <Color x:Key="SecondaryDark">#36A665</Color>
+    <Color x:Key="SecondaryVariantDark">#36A665</Color>
+    <Color x:Key="OnSecondaryDark">#A3E1BF</Color>
 
-  <Color x:Key="TertiaryDark">#374474</Color>
-  <Color x:Key="TertiaryVariantDark">#374474</Color>
-  <Color x:Key="OnTetruaryDark">White</Color>
+    <Color x:Key="TetruaryDark">#374474</Color>
+    <Color x:Key="TetruaryVariantDark">#374474</Color>
+    <Color x:Key="OnTetruaryDark">#A9BFDB</Color>
 
-  <Color x:Key="BackgroundDark">#1F2432</Color>
-  <Color x:Key="OnBackgroundDark">#1F2432</Color>
+    <Color x:Key="BackgroundDark">#1F2432</Color>
+    <Color x:Key="OnBackgroundDark">#E7E9EF</Color>
 
-  <Color x:Key="BackgroundVariantDark">Black</Color>
-  <Color x:Key="OnBackgroundVariantDark">Black</Color>
+    <Color x:Key="BackgroundVariantDark">Black</Color>
+    <Color x:Key="OnBackgroundVariantDark">Black</Color>
 
-  <Color x:Key="PrimaryTextDark">#E7E9EF</Color>
-  <Color x:Key="PrimaryPlaceholderTextDark">#e7e9ef80</Color>
-  <Color x:Key="SecondaryTextDark">White</Color>
+    <Color x:Key="PrimaryTextDark">#E7E9EF</Color>
+    <Color x:Key="PrimaryPlaceholderTextDark">#e7e9ef80</Color>
+    <Color x:Key="SecondaryTextDark">White</Color>
 
-  <!--  Universal  -->
+    <!--  Universal  -->
 
-  <Color x:Key="Error">#D42121</Color>
-  <Color x:Key="Warning">#FFE500</Color>
-  <Color x:Key="Accept">#61CC33</Color>
+    <Color x:Key="Error">#D42121</Color>
+    <Color x:Key="Warning">#FFE500</Color>
+    <Color x:Key="Accept">#61CC33</Color>
 
-  <Color x:Key="LightGray">#E5E5E1</Color>
-  <Color x:Key="MidGray">#969696</Color>
-  <Color x:Key="DarkGray">#505050</Color>
+    <Color x:Key="LightGray">#E5E5E1</Color>
+    <Color x:Key="MidGray">#969696</Color>
+    <Color x:Key="DarkGray">#505050</Color>
 
 </ResourceDictionary>

@@ -1,4 +1,4 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+﻿using MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage;
 
 namespace MyPrintiverse.Authorization.Login;
 

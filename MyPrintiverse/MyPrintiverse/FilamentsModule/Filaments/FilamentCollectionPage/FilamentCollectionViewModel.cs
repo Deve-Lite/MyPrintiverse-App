@@ -3,12 +3,12 @@ using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 using MyPrintiverse.FilamentsModule.Spools;
 
-namespace MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+namespace MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage;
 
-public class FilamentsViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
+public class FilamentCollectionViewModel : GroupedCollectionViewModel<Filament, AddFilamentView, EditFilamentView, FilamentView>
 {
     private readonly IItemKeyService<Spool> _spoolService;
-    public FilamentsViewModel(IMessageService messagingService, IItemService<Filament> itemsService, IItemKeyService<Spool> spoolService) : base(messagingService, itemsService)
+    public FilamentCollectionViewModel(IMessageService messagingService, IItemService<Filament> itemsService, IItemKeyService<Spool> spoolService) : base(messagingService, itemsService)
     {
         _spoolService = spoolService;
     }

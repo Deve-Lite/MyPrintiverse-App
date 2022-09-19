@@ -1,9 +1,7 @@
-﻿using MyPrintiverse.Admin.Tests;
-using MyPrintiverse.Admin;
-using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
+﻿using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
-using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+using MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage;
 using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.SpoolPage;

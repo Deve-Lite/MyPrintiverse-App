@@ -4,7 +4,7 @@ using MyPrintiverse.FilamentsModule.Filaments;
 using MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
-using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+using MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage;
 using MyPrintiverse.FilamentsModule.Filaments.Services;
 using MyPrintiverse.FilamentsModule.Spools;
 using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
@@ -91,7 +91,7 @@ public static class FilamentBuilderConfig
 	public static MauiAppBuilder ConfigureFilamentViewModels(this MauiAppBuilder builder)
 	{
 		// template
-		builder.Services.AddSingleton<FilamentsViewModel>();
+		builder.Services.AddSingleton<FilamentCollectionViewModel>();
 		builder.Services.AddSingleton<FilamentViewModel>();
 		builder.Services.AddSingleton<AddFilamentViewModel>();
 		builder.Services.AddSingleton<EditFilamentViewModel>();

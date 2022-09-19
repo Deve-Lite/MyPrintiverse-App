@@ -86,7 +86,7 @@
 		<Compile Update="Authorization\Settings\SettingsView.xaml.cs">
 			<DependentUpon>SettingsView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="FilamentsModule\Filaments\FilamentsPage\FilamentCollectionView.xaml.cs">
+		<Compile Update="FilamentsModule\Filaments\FilamentCollectionPage\FilamentCollectionView.xaml.cs">
 		  <DependentUpon>FilamentCollectionView.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="FilamentsModule\FilamentTemplates\AddCollectionHeader.xaml.cs">
@@ -214,7 +214,9 @@
 		<None Remove="Resources\Fonts\Raleway-SemiBoldItalic.ttf" />
 		<None Remove="Resources\Fonts\Raleway-Thin.ttf" />
 		<None Remove="Resources\Fonts\Raleway-ThinItalic.ttf" />
+		<None Remove="Resources\Images\emptystar.svg" />
 		<None Remove="Resources\Images\res.png" />
+		<None Remove="Resources\Images\star.svg" />
 		<None Remove="RestSharp" />
 		<None Remove="System.IdentityModel.Tokens.Jwt" />
 	</ItemGroup>
