@@ -131,6 +131,9 @@
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\ExtendedAddCollectionHeader.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="FilamentsModule\FilamentTemplates\ValueIndicators\MaterialProperty.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\ValueIndicators\RangeValueIndicator.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

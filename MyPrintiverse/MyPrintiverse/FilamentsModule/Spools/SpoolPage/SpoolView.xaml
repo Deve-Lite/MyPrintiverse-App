@@ -6,9 +6,16 @@
              Shell.TabBarIsVisible="False">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="spool.png"/>
-        <ToolbarItem Order="Secondary" Text="Delete" Command="{Binding DeleteItemCommand}" IsEnabled="True"/>
-        <ToolbarItem Order="Secondary" Text="Edit" Command="{Binding EditItemCommand}" IsEnabled="True"/>
+        <ToolbarItem Text="Tip" 
+                     IconImageSource="spool.png"/>
+        
+        <ToolbarItem Order="Secondary" 
+                     Text="Delete" 
+                     Command="{Binding DeleteItemCommand}"/>
+        
+        <ToolbarItem Order="Secondary"
+                     Text="Edit" 
+                     Command="{Binding EditItemCommand}"/>
     </ContentPage.ToolbarItems>
     
     <StackLayout>

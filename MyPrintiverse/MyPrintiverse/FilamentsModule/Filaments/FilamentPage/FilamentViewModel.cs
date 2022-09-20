@@ -28,7 +28,7 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
     {
         base.OnAppearing();
         // TODO Load From Settings
-        IsFinishedFilamentsVisible = false && FinishedFilaments.Count != 0;
+        IsFinishedFilamentsVisible = false;
     }
 
     protected override async Task Refresh()

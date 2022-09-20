@@ -26,7 +26,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:FilamentType">
                         <StackLayout>
-                            <Grid Margin="15,5,15,5" ColumnDefinitions="*, 45, 45">
+                            <Grid Margin="15,5,15,5" ColumnDefinitions="*">
                                 <Frame Style="{StaticResource CollectionFrame}">
 
                                     <Frame.GestureRecognizers>
@@ -61,7 +61,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
-                                                          Text="Heated bed: " />
+                                                          Text="Heated bed temperatures range: " />
                                                     <Span Style="{StaticResource CollectionFrameSpan}" 
                                                           Text="{Binding BedTemperatureRange, StringFormat='{0} °C'}"/>
                                                 </FormattedString>
@@ -72,13 +72,24 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
-                                                          Text="Extruder: " />
+                                                          Text="Extruder temperatures range: " />
                                                     <Span Style="{StaticResource CollectionFrameSpan}" 
                                                           Text="{Binding NozzleTemperatureRange, StringFormat='{0} °C'}"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        
+
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Style="{StaticResource CollectionFrameBoldSpan}" 
+                                                          Text="Cooling rate range: " />
+                                                    <Span Style="{StaticResource CollectionFrameSpan}" 
+                                                          Text="{Binding CoolingRange, StringFormat='{0} %'}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
                                         <Label Style="{StaticResource MicroRaleway}"
                                            Margin="0,5,0,0"
                                            Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
@@ -86,9 +97,9 @@
                                     </StackLayout>
                                 </Frame>
 
-                                <StackLayout Grid.Column="1" BackgroundColor="Red" Padding="4"/>
+                                <StackLayout Grid.Column="1"  Padding="4"/>
 
-                                <StackLayout Grid.Column="2" BackgroundColor="Red" Padding="4"/>
+                                <StackLayout Grid.Column="2"  Padding="4"/>
                             </Grid>
                             
                         </StackLayout>

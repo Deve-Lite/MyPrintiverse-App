@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators.MaterialProperty"
+             x:Name="this">
+    <VerticalStackLayout BindingContext="{x:Reference this}">
+
+        <Frame Style="{Binding FrameStyle}">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ClickedCommand}" CommandParameter="{Binding .}"/>
+            </Frame.GestureRecognizers>
+            
+            <StackLayout>
+                <Image Source="spool.png"/>
+
+                <Label Style="{Binding TitleStyle}"
+                       Margin="2,2,2,4"
+                       HorizontalOptions="Center"
+                       Text="{Binding Title}"
+                       VerticalOptions="Center"/>
+                
+            </StackLayout>
+            
+        </Frame>
+        
+    </VerticalStackLayout>
+</ContentView>

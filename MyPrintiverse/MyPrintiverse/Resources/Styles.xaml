@@ -100,6 +100,21 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
     </Style>
 
+    <Style x:Key="BaseFrameVariant" TargetType="Frame">
+
+        <Setter Property="HasShadow" Value="False" />
+
+        <Setter Property="BorderColor" Value="Transparent" />
+
+        <Setter Property="CornerRadius" Value="10" />
+
+        <Setter Property="Margin" Value="15 "/>
+
+        <Setter Property="Padding" Value="0"/>
+
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+    </Style>
+
 
     <Style TargetType="Span" x:Key="DisplayFrameSpan">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}"/>
