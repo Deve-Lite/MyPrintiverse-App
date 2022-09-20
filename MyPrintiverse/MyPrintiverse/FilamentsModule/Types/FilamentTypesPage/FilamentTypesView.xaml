@@ -4,10 +4,14 @@
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
-             x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypesPage.FilamentTypesView"
-             Title="FilamentTypesView">
-
-    <Grid>
+             x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypesPage.FilamentTypesView">
+    
+    <ContentPage.ToolbarItems>
+        <!-- TODO Search bar -->
+        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="spool.png"/>
+    </ContentPage.ToolbarItems>
+    
+    <Grid RowDefinitions="*,80">
         <RefreshView Style="{StaticResource BaseRefreshView}">
             <CollectionView Style="{StaticResource BaseCollectionView}"
                             Footer="{Binding .}"
@@ -22,48 +26,78 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:FilamentType">
                         <StackLayout>
-                            <Frame Style="{StaticResource CollectionGroupItemFrame}">
-                                
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
+                            <Grid Margin="15,5,15,5" ColumnDefinitions="*, 45, 45">
+                                <Frame Style="{StaticResource CollectionFrame}">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
                                                           CommandParameter="{Binding .}"/>
 
 
-                                    <TapGestureRecognizer NumberOfTapsRequired="2" 
+                                        <TapGestureRecognizer NumberOfTapsRequired="2" 
                                                           Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
                                                           CommandParameter="{Binding .}" />
-                                </Frame.GestureRecognizers>
-                                
-                                <StackLayout>
+                                    </Frame.GestureRecognizers>
+
+                                    <StackLayout>
+
+                                        <Label Style="{StaticResource CollectionFrameBoldSpan}"
+                                           Margin="0,3,0,0"
+                                           Text="{Binding ShortName}" />
+
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Style="{StaticResource CollectionFrameBoldSpan}" 
+                                                          Text="Density: " />
+                                                    <Span Style="{StaticResource CollectionFrameSpan}" 
+                                                          Text="{Binding Density,StringFormat='{0:0.00 g/cm^3}'}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
 
 
-                                    <Label Style="{StaticResource SmallRaleway}"
-                                           Margin="0,5,0,0"
-                                           Text="{Binding ShortName, StringFormat='ShortName: {0} '}" />
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Style="{StaticResource CollectionFrameBoldSpan}" 
+                                                          Text="Heated bed: " />
+                                                    <Span Style="{StaticResource CollectionFrameSpan}" 
+                                                          Text="{Binding BedTemperatureRange, StringFormat='{0} °C'}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
 
-                                    <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding FullName, StringFormat='FullName: {0} '}" />
-
-                                    <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding Density, StringFormat='Density: {0:0.00} g/cm^3'}" />
-
-                                    <Label Style="{StaticResource SmallRaleway}"
-                                           Text="{Binding Description, StringFormat='{0}'}" />
-
-                                    
-                                    <Label Style="{StaticResource MicroRaleway}"
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Style="{StaticResource CollectionFrameBoldSpan}" 
+                                                          Text="Extruder: " />
+                                                    <Span Style="{StaticResource CollectionFrameSpan}" 
+                                                          Text="{Binding NozzleTemperatureRange, StringFormat='{0} °C'}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        
+                                        <Label Style="{StaticResource MicroRaleway}"
                                            Margin="0,5,0,0"
                                            Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
-                                    
-                                </StackLayout>
-                            </Frame>
+
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout Grid.Column="1" BackgroundColor="Red" Padding="4"/>
+
+                                <StackLayout Grid.Column="2" BackgroundColor="Red" Padding="4"/>
+                            </Grid>
+                            
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
                 <CollectionView.FooterTemplate>
                     <DataTemplate>
-                        <StackLayout HeightRequest="65">
+                        <StackLayout HeightRequest="80">
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.FooterTemplate>
@@ -71,7 +105,25 @@
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Style="{StaticResource CollectionImageButton}"
+        <ImageButton Grid.Row="1" 
+                     Style="{StaticResource CollectionImageButton}"
+                     Margin="10,0,0,0"    
+                     Source="spool.png"
                      Command="{Binding AddItemCommand}"/>
+        
+        <!-- TODO Switch View-->
+        
+        <ImageButton Style="{StaticResource CollectionImageButton}"
+                     Grid.Row="1"
+                     Source="spool.png"
+                     HorizontalOptions="End"
+                     IsVisible="False"
+                     Margin="0,0,10,0"/>
+
+        <Border Style="{StaticResource CollectionHeaderBorder}"
+                Grid.Row="1"
+                VerticalOptions="End"
+                Margin="15,0"/>
+        
     </Grid>
 </ContentPage>

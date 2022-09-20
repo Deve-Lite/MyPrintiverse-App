@@ -19,6 +19,9 @@ public class Spool : BaseModel
     [JsonProperty("leftWeight")]
     public double AvaliableWeight { get; set; }
 
+    [JsonProperty("cost")]
+    public double Cost { get; set; }
+
 
     [JsonProperty("isFinished")]
     public bool IsFinished { get; set; }

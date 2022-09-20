@@ -3,30 +3,108 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentPage"
              x:Class="MyPrintiverse.FilamentsModule.Spools.SpoolPage.SpoolView"
-             Title="SpoolView">
+             Shell.TabBarIsVisible="False">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="spool.png"/>
+        <ToolbarItem Order="Secondary" Text="Delete" Command="{Binding DeleteItemCommand}" IsEnabled="True"/>
+        <ToolbarItem Order="Secondary" Text="Edit" Command="{Binding EditItemCommand}" IsEnabled="True"/>
+    </ContentPage.ToolbarItems>
+    
     <StackLayout>
-        <Frame Grid.Row="0" 
-               Style="{StaticResource BaseFrame}" 
-               Padding="15"
+        
+        <Frame Style="{StaticResource BaseFrame}" 
+               Padding="15, 0, 15, 0"
                VerticalOptions="Center">
-            <StackLayout>
+            
+            <Grid RowDefinitions="*,*,*,*,*,*,*,*,*"
+                  ColumnDefinitions="*">
 
-                <Label Style="{StaticResource SmallRaleway}"
-                           Text="{Binding Item.AvaliableWeight, StringFormat='Avaliable weight: {0:0.00} kg'}"/>
 
-                <Label Style="{StaticResource SmallRaleway}"
-                           Text="{Binding Item.StandardWeight, StringFormat='Standard weight: {0:0.00} kg'}"/>
+                <Label Style="{StaticResource TitleOswald}" 
+                       Grid.Row="0"
+                       Margin="3,3"
+                       Text="{Binding ItemFilament.Brand}"/>
 
-                <Label Style="{StaticResource SmallRaleway}"
-                           Text="{Binding Item.IsFinished, StringFormat='Is Finished: {0} '}"/>
 
-                <Label Style="{StaticResource SmallRaleway}" 
-                           Text="{Binding Item.IsSample, StringFormat='Is Sample: {0} '}"/>
+                <Label Grid.Row="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Filament Type: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding ItemFilament.TypeId, Converter={StaticResource TypeIdToTypeConverter}}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-                <Label Style="{StaticResource SmallRaleway}"
-                           Text="{Binding Item.Description, StringFormat='Description: {0}.'}"/>
+                <Label Grid.Row="2">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Color: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding ItemFilament.ColorName}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-            </StackLayout>
+                <Label Grid.Row="3">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Diameter: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding ItemFilament.Diameter, StringFormat='{0:0.00} mm'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                
+                <Label Style="{StaticResource MediumOswald}"
+                       Grid.Row="4"
+                       Margin="3,0,0,0"
+                       Text="Spool Info"/>
+
+                <Label Grid.Row="5">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Spool status: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding Item.AvaliableWeight,StringFormat='{0:0.00}'}"/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text=" / "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding Item.StandardWeight,StringFormat='{0:0.00} kg'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Row="6">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Cost: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding Item.Cost}"/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding Currency, StringFormat=' {0}'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Row="7" Style="{StaticResource DisplayFrameSpan}" 
+                       Margin="0,5,10,0"
+                       Text="{Binding Item.Description}"
+                       IsVisible="{Binding Item.Description, Converter={StaticResource IsNotEmptyStringConventer}}"/>
+
+                <Label Style="{StaticResource MicroRaleway}"
+                       Grid.Row="8"
+                       Margin="0,5"
+                       Text="{Binding Item.EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
+
+            </Grid>
         </Frame >
         
     </StackLayout>

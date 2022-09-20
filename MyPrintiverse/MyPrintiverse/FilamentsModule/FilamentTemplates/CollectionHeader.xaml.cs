@@ -22,11 +22,11 @@ public partial class CollectionHeader : ContentView
 
     #region StackLayout
 
-    public static readonly BindableProperty StackLayoutStyleProperty = BindableProperty.Create(nameof(StackLayoutStyle), typeof(Style), typeof(CollectionHeader), null);
-    public Style StackLayoutStyle
+    public static readonly BindableProperty BorderStyleProperty = BindableProperty.Create(nameof(BorderStyle), typeof(Style), typeof(CollectionHeader), null);
+    public Style BorderStyle
     {
-        get => (Style)GetValue(StackLayoutStyleProperty);
-        set => SetValue(StackLayoutStyleProperty, value);
+        get => (Style)GetValue(BorderStyleProperty);
+        set => SetValue(BorderStyleProperty, value);
     }
 
     #endregion

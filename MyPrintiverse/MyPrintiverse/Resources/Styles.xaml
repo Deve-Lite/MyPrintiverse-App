@@ -26,13 +26,17 @@
         <Setter Property="Margin" Value="0" />
     </Style>
 
-    <Style TargetType="StackLayout" x:Key="BaseCollectionHeaderBorder">
+    <Style TargetType="Border" x:Key="CollectionHeaderBorder">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"/>
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 1,1,1,1"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="HeightRequest" Value="1.8"/>
     </Style>
 
     <Style TargetType="filamentemplates:CollectionHeader" x:Key="BaseCollectionHeader">
-        <Setter Property="StackLayoutStyle" 
-                        Value="{StaticResource BaseCollectionHeaderBorder}"/>
+        <Setter Property="BorderStyle" 
+                        Value="{StaticResource CollectionHeaderBorder}"/>
         <Setter Property="TitleStyle" 
                         Value="{StaticResource LargeOswald}"/>
         <Setter Property="Margin" 
@@ -42,8 +46,8 @@
     </Style>
 
     <Style TargetType="filamentemplates:AddCollectionHeader" x:Key="BaseAddCollectionHeader">
-        <Setter Property="StackLayoutStyle" 
-                        Value="{StaticResource BaseCollectionHeaderBorder}"/>
+        <Setter Property="BorderStyle" 
+                        Value="{StaticResource CollectionHeaderBorder}"/>
         <Setter Property="TitleStyle" 
                         Value="{StaticResource LargeOswald}"/>
         <Setter Property="Margin" 
@@ -57,6 +61,7 @@
         <Setter Property="HeightRequest" Value="60"/>
         <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
     </Style>
@@ -65,7 +70,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="10,8,10,8"/>
     </Style>
 
     <Style TargetType="Span" x:Key="CollectionFrameSpan">
@@ -95,17 +100,15 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
     </Style>
 
-    <Style x:Key="ClearValidatableEntryFrame" TargetType="Frame">
 
-        <Setter Property="HasShadow" Value="False" />
+    <Style TargetType="Span" x:Key="DisplayFrameSpan">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}"/>
+        <Setter Property="FontFamily" Value="MediumRaleway"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
 
-        <Setter Property="BorderColor" Value="Transparent" />
-
-        <Setter Property="BackgroundColor" Value="Transparent" />
-
-        <Setter Property="Margin" Value="0,3,0,2" />
-
-        <Setter Property="Padding" Value="0" />
+    <Style TargetType="Span" x:Key="DisplayFrameBoldSpan" BasedOn="{StaticResource DisplayFrameSpan}">
+        <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
     <Style x:Key="BaseBorder" TargetType="Border">

@@ -33,14 +33,6 @@
                                  IsToggled="{Binding BoolValue, Mode=TwoWay}"
                                  Title="tfgmndfgohnfhnmdfgh" />
 
-            <module:TitledSwitch TitleStyle="{StaticResource BaseOswald}" 
-                                 SwitchStyle="{StaticResource BaseSwitch}" 
-                                 FrameStyle="{StaticResource ClearValidatableEntryFrame}"
-                                 Padding="0"
-                                 Margin="10,5,10,5"
-                                 IsToggled="{Binding BoolValue, Mode=TwoWay}"
-                                 Title="tfgmndfgohnfhnmdfgh" />
-
             <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,10"/>

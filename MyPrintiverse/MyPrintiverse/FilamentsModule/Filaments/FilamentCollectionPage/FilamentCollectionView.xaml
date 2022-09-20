@@ -22,7 +22,8 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Search" IconImageSource="spool.png" />
+        <!-- TODO Search bar -->
+        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="spool.png"/>
     </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="*, 80">
@@ -51,13 +52,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filament">
                         <StackLayout>
-                            <Grid Margin="15,5,15,5" HeightRequest="95">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="30"/>
-                                </Grid.ColumnDefinitions>
-                                <Frame Style="{StaticResource CollectionFrame}">
+                            <Grid Margin="15,5,15,5"  ColumnDefinitions="*,30,30">
+                                <Frame Style="{StaticResource CollectionFrame}" VerticalOptions="FillAndExpand"> 
                                     
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentCollectionViewModel}}}"
@@ -70,7 +66,7 @@
                                     </Frame.GestureRecognizers>
 
 
-                                    <StackLayout>
+                                    <StackLayout VerticalOptions="Center">
 
                                         <Label>
                                             <Label.FormattedText>
@@ -149,22 +145,21 @@
         <ImageButton Style="{StaticResource CollectionImageButton}"
                      Grid.Row="1"
                      Source="spool.png"
-                     HorizontalOptions="Start"
                      Margin="10,0,0,0"
                      Command="{Binding AddItemCommand}"/>
 
+        <!-- TODO Switch View-->
         <ImageButton Style="{StaticResource CollectionImageButton}"
                      Grid.Row="1"
                      Source="spool.png"
                      HorizontalOptions="End"
-                     Margin="0,0,10,0"
-                     Command="{Binding AddItemCommand}"/>
+                     IsVisible="False"
+                     Margin="0,0,10,0"/>
 
-        <StackLayout Style="{StaticResource BaseCollectionHeaderBorder}"
-                     Grid.Row="1"
-                     HeightRequest="1"
-                     VerticalOptions="End"
-                     Margin="15,0"/>
+        <Border Style="{StaticResource CollectionHeaderBorder}"
+                Grid.Row="1"
+                VerticalOptions="End"
+                Margin="15,0"/>
 
     </Grid>
 

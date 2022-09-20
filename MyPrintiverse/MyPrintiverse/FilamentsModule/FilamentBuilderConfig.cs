@@ -11,7 +11,6 @@ using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.Services;
 using MyPrintiverse.FilamentsModule.Spools.SpoolPage;
-using MyPrintiverse.FilamentsModule.Statistics.FilamentStatisticPage;
 using MyPrintiverse.FilamentsModule.Types;
 using MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage;
 using MyPrintiverse.FilamentsModule.Types.EditFilamentTypePage;
@@ -78,7 +77,6 @@ public static class FilamentBuilderConfig
 		builder.Services.AddSingleton<AddSpoolView>();
 		builder.Services.AddSingleton<EditSpoolView>();
 
-		builder.Services.AddSingleton<FilamentStatisticsView>();
 
 		return builder;
 	}
@@ -105,7 +103,6 @@ public static class FilamentBuilderConfig
 		builder.Services.AddSingleton<AddSpoolViewModel>();
 		builder.Services.AddSingleton<EditSpoolViewModel>();
 
-		builder.Services.AddSingleton<FilamentStatisticsViewModel>();
 
 		return builder;
 	}

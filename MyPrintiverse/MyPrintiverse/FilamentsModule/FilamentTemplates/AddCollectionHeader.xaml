@@ -13,7 +13,7 @@
         
         <filamentemplates:CollectionHeader Title="{Binding Title}" 
                                            TitleStyle="{Binding TitleStyle}"
-                                           StackLayoutStyle="{Binding StackLayoutStyle}"/>
+                                           BorderStyle="{Binding BorderStyle}"/>
 
   
 

@@ -16,33 +16,25 @@
                 <StackLayout Margin="0,0,15,0"/>
             </DataTemplate>
 
-            <Style TargetType="Span" x:Key="DisplayFrameSpan">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}"/>
-                <Setter Property="FontFamily" Value="MediumRaleway"/>
-                <Setter Property="FontSize" Value="13"/>
-            </Style>
-
-            <Style TargetType="Span" x:Key="DisplayFrameBoldSpan" BasedOn="{StaticResource DisplayFrameSpan}">
-                <Setter Property="FontAttributes" Value="Bold"/>
-            </Style>
-
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Secondary" Text="B"/>
-        <ToolbarItem Order="Secondary" Text="C"/>
+        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="spool.png"/>
+        <ToolbarItem Order="Secondary" Priority="2" Text="Switch Spool Visibility" Command="{Binding SwitchIsFinishedFilamentsCommand}"/>
+        <ToolbarItem Order="Secondary" Text="Delete" Command="{Binding DeleteDisplayItemCommand}" IsEnabled="True"/>
+        <ToolbarItem Order="Secondary" Text="Edit" Command="{Binding EditDisplayItemCommand}" IsEnabled="True"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout>
 
-        <Frame Grid.Row="0" 
-               Style="{StaticResource BaseFrame}" 
+         <Frame Style="{StaticResource BaseFrame}" 
                Padding="15, 0, 0, 0"
                VerticalOptions="Center">
             <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*"
                   ColumnDefinitions="*, 10, 30">
 
+                <!--                  z jakiegos powodu tutaj wyjatki rzuca na relase -->
                 <Frame Grid.Column="2" 
                        Grid.RowSpan="10"
                        Padding="0"
@@ -55,13 +47,12 @@
                                WidthRequest="8"
                                Text="{Binding Item.ColorHex}"/>
                     </StackLayout>
-                </Frame>
+                </Frame> 
 
                 <Label Style="{StaticResource TitleOswald}" 
                        Grid.Row="0"
                        Margin="3,3"
                        Text="{Binding Item.Brand}"/>
-
 
                 <Label Grid.Row="1">
                     <Label.FormattedText>
@@ -73,7 +64,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-
+                
                 <Label Grid.Row="2">
                     <Label.FormattedText>
                         <FormattedString>
@@ -134,7 +125,7 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Grid.Row="8" Style="{StaticResource SmallRaleway}" 
+                <Label Grid.Row="8" Style="{StaticResource DisplayFrameSpan}" 
                        Margin="0,5,10,0"
                        Text="{Binding Item.Description}"
                        IsVisible="{Binding Item.Description, Converter={StaticResource IsNotEmptyStringConventer}}"/>
@@ -143,18 +134,14 @@
                        Grid.Row="9"
                        Margin="0,5"
                        Text="{Binding Item.EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
-
             </Grid>
-        </Frame >
+        </Frame > 
 
-        <StackLayout HorizontalOptions="FillAndExpand">
+        <!--<StackLayout HorizontalOptions="FillAndExpand">
             <RefreshView Style="{StaticResource BaseRefreshView}" 
                          Grid.Row="2" 
                          Margin="0,10,0,0">
                 <StackLayout HorizontalOptions="FillAndExpand">
-
-                    <!-- To jest po to zeby odpowiednio layout sie załadowal 
-                    <StackLayout HorizontalOptions="FillAndExpand" HeightRequest="2" WidthRequest="500"/> -->
 
                     <filamentemplates:AddCollectionHeader Style="{StaticResource BaseAddCollectionHeader}"
                                                           AddCommand="{Binding AddItemCommand}"
@@ -163,7 +150,8 @@
                     <CollectionView Style="{StaticResource BaseCollectionView}"
                                     FooterTemplate="{StaticResource footerTemplate}"
                                     ItemsLayout="HorizontalList"
-                                    Footer="{Binding .}">
+                                    Footer="{Binding .}"
+                                    >
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:Spool">
@@ -175,14 +163,14 @@
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
                                                           CommandParameter="{Binding .}"/>
-                                            
+
                                             <TapGestureRecognizer Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
                                                                   NumberOfTapsRequired="2"
                                                           CommandParameter="{Binding .}"/>
                                         </Frame.GestureRecognizers>
 
                                         <StackLayout Padding="5,2,5,2">
-                                            
+
                                             <Image Source="spool.png"
                                                    HeightRequest="60" 
                                                    Aspect="AspectFit" 
@@ -208,7 +196,7 @@
                                             <Label Style="{StaticResource MicroRaleway}"  
                                                    HorizontalOptions="End"
                                                    Text="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}"/>
-                                            
+
                                         </StackLayout>
 
                                     </Frame>
@@ -217,16 +205,30 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
 
+                        <CollectionView.EmptyView>
+                            <ContentView>
+                                <StackLayout HeightRequest="115">
+                                    <Label Style="{StaticResource MediumRaleway}"
+                                       Opacity="0.6"
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="Center"
+                                       Text="No items in collection"/>
+                                </StackLayout>
+                            </ContentView>
+                        </CollectionView.EmptyView>
+                        
                     </CollectionView>
 
                     <filamentemplates:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
+                                                       IsVisible="{Binding IsFinishedFilamentsVisible}"
                                                        Title="Finished"/>
 
                     <CollectionView Style="{StaticResource BaseCollectionView}"
                                     ItemsSource="{Binding FinishedFilaments}"
                                     FooterTemplate="{StaticResource footerTemplate}"
                                     ItemsLayout="HorizontalList"
-                                    Footer="{Binding .}">
+                                    Footer="{Binding .}"
+                                    IsVisible="{Binding IsFinishedFilamentsVisible}">
                         
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:Spool">
@@ -283,6 +285,6 @@
                     </CollectionView>
                 </StackLayout>
             </RefreshView>
-        </StackLayout>
+        </StackLayout> -->
     </StackLayout>
 </ContentPage>

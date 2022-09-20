@@ -79,7 +79,7 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
         if (AnyActionStartedCommand())
             return;
 
-        await Shell.Current.GoToAsync($"{typeof(TEditView).Name}", true);
+        await Shell.Current.GoToAsync($"{typeof(TEditView).Name}?Id={Item.Id}", true);
     }
 
     /// <summary>
