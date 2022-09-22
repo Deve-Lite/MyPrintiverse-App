@@ -4,12 +4,14 @@ namespace MyPrintiverse;
 
 public abstract class BaseValidator<T> : Validator<T> where T : BaseModel, new()
 {
-    protected ValidationMode _validatonMode;
-
     public string Id { get; set; }
     public long CreatedAtTicks { get; set; }
     public long EditedAtTicks { get; set; }
 
+    /// <summary>
+    /// Maps model item to class data
+    /// </summary>
+    /// <param name="item"></param>
     protected void BaseModelMap(T item)
     {
         item.Id = Id;
@@ -17,10 +19,14 @@ public abstract class BaseValidator<T> : Validator<T> where T : BaseModel, new()
         item.EditedAtTicks = EditedAtTicks;
     }
 
-    protected virtual void FillData(T filament)
+    /// <summary>
+    /// Maps given item to class data.
+    /// </summary>
+    /// <param name="item"></param>
+    protected virtual void Map(T item)
     {
-        Id = filament.Id;
-        CreatedAtTicks = filament.CreatedAtTicks;
-        EditedAtTicks = filament.EditedAtTicks;
+        Id = item.Id;
+        CreatedAtTicks = item.CreatedAtTicks;
+        EditedAtTicks = item.EditedAtTicks;
     }
 }

@@ -70,7 +70,7 @@
                                                    Title="Email"
                                                    IsValid="{Binding Email.IsValid}"
                                                    Text="{Binding Email.Value, Mode=TwoWay}"
-                                                   ValidationCommand="{Binding EmailValidateCommand}"
+                                                   ValidationCommand="{Binding Email.Validate}"
                                                    ExtendingCommand="{Binding PaswordizeCommand}"/>
 
             <Button Style="{StaticResource BaseButton}" Margin="0,5,0,0" Text="test validatable entry" Command="{Binding TestCommand}"/>

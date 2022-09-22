@@ -4,8 +4,7 @@ namespace MyPrintiverse.FilamentsModule.Types;
 public class FilamentTypeValidator : BaseValidator<FilamentType>
 {
     public FilamentTypeValidator()
-    {
-        _validatonMode = ValidationMode.Part;
+    { 
 
         AddValidation();
 
@@ -14,11 +13,10 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
 
     public FilamentTypeValidator(FilamentType filamentType)
     {
-        _validatonMode = ValidationMode.Full;
 
         AddValidation();
 
-        FillData(filamentType);
+        Map(filamentType);
 
         InitUnit();
     }
@@ -53,8 +51,8 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
     {
         var FilamentTypeMap = new FilamentType();
 
-        if (_validatonMode == ValidationMode.Full)
-            BaseModelMap(FilamentTypeMap);
+        
+        BaseModelMap(FilamentTypeMap);
 
 
         FilamentTypeMap.BedTemperatureRange = $"{BedMin}-{BedMax}";
@@ -80,8 +78,8 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
 
     private void AddValidation()
     {
-        Density = Validator.Build<double>().WithRule(new FloatingPointMantissaRule<double>(4), "Maximal approximation to 4 places!")
-            .WithRule(new FloatinPointExponentRule<double>(2), "Invalid density.");
+        //Density = Validator.Build<double>().WithRule(new FloatingPointMantissaRule<double>(4), "Maximal approximation to 4 places!")
+        //    .WithRule(new FloatinPointExponentRule<double>(2), "Invalid density.");
 
         ShortName = Validator.Build<string>().WithRule(new RangeRule<string>(3, 26), "Brand should be between 3-26 characters.");
 
@@ -89,14 +87,14 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
 
         Description = Validator.Build<string>().WithRule(new RangeRule<string>(maxLength: 250), "Description should be shorter than 250 characters.");
 
-        MaxServiceTempearature = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 999));
+        //MaxServiceTempearature = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 999));
 
 
     }
 
-    protected override void FillData(FilamentType filamentType)
+    protected override void Map(FilamentType filamentType)
     {
-        base.FillData(filamentType);
+        base.Map(filamentType);
 
 
         ShortName.Value = filamentType.ShortName;

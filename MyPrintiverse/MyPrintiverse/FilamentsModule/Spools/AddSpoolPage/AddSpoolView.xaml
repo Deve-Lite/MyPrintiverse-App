@@ -2,10 +2,69 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Spools.AddSpoolPage.AddSpoolView"
-             xmlns:stepTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.ManageSpoolViews">
+             xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
+             xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
     <ScrollView>
-        <Grid Margin="15">
-            <stepTemplates:SpoolStepOneView />
-        </Grid>
+        <StackLayout>
+            <otherTemplates:TopManageBar BackCommand="{Binding BackCommand}"/>
+
+            <StackLayout Margin="15" IsVisible="{Binding StepOne}">
+
+                <otherTemplates:StepDescription Title="New Spool"
+                                        Step="Step 1 of 2"
+                                        Description="Enter spool informations."
+                                        Margin="0,2,0,10"/>
+
+
+
+                <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                                                       Title="Cost"
+                                                       Text="{Binding Item.Cost.Value}"
+                                                       ValidationCommand="{Binding Item.Cost.ExtendedValidateCommand}"
+                                                       IsValid="{Binding Item.Cost.IsValid}"
+                                                       ErrorMessage="{Binding Item.Cost.Error}"
+                                                       Entity="{Binding Currency}"/>
+
+                <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                                                       Title="Standard filament weight"
+                                                       Text="{Binding Item.StandardWeight.Value}"
+                                                       ValidationCommand="{Binding Item.StandardWeight.ExtendedValidateCommand}"
+                                                       IsValid="{Binding Item.StandardWeight.IsValid}"
+                                                       ErrorMessage="{Binding Item.StandardWeight.Error}"
+                                                       Entity="kg"/>
+
+                <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                                                       Title="Avaliable filament weight"
+                                                       Text="{Binding Item.AvaliableWeight.Value}"
+                                                       ValidationCommand="{Binding Item.AvaliableWeight.ExtendedValidateCommand}"
+                                                       IsValid="{Binding Item.AvaliableWeight.IsValid}"
+                                                       ErrorMessage="{Binding Item.AvaliableWeight.Error}"
+                                                       Entity="kg"/>
+
+                <entryTemplates:TitledEditor Style="{StaticResource BaseTitledEditor}"
+                                             Title="Description"
+                                             Text="{Binding Item.Description.Value}"
+                                             ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
+                                             IsValid="{Binding Item.Description.IsValid}"
+                                             ErrorMessage="{Binding Item.Description.Error}"/>
+                
+                <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
+                                             Title="Is on spool"
+                                             IsToggled="{Binding Item.IsOnSpool}"/>
+
+
+                <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+                                               Text="NEXT"
+                                               Command="{Binding IsStepOneValidCommand}"/>
+
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding FinishingStep}">
+                <Label Text="stapafs0idgh sdobfg d"/>
+            </StackLayout>
+        
+        </StackLayout>
     </ScrollView>
 </ContentPage>

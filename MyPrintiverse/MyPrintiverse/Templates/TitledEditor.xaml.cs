@@ -147,5 +147,6 @@ public partial class TitledEditor : ContentView
     public TitledEditor()
 	{
 		InitializeComponent();
-	}
+        ValidStrokeBrush = Color.FromArgb("#00000000");
+    }
 }

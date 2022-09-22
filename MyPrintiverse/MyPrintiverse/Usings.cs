@@ -19,7 +19,7 @@ global using Plugin.ValidationRules;
 global using Plugin.ValidationRules.Extensions;
 global using Plugin.ValidationRules.Rules;
 
-global using MyPrintiverse.Core.Validation.NumbersRule;
+global using MyPrintiverse.Core.Validation.NumberValidation;
 
 global using CommunityToolkit.Mvvm.Input;
 

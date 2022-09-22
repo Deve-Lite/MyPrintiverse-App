@@ -10,7 +10,7 @@
               BackgroundColor="Transparent">
 
             <Button Style="{Binding ButtonStyle}"
-                    Command="{Binding ButtonCommand}"
+                    Command="{Binding Command}"
                     IsEnabled="{Binding IsButtonEnabled}"
                     HorizontalOptions="FillAndExpand"/>
 

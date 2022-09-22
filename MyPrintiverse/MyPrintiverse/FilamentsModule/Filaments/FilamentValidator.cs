@@ -3,6 +3,7 @@ namespace MyPrintiverse.FilamentsModule.Filaments;
 
 public class FilamentValidator : BaseValidator<Filament>
 {
+    #region Properties
     public string TypeId { get; set; }
     public Validatable<double> Diameter { get; set; }
     public Validatable<string> Brand { get; set; }
@@ -14,9 +15,10 @@ public class FilamentValidator : BaseValidator<Filament>
     public Validatable<int> BedTemperature { get; set; }
     public Validatable<int> Rating { get; set; }
 
+    #endregion
+
     public FilamentValidator()
     {
-        _validatonMode = ValidationMode.Part;
 
         AddValidation();
 
@@ -24,28 +26,20 @@ public class FilamentValidator : BaseValidator<Filament>
     }
     public FilamentValidator(Filament filament)
     {
-        _validatonMode = ValidationMode.Full;
 
         AddValidation();
 
-        FillData(filament);
+        Map(filament);
 
         InitUnit();
     }
 
-    public override bool Validate()
-    {
-        return base.Validate();
-    }
+    public override bool Validate() => base.Validate();
 
     public override Filament Map()
     {
         var fialmentMap = new Filament();
-
-        if (_validatonMode == ValidationMode.Full)
-            BaseModelMap(fialmentMap);
         
-
         fialmentMap.TypeId = TypeId;
         fialmentMap.Diameter = Diameter.Value;
         fialmentMap.Brand = Brand.Value;
@@ -65,25 +59,17 @@ public class FilamentValidator : BaseValidator<Filament>
     private void AddValidation()
     {
 
-        Diameter = Validator.Build<double>()
-            .WithRule(new FloatingPointMantissaRule<double>(2), "Maximal approximation to 2 places!")
-            .WithRule(new FloatinPointExponentRule<double>(6), "Invalid diameter.");
+        Diameter = Validator.Build<double>();
 
         Brand = Validator.Build<string>().WithRule(new RangeRule<string>(3, 26), "Brand should be between 3-26 characters.");
 
         Color = Validator.Build<string>().WithRule(new RangeRule<string>(3, 26), "Color should be between 3-26 characters.");
 
-        if (_validatonMode == ValidationMode.Full)
+        if (true)
         {
             ShortDescription = Validator.Build<string>().WithRule(new RangeRule<string>(maxLength:100), "Description should be shorter than 100 characters.");
 
-            NozzleTemperature = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 999));
-
-            BedTemperature = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 999));
-
-            CoolingRate = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 100));
-
-            Rating = Validator.Build<int>().WithRule(new NumberValueRule<int>(0, 10));
+            
         }
         else
         {
@@ -101,9 +87,9 @@ public class FilamentValidator : BaseValidator<Filament>
         }
     }
 
-    protected override void FillData(Filament filament)
+    protected override void Map(Filament filament)
     {
-        base.FillData(filament);
+        base.Map(filament);
 
         TypeId = filament.TypeId;
         ColorHex = filament.ColorHex;

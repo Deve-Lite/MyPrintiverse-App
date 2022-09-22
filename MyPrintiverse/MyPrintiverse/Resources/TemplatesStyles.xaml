@@ -47,11 +47,7 @@
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
     </Style>
 
-    <Style x:Key="NumericEntryValidatableEntry" TargetType="Entry">
-
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
-        <Setter Property="FontFamily" Value="Raleway" />
-        <Setter Property="FontSize" Value="14" />
+    <Style x:Key="NumericEntryValidatableEntry" TargetType="Entry" BasedOn="{StaticResource BaseEntryValidatableEntry}">
         <Setter Property="Keyboard" Value="Numeric" />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
     </Style>
@@ -102,6 +98,15 @@
         <Setter Property="Margin" Value="0,2,0,2" />
     </Style>
 
+    <Style x:Key="NumericEntityValidatableEntry" TargetType="templates:EntityValidatableEntry">
+        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}" />
+        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}" />
+        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
+        <Setter Property="EntryStyle" Value="{StaticResource NumericEntryValidatableEntry}" />
+        <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}" />
+        <Setter Property="Margin" Value="0,2,0,2" />
+    </Style>
+
     <!--  End Entity Validatable Entry  -->
 
     <!--  Extended Entity Validatable Entry  -->
@@ -112,7 +117,7 @@
         <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
         <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}" />
         <Setter Property="EntityStyle" Value="{StaticResource EntityValidatableEntry}" />
-        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <!--  End Extended Entity Validatable Entry  -->
@@ -125,7 +130,7 @@
         <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
         <Setter Property="EntryStyle" Value="{StaticResource BaseEntryValidatableEntry}" />
 
-        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <!--  End Extended Validatable Entry  -->
@@ -182,7 +187,7 @@
         <Setter Property="IsButtonEnabled" Value="{Binding IsEnabled}" />
         <Setter Property="IsRunning" Value="{Binding IsRunning}" />
         <Setter Property="HeightRequest" Value="60"/>
-        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <!--  End Activity Button  -->
@@ -201,7 +206,7 @@
         <Setter Property="FrameStyle" Value="{StaticResource TitledSwitchFrame}" />
         <Setter Property="HeightRequest" Value="30"/>
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <!--  End Titled Switch  -->
@@ -215,7 +220,7 @@
         <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
         <Setter Property="EditorStyle" Value="{StaticResource BaseEditorValidatableEntry}" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="SupportHeight" Value="110" />
     </Style>
 

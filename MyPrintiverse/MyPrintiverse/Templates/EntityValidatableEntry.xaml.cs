@@ -87,7 +87,7 @@ public partial class EntityValidatableEntry : ContentView
     {
         var bindableEntry = (EntityValidatableEntry)bindable;
 
-        bindableEntry.errorMessage.HeightRequest = bindableEntry.ErrorMessageLines * ((int)bindableEntry.errorMessage.FontSize + 2);
+        bindableEntry.errorMessage.HeightRequest = bindableEntry.ErrorMessageLines * ((int)bindableEntry.errorMessage.FontSize + 4);
     }
 
     #endregion
@@ -173,7 +173,6 @@ public partial class EntityValidatableEntry : ContentView
     public EntityValidatableEntry()
 	{
 		InitializeComponent();
-        Margin = new Thickness(10, 4, 10, 4);
         ValidStrokeBrush = Color.FromArgb("#00000000");
     }
 }

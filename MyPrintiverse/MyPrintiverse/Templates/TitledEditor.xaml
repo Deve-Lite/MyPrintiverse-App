@@ -32,7 +32,6 @@
 
         <Label x:Name="errorMessage" 
                Style="{Binding ErrorMessageStyle}" 
-               HeightRequest="{Binding ErrorMessageHeight}"
                Text="{Binding ErrorMessage}" />
 
     </StackLayout>
