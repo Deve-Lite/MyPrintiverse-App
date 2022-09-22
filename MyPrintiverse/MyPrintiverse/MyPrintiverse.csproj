@@ -131,10 +131,19 @@
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\ExtendedAddCollectionHeader.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="FilamentsModule\FilamentTemplates\Others\StepDescription.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="FilamentsModule\FilamentTemplates\Others\TopManageBar.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\ValueIndicators\MaterialProperty.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\ValueIndicators\RangeValueIndicator.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="FilamentsModule\Spools\ManageSpoolViews\SpoolStepOneView.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Resources\Colors.xaml">
@@ -180,6 +189,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\TitledEditor.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\TitledSwitch.xaml">
@@ -238,6 +250,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\MyPrintiverse.Core\MyPrintiverse.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="FilamentsModule\Filaments\ManageFilamentViws\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyPrintiverseHideInfoBar="True" /></VisualStudio></ProjectExtensions>

@@ -15,11 +15,11 @@ public partial class ActivityButton : ContentView
         set => SetValue(ButtonStyleProperty, value);
     }
 
-    public static readonly BindableProperty ButtonCommandProperty = BindableProperty.Create(nameof(ButtonCommand), typeof(ICommand), typeof(ActivityButton), null);
-    public ICommand ButtonCommand
+    public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ActivityButton), null);
+    public ICommand Command
     {
-        get => (ICommand)GetValue(ButtonCommandProperty);
-        set => SetValue(ButtonCommandProperty, value);
+        get => (ICommand)GetValue(CommandProperty);
+        set => SetValue(CommandProperty, value);
     }
 
     public static readonly BindableProperty IsButtonEnabledProperty = BindableProperty.Create(nameof(IsButtonEnabled), typeof(bool), typeof(ActivityButton), false);

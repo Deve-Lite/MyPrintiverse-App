@@ -30,6 +30,7 @@ public class FilamentsManageViewModel : BaseItemManageViewModel<Filament>
     protected virtual async Task LoadData()
     {
         Item = new FilamentValidator();
+        (Item as FilamentValidator).Diameter.Value = 1.75;
         await LoadFilamentTypes();
     }
 

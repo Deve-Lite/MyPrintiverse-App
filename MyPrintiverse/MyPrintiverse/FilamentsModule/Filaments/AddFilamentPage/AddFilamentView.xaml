@@ -20,11 +20,11 @@
 
 
     <ScrollView VerticalOptions="FillAndExpand">
-        <Grid VerticalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand">
 
+            <Label Text="{Binding Item.Diameter.Value}"/>
 
-            
-        </Grid>
+        </StackLayout>
     </ScrollView>
 
 </ContentPage>

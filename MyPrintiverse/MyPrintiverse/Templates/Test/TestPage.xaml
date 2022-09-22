@@ -25,11 +25,7 @@
     
             <Label Style="{StaticResource TitleOswald}" Text="Titled Switch" HorizontalOptions="Center"/>
 
-            <module:TitledSwitch TitleStyle="{StaticResource BaseOswald}" 
-                                 SwitchStyle="{StaticResource BaseSwitch}" 
-                                 FrameStyle="{StaticResource BaseFrame}"
-                                 Padding="0"
-                                 Margin="10,5,10,5"
+            <module:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
                                  IsToggled="{Binding BoolValue, Mode=TwoWay}"
                                  Title="tfgmndfgohnfhnmdfgh" />
 
@@ -85,8 +81,7 @@
 
             <module:ActivityButton Style="{StaticResource BaseActivityButton}"
                                    Margin="10,0,10,0"
-                                   HeightRequest="50"
-                                   ButtonCommand="{Binding LoadUpCommand}"
+                                   Command="{Binding LoadUpCommand}"
                                    Text="Login"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tertiary}" Margin="0,10,0,60"/>

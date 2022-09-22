@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.FilamentsModule.Spools.ManageSpoolViews.SpoolStepOneView"
+             xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
+             x:Name="this">
+    <VerticalStackLayout BindingContext="{x:Reference this}">
+        
+        <otherTemplates:TopManageBar BackCommand="{Binding BackCommand}"/>
+        
+        <otherTemplates:StepDescription Title="New Spool"
+                                        Step="Step 1 of 2"
+                                        Description="Enter spool informations."/>
+
+        <entryTemplates:EntityValidatableEntry Style="{StaticResource BaseEntityValidatableEntry}"
+                                               Title="Cost"
+                                               Text="{Binding Spool.}"
+                                               ValidationCommand="{Binding .}"
+                                               IsValid="{Binding .}"
+                                               ErrorMessage="{Binding .}"
+                                               Entity="{Binding .}"/>
+        
+        <entryTemplates:EntityValidatableEntry />
+        <entryTemplates:EntityValidatableEntry />
+        <entryTemplates:TitledEditor />
+        <entryTemplates:TitledSwitch />
+        
+        <entryTemplates:ActivityButton Style="{StaticResource}" 
+                                       Command="{Binding NextStepCommand}"
+                                       IsRunning="{Binding IsRunning}"/>
+        
+    </VerticalStackLayout>
+</ContentView>

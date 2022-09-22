@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.FilamentsModule.FilamentTemplates.Others.StepDescription"
+             x:Name="this">
+    <Grid BindingContext="{x:Reference this}"
+          RowDefinitions="*,*" 
+          RowSpacing="10"
+          ColumnDefinitions="0.6*, 0.4*">
+        
+        <Label Style="{StaticResource LargeOswald}" 
+               VerticalOptions="Start" 
+               Text="{Binding Title}"/>
+
+        <Label Style="{StaticResource MediumOswald}" 
+               Grid.Column="1" 
+               VerticalOptions="Start" 
+               HorizontalOptions="End"
+               TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark} }"
+               Text="{Binding Step}"/>
+        
+        <Label Grid.ColumnSpan="2" 
+               Grid.Row="1" 
+               Style="{StaticResource MediumRaleway}"
+               Text="{Binding Description}"/>
+    </Grid>
+</ContentView>
