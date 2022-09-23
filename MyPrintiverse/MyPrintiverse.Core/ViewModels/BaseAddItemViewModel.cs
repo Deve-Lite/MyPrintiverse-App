@@ -16,6 +16,8 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
     /// </summary>
     public AsyncRelayCommand AddItemCommand { get; }
 
+    public string AddRoute => "..";
+
     #endregion
 
     public BaseAddItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
@@ -38,7 +40,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
 
         if (IsValid())
             if (await ItemService.AddItemAsync(Item.Map()))
-                await Shell.Current.GoToAsync("..", true);
+                await OpenPage(AddRoute, true);
         
         IsRunning = false;
         IsBusy = false;

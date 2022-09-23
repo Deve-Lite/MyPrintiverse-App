@@ -41,6 +41,8 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// </summary>
     public AsyncRelayCommand DeleteItemCommand { get; }
 
+    protected virtual string EditRoute => $"{typeof(TEdit).Name}?Id={Item.Id}";
+    protected virtual string DeleteRoute => "..";
     #endregion
 
     #region Services
@@ -67,11 +69,12 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     }
 
     #region Overrides
-    public override async void OnAppearing()
+    public override void OnAppearing()
     {
         base.OnAppearing();
 
-        Item = await ItemService.GetItemAsync(Id);
+        Task.Run(async() => { Item = await ItemService.GetItemAsync(Id); });
+
     }
 
     #endregion
@@ -87,7 +90,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
         if (AnyActionStartedCommand())
             return;
 
-        await Shell.Current.GoToAsync($"{typeof(TEdit).Name}");
+        await OpenPage(EditRoute);
     }
 
     /// <summary>
@@ -101,7 +104,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
 
         if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
             if (await ItemService.DeleteItemAsync(Id))
-                await Shell.Current.GoToAsync("..", true);
+                await Shell.Current.GoToAsync(DeleteRoute, true);
 
         IsBusy = false;
     }

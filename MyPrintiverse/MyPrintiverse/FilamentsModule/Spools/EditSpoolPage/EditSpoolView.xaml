@@ -2,10 +2,119 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Spools.EditSpoolPage.EditSpoolView"
-             >
-    <StackLayout>
-        <Label Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-    </StackLayout>
+             xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
+             xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Spools.AddSpoolPage"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="60, *, 60" 
+          ColumnDefinitions="*,*" 
+          VerticalOptions="FillAndExpand" 
+          HorizontalOptions="FillAndExpand">
+
+        <otherTemplates:TopManageBar Grid.ColumnSpan="2" 
+                                     BackCommand="{Binding BackCommand}"/>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" >
+
+            <ScrollView IsVisible="{Binding StepOne}">
+                <StackLayout Margin="15">
+
+                    <otherTemplates:StepDescription Title="New Spool"
+                                        Step="Step 1 of 2"
+                                        Description="Enter spool informations."
+                                        Margin="0,2,0,10"/>
+
+
+                    <entryTemplates:EntityValidatableEntry Margin="0,10,0,0"
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Cost"
+                                                           Text="{Binding Item.Cost.Value}"
+                                                           ValidationCommand="{Binding Item.Cost.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.Cost.IsValid}"
+                                                           ErrorMessage="{Binding Item.Cost.Error}"
+                                                           Entity="{Binding Currency}"/>
+
+                    <entryTemplates:EntityValidatableEntry x:Name="standardWeightEntry" 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                       Title="Standard filament weight"
+                                                       Text="{Binding Item.StandardWeight.Value}"
+                                                       ValidationCommand="{Binding Item.StandardWeight.ExtendedValidateCommand}"
+                                                       IsValid="{Binding Item.StandardWeight.IsValid}"
+                                                       ErrorMessage="{Binding Item.StandardWeight.Error}"
+                                                       Entity="kg"/>
+
+                    <entryTemplates:EntityValidatableEntry x:Name="avaliableWeightEntry" 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                       Title="Avaliable filament weight"
+                                                       Text="{Binding Item.AvaliableWeight.Value}"
+                                                       ValidationCommand="{Binding Item.AvaliableWeight.ExtendedValidateCommand}"
+                                                       IsValid="{Binding Item.AvaliableWeight.IsValid}"
+                                                       ErrorMessage="{Binding Item.AvaliableWeight.Error}"
+                                                       Entity="kg"/>
+
+                    <entryTemplates:TitledEditor x:Name="descriptionEntry" 
+                                                 Style="{StaticResource BaseTitledEditor}"
+                                             Title="Description"
+                                             Text="{Binding Item.Description.Value}"
+                                             ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
+                                             IsValid="{Binding Item.Description.IsValid}"
+                                             ErrorMessage="{Binding Item.Description.Error}"/>
+
+                    <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
+                                             Title="Is on spool"
+                                             IsToggled="{Binding Item.IsOnSpool}"/>
+
+                </StackLayout>
+            </ScrollView>
+
+            <ScrollView IsVisible="{Binding FinishingStep}">
+                <StackLayout Margin="15">
+                    <otherTemplates:StepDescription Title="New Spool"
+                                        Step="Step 2 of 2"
+                                        Description="Check your data."
+                                        Margin="0,2,0,10"/>
+
+                    <spoolTemplates:DisplaySpoolView Margin="0,10,0,0"
+                                                     Brand="{Binding Filament.Brand}"
+                                                     Diameter="{Binding Filament.Diameter, StringFormat='{0:0.00} mm'}"
+                                                     Type="{Binding Filament.TypeId, Converter={StaticResource TypeIdToTypeConverter}}"
+                                                     ColorName="{Binding Filament.ColorName}"
+                                                     Description="{Binding Item.Description.Value}"
+                                                     AvaliableWeight="{Binding Item.AvaliableWeight.Value, StringFormat='{0:0.000}'}"
+                                                     StandardWeight="{Binding Item.StandardWeight.Value, StringFormat='{0:0.000 kg}'}"
+                                                     Cost="{Binding Item.Cost.Value}"
+                                                     EditedAt="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Created at: {0:dd/MM/yy HH:mm}'}"
+                                                     Currency="{Binding Currency}"/>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+
+        <Border Style="{StaticResource CollectionHeaderBorder}"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                VerticalOptions="End"
+                Margin="15,0"/>
+
+        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+                                       IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       Text="BACK"
+                                       VerticalOptions="Center"
+                                       Margin="15,0,20,0"
+                                       Command="{Binding StepBackCommand}"/>
+
+        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Text="{Binding NextButtonTitle}"
+                                       VerticalOptions="Center"
+                                       Margin="20,0,15,0"
+                                       Command="{Binding NextStepCommand}"/>
+
+    </Grid>
 </ContentPage>

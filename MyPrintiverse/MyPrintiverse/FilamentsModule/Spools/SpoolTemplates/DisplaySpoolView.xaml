@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentPage"
-             x:Class="MyPrintiverse.FilamentsModule.Spools.SpoolPage.SpoolView"
-             Shell.TabBarIsVisible="False">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Tip" 
-                     IconImageSource="spool.png"/>
-        
-        <ToolbarItem Order="Secondary" 
-                     Text="Delete" 
-                     Command="{Binding DeleteItemCommand}"/>
-        
-        <ToolbarItem Order="Secondary"
-                     Text="Edit" 
-                     Command="{Binding EditItemCommand}"/>
-    </ContentPage.ToolbarItems>
-    
-    <StackLayout>
-        
-        <Frame Style="{StaticResource BaseFrame}" 
+             x:Class="MyPrintiverse.FilamentsModule.Spools.SpoolTemplates.DisplaySpoolView"
+             x:Name="this">
+    <ContentView.Content>
+        <Frame BindingContext="{x:Reference this}" Style="{StaticResource BaseFrame}" 
                Padding="15, 0, 15, 0"
-               Margin="15"
                VerticalOptions="Center">
-            
+
             <Grid RowDefinitions="*,*,*,*,*,*,*,*,*"
                   ColumnDefinitions="*">
 
@@ -32,7 +15,7 @@
                 <Label Style="{StaticResource TitleOswald}" 
                        Grid.Row="0"
                        Margin="3,3"
-                       Text="{Binding ItemFilament.Brand}"/>
+                       Text="{Binding Brand}"/>
 
 
                 <Label Grid.Row="1">
@@ -41,7 +24,7 @@
                             <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Filament Type: "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding ItemFilament.TypeId, Converter={StaticResource TypeIdToTypeConverter}}"/>
+                                  Text="{Binding Type}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -52,7 +35,7 @@
                             <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Color: "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding ItemFilament.ColorName}"/>
+                                  Text="{Binding ColorName}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -63,12 +46,12 @@
                             <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Diameter: "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding ItemFilament.Diameter, StringFormat='{0:0.00} mm'}"/>
+                                  Text="{Binding Diameter}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                
+
                 <Label Style="{StaticResource MediumOswald}"
                        Grid.Row="4"
                        Margin="3,0,0,0"
@@ -80,11 +63,11 @@
                             <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Spool status: "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Item.AvaliableWeight,StringFormat='{0:0.00}'}"/>
+                                  Text="{Binding AvaliableWeight}"/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text=" / "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Item.StandardWeight,StringFormat='{0:0.00} kg'}"/>
+                                  Text="{Binding StandardWeight}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -95,25 +78,26 @@
                             <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Cost: "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Item.Cost}"/>
+                                  Text="{Binding Cost}"/>
+                            <Span Style="{StaticResource DisplayFrameSpan}"
+                                  Text=" "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Currency, StringFormat=' {0}'}"/>
+                                  Text="{Binding Currency}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
                 <Label Grid.Row="7" Style="{StaticResource DisplayFrameSpan}" 
                        Margin="0,5,10,0"
-                       Text="{Binding Item.Description}"
-                       IsVisible="{Binding Item.Description, Converter={StaticResource IsNotEmptyStringConventer}}"/>
+                       Text="{Binding Description}"
+                       IsVisible="{Binding Description, Converter={StaticResource IsNotEmptyStringConventer}}"/>
 
                 <Label Style="{StaticResource MicroRaleway}"
                        Grid.Row="8"
                        Margin="0,5"
-                       Text="{Binding Item.EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
+                       Text="{Binding EditedAt}" />
 
             </Grid>
         </Frame >
-        
-    </StackLayout>
-</ContentPage>
+    </ContentView.Content>
+</ContentView>

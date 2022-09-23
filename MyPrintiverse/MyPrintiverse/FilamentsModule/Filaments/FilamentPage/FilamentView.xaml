@@ -37,7 +37,8 @@
 
     <StackLayout>
 
-        <Frame Style="{StaticResource BaseFrame}" 
+        <Frame Style="{StaticResource BaseFrame}"
+               Margin="15,0,15,0"
                Padding="15, 0, 0, 0"
                VerticalOptions="Center">
             <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*"

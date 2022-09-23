@@ -20,6 +20,8 @@ public class SpoolValidator : BaseValidator<Spool>
     {
         AddValidation();
 
+        InitializeFields();
+
         InitUnit();
     }
 
@@ -27,15 +29,17 @@ public class SpoolValidator : BaseValidator<Spool>
     {
         AddValidation();
 
+        InitializeFields();
+
         Map(spool);
 
         InitUnit();
     }
 
-    public override bool Validate() => AvaliableWeight.Validate() && 
-                                       StandardWeight.Validate() &&     
-                                       Description.Validate() &&
-                                       Cost.Validate();
+    public override bool Validate() => Cost.Validate() &&
+                                       StandardWeight.Validate() &&
+                                       AvaliableWeight.Validate() &&     
+                                       Description.Validate();
 
     public override Spool Map()
     {
@@ -75,6 +79,17 @@ public class SpoolValidator : BaseValidator<Spool>
 
 
         Description = ExtendedValidator.Build<string>();
+    }
+
+    private void InitializeFields()
+    {
+        IsOnSpool = true;
+        IsFinished = false;
+        Cost.Value = ""; 
+        AvaliableWeight.Value = "";
+        StandardWeight.Value = "";
+        Description.Value = "";
+        FilamentId = "";
     }
 
     protected override void Map(Spool spool)

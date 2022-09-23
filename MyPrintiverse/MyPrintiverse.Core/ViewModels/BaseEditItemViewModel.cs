@@ -17,6 +17,8 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     /// </summary>
     public string Id { get; set; }
 
+    public string EditRoute => "..";
+
     #endregion
 
     #region Commands
@@ -33,6 +35,16 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
         EditItemCommand = new AsyncRelayCommand(EditItem, CanExecute);
     }
 
+    #region Override
+
+    public override void OnAppearing()
+    {
+        base.OnAppearing();
+        //TODO : LOADING
+    }
+
+    #endregion
+
     #region Virtual Methods
 
     /// <summary>
@@ -48,7 +60,7 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
 
         if (IsValid())
             if (await ItemService.UpdateItemAsync(Item.Map()))
-                await Shell.Current.GoToAsync("..", true);
+                await OpenPage(EditRoute, true);
 
         IsRunning = false;
         IsBusy = false;

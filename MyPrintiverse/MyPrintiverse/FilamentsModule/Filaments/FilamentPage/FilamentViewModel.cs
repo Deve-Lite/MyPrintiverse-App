@@ -59,7 +59,7 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
         
     }
 
-    protected override async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(AddSpoolView)}?Id={Item.Id}");
+    protected override async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(AddSpoolView)}?FilamentId={Item.Id}");
 
     protected override void DeleteFromItems(Spool item)
     {

@@ -74,8 +74,8 @@ public static class FilamentBuilderConfig
 		builder.Services.AddSingleton<EditFilamentTypeView>();
 
 		builder.Services.AddSingleton<SpoolView>();
-		builder.Services.AddSingleton<AddSpoolView>();
-		builder.Services.AddSingleton<EditSpoolView>();
+		builder.Services.AddTransient<AddSpoolView>();
+		builder.Services.AddTransient<EditSpoolView>();
 
 
 		return builder;
@@ -100,8 +100,8 @@ public static class FilamentBuilderConfig
 		builder.Services.AddSingleton<EditFilamentTypeViewModel>();
 
 		builder.Services.AddSingleton<SpoolViewModel>();
-		builder.Services.AddSingleton<AddSpoolViewModel>();
-		builder.Services.AddSingleton<EditSpoolViewModel>();
+		builder.Services.AddTransient<AddSpoolViewModel>();
+		builder.Services.AddTransient<EditSpoolViewModel>();
 
 
 		return builder;
