@@ -42,7 +42,7 @@
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
                                                        Title="Standard filament weight"
                                                        Text="{Binding Item.StandardWeight.Value}"
-                                                       ValidationCommand="{Binding Item.StandardWeight.ExtendedValidateCommand}"
+                                                       ValidationCommand="{Binding StandardWeightValidateCommand}"
                                                        IsValid="{Binding Item.StandardWeight.IsValid}"
                                                        ErrorMessage="{Binding Item.StandardWeight.Error}"
                                                        Entity="kg"/>

@@ -1,5 +1,5 @@
 ﻿
-using MyPrintiverse.Core.Validation.NumberValidation;
+using MyPrintiverse.Core.Extensions;
 
 namespace MyPrintiverse.FilamentsModule.Spools;
 
@@ -74,9 +74,8 @@ public class SpoolValidator : BaseValidator<Spool>
 
         AvaliableWeight = ExtendedValidator.Build<string>()
             .WithRule( new IsNumber(), "Data is not a valid number.")
-            .WithRule( new MantissaLengthRule(3), "Too long number mantissa.");
-
-
+            .WithRule( new MantissaLengthRule(3), "Too long number mantissa.")
+            .WithRule( new LowerOrEqualRule(StandardWeight), "Should be lower than standard weight.");
 
         Description = ExtendedValidator.Build<string>();
     }
@@ -92,7 +91,7 @@ public class SpoolValidator : BaseValidator<Spool>
         FilamentId = "";
     }
 
-    protected override void Map(Spool spool)
+    public override void Map(Spool spool)
     {
         base.Map(spool);
 

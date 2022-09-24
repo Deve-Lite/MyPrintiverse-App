@@ -36,8 +36,11 @@ public partial class EditSpoolViewModel : BaseEditItemViewModel<Spool>
     {
         base.OnAppearing();
 
-        Task.Run(async () => { Filament = await FilamentService.GetItemAsync(FilamentId); });
-        (Item as SpoolValidator)!.FilamentId = FilamentId;
+        Task.Run(async () => 
+        { 
+            Filament = await FilamentService.GetItemAsync(FilamentId);
+            Item = new SpoolValidator(await ItemService.GetItemAsync(Id));
+        });
 
         //TODO: odczytanie z ustawień
         Currency = "PLN";

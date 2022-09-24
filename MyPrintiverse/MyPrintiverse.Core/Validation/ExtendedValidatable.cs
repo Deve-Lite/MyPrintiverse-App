@@ -1,6 +1,8 @@
 ﻿
 
-namespace MyPrintiverse.FilamentsModule.Spools;
+using Plugin.ValidationRules;
+
+namespace MyPrintiverse.Core.Extensions;
 
 public partial class ExtendedValidatable<T> : Validatable<T>
 {

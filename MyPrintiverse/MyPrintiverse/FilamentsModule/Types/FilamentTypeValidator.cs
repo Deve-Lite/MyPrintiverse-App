@@ -92,7 +92,7 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
 
     }
 
-    protected override void Map(FilamentType filamentType)
+    public override void Map(FilamentType filamentType)
     {
         base.Map(filamentType);
 

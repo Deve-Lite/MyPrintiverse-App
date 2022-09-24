@@ -41,7 +41,6 @@ public partial class AddSpoolViewModel : BaseAddItemViewModel<Spool>
 
         //TODO: odczytanie z ustawień
         Currency = "PLN";
-
     }
 
     [RelayCommand]
@@ -71,7 +70,6 @@ public partial class AddSpoolViewModel : BaseAddItemViewModel<Spool>
 
         IsRunning = false;
     }
-
     [RelayCommand]
     public override async Task StepBack()
     {
@@ -81,6 +79,20 @@ public partial class AddSpoolViewModel : BaseAddItemViewModel<Spool>
             FinishingStep = false;
             NextButtonTitle = "NEXT";
         }
+    }
+
+    #endregion
+
+    #region Privates
+
+    [RelayCommand]
+    private void StandardWeightValidate()
+    {
+        var item = (Item as SpoolValidator);
+        item!.StandardWeight.Validate();
+
+        if (!string.IsNullOrEmpty(item.AvaliableWeight.Value))
+            item.AvaliableWeight.Validate();
     }
 
     #endregion

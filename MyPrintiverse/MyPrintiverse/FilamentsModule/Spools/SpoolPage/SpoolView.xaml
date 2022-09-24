@@ -7,15 +7,18 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Tip" 
-                     IconImageSource="spool.png"/>
+                     IconImageSource="spool.png"
+                     IsEnabled="{Binding IsEnabled}"/>
         
         <ToolbarItem Order="Secondary" 
                      Text="Delete" 
-                     Command="{Binding DeleteItemCommand}"/>
+                     Command="{Binding DeleteItemCommand}"
+                     IsEnabled="{Binding IsEnabled}"/>
         
         <ToolbarItem Order="Secondary"
                      Text="Edit" 
-                     Command="{Binding EditItemCommand}"/>
+                     Command="{Binding EditItemCommand}"
+                     IsEnabled="{Binding IsEnabled}"/>
     </ContentPage.ToolbarItems>
     
     <StackLayout>

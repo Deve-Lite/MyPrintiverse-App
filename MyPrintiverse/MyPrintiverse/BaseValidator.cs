@@ -23,7 +23,7 @@ public abstract class BaseValidator<T> : Validator<T> where T : BaseModel, new()
     /// Maps given item to class data.
     /// </summary>
     /// <param name="item"></param>
-    protected virtual void Map(T item)
+    public virtual void Map(T item)
     {
         Id = item.Id;
         CreatedAtTicks = item.CreatedAtTicks;

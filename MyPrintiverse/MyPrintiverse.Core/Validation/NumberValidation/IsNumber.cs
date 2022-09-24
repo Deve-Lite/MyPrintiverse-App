@@ -1,4 +1,6 @@
-﻿
+﻿using MyPrintiverse.Core.Extensions;
+using System.Globalization;
+
 namespace MyPrintiverse.Core.Validation.NumberValidation;
 
 public class IsNumber : IValidationRule<string>
@@ -9,15 +11,20 @@ public class IsNumber : IValidationRule<string>
     public bool Check(string value)
     {
         if (value == null)
-
             return false;
 
-        string copy = "";
-        if (value.Contains('.'))
-            copy = value.Replace('.', ',');
-        else
-            copy = value;
+        if (value.Contains(','))
+            value = value.Replace(',', '.');
 
-        return double.TryParse(value, out _) || double.TryParse(copy, out _);
+        try
+        {
+            double.Parse(value, CultureInfo.InvariantCulture);
+        }
+        catch
+        {
+            return false;
+        }
+
+        return true;
     }
 }

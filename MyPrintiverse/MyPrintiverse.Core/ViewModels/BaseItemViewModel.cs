@@ -29,6 +29,9 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// </summary>
     public string Id { get; set; }
 
+    protected virtual string EditRoute => $"{typeof(TEdit).Name}?Id={Item.Id}";
+    protected virtual string DeleteRoute => "..";
+
     #endregion
 
     #region Commands
@@ -41,8 +44,6 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// </summary>
     public AsyncRelayCommand DeleteItemCommand { get; }
 
-    protected virtual string EditRoute => $"{typeof(TEdit).Name}?Id={Item.Id}";
-    protected virtual string DeleteRoute => "..";
     #endregion
 
     #region Services

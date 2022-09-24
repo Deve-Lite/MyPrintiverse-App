@@ -1,8 +1,9 @@
 ﻿
 
+using Plugin.ValidationRules.Extensions;
 using Plugin.ValidationRules.Interfaces;
 
-namespace MyPrintiverse.FilamentsModule.Spools;
+namespace MyPrintiverse.Core.Extensions;
 
 public static class ExtendedValidator 
 {

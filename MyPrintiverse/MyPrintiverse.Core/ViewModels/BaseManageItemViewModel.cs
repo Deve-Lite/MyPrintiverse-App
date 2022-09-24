@@ -76,7 +76,6 @@ public abstract partial class BaseItemManageViewModel<T> : BaseViewModel where T
 
         StepOne = true;
         FinishingStep = false;
-
         NextButtonTitle = "NEXT";
 
         BackCommand = new AsyncRelayCommand(execute: Back, canExecute: CanExecute);
