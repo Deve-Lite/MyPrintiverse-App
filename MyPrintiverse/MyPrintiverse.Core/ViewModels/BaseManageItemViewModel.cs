@@ -42,7 +42,16 @@ public abstract partial class BaseItemManageViewModel<T> : BaseViewModel where T
     [ObservableProperty]
     public string _nextButtonTitle;
 
+    /// <summary>
+    /// Route to perform when back Button is clicked.
+    /// </summary>
     public string BackRoute => "..";
+
+
+    /// <summary>
+    /// Route to perform after succesful add/edit action.
+    /// </summary>
+    public string SuccesRoute => "..";
 
     #endregion
 
@@ -90,8 +99,29 @@ public abstract partial class BaseItemManageViewModel<T> : BaseViewModel where T
 
     #endregion
 
-
     #region Virtual Methods
+
+    /// <summary>
+    /// Performs add/edit to database action.
+    /// </summary>
+    /// <param name="manageItem"></param>
+    /// <returns></returns>
+    public virtual async Task ManageItem(Func<T, Task<bool>> manageItem)
+    {
+        if (AnyActionStartedCommand())
+            return;
+
+        IsRunning = true;
+
+        if (IsValid())
+            if (await manageItem.Invoke(Item.Map()))
+                await OpenPage(SuccesRoute, true);
+
+        IsRunning = false;
+        IsBusy = false;
+    }
+
+
     public virtual async Task Back()
     {
         if (AnyActionStartedCommand())

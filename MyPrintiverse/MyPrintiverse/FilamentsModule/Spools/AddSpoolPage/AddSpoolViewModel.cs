@@ -6,30 +6,12 @@ using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 
-[QueryProperty(nameof(FilamentId),nameof(FilamentId))]
-public partial class AddSpoolViewModel : BaseAddItemViewModel<Spool>
+
+public partial class AddSpoolViewModel : ManageSpoolViewModel
 {
-    #region Fields
-    public string FilamentId { get; set; }
 
-    [ObservableProperty]
-    public string _currency;
-    
-    [ObservableProperty]
-    public Filament _filament;
-
-    IItemService<Filament> FilamentService;
-
-    IToast Toast;
-
-    #endregion
-
-    public AddSpoolViewModel(IMessageService messageService, IItemService<Spool> itemService, IItemService<Filament> filamentService, IToast toast) : base(messageService, itemService)
+    public AddSpoolViewModel(IMessageService messageService, IItemService<Spool> itemService, IItemService<Filament> filamentService, IToast toast) : base(messageService, itemService, filamentService, toast)
 	{
-        FilamentService = filamentService;
-        Filament = new Filament();
-        Item = new SpoolValidator();
-        Toast = toast;
     }
 
     #region Overrides
@@ -37,74 +19,15 @@ public partial class AddSpoolViewModel : BaseAddItemViewModel<Spool>
     {
         base.OnAppearing();
 
-        Task.Run(async() => { Filament = await FilamentService.GetItemAsync(FilamentId); });
         (Item as SpoolValidator)!.FilamentId = FilamentId;
-
-        //TODO: odczytanie z ustawień
-        Currency = "PLN";
     }
 
     [RelayCommand]
-    public override async Task NextStep()
-    {
-        IsRunning = true;
+    public override async Task NextStep() => await Next(AddItem);
 
-        //TODO: Simulate Data Animation
-        await Task.Delay(500);
-
-        if (FinishingStep)
-        {
-            // Parse will not throw Exception because of NumberRules
-            var avaliableWeight =  double.Parse((Item as SpoolValidator).AvaliableWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-
-            if (avaliableWeight == 0)
-               (Item as SpoolValidator).IsFinished = true;
-            else
-               (Item as SpoolValidator).IsFinished = false;
-
-            
-            await AddItem();
-        }
-
-        if (StepOne)
-        {
-            if (IsStepOneValid())
-            {
-                StepOne = false;
-                FinishingStep = true;
-                NextButtonTitle = "ADD";
-            }
-            else
-                await Toast.Toast("Some data is invalid.");
-        }
-
-        IsRunning = false;
-    }
-
-    [RelayCommand]
-    public override async Task StepBack()
-    {
-        if (FinishingStep)
-        {
-            StepOne = true;
-            FinishingStep = false;
-            NextButtonTitle = "NEXT";
-        }
-    }
+    public async Task AddItem() => await ManageItem( async(spool) => { return await ItemService.AddItemAsync(spool); });
 
     #endregion
 
-    #region Privates
 
-    [RelayCommand]
-    private void StandardWeightValidate()
-    {
-        var item = (Item as SpoolValidator);
-        item!.StandardWeight.Validate();
-
-        if (!string.IsNullOrEmpty(item.AvaliableWeight.Value))
-            item.AvaliableWeight.Validate();
-    }
-
-    #endregion
 }

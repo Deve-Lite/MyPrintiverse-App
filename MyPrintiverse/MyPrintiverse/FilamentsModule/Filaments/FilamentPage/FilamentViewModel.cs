@@ -12,6 +12,8 @@ namespace MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, EditFilamentView, Spool, AddSpoolView, EditSpoolView, SpoolView>
 {
 
+    //TODO : Fix spool routes
+
     [ObservableProperty]
     private bool _isFinishedFilamentsVisible;
 

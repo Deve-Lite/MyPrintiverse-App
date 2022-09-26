@@ -15,7 +15,6 @@ public class SpoolValidator : BaseValidator<Spool>
     public bool IsFinished { get; set; }
     public bool IsOnSpool { get; set; }
 
-
     public SpoolValidator()
     {
         AddValidation();
@@ -93,6 +92,8 @@ public class SpoolValidator : BaseValidator<Spool>
 
     public override void Map(Spool spool)
     {
+        // TODO : If edit state save edit data and put into spool only edited data.
+
         base.Map(spool);
 
         FilamentId = spool.FilamentId;

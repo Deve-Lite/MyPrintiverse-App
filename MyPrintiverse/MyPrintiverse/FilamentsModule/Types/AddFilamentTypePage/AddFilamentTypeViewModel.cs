@@ -12,10 +12,21 @@ public class AddFilamentTypeViewModel : BaseAddItemViewModel<FilamentType>
     {
         base.OnAppearing();
 
-        Task.Run(async () =>
-        {
-            await Task.Delay(DELAY);
-            await ItemService.AddItemAsync(_filamentTypeMock.GenerateFilamentType());
-        });
+        //Task.Run(async () =>
+        //{
+        //    await Task.Delay(DELAY);
+        //    await ItemService.AddItemAsync(_filamentTypeMock.GenerateFilamentType());
+        //});
+    }
+
+    public override Task NextStep()
+    {
+        return base.NextStep();
+    }
+
+
+    public override Task StepBack()
+    {
+        return base.StepBack();
     }
 }
