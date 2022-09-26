@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using MyPrintiverse.FilamentsModule.Filaments;
 using MyPrintiverse.Tools;
+using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 
@@ -53,6 +54,15 @@ public partial class AddSpoolViewModel : BaseAddItemViewModel<Spool>
 
         if (FinishingStep)
         {
+            // Parse will not throw Exception because of NumberRules
+            var avaliableWeight =  double.Parse((Item as SpoolValidator).AvaliableWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+
+            if (avaliableWeight == 0)
+               (Item as SpoolValidator).IsFinished = true;
+            else
+               (Item as SpoolValidator).IsFinished = false;
+
+            
             await AddItem();
         }
 
@@ -70,6 +80,7 @@ public partial class AddSpoolViewModel : BaseAddItemViewModel<Spool>
 
         IsRunning = false;
     }
+
     [RelayCommand]
     public override async Task StepBack()
     {

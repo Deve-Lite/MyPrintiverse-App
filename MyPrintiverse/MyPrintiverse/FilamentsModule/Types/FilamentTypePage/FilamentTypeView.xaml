@@ -32,7 +32,8 @@
     
     <ScrollView>
         <StackLayout >
-            <Frame Style="{StaticResource BaseFrame}" 
+            <Frame Style="{StaticResource BaseFrame}"
+                   Margin="15,15,15,20"
                    Padding="10, 4, 10, 4">
 
                 <Grid RowDefinitions="*,*,*,*,*">

@@ -84,6 +84,7 @@
                                                      Type="{Binding Filament.TypeId, Converter={StaticResource TypeIdToTypeConverter}}"
                                                      ColorName="{Binding Filament.ColorName}"
                                                      Description="{Binding Item.Description.Value}"
+                                                     IsDescriptionVisible="{Binding Item.Description.Value, Converter={StaticResource IsNotEmptyStringConventer}}"
                                                      AvaliableWeight="{Binding Item.AvaliableWeight.Value, StringFormat='{0:0.000}'}"
                                                      StandardWeight="{Binding Item.StandardWeight.Value, StringFormat='{0:0.000 kg}'}"
                                                      Cost="{Binding Item.Cost.Value}"

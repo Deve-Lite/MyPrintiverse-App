@@ -11,18 +11,12 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
 {
     #region Commands
 
-    /// <summary>
-    /// Command for view, designed to save new item.
-    /// </summary>
-    public AsyncRelayCommand AddItemCommand { get; }
-
     public string AddRoute => "..";
 
     #endregion
 
     public BaseAddItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
-        AddItemCommand = new AsyncRelayCommand(AddItem, CanExecute);
     }
 
     #region Virtual Methods

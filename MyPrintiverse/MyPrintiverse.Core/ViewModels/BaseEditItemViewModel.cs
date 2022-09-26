@@ -21,18 +21,8 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
 
     #endregion
 
-    #region Commands
-
-    /// <summary>
-    /// Command for view, designed to save edited item.
-    /// </summary>
-    public AsyncRelayCommand EditItemCommand { get; }
-
-    #endregion
-
     public BaseEditItemViewModel(IMessageService messageService, IItemService<T> itemService) : base(messageService, itemService)
     {
-        EditItemCommand = new AsyncRelayCommand(EditItem, CanExecute);
     }
 
     #region Override
@@ -40,7 +30,7 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     public override void OnAppearing()
     {
         base.OnAppearing();
-        //TODO : LOADING
+        //TOIMPLEMENT : LOADING
     }
 
     #endregion

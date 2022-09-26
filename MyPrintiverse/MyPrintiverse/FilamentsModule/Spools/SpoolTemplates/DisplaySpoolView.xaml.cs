@@ -61,6 +61,13 @@ public partial class DisplaySpoolView : ContentView
         set => SetValue(DescriptionProperty, value);
     }
 
+    public static readonly BindableProperty IsDescriptionVisibleProperty = BindableProperty.Create(nameof(IsDescriptionVisible), typeof(bool), typeof(DisplaySpoolView), true);
+    public bool IsDescriptionVisible
+    {
+        get => (bool)GetValue(IsDescriptionVisibleProperty);
+        set => SetValue(IsDescriptionVisibleProperty, value);
+    }
+
     public static readonly BindableProperty EditedAtProperty = BindableProperty.Create(nameof(EditedAt), typeof(string), typeof(DisplaySpoolView), "");
     public string EditedAt
     {
