@@ -1,17 +1,16 @@
-﻿
-using MyPrintiverse.Core.Utilities;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace MyPrintiverse.Core.Validation.NumberValidation;
 
 /// <summary>
-/// Checks if value is lower or equal valueReference.Value.
+/// Checks if value is bigger or equal valueReference.Value.
 /// </summary>
-public class LowerOrEqualRule : IValidationRule<string>
+public class BiggerOrEqualRule : IValidationRule<string>
 {
     private ExtendedValidatable<string> ValueReference;
 
-    public LowerOrEqualRule(ExtendedValidatable<string> valueReference)
+
+    public BiggerOrEqualRule(ExtendedValidatable<string> valueReference)
     {
         ValueReference = valueReference;
     }

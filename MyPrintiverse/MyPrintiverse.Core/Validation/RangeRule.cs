@@ -21,7 +21,7 @@ public class RangeRule<T> : IValidationRule<T>
         if (typeof(T).IsValueType)
             return false;
 
-        var numberLength = value.ToString().Length;
+        var numberLength = value?.ToString()?.Length;
 
         if (_minLength >= 0 && numberLength < _minLength)
             return false;

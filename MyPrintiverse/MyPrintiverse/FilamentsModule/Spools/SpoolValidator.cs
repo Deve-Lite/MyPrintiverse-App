@@ -1,5 +1,6 @@
 ﻿
 using MyPrintiverse.Core.Extensions;
+using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Spools;
 
@@ -50,11 +51,11 @@ public class SpoolValidator : BaseValidator<Spool>
         spoolMap.Description = Description.Value;
         spoolMap.IsFinished = IsFinished;
         spoolMap.IsSample = IsOnSpool;
-        // TODO
-        // Check conversion!.
-        spoolMap.AvaliableWeight = Convert.ToDouble(AvaliableWeight.Value);
-        spoolMap.StandardWeight = Convert.ToDouble(StandardWeight.Value);
-        spoolMap.Cost = Convert.ToDouble(Cost.Value);
+
+        /* Parse will not throw Exception because of NumberRules */
+        spoolMap.AvaliableWeight = double.Parse(AvaliableWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        spoolMap.StandardWeight = double.Parse(StandardWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        spoolMap.Cost = double.Parse(Cost.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
 
         return spoolMap;
     }
@@ -76,7 +77,8 @@ public class SpoolValidator : BaseValidator<Spool>
             .WithRule( new MantissaLengthRule(3), "Too long number mantissa.")
             .WithRule( new LowerOrEqualRule(StandardWeight), "Should be lower than standard weight.");
 
-        Description = ExtendedValidator.Build<string>();
+        Description = ExtendedValidator.Build<string>()
+            .WithRule(new RangeRule<string>(maxLength:500), "Too long data.");
     }
 
     private void InitializeFields()

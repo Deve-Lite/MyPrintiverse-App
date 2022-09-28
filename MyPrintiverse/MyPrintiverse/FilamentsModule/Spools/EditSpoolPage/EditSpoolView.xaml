@@ -23,7 +23,7 @@
             <ScrollView IsVisible="{Binding StepOne}">
                 <StackLayout Margin="15">
 
-                    <otherTemplates:StepDescription Title="New Spool"
+                    <otherTemplates:StepDescription Title="Edit Spool"
                                         Step="Step 1 of 2"
                                         Description="Enter spool informations."
                                         Margin="0,2,0,10"/>
@@ -73,7 +73,7 @@
 
             <ScrollView IsVisible="{Binding FinishingStep}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Spool"
+                    <otherTemplates:StepDescription Title="Edit Spool"
                                         Step="Step 2 of 2"
                                         Description="Check your data."
                                         Margin="0,2,0,10"/>

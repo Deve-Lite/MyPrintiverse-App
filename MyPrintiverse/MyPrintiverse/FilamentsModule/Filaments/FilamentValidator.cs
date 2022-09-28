@@ -1,26 +1,30 @@
 ﻿
+using MyPrintiverse.Core.Extensions;
+using System.Globalization;
+
 namespace MyPrintiverse.FilamentsModule.Filaments;
 
 public class FilamentValidator : BaseValidator<Filament>
 {
     #region Properties
     public string TypeId { get; set; }
-    public Validatable<double> Diameter { get; set; }
-    public Validatable<string> Brand { get; set; }
-    public Validatable<string> Color { get; set; }
+    public ExtendedValidatable<string> Diameter { get; set; }
+    public ExtendedValidatable<string> Brand { get; set; }
+    public ExtendedValidatable<string> Color { get; set; }
     public string ColorHex { get; set; }
-    public Validatable<string> ShortDescription { get; set; }
-    public Validatable<int> NozzleTemperature { get; set; }
-    public Validatable<int> CoolingRate { get; set; }
-    public Validatable<int> BedTemperature { get; set; }
-    public Validatable<int> Rating { get; set; }
+    public ExtendedValidatable<string> ShortDescription { get; set; }
+    public ExtendedValidatable<string> NozzleTemperature { get; set; }
+    public ExtendedValidatable<string> CoolingRate { get; set; }
+    public ExtendedValidatable<string> BedTemperature { get; set; }
+    public ExtendedValidatable<string> Rating { get; set; }
 
     #endregion
 
     public FilamentValidator()
     {
-
         AddValidation();
+
+        InitializeFields();
 
         InitUnit();
     }
@@ -29,62 +33,72 @@ public class FilamentValidator : BaseValidator<Filament>
 
         AddValidation();
 
+        InitializeFields();
+
         Map(filament);
 
         InitUnit();
     }
 
-    public override bool Validate() => base.Validate();
+    public override bool Validate() => Diameter.Validate() &&
+                                       Brand.Validate() &&
+                                       Color.Validate() &&
+                                       ShortDescription.Validate() &&
+                                       NozzleTemperature.Validate() &&
+                                       CoolingRate.Validate() &&
+                                       BedTemperature.Validate() &&
+                                       Rating.Validate();
 
     public override Filament Map()
     {
         var fialmentMap = new Filament();
         
         fialmentMap.TypeId = TypeId;
-        fialmentMap.Diameter = Diameter.Value;
         fialmentMap.Brand = Brand.Value;
         fialmentMap.Description = ShortDescription.Value;
         fialmentMap.ColorName = Color.Value;
         fialmentMap.ColorHex = ColorHex;
-        fialmentMap.BedTemperature = BedTemperature.Value;
-        fialmentMap.CoolingRate = CoolingRate.Value;
-        fialmentMap.NozzleTemperature = NozzleTemperature.Value;
-        fialmentMap.Rating = Rating.Value;
+
+        /* Parse will not throw Exception because of NumberRules */
+        fialmentMap.Diameter = double.Parse(Diameter.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        fialmentMap.BedTemperature = int.Parse(BedTemperature.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        fialmentMap.CoolingRate = int.Parse(CoolingRate.Value, CultureInfo.InvariantCulture);
+        fialmentMap.NozzleTemperature = int.Parse(NozzleTemperature.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        fialmentMap.Rating = int.Parse(Rating.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
 
         return fialmentMap;
     }
 
     #region Privates
 
+    private void InitializeFields()
+    {
+        TypeId = "";
+        ColorHex = "";
+
+        ShortDescription.Value = "";
+        Color.Value = "";
+        Brand.Value = "";
+
+        Diameter.Value = "";
+        NozzleTemperature.Value = "";
+        BedTemperature.Value = "";
+        CoolingRate.Value = "";
+        Rating.Value = "";
+    }
+
     private void AddValidation()
     {
 
-        Diameter = Validator.Build<double>();
+        Diameter = ExtendedValidator.Build<string>();
+        Brand = ExtendedValidator.Build<string>();
+        Color = ExtendedValidator.Build<string>();
 
-        Brand = Validator.Build<string>().WithRule(new RangeRule<string>(3, 26), "Brand should be between 3-26 characters.");
-
-        Color = Validator.Build<string>().WithRule(new RangeRule<string>(3, 26), "Color should be between 3-26 characters.");
-
-        if (true)
-        {
-            ShortDescription = Validator.Build<string>().WithRule(new RangeRule<string>(maxLength:100), "Description should be shorter than 100 characters.");
-
-            
-        }
-        else
-        {
-            ShortDescription = Validator.Build<string>();
-            NozzleTemperature = Validator.Build<int>();
-            BedTemperature = Validator.Build<int>();
-            CoolingRate = Validator.Build<int>();
-            Rating = Validator.Build<int>();
-
-            ShortDescription.IsValid = true;
-            NozzleTemperature.IsValid = true;
-            BedTemperature.IsValid = true;
-            CoolingRate.IsValid = true;
-            Rating.IsValid = true;
-        }
+        ShortDescription = ExtendedValidator.Build<string>();
+        NozzleTemperature = ExtendedValidator.Build<string>();
+        BedTemperature = ExtendedValidator.Build<string>();
+        CoolingRate = ExtendedValidator.Build<string>();
+        Rating = ExtendedValidator.Build<string>();
     }
 
     public override void Map(Filament filament)
@@ -94,15 +108,16 @@ public class FilamentValidator : BaseValidator<Filament>
         TypeId = filament.TypeId;
         ColorHex = filament.ColorHex;
 
+        ShortDescription.Value = filament.Description;
         Color.Value = filament.ColorName;
-        Diameter.Value = filament.Diameter;
         Brand.Value = filament.Brand;
 
-        ShortDescription.Value = filament.Description;
-        NozzleTemperature.Value = filament.NozzleTemperature;
-        BedTemperature.Value = filament.BedTemperature;
-        CoolingRate.Value = filament.CoolingRate;
-        Rating.Value = filament.Rating;
+
+        Diameter.Value = filament.Diameter.ToString("0.##");
+        NozzleTemperature.Value = filament.NozzleTemperature.ToString();
+        BedTemperature.Value = filament.BedTemperature.ToString();
+        CoolingRate.Value = filament.CoolingRate.ToString();
+        Rating.Value = filament.Rating.ToString();
     }
 
     #endregion

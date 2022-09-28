@@ -28,6 +28,4 @@ public partial class AddSpoolViewModel : ManageSpoolViewModel
     public async Task AddItem() => await ManageItem( async(spool) => { return await ItemService.AddItemAsync(spool); });
 
     #endregion
-
-
 }
