@@ -26,15 +26,14 @@
 
         <spoolTemplate:DisplaySpoolView Margin="15" 
                                         Brand="{Binding ItemFilament.Brand}"
-                                        Type="{Binding ItemFilament.TypeId, Converter={StaticResource TypeIdToTypeConverter}}"
+                                        TypeId="{Binding ItemFilament.TypeId}"
                                         ColorName="{Binding ItemFilament.ColorName}"
-                                        Diameter="{Binding ItemFilament.Diameter, StringFormat='{0:0.00} mm'}"
+                                        Diameter="{Binding ItemFilament.Diameter, StringFormat='{0:0.00}'}"
                                         AvaliableWeight="{Binding Item.AvaliableWeight,StringFormat='{0:0.00}'}"
-                                        StandardWeight="{Binding Item.StandardWeight,StringFormat='{0:0.00} kg'}"
+                                        StandardWeight="{Binding Item.StandardWeight,StringFormat='{0:0.00}'}"
                                         Cost="{Binding Item.Cost}"
                                         Currency="{Binding Currency}"
                                         Description="{Binding Item.Description}"
-                                        IsDescriptionVisible="{Binding Item.Description, Converter={StaticResource IsNotEmptyStringConventer}}"
                                         EditedAt="{Binding Item.EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"/>
         
     </StackLayout>

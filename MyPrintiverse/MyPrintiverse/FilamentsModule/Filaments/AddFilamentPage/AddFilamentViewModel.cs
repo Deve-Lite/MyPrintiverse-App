@@ -1,4 +1,4 @@
-﻿using MyPrintiverse.FilamentsModule.Spools;
+﻿
 using MyPrintiverse.FilamentsModule.Types;
 using MyPrintiverse.Tools;
 

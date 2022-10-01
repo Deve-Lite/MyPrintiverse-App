@@ -12,11 +12,11 @@ public partial class DisplaySpoolView : ContentView
         set => SetValue(BrandProperty, value);
     }
 
-    public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(string), typeof(DisplaySpoolView), "");
-    public string Type
+    public static readonly BindableProperty TypeIdProperty = BindableProperty.Create(nameof(TypeId), typeof(string), typeof(DisplaySpoolView), "");
+    public string TypeId
     {
-        get => (string)GetValue(TypeProperty);
-        set => SetValue(TypeProperty, value);
+        get => (string)GetValue(TypeIdProperty);
+        set => SetValue(TypeIdProperty, value);
     }
 
     public static readonly BindableProperty ColorNameProperty = BindableProperty.Create(nameof(ColorName), typeof(string), typeof(DisplaySpoolView), "");
@@ -59,13 +59,6 @@ public partial class DisplaySpoolView : ContentView
     {
         get => (string)GetValue(DescriptionProperty);
         set => SetValue(DescriptionProperty, value);
-    }
-
-    public static readonly BindableProperty IsDescriptionVisibleProperty = BindableProperty.Create(nameof(IsDescriptionVisible), typeof(bool), typeof(DisplaySpoolView), true);
-    public bool IsDescriptionVisible
-    {
-        get => (bool)GetValue(IsDescriptionVisibleProperty);
-        set => SetValue(IsDescriptionVisibleProperty, value);
     }
 
     public static readonly BindableProperty EditedAtProperty = BindableProperty.Create(nameof(EditedAt), typeof(string), typeof(DisplaySpoolView), "");

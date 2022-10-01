@@ -65,13 +65,13 @@ public static class FilamentBuilderConfig
 	{
 		builder.Services.AddSingleton<FilamentCollectionView>();
 		builder.Services.AddSingleton<FilamentView>();
-		builder.Services.AddSingleton<AddFilamentView>();
-		builder.Services.AddSingleton<EditFilamentView>();
+		builder.Services.AddTransient<AddFilamentView>();
+		builder.Services.AddTransient<EditFilamentView>();
 
 		builder.Services.AddSingleton<FilamentTypesView>();
 		builder.Services.AddSingleton<FilamentTypeView>();
-		builder.Services.AddSingleton<AddFilamentTypeView>();
-		builder.Services.AddSingleton<EditFilamentTypeView>();
+		builder.Services.AddTransient<AddFilamentTypeView>();
+		builder.Services.AddTransient<EditFilamentTypeView>();
 
 		builder.Services.AddSingleton<SpoolView>();
 		builder.Services.AddTransient<AddSpoolView>();
@@ -91,13 +91,13 @@ public static class FilamentBuilderConfig
 		// template
 		builder.Services.AddSingleton<FilamentCollectionViewModel>();
 		builder.Services.AddSingleton<FilamentViewModel>();
-		builder.Services.AddSingleton<AddFilamentViewModel>();
-		builder.Services.AddSingleton<EditFilamentViewModel>();
+		builder.Services.AddTransient<AddFilamentViewModel>();
+		builder.Services.AddTransient<EditFilamentViewModel>();
 
 		builder.Services.AddSingleton<FilamentTypesViewModel>();
 		builder.Services.AddSingleton<FilamentTypeViewModel>();
-		builder.Services.AddSingleton<AddFilamentTypeViewModel>();
-		builder.Services.AddSingleton<EditFilamentTypeViewModel>();
+		builder.Services.AddTransient<AddFilamentTypeViewModel>();
+		builder.Services.AddTransient<EditFilamentTypeViewModel>();
 
 		builder.Services.AddSingleton<SpoolViewModel>();
 		builder.Services.AddTransient<AddSpoolViewModel>();

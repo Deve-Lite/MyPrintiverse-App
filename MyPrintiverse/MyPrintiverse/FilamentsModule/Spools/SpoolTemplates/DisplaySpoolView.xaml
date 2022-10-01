@@ -24,7 +24,7 @@
                             <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Filament Type: "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Type}"/>
+                                  Text="{Binding TypeId, Converter={StaticResource TypeIdToTypeConverter}}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -46,7 +46,7 @@
                             <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Diameter: "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Diameter}"/>
+                                  Text="{Binding Diameter, StringFormat='{0} mm'}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -67,7 +67,7 @@
                             <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text=" / "/>
                             <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding StandardWeight}"/>
+                                  Text="{Binding StandardWeight, StringFormat='{0} kg'}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
