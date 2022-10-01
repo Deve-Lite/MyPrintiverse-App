@@ -71,9 +71,9 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
         FilamentTypeMap.Density = double.Parse(Density.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
         FilamentTypeMap.MaxServiceTempearature = double.Parse(MaxServiceTempearature.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
         
-        FilamentTypeMap.BedTemperatureRange = $"{BedMin}-{BedMax}";
-        FilamentTypeMap.NozzleTemperatureRange = $"{NozzleMin}-{NozzleMax}";
-        FilamentTypeMap.CoolingRange = $"{CoolingMin}-{CoolingMax}";
+        FilamentTypeMap.BedTemperatureRange = $"{BedMin.Value}-{BedMax.Value}";
+        FilamentTypeMap.NozzleTemperatureRange = $"{NozzleMin.Value}-{NozzleMax.Value}";
+        FilamentTypeMap.CoolingRange = $"{CoolingMin.Value}-{CoolingMax.Value}";
 
         FilamentTypeMap.Description = Description.Value;
         FilamentTypeMap.ShortName = ShortName.Value;
@@ -95,9 +95,9 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
         Description  = ExtendedValidator.Build<string>()
             .WithRule(new RangeRule<string>(maxLength: 500), "Too long data.");
         ShortName  = ExtendedValidator.Build<string>()
-            .WithRule(new RangeRule<string>(maxLength: 20), "Too long data.");
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 20), "Too long data.");
         FullName  = ExtendedValidator.Build<string>()
-            .WithRule(new RangeRule<string>(maxLength: 50), "Too long data.");
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Too long data.");
 
         Density  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")
@@ -108,25 +108,31 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
 
         BedMin  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")
-            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.");
+            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.")
+            .WithRule(new HasNoDecimalPlace(), "Should be integer");
         BedMax  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")
             .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.")
-            .WithRule(new BiggerOrEqualRule(BedMin), "Should be lower than standard weight."); ;
+            .WithRule(new HasNoDecimalPlace(), "Should be integer")
+            .WithRule(new BiggerOrEqualRule(BedMin), "Invalid range."); ;
         CoolingMin  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")
-            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.");
+            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.")
+            .WithRule(new HasNoDecimalPlace(), "Should be integer");
         CoolingMax  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")
             .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.")
-            .WithRule(new BiggerOrEqualRule(CoolingMin), "Should be lower than standard weight."); ;
+            .WithRule(new HasNoDecimalPlace(), "Should be integer")
+            .WithRule(new BiggerOrEqualRule(CoolingMin), "Invalid range."); ;
         NozzleMin  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")
-            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.");
+            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.")
+            .WithRule(new HasNoDecimalPlace(), "Should be integer");
         NozzleMax  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")
             .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.")
-            .WithRule(new BiggerOrEqualRule(NozzleMin), "Should be lower than standard weight."); ;
+            .WithRule(new HasNoDecimalPlace(), "Should be integer")
+            .WithRule(new BiggerOrEqualRule(NozzleMin), "Invalid range."); ;
     }
 
     private void InitializeFields()
@@ -158,10 +164,10 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
         base.Map(filamentType);
 
         IsBio = filamentType.IsBio;
-        IsFlexible= filamentType.IsBio;
-        IsFoodFriendly = filamentType.IsBio;
-        IsUVResistant = filamentType.IsBio;
-        IsHeatedBedRequired = filamentType.IsBio;
+        IsFlexible= filamentType.IsFlexible;
+        IsFoodFriendly = filamentType.IsFoodFriendly;
+        IsUVResistant = filamentType.IsUVResistant;
+        IsHeatedBedRequired = filamentType.IsHeatedBedRequired;
 
         ShortName.Value = filamentType.ShortName;
         FullName.Value = filamentType.FullName;
@@ -171,8 +177,8 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
         MaxServiceTempearature.Value = filamentType.MaxServiceTempearature.ToString();
 
         var nozzleTemperatures = filamentType.NozzleTemperatureRange.Split('-');
-        var bedTemperatures = filamentType.NozzleTemperatureRange.Split('-');
-        var coolingRange = filamentType.NozzleTemperatureRange.Split('-');
+        var bedTemperatures = filamentType.BedTemperatureRange.Split('-');
+        var coolingRange = filamentType.CoolingRange.Split('-');
 
         NozzleMax.Value = nozzleTemperatures[1];
         NozzleMin.Value = nozzleTemperatures[0];

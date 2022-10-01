@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.Tools;
+﻿using MyPrintiverse.FilamentsModule.Spools;
+using MyPrintiverse.Tools;
 
 namespace MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage;
 
@@ -7,7 +8,6 @@ public partial class AddFilamentTypeViewModel : ManageFilamentTypeViewModel
     public AddFilamentTypeViewModel(IMessageService messageService, IItemService<FilamentType> itemService, IToast toast) : base(messageService, itemService, toast)
     {
     }
-
 
     #region Overrides
 

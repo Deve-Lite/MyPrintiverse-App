@@ -23,6 +23,7 @@ public partial class ManageSpoolViewModel : BaseItemManageViewModel<Spool>
     protected IToast Toast;
 
     #endregion
+
     public ManageSpoolViewModel(IMessageService messageService, IItemService<Spool> itemService, IItemService<Filament> filamentService, IToast toast) : base(messageService, itemService)
     {
         FilamentService = filamentService;

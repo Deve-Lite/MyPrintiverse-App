@@ -88,7 +88,7 @@
                                                      AvaliableWeight="{Binding Item.AvaliableWeight.Value, StringFormat='{0:0.000}'}"
                                                      StandardWeight="{Binding Item.StandardWeight.Value, StringFormat='{0:0.000 kg}'}"
                                                      Cost="{Binding Item.Cost.Value}"
-                                                     EditedAt="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Created at: {0:dd/MM/yy HH:mm}'}"
+                                                     EditedAt="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"
                                                      Currency="{Binding Currency}"/>
                 </StackLayout>
             </ScrollView>

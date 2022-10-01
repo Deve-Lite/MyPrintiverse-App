@@ -61,6 +61,14 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     protected IMessageService MessageService;
     #endregion
 
+    #region Properties
+
+    protected virtual string EditRoute(TBaseModel item) => $"{typeof(TEditView).Name}?Id={item.Id}";
+    protected virtual string OpenRoute(TBaseModel item) => $"{typeof(TItemView).Name}?Id={item.Id}";
+    protected virtual string AddRoute() => $"{typeof(TAddView).Name}";
+
+    #endregion
+
     public BaseCollectionViewModel(IMessageService messageService, IItemService<TBaseModel> itemsService)
     {
         MessageService = messageService;
@@ -223,7 +231,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         if (AnyActionStartedCommand())
             return;
 
-        await OpenPage($"{typeof(TAddView).Name}");
+        await OpenPage(AddRoute());
     }
 
     /// <summary>
@@ -236,7 +244,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         if (AnyActionStartedCommand())
             return;
 
-        await OpenPage($"{typeof(TEditView).Name}?Id={item?.Id}");
+        await OpenPage(EditRoute(item));
     }
 
     /// <summary>
@@ -249,7 +257,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         if (AnyActionStartedCommand())
             return;
 
-        await OpenPage($"{typeof(TItemView).Name}?Id={item?.Id}");
+        await OpenPage(OpenRoute(item));
     }
 
     /// <summary>

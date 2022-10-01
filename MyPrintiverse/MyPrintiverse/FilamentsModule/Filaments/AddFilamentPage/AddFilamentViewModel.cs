@@ -1,24 +1,31 @@
-﻿using MyPrintiverse.FilamentsModule.Types;
+﻿using MyPrintiverse.FilamentsModule.Spools;
+using MyPrintiverse.FilamentsModule.Types;
+using MyPrintiverse.Tools;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 
 
-public class AddFilamentViewModel : FilamentsManageViewModel
+public partial class AddFilamentViewModel : ManageFilamentViewModel
 {
-    FilamentMock FilamentMock;
-    public AddFilamentViewModel(IMessageService messageService, IItemService<Filament> itemService, IItemService<FilamentType> typeService, FilamentMock filamentMock) : base(messageService, itemService, typeService)
+    FilamentMock fm;
+    public AddFilamentViewModel(FilamentMock filamentMock,IMessageService messageService, IItemService<Filament> itemService, IItemService<FilamentType> typeService, IToast toast) : base(messageService, itemService, typeService, toast)
     {
-        FilamentMock = filamentMock;
+        fm = filamentMock;
     }
 
 
     public override void OnAppearing()
     {
         base.OnAppearing();
-
-        Task.Run(async () => { await ItemService.AddItemAsync(await FilamentMock.GenerateFilament()); });
-
+        Task.Run(async () => { await ItemService.AddItemAsync(await fm.GenerateFilament()); });
     }
 
+    #region Overrides
+    [RelayCommand]
+    public override async Task NextStep() => await Next(AddItem);
+
+    public async Task AddItem() => await ManageItem(async (spool) => { return await ItemService.AddItemAsync(spool); });
+
+    #endregion
 }
 

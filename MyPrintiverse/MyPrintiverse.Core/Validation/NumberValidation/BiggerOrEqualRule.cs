@@ -24,9 +24,9 @@ public class BiggerOrEqualRule : IValidationRule<string>
 
         try
         {
-            var a = double.Parse(value.Replace(',', '.'), CultureInfo.InvariantCulture);
-            var b = double.Parse(ValueReference.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-            return a <= b;
+            var biggerValue = double.Parse(value.Replace(',', '.'), CultureInfo.InvariantCulture);
+            var lowerValue = double.Parse(ValueReference.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+            return lowerValue <= biggerValue;
         }
         catch
         {

@@ -2,12 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Types.EditFilamentTypePage.EditFilamentTypeView"
-             Title="EditFilamentTypeView"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Spools.AddSpoolPage"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
@@ -49,11 +47,11 @@
 
                     <entryTemplates:TitledEditor x:Name="descriptionEntry" 
                                                  Style="{StaticResource BaseTitledEditor}"
-                                             Title="Description"
-                                             Text="{Binding Item.Description.Value}"
-                                             ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
-                                             IsValid="{Binding Item.Description.IsValid}"
-                                             ErrorMessage="{Binding Item.Description.Error}"/>
+                                                 Title="Description"
+                                                 Text="{Binding Item.Description.Value}"
+                                                 ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
+                                                 IsValid="{Binding Item.Description.IsValid}"
+                                                 ErrorMessage="{Binding Item.Description.Error}"/>
 
                 </StackLayout>
             </ScrollView>
@@ -65,19 +63,50 @@
                                         Description="Enter filament type informations."
                                         Margin="0,2,0,10"/>
 
-                    <entryTemplates:EntityValidatableEntry x:Name="avaliableWeightEntry" 
+                    <entryTemplates:EntityValidatableEntry x:Name="densityEntry" 
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Avaliable filament weight"
-                                                           Text="{Binding Item.AvaliableWeight.Value}"
-                                                           ValidationCommand="{Binding Item.AvaliableWeight.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.AvaliableWeight.IsValid}"
-                                                           ErrorMessage="{Binding Item.AvaliableWeight.Error}"
-                                                           Entity="kg"/>
+                                                           Title="Density"
+                                                           Text="{Binding Item.Density.Value}"
+                                                           ValidationCommand="{Binding Item.Density.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.Density.IsValid}"
+                                                           ErrorMessage="{Binding Item.Density.Error}"
+                                                           Entity="g/cm^3"/>
 
-                    
-                    
-                    <!-- TODO - 3 range picker -->
-                    <!-- TODO - 1 rating picker-->
+                    <entryTemplates:EntityValidatableEntry x:Name="serviceTemperatureEntry" 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Max Service Temperature"
+                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
+                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
+                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                                                           Entity="°C"/>
+
+                    <entryTemplates:RangeValidatableEntry Title="Nozzle Temperature Range"
+                                                          Entity="°C"
+                                                          IsLeftValid="{Binding Item.NozzleMin.IsValid}"
+                                                          TextLeft="{Binding Item.NozzleMin.Value }"
+                                                          IsRightValid="{Binding Item.NozzleMax.IsValid }"
+                                                          TextRight="{Binding Item.NozzleMax.Value }"
+                                                          ErrorMessage="{Binding NozzleError}"
+                                                          ValidationCommand="{Binding NozzleValidateCommand}"/>
+
+                    <entryTemplates:RangeValidatableEntry Title="Bed Temperature Range"
+                                                          Entity="°C"
+                                                          IsLeftValid="{Binding Item.BedMin.IsValid}"
+                                                          TextLeft="{Binding Item.BedMin.Value }"
+                                                          IsRightValid="{Binding Item.BedMax.IsValid }"
+                                                          TextRight="{Binding Item.BedMax.Value }"
+                                                          ErrorMessage="{Binding BedError}"
+                                                          ValidationCommand="{Binding BedValidateCommand}"/>
+
+                    <entryTemplates:RangeValidatableEntry Title="Cooling Rate Range"
+                                                          Entity="%"
+                                                          IsLeftValid="{Binding Item.CoolingMin.IsValid}"
+                                                          TextLeft="{Binding Item.CoolingMin.Value}"
+                                                          IsRightValid="{Binding Item.CoolingMax.IsValid}"
+                                                          TextRight="{Binding Item.CoolingMax.Value}"
+                                                          ErrorMessage="{Binding CoolingError}"
+                                                          ValidationCommand="{Binding CoolingValidateCommand}"/>
 
                 </StackLayout>
             </ScrollView>
@@ -90,24 +119,24 @@
                                         Margin="0,2,0,10"/>
 
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is on spool"
-                                             IsToggled="{Binding Item.IsOnSpool}"/>
+                                             Title="Is food friendly"
+                                             IsToggled="{Binding Item.IsFoodFriendly}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is on spool"
-                                             IsToggled="{Binding Item.IsOnSpool}"/>
+                                             Title="Is bio"
+                                             IsToggled="{Binding Item.IsBio}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is on spool"
-                                             IsToggled="{Binding Item.IsOnSpool}"/>
+                                             Title="Is uv resistant"
+                                             IsToggled="{Binding Item.IsUVResistant}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is on spool"
-                                             IsToggled="{Binding Item.IsOnSpool}"/>
+                                             Title="Is flexible"
+                                             IsToggled="{Binding Item.IsFlexible}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is on spool"
-                                             IsToggled="{Binding Item.IsOnSpool}"/>
+                                             Title="Is heated bed required"
+                                             IsToggled="{Binding Item.IsHeatedBedRequired}"/>
 
                 </StackLayout>
             </ScrollView>

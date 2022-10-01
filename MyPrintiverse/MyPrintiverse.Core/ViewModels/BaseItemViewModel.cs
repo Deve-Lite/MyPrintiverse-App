@@ -29,8 +29,12 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
     /// </summary>
     public string Id { get; set; }
 
-    protected virtual string EditRoute => $"{typeof(TEdit).Name}?Id={Item.Id}";
-    protected virtual string DeleteRoute => "..";
+    #endregion
+
+    #region Routes
+
+    protected virtual string EditRoute() => $"{typeof(TEdit).Name}?Id={Item.Id}";
+    protected virtual string DeleteRoute() => "..";
 
     #endregion
 
@@ -91,7 +95,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
         if (AnyActionStartedCommand())
             return;
 
-        await OpenPage(EditRoute);
+        await OpenPage(EditRoute());
     }
 
     /// <summary>
@@ -105,7 +109,7 @@ public class BaseItemViewModel<TBaseModel, TEdit> : BaseViewModel where TBaseMod
 
         if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
             if (await ItemService.DeleteItemAsync(Id))
-                await Shell.Current.GoToAsync(DeleteRoute, true);
+                await OpenPage(DeleteRoute(), true);
 
         IsBusy = false;
     }

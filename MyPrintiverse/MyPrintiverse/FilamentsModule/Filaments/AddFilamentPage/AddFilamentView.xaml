@@ -3,28 +3,160 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage"
-             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="templates:ActivityButton" x:Key="BaseActivityButton">
-                <Setter Property="ActivityIndicatorStyle" Value="{StaticResource BaseActivityIndicator}"/>
-                <Setter Property="ButtonStyle" Value="{StaticResource BaseButton}"/>
-                <Setter Property="TextStyle" Value="{StaticResource BaseRaleway}"/>
-                <Setter Property="IsRunning" Value="{Binding IsRunning}"/>
-                <Setter Property="Text" Value="Add Filament"/>
-            </Style>
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
+             xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
+             xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
 
 
-    <ScrollView VerticalOptions="FillAndExpand">
-        <StackLayout VerticalOptions="FillAndExpand">
+    <Grid RowDefinitions="60, *, 60" 
+          ColumnDefinitions="*,*" 
+          VerticalOptions="FillAndExpand" 
+          HorizontalOptions="FillAndExpand">
 
-            <Label Text="{Binding Item.Diameter.Value}"/>
+        <otherTemplates:TopManageBar Grid.ColumnSpan="2" 
+                                     BackCommand="{Binding BackCommand}"/>
 
-        </StackLayout>
-    </ScrollView>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" >
 
+            <StackLayout IsVisible="{Binding StepOne}">
+                
+                <!-- Selected Type-->
+                
+                
+                <CollectionView Style="{StaticResource BaseCollectionView}" 
+                                ItemsSource="{Binding FilamentTypes}">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+          
+            <ScrollView IsVisible="{Binding StepTwo}">
+                <StackLayout Margin="15">
+                    <otherTemplates:StepDescription Title="New Type"
+                                        Step="Step 2 of 4"
+                                        Description="Enter filament type informations."
+                                        Margin="0,2,0,10"/>
+
+                    <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                                                     Title="Brand"
+                                                     Text="{Binding Item.MaxServiceTempearature.Value}"
+                                                     ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
+                                                     IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
+                                                     ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"/>
+
+                    <entryTemplates:EntityValidatableEntry 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Max Service Temperature"
+                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
+                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
+                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                                                           Entity="°C"/>
+
+                    <entryTemplates:EntityValidatableEntry 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Max Service Temperature"
+                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
+                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
+                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                                                           Entity="°C"/>
+                     
+                    <!-- Color Picker -->
+
+                </StackLayout>
+            </ScrollView>
+
+            <ScrollView IsVisible="{Binding StepThree}">
+                <StackLayout Margin="15">
+                    <otherTemplates:StepDescription Title="New Type"
+                                        Step="Step 3 of 4"
+                                        Description="Enter filament type informations."
+                                        Margin="0,2,0,10"/>
+
+                    <entryTemplates:EntityValidatableEntry 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Max Service Temperature"
+                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
+                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
+                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                                                           Entity="°C"/>
+                    
+                    <entryTemplates:EntityValidatableEntry 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Max Service Temperature"
+                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
+                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
+                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                                                           Entity="°C"/>
+                    
+                    <entryTemplates:EntityValidatableEntry 
+                                                           Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Max Service Temperature"
+                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
+                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
+                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                                                           Entity="°C"/>
+
+                    <entryTemplates:TitledEditor  
+                                                 Style="{StaticResource BaseTitledEditor}"
+                                             Title="Description"
+                                             Text="{Binding Item.Description.Value}"
+                                             ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
+                                             IsValid="{Binding Item.Description.IsValid}"
+                                             ErrorMessage="{Binding Item.Description.Error}"/>
+
+                </StackLayout>
+            </ScrollView>
+
+            <ScrollView IsVisible="{Binding FinishingStep}">
+                <StackLayout Margin="15">
+                    <otherTemplates:StepDescription Title="New Type"
+                                        Step="Step 4 of 4"
+                                        Description="Check your data."
+                                        Margin="0,2,0,10"/>
+
+                    
+                    
+
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+
+        <Border Style="{StaticResource CollectionHeaderBorder}"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                VerticalOptions="End"
+                Margin="15,0"/>
+
+        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+                                       IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       Text="BACK"
+                                       VerticalOptions="Center"
+                                       Margin="15,0,20,0"
+                                       Command="{Binding StepBackCommand}"/>
+
+        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Text="{Binding NextButtonTitle}"
+                                       VerticalOptions="Center"
+                                       Margin="20,0,15,0"
+                                       Command="{Binding NextStepCommand}"/>
+
+    </Grid>
 </ContentPage>

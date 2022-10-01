@@ -12,7 +12,7 @@ public class FilamentValidator : BaseValidator<Filament>
     public ExtendedValidatable<string> Brand { get; set; }
     public ExtendedValidatable<string> Color { get; set; }
     public string ColorHex { get; set; }
-    public ExtendedValidatable<string> ShortDescription { get; set; }
+    public ExtendedValidatable<string> Description { get; set; }
     public ExtendedValidatable<string> NozzleTemperature { get; set; }
     public ExtendedValidatable<string> CoolingRate { get; set; }
     public ExtendedValidatable<string> BedTemperature { get; set; }
@@ -43,7 +43,7 @@ public class FilamentValidator : BaseValidator<Filament>
     public override bool Validate() => Diameter.Validate() &&
                                        Brand.Validate() &&
                                        Color.Validate() &&
-                                       ShortDescription.Validate() &&
+                                       Description.Validate() &&
                                        NozzleTemperature.Validate() &&
                                        CoolingRate.Validate() &&
                                        BedTemperature.Validate() &&
@@ -55,7 +55,7 @@ public class FilamentValidator : BaseValidator<Filament>
         
         fialmentMap.TypeId = TypeId;
         fialmentMap.Brand = Brand.Value;
-        fialmentMap.Description = ShortDescription.Value;
+        fialmentMap.Description = Description.Value;
         fialmentMap.ColorName = Color.Value;
         fialmentMap.ColorHex = ColorHex;
 
@@ -76,7 +76,7 @@ public class FilamentValidator : BaseValidator<Filament>
         TypeId = "";
         ColorHex = "";
 
-        ShortDescription.Value = "";
+        Description.Value = "";
         Color.Value = "";
         Brand.Value = "";
 
@@ -90,15 +90,33 @@ public class FilamentValidator : BaseValidator<Filament>
     private void AddValidation()
     {
 
-        Diameter = ExtendedValidator.Build<string>();
-        Brand = ExtendedValidator.Build<string>();
-        Color = ExtendedValidator.Build<string>();
+        Diameter = ExtendedValidator.Build<string>()
+            .WithRule(new IsNumber(), "Data is not a valid number.")
+            .WithRule(new MantissaLengthRule(2), "Too long number mantissa.");
+        Brand = ExtendedValidator.Build<string>()
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Too long data.");
+        Color = ExtendedValidator.Build<string>()
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Too long data.");
 
-        ShortDescription = ExtendedValidator.Build<string>();
-        NozzleTemperature = ExtendedValidator.Build<string>();
-        BedTemperature = ExtendedValidator.Build<string>();
-        CoolingRate = ExtendedValidator.Build<string>();
-        Rating = ExtendedValidator.Build<string>();
+        Description = ExtendedValidator.Build<string>()
+            .WithRule(new RangeRule<string>(maxLength: 500), "Too long data.");
+        NozzleTemperature = ExtendedValidator.Build<string>()
+            .WithRule(new IsNumber(), "Data is not a valid number.")
+            .WithRule(new HasNoDecimalPlace(), "Should be integer")
+            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.");
+        BedTemperature = ExtendedValidator.Build<string>()
+            .WithRule(new IsNumber(), "Data is not a valid number.")
+            .WithRule(new HasNoDecimalPlace(), "Should be integer")
+            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.");
+        CoolingRate = ExtendedValidator.Build<string>()
+            .WithRule(new IsNumber(), "Data is not a valid number.")
+            .WithRule(new HasNoDecimalPlace(), "Should be integer")
+            .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.");
+
+        // TODO : Change to some clicking 
+        Rating = ExtendedValidator.Build<string>()
+            .WithRule(new IsNumber(), "Data is not a valid number.")
+            .WithRule(new HasNoDecimalPlace(), "Should be integer");
     }
 
     public override void Map(Filament filament)
@@ -108,7 +126,7 @@ public class FilamentValidator : BaseValidator<Filament>
         TypeId = filament.TypeId;
         ColorHex = filament.ColorHex;
 
-        ShortDescription.Value = filament.Description;
+        Description.Value = filament.Description;
         Color.Value = filament.ColorName;
         Brand.Value = filament.Brand;
 

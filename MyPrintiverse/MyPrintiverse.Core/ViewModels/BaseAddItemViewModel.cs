@@ -11,7 +11,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
 {
     #region Commands
 
-    public string AddRoute => "..";
+    public string AddRoute() => "..";
 
     #endregion
 
@@ -34,7 +34,7 @@ public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : Base
 
         if (IsValid())
             if (await ItemService.AddItemAsync(Item.Map()))
-                await OpenPage(AddRoute, true);
+                await OpenPage(AddRoute(), true);
         
         IsRunning = false;
         IsBusy = false;

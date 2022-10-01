@@ -17,7 +17,11 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     /// </summary>
     public string Id { get; set; }
 
-    public string EditRoute => "..";
+    #endregion
+
+    #region Routes
+
+    public string EditRoute() => "..";
 
     #endregion
 
@@ -30,7 +34,7 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
     public override void OnAppearing()
     {
         base.OnAppearing();
-        //TOIMPLEMENT : LOADING
+        //TO IMPLEMENT : LOADING
     }
 
     #endregion
@@ -50,7 +54,7 @@ public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : Bas
 
         if (IsValid())
             if (await ItemService.UpdateItemAsync(Item.Map()))
-                await OpenPage(EditRoute, true);
+                await OpenPage(EditRoute(), true);
 
         IsRunning = false;
         IsBusy = false;

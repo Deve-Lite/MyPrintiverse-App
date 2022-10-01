@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MyPrintiverse.Templates.RangeValidatableEntry"
+             x:Name="this">
+    
+    <Grid BindingContext="{x:Reference this}"
+          BackgroundColor="Transparent"
+          ColumnDefinitions="0.43*, 0.14*, 0.43*">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="3"
+               Style="{StaticResource SmallRalewayValidatableEntry}" 
+               Text="{Binding Title}" />
+
+        <Border x:Name="BorderLeft" 
+                Grid.Row="1"
+                Grid.Column="0" 
+                HeightRequest="{Binding SupportHeight}"
+                Style="{StaticResource BaseBorderValidatableEntry}">
+            <Grid ColumnDefinitions="0.7*,0.3*">
+                <Entry Style="{Binding EntryStyle}" 
+                       Text="{Binding TextLeft, Mode=TwoWay}" 
+                       Keyboard="Numeric"
+                       Placeholder="{Binding Placeholder}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                        Command="{Binding ValidationCommand}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Grid.Column="1" 
+                           Style="{StaticResource EntityValidatableEntry}"
+                           Text="{Binding Entity}"/>
+
+            </Grid>
+        </Border>
+
+        <Border x:Name="BorderRight" 
+                Grid.Row="1"
+                Grid.Column="2"
+                HeightRequest="{Binding SupportHeight}"
+                Style="{StaticResource BaseBorderValidatableEntry}">
+            <Grid ColumnDefinitions="0.7*,0.3*">
+                <Entry Style="{Binding EntryStyle}" 
+                       Text="{Binding TextRight, Mode=TwoWay}" 
+                       Keyboard="Numeric"
+                       Placeholder="{Binding Placeholder}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                        Command="{Binding ValidationCommand}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Grid.Column="1" 
+                           Style="{StaticResource EntityValidatableEntry}"
+                           Text="{Binding Entity}"/>
+
+            </Grid>
+        </Border>
+
+
+        <Label Grid.Row="2"
+               Grid.ColumnSpan="3"
+               x:Name="errorMessage" 
+               Style="{StaticResource SmallComplementary}" 
+               Text="{Binding ErrorMessage}"/>
+
+    </Grid>
+</ContentView>

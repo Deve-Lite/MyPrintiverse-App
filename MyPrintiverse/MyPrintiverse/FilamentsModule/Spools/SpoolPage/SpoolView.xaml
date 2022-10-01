@@ -36,5 +36,6 @@
                                         Description="{Binding Item.Description}"
                                         IsDescriptionVisible="{Binding Item.Description, Converter={StaticResource IsNotEmptyStringConventer}}"
                                         EditedAt="{Binding Item.EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"/>
+        
     </StackLayout>
 </ContentPage>

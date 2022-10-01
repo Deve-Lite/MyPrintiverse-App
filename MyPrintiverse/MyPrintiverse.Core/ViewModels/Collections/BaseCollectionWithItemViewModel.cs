@@ -58,6 +58,13 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
 
     #endregion
 
+    #region Routes
+
+    protected virtual string EditDisplayRoute() => $"{typeof(TEditView).Name}?Id={Item.Id}";
+    protected virtual string DeleteDisplayRoute() => $"..";
+
+    #endregion
+
     public BaseCollectionWithItemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService) : base(messagingService, itemsService)
 {
         ItemService = itemService;
@@ -86,7 +93,7 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
         if (AnyActionStartedCommand())
             return;
 
-        await Shell.Current.GoToAsync($"{typeof(TEditView).Name}", true);
+        await OpenPage(EditDisplayRoute());
     }
 
     /// <summary>
@@ -100,7 +107,7 @@ public abstract class BaseCollectionWithItemViewModel<TBaseModel, TEditView, TCo
 
         if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
             if (await ItemService.DeleteItemAsync(Item.Id))
-                await Shell.Current.GoToAsync("..", true);
+                await Shell.Current.GoToAsync(DeleteDisplayRoute(), true);
 
         IsBusy = false;
     }

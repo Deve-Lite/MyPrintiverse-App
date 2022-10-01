@@ -18,7 +18,11 @@ public partial class SpoolViewModel : BaseItemViewModel<Spool, EditSpoolView>
 
 	protected IItemService<Filament> FilamentService;
 
-	protected override string EditRoute => $"{nameof(EditSpoolView)}?Id={Item.Id}&FilamentId={FilamentId}";
+    #endregion
+
+    #region Routes
+
+    protected override string EditRoute() => $"{nameof(EditSpoolView)}?Id={Item.Id}&FilamentId={FilamentId}";
 
     #endregion
 

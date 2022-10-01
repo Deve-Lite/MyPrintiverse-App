@@ -50,6 +50,13 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
 
     #endregion
 
+    #region Routes
+
+    protected virtual string EditDisplayRoute() => $"{typeof(TEditView).Name}?Id={Item.Id}";
+    protected virtual string DeleteDisplayRoute() => $"..";
+
+    #endregion
+
     public BaseKeyCollectionWithitemViewModel(IMessageService messagingService, IItemService<TBaseModel> itemService, IItemService<TCollectionModel> itemsService, IItemKeyService<TCollectionModel> keyItemsService) : base(messagingService, itemsService, keyItemsService)
     {
         ItemService = itemService;
@@ -79,7 +86,7 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
         if (AnyActionStartedCommand())
             return;
 
-        await Shell.Current.GoToAsync($"{typeof(TEditView).Name}?Id={Item.Id}", true);
+        await OpenPage(EditDisplayRoute(), true);
     }
 
     /// <summary>
@@ -95,7 +102,7 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
             if (await ItemService.DeleteItemAsync(Item.Id)) 
             {
                 await KeyItemsService.DeleteItemsByKeyAsync(Item.Id);
-                await Shell.Current.GoToAsync("..", true);
+                await OpenPage(DeleteDisplayRoute(), true);
             }
 
         IsBusy = false;
