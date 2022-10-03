@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
+             xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
-             xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
@@ -23,22 +24,95 @@
 
         <Grid Grid.Row="1" Grid.ColumnSpan="2" >
 
-            <StackLayout IsVisible="{Binding StepOne}">
-                
-                <!-- Selected Type-->
-                
-                
-                <CollectionView Style="{StaticResource BaseCollectionView}" 
+            <StackLayout IsVisible="{Binding StepOne}"
+                         Margin="15">
+
+                <otherTemplates:StepDescription Title="New Filament"
+                                        Step="Step 1 of 4"
+                                        Description="Select Type of Filament."
+                                        Margin="0,2,0,10"/>
+
+
+                <Frame Style="{StaticResource BaseFrameVariant}"
+                       Margin="0, 5, 0, 10"
+                       Padding="15,0,15,0">
+                    <StackLayout>
+
+                        <Label Style="{StaticResource LargeRaleway}"
+                                           Margin="0,5,0,5"
+                                           Text="{Binding SelectedFilamentType.ShortName}" />
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                                      Text="Density: "/>
+                                    <Span Style="{StaticResource DisplayFrameSpan}"
+                                          Text="{Binding SelectedFilamentType.Density, StringFormat='{0:0.00} g/cm^3'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Style="{StaticResource DisplayFrameSpan}"
+                               Text="{Binding SelectedFilamentType.Description, Converter={StaticResource DescriptionConverter}}"/>
+
+                        <Label Style="{StaticResource MicroRaleway}"
+                                           Margin="0,5"
+                                           HorizontalOptions="End"
+                                           Text="{Binding SelectedFilamentType.EditedAt, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
+                    </StackLayout>
+                </Frame>
+
+                <RefreshView Style="{StaticResource BaseRefreshView}">
+                    <CollectionView Style="{StaticResource BaseCollectionView}" 
                                 ItemsSource="{Binding FilamentTypes}">
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:FilamentType">
+                                <StackLayout>
+                                    <Frame Style="{StaticResource BaseFrame}"
+                                           Margin="0, 5, 0, 5"
+                                           Padding="15,0,15,0">
 
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding TypeClickedCommand,Source={RelativeSource AncestorType={x:Type viewmodel:AddFilamentViewModel}}}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+
+                                        <StackLayout>
+
+                                            <Label Style="{StaticResource LargeRaleway}"
+                                           Margin="0,5,0,5"
+                                           Text="{Binding ShortName}" />
+
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                                      Text="Density: "/>
+                                                        <Span Style="{StaticResource DisplayFrameSpan}" 
+                                                      Text="{Binding Density,StringFormat='{0.00} g/cm^3'}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Label Style="{StaticResource DisplayFrameSpan}" 
+                                           Text="{Binding  Description, Converter={StaticResource DescriptionConverter}}"/>
+
+                                            <Label Style="{StaticResource MicroRaleway}"
+                                           Margin="0,5"
+                                           HorizontalOptions="End"
+                                           Text="{Binding EditedAt, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </RefreshView>
             </StackLayout>
-          
+
             <ScrollView IsVisible="{Binding StepTwo}">
                 <StackLayout Margin="15">
                     <otherTemplates:StepDescription Title="New Type"
@@ -70,7 +144,7 @@
                                                            IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
                                                            ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
                                                            Entity="°C"/>
-                     
+
                     <!-- Color Picker -->
 
                 </StackLayout>
@@ -91,7 +165,7 @@
                                                            IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
                                                            ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
                                                            Entity="°C"/>
-                    
+
                     <entryTemplates:EntityValidatableEntry 
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Max Service Temperature"
@@ -100,7 +174,7 @@
                                                            IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
                                                            ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
                                                            Entity="°C"/>
-                    
+
                     <entryTemplates:EntityValidatableEntry 
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Max Service Temperature"
@@ -128,8 +202,18 @@
                                         Description="Check your data."
                                         Margin="0,2,0,10"/>
 
-                    
-                    
+
+                    <filamentTemplates:DisplayFilamentView 
+                                               Brand="{Binding Item.Brand.Value}"
+                                               ColorHex="{Binding Item.ColorHex}"
+                                               TypeId="{Binding Item.TypeId, Converter={StaticResource TypeIdToTypeConverter}}"
+                                               ColorName="{Binding Item.ColorName.Value}"
+                                               Diameter="{Binding Item.Diameter.Value}"
+                                               NozzleTemperature="{Binding Item.NozzleTemperature.Value}"
+                                               BedTemperature="{Binding Item.BedTemperature.Value}"
+                                               CoolingRate="{Binding Item.CoolingRate.Value}"
+                                               Description="{Binding Item.Description.Value}"
+                                               EditedAt="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"/>
 
                 </StackLayout>
             </ScrollView>

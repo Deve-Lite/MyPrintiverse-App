@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Types.EditFilamentTypePage.EditFilamentTypeView"
@@ -120,23 +120,23 @@
 
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
                                              Title="Is food friendly"
-                                             IsToggled="{Binding Item.IsFoodFriendly}"/>
+                                             IsToggled="{Binding Item.IsFoodFriendly,Mode=TwoWay}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
                                              Title="Is bio"
-                                             IsToggled="{Binding Item.IsBio}"/>
+                                             IsToggled="{Binding Item.IsBio,Mode=TwoWay}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
                                              Title="Is uv resistant"
-                                             IsToggled="{Binding Item.IsUVResistant}"/>
+                                             IsToggled="{Binding Item.IsUVResistant,Mode=TwoWay}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
                                              Title="Is flexible"
-                                             IsToggled="{Binding Item.IsFlexible}"/>
+                                             IsToggled="{Binding Item.IsFlexible,Mode=TwoWay}"/>
                     
                     <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
                                              Title="Is heated bed required"
-                                             IsToggled="{Binding Item.IsHeatedBedRequired}"/>
+                                             IsToggled="{Binding Item.IsHeatedBedRequired,Mode=TwoWay}"/>
 
                 </StackLayout>
             </ScrollView>

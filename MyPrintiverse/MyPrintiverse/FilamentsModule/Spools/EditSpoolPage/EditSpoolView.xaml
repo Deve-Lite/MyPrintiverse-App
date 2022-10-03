@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Spools.EditSpoolPage.EditSpoolView"
@@ -84,8 +84,8 @@
                                                      TypeId="{Binding Filament.TypeId}"
                                                      ColorName="{Binding Filament.ColorName}"
                                                      Description="{Binding Item.Description.Value}"
-                                                     AvaliableWeight="{Binding Item.AvaliableWeight.Value, StringFormat='{0:0.000}'}"
-                                                     StandardWeight="{Binding Item.StandardWeight.Value, StringFormat='{0:0.000}'}"
+                                                     AvaliableWeight="{Binding Item.AvaliableWeight.Value}"
+                                                     StandardWeight="{Binding Item.StandardWeight.Value}"
                                                      Cost="{Binding Item.Cost.Value}"
                                                      EditedAt="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"
                                                      Currency="{Binding Currency}"/>

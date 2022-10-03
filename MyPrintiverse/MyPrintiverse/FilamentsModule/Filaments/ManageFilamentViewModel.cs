@@ -40,15 +40,25 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
         Toast = toast;
         Item = new FilamentValidator();
 
-        //TO Thinkof
+        FilamentTypes = new ObservableCollection<FilamentType>();
+
         SelectedFilamentType = new FilamentType();
+        SelectedFilamentType.Description = "Please click any type to select it as type of filament.";
+        SelectedFilamentType.Density = 0;
+        SelectedFilamentType.ShortName = "Type not set.";
+        SelectedFilamentType.EditedAtTicks = DateTime.Now.Ticks;
     }
 
     #region Overrides
     public override void OnAppearing()
     {
         base.OnAppearing();
-        Task.Run(async () => { FilamentTypes = (ObservableCollection<FilamentType>) await TypeService.GetItemsAsync(); });
+
+        Task.Run(async () =>
+        {
+            foreach (var item in await TypeService.GetItemsAsync())
+                FilamentTypes.Add(item);
+        });
 
         // TODO : Load from Settings
         (Item as FilamentValidator).Diameter.Value = "1.75";
@@ -90,7 +100,24 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
     #region Protected
 
     [RelayCommand]
-    protected void TypeClicked(FilamentType filamentType)
+    public async Task Refresh()
+    {
+        IsBusy = true;
+        IsRefreshing = true;
+
+        FilamentTypes.Clear();
+
+        foreach(var item in await TypeService.GetItemsAsync())
+            FilamentTypes.Add(item);
+
+        IsRefreshing = true;
+        IsBusy = false;
+    }
+
+
+
+    [RelayCommand]
+    public void TypeClicked(FilamentType filamentType)
     {
         (Item as FilamentValidator).TypeId = filamentType.Id;
 

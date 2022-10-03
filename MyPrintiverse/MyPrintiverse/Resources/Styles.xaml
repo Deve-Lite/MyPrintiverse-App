@@ -10,6 +10,7 @@
     <converters:StringToColorConverter x:Key="StringToColorConverter" />
     <converters:TypeIdToTypeConverter x:Key="TypeIdToTypeConverter" />
     <converters:IsNotEmptyStringConventer x:Key="IsNotEmptyStringConventer" />
+    <converters:DescriptionConverter x:Key="DescriptionConverter" />
 
     <!--  Connected with displaying collections  -->
 

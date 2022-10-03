@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
   x:Class="MyPrintiverse.Admin.AdminView"
   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -20,7 +20,7 @@
         <Setter Property="CornerRadius" Value="10" />
       </Style>
       <Style x:Key="TileButton" TargetType="Button">
-        <Setter Property="FontSize" Value="{OnPlatform iOS='16', Android='16', WinUI='24'}" />
+        <Setter Property="FontSize" Value="{OnPlatform iOS='16', Android='16', WinUI='24',Default=16}" />
         <Setter Property="TextColor" Value="{x:StaticResource DarkGray}" />
         <Setter Property="BackgroundColor" Value="White" />
       </Style>
