@@ -176,9 +176,10 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
                 StepOne = false;
                 StepTwo = true;
                 NextButtonTitle = "NEXT";
+                (Item as FilamentValidator).TypeId = SelectedFilamentType.Id;
             }
             else
-                await Toast.Toast("Some data is invalid.");
+                await Toast.Toast("Please select type.");
         }
 
         IsRunning = false;

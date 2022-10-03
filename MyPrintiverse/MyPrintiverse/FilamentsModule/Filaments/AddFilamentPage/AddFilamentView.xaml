@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:headerTemplate="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
@@ -31,6 +31,11 @@
                                         Step="Step 1 of 4"
                                         Description="Select Type of Filament."
                                         Margin="0,2,0,10"/>
+
+
+                <headerTemplate:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
+                                                 Margin="0,5,0,5"
+                                                 Title="Selected Type"/>
 
 
                 <Frame Style="{StaticResource BaseFrameVariant}"
@@ -65,7 +70,18 @@
 
                 <RefreshView Style="{StaticResource BaseRefreshView}">
                     <CollectionView Style="{StaticResource BaseCollectionView}" 
-                                ItemsSource="{Binding FilamentTypes}">
+                                    ItemsSource="{Binding FilamentTypes}">
+
+                        <CollectionView.Header>
+
+                            <StackLayout>
+                                <headerTemplate:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
+                                                                 Margin="0,5,0,5"
+                                                                 Title="Types"/>
+
+                            </StackLayout>
+
+                        </CollectionView.Header>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:FilamentType">
@@ -122,30 +138,32 @@
 
                     <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Brand"
-                                                     Text="{Binding Item.MaxServiceTempearature.Value}"
-                                                     ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
-                                                     IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
-                                                     ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"/>
+                                                     Text="{Binding Item.Brand.Value}"
+                                                     ValidationCommand="{Binding Item.Brand.ExtendedValidateCommand}"
+                                                     IsValid="{Binding Item.Brand.IsValid}"
+                                                     ErrorMessage="{Binding Item.Brand.Error}"/>
 
-                    <entryTemplates:EntityValidatableEntry 
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Max Service Temperature"
-                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
-                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
-                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
-                                                           Entity="°C"/>
+                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Diameter"
+                                                           Text="{Binding Item.Diameter.Value}"
+                                                           ValidationCommand="{Binding Item.Diameter.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.Diameter.IsValid}"
+                                                           ErrorMessage="{Binding Item.Diameter.Error}"
+                                                           Entity="mm"/>
 
-                    <entryTemplates:EntityValidatableEntry 
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Max Service Temperature"
-                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
-                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
-                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
-                                                           Entity="°C"/>
+                    <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                                                     Title="Color Name"
+                                                     Text="{Binding Item.Color.Value}"
+                                                     ValidationCommand="{Binding Item.Color.ExtendedValidateCommand}"
+                                                     IsValid="{Binding Item.Color.IsValid}"
+                                                     ErrorMessage="{Binding Item.Color.Error}"/>
 
                     <!-- Color Picker -->
+
+                    <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                                                     Title="Color Hex TMP"
+                                                     Text="{Binding Item.ColorHex}"
+                                                     IsValid="True"/>
 
                 </StackLayout>
             </ScrollView>
@@ -154,43 +172,42 @@
                 <StackLayout Margin="15">
                     <otherTemplates:StepDescription Title="New Type"
                                         Step="Step 3 of 4"
-                                        Description="Enter filament type informations."
+                                        Description="Enter print settings and additional data."
                                         Margin="0,2,0,10"/>
 
-                    <entryTemplates:EntityValidatableEntry 
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Max Service Temperature"
-                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
-                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
-                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Print Nozzle Temperature"
+                                                           Text="{Binding Item.NozzleTemperature.Value}"
+                                                           ValidationCommand="{Binding Item.NozzleTemperature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.NozzleTemperature.IsValid}"
+                                                           ErrorMessage="{Binding Item.NozzleTemperature.Error}"
                                                            Entity="°C"/>
 
-                    <entryTemplates:EntityValidatableEntry 
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Max Service Temperature"
-                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
-                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
-                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
+                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Print Bed Temperature"
+                                                           Text="{Binding Item.BedTemperature.Value}"
+                                                           ValidationCommand="{Binding Item.BedTemperature.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.BedTemperature.IsValid}"
+                                                           ErrorMessage="{Binding Item.BedTemperature.Error}"
                                                            Entity="°C"/>
 
-                    <entryTemplates:EntityValidatableEntry 
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Max Service Temperature"
-                                                           Text="{Binding Item.MaxServiceTempearature.Value}"
-                                                           ValidationCommand="{Binding Item.MaxServiceTempearature.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.MaxServiceTempearature.IsValid}"
-                                                           ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
-                                                           Entity="°C"/>
+                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                                                           Title="Print Cooling Rate"
+                                                           Text="{Binding Item.CoolingRate.Value}"
+                                                           ValidationCommand="{Binding Item.CoolingRate.ExtendedValidateCommand}"
+                                                           IsValid="{Binding Item.CoolingRate.IsValid}"
+                                                           ErrorMessage="{Binding Item.CoolingRate.Error}"
+                                                           Entity="%"/>
 
-                    <entryTemplates:TitledEditor  
-                                                 Style="{StaticResource BaseTitledEditor}"
+                    <entryTemplates:TitledEditor Style="{StaticResource BaseTitledEditor}"
                                              Title="Description"
                                              Text="{Binding Item.Description.Value}"
                                              ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
                                              IsValid="{Binding Item.Description.IsValid}"
                                              ErrorMessage="{Binding Item.Description.Error}"/>
+
+
+                    <!-- Rating todo-->
 
                 </StackLayout>
             </ScrollView>
@@ -206,8 +223,8 @@
                     <filamentTemplates:DisplayFilamentView 
                                                Brand="{Binding Item.Brand.Value}"
                                                ColorHex="{Binding Item.ColorHex}"
-                                               TypeId="{Binding Item.TypeId, Converter={StaticResource TypeIdToTypeConverter}}"
-                                               ColorName="{Binding Item.ColorName.Value}"
+                                               TypeId="{Binding Item.TypeId}"
+                                               ColorName="{Binding Item.Color.Value}"
                                                Diameter="{Binding Item.Diameter.Value}"
                                                NozzleTemperature="{Binding Item.NozzleTemperature.Value}"
                                                BedTemperature="{Binding Item.BedTemperature.Value}"

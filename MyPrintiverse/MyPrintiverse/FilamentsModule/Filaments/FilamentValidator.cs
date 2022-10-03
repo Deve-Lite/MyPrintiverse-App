@@ -84,7 +84,7 @@ public class FilamentValidator : BaseValidator<Filament>
         NozzleTemperature.Value = "";
         BedTemperature.Value = "";
         CoolingRate.Value = "";
-        Rating.Value = "";
+        Rating.Value = "3";
     }
 
     private void AddValidation()
