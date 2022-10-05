@@ -1,22 +1,23 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.FilamentTemplates.Others.TopManageBar"
              x:Name="this">
     <ContentView.Content>
-        <Grid BindingContext="{x:Reference this}"  ColumnDefinitions="0.2*, 0.8*">
-            <Image Source="star.png" Margin="0,15,0,15" >
+        <Grid BindingContext="{x:Reference this}">
+            <Image Source="star.png"
+                   HorizontalOptions="Start"
+                   Margin="0,15,0,15" >
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding BackCommand}" CommandParameter="{Binding .}"/>
                 </Image.GestureRecognizers>
             </Image>
             <Label Style="{StaticResource LargeOswald}"
-                   VerticalOptions="Center"
-                   Grid.Column="1"
+                   VerticalOptions="Center"         
+                   HorizontalOptions="End"
                    Margin="0, 0, 15, 0"
                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                   Text="MyPrintiverse" 
-                   HorizontalOptions="End"/>
+                   Text="MyPrintiverse" />
         </Grid>
     </ContentView.Content>
 </ContentView>

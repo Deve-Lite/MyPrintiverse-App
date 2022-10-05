@@ -95,9 +95,9 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
         Description  = ExtendedValidator.Build<string>()
             .WithRule(new RangeRule<string>(maxLength: 500), "Too long data.");
         ShortName  = ExtendedValidator.Build<string>()
-            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 20), "Too long data.");
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 20), "Data should have from 3 to 20 characters.\n");
         FullName  = ExtendedValidator.Build<string>()
-            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Too long data.");
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Data should have from 3 to 50 characters.\n");
 
         Density  = ExtendedValidator.Build<string>()
             .WithRule(new IsNumber(), "Data is not a valid number.")

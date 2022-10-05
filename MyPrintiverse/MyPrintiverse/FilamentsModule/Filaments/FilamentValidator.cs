@@ -97,9 +97,9 @@ public partial class FilamentValidator : BaseValidator<Filament>
             .WithRule(new IsNumber(), "Data is not a valid number.")
             .WithRule(new MantissaLengthRule(2), "Too long number mantissa.");
         Brand = ExtendedValidator.Build<string>()
-            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Too long data.");
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Data should have from 3 to 50 characters.\n");
         Color = ExtendedValidator.Build<string>()
-            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Too long data.");
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Data should have from 3 to 50 characters.\n");
 
         Description = ExtendedValidator.Build<string>()
             .WithRule(new RangeRule<string>(maxLength: 500), "Too long data.");

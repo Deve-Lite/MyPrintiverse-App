@@ -16,7 +16,21 @@ public partial class EditFilamentViewModel : ManageFilamentViewModel
     {
         base.OnAppearing();
 
-        Task.Run(async () => { Item = new FilamentValidator(await ItemService.GetItemAsync(Id)); });
+        Task.Run(async () =>
+        {
+            Item = new FilamentValidator(await ItemService.GetItemAsync(Id));
+            SelectedFilamentType = FilamentTypes!.FirstOrDefault(x => x.Id == (Item as FilamentValidator)!.TypeId.Value);
+
+            if (SelectedFilamentType == null)
+            {
+                (Item as FilamentValidator).TypeId.Value = "";
+                SelectedFilamentType = new FilamentType();
+                SelectedFilamentType.Description = "Please click any type to select it as type of filament.";
+                SelectedFilamentType.Density = 0;
+                SelectedFilamentType.ShortName = "Couldn't find filament type";
+                SelectedFilamentType.EditedAtTicks = DateTime.Now.Ticks;
+            }
+        });
 
         // Think of what if type not found
         SelectedFilamentType = FilamentTypes!.FirstOrDefault(x => x.Id == (Item as FilamentValidator)!.TypeId.Value);

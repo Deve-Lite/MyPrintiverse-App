@@ -119,6 +119,10 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
     [RelayCommand]
     public void TypeClicked(FilamentType filamentType)
     {
+        if (filamentType.Id == (Item as FilamentValidator)!.TypeId.Value)
+            return;
+
+        //TODO : Data animation ???
         (Item as FilamentValidator)!.TypeId.Value = filamentType.Id;
 
         SelectedFilamentType = FilamentTypes.FirstOrDefault(x => x.Id == filamentType.Id);
