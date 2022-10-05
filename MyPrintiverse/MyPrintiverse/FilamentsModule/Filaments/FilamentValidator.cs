@@ -1,17 +1,19 @@
 ﻿
 using MyPrintiverse.Core.Extensions;
+using MyPrintiverse.Core.Validation.OtherValidation;
 using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Filaments;
 
-public class FilamentValidator : BaseValidator<Filament>
+public partial class FilamentValidator : BaseValidator<Filament>
 {
     #region Properties
-    public string TypeId { get; set; }
+    public Validatable<string> TypeId { get; set; }
     public ExtendedValidatable<string> Diameter { get; set; }
     public ExtendedValidatable<string> Brand { get; set; }
     public ExtendedValidatable<string> Color { get; set; }
-    public string ColorHex { get; set; }
+
+    public ExtendedValidatable<string> ColorHex { get; set; }
     public ExtendedValidatable<string> Description { get; set; }
     public ExtendedValidatable<string> NozzleTemperature { get; set; }
     public ExtendedValidatable<string> CoolingRate { get; set; }
@@ -43,6 +45,7 @@ public class FilamentValidator : BaseValidator<Filament>
     public override bool Validate() => Diameter.Validate() &&
                                        Brand.Validate() &&
                                        Color.Validate() &&
+                                       ColorHex.Validate() &&
                                        Description.Validate() &&
                                        NozzleTemperature.Validate() &&
                                        CoolingRate.Validate() &&
@@ -53,18 +56,18 @@ public class FilamentValidator : BaseValidator<Filament>
     {
         var fialmentMap = new Filament();
         
-        fialmentMap.TypeId = TypeId;
+        fialmentMap.TypeId = TypeId.Value;
         fialmentMap.Brand = Brand.Value;
         fialmentMap.Description = Description.Value;
         fialmentMap.ColorName = Color.Value;
-        fialmentMap.ColorHex = ColorHex;
+        fialmentMap.ColorHex = ColorHex.Value;
 
         /* Parse will not throw Exception because of NumberRules */
         fialmentMap.Diameter = double.Parse(Diameter.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-        fialmentMap.BedTemperature = int.Parse(BedTemperature.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        fialmentMap.BedTemperature = int.Parse(BedTemperature.Value, CultureInfo.InvariantCulture);
         fialmentMap.CoolingRate = int.Parse(CoolingRate.Value, CultureInfo.InvariantCulture);
-        fialmentMap.NozzleTemperature = int.Parse(NozzleTemperature.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-        fialmentMap.Rating = int.Parse(Rating.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        fialmentMap.NozzleTemperature = int.Parse(NozzleTemperature.Value, CultureInfo.InvariantCulture);
+        fialmentMap.Rating = int.Parse(Rating.Value, CultureInfo.InvariantCulture);
 
         return fialmentMap;
     }
@@ -73,8 +76,8 @@ public class FilamentValidator : BaseValidator<Filament>
 
     private void InitializeFields()
     {
-        TypeId = "";
-        ColorHex = "";
+        TypeId.Value = "";
+        ColorHex.Value = "FF000000";
 
         Description.Value = "";
         Color.Value = "";
@@ -113,23 +116,22 @@ public class FilamentValidator : BaseValidator<Filament>
             .WithRule(new HasNoDecimalPlace(), "Should be integer")
             .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.");
 
-        // TODO : Change to some clicking 
-        Rating = ExtendedValidator.Build<string>()
-            .WithRule(new IsNumber(), "Data is not a valid number.")
-            .WithRule(new HasNoDecimalPlace(), "Should be integer");
+        Rating = ExtendedValidator.Build<string>();
+
+        TypeId = Validator.Build<string>();
+        ColorHex = ExtendedValidator.Build<string>().WithRule(new IsValidColor(), "Invalid color hex.");
     }
 
     public override void Map(Filament filament)
     {
         base.Map(filament);
 
-        TypeId = filament.TypeId;
-        ColorHex = filament.ColorHex;
+        TypeId.Value = filament.TypeId;
+        ColorHex.Value = filament.ColorHex;
 
         Description.Value = filament.Description;
         Color.Value = filament.ColorName;
         Brand.Value = filament.Brand;
-
 
         Diameter.Value = filament.Diameter.ToString("0.##");
         NozzleTemperature.Value = filament.NozzleTemperature.ToString();

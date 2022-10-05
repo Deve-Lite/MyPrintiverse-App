@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.Templates.ColorPicker"
+             xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+             x:Name="this">
+
+    <Grid RowDefinitions="60, 16,30,30,30,30"
+          BindingContext="{x:Reference this}">
+
+      <!--  <Border Stroke="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                StrokeThickness="1"
+                BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}"/>
+
+        <Label Style="{StaticResource SmallRaleway}"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="Tap to set hex value."/>
+
+        <templates:ColorSlider Grid.Row="2"
+                               Minimum="0"
+                               Maximum="255"
+                               Value="{Binding R, Mode=TwoWay}"/>
+
+        <templates:ColorSlider Grid.Row="3"
+                               Minimum="0"
+                               Maximum="255"
+                               Value="{Binding G, Mode=TwoWay}"/>
+
+        <templates:ColorSlider Grid.Row="4"
+                               Minimum="0"
+                               Maximum="255"
+                               Value="{Binding B, Mode=TwoWay}"/>
+
+        <Grid ColumnDefinitions="0.1*, 0.7*, 0.2*"
+              Grid.Row="5">
+
+            <Frame Style="{StaticResource BaseFrameVariant}">
+                <Label Style="{StaticResource TitleLabel}"
+                       FontAttributes="Bold"/>
+            </Frame>
+
+            <Slider Style="{StaticResource BaseSlider}"
+                    Margin="10,0,10,0"
+                    Minimum="0"
+                    Maximum="1"
+                    Value="{Binding A, Mode=TwoWay}"/>
+
+            <Frame Style="{StaticResource BaseFrameVariant}">
+                <Label Style="{StaticResource TitleLabel}"
+                       FontAttributes="Bold"
+                       Text="{Binding A, StringFormat='{0:0.00}'}"/>
+            </Frame>
+        </Grid>
+        -->
+    </Grid>
+</ContentView>
+

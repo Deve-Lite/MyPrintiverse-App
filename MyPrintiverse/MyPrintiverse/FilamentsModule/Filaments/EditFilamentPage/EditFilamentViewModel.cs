@@ -19,7 +19,7 @@ public partial class EditFilamentViewModel : ManageFilamentViewModel
         Task.Run(async () => { Item = new FilamentValidator(await ItemService.GetItemAsync(Id)); });
 
         // Think of what if type not found
-        SelectedFilamentType = FilamentTypes.FirstOrDefault(x => x.Id == (Item as FilamentValidator).TypeId);
+        SelectedFilamentType = FilamentTypes!.FirstOrDefault(x => x.Id == (Item as FilamentValidator)!.TypeId.Value);
     }
 
     [RelayCommand]

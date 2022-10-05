@@ -93,7 +93,7 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
 
     }
 
-    public override bool IsStepOneValid() => !string.IsNullOrEmpty((Item as FilamentValidator).TypeId);
+    public override bool IsStepOneValid() => !string.IsNullOrEmpty((Item as FilamentValidator)!.TypeId.Value);
 
     #endregion
 
@@ -119,7 +119,7 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
     [RelayCommand]
     public void TypeClicked(FilamentType filamentType)
     {
-        (Item as FilamentValidator).TypeId = filamentType.Id;
+        (Item as FilamentValidator)!.TypeId.Value = filamentType.Id;
 
         SelectedFilamentType = FilamentTypes.FirstOrDefault(x => x.Id == filamentType.Id);
     } 
@@ -127,7 +127,9 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
 
     protected virtual bool IsStepTwoValid() => (Item as FilamentValidator).Brand.Validate() &&
                                                (Item as FilamentValidator).Diameter.Validate() &&
-                                               (Item as FilamentValidator).Color.Validate();
+                                               (Item as FilamentValidator).Color.Validate() &&
+                                               (Item as FilamentValidator).ColorHex.Validate();
+
     protected virtual bool IsStepThreeValid() => (Item as FilamentValidator).NozzleTemperature.Validate() &&
                                                  (Item as FilamentValidator).BedTemperature.Validate() &&
                                                  (Item as FilamentValidator).CoolingRate.Validate()&&
@@ -176,7 +178,7 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
                 StepOne = false;
                 StepTwo = true;
                 NextButtonTitle = "NEXT";
-                (Item as FilamentValidator).TypeId = SelectedFilamentType.Id;
+                (Item as FilamentValidator)!.TypeId.Value = SelectedFilamentType.Id;
             }
             else
                 await Toast.Toast("Please select type.");

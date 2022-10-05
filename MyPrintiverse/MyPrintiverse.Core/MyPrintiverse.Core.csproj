@@ -20,6 +20,7 @@
 
 	<ItemGroup>
 	  <None Remove="Services\Server\g3yo5zx2.q3o~" />
+	  <None Remove="Validation\OtherValidation\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -32,4 +33,7 @@
 	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.21.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Validation\OtherValidation\" />
+	</ItemGroup>
 </Project>

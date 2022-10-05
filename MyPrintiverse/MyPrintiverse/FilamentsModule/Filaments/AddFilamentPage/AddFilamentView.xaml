@@ -131,7 +131,7 @@
 
             <ScrollView IsVisible="{Binding StepTwo}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Type"
+                    <otherTemplates:StepDescription Title="New Filament"
                                         Step="Step 2 of 4"
                                         Description="Enter filament type informations."
                                         Margin="0,2,0,10"/>
@@ -158,19 +158,22 @@
                                                      IsValid="{Binding Item.Color.IsValid}"
                                                      ErrorMessage="{Binding Item.Color.Error}"/>
 
-                    <!-- Color Picker -->
-
                     <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                     Title="Color Hex TMP"
-                                                     Text="{Binding Item.ColorHex}"
-                                                     IsValid="True"/>
+                                                     Title="Color Hex"
+                                                     Text="{Binding Item.ColorHex.Value}"
+                                                     ValidationCommand="{Binding Item.ColorHex.ExtendedValidateCommand}"
+                                                     IsValid="{Binding Item.ColorHex.IsValid}"
+                                                     ErrorMessage="{Binding Item.ColorHex.Error}"/>
+
+
+                    <!-- <entryTemplates:ColorPicker ColorHex="{Binding Item.ColorHex.Value}"/> -->
 
                 </StackLayout>
             </ScrollView>
 
             <ScrollView IsVisible="{Binding StepThree}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Type"
+                    <otherTemplates:StepDescription Title="New Filament"
                                         Step="Step 3 of 4"
                                         Description="Enter print settings and additional data."
                                         Margin="0,2,0,10"/>
@@ -199,6 +202,8 @@
                                                            ErrorMessage="{Binding Item.CoolingRate.Error}"
                                                            Entity="%"/>
 
+                    <entryTemplates:RatingSelector Rating="{Binding Item.Rating.Value}"/>
+
                     <entryTemplates:TitledEditor Style="{StaticResource BaseTitledEditor}"
                                              Title="Description"
                                              Text="{Binding Item.Description.Value}"
@@ -206,15 +211,12 @@
                                              IsValid="{Binding Item.Description.IsValid}"
                                              ErrorMessage="{Binding Item.Description.Error}"/>
 
-
-                    <!-- Rating todo-->
-
                 </StackLayout>
             </ScrollView>
 
             <ScrollView IsVisible="{Binding FinishingStep}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Type"
+                    <otherTemplates:StepDescription Title="New Filament"
                                         Step="Step 4 of 4"
                                         Description="Check your data."
                                         Margin="0,2,0,10"/>
@@ -222,8 +224,8 @@
 
                     <filamentTemplates:DisplayFilamentView 
                                                Brand="{Binding Item.Brand.Value}"
-                                               ColorHex="{Binding Item.ColorHex}"
-                                               TypeId="{Binding Item.TypeId}"
+                                               ColorHex="{Binding Item.ColorHex.Value}"
+                                               TypeId="{Binding Item.TypeId.Value, Mode=TwoWay}"
                                                ColorName="{Binding Item.Color.Value}"
                                                Diameter="{Binding Item.Diameter.Value}"
                                                NozzleTemperature="{Binding Item.NozzleTemperature.Value}"

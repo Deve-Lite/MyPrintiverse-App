@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.Templates.ColorSlider"
+             x:Name="this">
+    <Grid ColumnDefinitions="0.1*, 0.7*, 0.2*"
+          BindingContext="{x:Reference this}">
+        <Frame Style="{StaticResource BaseFrameVariant}">
+            <Label Style="{StaticResource TitleLabel}"
+                   FontAttributes="Bold"/>
+        </Frame>
+
+        <Slider Style="{StaticResource BaseSlider}"
+                Margin="10,0,10,0"
+                Minimum="{Binding Minimum}"
+                Maximum="{Binding Maximum}"
+                Value="{Binding Value}"/>
+
+        <Frame Style="{StaticResource BaseFrameVariant}">
+            <Label Style="{StaticResource TitleLabel}"
+                   FontAttributes="Bold"
+                   Text="{Binding Value, StringFormat='{0:F0}'}"/>
+        </Frame>
+
+    </Grid>
+</ContentView>
+

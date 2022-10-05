@@ -4,7 +4,7 @@ using System.Globalization;
 namespace MyPrintiverse.Tools.Converters;
 
 /// <summary>
-/// Converts string hex 'XXXXXX' to color.
+/// Converts argb / rgb hex string 'XXXXXX' to color.
 /// </summary>
 public class StringToColorConverter : IValueConverter
 {
