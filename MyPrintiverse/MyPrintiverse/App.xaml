@@ -1,17 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Application
-  x:Class="MyPrintiverse.App"
-  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:admin="clr-namespace:MyPrintiverse.Admin"
-  xmlns:filaments="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage"
-  xmlns:local="clr-namespace:MyPrintiverse"
-  xmlns:login="clr-namespace:MyPrintiverse.Authorization.Login"
-  xmlns:sys="clr-namespace:System;assembly=netstandard"
-  xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
-  xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-  xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage">
-
+<Application x:Class="MyPrintiverse.App"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,73 +13,4 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
-
-
-    <Application.MainPage>
-        <Shell>
-
-            <!-- 
-            <FlyoutItem Title="Login">
-                <ShellContent
-                      Title="Login"
-                      ContentTemplate="{DataTemplate login:LoginView}"
-                      FlyoutItemIsVisible="False" />
-            </FlyoutItem> -->
-
-            <FlyoutItem Title="Filaments" Icon="spool.png">
-                <Tab  Title="Filaments" Icon="spool.png">
-                    <ShellContent 
-                        ContentTemplate="{DataTemplate filaments:FilamentCollectionView}"
-                        />
-                </Tab>
-                <Tab Title="Types" Icon="spool.png">
-                    <ShellContent 
-                        ContentTemplate="{DataTemplate types:FilamentTypesView}" />
-                </Tab>
-            </FlyoutItem>
-
-            <FlyoutItem Title="Filaments" Icon="spool.png" />
-            <FlyoutItem Title="Test" Icon="spool.png">
-                <ShellContent Title="Test" ContentTemplate="{DataTemplate test:TestPage}" />
-            </FlyoutItem>
-
-            <FlyoutItem Title="Admin Panel (Dev Mode)" Icon="spool.png">
-                <ShellContent
-                    Title="Admin Panel"   
-                    ContentTemplate="{DataTemplate admin:AdminView}" 
-                    Route="admin" />
-            </FlyoutItem>
-
-            <Shell.FlyoutHeaderTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Frame Style="{StaticResource BaseFrame}">
-                            <Image
-                                Margin="0,30,0,30"   
-                                HeightRequest="84"
-                                Source="spool.png" />
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </Shell.FlyoutHeaderTemplate>
-
-            <Shell.FlyoutFooterTemplate>
-                <DataTemplate>
-                    <StackLayout HeightRequest="60">
-                        <Label
-                            Margin="0,5,0,0"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            Style="{StaticResource SmallRaleway}"
-                            Text="My Printiverse" />
-                        <Label
-                            HorizontalOptions="Center"
-                            Style="{StaticResource SmallRaleway}"
-                            Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dddd, dd/MM/yyyy}'}" />
-                    </StackLayout>
-                </DataTemplate>
-            </Shell.FlyoutFooterTemplate>
-
-        </Shell>
-    </Application.MainPage>
 </Application>

@@ -209,7 +209,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         var action = await MessageService.ShowActionSheetAsync<BaseItemActions>("Actions:");
 
         if (action == BaseItemActions.Open)
-            await OpenPage($"{typeof(TItemView).Name}?Id={item?.Id}");
+            await OpenPage(OpenRoute(item));
         else if (action == BaseItemActions.Delete)
         {
             if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
@@ -219,7 +219,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             IsBusy = false;
         }
         else if (action == BaseItemActions.Edit)
-            await OpenPage($"{typeof(TEditView).Name}?Id={item?.Id}");
+            await OpenPage(EditRoute(item));
     }
 
     /// <summary>

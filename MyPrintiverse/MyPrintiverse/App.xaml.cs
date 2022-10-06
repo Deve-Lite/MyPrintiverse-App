@@ -1,17 +1,24 @@
-﻿using MyPrintiverse.Admin;
+﻿
+using MyPrintiverse.Admin;
 using MyPrintiverse.Authorization;
 using MyPrintiverse.FilamentsModule;
 using MyPrintiverse.Templates.Test;
+using MyPrintiverse.Tools;
 
 namespace MyPrintiverse;
 
 public partial class App : Application
 {
-	public App()
-	{
+    public App(IToast toast)
+    {
         RegisterRoutes();
 
         InitializeComponent();
+
+        if (DeviceIdiom.Phone == DeviceInfo.Idiom)
+            MainPage = new MobileShell(toast);
+        else
+            MainPage = new MobileShell(toast); // In future DesktopShell
     }
 
     /// <summary>
@@ -36,4 +43,5 @@ public partial class App : Application
 
         #endregion
     }
+
 }

@@ -24,11 +24,20 @@ public partial class DisplayFilamentView : ContentView
         set => SetValue(ColorNameProperty, value);
     }
 
-    public static readonly BindableProperty ColorHexProperty = BindableProperty.Create(nameof(ColorHex), typeof(string), typeof(DisplayFilamentView), "");
+    public static readonly BindableProperty ColorHexProperty = BindableProperty.Create(nameof(ColorHex), typeof(string), typeof(DisplayFilamentView), "", propertyChanged: OnColorHexChanged);
     public string ColorHex
     {
         get => (string)GetValue(ColorHexProperty);
         set => SetValue(ColorHexProperty, value);
+    }
+
+    private static void OnColorHexChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var displayFilament = (DisplayFilamentView)bindable;
+
+        var color = Color.FromArgb(displayFilament.ColorHex);
+        var rate = 0.2126 * color.Red + 0.7152 * color.Green + 0.0722 * color.Blue;
+        displayFilament.colorLabel.TextColor = rate < 0.5 ? Color.FromArgb("E7E9EF") : Color.FromArgb("1F2432");
     }
 
     public static readonly BindableProperty DiameterProperty = BindableProperty.Create(nameof(Diameter), typeof(string), typeof(DisplayFilamentView), "");
@@ -88,5 +97,6 @@ public partial class DisplayFilamentView : ContentView
     public DisplayFilamentView()
 	{
 		InitializeComponent();
+        colorLabel.TextColor = Color.FromArgb("E7E9EF");
 	}
 }

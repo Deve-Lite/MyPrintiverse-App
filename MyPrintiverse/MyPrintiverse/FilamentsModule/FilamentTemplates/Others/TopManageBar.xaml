@@ -7,7 +7,7 @@
         <Grid BindingContext="{x:Reference this}">
             <Image Source="star.png"
                    HorizontalOptions="Start"
-                   Margin="0,15,0,15" >
+                   Margin="15,14,0,14" >
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding BackCommand}" CommandParameter="{Binding .}"/>
                 </Image.GestureRecognizers>
