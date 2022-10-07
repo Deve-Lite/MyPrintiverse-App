@@ -15,6 +15,7 @@
                 <Frame Grid.Column="3" 
                        Grid.RowSpan="10"
                        Padding="0"
+                       CornerRadius="0"
                        BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}">
                     <StackLayout>
                         <Label Style="{StaticResource MediumOswald}" x:Name="colorLabel"

@@ -32,12 +32,12 @@
 
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
-                                                          CommandParameter="{Binding .}"/>
+                                                              CommandParameter="{Binding .}"/>
 
 
                                         <TapGestureRecognizer NumberOfTapsRequired="2" 
-                                                          Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
-                                                          CommandParameter="{Binding .}" />
+                                                              Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
+                                                              CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
 
                                     <StackLayout>

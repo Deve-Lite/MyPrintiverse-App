@@ -24,10 +24,10 @@
                      IconImageSource="spool.png"/>
         <ToolbarItem Order="Secondary" 
                      Text="Delete"
-                     Command="{Binding DeleteDisplayItemCommand}" />
+                     Command="{Binding DeleteItemCommand}" />
         <ToolbarItem Order="Secondary" 
                      Text="Edit" 
-                     Command="{Binding EditDisplayItemCommand}" />
+                     Command="{Binding EditItemCommand}" />
     </ContentPage.ToolbarItems>
     
     
