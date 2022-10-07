@@ -4,7 +4,8 @@
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
-             x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypesPage.FilamentTypesView">
+             x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypesPage.FilamentTypesView"
+             xmlns:buttonTemplates="clr-namespace:MyPrintiverse.Templates.Button">
     
     <ContentPage.ToolbarItems>
         <!-- TODO Search bar -->
@@ -12,7 +13,7 @@
     </ContentPage.ToolbarItems>
     
     <Grid RowDefinitions="*,80">
-        <RefreshView Style="{StaticResource BaseRefreshView}">
+        <RefreshView Style="{StaticResource BaseRefreshView}" Grid.RowSpan="2">
             <CollectionView Style="{StaticResource BaseCollectionView}"
                             Footer="{Binding .}"
                             Header="{Binding .}">
@@ -117,12 +118,10 @@
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Grid.Row="1" 
-                     Style="{StaticResource CollectionImageButton}"
-                     Margin="10,0,0,0"    
-                     Source="spool.png"
-                     Command="{Binding AddItemCommand}"/>
-        
+        <buttonTemplates:AddToCollectionButton HorizontalOptions="Start"
+                                               Grid.Row="1"
+                                               AddCommand="{Binding AddItemCommand}"/>
+
         <!-- TODO Switch View-->
         
         <ImageButton Style="{StaticResource CollectionImageButton}"

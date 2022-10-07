@@ -8,6 +8,7 @@
              xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
              xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
              xmlns:othertemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
+             xmlns:buttonTemplates="clr-namespace:MyPrintiverse.Templates.Button"
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>

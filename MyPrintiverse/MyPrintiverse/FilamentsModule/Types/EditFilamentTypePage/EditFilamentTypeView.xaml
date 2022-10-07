@@ -6,10 +6,22 @@
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
+             xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Frame" x:Key="PropertyFrame" BasedOn="{StaticResource BaseFrameVariant}">
+                <Setter Property="Padding" Value="7,7,7,5"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid RowDefinitions="60, *, 60" 
           ColumnDefinitions="*,*" 
           VerticalOptions="FillAndExpand" 
@@ -148,7 +160,149 @@
                                         Description="Check your data."
                                         Margin="0,2,0,10"/>
 
-                    
+
+                    <StackLayout>
+
+                        <Frame Style="{StaticResource BaseFrame}"
+                               Margin="0,15,0,20"
+                               Padding="10, 4, 10, 4">
+
+                            <Grid RowDefinitions="*,*,*,*,*,*">
+
+                                <Label Style="{StaticResource TitleOswald}" 
+                                       Grid.Row="0"
+                                       Margin="3,3"
+                                       Text="{Binding Item.ShortName.Value}"/>
+
+                                <Label Grid.Row="1">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                                  Text="Full Name: "/>
+                                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                                  Text="{Binding Item.FullName.Value}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Grid.Row="2">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                                  Text="Density: "/>
+                                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                                  Text="{Binding Item.Density.Value,StringFormat='{0} g/cm^3'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Grid.Row="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                                  Text="Max. Service Tempearature: "/>
+                                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                                  Text="{Binding Item.MaxServiceTempearature.Value,StringFormat='{0} °C'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Grid.Row="4" Style="{StaticResource DisplayFrameSpan}" 
+                                       Text="{Binding Item.Description.Value}"
+                                       IsVisible="{Binding Item.Description.Value, Converter={StaticResource IsNotEmptyStringConventer}}"/>
+
+                                <Label Style="{StaticResource MicroRaleway}"
+                                       Grid.Row="5"
+                                       Margin="0,5"
+                                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
+                            </Grid>
+                        </Frame>
+
+                        <Frame Style="{StaticResource BaseFrameVariant}" 
+                               Margin="0,0,0,5"
+                               Padding="10, 4, 10, 4">
+
+                            <Grid RowDefinitions="*, *" ColumnDefinitions="*,*,*" Padding="0,0,0,10">
+
+                                <Label Style="{StaticResource MediumOswald}"
+                                       Margin="3,0,0,10"
+                                       Grid.ColumnSpan="3"
+                                       Text="Print Settings Compartments"/>
+
+                                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
+                                                                  Grid.Column="0"
+                                                                  TopValue="330"
+                                                                  DisplayValue="{Binding Item.NozzleTemperatureRange}"
+                                                                  Entity="°C"/>
+
+                                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
+                                                                  Grid.Column="1"
+                                                                  TopValue="120"
+                                                                  DisplayValue="{Binding Item.BedTemperatureRange}"
+                                                                  Entity="°C"/>
+
+                                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
+                                                                  Grid.Column="2"
+                                                                  TopValue="100"
+                                                                  DisplayValue="{Binding Item.CoolingRange}"
+                                                                  Entity="%"/>
+
+                            </Grid>
+                        </Frame>
+
+                        <filamentemplates:CollectionHeader Style="{StaticResource BaseCollectionHeader}" Margin="0,5,0,5" Title="Material properties"/>
+
+                        <Grid ColumnDefinitions="*, *, *" 
+                  RowDefinitions="*, *"
+                  ColumnSpacing="15" 
+                  RowSpacing="0" 
+                  HeightRequest="260"
+
+                  Margin="0,15,0,0" >
+
+                            <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="0"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Food Friendly"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding Item.IsFoodFriendly}"/>
+
+                            <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="0"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Flexible"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding Item.IsFlexible}"/>
+
+                            <valueindicatorstemplates:MaterialProperty Grid.Column="2" Grid.Row="0"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="BIO"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding Item.IsBio}"/>
+
+                            <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="1"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Uv Resistant"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding Item.IsUVResistant}"/>
+
+                            <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="1"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Heated Bed"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding Item.IsHeatedBedRequired}"/>
+
+                        </Grid>
+                    </StackLayout>
+
                 </StackLayout>
             </ScrollView>
         </Grid>

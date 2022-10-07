@@ -10,6 +10,7 @@
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
+    
     <Grid RowDefinitions="60, *, 60" 
           ColumnDefinitions="*,*" 
           VerticalOptions="FillAndExpand" 

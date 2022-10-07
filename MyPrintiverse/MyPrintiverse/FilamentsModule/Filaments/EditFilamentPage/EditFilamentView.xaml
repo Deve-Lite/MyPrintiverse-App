@@ -106,7 +106,7 @@
                                                         <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                                       Text="Density: "/>
                                                         <Span Style="{StaticResource DisplayFrameSpan}" 
-                                                      Text="{Binding Density,StringFormat='{0.00} g/cm^3'}"/>
+                                                      Text="{Binding Density,StringFormat='{0:0.00} g/cm^3'}"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>

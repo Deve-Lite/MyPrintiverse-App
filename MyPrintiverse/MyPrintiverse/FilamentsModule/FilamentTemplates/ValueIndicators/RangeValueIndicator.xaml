@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators.RangeValueIndicator">
-    <VerticalStackLayout>
-        <StackLayout>
+             x:Class="MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators.RangeValueIndicator"
+             x:Name="this">
+    <VerticalStackLayout BindingContext="{x:Reference this}">
+        <VerticalStackLayout.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding}"/>
+        </VerticalStackLayout.GestureRecognizers>
 
-        </StackLayout>
+        <Frame HeightRequest="100" 
+               WidthRequest="32"
+               BackgroundColor="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"
+               Padding="0"
+               CornerRadius="6">
+            <Grid>
+
+                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"
+                       x:Name="indicator"
+                       Padding="0"
+                       VerticalOptions="Start"
+                       CornerRadius="6"/>
+            </Grid>
+        </Frame>
+
+        <Label HorizontalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding DisplayValue}"/>
+                    <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding Entity, StringFormat=' {0}'}"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Image Source="{Binding Source}" HeightRequest="32" WidthRequest="32"/>
     </VerticalStackLayout>
 </ContentView>

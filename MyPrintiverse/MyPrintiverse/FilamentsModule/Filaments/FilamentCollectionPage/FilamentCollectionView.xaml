@@ -5,21 +5,8 @@
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage"
              x:Class="MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage.FilamentCollectionView"
              xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
-             xmlns:othertemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-            <Style TargetType="Border" x:Key="FilamentFrameBorder">
-                <Setter Property="Margin" Value="5,0,5,0"/>
-                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"/>
-                <Setter Property="StrokeThickness" Value="0.6"/>
-                <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5"/>
-                <Setter Property="BackgroundColor" Value="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}"/>
-            </Style>
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             xmlns:othertemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
+             xmlns:buttonTemplates="clr-namespace:MyPrintiverse.Templates.Button">
 
     <ContentPage.ToolbarItems>
         <!-- TODO Search bar -->
@@ -158,13 +145,11 @@
             </CollectionView>
         </RefreshView>
 
-        <ImageButton Style="{StaticResource CollectionImageButton}"
-                     Grid.Row="1"
-                     Source="spool.png"
-                     Margin="10,0,0,0"
-                     Command="{Binding AddItemCommand}"/>
+        <buttonTemplates:AddToCollectionButton HorizontalOptions="Start"
+                                               Grid.Row="1"
+                                               AddCommand="{Binding AddItemCommand}"/>
 
-        <!-- TODO Switch View-->
+        
         <ImageButton Style="{StaticResource CollectionImageButton}"
                      Grid.Row="1"
                      Source="spool.png"

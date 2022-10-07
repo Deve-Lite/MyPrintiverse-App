@@ -1,11 +1,163 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates.FilamentTypeDisplay">
-    <VerticalStackLayout>
-        <Label 
-            Text="TODO"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates.FilamentTypeDisplay"
+             xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
+             xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
+             x:Name="this">
+
+    <!-- Dziwne problemy nie uzywac!! -->
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Frame" x:Key="PropertyFrame" BasedOn="{StaticResource BaseFrameVariant}">
+                <Setter Property="Padding" Value="7,7,7,5"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+
+    <StackLayout BindingContext="{x:Reference this}">
+        <Frame Style="{StaticResource BaseFrame}"
+                   Margin="15,15,15,20"
+                   Padding="10, 4, 10, 4">
+
+            <Grid RowDefinitions="*,*,*,*,*,*">
+
+                <Label Style="{StaticResource TitleOswald}" 
+                       Grid.Row="0"
+                       Margin="3,3"
+                       Text="{Binding ShortName}"/>
+
+                <Label Grid.Row="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Full Name: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding FullName}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Row="2">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Density: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding Density, StringFormat='{0} g/cm^3'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Row="3">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                                  Text="Max. Service Tempearature: "/>
+                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                  Text="{Binding MaxServiceTempearature, StringFormat='{0} °C'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Row="4" Style="{StaticResource DisplayFrameSpan}" 
+                       Margin="0,5,10,0"
+                       Text="{Binding Description}"
+                       IsVisible="{Binding Description, Converter={StaticResource IsNotEmptyStringConventer}}"/>
+
+                <Label Style="{StaticResource MicroRaleway}"
+                       Grid.Row="5"
+                       Margin="0,5"
+                       Text="{Binding EditedAt}" />
+            </Grid>
+        </Frame>
+
+        <Frame Style="{StaticResource BaseFrameVariant}" 
+                   
+                   Margin="15,0,15,5"
+                   Padding="10, 4, 10, 4">
+
+            <Grid RowDefinitions="*, *" ColumnDefinitions="*,*,*" Padding="0,0,0,10">
+
+                <Label Style="{StaticResource MediumOswald}"
+                           Margin="3,0,0,10"
+                           Grid.ColumnSpan="3"
+                           Text="Print Settings Compartments"/>
+
+                <!--
+                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
+                                                                  Grid.Column="0"
+                                                                  TopValue="330"
+                                                                  DisplayValue="{Binding NozzleTemperatureRange}"
+                                                                  Entity="°C"/>
+
+                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
+                                                                  Grid.Column="1"
+                                                                  TopValue="120"
+                                                                  DisplayValue="{Binding BedTemperatureRange}"
+                                                                  Entity="°C"/>
+
+                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
+                                                                  Grid.Column="2"
+                                                                  TopValue="100"
+                                                                  DisplayValue="{Binding CoolingRange}"
+                                                                  Entity="%"/> -->
+
+            </Grid>
+        </Frame>
+
+        <filamentemplates:CollectionHeader Style="{StaticResource BaseCollectionHeader}" Title="Material properties"/>
+
+        <Grid ColumnDefinitions="*, *, *" 
+                  RowDefinitions="*, *"
+                  ColumnSpacing="15" 
+                  RowSpacing="0" 
+                  HeightRequest="260"
+                  Margin="15,15,15,30" >
+            
+            <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="0"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Food Friendly"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding IsFoodFriendly}"/>
+
+            <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="0"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Flexible"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding IsFlexible}"/>
+
+            <valueindicatorstemplates:MaterialProperty Grid.Column="2" Grid.Row="0"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="BIO"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding IsBio}"/>
+
+            <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="1"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Uv Resistant"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding IsUVResistant}"/>
+
+            <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="1"
+                                                           FrameStyle="{StaticResource PropertyFrame}"
+                                                           TitleStyle="{StaticResource SmallRaleway}"
+                                                           Title="Heated Bed"
+                                                           ImageSource="spool.png"
+                                                           InvalidImageSource="star.svg"
+                                                           IsValid="{Binding IsHeatedBedRequired}"/>
+        </Grid>
+    </StackLayout>
 </ContentView>

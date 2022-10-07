@@ -16,8 +16,6 @@ public abstract partial class ManageFilamentTypeViewModel : BaseItemManageViewMo
     [ObservableProperty]
     protected bool _stepThree;
 
-
-
     [ObservableProperty]
     private string _nozzleError;
     [ObservableProperty]
@@ -159,6 +157,11 @@ public abstract partial class ManageFilamentTypeViewModel : BaseItemManageViewMo
         {
             if (IsStepThreeValid())
             {
+                var item = (Item as FilamentTypeValidator);
+                (Item as FilamentTypeValidator).NozzleTemperatureRange = $"{item.NozzleMin.Value}-{item.NozzleMax.Value}";
+                (Item as FilamentTypeValidator).BedTemperatureRange = $"{item.BedMin.Value}-{item.BedMax.Value}";
+                (Item as FilamentTypeValidator).CoolingRange =  $"{item.CoolingMin.Value}-{item.CoolingMax.Value}";
+
                 StepThree = false;
                 FinishingStep = true;
                 NextButtonTitle = "FINISH";

@@ -1,9 +1,11 @@
-﻿using MyPrintiverse.Core.Extensions;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MyPrintiverse.Core.Extensions;
 using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Types;
 
-public class FilamentTypeValidator : BaseValidator<FilamentType>
+[ObservableObject]
+public partial class FilamentTypeValidator : BaseValidator<FilamentType>
 {
     public ExtendedValidatable<string> ShortName { get; set; }
     public ExtendedValidatable<string> FullName { get; set; }
@@ -26,6 +28,12 @@ public class FilamentTypeValidator : BaseValidator<FilamentType>
     public bool IsFlexible { get; set; }
     public bool IsHeatedBedRequired { get; set; }
 
+    [ObservableProperty]
+    private string _nozzleTemperatureRange;
+    [ObservableProperty]
+    private string _bedTemperatureRange;
+    [ObservableProperty]
+    private string _coolingRange;
 
     public FilamentTypeValidator()
     { 
