@@ -10,9 +10,9 @@
                Padding="15, 0, 0, 0"
                VerticalOptions="Center">
             <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*"
-                  ColumnDefinitions="*, 10, 30">
+                  ColumnDefinitions="*, 10, 2, 30">
 
-                <Frame Grid.Column="2" 
+                <Frame Grid.Column="3" 
                        Grid.RowSpan="10"
                        Padding="0"
                        BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}">
@@ -25,6 +25,12 @@
                                Text="{Binding ColorHex}"/>
                     </StackLayout>
                 </Frame>
+
+                <StackLayout Grid.Column="2"
+                             Grid.RowSpan="10"
+                             BackgroundColor="{AppThemeBinding Light={StaticResource OnBackground},Dark={StaticResource OnBackgroundDark}}"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"/>
 
                 <Label Style="{StaticResource TitleOswald}" 
                        Grid.Row="0"

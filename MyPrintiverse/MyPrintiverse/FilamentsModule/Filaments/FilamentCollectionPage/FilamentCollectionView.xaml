@@ -52,9 +52,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filament">
                         <StackLayout>
-                            <Grid Margin="15,5,15,5"  ColumnDefinitions="*,30,30">
-                                <Frame Style="{StaticResource CollectionFrame}" VerticalOptions="FillAndExpand"> 
-                                    
+                            <Grid Margin="15,5,15,5"  ColumnDefinitions="*, 38">
+                                <Frame Style="{StaticResource CollectionFrame}"
+                                       Padding="10,0,0,0"
+                                       VerticalOptions="FillAndExpand">
+
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentCollectionViewModel}}}"
                                                           CommandParameter="{Binding .}"/>
@@ -62,13 +64,30 @@
                                         <TapGestureRecognizer NumberOfTapsRequired="2" 
                                                           Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentCollectionViewModel}}}"
                                                           CommandParameter="{Binding .}" />
-                                        
+
                                     </Frame.GestureRecognizers>
 
+                                    <Grid VerticalOptions="Center"
+                                          RowDefinitions="14, *, *, *, *, 14"
+                                          Padding="0"
+                                          Margin="0"
+                                          ColumnDefinitions="*, 16, 2, 24">
 
-                                    <StackLayout VerticalOptions="Center">
+                                        <Frame Grid.Column="3" 
+                                               Grid.RowSpan="6"
+                                               Padding="0"
+                                               CornerRadius="0"
+                                               Margin="0"
+                                               BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}">
+                                        </Frame>
 
-                                        <Label>
+                                        <StackLayout Grid.Column="2"
+                                                     Grid.RowSpan="6"
+                                                     BackgroundColor="{AppThemeBinding Light={StaticResource OnBackground},Dark={StaticResource OnBackgroundDark}}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand"/>
+
+                                        <Label Grid.Row="1">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
@@ -79,7 +98,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                        <Label>
+                                        <Label Grid.Row="2">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
@@ -90,7 +109,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                        <Label>
+                                        <Label Grid.Row="3">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
@@ -101,7 +120,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                        <Grid>
+                                        <Grid Grid.Row="4">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.4*"/>
                                                 <ColumnDefinition Width="0.6*"/>
@@ -111,22 +130,19 @@
                                                    HorizontalOptions="Start"
                                                    VerticalOptions="Center"
                                                    Text="TODO TAG"/>
-                                            
+
                                             <Label Grid.Column="1" 
                                                    Style="{StaticResource MicroRaleway}"
                                                    Margin="0,5,0,0"
                                                    Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
                                         </Grid>
 
-                                    </StackLayout>
+                                    </Grid>
                                 </Frame>
-
-                                <Border Grid.Column="1"
-                                        Style="{StaticResource FilamentFrameBorder}" />
 
                                 <othertemplates:FilamentRating Grid.Column="2" 
                                                                Rating="{Binding Rating}"/>
-                                
+
                             </Grid>
                         </StackLayout>
                     </DataTemplate>
