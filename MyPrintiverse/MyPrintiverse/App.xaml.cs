@@ -18,7 +18,7 @@ public partial class App : Application
         if (DeviceIdiom.Phone == DeviceInfo.Idiom)
             MainPage = new MobileShell(toast);
         else
-            MainPage = new MobileShell(toast); // In future DesktopShell
+            MainPage = new DesktopShell();
     }
 
     /// <summary>

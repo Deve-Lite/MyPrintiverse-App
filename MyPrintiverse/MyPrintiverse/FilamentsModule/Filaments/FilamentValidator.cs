@@ -55,6 +55,8 @@ public partial class FilamentValidator : BaseValidator<Filament>
     public override Filament Map()
     {
         var fialmentMap = new Filament();
+
+        BaseModelMap(fialmentMap);
         
         fialmentMap.TypeId = TypeId.Value;
         fialmentMap.Brand = Brand.Value;
