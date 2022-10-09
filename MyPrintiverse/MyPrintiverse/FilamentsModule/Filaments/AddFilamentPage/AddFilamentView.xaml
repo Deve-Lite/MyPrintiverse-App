@@ -45,8 +45,9 @@
                     <StackLayout>
 
                         <Label Style="{StaticResource LargeRaleway}"
-                                           Margin="0,5,0,5"
-                                           Text="{Binding SelectedFilamentType.ShortName}" />
+                               FontAttributes="Bold"
+                               Margin="0,5,0,5"
+                               Text="{Binding SelectedFilamentType.ShortName}" />
 
                         <Label>
                             <Label.FormattedText>
@@ -100,8 +101,9 @@
                                         <StackLayout>
 
                                             <Label Style="{StaticResource LargeRaleway}"
-                                           Margin="0,5,0,5"
-                                           Text="{Binding ShortName}" />
+                                                   FontAttributes="Bold"
+                                                   Margin="0,5,0,5"
+                                                   Text="{Binding ShortName}" />
 
                                             <Label>
                                                 <Label.FormattedText>

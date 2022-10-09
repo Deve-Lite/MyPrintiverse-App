@@ -44,8 +44,8 @@
 
                                         <Label Style="{StaticResource LargeRaleway}"
                                                FontAttributes="Bold"
-                                           Margin="0,3,0,0"
-                                           Text="{Binding ShortName}" />
+                                               Margin="0,3,0,0"
+                                               Text="{Binding ShortName}" />
 
                                         <Label>
                                             <Label.FormattedText>
@@ -63,7 +63,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
-                                                          Text="Heated bed temperatures range: " />
+                                                          Text="Heated bed range: " />
                                                     <Span Style="{StaticResource CollectionFrameSpan}" 
                                                           Text="{Binding BedTemperatureRange, StringFormat='{0} °C'}"/>
                                                 </FormattedString>
@@ -74,7 +74,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
-                                                          Text="Extruder temperatures range: " />
+                                                          Text="Extruder range: " />
                                                     <Span Style="{StaticResource CollectionFrameSpan}" 
                                                           Text="{Binding NozzleTemperatureRange, StringFormat='{0} °C'}"/>
                                                 </FormattedString>
@@ -85,7 +85,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Style="{StaticResource CollectionFrameBoldSpan}" 
-                                                          Text="Cooling rate range: " />
+                                                          Text="Cooling range: " />
                                                     <Span Style="{StaticResource CollectionFrameSpan}" 
                                                           Text="{Binding CoolingRange, StringFormat='{0} %'}"/>
                                                 </FormattedString>

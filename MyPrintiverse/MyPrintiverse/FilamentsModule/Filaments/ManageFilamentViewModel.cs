@@ -111,7 +111,7 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
         foreach(var item in await TypeService.GetItemsAsync())
             FilamentTypes.Add(item);
 
-        IsRefreshing = true;
+        IsRefreshing = false;
         IsBusy = false;
     }
 
