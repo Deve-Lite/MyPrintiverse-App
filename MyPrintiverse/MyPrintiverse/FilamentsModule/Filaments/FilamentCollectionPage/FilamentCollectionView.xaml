@@ -65,7 +65,12 @@
                                                Padding="0"
                                                CornerRadius="0"
                                                Margin="0"
-                                               BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}">
+                                               BackgroundColor="White">
+                                            <Frame Padding="0"
+                                                   CornerRadius="0"
+                                                   Margin="0"
+                                                   BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}">
+                                            </Frame>
                                         </Frame>
 
                                         <StackLayout Grid.Column="2"

@@ -100,6 +100,8 @@ public partial class ColorPicker : ContentView
         if (aSlider.Value <= 0.31)
             return Color.FromArgb("1F2432");
 
+       
+
         var rate = 0.2126 * rSlider.Value + 0.7152 * gSlider.Value + 0.0722 *  bSlider.Value;
         return rate < 128 ? Color.FromArgb("E7E9EF") : Color.FromArgb("1F2432");
     }
