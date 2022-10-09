@@ -418,4 +418,10 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BaseSlider" TargetType="Slider">
+        <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}"/>
+        <Setter Property="MinimumTrackColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"/>
+        <Setter Property="MaximumTrackColor" Value="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"/>
+    </Style>
+
 </ResourceDictionary>
