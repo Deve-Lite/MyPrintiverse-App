@@ -62,6 +62,7 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
 
         // TODO : Load from Settings
         (Item as FilamentValidator).Diameter.Value = "1.75";
+        
     }
 
     [RelayCommand]
@@ -126,13 +127,12 @@ public partial class ManageFilamentViewModel : BaseItemManageViewModel<Filament>
         (Item as FilamentValidator)!.TypeId.Value = filamentType.Id;
 
         SelectedFilamentType = FilamentTypes.FirstOrDefault(x => x.Id == filamentType.Id);
-    } 
+    }
 
 
     protected virtual bool IsStepTwoValid() => (Item as FilamentValidator).Brand.Validate() &&
                                                (Item as FilamentValidator).Diameter.Validate() &&
-                                               (Item as FilamentValidator).Color.Validate() &&
-                                               (Item as FilamentValidator).ColorHex.Validate();
+                                               (Item as FilamentValidator).Color.Validate();
 
     protected virtual bool IsStepThreeValid() => (Item as FilamentValidator).NozzleTemperature.Validate() &&
                                                  (Item as FilamentValidator).BedTemperature.Validate() &&

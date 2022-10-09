@@ -45,7 +45,6 @@ public partial class FilamentValidator : BaseValidator<Filament>
     public override bool Validate() => Diameter.Validate() &&
                                        Brand.Validate() &&
                                        Color.Validate() &&
-                                       ColorHex.Validate() &&
                                        Description.Validate() &&
                                        NozzleTemperature.Validate() &&
                                        CoolingRate.Validate() &&
@@ -121,7 +120,8 @@ public partial class FilamentValidator : BaseValidator<Filament>
         Rating = ExtendedValidator.Build<string>();
 
         TypeId = Validator.Build<string>();
-        ColorHex = ExtendedValidator.Build<string>().WithRule(new IsValidColor(), "Invalid color hex.");
+
+        ColorHex = ExtendedValidator.Build<string>();
     }
 
     public override void Map(Filament filament)

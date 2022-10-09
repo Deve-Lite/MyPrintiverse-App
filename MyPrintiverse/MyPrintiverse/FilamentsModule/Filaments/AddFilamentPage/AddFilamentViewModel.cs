@@ -12,6 +12,7 @@ public partial class AddFilamentViewModel : ManageFilamentViewModel
     }
 
     #region Overrides
+
     [RelayCommand]
     public override async Task NextStep() => await Next(AddItem);
 

@@ -92,6 +92,8 @@
 
             <module:RangeValidatableEntry BackgroundColor="Red" Margin="10,0,10,30"/>
 
+            <module:ColorPicker Margin="10" ColorHex="FFAFAFAF"/>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

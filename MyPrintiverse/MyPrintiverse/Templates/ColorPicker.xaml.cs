@@ -1,135 +1,107 @@
-﻿using System.Globalization;
-
-namespace MyPrintiverse.Templates;
+﻿namespace MyPrintiverse.Templates;
 
 public partial class ColorPicker : ContentView
 {
-    #region Switch
-
-    public static readonly BindableProperty SliderModeProperty = BindableProperty.Create(nameof(SliderMode), typeof(bool), typeof(ColorPicker), true);
-    public bool SliderMode
+    public ColorPicker()
     {
-        get => (bool)GetValue(SliderModeProperty);
-        set => SetValue(SliderModeProperty, value);
+        InitializeComponent();
+        defaultModeSwitch.IsToggled = true;
     }
 
-    #endregion 
+    #region Title
 
-    #region Hex
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(RangeValidatableEntry), "Title not set.");
+    public string Title
+    {
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
 
-    public static readonly BindableProperty ColorHexProperty = BindableProperty.Create(nameof(ColorHex), typeof(string), typeof(ColorPicker), "", propertyChanged: OnHexChanged);
+    #endregion
+
+    #region ColorHex
+
+    public static readonly BindableProperty ColorHexProperty = BindableProperty.Create(nameof(ColorHex), typeof(string), typeof(ColorPicker), "00000000", propertyChanged: OnColorHexChanged);
     public string ColorHex
     {
         get => (string)GetValue(ColorHexProperty);
         set => SetValue(ColorHexProperty, value);
     }
 
-    private static void OnHexChanged(BindableObject bindable, object oldValue, object newValue)
+    public static readonly BindableProperty NewColorHexProperty = BindableProperty.Create(nameof(NewColorHex), typeof(string), typeof(ColorPicker), "00000000");
+    public string NewColorHex
     {
-        var bindableColorPicker = (ColorPicker)bindable;
-        /*
-        //if (bindableColorPicker.SliderMode)
-            //return;
+        get => (string)GetValue(NewColorHexProperty);
+        set => SetValue(NewColorHexProperty, value);
+    }
 
-        string color = bindableColorPicker.ColorHex;
-        if (color.Length == 0)
+    private static void OnColorHexChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var picker = (ColorPicker)bindable;
+
+        string hex = picker.ColorHex;
+
+        if (hex == null || hex.Length != 8)
             return;
 
-        try
-        {
-            if (color.Length % 3 == 0)
-            {
-                bindableColorPicker.A = 1;
-
-                if (color.Length == 3)
-                {
-                    bindableColorPicker.R = Int32.Parse(color.Substring(0, 1), NumberStyles.HexNumber);
-                    bindableColorPicker.G = Int32.Parse(color.Substring(1, 1), NumberStyles.HexNumber);
-                    bindableColorPicker.B = Int32.Parse(color.Substring(2, 1), NumberStyles.HexNumber);
-                }
-                else
-                {
-                    bindableColorPicker.R = Int32.Parse(color.Substring(0, 2), NumberStyles.HexNumber);
-                    bindableColorPicker.G = Int32.Parse(color.Substring(2, 2), NumberStyles.HexNumber);
-                    bindableColorPicker.B = Int32.Parse(color.Substring(4, 2), NumberStyles.HexNumber);
-                }
-            }
-
-
-            if (color.Length % 4 == 0)
-            {
-                if (color.Length == 3)
-                {
-                    bindableColorPicker.A = double.Parse(color.Substring(0, 1), NumberStyles.HexNumber);
-                    bindableColorPicker.R = Int32.Parse(color.Substring(1, 1), NumberStyles.HexNumber);
-                    bindableColorPicker.G = Int32.Parse(color.Substring(2, 1), NumberStyles.HexNumber);
-                    bindableColorPicker.B = Int32.Parse(color.Substring(3, 1), NumberStyles.HexNumber);
-                }
-                else
-                {
-                    bindableColorPicker.A = double.Parse(color.Substring(0, 2), NumberStyles.HexNumber);
-                    bindableColorPicker.R = Int32.Parse(color.Substring(2, 2), NumberStyles.HexNumber);
-                    bindableColorPicker.G = Int32.Parse(color.Substring(4, 2), NumberStyles.HexNumber);
-                    bindableColorPicker.B = Int32.Parse(color.Substring(6, 2), NumberStyles.HexNumber);
-                }
-            }
-        }
-        catch
-        {
-            
-        }
-        */
-
+        picker.aSlider.Value = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber) / 255;
+        picker.rSlider.Value = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+        picker.gSlider.Value = int.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+        picker.bSlider.Value = int.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
     }
 
     #endregion
 
-    #region Sliders
+    #region ARGB Actions
 
-    public static readonly BindableProperty RProperty = BindableProperty.Create(nameof(R), typeof(double), typeof(ColorPicker), 0, propertyChanged: OnRGBChanged);
-    public double R
+    private void AlphaValueChanged(object sender, ValueChangedEventArgs e) => Slidifiy(e.NewValue, aLabel, 255, "F2", "X2");
+    private void RedValueChanged(object sender, ValueChangedEventArgs e) => Slidifiy(e.NewValue, rLabel);
+    private void GreenValueChanged(object sender, ValueChangedEventArgs e) => Slidifiy(e.NewValue, gLabel);
+    private void BlueValueChanged(object sender, ValueChangedEventArgs e) => Slidifiy(e.NewValue, bLabel);
+
+    private void SwitchToogled(object sender, ToggledEventArgs e)
     {
-        get => (double)GetValue(RProperty);
-        set => SetValue(RProperty, value);
+        aLabel.Text = FormatValue(aSlider.Value, "F2", "X2", defaultModeSwitch.IsToggled, 255);
+        rLabel.Text = FormatValue(rSlider.Value, "F0", "X2", defaultModeSwitch.IsToggled);
+        gLabel.Text = FormatValue(gSlider.Value, "F0", "X2", defaultModeSwitch.IsToggled);
+        bLabel.Text = FormatValue(bSlider.Value, "F0", "X2", defaultModeSwitch.IsToggled);
     }
-
-    public static readonly BindableProperty GProperty = BindableProperty.Create(nameof(G), typeof(double), typeof(ColorPicker), 0, propertyChanged: OnRGBChanged);
-    public double G
-    {
-        get => (double)GetValue(GProperty);
-        set => SetValue(GProperty, value);
-    }
-
-    public static readonly BindableProperty BProperty = BindableProperty.Create(nameof(B), typeof(double), typeof(ColorPicker), 0, propertyChanged: OnRGBChanged);
-    public double B
-    {
-        get => (double)GetValue(BProperty);
-        set => SetValue(BProperty, value);
-    }
-
-    public static readonly BindableProperty AProperty = BindableProperty.Create(nameof(A), typeof(double), typeof(ColorPicker), 0, propertyChanged: OnRGBChanged);
-    public double A
-    {
-        get => (double)GetValue(AProperty);
-        set => SetValue(AProperty, value);
-    }
-
-    private static void OnRGBChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        var bindableColorPicker = (ColorPicker)bindable;
-
-        bindableColorPicker.ColorHex = ((int)(bindableColorPicker.A * 255)).ToString("X2") +
-                                       ((int)bindableColorPicker.R).ToString("X2") +
-                                       ((int)bindableColorPicker.G).ToString("X2") +
-                                       ((int)bindableColorPicker.B).ToString("X2");
-    }
-
     #endregion
 
-    public ColorPicker()
+    #region Supprot Functions
+
+    private void Slidifiy(double value, Label label, double multiplayer = 1, string defaultFormat = "F0", string hexFormat = "X2")
     {
-        InitializeComponent();
-
-
+        label.Text = FormatValue(value, defaultFormat, hexFormat, defaultModeSwitch.IsToggled, multiplayer);
+        NewColorHex = CreateColorHex();
+        colorHexLabel.TextColor = ColorHexContrast();
     }
+
+    private string FormatValue(double value, string defaultFormat, string hexFormat, bool isDefaultMode, double multiplayer = 1)
+    {
+        if (isDefaultMode)
+            return value.ToString(defaultFormat);
+
+        return GetHex(value, hexFormat, multiplayer);
+    }
+
+    private string GetHex(double value, string hexFormat, double multiplayer = 1) => ((int)(value*multiplayer)).ToString(hexFormat);
+
+    private string CreateColorHex()
+    {
+        return string.Format("{0}{1}{2}{3}", GetHex(aSlider.Value, "X2", 255),
+                                             GetHex(rSlider.Value, "X2"),
+                                             GetHex(gSlider.Value, "X2"),
+                                             GetHex(bSlider.Value, "X2"));
+    }
+
+    private Color ColorHexContrast()
+    {
+        if (aSlider.Value <= 0.31)
+            return Color.FromArgb("1F2432");
+
+        var rate = 0.2126 * rSlider.Value + 0.7152 * gSlider.Value + 0.0722 *  bSlider.Value;
+        return rate < 128 ? Color.FromArgb("E7E9EF") : Color.FromArgb("1F2432");
+    }
+    #endregion
 }

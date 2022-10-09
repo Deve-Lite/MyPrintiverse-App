@@ -5,56 +5,192 @@
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
              x:Name="this">
 
-    <Grid RowDefinitions="60, 16,30,30,30,30"
-          BindingContext="{x:Reference this}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame"  x:Key="ColorPickerFrame">
+                <Setter Property="Padding" Value="12,3,12,5" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="Margin" Value="5,0,5,0"/>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
 
-      <!--  <Border Stroke="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"
-                StrokeShape="RoundRectangle 10,10,10,10"
+    <VerticalStackLayout BindingContext="{x:Reference this}">
+        <Label Style="{StaticResource SmallRalewayValidatableEntry}"
+               Margin="5,0,0,5"
+               Text="{Binding Title}"/>
+
+        <Border Stroke="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"
+                Grid.ColumnSpan="3"
+                HeightRequest="60"
+                StrokeShape="RoundRectangle 8,8,8,8"
                 StrokeThickness="1"
-                BackgroundColor="{Binding ColorHex, Converter={StaticResource StringToColorConverter}}"/>
+                BackgroundColor="{Binding NewColorHex, Converter={StaticResource StringToColorConverter}}">
 
-        <Label Style="{StaticResource SmallRaleway}"
-               Grid.Row="1"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Text="Tap to set hex value."/>
+            <Label Style="{StaticResource LargeRaleway}"
+                   x:Name="colorHexLabel"
+                   FontAttributes="Bold"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="3"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Text="{Binding NewColorHex, StringFormat='#{0}'}"/>
+            
+        </Border>
 
-        <templates:ColorSlider Grid.Row="2"
-                               Minimum="0"
-                               Maximum="255"
-                               Value="{Binding R, Mode=TwoWay}"/>
+        <Grid RowDefinitions="26, *, *, *, *" ColumnDefinitions="40, *, 80" RowSpacing="5"  Margin="10">
 
-        <templates:ColorSlider Grid.Row="3"
-                               Minimum="0"
-                               Maximum="255"
-                               Value="{Binding G, Mode=TwoWay}"/>
+            <Label Style="{StaticResource MediumRaleway}" 
+                   Grid.ColumnSpan="2"
+                   VerticalOptions="Center"
+                   Text="Switch value format"/>
 
-        <templates:ColorSlider Grid.Row="4"
-                               Minimum="0"
-                               Maximum="255"
-                               Value="{Binding B, Mode=TwoWay}"/>
+            <Switch Style="{StaticResource BaseSwitch}" 
+                    x:Name="defaultModeSwitch"
+                    Toggled="SwitchToogled"
+                    HorizontalOptions="Center"
+                    Grid.Column="2"/>
 
-        <Grid ColumnDefinitions="0.1*, 0.7*, 0.2*"
-              Grid.Row="5">
-
-            <Frame Style="{StaticResource BaseFrameVariant}">
-                <Label Style="{StaticResource TitleLabel}"
-                       FontAttributes="Bold"/>
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="1"
+                   Grid.Column="0">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                       FontAttributes="Bold"
+                       Text="A"/>
+                </StackLayout>
             </Frame>
 
             <Slider Style="{StaticResource BaseSlider}"
-                    Margin="10,0,10,0"
+                    x:Name="aSlider"
+                    ValueChanged="AlphaValueChanged"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="6,0,6,0"
                     Minimum="0"
-                    Maximum="1"
-                    Value="{Binding A, Mode=TwoWay}"/>
+                    Maximum="1"/>
 
-            <Frame Style="{StaticResource BaseFrameVariant}">
-                <Label Style="{StaticResource TitleLabel}"
-                       FontAttributes="Bold"
-                       Text="{Binding A, StringFormat='{0:0.00}'}"/>
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="1"
+                   Grid.Column="2">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                           x:Name="aLabel"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           FontAttributes="Bold"/>
+                </StackLayout>
             </Frame>
+
+
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="2"
+                   Grid.Column="0">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                       FontAttributes="Bold"
+                       Text="R"/>
+                </StackLayout>
+            </Frame>
+
+            <Slider Style="{StaticResource BaseSlider}"
+                    x:Name="rSlider"
+                    ValueChanged="RedValueChanged"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    Margin="6,0,6,0"
+                    Minimum="0"
+                    Maximum="255"/>
+
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="2"
+                   Grid.Column="2">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                           x:Name="rLabel"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           FontAttributes="Bold"
+                           Text="000"/>
+                </StackLayout>
+            </Frame>
+
+
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="3"
+                   Grid.Column="0">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                       FontAttributes="Bold"
+                       Text="G"/>
+                </StackLayout>
+            </Frame>
+
+            <Slider Style="{StaticResource BaseSlider}"
+                    x:Name="gSlider"
+                    ValueChanged="GreenValueChanged"
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    Margin="6,0,6,0"
+                    Minimum="0"
+                    Maximum="255"/>
+
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="3"
+                   Grid.Column="2">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                           x:Name="gLabel"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
+
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="4"
+                   Grid.Column="0">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                       FontAttributes="Bold"
+                       Text="B"/>
+                </StackLayout>
+            </Frame>
+
+            <Slider Style="{StaticResource BaseSlider}"
+                    x:Name="bSlider"
+                    ValueChanged="BlueValueChanged"
+                    Grid.Column="1"
+                    Grid.Row="4"
+                    Margin="6,0,6,0"
+                    Minimum="0"
+                    Maximum="255"/>
+
+            <Frame Style="{StaticResource ColorPickerFrame}" 
+                   Margin="0"
+                   Grid.Row="4"
+                   Grid.Column="2">
+                <StackLayout>
+                    <Label Style="{StaticResource LargeRaleway}"
+                           x:Name="bLabel"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
         </Grid>
-        -->
-    </Grid>
+    </VerticalStackLayout>
 </ContentView>
 

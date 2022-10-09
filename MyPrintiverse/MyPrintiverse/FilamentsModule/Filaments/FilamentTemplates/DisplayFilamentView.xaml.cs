@@ -24,7 +24,7 @@ public partial class DisplayFilamentView : ContentView
         set => SetValue(ColorNameProperty, value);
     }
 
-    public static readonly BindableProperty ColorHexProperty = BindableProperty.Create(nameof(ColorHex), typeof(string), typeof(DisplayFilamentView), "", propertyChanged: OnColorHexChanged);
+    public static readonly BindableProperty ColorHexProperty = BindableProperty.Create(nameof(ColorHex), typeof(string), typeof(DisplayFilamentView), "", BindingMode.TwoWay, propertyChanged: OnColorHexChanged);
     public string ColorHex
     {
         get => (string)GetValue(ColorHexProperty);

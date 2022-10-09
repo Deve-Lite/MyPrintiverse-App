@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.FilamentsModule.Types;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MyPrintiverse.FilamentsModule.Types;
 using MyPrintiverse.Tools;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
@@ -7,8 +8,13 @@ namespace MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 public partial class EditFilamentViewModel : ManageFilamentViewModel
 {
     public string Id { get; set; }
+
+    [ObservableProperty]
+    public string _colorHex;
+
     public EditFilamentViewModel(IMessageService messageService, IItemService<Filament> itemService, IItemService<FilamentType> typeService, IToast toast) : base(messageService, itemService, typeService, toast)
     {
+        ColorHex = "FF000000";
     }
 
     #region Overrides
@@ -19,6 +25,7 @@ public partial class EditFilamentViewModel : ManageFilamentViewModel
         Task.Run(async () =>
         {
             Item = new FilamentValidator(await ItemService.GetItemAsync(Id));
+            ColorHex = (Item as FilamentValidator).ColorHex.Value;
             SelectedFilamentType = FilamentTypes!.FirstOrDefault(x => x.Id == (Item as FilamentValidator)!.TypeId.Value);
 
             if (SelectedFilamentType == null)

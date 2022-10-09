@@ -12,14 +12,14 @@
                WidthRequest="32"
                BackgroundColor="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"
                Padding="0"
-               CornerRadius="6">
+               CornerRadius="4">
             <Grid>
 
                 <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"
                        x:Name="indicator"
                        Padding="0"
                        VerticalOptions="Start"
-                       CornerRadius="6"/>
+                       CornerRadius="4"/>
             </Grid>
         </Frame>
 

@@ -54,19 +54,40 @@ public partial class RangeValueIndicator : ContentView
     {
         var bindableEntry = (RangeValueIndicator)bindable;
 
+        // in range
+        // first in second out
+        // first out second out 
+
         try
         {
             var values = bindableEntry.DisplayValue.Split('-');
-
             double minValue = double.Parse(values[0].Replace(',', '.'), CultureInfo.InvariantCulture);
             double maxValue = double.Parse(values[1].Replace(',', '.'), CultureInfo.InvariantCulture);
             double topValue = double.Parse(bindableEntry.TopValue.Replace(',', '.'), CultureInfo.InvariantCulture);
-            double margin = Math.Min(100 - (maxValue / topValue) * 100, 97);
+
+            double margin = 0;
             double height = 0;
-            if (margin == 97)
-                height = 3;
+
+            if (maxValue < topValue)
+            {
+                margin = 100 - (maxValue/topValue)*100;
+                height = Math.Max(8, ((maxValue - minValue)/topValue)*100);
+
+                if (margin+ height > 100)
+                    margin = 100 - height;
+            }
+            else if (minValue < topValue)
+            {
+                margin = 0;
+                height = Math.Max(8, ((maxValue - minValue)/topValue)*100);
+            }
             else
-                height = Math.Max( ((maxValue - minValue) * 100) / topValue, 3);
+            {
+                margin = 0;
+                height = 8;
+            }
+
+
 
             bindableEntry.indicator.Margin = new Thickness(0, margin, 0, 0);
             bindableEntry.indicator.HeightRequest = height;

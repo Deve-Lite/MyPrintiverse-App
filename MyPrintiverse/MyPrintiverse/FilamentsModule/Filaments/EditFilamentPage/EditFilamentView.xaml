@@ -24,7 +24,7 @@
         <Grid Grid.Row="1" Grid.ColumnSpan="2" >
 
             <StackLayout IsVisible="{Binding StepOne}"
-                         Margin="15">
+                         Margin="15,15,15,0">
 
                 <otherTemplates:StepDescription Title="New Filament"
                                         Step="Step 1 of 4"
@@ -67,20 +67,21 @@
                     </StackLayout>
                 </Frame>
 
+                <headerTemplate:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
+                                                                 Margin="0,5,0,0"
+                                                                 Title="Types"/>
+                
                 <RefreshView Style="{StaticResource BaseRefreshView}">
                     <CollectionView Style="{StaticResource BaseCollectionView}" 
                                     ItemsSource="{Binding FilamentTypes}">
 
                         <CollectionView.Header>
-
-                            <StackLayout>
-                                <headerTemplate:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
-                                                                 Margin="0,5,0,5"
-                                                                 Title="Types"/>
-
-                            </StackLayout>
-
+                            <StackLayout HeightRequest="10"/>
                         </CollectionView.Header>
+
+                        <CollectionView.Footer>
+                            <StackLayout HeightRequest="10"/>
+                        </CollectionView.Footer>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:FilamentType">
@@ -157,15 +158,9 @@
                                                      IsValid="{Binding Item.Color.IsValid}"
                                                      ErrorMessage="{Binding Item.Color.Error}"/>
 
-                    <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                     Title="Color Hex"
-                                                     Text="{Binding Item.ColorHex.Value}"
-                                                     ValidationCommand="{Binding Item.ColorHex.ExtendedValidateCommand}"
-                                                     IsValid="{Binding Item.ColorHex.IsValid}"
-                                                     ErrorMessage="{Binding Item.ColorHex.Error}"/>
-
-
-                    <!-- <entryTemplates:ColorPicker ColorHex="{Binding Item.ColorHex.Value}"/> -->
+                    <entryTemplates:ColorPicker NewColorHex="{Binding Item.ColorHex.Value, Mode=TwoWay}"
+                                                ColorHex="{Binding ColorHex}"
+                                                Title="Color Hex Value"/>
 
                 </StackLayout>
             </ScrollView>
@@ -223,7 +218,7 @@
 
                     <filamentTemplates:DisplayFilamentView 
                                                Brand="{Binding Item.Brand.Value}"
-                                               ColorHex="{Binding Item.ColorHex.Value}"
+                                               ColorHex="{Binding Item.ColorHex.Value, Mode=TwoWay}"
                                                TypeId="{Binding Item.TypeId.Value, Mode=TwoWay}"
                                                ColorName="{Binding Item.Color.Value}"
                                                Diameter="{Binding Item.Diameter.Value}"
