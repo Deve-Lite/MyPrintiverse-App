@@ -32,7 +32,7 @@
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"/>
         <Setter Property="StrokeShape" Value="RoundRectangle 1,1,1,1"/>
         <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-        <Setter Property="HeightRequest" Value="1.8"/>
+        <Setter Property="HeightRequest" Value="2"/>
     </Style>
 
     <Style TargetType="filamentemplates:CollectionHeader" x:Key="BaseCollectionHeader">

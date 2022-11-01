@@ -203,6 +203,15 @@
 		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Templates\Headers\PrimaryHeader.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\Headers\SecondaryHeader.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\Headers\TertiaryHeader.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Templates\RangeValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
