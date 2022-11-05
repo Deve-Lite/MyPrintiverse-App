@@ -9,20 +9,19 @@
         <Grid BindingContext="{x:Reference this}"
               BackgroundColor="Transparent">
 
-            <Button Style="{Binding ButtonStyle}"
+            <Button Style="{StaticResource BaseButtonActivityButton}"
                     Command="{Binding Command}"
                     IsEnabled="{Binding IsButtonEnabled}"
                     HorizontalOptions="FillAndExpand"/>
 
-            <Label Style="{Binding TextStyle}"
+            <Label Style="{StaticResource LargeActivityButtonLabel}"
                    Text="{Binding Text}" 
                    HorizontalOptions="Center" 
                    VerticalOptions="Center"
                    IsVisible="{Binding IsRunning, Converter={toolkit:InvertedBoolConverter}}"/>
 
             <ActivityIndicator x:Name="ai"
-                               Margin="0,5,0,5"
-                               Style="{Binding ActivityIndicatorStyle}"
+                               Style="{StaticResource ButtonActivityIndicator}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                IsRunning="{Binding IsRunning}"

@@ -1,5 +1,6 @@
 ﻿
 
+using CommunityToolkit.Mvvm.ComponentModel;
 using MyPrintiverse.Tools;
 
 namespace MyPrintiverse.Templates.Test;
@@ -42,6 +43,9 @@ public partial class TestViewModel : BaseViewModel
         LoadUpCommand = new AsyncRelayCommand(LoadUp);
         NumbersValidateCommand = new Command(() => { Numbers.Validate(); });
         PaswordizeCommand = new Command(Passwordize);
+
+        Step = 1;
+        TotalSteps=4;
     }
 
     public Command EmailValidateCommand { get; set; }
@@ -152,4 +156,47 @@ public partial class TestViewModel : BaseViewModel
     }
 
     #endregion
+
+    #region Form
+
+    [ObservableProperty]
+    byte _step;
+    [ObservableProperty]
+    string _stepDescription;
+    [ObservableProperty]
+    byte _TotalSteps;
+    [ObservableProperty]
+    bool _isRunningNext;
+
+    [RelayCommand]
+    public async Task Prev()
+    {
+        if (Step == 1)
+            return;
+
+        IsRunning = true;
+        Step -= 1;
+        StepDescription = $"This is test description with chanigin number: {Step}";
+        await ToastService.Toast($"Prev clicked: {Step}.");
+        await Task.Delay(500);
+
+        IsRunning = false;
+    }
+
+    [RelayCommand]
+    public async Task Next()
+    {
+        if (Step == 4)
+            return;
+
+        IsRunningNext = true;
+        Step += 1;
+        StepDescription = $"This is test description with chanigin number: {Step}";
+        await ToastService.Toast($"Next clicked: {Step}.");
+        await Task.Delay(500);
+        IsRunningNext = false;
+    }
+
+    #endregion
+
 }

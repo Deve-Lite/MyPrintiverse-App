@@ -198,9 +198,6 @@
 
     <Style x:Key="BaseActivityButton" TargetType="buttons:ActivityButton">
 
-        <Setter Property="TextStyle" Value="{StaticResource LargeActivityButtonLabel}" />
-        <Setter Property="ActivityIndicatorStyle" Value="{StaticResource BaseActivityIndicator}" />
-        <Setter Property="ButtonStyle" Value="{StaticResource BaseButtonActivityButton}" />
         <Setter Property="IsButtonEnabled" Value="{Binding IsEnabled}" />
         <Setter Property="IsRunning" Value="{Binding IsRunning}" />
         <Setter Property="HeightRequest" Value="60"/>

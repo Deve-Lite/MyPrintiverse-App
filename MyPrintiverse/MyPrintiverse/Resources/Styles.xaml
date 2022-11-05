@@ -273,7 +273,7 @@
     TargetType="ActivityIndicator">
 
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
-
+        <Setter Property="HeightRequest" Value="40"/>
     </Style>
 
     <Style x:Key="BaseProgressBar" TargetType="ProgressBar">

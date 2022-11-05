@@ -5,6 +5,7 @@
              xmlns:module="clr-namespace:MyPrintiverse.Templates"
              xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
              xmlns:header="clr-namespace:MyPrintiverse.Templates.Headers"
+             xmlns:form="clr-namespace:MyPrintiverse.Templates.Forms"
              Title="TestPage">
 
     <ContentPage.Resources>
@@ -113,6 +114,26 @@
                                    SecondImageCommand="{Binding Header2Command}"
                                    FirstImageSource="star.svg"
                                    SecondImageSource="emptystar.svg"/>
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+
+
+            <form:FormHeader Title="Test Title"
+                             BackgroundColor="Azure"
+                             Step="{Binding Step}"
+                             TotalSteps="{Binding TotalSteps}"
+                             StepDescription="{Binding StepDescription}"/>
+
+            <form:FormFooter BackgroundColor="AntiqueWhite"
+                             Step="{Binding Step}"
+                             TotalSteps="{Binding TotalSteps}"
+                             IsPreviousButtonRunning="{Binding IsRunning}"
+                             IsNextButtonRunning="{Binding IsRunningNext}"
+                             FinishingStepText="Add"
+                             PreviousStepText="Prev"
+                             NextStepText="Next"
+                             NextStepCommand="{Binding NextCommand}"
+                             PreviousStepCommand="{Binding PrevCommand}"/>
 
         </VerticalStackLayout>
     </ScrollView>

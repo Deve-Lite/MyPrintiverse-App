@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyPrintiverse.Templates.Forms.FormHeader">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="MyPrintiverse.Templates.Forms.FormHeader"
+             x:Name="this">
+    <Grid BindingContext="{x:Reference this}"
+          RowDefinitions="*,*" 
+          RowSpacing="10"
+          ColumnDefinitions="0.6*, 0.4*">
+
+        <Label Style="{StaticResource LargeOswald}" 
+               VerticalOptions="Start" 
+               Text="{Binding Title}"/>
+
+        <Label Style="{StaticResource MediumOswald}" 
+               Grid.Column="1" 
+               VerticalOptions="Start" 
+               HorizontalOptions="End"
+               TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark} }">
+            <Label.Text>
+                <MultiBinding StringFormat="{} Step {0} of {1}">
+                    <Binding  Path="Step" />
+                    <Binding Path="TotalSteps" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+               
+        <Label Grid.ColumnSpan="2" 
+               Grid.Row="1" 
+               Style="{StaticResource MediumRaleway}"
+               Text="{Binding StepDescription}"/>
+    </Grid>
 </ContentView>
