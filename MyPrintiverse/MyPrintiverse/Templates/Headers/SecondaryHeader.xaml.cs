@@ -6,7 +6,7 @@ public partial class SecondaryHeader : ContentView
 {
     #region Title
 
-    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(PrimaryHeader), "Title not set.");
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(SecondaryHeader), "Title not set.");
     public string Title
     {
         get => (string)GetValue(TitleProperty);
@@ -15,27 +15,27 @@ public partial class SecondaryHeader : ContentView
 
     #endregion
 
-    #region Action Data
+    #region Image Button
 
-    public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(PrimaryHeader), null);
-    public ICommand Command
+    public static readonly BindableProperty ImageCommandProperty = BindableProperty.Create(nameof(ImageCommand), typeof(ICommand), typeof(SecondaryHeader), null);
+    public ICommand ImageCommand
     {
-        get => (ICommand)GetValue(CommandProperty);
-        set => SetValue(CommandProperty, value);
+        get => (ICommand)GetValue(ImageCommandProperty);
+        set => SetValue(ImageCommandProperty, value);
     }
 
-    public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(string), typeof(PrimaryHeader), "spool.png");
-    public string Source
+    public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(string), typeof(SecondaryHeader), "spool.png");
+    public string ImageSource
     {
-        get => (string)GetValue(SourceProperty);
-        set => SetValue(SourceProperty, value);
+        get => (string)GetValue(ImageSourceProperty);
+        set => SetValue(ImageSourceProperty, value);
     }
 
-    public static readonly BindableProperty ImageWidthProperty = BindableProperty.Create(nameof(ImageWidth), typeof(double), typeof(PrimaryHeader), 32);
-    public double ImageWidth
+    public static readonly BindableProperty ImageSizeProperty = BindableProperty.Create(nameof(ImageSize), typeof(string), typeof(SecondaryHeader), "32");
+    public string ImageSize
     {
-        get => (double)GetValue(ImageWidthProperty);
-        set => SetValue(ImageWidthProperty, value);
+        get => (string)GetValue(ImageSizeProperty);
+        set => SetValue(ImageSizeProperty, value);
     }
 
     #endregion

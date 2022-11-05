@@ -6,7 +6,7 @@ public partial class TertiaryHeader : ContentView
 {
     #region Title
 
-    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(PrimaryHeader), "Title not set.");
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(TertiaryHeader), "Title not set.");
     public string Title
     {
         get => (string)GetValue(TitleProperty);
@@ -15,38 +15,52 @@ public partial class TertiaryHeader : ContentView
 
     #endregion
 
-    #region First Action Data
+    #region First ImageButton
 
-    public static readonly BindableProperty FirstCommandProperty = BindableProperty.Create(nameof(FirstCommand), typeof(ICommand), typeof(PrimaryHeader), null);
-    public ICommand FirstCommand
+    public static readonly BindableProperty FirstImageCommandProperty = BindableProperty.Create(nameof(FirstImageCommand), typeof(ICommand), typeof(TertiaryHeader), null);
+    public ICommand FirstImageCommand
     {
-        get => (ICommand)GetValue(FirstCommandProperty);
-        set => SetValue(FirstCommandProperty, value);
+        get => (ICommand)GetValue(FirstImageCommandProperty);
+        set => SetValue(FirstImageCommandProperty, value);
     }
 
-    public static readonly BindableProperty FirstSourceProperty = BindableProperty.Create(nameof(FirstSource), typeof(string), typeof(PrimaryHeader), "spool.png");
-    public string FirstSource
+    public static readonly BindableProperty FirstImageSourceProperty = BindableProperty.Create(nameof(FirstImageSource), typeof(string), typeof(TertiaryHeader), "spool.png");
+    public string FirstImageSource
     {
-        get => (string)GetValue(FirstSourceProperty);
-        set => SetValue(FirstSourceProperty, value);
+        get => (string)GetValue(FirstImageSourceProperty);
+        set => SetValue(FirstImageSourceProperty, value);
+    }
+
+    public static readonly BindableProperty FirstImageSizeProperty = BindableProperty.Create(nameof(FirstImageSize), typeof(string), typeof(TertiaryHeader), "32");
+    public string FirstImageSize
+    {
+        get => (string)GetValue(FirstImageSizeProperty);
+        set => SetValue(FirstImageSizeProperty, value);
     }
 
     #endregion
 
-    #region Second Action Data
+    #region Second ImageButton
 
-    public static readonly BindableProperty SecondCommandProperty = BindableProperty.Create(nameof(SecondCommand), typeof(ICommand), typeof(PrimaryHeader), null);
-    public ICommand SecondCommand
+    public static readonly BindableProperty SecondImageCommandProperty = BindableProperty.Create(nameof(SecondImageCommand), typeof(ICommand), typeof(TertiaryHeader), null);
+    public ICommand SecondImageCommand
     {
-        get => (ICommand)GetValue(SecondCommandProperty);
-        set => SetValue(SecondCommandProperty, value);
+        get => (ICommand)GetValue(SecondImageCommandProperty);
+        set => SetValue(SecondImageCommandProperty, value);
     }
 
-    public static readonly BindableProperty SecondSourceProperty = BindableProperty.Create(nameof(SecondSource), typeof(string), typeof(PrimaryHeader), "spool.png");
-    public string SecondSource
+    public static readonly BindableProperty SecondImageSourceProperty = BindableProperty.Create(nameof(SecondImageSource), typeof(string), typeof(TertiaryHeader), "spool.png");
+    public string SecondImageSource
     {
-        get => (string)GetValue(SecondSourceProperty);
-        set => SetValue(SecondSourceProperty, value);
+        get => (string)GetValue(SecondImageSourceProperty);
+        set => SetValue(SecondImageSourceProperty, value);
+    }
+
+    public static readonly BindableProperty SecondImageSizeProperty = BindableProperty.Create(nameof(SecondImageSize), typeof(string), typeof(TertiaryHeader), "32");
+    public string SecondImageSize
+    {
+        get => (string)GetValue(SecondImageSizeProperty);
+        set => SetValue(SecondImageSizeProperty, value);
     }
 
     #endregion

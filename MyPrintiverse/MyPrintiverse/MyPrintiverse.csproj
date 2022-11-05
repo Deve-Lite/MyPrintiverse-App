@@ -98,6 +98,9 @@
 		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
 		  <DependentUpon>ExtendedValidatableEntry.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Templates\Headers\SecondaryHeader.xaml.cs">
+		  <DependentUpon>SecondaryHeader.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -203,10 +206,10 @@
 		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\Headers\PrimaryHeader.xaml">
+		<MauiXaml Update="Templates\Headers\SecondaryHeader.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\Headers\SecondaryHeader.xaml">
+		<MauiXaml Update="Templates\Headers\PrimaryHeader.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\Headers\TertiaryHeader.xaml">

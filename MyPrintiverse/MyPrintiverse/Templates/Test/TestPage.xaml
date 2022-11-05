@@ -98,9 +98,23 @@
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
 
             <header:PrimaryHeader Title="Title"/>
-            <header:SecondaryHeader Title="Secondary Title"
-                                    Command="{Binding HeaderCommand}"
-                                    Source="spool.png"/>
+            <header:PrimaryHeader Title="Title"/>
+
+            <header:SecondaryHeader Title="Title2"
+                                    ImageSize="32"
+                                    Margin="10"
+                                    ImageCommand="{Binding HeaderCommand}"
+                                    ImageSource="star.svg"/>
+
+            <header:TertiaryHeader Title="Title 3"
+                                   Margin="10"
+                                   FirstImageSize="32"
+                                   SecondImageSize="32"
+                                   FirstImageCommand="{Binding HeaderCommand}"
+                                   SecondImageCommand="{Binding Header2Command}"
+                                   FirstImageSource="star.svg"
+                                   SecondImageSource="emptystar.svg"
+                                   />
 
         </VerticalStackLayout>
     </ScrollView>

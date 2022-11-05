@@ -1,21 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.Templates.Headers.TertiaryHeader"
              xmlns:header="clr-namespace:MyPrintiverse.Templates.Headers"
              x:Name="this">
-
-    <Grid BindingContext="{x:Reference this}" VerticalOptions="Center">
+    
+    <Grid BindingContext="{x:Reference this}" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.85*"/>
-            <ColumnDefinition Width="0.15*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        
-        <header:PrimaryHeader Title="{Binding Title}"/>
+
+        <header:SecondaryHeader Title="{Binding Title}"
+                                ImageSource="{Binding FirstImageSource}"
+                                ImageCommand="{Binding FirstImageCommand}"
+                                ImageSize="{Binding FirstImageSize}"/>
 
         <ImageButton Grid.Column="1"
-                     Source="{Binding Source}"
-                     Command="{Binding Command}"/>
-        
+                     Source="{Binding SecondImageSource}"
+                     HeightRequest="{Binding SecondImageSize}"
+                     WidthRequest="{Binding SecondImageSize}"
+                     Command="{Binding SecondImageCommand}"
+                     Margin="10,0,10,0"/>
+
     </Grid>
 </ContentView>
