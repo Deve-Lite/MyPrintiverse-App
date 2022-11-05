@@ -5,6 +5,7 @@
              x:Class="MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage.AddFilamentTypeView"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
+             xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:filamentTypeTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates"
              xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
@@ -315,7 +316,7 @@
                 VerticalOptions="End"
                 Margin="15,0"/>
 
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
                                        Grid.Row="2"
                                        Grid.Column="0"
@@ -324,7 +325,7 @@
                                        Margin="15,0,20,0"
                                        Command="{Binding StepBackCommand}"/>
 
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        Grid.Row="2"
                                        Grid.Column="1"
                                        Text="{Binding NextButtonTitle}"

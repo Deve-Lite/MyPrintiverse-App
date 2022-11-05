@@ -7,6 +7,7 @@
              xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
+             xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
              xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
@@ -313,7 +314,7 @@
                 VerticalOptions="End"
                 Margin="15,0"/>
 
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
                                        Grid.Row="2"
                                        Grid.Column="0"
@@ -322,7 +323,7 @@
                                        Margin="15,0,20,0"
                                        Command="{Binding StepBackCommand}"/>
 
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        Grid.Row="2"
                                        Grid.Column="1"
                                        Text="{Binding NextButtonTitle}"

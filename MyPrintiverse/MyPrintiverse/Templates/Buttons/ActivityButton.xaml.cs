@@ -2,7 +2,7 @@
 
 using System.Windows.Input;
 
-namespace MyPrintiverse.Templates;
+namespace MyPrintiverse.Templates.Buttons;
 
 public partial class ActivityButton : ContentView
 {

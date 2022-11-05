@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace MyPrintiverse.Templates.Button;
+namespace MyPrintiverse.Templates.Buttons;
 
 public partial class SwitchCollectionViewButton : ContentView
 {
@@ -29,7 +29,6 @@ public partial class SwitchCollectionViewButton : ContentView
     public SwitchCollectionViewButton()
 	{
 		InitializeComponent();
-
         //TODO
 	}
 }

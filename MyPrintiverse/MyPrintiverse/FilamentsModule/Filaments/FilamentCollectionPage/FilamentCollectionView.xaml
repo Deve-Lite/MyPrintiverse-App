@@ -6,7 +6,7 @@
              x:Class="MyPrintiverse.FilamentsModule.Filaments.FilamentCollectionPage.FilamentCollectionView"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:othertemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
-             xmlns:buttonTemplates="clr-namespace:MyPrintiverse.Templates.Button">
+             xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons">
 
     <ContentPage.ToolbarItems>
         <!-- TODO Search bar -->
@@ -150,7 +150,7 @@
             </CollectionView>
         </RefreshView>
 
-        <buttonTemplates:AddToCollectionButton HorizontalOptions="Start"
+        <buttons:AddToCollectionButton HorizontalOptions="Start"
                                                Grid.Row="1"
                                                AddCommand="{Binding AddItemCommand}"/>
 

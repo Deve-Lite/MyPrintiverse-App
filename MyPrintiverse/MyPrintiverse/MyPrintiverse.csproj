@@ -176,19 +176,25 @@
 		<MauiXaml Update="FilamentsModule\Filaments\Views\FilamentsView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\ActivityButton.xaml">
+		<MauiXaml Update="Templates\Buttons\ActivityButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\Button\AddToCollectionButton.xaml">
+		<MauiXaml Update="Templates\Buttons\AddToCollectionButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\Button\SwitchCollectionViewButton.xaml">
+		<MauiXaml Update="Templates\Buttons\SwitchCollectionViewButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\EntityValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\Forms\FormFooter.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\Forms\FormHeader.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\Headers\SecondaryHeader.xaml">

@@ -4,6 +4,7 @@
              x:Class="MyPrintiverse.FilamentsModule.Spools.AddSpoolPage.AddSpoolView"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
              xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Spools.AddSpoolPage"
@@ -100,7 +101,7 @@
                 VerticalOptions="End"
                 Margin="15,0"/>
         
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
                                        Grid.Row="2"
                                        Grid.Column="0"
@@ -109,7 +110,7 @@
                                        Margin="15,0,20,0"
                                        Command="{Binding StepBackCommand}"/>
 
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        Grid.Row="2"
                                        Grid.Column="1"
                                        Text="{Binding NextButtonTitle}"

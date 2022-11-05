@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage"
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
+             xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
@@ -238,7 +239,7 @@
                 VerticalOptions="End"
                 Margin="15,0"/>
 
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
                                        Grid.Row="2"
                                        Grid.Column="0"
@@ -247,7 +248,7 @@
                                        Margin="15,0,20,0"
                                        Command="{Binding StepBackCommand}"/>
 
-        <entryTemplates:ActivityButton Style="{StaticResource BaseActivityButton}"
+        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
                                        Grid.Row="2"
                                        Grid.Column="1"
                                        Text="{Binding NextButtonTitle}"
