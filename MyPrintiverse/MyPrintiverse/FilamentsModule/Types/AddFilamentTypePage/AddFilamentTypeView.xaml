@@ -6,6 +6,7 @@
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
+             xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:filamentTypeTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates"
              xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
@@ -59,9 +60,7 @@
                                                      IsValid="{Binding Item.FullName.IsValid}"
                                                      ErrorMessage="{Binding Item.FullName.Error}"/>
 
-                    <entryTemplates:TitledEditor x:Name="descriptionEntry" 
-                                                 Style="{StaticResource BaseTitledEditor}"
-                                             Title="Description"
+                    <inputs:ValidatableEditor Title="Description"
                                              Text="{Binding Item.Description.Value}"
                                              ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
                                              IsValid="{Binding Item.Description.IsValid}"
@@ -132,25 +131,20 @@
                                         Description="Enter filament type informations."
                                         Margin="0,2,0,10"/>
 
-                    <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is food friendly"
-                                             IsToggled="{Binding Item.IsFoodFriendly,Mode=TwoWay}"/>
+                    <inputs:TitledSwitch Title="Is food friendly"
+                                         IsToggled="{Binding Item.IsFoodFriendly,Mode=TwoWay}"/>
 
-                    <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is bio"
-                                             IsToggled="{Binding Item.IsBio,Mode=TwoWay}"/>
+                    <inputs:TitledSwitch Title="Is bio"
+                                         IsToggled="{Binding Item.IsBio,Mode=TwoWay}"/>
 
-                    <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is uv resistant"
-                                             IsToggled="{Binding Item.IsUVResistant,Mode=TwoWay}"/>
+                    <inputs:TitledSwitch Title="Is uv resistant"
+                                         IsToggled="{Binding Item.IsUVResistant,Mode=TwoWay}"/>
 
-                    <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is flexible"
-                                             IsToggled="{Binding Item.IsFlexible,Mode=TwoWay}"/>
+                    <inputs:TitledSwitch Title="Is flexible"
+                                         IsToggled="{Binding Item.IsFlexible,Mode=TwoWay}"/>
 
-                    <entryTemplates:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                             Title="Is heated bed required"
-                                             IsToggled="{Binding Item.IsHeatedBedRequired,Mode=TwoWay}"/>
+                    <inputs:TitledSwitch Title="Is heated bed required"
+                                         IsToggled="{Binding Item.IsHeatedBedRequired,Mode=TwoWay}"/>
 
                 </StackLayout>
             </ScrollView>

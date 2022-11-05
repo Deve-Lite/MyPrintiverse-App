@@ -7,7 +7,7 @@ public partial class AddFilamentView : ContentPage
 	{
 		InitializeComponent();
         BindingContext = vm;
-	}
+    }
 
     protected override void OnAppearing()
     {

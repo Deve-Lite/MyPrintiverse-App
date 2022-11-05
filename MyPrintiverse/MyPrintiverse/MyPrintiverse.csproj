@@ -95,6 +95,9 @@
 		<Compile Update="Templates\Headers\SecondaryHeader.xaml.cs">
 		  <DependentUpon>SecondaryHeader.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Templates\Input\ValidatableEditor.xaml.cs">
+		  <DependentUpon>ValidatableEditor.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -209,10 +212,10 @@
 		<MauiXaml Update="Templates\RangeValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\TitledEditor.xaml">
+		<MauiXaml Update="Templates\Input\ValidatableEditor.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\TitledSwitch.xaml">
+		<MauiXaml Update="Templates\Input\TitledSwitch.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\ValidatableEntry.xaml">

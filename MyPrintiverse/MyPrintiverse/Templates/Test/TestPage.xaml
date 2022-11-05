@@ -2,10 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.Templates.Test.TestPage"
-             xmlns:module="clr-namespace:MyPrintiverse.Templates"
-             xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
              xmlns:header="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:form="clr-namespace:MyPrintiverse.Templates.Forms"
+             xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs"
              Title="TestPage">
 
     <ContentPage.Resources>
@@ -23,89 +22,14 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <!--
-    
-            <Label Style="{StaticResource TitleOswald}" Text="Titled Switch" HorizontalOptions="Center"/>
-
-            <module:TitledSwitch Style="{StaticResource BaseTitledSwitch}"
-                                 IsToggled="{Binding BoolValue, Mode=TwoWay}"
-                                 Title="tfgmndfgohnfhnmdfgh" />
-
-            <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
-
-            <Label Style="{StaticResource TitleOswald}" Text="Validatable Entry" HorizontalOptions="Center"/>
-
-            <module:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                     Margin="10,2,10,4"
-                                     ErrorMessage="{Binding Email.Error}"
-                                     IsValid="{Binding Email.IsValid}"
-                                     Title="Email"       
-                                     Text="{Binding Email.Value, Mode=TwoWay}"
-                                     ValidationCommand="{Binding EmailValidateCommand}"/>
-
-            <module:ExtendedValidatableEntry Style="{StaticResource BaseExtendedValidatableEntry}"
-                                             Margin="10,2,10,4"
-                                             ErrorMessage="{Binding Password.Error}"
-                                             Title="Password"
-                                             IsValid="{Binding Password.IsValid}"
-                                             Text="{Binding Password.Value, Mode=TwoWay}"
-                                             IsPassword="{Binding IsPassword}"
-                                             ValidationCommand="{Binding PasswordValidateCommand}"
-                                             ImageSource="{Binding ImageSource}"
-                                             ExtendingCommand="{Binding PaswordizeCommand}"/>
-
-            <module:EntityValidatableEntry Style="{StaticResource BaseEntityValidatableEntry}"
-                                           Margin="10,2,10,4"
-                                           Entity="kg"
-                                           ErrorMessage="{Binding Email.Error}"
-                                           Title="Email"
-                                           IsValid="{Binding Email.IsValid}"
-                                           Text="{Binding Email.Value, Mode=TwoWay}"
-                                           ValidationCommand="{Binding EmailValidateCommand}"/>
-
-            <module:ExtendedEntityValidatableEntry Style="{StaticResource BaseExtendedEntityValidatableEntry}"
-                                                   Margin="10,2,10,4"
-                                                   Entity="kg"
-                                                   ImageSource="{Binding ImageSource}"
-                                                   ErrorMessage="{Binding Email.Error}"
-                                                   Title="Email"
-                                                   IsValid="{Binding Email.IsValid}"
-                                                   Text="{Binding Email.Value, Mode=TwoWay}"
-                                                   ValidationCommand="{Binding Email.Validate}"
-                                                   ExtendingCommand="{Binding PaswordizeCommand}"/>
-
-            <Button Style="{StaticResource BaseButton}" 
-                    Margin="0,5,0,0"
-                    Text="test validatable entry" 
-                    Command="{Binding TestCommand}"/>
-
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
-
-            <Label Style="{StaticResource TitleOswald}" Text="Activity Button" HorizontalOptions="Center"/>
-
-            <module:ActivityButton Style="{StaticResource BaseActivityButton}"
-                                   Margin="10,0,10,0"
-                                   Command="{Binding LoadUpCommand}"
-                                   Text="Login"/>
-
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
-
-            <module:RangeValidatableEntry BackgroundColor="Red" Margin="10,0,10,30"/>
-
-            <module:ColorPicker Margin="10" ColorHex="FFAFAFAF"/>-->
-
-            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
-
             <header:PrimaryHeader Title="Title"/>
-
             <header:SecondaryHeader Title="Title2"
                                     ImageSize="32"
                                     Margin="10"
                                     ImageCommand="{Binding HeaderCommand}"
                                     ImageSource="star.svg"/>
-
             <header:TertiaryHeader Title="Title 3"
                                    Margin="10"
                                    FirstImageSize="32"
@@ -116,14 +40,11 @@
                                    SecondImageSource="emptystar.svg"/>
 
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
-
-
             <form:FormHeader Title="Test Title"
                              BackgroundColor="Azure"
                              Step="{Binding Step}"
                              TotalSteps="{Binding TotalSteps}"
                              StepDescription="{Binding StepDescription}"/>
-
             <form:FormFooter BackgroundColor="AntiqueWhite"
                              Step="{Binding Step}"
                              TotalSteps="{Binding TotalSteps}"
@@ -134,6 +55,31 @@
                              NextStepText="Next"
                              NextStepCommand="{Binding NextCommand}"
                              PreviousStepCommand="{Binding PrevCommand}"/>
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+            <Label Style="{StaticResource TitleOswald}" Text="Titled Switch" HorizontalOptions="Center"/>
+            <inputs:TitledSwitch IsToggled="{Binding BoolValue, Mode=TwoWay}"
+                                 Title="tfgmndfgohnfhnmdfgh" 
+                                 Margin="10"/>
+            <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
+
+
+            <inputs:ValidatableEditor x:Name="e1" Margin="10"
+                                 Title="Title"
+                                 Text="{Binding NewDescription.Value}"
+                                 ErrorMessage="{Binding NewDescription.Error}"
+                                 IsValid="{Binding NewDescription.IsValid}"
+                                 ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"/>
+
+            <inputs:ValidatableEditor x:Name="e2" Margin="10"
+                                 Title="Title"
+                                 ErrorMessageLines="2"
+                                 Text="{Binding NewDescription.Value}"
+                                 ErrorMessage="{Binding NewDescription.Error}"
+                                 IsValid="{Binding NewDescription.IsValid}"
+                                 ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"/>
+            
+
 
         </VerticalStackLayout>
     </ScrollView>

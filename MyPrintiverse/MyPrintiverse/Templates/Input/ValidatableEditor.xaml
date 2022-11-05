@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MyPrintiverse.Templates.Inputs.ValidatableEditor"
+             x:Name="this">
+
+    <Grid BindingContext="{x:Reference this}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding TitleHeight}"/>
+            <RowDefinition Height="{Binding EditorHeight}"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Style="{StaticResource SmallRalewayValidatableEntry}" 
+               Text="{Binding Title}" />
+
+        <Border x:Name="Border"
+                Grid.Row="1"
+                Style="{StaticResource BaseBorderValidatableEntry}">
+
+            <Editor Style="{StaticResource BaseEditor}" 
+                    Text="{Binding Text, Mode=TwoWay}" 
+                    Placeholder="{Binding Placeholder}"
+                    
+                    Completed="EditorCompleted">
+                <Editor.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                    Command="{Binding ValidationCommand}"/>
+                </Editor.Behaviors>
+            </Editor>
+
+        </Border>
+
+        <Label x:Name="errorMessage" 
+               Grid.Row="2"
+               MaxLines="{Binding ErrorMessageLines}"
+               Style="{StaticResource SmallComplementary}" 
+               Text="{Binding ErrorMessage}" />
+
+    </Grid>
+</ContentView>

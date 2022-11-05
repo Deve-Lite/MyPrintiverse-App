@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:templates="clr-namespace:MyPrintiverse.Templates"
     xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
-    xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons">
+    xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
+    xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs">
 
     
     <!-- Headers -->
@@ -22,7 +23,7 @@
         <Setter Property="Margin" Value="15,0,15,0"/>
     </Style>
     
-    <!--  Validatable Entry  -->
+    <!--  Inputs  -->
 
     <Style x:Key="BaseBorderValidatableEntry" TargetType="Border">
 
@@ -36,15 +37,6 @@
 
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
 
-    </Style>
-
-
-    <Style x:Key="BaseEditorValidatableEntry" TargetType="Editor">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
-        <Setter Property="FontFamily" Value="Raleway" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="HeightRequest" Value="100"/>
-        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource PrimaryPlaceholderText}, Dark={StaticResource PrimaryPlaceholderTextDark}}" />
     </Style>
 
     <Style x:Key="BaseEntryValidatableEntry" TargetType="Entry">
@@ -205,39 +197,5 @@
     </Style>
 
     <!--  End Activity Button  -->
-    
-    <!--  Start Titled Switch   -->
-
-    <Style TargetType="Frame" x:Key="TitledSwitchFrame">
-        <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="Padding" Value="15,0,10,0"/>
-    </Style>
-
-    <Style x:Key="BaseTitledSwitch" TargetType="templates:TitledSwitch">
-
-        <Setter Property="TitleStyle" Value="{StaticResource BaseOswald}" />
-        <Setter Property="SwitchStyle" Value="{StaticResource BaseSwitch}" />
-        <Setter Property="FrameStyle" Value="{StaticResource TitledSwitchFrame}" />
-        <Setter Property="HeightRequest" Value="30"/>
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Margin" Value="0" />
-    </Style>
-
-    <!--  End Titled Switch  -->
-
-
-    <!--  Start Titled Editor   -->
-
-    <Style x:Key="BaseTitledEditor" TargetType="templates:TitledEditor">
-        <Setter Property="BorderStyle" Value="{StaticResource BaseBorderValidatableEntry}" />
-        <Setter Property="TitleStyle" Value="{StaticResource SmallRalewayValidatableEntry}" />
-        <Setter Property="ErrorMessageStyle" Value="{StaticResource SmallComplementary}" />
-        <Setter Property="EditorStyle" Value="{StaticResource BaseEditorValidatableEntry}" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="SupportHeight" Value="110" />
-    </Style>
-
-    <!--  End Titled Editor  -->
 
 </ResourceDictionary>

@@ -6,6 +6,7 @@
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
+             xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
@@ -199,8 +200,7 @@
 
                     <entryTemplates:RatingSelector Rating="{Binding Item.Rating.Value}"/>
 
-                    <entryTemplates:TitledEditor Style="{StaticResource BaseTitledEditor}"
-                                             Title="Description"
+                    <inputs:ValidatableEditor Title="Description"
                                              Text="{Binding Item.Description.Value}"
                                              ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
                                              IsValid="{Binding Item.Description.IsValid}"
