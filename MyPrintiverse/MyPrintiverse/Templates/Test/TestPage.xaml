@@ -98,7 +98,6 @@
             <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
 
             <header:PrimaryHeader Title="Title"/>
-            <header:PrimaryHeader Title="Title"/>
 
             <header:SecondaryHeader Title="Title2"
                                     ImageSize="32"
@@ -113,8 +112,7 @@
                                    FirstImageCommand="{Binding HeaderCommand}"
                                    SecondImageCommand="{Binding Header2Command}"
                                    FirstImageSource="star.svg"
-                                   SecondImageSource="emptystar.svg"
-                                   />
+                                   SecondImageSource="emptystar.svg"/>
 
         </VerticalStackLayout>
     </ScrollView>

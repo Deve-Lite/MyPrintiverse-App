@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Spools"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
+             xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
              xmlns:othertemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:buttonTemplates="clr-namespace:MyPrintiverse.Templates.Button"
@@ -58,9 +58,10 @@
                          Margin="0,10,0,0">
                 <StackLayout HorizontalOptions="FillAndExpand">
 
-                    <filamentemplates:AddCollectionHeader Style="{StaticResource BaseAddCollectionHeader}"
-                                                          AddCommand="{Binding AddItemCommand}"
-                                                          Title="Avaliable"/>
+                    <headers:SecondaryHeader Title="Avaliable"
+                                             ImageCommand="{Binding AddItemCommand}"
+                                             ImageSize="32"
+                                             ImageSource="star.svg"/>
 
                     <CollectionView Style="{StaticResource BaseCollectionView}"
                                     FooterTemplate="{StaticResource footerTemplate}"
@@ -122,9 +123,8 @@
 
                     </CollectionView>
 
-                    <filamentemplates:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
-                                                       IsVisible="{Binding IsFinishedFilamentsVisible}"
-                                                       Title="Finished"/>
+                    <headers:PrimaryHeader IsVisible="{Binding IsFinishedFilamentsVisible}"
+                                           Title="Finished"/>
 
                     <CollectionView Style="{StaticResource BaseCollectionView}"
                                     ItemsSource="{Binding FinishedFilaments}"

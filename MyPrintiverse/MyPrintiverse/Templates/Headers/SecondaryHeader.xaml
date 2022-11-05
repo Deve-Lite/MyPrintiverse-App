@@ -11,17 +11,16 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <header:PrimaryHeader Title="{Binding Title}" />
+        <header:PrimaryHeader Margin="0" Title="{Binding Title}" />
 
 
         <ImageButton Grid.Column="1"
                      Source="{Binding ImageSource}"
-                     Clicked="ImageButton_Clicked"
                      CornerRadius="5"
                      HeightRequest="{Binding ImageSize}"
                      WidthRequest="{Binding ImageSize}"
                      Command="{Binding ImageCommand}"
-                     Margin="10,0,10,0"/>
+                     Margin="10,0,0,0"/>
 
 
     </Grid>

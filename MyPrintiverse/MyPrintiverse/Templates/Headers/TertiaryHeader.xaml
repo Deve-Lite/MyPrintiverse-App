@@ -11,7 +11,8 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <header:SecondaryHeader Title="{Binding Title}"
+        <header:SecondaryHeader Margin="0"
+                                Title="{Binding Title}"
                                 ImageSource="{Binding FirstImageSource}"
                                 ImageCommand="{Binding FirstImageCommand}"
                                 ImageSize="{Binding FirstImageSize}"/>
@@ -21,7 +22,7 @@
                      HeightRequest="{Binding SecondImageSize}"
                      WidthRequest="{Binding SecondImageSize}"
                      Command="{Binding SecondImageCommand}"
-                     Margin="10,0,10,0"/>
+                     Margin="10,0,0,0"/>
 
     </Grid>
 </ContentView>

@@ -4,7 +4,7 @@
              x:Class="MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage.EditFilamentView"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage"
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
-             xmlns:headerTemplate="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
+             xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
@@ -32,9 +32,8 @@
                                         Margin="0,2,0,10"/>
 
 
-                <headerTemplate:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
-                                                 Margin="0,5,0,5"
-                                                 Title="Selected Type"/>
+                <headers:PrimaryHeader Margin="0,5,0,5"
+                                       Title="Selected Type"/>
 
 
                 <Frame Style="{StaticResource BaseFrameVariant}"
@@ -68,9 +67,8 @@
                     </StackLayout>
                 </Frame>
 
-                <headerTemplate:CollectionHeader Style="{StaticResource BaseCollectionHeader}"
-                                                                 Margin="0,5,0,0"
-                                                                 Title="Types"/>
+                <headers:PrimaryHeader Margin="0,5,0,0"
+                                       Title="Types"/>
                 
                 <RefreshView Style="{StaticResource BaseRefreshView}">
                     <CollectionView Style="{StaticResource BaseCollectionView}" 

@@ -89,12 +89,6 @@
 		<Compile Update="FilamentsModule\Filaments\FilamentCollectionPage\FilamentCollectionView.xaml.cs">
 		  <DependentUpon>FilamentCollectionView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="FilamentsModule\FilamentTemplates\AddCollectionHeader.xaml.cs">
-		  <DependentUpon>AddCollectionHeader.xaml</DependentUpon>
-		</Compile>
-		<Compile Update="FilamentsModule\FilamentTemplates\ExtendedAddCollectionHeader.xaml.cs">
-		  <DependentUpon>ExtendedAddCollectionHeader.xaml</DependentUpon>
-		</Compile>
 		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
 		  <DependentUpon>ExtendedValidatableEntry.xaml</DependentUpon>
 		</Compile>
@@ -126,15 +120,6 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="FilamentsModule\Filaments\FilamentTemplates\DisplayFilamentView.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="FilamentsModule\FilamentTemplates\AddCollectionHeader.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="FilamentsModule\FilamentTemplates\CollectionHeader.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="FilamentsModule\FilamentTemplates\ExtendedAddCollectionHeader.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\Others\StepDescription.xaml">

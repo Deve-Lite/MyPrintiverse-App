@@ -2,7 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates.FilamentTypeDisplay"
-             xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
+             xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
              x:Name="this">
 
@@ -110,7 +110,7 @@
             </Grid>
         </Frame>
 
-        <filamentemplates:CollectionHeader Style="{StaticResource BaseCollectionHeader}" Title="Material properties"/>
+        <headers:PrimaryHeader Title="Material properties"/>
 
         <Grid ColumnDefinitions="*, *, *" 
                   RowDefinitions="*, *"

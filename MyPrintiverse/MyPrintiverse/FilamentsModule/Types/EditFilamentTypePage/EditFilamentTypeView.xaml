@@ -6,7 +6,7 @@
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
+             xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
@@ -250,7 +250,7 @@
                             </Grid>
                         </Frame>
 
-                        <filamentemplates:CollectionHeader Style="{StaticResource BaseCollectionHeader}" Margin="0,5,0,5" Title="Material properties"/>
+                        <headers:PrimaryHeader Margin="0,5,0,5" Title="Material properties"/>
 
                         <Grid ColumnDefinitions="*, *, *" 
                   RowDefinitions="*, *"

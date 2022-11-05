@@ -3,8 +3,24 @@
 <ResourceDictionary
   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:templates="clr-namespace:MyPrintiverse.Templates">
+  xmlns:templates="clr-namespace:MyPrintiverse.Templates"
+    xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers">
 
+    
+    <!-- Headers -->
+
+    <Style TargetType="headers:PrimaryHeader">
+        <Setter Property="Margin" Value="15,0,15,0"/>
+    </Style>
+    
+    <Style TargetType="headers:SecondaryHeader">
+        <Setter Property="Margin" Value="15,0,15,0"/>
+    </Style>
+    
+    <Style TargetType="headers:TertiaryHeader">
+        <Setter Property="Margin" Value="15,0,15,0"/>
+    </Style>
+    
     <!--  Validatable Entry  -->
 
     <Style x:Key="BaseBorderValidatableEntry" TargetType="Border">

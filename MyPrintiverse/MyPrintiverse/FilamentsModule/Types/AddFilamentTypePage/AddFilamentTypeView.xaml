@@ -4,7 +4,7 @@
              xmlns:templates="clr-namespace:MyPrintiverse.Templates"
              x:Class="MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage.AddFilamentTypeView"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
-             xmlns:filamentemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates"
+             xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:filamentTypeTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates"
              xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
@@ -251,7 +251,8 @@
                             </Grid>
                         </Frame>
 
-                        <filamentemplates:CollectionHeader Style="{StaticResource BaseCollectionHeader}" Margin="0,5,0,5" Title="Material properties"/>
+                        <headers:PrimaryHeader Margin="0,5,0,5" 
+                                               Title="Material properties"/>
 
                         <Grid ColumnDefinitions="*, *, *" 
                   RowDefinitions="*, *"

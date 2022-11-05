@@ -35,28 +35,6 @@
         <Setter Property="HeightRequest" Value="2"/>
     </Style>
 
-    <Style TargetType="filamentemplates:CollectionHeader" x:Key="BaseCollectionHeader">
-        <Setter Property="BorderStyle" 
-                        Value="{StaticResource CollectionHeaderBorder}"/>
-        <Setter Property="TitleStyle" 
-                        Value="{StaticResource LargeOswald}"/>
-        <Setter Property="Margin" 
-                        Value="15,5,15,5"/>
-        <Setter Property="HeightRequest" 
-                        Value="30"/>
-    </Style>
-
-    <Style TargetType="filamentemplates:AddCollectionHeader" x:Key="BaseAddCollectionHeader">
-        <Setter Property="BorderStyle" 
-                        Value="{StaticResource CollectionHeaderBorder}"/>
-        <Setter Property="TitleStyle" 
-                        Value="{StaticResource LargeOswald}"/>
-        <Setter Property="Margin" 
-                        Value="15,5,15,5"/>
-        <Setter Property="HeightRequest" 
-                        Value="30"/>
-    </Style>
-
     <Style TargetType="ImageButton" x:Key="CollectionImageButton">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}"/>
         <Setter Property="HeightRequest" Value="60"/>
