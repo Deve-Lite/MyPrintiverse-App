@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.Templates.Test.TestPage"
              xmlns:module="clr-namespace:MyPrintiverse.Templates"
              xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
+             xmlns:header="clr-namespace:MyPrintiverse.Templates.Headers"
              Title="TestPage">
 
     <ContentPage.Resources>
@@ -21,7 +22,7 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            
+            <!--
     
             <Label Style="{StaticResource TitleOswald}" Text="Titled Switch" HorizontalOptions="Center"/>
 
@@ -92,7 +93,14 @@
 
             <module:RangeValidatableEntry BackgroundColor="Red" Margin="10,0,10,30"/>
 
-            <module:ColorPicker Margin="10" ColorHex="FFAFAFAF"/>
+            <module:ColorPicker Margin="10" ColorHex="FFAFAFAF"/>-->
+
+            <StackLayout HeightRequest="4" BackgroundColor="{StaticResource Tetruary}" Margin="0,10,0,10"/>
+
+            <header:PrimaryHeader Title="Title"/>
+            <header:SecondaryHeader Title="Secondary Title"
+                                    Command="{Binding HeaderCommand}"
+                                    Source="spool.png"/>
 
         </VerticalStackLayout>
     </ScrollView>

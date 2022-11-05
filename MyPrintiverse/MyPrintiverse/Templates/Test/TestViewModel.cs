@@ -1,8 +1,10 @@
 ﻿
 
+using MyPrintiverse.Tools;
+
 namespace MyPrintiverse.Templates.Test;
 
-public class TestViewModel : BaseViewModel
+public partial class TestViewModel : BaseViewModel
 {
     bool boolValue;
     public bool BoolValue { get => boolValue; set => SetProperty(ref boolValue, value); }
@@ -15,8 +17,12 @@ public class TestViewModel : BaseViewModel
         Console.WriteLine("Pressed");
     }
 
-    public TestViewModel()
+    IToast ToastService;
+
+    public TestViewModel(IToast toast)
     {
+        ToastService = toast;
+
         Email = Validator.Build<string>()
             .WithRule(new EmailRule(), "Email is not valid");
 
@@ -125,4 +131,25 @@ public class TestViewModel : BaseViewModel
 
         IsRunning = false;
     }
+
+
+    #region Headers
+
+    private int counter = 0;
+
+    [RelayCommand]
+    public async Task Header()
+    {
+        counter += 1;
+        await ToastService.Toast($"1. Clicked: {counter}.");
+    }
+
+    [RelayCommand]
+    public async Task Header2()
+    {
+        counter += 1;
+        await ToastService.Toast($"2. Clicked: {counter}.");
+    }
+
+    #endregion
 }
