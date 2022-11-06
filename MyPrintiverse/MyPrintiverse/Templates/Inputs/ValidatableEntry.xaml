@@ -18,7 +18,8 @@
                 Grid.Row="1"
                 Style="{StaticResource ValidatableEntry_Border}">
 
-            <Entry Style="{StaticResource ValidatableEntry_Entry}" 
+            <Entry x:Name="Entry"
+                   Style="{StaticResource ValidatableEntry_Entry}" 
                    Text="{Binding Text, Mode=TwoWay}" 
                    IsPassword="{Binding IsPassword}"
                    Placeholder="{Binding Placeholder}"

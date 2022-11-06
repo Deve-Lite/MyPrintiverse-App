@@ -44,7 +44,7 @@
                                         Margin="0,2,0,10"/>
 
 
-                    <entryTemplates:ValidatableEntry Margin="0,10,0,0"
+                    <inputs:ValidatableEntry Margin="0,10,0,0"
                                                      Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Short Name"
                                                      Text="{Binding Item.ShortName.Value}"
@@ -52,7 +52,7 @@
                                                      IsValid="{Binding Item.ShortName.IsValid}"
                                                      ErrorMessage="{Binding Item.ShortName.Error}"/>
 
-                    <entryTemplates:ValidatableEntry Margin="0,10,0,0"
+                    <inputs:ValidatableEntry Margin="0,10,0,0"
                                                      Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Full Name"
                                                      Text="{Binding Item.FullName.Value}"
@@ -76,7 +76,7 @@
                                         Description="Enter filament type informations."
                                         Margin="0,2,0,10"/>
 
-                    <entryTemplates:EntityValidatableEntry x:Name="densityEntry" 
+                    <inputs:EntityValidatableEntry x:Name="densityEntry" 
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Density"
                                                            Text="{Binding Item.Density.Value}"
@@ -85,7 +85,7 @@
                                                            ErrorMessage="{Binding Item.Density.Error}"
                                                            Entity="g/cm^3"/>
 
-                    <entryTemplates:EntityValidatableEntry x:Name="serviceTemperatureEntry" 
+                    <inputs:EntityValidatableEntry x:Name="serviceTemperatureEntry" 
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Max Service Temperature"
                                                            Text="{Binding Item.MaxServiceTempearature.Value}"

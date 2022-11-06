@@ -89,9 +89,6 @@
 		<Compile Update="FilamentsModule\Filaments\FilamentCollectionPage\FilamentCollectionView.xaml.cs">
 		  <DependentUpon>FilamentCollectionView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
-		  <DependentUpon>ExtendedValidatableEntry.xaml</DependentUpon>
-		</Compile>
 		<Compile Update="Templates\Headers\SecondaryHeader.xaml.cs">
 		  <DependentUpon>SecondaryHeader.xaml</DependentUpon>
 		</Compile>
@@ -188,12 +185,6 @@
 		<MauiXaml Update="Templates\Buttons\SwitchCollectionViewButton.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\EntityValidatableEntry.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Templates\ExtendedEntityValidatableEntry.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="Templates\Forms\FormFooter.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -222,12 +213,6 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Templates\Inputs\TitledSwitch.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Templates\ValidatableEntry.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Templates\ExtendedValidatableEntry.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>

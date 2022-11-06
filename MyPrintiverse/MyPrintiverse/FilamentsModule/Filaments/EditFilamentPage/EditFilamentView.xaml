@@ -138,14 +138,14 @@
                                         Description="Enter filament type informations."
                                         Margin="0,2,0,10"/>
 
-                    <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                    <inputs:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Brand"
                                                      Text="{Binding Item.Brand.Value}"
                                                      ValidationCommand="{Binding Item.Brand.ExtendedValidateCommand}"
                                                      IsValid="{Binding Item.Brand.IsValid}"
                                                      ErrorMessage="{Binding Item.Brand.Error}"/>
 
-                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Diameter"
                                                            Text="{Binding Item.Diameter.Value}"
                                                            ValidationCommand="{Binding Item.Diameter.ExtendedValidateCommand}"
@@ -153,7 +153,7 @@
                                                            ErrorMessage="{Binding Item.Diameter.Error}"
                                                            Entity="mm"/>
 
-                    <entryTemplates:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                    <inputs:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Color Name"
                                                      Text="{Binding Item.Color.Value}"
                                                      ValidationCommand="{Binding Item.Color.ExtendedValidateCommand}"
@@ -174,7 +174,7 @@
                                         Description="Enter print settings and additional data."
                                         Margin="0,2,0,10"/>
 
-                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Nozzle Temperature"
                                                            Text="{Binding Item.NozzleTemperature.Value}"
                                                            ValidationCommand="{Binding Item.NozzleTemperature.ExtendedValidateCommand}"
@@ -182,7 +182,7 @@
                                                            ErrorMessage="{Binding Item.NozzleTemperature.Error}"
                                                            Entity="°C"/>
 
-                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Bed Temperature"
                                                            Text="{Binding Item.BedTemperature.Value}"
                                                            ValidationCommand="{Binding Item.BedTemperature.ExtendedValidateCommand}"
@@ -190,7 +190,7 @@
                                                            ErrorMessage="{Binding Item.BedTemperature.Error}"
                                                            Entity="°C"/>
 
-                    <entryTemplates:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Cooling Rate"
                                                            Text="{Binding Item.CoolingRate.Value}"
                                                            ValidationCommand="{Binding Item.CoolingRate.ExtendedValidateCommand}"

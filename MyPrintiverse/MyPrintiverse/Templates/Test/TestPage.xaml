@@ -66,6 +66,7 @@
 
              <inputs:ValidatableEditor x:Name="e1" Margin="10"
                                  Title="Title"
+                                       
                                  Text="{Binding NewDescription.Value}"
                                  ErrorMessage="{Binding NewDescription.Error}"
                                  IsValid="{Binding NewDescription.IsValid}"
@@ -83,9 +84,12 @@
                                      Text="{Binding NewDescription.Value}"
                                      ErrorMessage="{Binding NewDescription.Error}"
                                      IsValid="{Binding NewDescription.IsValid}"
-                                     ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"/>
+                                     KeyboardFlag="CapitalizeWord"
+                                     ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"
+                                     KeyboardType="Numeric"/>
 
-            <inputs:ValidatableEntry x:Name="en2"/>
+            <inputs:ValidatableEntry x:Name="en2"
+                                     KeyboardFlag="CapitalizeSentence"/>
 
             <inputs:EntityValidatableEntry x:Name="en3"
                                            Entity="kg"/>

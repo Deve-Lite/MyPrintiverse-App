@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using MyPrintiverse.Tools.Templates;
 
 namespace MyPrintiverse.Templates.Inputs;
 
@@ -105,6 +106,28 @@ public partial class ValidatableEntry : ContentView
     {
         get => (bool)GetValue(IsPasswordProperty);
         set => SetValue(IsPasswordProperty, value);
+    }
+
+    public static readonly BindableProperty KeyboardTypeProperty = BindableProperty.Create(nameof(KeyboardType), typeof(Keyboards), typeof(ValidatableEntry), Keyboards.Default, propertyChanged:SetKeyboard);
+    public Keyboards KeyboardType
+    {
+        get => (Keyboards)GetValue(KeyboardTypeProperty);
+        set => SetValue(KeyboardTypeProperty, value);
+    }
+
+    public static readonly BindableProperty KeyboardFlagProperty = BindableProperty.Create(nameof(KeyboardFlag), typeof(KeyboardFlags), typeof(ValidatableEntry), KeyboardFlags.None, propertyChanged: SetKeyboard);
+    public KeyboardFlags KeyboardFlag
+    {
+        get => (KeyboardFlags)GetValue(KeyboardFlagProperty);
+        set => SetValue(KeyboardFlagProperty, value);
+    }
+
+    private static void SetKeyboard(BindableObject bindable, object oldValue, object newValue)
+    { 
+        ValidatableEntry entry = (ValidatableEntry)bindable;
+
+        entry.Entry.Keyboard = KeyboardsExtensions.Map(entry.KeyboardType);
+        entry.Entry.Keyboard = Keyboard.Create(entry.KeyboardFlag);
     }
 
     #endregion
