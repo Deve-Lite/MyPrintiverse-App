@@ -7,7 +7,8 @@ public partial class TestPage : ContentPage
     {
         InitializeComponent();
         BindingContext = vm;
-        e1.Completed += (s,e) => e2.Focus();
+        //e1.Completed += (s,e) => e2.Focus();
+        //en1.Completed += (s, e) => en2.Focus(); 
     }
 
     protected override void OnAppearing()

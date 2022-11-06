@@ -5,10 +5,10 @@
              x:Name="this">
     
     <VerticalStackLayout BindingContext="{x:Reference this}">
-        <Label Style="{StaticResource LargeOswald}"
+        <Label Style="{StaticResource PrimaryHeader_Title}"
                Text="{Binding Title}"/>
 
-        <Border Style="{StaticResource CollectionHeaderBorder}"/>
+        <Border Style="{StaticResource PrimaryHeader_Border}"/>
     </VerticalStackLayout>
     
 </ContentView>

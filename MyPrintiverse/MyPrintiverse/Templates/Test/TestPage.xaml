@@ -62,9 +62,9 @@
                                  Title="tfgmndfgohnfhnmdfgh" 
                                  Margin="10"/>
             <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
+            
 
-
-            <inputs:ValidatableEditor x:Name="e1" Margin="10"
+             <inputs:ValidatableEditor x:Name="e1" Margin="10"
                                  Title="Title"
                                  Text="{Binding NewDescription.Value}"
                                  ErrorMessage="{Binding NewDescription.Error}"
@@ -78,8 +78,17 @@
                                  ErrorMessage="{Binding NewDescription.Error}"
                                  IsValid="{Binding NewDescription.IsValid}"
                                  ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"/>
-            
 
+            <inputs:ValidatableEntry x:Name="en1"
+                                     Text="{Binding NewDescription.Value}"
+                                     ErrorMessage="{Binding NewDescription.Error}"
+                                     IsValid="{Binding NewDescription.IsValid}"
+                                     ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"/>
+
+            <inputs:ValidatableEntry x:Name="en2"/>
+
+            <inputs:EntityValidatableEntry x:Name="en3"
+                                           Entity="kg"/>
 
         </VerticalStackLayout>
     </ScrollView>

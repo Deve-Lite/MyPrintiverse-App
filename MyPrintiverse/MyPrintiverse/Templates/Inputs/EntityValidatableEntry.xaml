@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.Templates.Inputs.EntityValidatableEntry"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this">
+    <Grid BindingContext="{x:Reference this}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding TitleHeight}"/>
+            <RowDefinition Height="{Binding EntryHeight}"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Style="{StaticResource ValidatableEntry_Title}" 
+               Text="{Binding Title}"/>
+
+        <Border x:Name="Border"
+                    Grid.Row="1"
+                    Style="{StaticResource ValidatableEntry_Border}">
+            <Grid Padding="0"
+                      Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                
+                <Entry Style="{StaticResource ValidatableEntry_Entry}" 
+                       Text="{Binding Text, Mode=TwoWay}" 
+                       Placeholder="{Binding Placeholder}"
+                       Completed="EntryCompleted">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                    Command="{Binding ValidationCommand}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Style="{StaticResource EntityValidatableEditor_Entity}"
+                       Text="{Binding Entity}"
+                       HorizontalOptions="Center"
+                       BackgroundColor="AntiqueWhite"
+                       Grid.Column="1"
+                       Margin="5,0,5,0"/>
+
+            </Grid>
+        </Border>
+
+        <Label x:Name="errorMessage" 
+               Grid.Row="2"
+               Style="{StaticResource ValidatableEntry_ErrorMessage}" 
+               MaxLines="{Binding ErrorMessageLines}"
+               Text="{Binding ErrorMessage}" />
+
+    </Grid>
+</ContentView>
