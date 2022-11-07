@@ -12,7 +12,7 @@ public class ContainAnyRuleTests
 	[Fact]
 	public void Check_NullConstructor_ThrowException()
 	{
-		var containAllRule = () => _ = new ContainAnyRule(null);
+		var containAllRule = () => _ = new ContainAnyRule(null!);
 
 		containAllRule
 			.Should()
@@ -22,7 +22,7 @@ public class ContainAnyRuleTests
 	[Fact]
 	public void Check_Null_ReturnFalse()
 	{
-		var act = () => _rule.Check(null);
+		var act = () => _rule.Check(null!);
 
 		try
 		{

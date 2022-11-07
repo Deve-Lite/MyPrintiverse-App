@@ -42,6 +42,16 @@ public static class MauiProgram
                 /* 200 */ fonts.AddFont("Raleway-ExtraLightItalic.ttf", "RalewayExtraLightItalic");
                 /* 100 */ fonts.AddFont("Raleway-ThinItalic.ttf", "RalewayThinItalic");
             })
+			.ConfigureMauiHandlers(handlers =>
+			{
+#if ANDROID
+
+#elif iOS
+
+#else
+
+#endif
+            })
 			.Build();
 
 		return appInstance;

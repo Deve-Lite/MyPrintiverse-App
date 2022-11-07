@@ -6,15 +6,23 @@
   xmlns:module="clr-namespace:MyPrintiverse.Templates"
   xmlns:settingsPage="clr-namespace:MyPrintiverse.Authorization.SignIn"
   x:DataType="settingsPage:SignInViewModel"
-  Shell.FlyoutBehavior="Disabled"
-  Shell.NavBarIsVisible="False">
-  <StackLayout>
+  Shell.FlyoutBehavior="Disabled">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="MainWrapper" TargetType="StackLayout">
+        <Setter Property="Padding" Value="30, 0, 30, 0" />
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <StackLayout Style="{x:StaticResource MainWrapper}">
 
     <module:MessageEntry Message="{Binding Email.Error}" Text="{Binding Email.Value, Mode=TwoWay}" />
     <module:MessageEntry Message="{Binding Password.Error}" Text="{Binding Password.Value, Mode=TwoWay}" />
     <module:MessageEntry Message="{Binding ConfirmPassword.Error}" Text="{Binding ConfirmPassword.Value, Mode=TwoWay}" />
 
-    <Button Command="{Binding SignInCommand}" />
+    <Button Command="{Binding SignInCommand}" Text="CREATE ACCOUNT" />
 
   </StackLayout>
 </ContentPage>

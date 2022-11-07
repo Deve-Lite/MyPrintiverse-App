@@ -2,13 +2,11 @@
 
 namespace MyPrintiverse.Authorization.SignIn;
 
-public class SignInViewModel : BaseViewModel
+public partial class SignInViewModel : BaseViewModel
 {
 	public Validatable<string> Email { get; set; }
 	public Validatable<string> Password { get; set; }
 	public Validatable<string> ConfirmPassword { get; set; }
-
-	public ICommand SignInCommand { get; }
 
 	private readonly ISignInService _signInService;
 	
@@ -16,13 +14,6 @@ public class SignInViewModel : BaseViewModel
 	{
 		_signInService = signInService;
 
-		SignInCommand = new AsyncCommand(SignIn, CanExecute);
-
-		SetupValidation();
-	}
-
-	private void SetupValidation()
-	{
 		Email = Validator.Build<string>()
 			.WithRule(new EmailRule(), "Not valid email");
 
@@ -37,6 +28,7 @@ public class SignInViewModel : BaseViewModel
 			.WithRule(new EmailRule(), "Not valid email");
 	}
 
+	[RelayCommand]
 	private async Task SignIn()
 	{
 		if (!Email.IsValid || !Password.IsValid || !ConfirmPassword.IsValid)

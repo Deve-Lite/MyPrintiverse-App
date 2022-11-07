@@ -3,6 +3,7 @@ using MyPrintiverse.Authorization.ConfirmEmail;
 using MyPrintiverse.Authorization.Login;
 using MyPrintiverse.Authorization.RemindPassword;
 using MyPrintiverse.Authorization.Settings;
+using MyPrintiverse.Authorization.SignIn;
 
 namespace MyPrintiverse.Authorization;
 
@@ -15,6 +16,7 @@ public static class MauiAppExtensions
 		@this.Services.AddScoped<ILoginService, LoginService>();
 		@this.Services.AddScoped<IRemindPasswordService, RemindPasswordService>();
 		@this.Services.AddScoped<ISettingsService, SettingsService>();
+		@this.Services.AddScoped<ISignInService, SignInService>();
 
 		return @this;
 	}
@@ -26,6 +28,7 @@ public static class MauiAppExtensions
 		@this.Services.AddSingleton<LoginViewModel>();
 		@this.Services.AddSingleton<RemindPasswordViewModel>();
 		@this.Services.AddSingleton<SettingsViewModel>();
+		@this.Services.AddSingleton<SignInViewModel>();
 
 		return @this;
 	}
@@ -37,6 +40,7 @@ public static class MauiAppExtensions
 		@this.Services.AddSingleton<LoginView>();
 		@this.Services.AddSingleton<RemindPasswordView>();
 		@this.Services.AddSingleton<SettingsView>();
+		@this.Services.AddSingleton<SignInView>();
 
 		return @this;
 	}

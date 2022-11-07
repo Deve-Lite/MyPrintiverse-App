@@ -20,7 +20,6 @@
 		Emulator - cloud) Jesteœ w dupie.
 		Fizyczne urz¹dzenie) Zamiast localhost u¿yæ ip komputera w lokalnej sieci.
 
-
 == Unicode Dictionary ==
 &#10; - Enter
 &#160; - No-Break Space (NBSP)

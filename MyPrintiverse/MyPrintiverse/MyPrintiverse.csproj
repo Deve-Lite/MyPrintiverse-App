@@ -86,6 +86,9 @@
 		<Compile Update="Authorization\Settings\SettingsView.xaml.cs">
 			<DependentUpon>SettingsView.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Platforms\Android\Renderers\MainEntryRendererIOS.cs">
+		  <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+		</Compile>
 		<Compile Update="Templates\ExtendedValidatableEntry.xaml.cs">
 		  <DependentUpon>ExtendedValidatableEntry.xaml</DependentUpon>
 		</Compile>
@@ -214,6 +217,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\MyPrintiverse.Core\MyPrintiverse.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Platforms\Windows\Renderers\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyPrintiverseHideInfoBar="True" /></VisualStudio></ProjectExtensions>

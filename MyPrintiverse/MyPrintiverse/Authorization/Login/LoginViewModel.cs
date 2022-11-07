@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
+﻿using MyPrintiverse.Authorization.SignIn;
+using MyPrintiverse.FilamentsModule.Filaments.FilamentsPage;
 
 namespace MyPrintiverse.Authorization.Login;
 
@@ -41,7 +42,7 @@ public sealed partial class LoginViewModel : BaseViewModel
 	[RelayCommand]
 	private async Task SignIn()
 	{
-		await Shell.Current.GoToAsync($"/{nameof(FilamentsView)}");
+		await Shell.Current.GoToAsync($"/{nameof(SignInView)}");
 	}
 
 	[RelayCommand]

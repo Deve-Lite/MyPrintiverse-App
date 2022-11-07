@@ -9,8 +9,6 @@
     <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" />
   </Style>
 
-
-
   <Style x:Key="BaseStyle" TargetType="Element">
     <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" />
     <Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
@@ -22,13 +20,11 @@
     <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" />
     <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}" />
     <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource TertiaryDark}}" />
-
   </Style>
 
   <Style
     ApplyToDerivedTypes="True"
     BasedOn="{StaticResource BaseStyle}"
     TargetType="ShellItem" />
-
 
 </ResourceDictionary>

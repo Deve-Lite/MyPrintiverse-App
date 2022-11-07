@@ -45,8 +45,8 @@ public class Session : ISession
 			return false;
 
 		OnAuthorizationFail?.Invoke();
-		return true;
 
+		return true;
 	}
 
 	public async Task<bool> ReAuthorize<TToken>(IHttpService httpService, string url) where TToken : IToken, new()
