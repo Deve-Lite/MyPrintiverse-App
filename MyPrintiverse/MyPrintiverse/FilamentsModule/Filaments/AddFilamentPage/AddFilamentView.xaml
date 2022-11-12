@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage"
-             x:Class="MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage.AddFilamentView"
              xmlns:model="clr-namespace:MyPrintiverse.FilamentsModule.Types"
              xmlns:forms="clr-namespace:MyPrintiverse.Templates.Forms"
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
@@ -15,7 +15,7 @@
              Shell.TabBarIsVisible="False">
 
 
-    <Grid RowDefinitions="60, auto, *, 60" 
+    <Grid RowDefinitions="60, auto, *, 70" 
           VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand">
 
@@ -23,7 +23,7 @@
 
         <forms:FormHeader Grid.Row="1"
                           Title="Edit Spool"
-                          Margin="15,2,15,2"
+                          Margin="15,2,15,0"
                           Step="{Binding Step}"
                           TotalSteps="{Binding TotalSteps}"
                           StepDescription="{Binding StepDescription}"/>
@@ -32,10 +32,6 @@
 
             <StackLayout IsVisible="{Binding Step,Converter={StaticResource StepOneToBoolConverter}}"
                          Margin="15,15,15,0">
-
-
-                <headers:PrimaryHeader Margin="0,5,0,5"
-                                       Title="Selected Type"/>
 
                 <Frame Style="{StaticResource BaseFrameVariant}"
                        Margin="0, 5, 0, 10"
@@ -133,14 +129,16 @@
             <ScrollView IsVisible="{Binding Step,Converter={StaticResource StepTwoToBoolConverter}}">
                 <StackLayout Margin="15">
 
-                    <inputs:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
-                                                     Title="Brand"
+                    <inputs:ValidatableEntry x:Name="brandEntry"
+                                             Style="{StaticResource BaseValidatableEntry}"
+                                             Title="Brand"
                                                      Text="{Binding Item.Brand.Value}"
                                                      ValidationCommand="{Binding Item.Brand.ExtendedValidateCommand}"
                                                      IsValid="{Binding Item.Brand.IsValid}"
                                                      ErrorMessage="{Binding Item.Brand.Error}"/>
 
-                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry x:Name="diameterEntry"
+                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Diameter"
                                                            Text="{Binding Item.Diameter.Value}"
                                                            ValidationCommand="{Binding Item.Diameter.ExtendedValidateCommand}"
@@ -148,14 +146,16 @@
                                                            ErrorMessage="{Binding Item.Diameter.Error}"
                                                            Entity="mm"/>
 
-                    <inputs:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
+                    <inputs:ValidatableEntry x:Name="colorEntry"
+                                             Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Color Name"
                                                      Text="{Binding Item.Color.Value}"
                                                      ValidationCommand="{Binding Item.Color.ExtendedValidateCommand}"
                                                      IsValid="{Binding Item.Color.IsValid}"
                                                      ErrorMessage="{Binding Item.Color.Error}"/>
 
-                    <inputs:ColorPicker ColorHex="FF000000"
+                    <inputs:ColorPicker x:Name="colorPicker"
+                                        ColorHex="FF000000"
                                         Title="Color Hex Value"
                                         NewColorHex="{Binding Item.ColorHex.Value, Mode=TwoWay}"/> 
 
@@ -165,7 +165,8 @@
             <ScrollView IsVisible="{Binding Step,Converter={StaticResource StepThreeToBoolConverter}}">
                 <StackLayout Margin="15">
 
-                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry x:Name="nozzleTemperatureEntry"
+                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Nozzle Temperature"
                                                            Text="{Binding Item.NozzleTemperature.Value}"
                                                            ValidationCommand="{Binding Item.NozzleTemperature.ExtendedValidateCommand}"
@@ -173,7 +174,8 @@
                                                            ErrorMessage="{Binding Item.NozzleTemperature.Error}"
                                                            Entity="°C"/>
 
-                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry x:Name="bedTemperatureEntry"
+                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Bed Temperature"
                                                            Text="{Binding Item.BedTemperature.Value}"
                                                            ValidationCommand="{Binding Item.BedTemperature.ExtendedValidateCommand}"
@@ -181,7 +183,8 @@
                                                            ErrorMessage="{Binding Item.BedTemperature.Error}"
                                                            Entity="°C"/>
 
-                    <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
+                    <inputs:EntityValidatableEntry x:Name="coolingRateEntry"
+                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Cooling Rate"
                                                            Text="{Binding Item.CoolingRate.Value}"
                                                            ValidationCommand="{Binding Item.CoolingRate.ExtendedValidateCommand}"
@@ -189,9 +192,11 @@
                                                            ErrorMessage="{Binding Item.CoolingRate.Error}"
                                                            Entity="%"/>
 
-                    <inputs:RatingSelector Rating="{Binding Item.Rating.Value}"/>
+                    <inputs:RatingSelector x:Name="selector" 
+                                           Rating="{Binding Item.Rating.Value}"/>
 
-                    <inputs:ValidatableEditor x:Name="description" Title="Description"
+                    <inputs:ValidatableEditor x:Name="descriptionEntry"
+                                              Title="Description"
                                          Text="{Binding Item.Description.Value}"
                                          ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
                                          IsValid="{Binding Item.Description.IsValid}"
@@ -225,7 +230,7 @@
                           IsNextButtonRunning="{Binding NextIsRunning}"
                           NextStepCommand="{Binding NextStepCommand}"
                           Step="{Binding Step}"
-                          FinishingStepText="EDIT"
+                          FinishingStepText="ADD"
                           TotalSteps="{Binding TotalSteps}"/>
 
     </Grid>

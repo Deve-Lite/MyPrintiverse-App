@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using MyPrintiverse.Tools;
+using System.Collections.ObjectModel;
 
 namespace MyPrintiverse.FilamentsModule.Types;
 
@@ -27,33 +28,40 @@ public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType
     {
         Item = new FilamentTypeValidator();
         Toast = toast;
+
         TotalSteps = 4;
-        StepDescription = "TODO 1";
+        StepDescriptionList = new ObservableCollection<string>
+        {
+            "Fill base material informations.",
+            "Enter material properties.",
+            "Fill material properties.",
+            "Check provided data."
+        };
+
+        StepDescription = StepDescriptionList[0];
     }
 
     #region Overrides
 
+    public override void OnAppearing()
+    {
+        base.OnAppearing();
+        //todo
+        (Item as FilamentTypeValidator).Density.Value = "1.75";
+    }
+
     [RelayCommand]
     public override async Task StepBack()
     {
-        //TODO: Simulate Data Animation
-        await Task.Delay(500);
-
         if (Step == 2)
-        {
-            DefaultPreviousStepAction("TODO 1");
-        }
-
+            DefaultPreviousStepAction();
+        
         if (Step == 3)
-        {
-            DefaultPreviousStepAction("TODO 2"); 
-        }
-
+            DefaultPreviousStepAction(); 
+        
         if (Step == 4)
-        {
-            DefaultPreviousStepAction("TODO 3");
-        }
-
+            DefaultPreviousStepAction();
+        
     }
 
     public override bool IsStepOneValid() => (Item as FilamentTypeValidator).ShortName.Validate() &&
@@ -131,15 +139,10 @@ public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType
 
     protected async Task Next(Func<Task> manageItem)
     {
-        IsRunning = true;
-
-        //TODO: Simulate Data Animation
-        await Task.Delay(500);
 
         if (Step == 4)
-        {
             await manageItem.Invoke();
-        }
+        
 
         if (Step == 3)
         {
@@ -161,16 +164,12 @@ public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType
         }
 
         if (Step == 2) 
-        {
-            DefaultNextStepAction("TDOD 3", IsStepTwoValid());
-        }
+            DefaultNextStepAction(IsStepTwoValid());
+        
 
         if (Step == 1)
-        {
-            DefaultNextStepAction("TDOD 2", IsStepOneValid());
-        }
-
-        IsRunning = false;
+            DefaultNextStepAction(IsStepOneValid());
+        
     }
 
     #endregion

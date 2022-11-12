@@ -2,6 +2,7 @@
 using MyPrintiverse.FilamentsModule.Filaments;
 using MyPrintiverse.FilamentsModule.Spools;
 using MyPrintiverse.Tools;
+using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule;
@@ -31,7 +32,13 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
         Filament = new Filament();
         Item = new SpoolValidator();
 
-        StepDescription = "TODO 1";
+        StepDescriptionList = new ObservableCollection<string>
+        {
+            "Fill base spool informations.",
+            "Check provided data."
+        };
+
+        StepDescription = StepDescriptionList[0];
     }
 
     #region Protected
@@ -39,8 +46,6 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
     protected async Task Next(Func<Task> manageItem)
     {
         IsRunning = true;
-
-        
 
         if (Step == 2)
         {
@@ -69,13 +74,11 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
             if (IsStepOneValid())
             {
                 Step = 2;
-                StepDescription = "Check informations.";
+                StepDescription = StepDescriptionList[Step-1];
 
-                if(string.IsNullOrEmpty(Filament.Id))
+                if (string.IsNullOrEmpty(Filament.Id))
                     Filament = await FilamentService.GetItemAsync(FilamentId);
             }
-            else
-                await Toast.Toast("Some data is invalid.");
 
             NextIsRunning = false;
         }
@@ -110,9 +113,8 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
         await Task.Delay(DELAY);
 
         if (Step == 2)
-        {
-            DefaultPreviousStepAction("Desc 1 todo");
-        }
+            DefaultPreviousStepAction();
+        
     }
 
     #endregion

@@ -28,32 +28,36 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
     /// Indicates is next step is validated.
     /// </summary>
     [ObservableProperty]
-    public bool _nextIsRunning;
+    private bool _nextIsRunning;
 
     /// <summary>
     /// Indicates moving to previous step.
     /// </summary>
     [ObservableProperty]
-    public bool _previousIsRunning;
+    private bool _previousIsRunning;
 
+    /// <summary>
+    /// Collection for 
+    /// </summary>
+    public ObservableCollection<string> StepDescriptionList = new ObservableCollection<string>();
 
     /// <summary>
     /// Indicates actual step.
     /// </summary>
     [ObservableProperty]
-    public int _step;
+    private int _step;
 
     /// <summary>
     /// Total steps to perform
     /// </summary>
     [ObservableProperty]
-    public int _totalSteps;
+    private int _totalSteps;
 
     /// <summary>
     /// Description displayed in form header.
     /// </summary>
     [ObservableProperty]
-    public string _stepDescription;
+    private string _stepDescription;
 
     /// <summary>
     /// Route to perform when back Button is clicked.
@@ -171,12 +175,12 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
     /// Set of standard actions for previous step.
     /// </summary>
     /// <param name="newStepDescription"></param>
-    public virtual void DefaultPreviousStepAction(string newStepDescription) 
+    public virtual void DefaultPreviousStepAction() 
     {
         PreviousIsRunning = true;
         Task.Delay(DELAY);
         Step -= 1;
-        StepDescription = newStepDescription;
+        StepDescription = StepDescriptionList[Step-1];
         PreviousIsRunning = false;
     }
 
@@ -184,15 +188,15 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
     /// Set of standard actions for next step.
     /// </summary>
     /// <param name="newStepDescription"></param>
-    public virtual void DefaultNextStepAction(string newStepDescription, bool isValid) 
+    public virtual void DefaultNextStepAction(bool isValid) 
     {
 
         PreviousIsRunning = true;
         Task.Delay(DELAY);
         if (isValid)
         {
+            StepDescription = StepDescriptionList[Step];
             Step += 1;
-            StepDescription = newStepDescription;
         }
 
         PreviousIsRunning = false;

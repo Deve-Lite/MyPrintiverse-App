@@ -42,8 +42,16 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
         SelectedFilamentType.ShortName = "Type not set.";
         SelectedFilamentType.EditedAtTicks = DateTime.Now.Ticks;
 
-        TotalSteps = 4;
-        StepDescription = "TODO 1";
+        TotalSteps = 4; 
+        StepDescriptionList = new ObservableCollection<string>
+        {
+            "Select filament material.",
+            "Fill base filament informations.",
+            "Fill additional data.",
+            "Check provided data."
+        };
+
+        StepDescription = StepDescriptionList[0];
     }
 
     #region Overrides
@@ -65,24 +73,14 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
     [RelayCommand]
     public override async Task StepBack()
     {
-        //TODO: Simulate Data Animation
-        await Task.Delay(500);
-
         if (Step == 2)
-        {
-            DefaultPreviousStepAction("TODO 1");
-        }
+            DefaultPreviousStepAction();
 
         if (Step == 3)
-        {
-            DefaultPreviousStepAction("TODO 2");
-        }
+            DefaultPreviousStepAction();
 
         if (Step == 4)
-        {
-            DefaultPreviousStepAction("TODO 3");
-        }
-
+            DefaultPreviousStepAction();
     }
 
     public override bool IsStepOneValid() => !string.IsNullOrEmpty((Item as FilamentValidator)!.TypeId.Value);
@@ -132,32 +130,19 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
 
     protected async Task Next(Func<Task> manageItem)
     {
-        IsRunning = true;
-
-        //TODO: Simulate Data Animation
-        await Task.Delay(500);
-
         if (Step == 4)
-        {
             await manageItem.Invoke();
-        }
+        
 
         if (Step == 3)
-        {
-            DefaultNextStepAction("TODO 4", IsStepThreeValid());
-        }
+            DefaultNextStepAction(IsStepThreeValid());
 
         if (Step == 2)
-        {
-            DefaultNextStepAction("TODO 3", IsStepTwoValid());
-        }
+            DefaultNextStepAction(IsStepTwoValid());
 
         if (Step == 1)
-        {
-            DefaultNextStepAction("TODO 2", IsStepOneValid());
-        }
-
-        IsRunning = false;
+            DefaultNextStepAction(IsStepOneValid());
+        
     }
 
 

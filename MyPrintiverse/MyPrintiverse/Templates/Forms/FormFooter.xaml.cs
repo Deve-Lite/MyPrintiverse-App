@@ -16,7 +16,7 @@ public partial class FormFooter : ContentView
         set => SetValue(StepProperty, value);
     }
 
-    public static readonly BindableProperty TotalStepsProperty = BindableProperty.Create(nameof(TotalSteps), typeof(int), typeof(FormFooter), 1);
+    public static readonly BindableProperty TotalStepsProperty = BindableProperty.Create(nameof(TotalSteps), typeof(int), typeof(FormFooter), 2);
     public int TotalSteps
     {
         get => (int)GetValue(TotalStepsProperty);
@@ -90,7 +90,7 @@ public partial class FormFooter : ContentView
         var bindableFooter = (FormFooter)bindable;
         byte actstep = Convert.ToByte(newValue);
 
-        if (bindableFooter.TotalSteps==1)
+        if (bindableFooter.TotalSteps == 1)
             return;
 
         if (actstep == bindableFooter.TotalSteps)

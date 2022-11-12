@@ -4,7 +4,7 @@
              x:Class="MyPrintiverse.Templates.Forms.FormHeader"
              x:Name="this">
     <Grid BindingContext="{x:Reference this}"
-          RowDefinitions="*,*" 
+          RowDefinitions="*,auto,auto" 
           RowSpacing="10"
           ColumnDefinitions="0.6*, 0.4*">
 
@@ -29,5 +29,8 @@
                Grid.Row="1" 
                Style="{StaticResource MediumRaleway}"
                Text="{Binding StepDescription}"/>
+
+        <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource PrimaryHeader_Border}"/>
+
     </Grid>
 </ContentView>

@@ -12,7 +12,7 @@
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
 
-    <Grid RowDefinitions="60, auto, *, 60" 
+    <Grid RowDefinitions="60, auto, *, 70" 
           VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand">
 
@@ -20,7 +20,7 @@
 
         <forms:FormHeader Grid.Row="1"
                           Title="Add Spool"
-                          Margin="15,2,15,2"
+                          Margin="15,2,15,0"
                           Step="{Binding Step}"
                           TotalSteps="{Binding TotalSteps}"
                           StepDescription="{Binding StepDescription}"/>
@@ -31,17 +31,15 @@
                 <StackLayout Margin="15">
 
 
-                    <inputs:EntityValidatableEntry Margin="0,10,0,0"
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Cost"
-                                                           Text="{Binding Item.Cost.Value}"
-                                                           ValidationCommand="{Binding Item.Cost.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.Cost.IsValid}"
-                                                           ErrorMessage="{Binding Item.Cost.Error}"
-                                                           Entity="{Binding Currency}"/>
+                    <inputs:EntityValidatableEntry x:Name="costEntry"
+                                                   Title="Cost"
+                                                   Text="{Binding Item.Cost.Value}"
+                                                   ValidationCommand="{Binding Item.Cost.ExtendedValidateCommand}"
+                                                   IsValid="{Binding Item.Cost.IsValid}"
+                                                   ErrorMessage="{Binding Item.Cost.Error}"
+                                                   Entity="{Binding Currency}"/>
 
                     <inputs:EntityValidatableEntry x:Name="standardWeightEntry" 
-                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                    Title="Standard filament weight"
                                                    Text="{Binding Item.StandardWeight.Value}"
                                                    ValidationCommand="{Binding StandardWeightValidateCommand}"
@@ -50,7 +48,6 @@
                                                    Entity="kg"/>
 
                     <inputs:EntityValidatableEntry x:Name="avaliableWeightEntry" 
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
                                                        Title="Avaliable filament weight"
                                                        Text="{Binding Item.AvaliableWeight.Value}"
                                                        ValidationCommand="{Binding Item.AvaliableWeight.ExtendedValidateCommand}"
@@ -58,11 +55,12 @@
                                                        ErrorMessage="{Binding Item.AvaliableWeight.Error}"
                                                        Entity="kg"/>
 
-                    <inputs:ValidatableEditor Title="Description"
-                                             Text="{Binding Item.Description.Value}"
-                                             ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
-                                             IsValid="{Binding Item.Description.IsValid}"
-                                             ErrorMessage="{Binding Item.Description.Error}"/>
+                    <inputs:ValidatableEditor x:Name="descriptionEditor"
+                                              Title="Description"
+                                              Text="{Binding Item.Description.Value}"
+                                              ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
+                                              IsValid="{Binding Item.Description.IsValid}"
+                                              ErrorMessage="{Binding Item.Description.Error}"/>
 
                     <inputs:TitledSwitch Title="Is on spool"
                                          IsToggled="{Binding Item.IsOnSpool}"/>

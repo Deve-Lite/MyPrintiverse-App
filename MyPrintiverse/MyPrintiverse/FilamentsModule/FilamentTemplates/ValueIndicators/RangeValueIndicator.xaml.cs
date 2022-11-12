@@ -54,6 +54,9 @@ public partial class RangeValueIndicator : ContentView
     {
         var bindableEntry = (RangeValueIndicator)bindable;
 
+        if (bindableEntry.DisplayValue == null)
+            return;
+
         // in range
         // first in second out
         // first out second out 
