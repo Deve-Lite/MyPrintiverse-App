@@ -3,7 +3,7 @@ using MyPrintiverse.Tools.Templates;
 
 namespace MyPrintiverse.Templates.Inputs;
 
-public partial class ValidatableEntry : ContentView
+public partial class ValidatableEntry : ContentView, IValidatableKeyboard<ValidatableEntry>
 {
     #region Heights
 
@@ -87,6 +87,7 @@ public partial class ValidatableEntry : ContentView
     #endregion
 
     #region Entry
+
     public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(ValidatableEntry), "", BindingMode.TwoWay);
     public string Text
     {
@@ -108,7 +109,10 @@ public partial class ValidatableEntry : ContentView
         set => SetValue(IsPasswordProperty, value);
     }
 
-    public static readonly BindableProperty KeyboardTypeProperty = BindableProperty.Create(nameof(KeyboardType), typeof(Keyboards), typeof(ValidatableEntry), Keyboards.Default, propertyChanged:SetKeyboard);
+    #endregion
+
+    #region Validatable Keyboard
+    public static readonly BindableProperty KeyboardTypeProperty = BindableProperty.Create(nameof(KeyboardType), typeof(Keyboards), typeof(ValidatableEntry), Keyboards.Default, propertyChanged: SetKeyboard);
     public Keyboards KeyboardType
     {
         get => (Keyboards)GetValue(KeyboardTypeProperty);
@@ -123,10 +127,14 @@ public partial class ValidatableEntry : ContentView
     }
 
     private static void SetKeyboard(BindableObject bindable, object oldValue, object newValue)
-    { 
+    {
         ValidatableEntry entry = (ValidatableEntry)bindable;
 
-        entry.Entry.Keyboard = KeyboardsExtensions.Map(entry.KeyboardType);
+        entry.Entry.Keyboard = entry.KeyboardType.Map();
+
+        if (entry.KeyboardType == Keyboards.Numeric || entry.KeyboardType == Keyboards.Telephone)
+            return;
+
         entry.Entry.Keyboard = Keyboard.Create(entry.KeyboardFlag);
     }
 
@@ -154,12 +162,17 @@ public partial class ValidatableEntry : ContentView
 
     public EventHandler<EventArgs> Completed;
 
-    public void EntryCompleted(object sender, EventArgs e) => Completed.Invoke(sender, e);
+    public void EntryCompleted(object sender, EventArgs e)
+    {
+        if (Completed == null)
+            return;
+        Completed(sender, e);
+    }
 
     #endregion
 
     public ValidatableEntry()
 	{
 		InitializeComponent();
-	}
+    }
 }

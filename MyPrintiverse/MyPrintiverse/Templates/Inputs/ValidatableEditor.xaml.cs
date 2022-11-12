@@ -124,7 +124,12 @@ public partial class ValidatableEditor : ContentView
 
     public EventHandler<EventArgs> Completed;
 
-    public void EditorCompleted(object sender, EventArgs e) => Completed.Invoke(sender, e);
+    public void EditorCompleted(object sender, EventArgs e)
+    {
+        if (Completed == null)
+            return;
+        Completed(sender, e);
+    }
 
     #endregion
 

@@ -4,7 +4,7 @@ namespace MyPrintiverse.Tools.Templates;
 
 public static class KeyboardsExtensions
 {
-    public static Keyboard Map(Keyboards keyboard) => keyboard switch
+    public static Keyboard Map(this Keyboards keyboard) => keyboard switch
     {
         Keyboards.Numeric => Keyboard.Numeric,
         Keyboards.Telephone => Keyboard.Telephone,
@@ -13,5 +13,6 @@ public static class KeyboardsExtensions
         Keyboards.Chat => Keyboard.Chat,
         Keyboards.Email => Keyboard.Email,
         Keyboards.Url => Keyboard.Url,
+        _ => Keyboard.Default
     };
 }

@@ -1,7 +1,12 @@
+using MyPrintiverse.Tools.Templates;
 using System.Windows.Input;
 
 namespace MyPrintiverse.Templates.Inputs;
 
+
+/// <summary>
+/// Klasa stworzona do odbierania wartoœci numerycznych z podan¹ jednostk¹.
+/// </summary>
 public partial class EntityValidatableEntry : ContentView
 {
     #region Heights
@@ -143,11 +148,17 @@ public partial class EntityValidatableEntry : ContentView
 
     public EventHandler<EventArgs> Completed;
 
-    public void EntryCompleted(object sender, EventArgs e) => Completed.Invoke(sender, e);
+    public void EntryCompleted(object sender, EventArgs e)
+    {
+        if (Completed == null)
+            return;
+        Completed(sender, e);
+    }
 
     #endregion
     public EntityValidatableEntry()
 	{
 		InitializeComponent();
+        Entry.Keyboard = Keyboard.Numeric;
 	}
 }

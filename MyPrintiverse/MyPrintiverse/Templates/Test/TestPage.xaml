@@ -84,14 +84,15 @@
                                      Text="{Binding NewDescription.Value}"
                                      ErrorMessage="{Binding NewDescription.Error}"
                                      IsValid="{Binding NewDescription.IsValid}"
-                                     KeyboardFlag="CapitalizeWord"
                                      ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"
                                      KeyboardType="Numeric"/>
 
             <inputs:ValidatableEntry x:Name="en2"
-                                     KeyboardFlag="CapitalizeSentence"/>
+                                     KeyboardType="Chat"
+                                     KeyboardFlag="CapitalizeWord"/>
 
             <inputs:EntityValidatableEntry x:Name="en3"
+                                           
                                            Entity="kg"/>
 
         </VerticalStackLayout>
