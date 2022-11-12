@@ -1,11 +1,88 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyPrintiverse.Templates.Inputs.RangeValidatableEntry">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="MyPrintiverse.Templates.Inputs.RangeValidatableEntry"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this">
+    <Grid BindingContext="{x:Reference this}"
+          BackgroundColor="Transparent"
+          ColumnDefinitions="0.43*, 0.14*, 0.43*">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding TitleHeight}"/>
+            <RowDefinition Height="{Binding EntryHeight}"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="3"
+               Style="{StaticResource ValidatableEntry_Title}" 
+               Text="{Binding Title}" />
+
+        <Border x:Name="BorderLeft" 
+                Grid.Row="1"
+                Grid.Column="0" 
+                Style="{StaticResource ValidatableEntry_Border}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <Entry x:Name="LEntry"
+                       Style="{Binding EntryStyle}" 
+                       Text="{Binding TextLeft, Mode=TwoWay}" 
+                       Keyboard="Numeric"
+                       Placeholder="{Binding Placeholder}"
+                       Completed="LEntryCompleted">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                        Command="{Binding ValidationCommand}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Grid.Column="1" 
+                           Style="{StaticResource EntityValidatableEditor_Entity}"
+                           Text="{Binding Entity}"/>
+
+            </Grid>
+        </Border>
+
+        <Border x:Name="BorderRight" 
+                Grid.Row="1"
+                Grid.Column="2"
+                Style="{StaticResource ValidatableEntry_Border}">
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="REntry"
+                       Style="{Binding EntryStyle}" 
+                       Text="{Binding TextRight, Mode=TwoWay}" 
+                       Keyboard="Numeric"
+                       Placeholder="{Binding Placeholder}"
+                       Completed="REntryCompleted">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="Unfocused" 
+                                                        Command="{Binding ValidationCommand}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Grid.Column="1" 
+                           Style="{StaticResource EntityValidatableEditor_Entity}"
+                           Text="{Binding Entity}"/>
+
+            </Grid>
+        </Border>
+
+
+        <Label Grid.Row="2"
+               Grid.ColumnSpan="3"
+               x:Name="errorMessage" 
+               Style="{StaticResource ValidatableEntry_ErrorMessage}" 
+               Text="{Binding ErrorMessage}"/>
+
+    </Grid>
 </ContentView>

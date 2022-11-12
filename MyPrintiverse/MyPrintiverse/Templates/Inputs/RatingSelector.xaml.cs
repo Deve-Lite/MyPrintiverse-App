@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Templates;
+﻿namespace MyPrintiverse.Templates.Inputs;
 
 public partial class RatingSelector : ContentView
 {
@@ -11,9 +11,7 @@ public partial class RatingSelector : ContentView
 
     private static void OnRatingChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        var selector = (RatingSelector)bindable;
-
-        SetImages(selector);
+        SetImages((RatingSelector)bindable);
     }
 
     public RatingSelector()

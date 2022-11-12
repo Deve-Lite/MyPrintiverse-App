@@ -1,4 +1,4 @@
-﻿namespace MyPrintiverse.Templates;
+﻿namespace MyPrintiverse.Templates.Inputs;
 
 public partial class ColorPicker : ContentView
 {
@@ -10,7 +10,7 @@ public partial class ColorPicker : ContentView
 
     #region Title
 
-    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(RangeValidatableEntry), "Title not set.");
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(ColorPicker), "Title not set.");
     public string Title
     {
         get => (string)GetValue(TitleProperty);

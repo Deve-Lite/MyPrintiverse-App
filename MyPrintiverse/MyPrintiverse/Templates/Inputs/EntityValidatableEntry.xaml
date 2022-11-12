@@ -38,8 +38,7 @@
                 <Label Style="{StaticResource EntityValidatableEditor_Entity}"
                        Text="{Binding Entity}"
                        HorizontalOptions="Center"
-                       Grid.Column="1"
-                       Margin="8,0,8,0"/>
+                       Grid.Column="1"/>
 
             </Grid>
         </Border>

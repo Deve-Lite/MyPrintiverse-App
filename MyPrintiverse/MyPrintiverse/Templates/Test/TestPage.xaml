@@ -62,16 +62,15 @@
                                  Title="tfgmndfgohnfhnmdfgh" 
                                  Margin="10"/>
             <Label Style="{StaticResource LargeOswald}" Text="{Binding BoolValue}" HorizontalOptions="Center"/>
-            
 
-             <inputs:ValidatableEditor x:Name="e1" Margin="10"
+
+            <inputs:ValidatableEditor x:Name="e1" Margin="10"
                                  Title="Title"
                                        
                                  Text="{Binding NewDescription.Value}"
                                  ErrorMessage="{Binding NewDescription.Error}"
                                  IsValid="{Binding NewDescription.IsValid}"
                                  ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"/>
-
             <inputs:ValidatableEditor x:Name="e2" Margin="10"
                                  Title="Title"
                                  ErrorMessageLines="2"
@@ -79,21 +78,19 @@
                                  ErrorMessage="{Binding NewDescription.Error}"
                                  IsValid="{Binding NewDescription.IsValid}"
                                  ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"/>
-
             <inputs:ValidatableEntry x:Name="en1"
                                      Text="{Binding NewDescription.Value}"
                                      ErrorMessage="{Binding NewDescription.Error}"
                                      IsValid="{Binding NewDescription.IsValid}"
                                      ValidationCommand="{Binding NewDescription.ExtendedValidateCommand}"
                                      KeyboardType="Numeric"/>
-
             <inputs:ValidatableEntry x:Name="en2"
                                      KeyboardType="Chat"
                                      KeyboardFlag="CapitalizeWord"/>
-
             <inputs:EntityValidatableEntry x:Name="en3"
                                            
                                            Entity="kg"/>
+            <inputs:RangeValidatableEntry Entity="dfghfgh"/>
 
         </VerticalStackLayout>
     </ScrollView>

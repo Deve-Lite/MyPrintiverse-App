@@ -71,6 +71,7 @@
            TargetType="Label">
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Margin" Value="8,0,8,0"/>
     </Style>
 
     <!--  Buttons  -->
