@@ -3,7 +3,7 @@
 namespace MyPrintiverse.FilamentsModule.Types.EditFilamentTypePage;
 
 [QueryProperty(nameof(Id), nameof(Id))]
-public partial class EditFilamentTypeViewModel : ManageFilamentTypeViewModel
+public partial class EditFilamentTypeViewModel : TypeFormViewModel
 {
 
     public string Id { get; set; }

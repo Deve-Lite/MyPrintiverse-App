@@ -7,36 +7,33 @@
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
              xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs"
-             xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
-             xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:forms="clr-namespace:MyPrintiverse.Templates.Forms"
              xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
 
-    <Grid RowDefinitions="60, *, 60" 
-          ColumnDefinitions="*,*" 
+    <Grid RowDefinitions="60, auto, *, 60" 
           VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand">
 
-        <otherTemplates:TopManageBar Grid.ColumnSpan="2" 
-                                     BackCommand="{Binding BackCommand}"/>
+        <forms:TopManageBar BackCommand="{Binding BackCommand}"/>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" >
+        <forms:FormHeader Grid.Row="1"
+                          Title="Edit Spool"
+                          Margin="15,2,15,2"
+                          Step="{Binding Step}"
+                          TotalSteps="{Binding TotalSteps}"
+                          StepDescription="{Binding StepDescription}"/>
 
-            <StackLayout IsVisible="{Binding StepOne}"
+        <Grid Grid.Row="2">
+
+            <StackLayout IsVisible="{Binding Step,Converter={StaticResource StepOneToBoolConverter}}"
                          Margin="15,15,15,0">
-
-                <otherTemplates:StepDescription Title="New Filament"
-                                        Step="Step 1 of 4"
-                                        Description="Select Type of Filament."
-                                        Margin="0,2,0,10"/>
-
 
                 <headers:PrimaryHeader Margin="0,5,0,5"
                                        Title="Selected Type"/>
-
 
                 <Frame Style="{StaticResource BaseFrameVariant}"
                        Margin="0, 5, 0, 10"
@@ -131,12 +128,8 @@
                 </RefreshView>
             </StackLayout>
 
-            <ScrollView IsVisible="{Binding StepTwo}">
+            <ScrollView IsVisible="{Binding Step, Converter={StaticResource StepTwoToBoolConverter}}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Filament"
-                                        Step="Step 2 of 4"
-                                        Description="Enter filament type informations."
-                                        Margin="0,2,0,10"/>
 
                     <inputs:ValidatableEntry Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Brand"
@@ -160,19 +153,15 @@
                                                      IsValid="{Binding Item.Color.IsValid}"
                                                      ErrorMessage="{Binding Item.Color.Error}"/>
 
-                    <entryTemplates:ColorPicker NewColorHex="{Binding Item.ColorHex.Value, Mode=TwoWay}"
+                    <inputs:ColorPicker NewColorHex="{Binding Item.ColorHex.Value, Mode=TwoWay}"
                                                 ColorHex="{Binding ColorHex}"
                                                 Title="Color Hex Value"/>
 
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView IsVisible="{Binding StepThree}">
+            <ScrollView IsVisible="{Binding Step, Converter={StaticResource StepThreeToBoolConverter}}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Filament"
-                                        Step="Step 3 of 4"
-                                        Description="Enter print settings and additional data."
-                                        Margin="0,2,0,10"/>
 
                     <inputs:EntityValidatableEntry Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Nozzle Temperature"
@@ -198,7 +187,7 @@
                                                            ErrorMessage="{Binding Item.CoolingRate.Error}"
                                                            Entity="%"/>
 
-                    <entryTemplates:RatingSelector Rating="{Binding Item.Rating.Value}"/>
+                    <inputs:RatingSelector Rating="{Binding Item.Rating.Value}"/>
 
                     <inputs:ValidatableEditor Title="Description"
                                              Text="{Binding Item.Description.Value}"
@@ -209,14 +198,8 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView IsVisible="{Binding FinishingStep}">
+            <ScrollView IsVisible="{Binding Step, Converter={StaticResource StepFourToBoolConverter}}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Filament"
-                                        Step="Step 4 of 4"
-                                        Description="Check your data."
-                                        Margin="0,2,0,10"/>
-
-
                     <filamentTemplates:DisplayFilamentView 
                                                Brand="{Binding Item.Brand.Value}"
                                                ColorHex="{Binding Item.ColorHex.Value, Mode=TwoWay}"
@@ -233,28 +216,14 @@
             </ScrollView>
         </Grid>
 
-        <Border Style="{StaticResource CollectionHeaderBorder}"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                VerticalOptions="End"
-                Margin="15,0"/>
-
-        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
-                                       IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
-                                       Grid.Row="2"
-                                       Grid.Column="0"
-                                       Text="BACK"
-                                       VerticalOptions="Center"
-                                       Margin="15,0,20,0"
-                                       Command="{Binding StepBackCommand}"/>
-
-        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
-                                       Grid.Row="2"
-                                       Grid.Column="1"
-                                       Text="{Binding NextButtonTitle}"
-                                       VerticalOptions="Center"
-                                       Margin="20,0,15,0"
-                                       Command="{Binding NextStepCommand}"/>
+        <forms:FormFooter Grid.Row="3" 
+                          PreviousStepCommand="{Binding StepBackCommand}"
+                          IsPreviousButtonRunning="{Binding PreviousIsRunning}"
+                          IsNextButtonRunning="{Binding NextIsRunning}"
+                          NextStepCommand="{Binding NextStepCommand}"
+                          Step="{Binding Step}"
+                          FinishingStepText="EDIT"
+                          TotalSteps="{Binding TotalSteps}"/>
 
     </Grid>
 </ContentPage>

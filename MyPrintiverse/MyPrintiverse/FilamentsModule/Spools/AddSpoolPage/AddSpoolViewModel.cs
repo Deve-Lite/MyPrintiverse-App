@@ -7,7 +7,7 @@ using System.Globalization;
 namespace MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 
 
-public partial class AddSpoolViewModel : ManageSpoolViewModel
+public partial class AddSpoolViewModel : SpoolFormViewModel
 {
 
     public AddSpoolViewModel(IMessageService messageService, IItemService<Spool> itemService, IItemService<Filament> filamentService, IToast toast) : base(messageService, itemService, filamentService, toast)
@@ -25,7 +25,7 @@ public partial class AddSpoolViewModel : ManageSpoolViewModel
     [RelayCommand]
     public override async Task NextStep() => await Next(AddItem);
 
-    public async Task AddItem() => await ManageItem( async(spool) => { return await ItemService.AddItemAsync(spool); });
+    public async Task AddItem() => await ManageItem(ItemService.AddItemAsync);
 
     #endregion
 }

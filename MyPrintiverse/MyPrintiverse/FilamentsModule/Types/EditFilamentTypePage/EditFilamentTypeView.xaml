@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Types.EditFilamentTypePage.EditFilamentTypeView"
              xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
-             xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
              xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
+             xmlns:forms="clr-namespace:MyPrintiverse.Templates.Forms"
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
              xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs"
              xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
@@ -24,24 +24,23 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="60, *, 60" 
-          ColumnDefinitions="*,*" 
+    <Grid RowDefinitions="60, auto, *, 60" 
           VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand">
 
-        <otherTemplates:TopManageBar Grid.ColumnSpan="2" 
-                                     BackCommand="{Binding BackCommand}"/>
+        <forms:TopManageBar BackCommand="{Binding BackCommand}"/>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" >
+        <forms:FormHeader Grid.Row="1"
+                          Title="Edit Spool"
+                          Margin="15,2,15,2"
+                          Step="{Binding Step}"
+                          TotalSteps="{Binding TotalSteps}"
+                          StepDescription="{Binding StepDescription}"/>
 
-            <ScrollView IsVisible="{Binding StepOne}">
+        <Grid Grid.Row="2">
+
+            <ScrollView IsVisible="{Binding Step,Converter={StaticResource StepOneToBoolConverter}}">
                 <StackLayout Margin="15">
-
-                    <otherTemplates:StepDescription Title="New Type"
-                                        Step="Step 1 of 4"
-                                        Description="Enter filament type informations."
-                                        Margin="0,2,0,10"/>
-
 
                     <inputs:ValidatableEntry Margin="0,10,0,0"
                                                      Style="{StaticResource BaseValidatableEntry}"
@@ -68,13 +67,9 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView IsVisible="{Binding StepTwo}">
+            <ScrollView IsVisible="{Binding Step, Converter={StaticResource StepTwoToBoolConverter}}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Type"
-                                        Step="Step 2 of 4"
-                                        Description="Enter filament type informations."
-                                        Margin="0,2,0,10"/>
-
+  
                     <inputs:EntityValidatableEntry x:Name="densityEntry" 
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Density"
@@ -93,7 +88,7 @@
                                                            ErrorMessage="{Binding Item.MaxServiceTempearature.Error}"
                                                            Entity="°C"/>
 
-                    <entryTemplates:RangeValidatableEntry Title="Nozzle Temperature Range"
+                    <inputs:RangeValidatableEntry Title="Nozzle Temperature Range"
                                                           Entity="°C"
                                                           IsLeftValid="{Binding Item.NozzleMin.IsValid}"
                                                           TextLeft="{Binding Item.NozzleMin.Value }"
@@ -102,7 +97,7 @@
                                                           ErrorMessage="{Binding NozzleError}"
                                                           ValidationCommand="{Binding NozzleValidateCommand}"/>
 
-                    <entryTemplates:RangeValidatableEntry Title="Bed Temperature Range"
+                    <inputs:RangeValidatableEntry Title="Bed Temperature Range"
                                                           Entity="°C"
                                                           IsLeftValid="{Binding Item.BedMin.IsValid}"
                                                           TextLeft="{Binding Item.BedMin.Value }"
@@ -111,7 +106,7 @@
                                                           ErrorMessage="{Binding BedError}"
                                                           ValidationCommand="{Binding BedValidateCommand}"/>
 
-                    <entryTemplates:RangeValidatableEntry Title="Cooling Rate Range"
+                    <inputs:RangeValidatableEntry Title="Cooling Rate Range"
                                                           Entity="%"
                                                           IsLeftValid="{Binding Item.CoolingMin.IsValid}"
                                                           TextLeft="{Binding Item.CoolingMin.Value}"
@@ -123,12 +118,8 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView IsVisible="{Binding StepThree}">
+            <ScrollView IsVisible="{Binding Step, Converter={StaticResource StepThreeToBoolConverter}}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Type"
-                                        Step="Step 3 of 4"
-                                        Description="Enter filament type informations."
-                                        Margin="0,2,0,10"/>
 
                     <inputs:TitledSwitch Title="Is food friendly"
                                          IsToggled="{Binding Item.IsFoodFriendly,Mode=TwoWay}"/>
@@ -148,13 +139,8 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView IsVisible="{Binding FinishingStep}">
+            <ScrollView IsVisible="{Binding Step, Converter={StaticResource StepFourToBoolConverter}}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Type"
-                                        Step="Step 4 of 4"
-                                        Description="Check your data."
-                                        Margin="0,2,0,10"/>
-
 
                     <StackLayout>
 
@@ -302,28 +288,14 @@
             </ScrollView>
         </Grid>
 
-        <Border Style="{StaticResource CollectionHeaderBorder}"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                VerticalOptions="End"
-                Margin="15,0"/>
-
-        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
-                                       IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
-                                       Grid.Row="2"
-                                       Grid.Column="0"
-                                       Text="BACK"
-                                       VerticalOptions="Center"
-                                       Margin="15,0,20,0"
-                                       Command="{Binding StepBackCommand}"/>
-
-        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
-                                       Grid.Row="2"
-                                       Grid.Column="1"
-                                       Text="{Binding NextButtonTitle}"
-                                       VerticalOptions="Center"
-                                       Margin="20,0,15,0"
-                                       Command="{Binding NextStepCommand}"/>
+        <forms:FormFooter Grid.Row="3"
+                          PreviousStepCommand="{Binding StepBackCommand}"
+                          IsPreviousButtonRunning="{Binding PreviousIsRunning}"
+                          IsNextButtonRunning="{Binding NextIsRunning}"
+                          NextStepCommand="{Binding NextStepCommand}"
+                          Step="{Binding Step}"
+                          FinishingStepText="EDIT"
+                          TotalSteps="{Binding TotalSteps}"/>
 
     </Grid>
 </ContentPage>

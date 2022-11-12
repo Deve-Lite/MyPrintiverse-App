@@ -3,7 +3,7 @@ using MyPrintiverse.Tools;
 
 namespace MyPrintiverse.FilamentsModule.Types.AddFilamentTypePage;
 
-public partial class AddFilamentTypeViewModel : ManageFilamentTypeViewModel
+public partial class AddFilamentTypeViewModel : TypeFormViewModel
 {
     public AddFilamentTypeViewModel(IMessageService messageService, IItemService<FilamentType> itemService, IToast toast) : base(messageService, itemService, toast)
     {

@@ -11,6 +11,11 @@
     <converters:IsNotEmptyStringConventer x:Key="IsNotEmptyStringConventer" />
     <converters:DescriptionConverter x:Key="DescriptionConverter" />
 
+    <converters:StepOneToBoolConverter x:Key="StepOneToBoolConverter" />
+    <converters:StepTwoToBoolConverter x:Key="StepTwoToBoolConverter" />
+    <converters:StepThreeToBoolConverter x:Key="StepThreeToBoolConverter" />
+    <converters:StepFourToBoolConverter x:Key="StepFourToBoolConverter" />
+
     <!--  Connected with displaying collections  -->
 
     <Style x:Key="BaseRefreshView" TargetType="RefreshView">

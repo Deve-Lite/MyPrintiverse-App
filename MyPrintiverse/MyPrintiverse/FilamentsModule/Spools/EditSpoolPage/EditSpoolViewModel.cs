@@ -1,13 +1,10 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
-using MyPrintiverse.FilamentsModule.Filaments;
+﻿using MyPrintiverse.FilamentsModule.Filaments;
 using MyPrintiverse.Tools;
-using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
 
 [QueryProperty(nameof(Id), nameof(Id))]
-public partial class EditSpoolViewModel : ManageSpoolViewModel
+public partial class EditSpoolViewModel : SpoolFormViewModel
 {
     #region Fields
 
@@ -30,7 +27,7 @@ public partial class EditSpoolViewModel : ManageSpoolViewModel
     [RelayCommand]
     public override async Task NextStep() => await Next(EditItem);
 
-    public async Task EditItem() => await ManageItem(async (spool) => { return await ItemService.UpdateItemAsync(spool); });
+    public async Task EditItem() => await ManageItem(ItemService.UpdateItemAsync);
 
     #endregion
 

@@ -5,7 +5,7 @@ using MyPrintiverse.Tools;
 namespace MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 
 [QueryProperty(nameof(Id),nameof(Id))]
-public partial class EditFilamentViewModel : ManageFilamentViewModel
+public partial class EditFilamentViewModel : FilamentFormViewModel
 {
     public string Id { get; set; }
 

@@ -189,7 +189,7 @@
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\Others\StepDescription.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="FilamentsModule\FilamentTemplates\Others\TopManageBar.xaml">
+		<MauiXaml Update="Templates\Forms\TopManageBar.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="FilamentsModule\FilamentTemplates\ValueIndicators\MaterialProperty.xaml">
@@ -326,6 +326,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\MyPrintiverse.Core\MyPrintiverse.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="FilamentsModule\Spools\SpoolForm\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyPrintiverseHideInfoBar="True" /></VisualStudio></ProjectExtensions>

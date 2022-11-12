@@ -7,7 +7,7 @@ using System.Globalization;
 namespace MyPrintiverse.FilamentsModule;
 
 [QueryProperty(nameof(FilamentId), nameof(FilamentId))]
-public partial class ManageSpoolViewModel : BaseItemManageViewModel<Spool>
+public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
 {
     #region Fields
     public string FilamentId { get; set; }
@@ -24,13 +24,14 @@ public partial class ManageSpoolViewModel : BaseItemManageViewModel<Spool>
 
     #endregion
 
-    public ManageSpoolViewModel(IMessageService messageService, IItemService<Spool> itemService, IItemService<Filament> filamentService, IToast toast) : base(messageService, itemService)
+    public SpoolFormViewModel(IMessageService messageService, IItemService<Spool> itemService, IItemService<Filament> filamentService, IToast toast) : base(messageService, itemService)
     {
         FilamentService = filamentService;
         Toast = toast;
-
         Filament = new Filament();
         Item = new SpoolValidator();
+
+        StepDescription = "TODO 1";
     }
 
     #region Protected
@@ -39,11 +40,14 @@ public partial class ManageSpoolViewModel : BaseItemManageViewModel<Spool>
     {
         IsRunning = true;
 
-        //TODO: Simulate Data Animation
-        await Task.Delay(500);
+        
 
-        if (FinishingStep)
+        if (Step == 2)
         {
+            NextIsRunning = true;
+
+            await Task.Delay(DELAY);
+
             /* Parse will not throw Exception because of NumberRules */
             var avaliableWeight = double.Parse((Item as SpoolValidator).AvaliableWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
 
@@ -53,22 +57,27 @@ public partial class ManageSpoolViewModel : BaseItemManageViewModel<Spool>
                 (Item as SpoolValidator).IsFinished = false;
 
             await manageItem.Invoke();
+            NextIsRunning = false;
         }
 
-        if (StepOne)
+        if (Step == 1)
         {
+            NextIsRunning = true;
+
+            await Task.Delay(DELAY);
+
             if (IsStepOneValid())
             {
-                StepOne = false;
-                FinishingStep = true;
-                NextButtonTitle = "Finish";
+                Step = 2;
+                StepDescription = "Check informations.";
 
                 if(string.IsNullOrEmpty(Filament.Id))
                     Filament = await FilamentService.GetItemAsync(FilamentId);
-
             }
             else
                 await Toast.Toast("Some data is invalid.");
+
+            NextIsRunning = false;
         }
 
         IsRunning = false;
@@ -98,13 +107,11 @@ public partial class ManageSpoolViewModel : BaseItemManageViewModel<Spool>
     public override async Task StepBack()
     {
         //TODO: Simulate Data Animation
-        await Task.Delay(500);
+        await Task.Delay(DELAY);
 
-        if (FinishingStep)
+        if (Step == 2)
         {
-            StepOne = true;
-            FinishingStep = false;
-            NextButtonTitle = "NEXT";
+            DefaultPreviousStepAction("Desc 1 todo");
         }
     }
 

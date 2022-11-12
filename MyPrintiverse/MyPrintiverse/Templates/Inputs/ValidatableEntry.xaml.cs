@@ -3,8 +3,8 @@ using MyPrintiverse.Tools.Templates;
 
 namespace MyPrintiverse.Templates.Inputs;
 
-public partial class ValidatableEntry : ContentView, IValidatableKeyboard<ValidatableEntry>
-{
+public partial class ValidatableEntry : ContentView 
+{ 
     #region Heights
 
     public static readonly BindableProperty TitleHeightProperty = BindableProperty.Create(nameof(TitleHeight), typeof(int), typeof(ValidatableEntry), 20);

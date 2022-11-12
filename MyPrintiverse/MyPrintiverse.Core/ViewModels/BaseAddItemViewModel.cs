@@ -7,7 +7,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// view model for adding item.
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
-public class BaseAddItemViewModel<T> : BaseItemManageViewModel<T> where T : BaseModel, new()
+public class BaseAddItemViewModel<T> : BaseFormViewModel<T> where T : BaseModel, new()
 {
     #region Commands
 

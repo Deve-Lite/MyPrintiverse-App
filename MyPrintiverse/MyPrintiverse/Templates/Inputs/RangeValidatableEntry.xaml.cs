@@ -135,6 +135,28 @@ public partial class RangeValidatableEntry : ContentView
 
     #endregion
 
+    #region Title
+
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(RangeValidatableEntry), "Title not set.");
+    public string Title
+    {
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
+
+    #endregion
+
+    #region ErrorMessage
+
+    public static readonly BindableProperty ErrorMessageProperty = BindableProperty.Create(nameof(ErrorMessage), typeof(string), typeof(RangeValidatableEntry), "");
+    public string ErrorMessage
+    {
+        get => (string)GetValue(ErrorMessageProperty);
+        set => SetValue(ErrorMessageProperty, value);
+    }
+
+    #endregion
+
     #region Events
 
     public EventHandler<EventArgs> LCompleted;
@@ -159,7 +181,6 @@ public partial class RangeValidatableEntry : ContentView
     }
 
     #endregion
-
 
     public RangeValidatableEntry()
 	{

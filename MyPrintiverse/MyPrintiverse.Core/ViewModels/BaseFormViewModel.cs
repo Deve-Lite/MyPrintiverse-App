@@ -11,7 +11,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// <typeparam name="T"></typeparam>
 /// 
 /// zmiana na T i TValidataor
-public abstract partial class BaseItemManageViewModel<T> : BaseViewModel where T : BaseModel, new()
+public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : BaseModel, new()
 {
     #region Fields
     /// <summary>
@@ -25,29 +25,40 @@ public abstract partial class BaseItemManageViewModel<T> : BaseViewModel where T
     public Validator<T> Item { get => item; set => SetProperty(ref item, value); }
 
     /// <summary>
-    /// Indicates if actual step is first one.
+    /// Indicates is next step is validated.
     /// </summary>
     [ObservableProperty]
-
-    public bool _stepOne;
-    /// <summary>
-    /// Indicates if actual step is last one.
-    /// </summary>
-    [ObservableProperty]
-    public bool _finishingStep;
+    public bool _nextIsRunning;
 
     /// <summary>
-    /// Text on next button.
+    /// Indicates moving to previous step.
     /// </summary>
     [ObservableProperty]
-    public string _nextButtonTitle;
+    public bool _previousIsRunning;
+
+
+    /// <summary>
+    /// Indicates actual step.
+    /// </summary>
+    [ObservableProperty]
+    public int _step;
+
+    /// <summary>
+    /// Total steps to perform
+    /// </summary>
+    [ObservableProperty]
+    public int _totalSteps;
+
+    /// <summary>
+    /// Description displayed in form header.
+    /// </summary>
+    [ObservableProperty]
+    public string _stepDescription;
 
     /// <summary>
     /// Route to perform when back Button is clicked.
     /// </summary>
     public string BackRoute => "..";
-
-
     /// <summary>
     /// Route to perform after succesful add/edit action.
     /// </summary>
@@ -78,14 +89,13 @@ public abstract partial class BaseItemManageViewModel<T> : BaseViewModel where T
 
     #endregion
 
-    public BaseItemManageViewModel(IMessageService messageService, IItemService<T> itemService)
+    public BaseFormViewModel(IMessageService messageService, IItemService<T> itemService)
     {
         ItemService = itemService;
         MessageService = messageService;
 
-        StepOne = true;
-        FinishingStep = false;
-        NextButtonTitle = "NEXT";
+        Step = 1;
+        TotalSteps = 2;
 
         BackCommand = new AsyncRelayCommand(execute: Back, canExecute: CanExecute);
     }
@@ -155,6 +165,38 @@ public abstract partial class BaseItemManageViewModel<T> : BaseViewModel where T
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
     public virtual Task NextStep() => throw new NotImplementedException("Implement this function for valid working.");
+
+
+    /// <summary>
+    /// Set of standard actions for previous step.
+    /// </summary>
+    /// <param name="newStepDescription"></param>
+    public virtual void DefaultPreviousStepAction(string newStepDescription) 
+    {
+        PreviousIsRunning = true;
+        Task.Delay(DELAY);
+        Step -= 1;
+        StepDescription = newStepDescription;
+        PreviousIsRunning = false;
+    }
+
+    /// <summary>
+    /// Set of standard actions for next step.
+    /// </summary>
+    /// <param name="newStepDescription"></param>
+    public virtual void DefaultNextStepAction(string newStepDescription, bool isValid) 
+    {
+
+        PreviousIsRunning = true;
+        Task.Delay(DELAY);
+        if (isValid)
+        {
+            Step += 1;
+            StepDescription = newStepDescription;
+        }
+
+        PreviousIsRunning = false;
+    }
 
     #endregion
 }

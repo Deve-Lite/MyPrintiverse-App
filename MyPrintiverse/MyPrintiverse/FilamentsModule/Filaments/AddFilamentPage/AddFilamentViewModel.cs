@@ -5,7 +5,7 @@ using MyPrintiverse.Tools;
 namespace MyPrintiverse.FilamentsModule.Filaments.AddFilamentPage;
 
 
-public partial class AddFilamentViewModel : ManageFilamentViewModel
+public partial class AddFilamentViewModel : FilamentFormViewModel
 {
     public AddFilamentViewModel(IMessageService messageService, IItemService<Filament> itemService, IItemService<FilamentType> typeService, IToast toast) : base(messageService, itemService, typeService, toast)
     {

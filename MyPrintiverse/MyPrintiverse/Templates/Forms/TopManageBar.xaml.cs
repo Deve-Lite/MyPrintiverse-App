@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace MyPrintiverse.FilamentsModule.FilamentTemplates.Others;
+namespace MyPrintiverse.Templates.Forms;
 
 public partial class TopManageBar : ContentView
 {

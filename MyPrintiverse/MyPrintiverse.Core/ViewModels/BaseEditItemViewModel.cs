@@ -9,7 +9,7 @@ namespace MyPrintiverse.Core.ViewModels;
 /// </summary>
 /// <typeparam name="T"> Model. </typeparam>
 [QueryProperty(nameof(Id), nameof(Id))]
-public class BaseEditItemViewModel<T> : BaseItemManageViewModel<T> where T : BaseModel, new()
+public class BaseEditItemViewModel<T> : BaseFormViewModel<T> where T : BaseModel, new()
 {
     #region Fields
     /// <summary>

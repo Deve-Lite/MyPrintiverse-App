@@ -1,20 +1,12 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
-using MyPrintiverse.FilamentsModule.Spools;
 using MyPrintiverse.Tools;
-using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Types;
 
-public abstract partial class ManageFilamentTypeViewModel : BaseItemManageViewModel<FilamentType>
+public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType>
 {
     #region Properties
-
-    [ObservableProperty]
-    protected bool _stepTwo;
-
-    [ObservableProperty]
-    protected bool _stepThree;
 
     [ObservableProperty]
     private string _nozzleError;
@@ -31,10 +23,12 @@ public abstract partial class ManageFilamentTypeViewModel : BaseItemManageViewMo
 
     #endregion
 
-    protected ManageFilamentTypeViewModel(IMessageService messageService, IItemService<FilamentType> itemService, IToast toast) : base(messageService, itemService)
+    protected TypeFormViewModel(IMessageService messageService, IItemService<FilamentType> itemService, IToast toast) : base(messageService, itemService)
     {
         Item = new FilamentTypeValidator();
         Toast = toast;
+        TotalSteps = 4;
+        StepDescription = "TODO 1";
     }
 
     #region Overrides
@@ -45,25 +39,19 @@ public abstract partial class ManageFilamentTypeViewModel : BaseItemManageViewMo
         //TODO: Simulate Data Animation
         await Task.Delay(500);
 
-        if (StepTwo)
+        if (Step == 2)
         {
-            StepOne = true;
-            StepTwo = false;
-            NextButtonTitle = "NEXT";
+            DefaultPreviousStepAction("TODO 1");
         }
 
-        if (StepThree)
+        if (Step == 3)
         {
-            StepTwo = true;
-            StepThree = false;
-            NextButtonTitle = "NEXT";
+            DefaultPreviousStepAction("TODO 2"); 
         }
 
-        if (FinishingStep)
+        if (Step == 4)
         {
-            StepThree = true;
-            FinishingStep = false;
-            NextButtonTitle = "NEXT";
+            DefaultPreviousStepAction("TODO 3");
         }
 
     }
@@ -148,13 +136,16 @@ public abstract partial class ManageFilamentTypeViewModel : BaseItemManageViewMo
         //TODO: Simulate Data Animation
         await Task.Delay(500);
 
-        if (FinishingStep)
+        if (Step == 4)
         {
             await manageItem.Invoke();
         }
 
-        if (StepThree)
+        if (Step == 3)
         {
+            NextIsRunning = true;
+            await Task.Delay(DELAY);
+
             if (IsStepThreeValid())
             {
                 var item = (Item as FilamentTypeValidator);
@@ -162,36 +153,21 @@ public abstract partial class ManageFilamentTypeViewModel : BaseItemManageViewMo
                 (Item as FilamentTypeValidator).BedTemperatureRange = $"{item.BedMin.Value}-{item.BedMax.Value}";
                 (Item as FilamentTypeValidator).CoolingRange =  $"{item.CoolingMin.Value}-{item.CoolingMax.Value}";
 
-                StepThree = false;
-                FinishingStep = true;
-                NextButtonTitle = "FINISH";
+                Step+=1;
+                StepDescription="todo 4";
+
             }
-            else
-                await Toast.Toast("Some data is invalid.");
+            NextIsRunning = false;
         }
 
-        if (StepTwo) 
+        if (Step == 2) 
         {
-            if (IsStepTwoValid())
-            {
-                StepTwo = false;
-                StepThree = true;
-                NextButtonTitle = "NEXT";
-            }
-            else
-                await Toast.Toast("Some data is invalid.");
+            DefaultNextStepAction("TDOD 3", IsStepTwoValid());
         }
 
-        if (StepOne)
+        if (Step == 1)
         {
-            if (IsStepOneValid())
-            {
-                StepOne = false;
-                StepTwo = true;
-                NextButtonTitle = "NEXT";
-            }
-            else
-                await Toast.Toast("Some data is invalid.");
+            DefaultNextStepAction("TDOD 2", IsStepOneValid());
         }
 
         IsRunning = false;

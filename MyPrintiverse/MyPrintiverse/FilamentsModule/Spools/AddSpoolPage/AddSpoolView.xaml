@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Spools.AddSpoolPage.AddSpoolView"
-             xmlns:otherTemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
-             xmlns:entryTemplates="clr-namespace:MyPrintiverse.Templates"
+             xmlns:forms="clr-namespace:MyPrintiverse.Templates.Forms"
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
              xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs"
              xmlns:spoolTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
@@ -12,24 +11,24 @@
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
-    
-    <Grid RowDefinitions="60, *, 60" 
-          ColumnDefinitions="*,*" 
+
+    <Grid RowDefinitions="60, auto, *, 60" 
           VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand">
 
-        <otherTemplates:TopManageBar Grid.ColumnSpan="2" 
-                                     BackCommand="{Binding BackCommand}"/>
+        <forms:TopManageBar BackCommand="{Binding BackCommand}"/>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" >
+        <forms:FormHeader Grid.Row="1"
+                          Title="Add Spool"
+                          Margin="15,2,15,2"
+                          Step="{Binding Step}"
+                          TotalSteps="{Binding TotalSteps}"
+                          StepDescription="{Binding StepDescription}"/>
 
-            <ScrollView IsVisible="{Binding StepOne}">
+        <Grid Grid.Row="2">
+
+            <ScrollView IsVisible="{Binding Step,Converter={StaticResource StepOneToBoolConverter}}">
                 <StackLayout Margin="15">
-
-                    <otherTemplates:StepDescription Title="New Spool"
-                                        Step="Step 1 of 2"
-                                        Description="Enter spool informations."
-                                        Margin="0,2,0,10"/>
 
 
                     <inputs:EntityValidatableEntry Margin="0,10,0,0"
@@ -42,13 +41,13 @@
                                                            Entity="{Binding Currency}"/>
 
                     <inputs:EntityValidatableEntry x:Name="standardWeightEntry" 
-                                                           Style="{StaticResource NumericEntityValidatableEntry}"
-                                                       Title="Standard filament weight"
-                                                       Text="{Binding Item.StandardWeight.Value}"
-                                                       ValidationCommand="{Binding StandardWeightValidateCommand}"
-                                                       IsValid="{Binding Item.StandardWeight.IsValid}"
-                                                       ErrorMessage="{Binding Item.StandardWeight.Error}"
-                                                       Entity="kg"/>
+                                                   Style="{StaticResource NumericEntityValidatableEntry}"
+                                                   Title="Standard filament weight"
+                                                   Text="{Binding Item.StandardWeight.Value}"
+                                                   ValidationCommand="{Binding StandardWeightValidateCommand}"
+                                                   IsValid="{Binding Item.StandardWeight.IsValid}"
+                                                   ErrorMessage="{Binding Item.StandardWeight.Error}"
+                                                   Entity="kg"/>
 
                     <inputs:EntityValidatableEntry x:Name="avaliableWeightEntry" 
                                                            Style="{StaticResource NumericEntityValidatableEntry}"
@@ -71,12 +70,8 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView IsVisible="{Binding FinishingStep}">
+            <ScrollView IsVisible="{Binding Step,Converter={StaticResource StepTwoToBoolConverter}}">
                 <StackLayout Margin="15">
-                    <otherTemplates:StepDescription Title="New Spool"
-                                        Step="Step 2 of 2"
-                                        Description="Check your data."
-                                        Margin="0,2,0,10"/>
 
                     <spoolTemplates:DisplaySpoolView Margin="0,10,0,0"
                                                      Brand="{Binding Filament.Brand}"
@@ -93,28 +88,14 @@
             </ScrollView>
         </Grid>
 
-        <Border Style="{StaticResource CollectionHeaderBorder}"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                VerticalOptions="End"
-                Margin="15,0"/>
-        
-        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
-                                       IsVisible="{Binding StepOne, Converter={toolkit:InvertedBoolConverter}}"
-                                       Grid.Row="2"
-                                       Grid.Column="0"
-                                       Text="BACK"
-                                       VerticalOptions="Center"
-                                       Margin="15,0,20,0"
-                                       Command="{Binding StepBackCommand}"/>
-
-        <buttons:ActivityButton Style="{StaticResource BaseActivityButton}"
-                                       Grid.Row="2"
-                                       Grid.Column="1"
-                                       Text="{Binding NextButtonTitle}"
-                                       VerticalOptions="Center"
-                                       Margin="20,0,15,0"
-                                       Command="{Binding NextStepCommand}"/>
+        <forms:FormFooter Grid.Row="3" 
+                          PreviousStepCommand="{Binding StepBackCommand}"
+                          IsPreviousButtonRunning="{Binding PreviousIsRunning}"
+                          IsNextButtonRunning="{Binding NextIsRunning}"
+                          NextStepCommand="{Binding NextStepCommand}"
+                          Step="{Binding Step}"
+                          FinishingStepText="ADD"
+                          TotalSteps="{Binding TotalSteps}"/>
 
     </Grid>
 </ContentPage>
