@@ -19,7 +19,7 @@
     </ContentView.Resources>
 
     <VerticalStackLayout BindingContext="{x:Reference this}">
-        <Label Style="{StaticResource SmallRalewayValidatableEntry}"
+        <Label Style="{StaticResource ValidatableEntry_Title}"
                Margin="5,0,0,5"
                Text="{Binding Title}"/>
 

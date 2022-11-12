@@ -191,7 +191,7 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
     public virtual void DefaultNextStepAction(bool isValid) 
     {
 
-        PreviousIsRunning = true;
+        NextIsRunning = true;
         Task.Delay(DELAY);
         if (isValid)
         {
@@ -199,7 +199,7 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
             Step += 1;
         }
 
-        PreviousIsRunning = false;
+        NextIsRunning = false;
     }
 
     #endregion

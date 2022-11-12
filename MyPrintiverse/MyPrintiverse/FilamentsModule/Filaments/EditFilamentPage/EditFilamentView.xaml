@@ -129,6 +129,7 @@
                 <StackLayout Margin="15">
 
                     <inputs:ValidatableEntry x:Name="brandEntry"
+                                             KeyboardFlag="CapitalizeWord"
                                                      Title="Brand"
                                                      Text="{Binding Item.Brand.Value}"
                                                      ValidationCommand="{Binding Item.Brand.ExtendedValidateCommand}"
@@ -144,6 +145,7 @@
                                                            Entity="mm"/>
 
                     <inputs:ValidatableEntry x:Name="colorEntry"
+                                             KeyboardFlag="CapitalizeWord"
                                                      Title="Color Name"
                                                      Text="{Binding Item.Color.Value}"
                                                      ValidationCommand="{Binding Item.Color.ExtendedValidateCommand}"
@@ -152,8 +154,8 @@
 
                     <inputs:ColorPicker x:Name="colorPicker"
                                         NewColorHex="{Binding Item.ColorHex.Value, Mode=TwoWay}"
-                                                ColorHex="{Binding ColorHex}"
-                                                Title="Color Hex Value"/>
+                                        ColorHex="{Binding ColorHex}"
+                                        Title="Color Hex"/>
 
                 </StackLayout>
             </ScrollView>

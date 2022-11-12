@@ -42,6 +42,7 @@
                 <StackLayout Margin="15">
 
                     <inputs:ValidatableEntry x:Name="shortNameEntry"
+                                             KeyboardFlag="CapitalizeCharacter"
                                                      Title="Short Name"
                                                      Text="{Binding Item.ShortName.Value}"
                                                      ValidationCommand="{Binding Item.ShortName.ExtendedValidateCommand}"
@@ -49,6 +50,7 @@
                                                      ErrorMessage="{Binding Item.ShortName.Error}"/>
 
                     <inputs:ValidatableEntry x:Name="nameEntry"
+                                             KeyboardFlag="CapitalizeWord"
                                                      Title="Full Name"
                                                      Text="{Binding Item.FullName.Value}"
                                                      ValidationCommand="{Binding Item.FullName.ExtendedValidateCommand}"

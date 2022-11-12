@@ -43,6 +43,7 @@
 
                     <inputs:ValidatableEntry x:Name="shortNameEntry"
                         Style="{StaticResource BaseValidatableEntry}"
+                                             KeyboardFlag="CapitalizeCharacter"
                                                      Title="Short Name"
                                                      Text="{Binding Item.ShortName.Value}"
                                                      ValidationCommand="{Binding Item.ShortName.ExtendedValidateCommand}"
@@ -51,6 +52,7 @@
 
                     <inputs:ValidatableEntry x:Name="nameEntry"
                                                      Title="Full Name"
+                                             KeyboardFlag="CapitalizeWord"
                                                      Text="{Binding Item.FullName.Value}"
                                                      ValidationCommand="{Binding Item.FullName.ExtendedValidateCommand}"
                                                      IsValid="{Binding Item.FullName.IsValid}"

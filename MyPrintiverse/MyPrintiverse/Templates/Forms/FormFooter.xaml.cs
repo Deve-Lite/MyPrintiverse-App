@@ -1,5 +1,4 @@
 
-using MyPrintiverse.Templates.Buttons;
 using System.Windows.Input;
 
 namespace MyPrintiverse.Templates.Forms;
@@ -48,14 +47,14 @@ public partial class FormFooter : ContentView
         set => SetValue(FinishingStepTextProperty, value);
     }
 
-    public static readonly BindableProperty IsNextButtonRunningProperty = BindableProperty.Create(nameof(IsNextButtonRunning), typeof(bool), typeof(ActivityButton), false);
+    public static readonly BindableProperty IsNextButtonRunningProperty = BindableProperty.Create(nameof(IsNextButtonRunning), typeof(bool), typeof(FormFooter), false);
     public bool IsNextButtonRunning
     {
         get => (bool)GetValue(IsNextButtonRunningProperty);
         set => SetValue(IsNextButtonRunningProperty, value);
     }
 
-    public static readonly BindableProperty IsPreviousButtonRunningProperty = BindableProperty.Create(nameof(IsPreviousButtonRunning), typeof(bool), typeof(ActivityButton), false);
+    public static readonly BindableProperty IsPreviousButtonRunningProperty = BindableProperty.Create(nameof(IsPreviousButtonRunning), typeof(bool), typeof(FormFooter), false);
     public bool IsPreviousButtonRunning
     {
         get => (bool)GetValue(IsPreviousButtonRunningProperty);
