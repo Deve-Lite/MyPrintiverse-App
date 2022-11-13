@@ -9,7 +9,7 @@
                Style="{StaticResource BaseFrame}"
                Padding="15, 0, 0, 0"
                VerticalOptions="Center">
-            <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*"
+            <Grid RowDefinitions="*,*,*,*,*,*,*,*,auto,*"
                   ColumnDefinitions="*, 10, 2, 30">
 
                 <Frame Grid.Column="3" 
@@ -109,10 +109,9 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Grid.Row="8" Style="{StaticResource DisplayFrameSpan}" 
-                       Margin="0,5,10,0"
-                       Text="{Binding  Description}"
-                       IsVisible="{Binding Description, Converter={StaticResource IsNotEmptyStringConventer}}"/>
+                <Button Grid.Row="8" 
+                        Style="{StaticResource NoteButton}"
+                        Clicked="NoteClicked"/>
 
                 <Label Style="{StaticResource MicroRaleway}"
                        Grid.Row="9"

@@ -38,13 +38,6 @@ public partial class RangeValidatableEntry : ContentView
 
     #region EntryRight
 
-    public static readonly BindableProperty PlaceholderRightProperty = BindableProperty.Create(nameof(PlaceholderRight), typeof(string), typeof(RangeValidatableEntry), "", BindingMode.TwoWay);
-    public string PlaceholderRight
-    {
-        get => (string)GetValue(PlaceholderRightProperty);
-        set => SetValue(PlaceholderRightProperty, value);
-    }
-
     public static readonly BindableProperty TextRightProperty = BindableProperty.Create(nameof(TextRight), typeof(string), typeof(RangeValidatableEntry), "", BindingMode.TwoWay);
     public string TextRight
     {
@@ -72,13 +65,6 @@ public partial class RangeValidatableEntry : ContentView
     #endregion
 
     #region EntryLeft
-
-    public static readonly BindableProperty PlaceholderLeftProperty = BindableProperty.Create(nameof(PlaceholderLeft), typeof(string), typeof(RangeValidatableEntry), "", BindingMode.TwoWay);
-    public string PlaceholderLeft
-    {
-        get => (string)GetValue(PlaceholderLeftProperty);
-        set => SetValue(PlaceholderLeftProperty, value);
-    }
 
     public static readonly BindableProperty TextLeftProperty = BindableProperty.Create(nameof(TextLeft), typeof(string), typeof(RangeValidatableEntry), "", BindingMode.TwoWay);
     public string TextLeft
@@ -113,13 +99,6 @@ public partial class RangeValidatableEntry : ContentView
     {
         get => (ICommand)GetValue(ValidationCommandProperty);
         set => SetValue(ValidationCommandProperty, value);
-    }
-
-    public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(RangeValidatableEntry), "", BindingMode.TwoWay);
-    public string Placeholder
-    {
-        get => (string)GetValue(PlaceholderProperty);
-        set => SetValue(PlaceholderProperty, value);
     }
 
     #endregion

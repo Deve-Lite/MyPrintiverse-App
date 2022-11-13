@@ -87,6 +87,7 @@ public class BaseKeyCollectionWithitemViewModel<TBaseModel, TEditView, TCollecti
             return;
 
         await OpenPage(EditDisplayRoute(), true);
+        IsBusy = false;
     }
 
     /// <summary>

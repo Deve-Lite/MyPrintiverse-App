@@ -3,24 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators.MaterialProperty"
              x:Name="this">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Frame" x:Key="PropertyFrame" BasedOn="{StaticResource BaseFrameVariant}">
+                <Setter Property="Padding" Value="7,7,7,5"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    
     <VerticalStackLayout BindingContext="{x:Reference this}">
 
-        <Frame Style="{Binding FrameStyle}">
+        <Frame Style="{StaticResource PropertyFrame}">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding ClickedCommand}" CommandParameter="{Binding .}"/>
+                <TapGestureRecognizer Command="{Binding ClickedCommand}"/>
             </Frame.GestureRecognizers>
-            
-            <StackLayout>
-                <Image Source="spool.png"/>
 
-                <Label Style="{Binding TitleStyle}"
+            <StackLayout>
+                <Image x:Name="image" HeightRequest="64" Source="spool.png"/>
+
+                <Label Style="{StaticResource SmallRaleway}"
                        Margin="2,2,2,4"
                        HorizontalOptions="Center"
-                       Text="{Binding Title}"
-                       VerticalOptions="Center"/>
-                
+                       VerticalOptions="Center"
+                       Text="{Binding Title}"/>
             </StackLayout>
-            
         </Frame>
         
     </VerticalStackLayout>

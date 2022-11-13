@@ -106,4 +106,14 @@ public partial class ColorPicker : ContentView
         return rate < 128 ? Color.FromArgb("E7E9EF") : Color.FromArgb("1F2432");
     }
     #endregion
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+
+    }
 }

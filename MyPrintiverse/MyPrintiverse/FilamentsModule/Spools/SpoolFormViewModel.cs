@@ -103,6 +103,7 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
     {
         base.OnAppearing();
         //TODO: odczytanie z ustawień
+        (Item as SpoolValidator).FilamentId = FilamentId;
         Currency = "PLN";
     }
 

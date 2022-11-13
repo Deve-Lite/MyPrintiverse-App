@@ -5,6 +5,7 @@
              xmlns:header="clr-namespace:MyPrintiverse.Templates.Headers"
              xmlns:form="clr-namespace:MyPrintiverse.Templates.Forms"
              xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs"
+             xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates"
              Title="TestPage">
 
     <ContentPage.Resources>
@@ -91,6 +92,9 @@
                                            
                                            Entity="kg"/>
             <inputs:RangeValidatableEntry Entity="dfghfgh"/>
+
+
+            <types:FilamentTypeDisplay IsFlexible="False" />
 
         </VerticalStackLayout>
     </ScrollView>

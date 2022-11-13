@@ -3,7 +3,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:templates="clr-namespace:MyPrintiverse.Templates"
     xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
     xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons"
     xmlns:inputs="clr-namespace:MyPrintiverse.Templates.Inputs">
@@ -55,6 +54,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryTextDark}}" />
         <Setter Property="FontFamily" Value="Raleway" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="Placeholder" Value="Aa..." />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource DarkGray}}" />
     </Style>
     <Style x:Key="ValidatableEntry_ErrorMessage"
@@ -63,7 +63,6 @@
     </Style>
 
     <Style x:Key="ValidatableEditor_Editor" TargetType="Editor" BasedOn="{StaticResource BaseEditor}">
-
     </Style>
 
     <Style x:Key="EntityValidatableEditor_Entity"

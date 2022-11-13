@@ -243,40 +243,30 @@
                   Margin="0,15,0,0" >
 
                             <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="0"
-                                                           FrameStyle="{StaticResource PropertyFrame}"
-                                                           TitleStyle="{StaticResource SmallRaleway}"
                                                            Title="Food Friendly"
                                                            ImageSource="spool.png"
                                                            InvalidImageSource="star.svg"
                                                            IsValid="{Binding Item.IsFoodFriendly}"/>
 
                             <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="0"
-                                                           FrameStyle="{StaticResource PropertyFrame}"
-                                                           TitleStyle="{StaticResource SmallRaleway}"
                                                            Title="Flexible"
                                                            ImageSource="spool.png"
                                                            InvalidImageSource="star.svg"
                                                            IsValid="{Binding Item.IsFlexible}"/>
 
                             <valueindicatorstemplates:MaterialProperty Grid.Column="2" Grid.Row="0"
-                                                           FrameStyle="{StaticResource PropertyFrame}"
-                                                           TitleStyle="{StaticResource SmallRaleway}"
                                                            Title="BIO"
                                                            ImageSource="spool.png"
                                                            InvalidImageSource="star.svg"
                                                            IsValid="{Binding Item.IsBio}"/>
 
                             <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="1"
-                                                           FrameStyle="{StaticResource PropertyFrame}"
-                                                           TitleStyle="{StaticResource SmallRaleway}"
                                                            Title="Uv Resistant"
                                                            ImageSource="spool.png"
                                                            InvalidImageSource="star.svg"
                                                            IsValid="{Binding Item.IsUVResistant}"/>
 
                             <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="1"
-                                                           FrameStyle="{StaticResource PropertyFrame}"
-                                                           TitleStyle="{StaticResource SmallRaleway}"
                                                            Title="Heated Bed"
                                                            ImageSource="spool.png"
                                                            InvalidImageSource="star.svg"

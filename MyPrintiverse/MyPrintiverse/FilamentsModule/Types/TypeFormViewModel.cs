@@ -46,8 +46,6 @@ public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType
     public override void OnAppearing()
     {
         base.OnAppearing();
-        //todo
-        (Item as FilamentTypeValidator).Density.Value = "1.75";
     }
 
     [RelayCommand]

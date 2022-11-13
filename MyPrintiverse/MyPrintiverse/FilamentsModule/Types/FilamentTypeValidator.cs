@@ -83,7 +83,7 @@ public partial class FilamentTypeValidator : BaseValidator<FilamentType>
         FilamentTypeMap.NozzleTemperatureRange = $"{NozzleMin.Value}-{NozzleMax.Value}";
         FilamentTypeMap.CoolingRange = $"{CoolingMin.Value}-{CoolingMax.Value}";
 
-        FilamentTypeMap.Description = Description.Value;
+        FilamentTypeMap.Description = Description.Value.Trim();
         FilamentTypeMap.ShortName = ShortName.Value;
         FilamentTypeMap.FullName = FullName.Value;
 

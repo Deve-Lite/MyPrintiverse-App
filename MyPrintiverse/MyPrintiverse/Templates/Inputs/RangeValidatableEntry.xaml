@@ -33,7 +33,6 @@
                        Style="{StaticResource ValidatableEntry_Entry}" 
                        Text="{Binding TextLeft, Mode=TwoWay}" 
                        Keyboard="Numeric"
-                       Placeholder="{Binding Placeholder}"
                        Completed="LEntryCompleted">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="Unfocused" 
@@ -62,7 +61,6 @@
                        Style="{StaticResource ValidatableEntry_Entry}" 
                        Text="{Binding TextRight, Mode=TwoWay}" 
                        Keyboard="Numeric"
-                       Placeholder="{Binding Placeholder}"
                        Completed="REntryCompleted">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="Unfocused" 

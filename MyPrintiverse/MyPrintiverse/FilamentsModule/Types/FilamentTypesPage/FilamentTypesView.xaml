@@ -27,8 +27,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:FilamentType">
                         <StackLayout>
-                            <Grid Margin="15,5,15,5" ColumnDefinitions="*">
-                                <Frame Style="{StaticResource CollectionFrame}">
+                            <Grid Margin="15,5,15,5" ColumnDefinitions="0.75*,0.25*">
+                                <Frame Style="{StaticResource CollectionFrame}" Padding="10,0,10,0">
 
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
@@ -40,7 +40,7 @@
                                                               CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
 
-                                    <StackLayout>
+                                    <StackLayout VerticalOptions="Center">
 
                                         <Label Style="{StaticResource LargeRaleway}"
                                                FontAttributes="Bold"
@@ -57,7 +57,6 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-
 
                                         <Label>
                                             <Label.FormattedText>
@@ -99,9 +98,21 @@
                                     </StackLayout>
                                 </Frame>
 
-                                <StackLayout Grid.Column="1"  Padding="4"/>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="Center"
+                                             Margin="5,0,5,0">
 
-                                <StackLayout Grid.Column="2"  Padding="4"/>
+                                    <Image Source="spool.png" Aspect="AspectFit"/>
+                                    <Label Style="{StaticResource MediumRaleway}"
+                                           HorizontalOptions="Center"
+                                           Text="{Binding MaxServiceTempearature, StringFormat='{0} °C'}"/>
+                                    <Label Style="{StaticResource SmallRaleway}"
+                                           HorizontalOptions="Center"
+                                           Text="(Melting point)"/>
+
+
+                                </StackLayout>
+                                
                             </Grid>
                             
                         </StackLayout>

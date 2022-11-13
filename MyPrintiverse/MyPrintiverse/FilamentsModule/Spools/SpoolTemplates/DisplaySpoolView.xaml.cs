@@ -1,4 +1,5 @@
-using MyPrintiverse.FilamentsModule.FilamentTemplates.Others;
+using CommunityToolkit.Maui.Views;
+using MyPrintiverse.Templates.Popups;
 
 namespace MyPrintiverse.FilamentsModule.Spools.SpoolTemplates;
 
@@ -81,4 +82,9 @@ public partial class DisplaySpoolView : ContentView
 	{
 		InitializeComponent();
 	}
+
+    private void NoteClicked(object sender, EventArgs e)
+    {
+        Shell.Current.ShowPopup(new DescriptionPopup(Description));
+    }
 }

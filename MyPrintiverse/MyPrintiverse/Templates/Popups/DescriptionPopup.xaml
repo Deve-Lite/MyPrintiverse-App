@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="MyPrintiverse.Templates.Popups.DescriptionPopup"
+               xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
+               x:Name="this">
+
+    <Frame Style="{StaticResource BaseFrame}"
+           BindingContext="{x:Reference this}">
+        <StackLayout WidthRequest="300" 
+                     HeightRequest="100">
+            <headers:SecondaryHeader Margin="10,10,10,0"
+                                     x:Name="header" 
+                                     Title="Note"
+                                     ImageCommand="{Binding CloseCommand}"/>
+
+            <Label x:Name="description"
+                   Margin="10"
+                   Style="{StaticResource MediumRaleway}"/>
+        </StackLayout>
+    </Frame>
+</toolkit:Popup>

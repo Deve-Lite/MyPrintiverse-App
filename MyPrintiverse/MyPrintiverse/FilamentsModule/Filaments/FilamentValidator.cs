@@ -59,7 +59,7 @@ public partial class FilamentValidator : BaseValidator<Filament>
         
         fialmentMap.TypeId = TypeId.Value;
         fialmentMap.Brand = Brand.Value;
-        fialmentMap.Description = Description.Value;
+        fialmentMap.Description = Description.Value.Trim();
         fialmentMap.ColorName = Color.Value;
         fialmentMap.ColorHex = ColorHex.Value;
 

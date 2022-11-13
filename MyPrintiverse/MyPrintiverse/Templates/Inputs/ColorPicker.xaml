@@ -65,14 +65,18 @@
                 </StackLayout>
             </Frame>
 
-            <Slider Style="{StaticResource BaseSlider}"
+       
+
+
+                <Slider Style="{StaticResource BaseSlider}"
                     x:Name="aSlider"
                     ValueChanged="AlphaValueChanged"
-                    Grid.Column="1"
-                    Grid.Row="1"
                     Margin="6,0,6,0"
+                        Grid.Column="1"
+                                   Grid.Row="1"
                     Minimum="0"
                     Maximum="1"/>
+            
 
             <Frame Style="{StaticResource ColorPickerFrame}" 
                    Margin="0"

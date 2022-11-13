@@ -1,3 +1,6 @@
+using CommunityToolkit.Maui.Views;
+using MyPrintiverse.Templates.Popups;
+
 namespace MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates;
 
 public partial class FilamentTypeDisplay : ContentView
@@ -69,37 +72,37 @@ public partial class FilamentTypeDisplay : ContentView
     #region Properties
 
     public static readonly BindableProperty IsFoodFriendlyProperty = BindableProperty.Create(nameof(IsFoodFriendly), typeof(bool), typeof(FilamentTypeDisplay), false);
-    public string IsFoodFriendly
+    public bool IsFoodFriendly
     {
-        get => (string)GetValue(IsFoodFriendlyProperty);
+        get => (bool)GetValue(IsFoodFriendlyProperty);
         set => SetValue(IsFoodFriendlyProperty, value);
     }
 
     public static readonly BindableProperty IsFlexibleProperty = BindableProperty.Create(nameof(IsFlexible), typeof(bool), typeof(FilamentTypeDisplay), false);
-    public string IsFlexible
+    public bool IsFlexible
     {
-        get => (string)GetValue(IsFlexibleProperty);
+        get => (bool)GetValue(IsFlexibleProperty);
         set => SetValue(IsFlexibleProperty, value);
     }
 
     public static readonly BindableProperty IsBioProperty = BindableProperty.Create(nameof(IsBio), typeof(bool), typeof(FilamentTypeDisplay), false);
-    public string IsBio
+    public bool IsBio
     {
-        get => (string)GetValue(IsBioProperty);
+        get => (bool)GetValue(IsBioProperty);
         set => SetValue(IsBioProperty, value);
     }
 
     public static readonly BindableProperty IsUVResistantProperty = BindableProperty.Create(nameof(IsUVResistant), typeof(bool), typeof(FilamentTypeDisplay), false);
-    public string IsUVResistant
+    public bool IsUVResistant
     {
-        get => (string)GetValue(IsUVResistantProperty);
+        get => (bool)GetValue(IsUVResistantProperty);
         set => SetValue(IsUVResistantProperty, value);
     }
 
     public static readonly BindableProperty IsHeatedBedRequiredProperty = BindableProperty.Create(nameof(IsHeatedBedRequired), typeof(bool), typeof(FilamentTypeDisplay), false);
-    public string IsHeatedBedRequired
+    public bool IsHeatedBedRequired
     {
-        get => (string)GetValue(IsHeatedBedRequiredProperty);
+        get => (bool)GetValue(IsHeatedBedRequiredProperty);
         set => SetValue(IsHeatedBedRequiredProperty, value);
     }
 
@@ -120,4 +123,8 @@ public partial class FilamentTypeDisplay : ContentView
 	{
 		InitializeComponent();
 	}
+    private void NoteClicked(object sender, EventArgs e)
+    {
+        Shell.Current.ShowPopup(new DescriptionPopup(Description));
+    }
 }

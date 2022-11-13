@@ -1,3 +1,6 @@
+using CommunityToolkit.Maui.Views;
+using MyPrintiverse.Templates.Popups;
+
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates;
 
 public partial class DisplayFilamentView : ContentView
@@ -99,4 +102,8 @@ public partial class DisplayFilamentView : ContentView
 		InitializeComponent();
         colorLabel.TextColor = Color.FromArgb("E7E9EF");
 	}
+    private void NoteClicked(object sender, EventArgs e)
+    {
+        Shell.Current.ShowPopup(new DescriptionPopup(Description));
+    }
 }

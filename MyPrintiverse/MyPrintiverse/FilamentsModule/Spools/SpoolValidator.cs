@@ -48,7 +48,7 @@ public class SpoolValidator : BaseValidator<Spool>
         BaseModelMap(spoolMap);
 
         spoolMap.FilamentId = FilamentId;
-        spoolMap.Description = Description.Value;
+        spoolMap.Description = Description.Value.Trim();
         spoolMap.IsFinished = IsFinished;
         spoolMap.IsSample = IsOnSpool;
 
