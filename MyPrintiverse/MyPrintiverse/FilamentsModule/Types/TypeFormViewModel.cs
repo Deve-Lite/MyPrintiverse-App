@@ -154,8 +154,8 @@ public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType
                 (Item as FilamentTypeValidator).BedTemperatureRange = $"{item.BedMin.Value}-{item.BedMax.Value}";
                 (Item as FilamentTypeValidator).CoolingRange =  $"{item.CoolingMin.Value}-{item.CoolingMax.Value}";
 
+                StepDescription=StepDescriptionList[Step];
                 Step+=1;
-                StepDescription="todo 4";
 
             }
             NextIsRunning = false;

@@ -10,7 +10,7 @@
           ColumnDefinitions="*,*,*,*,*">
 
         <Label Grid.ColumnSpan="5"
-               Style="{StaticResource SmallRalewayValidatableEntry}"
+               Style="{StaticResource ValidatableEntry_Title}"
                Text="Rating"/>
 
         <Image x:Name="ImageZero"

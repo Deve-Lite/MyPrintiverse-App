@@ -94,7 +94,7 @@
             <inputs:RangeValidatableEntry Entity="dfghfgh"/>
 
 
-            <types:FilamentTypeDisplay IsFlexible="False" />
+            <types:FilamentTypeDisplay IsFlexible="False" IsBio="True" IsHeatedBedRequired="True"/>
 
         </VerticalStackLayout>
     </ScrollView>

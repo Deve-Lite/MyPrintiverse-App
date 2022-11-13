@@ -8,10 +8,9 @@
 
     <StackLayout BindingContext="{x:Reference this}">
         <Frame Style="{StaticResource BaseFrame}"
-                   Margin="15,15,15,20"
                    Padding="10, 4, 10, 4">
 
-            <Grid RowDefinitions="*,*,*,*,auto,*">
+            <Grid RowDefinitions="auto,*,*,*,auto,*">
 
                 <Label Style="{StaticResource TitleOswald}" 
                        Grid.Row="0"
@@ -64,7 +63,7 @@
 
         <Frame Style="{StaticResource BaseFrameVariant}" 
                    
-                   Margin="15,0,15,5"
+                   Margin="0,20,0,0"
                    Padding="10, 4, 10, 4">
 
             <Grid RowDefinitions="*, *" ColumnDefinitions="*,*,*" Padding="0,0,0,10">
@@ -96,13 +95,13 @@
             </Grid>
         </Frame>
 
-        <headers:PrimaryHeader Title="Material properties"/>
+        <headers:PrimaryHeader Margin="0,15,0,0" Title="Material properties"/>
 
         <Grid ColumnDefinitions="*, *, *" 
                   RowDefinitions="*, *"
                   ColumnSpacing="15" 
                   RowSpacing="10" 
-                  Margin="15,15,15,30">
+                  Margin="0,15,0,30">
             
             <valueindicatorstemplates:MaterialProperty Grid.Column="0"
                                                        Grid.Row="0"

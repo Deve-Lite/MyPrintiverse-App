@@ -24,7 +24,7 @@ public partial class EditFilamentTypeViewModel : TypeFormViewModel
     [RelayCommand]
     public override async Task NextStep() => await Next(EditItem);
 
-    public async Task EditItem() => await ManageItem(async (spool) => { return await ItemService.UpdateItemAsync(spool); });
+    public async Task EditItem() => await ManageItem(ItemService.UpdateItemAsync);
 
     #endregion
 

@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypePage.FilamentTypeView"
-             xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
-             xmlns:valueindicatorstemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.ValueIndicators"
+             xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates"
              Shell.TabBarIsVisible="False">
 
 
@@ -33,138 +32,21 @@
     
     
     <ScrollView>
-        <StackLayout>
-
-            <Frame Style="{StaticResource BaseFrame}"
-                   Margin="15,15,15,20"
-                   Padding="10, 4, 10, 4">
-
-                <Grid RowDefinitions="*,*,*,*,*,*">
-
-                    <Label Style="{StaticResource TitleOswald}" 
-                       Grid.Row="0"
-                       Margin="3,3"
-                       Text="{Binding Item.ShortName}"/>
-
-                    <Label Grid.Row="1">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
-                                  Text="Full Name: "/>
-                                <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Item.FullName}"/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-
-                    <Label Grid.Row="2">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
-                                  Text="Density: "/>
-                                <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Item.Density,StringFormat='{0:0.00 g/cm^3}'}"/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-
-                    <Label Grid.Row="3">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
-                                  Text="Max. Service Tempearature: "/>
-                                <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding Item.MaxServiceTempearature,StringFormat='{0} °C'}"/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-
-                    <Label Grid.Row="4" Style="{StaticResource DisplayFrameSpan}" 
-                       Margin="0,5,10,0"
-                       Text="{Binding Item.Description}"
-                       IsVisible="{Binding Item.Description, Converter={StaticResource IsNotEmptyStringConventer}}"/>
-
-                    <Label Style="{StaticResource MicroRaleway}"
-                       Grid.Row="5"
-                       Margin="0,5"
-                       Text="{Binding Item.EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
-                </Grid>
-            </Frame>
-
-            <Frame Style="{StaticResource BaseFrameVariant}" 
-                   
-                   Margin="15,0,15,5"
-                   Padding="10, 4, 10, 4">
-
-                <Grid RowDefinitions="*, *" ColumnDefinitions="*,*,*" Padding="0,0,0,10">
-
-                    <Label Style="{StaticResource MediumOswald}"
-                           Margin="3,0,0,10"
-                           Grid.ColumnSpan="3"
-                           Text="Print Settings Compartments"/>
-
-                    <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
-                                                                  Grid.Column="0"
-                                                                  TopValue="330"
-                                                                  DisplayValue="{Binding Item.NozzleTemperatureRange}"
-                                                                  Entity="°C"/>
-
-                    <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
-                                                                  Grid.Column="1"
-                                                                  TopValue="120"
-                                                                  DisplayValue="{Binding Item.BedTemperatureRange}"
-                                                                  Entity="°C"/>
-
-                    <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
-                                                                  Grid.Column="2"
-                                                                  TopValue="100"
-                                                                  DisplayValue="{Binding Item.CoolingRange}"
-                                                                  Entity="%"/>
-                    
-                </Grid>
-            </Frame>
-
-            <headers:PrimaryHeader Title="Material properties"/>
-
-            <Grid ColumnDefinitions="*, *, *" 
-                  RowDefinitions="*, *"
-                  ColumnSpacing="15" 
-                  RowSpacing="0" 
-                  HeightRequest="260"
-
-                  Margin="15,15,15,30" >
-
-                <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="0"
-                                                           Title="Food Friendly"
-                                                           ImageSource="spool.png"
-                                                           InvalidImageSource="star.svg"
-                                                           IsValid="{Binding Item.IsFoodFriendly}"/>
-
-                <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="0"
-                                                           Title="Flexible"
-                                                           ImageSource="spool.png"
-                                                           InvalidImageSource="star.svg"
-                                                           IsValid="{Binding Item.IsFlexible}"/>
-
-                <valueindicatorstemplates:MaterialProperty Grid.Column="2" Grid.Row="0"
-                                                           Title="BIO"
-                                                           ImageSource="spool.png"
-                                                           InvalidImageSource="star.svg"
-                                                           IsValid="{Binding Item.IsBio}"/>
-
-                <valueindicatorstemplates:MaterialProperty Grid.Column="0" Grid.Row="1"
-                                                           Title="Uv Resistant"
-                                                           ImageSource="spool.png"
-                                                           InvalidImageSource="star.svg"
-                                                           IsValid="{Binding Item.IsUVResistant}"/>
-
-                <valueindicatorstemplates:MaterialProperty Grid.Column="1" Grid.Row="1"
-                                                           Title="Heated Bed"
-                                                           ImageSource="spool.png"
-                                                           InvalidImageSource="star.svg"
-                                                           IsValid="{Binding Item.IsHeatedBedRequired}"/>
-
-            </Grid>
+        <StackLayout Margin="15">
+            <types:FilamentTypeDisplay ShortName="{Binding Item.ShortName}"
+                                       FullName="{Binding Item.FullName}"
+                                       Density="{Binding Item.Density}"
+                                       MaxServiceTempearature="{Binding Item.MaxServiceTempearature, StringFormat='{0} °C'}"
+                                       Description="{Binding Item.Description}"
+                                       EditedAt="{Binding Item.EditedAt, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"
+                                       NozzleTemperatureRange="{Binding Item.NozzleTemperatureRange}"
+                                       BedTemperatureRange="{Binding Item.BedTemperatureRange}"
+                                       CoolingRange="{Binding Item.CoolingRange}"
+                                       IsFlexible="{Binding Item.IsFlexible}"
+                                       IsFoodFriendly="{Binding Item.IsFoodFriendly}"
+                                       IsBio="{Binding Item.IsBio}"
+                                       IsUVResistant="{Binding Item.IsUVResistant}"
+                                       IsHeatedBedRequired="{Binding Item.IsHeatedBedRequired}"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

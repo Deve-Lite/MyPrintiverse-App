@@ -22,7 +22,7 @@
         <forms:TopManageBar BackCommand="{Binding BackCommand}"/>
 
         <forms:FormHeader Grid.Row="1"
-                          Title="Edit Spool"
+                          Title="Add Filament"
                           Margin="15,2,15,0"
                           Step="{Binding Step}"
                           TotalSteps="{Binding TotalSteps}"
@@ -130,26 +130,23 @@
                 <StackLayout Margin="15">
 
                     <inputs:ValidatableEntry x:Name="brandEntry"
-                                             KeyboardFlag="CapitalizeWord"
-                                             Style="{StaticResource BaseValidatableEntry}"
-                                             Title="Brand"
-                                                     Text="{Binding Item.Brand.Value}"
-                                                     ValidationCommand="{Binding Item.Brand.ExtendedValidateCommand}"
-                                                     IsValid="{Binding Item.Brand.IsValid}"
-                                                     ErrorMessage="{Binding Item.Brand.Error}"/>
+                                                 KeyboardFlag="CapitalizeWord"
+                                                 Title="Brand"
+                                                 Text="{Binding Item.Brand.Value}"
+                                                 ValidationCommand="{Binding Item.Brand.ExtendedValidateCommand}"
+                                                 IsValid="{Binding Item.Brand.IsValid}"
+                                                 ErrorMessage="{Binding Item.Brand.Error}"/>
 
                     <inputs:EntityValidatableEntry x:Name="diameterEntry"
-                                                   Style="{StaticResource NumericEntityValidatableEntry}"
-                                                           Title="Diameter"
-                                                           Text="{Binding Item.Diameter.Value}"
-                                                           ValidationCommand="{Binding Item.Diameter.ExtendedValidateCommand}"
-                                                           IsValid="{Binding Item.Diameter.IsValid}"
-                                                           ErrorMessage="{Binding Item.Diameter.Error}"
-                                                           Entity="mm"/>
+                                                   Title="Diameter"
+                                                   Text="{Binding Item.Diameter.Value}"
+                                                   ValidationCommand="{Binding Item.Diameter.ExtendedValidateCommand}"
+                                                   IsValid="{Binding Item.Diameter.IsValid}"
+                                                   ErrorMessage="{Binding Item.Diameter.Error}"
+                                                   Entity="mm"/>
 
                     <inputs:ValidatableEntry x:Name="colorEntry"
                                              KeyboardFlag="CapitalizeWord"
-                                             Style="{StaticResource BaseValidatableEntry}"
                                                      Title="Color Name"
                                                      Text="{Binding Item.Color.Value}"
                                                      ValidationCommand="{Binding Item.Color.ExtendedValidateCommand}"
@@ -168,7 +165,6 @@
                 <StackLayout Margin="15">
 
                     <inputs:EntityValidatableEntry x:Name="nozzleTemperatureEntry"
-                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Nozzle Temperature"
                                                            Text="{Binding Item.NozzleTemperature.Value}"
                                                            ValidationCommand="{Binding Item.NozzleTemperature.ExtendedValidateCommand}"
@@ -177,7 +173,6 @@
                                                            Entity="°C"/>
 
                     <inputs:EntityValidatableEntry x:Name="bedTemperatureEntry"
-                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Bed Temperature"
                                                            Text="{Binding Item.BedTemperature.Value}"
                                                            ValidationCommand="{Binding Item.BedTemperature.ExtendedValidateCommand}"
@@ -186,7 +181,6 @@
                                                            Entity="°C"/>
 
                     <inputs:EntityValidatableEntry x:Name="coolingRateEntry"
-                                                   Style="{StaticResource NumericEntityValidatableEntry}"
                                                            Title="Print Cooling Rate"
                                                            Text="{Binding Item.CoolingRate.Value}"
                                                            ValidationCommand="{Binding Item.CoolingRate.ExtendedValidateCommand}"
@@ -199,10 +193,10 @@
 
                     <inputs:ValidatableEditor x:Name="descriptionEntry"
                                               Title="Description"
-                                         Text="{Binding Item.Description.Value}"
-                                         ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
-                                         IsValid="{Binding Item.Description.IsValid}"
-                                         ErrorMessage="{Binding Item.Description.Error}"/>
+                                              Text="{Binding Item.Description.Value}"
+                                              ValidationCommand="{Binding Item.Description.ExtendedValidateCommand}"
+                                              IsValid="{Binding Item.Description.IsValid}"
+                                              ErrorMessage="{Binding Item.Description.Error}"/>
 
                 </StackLayout>
             </ScrollView>

@@ -21,7 +21,7 @@
         <forms:TopManageBar BackCommand="{Binding BackCommand}"/>
 
         <forms:FormHeader Grid.Row="1"
-                          Title="Edit Spool"
+                          Title="Edit Filament"
                           Margin="15,2,15,0"
                           Step="{Binding Step}"
                           TotalSteps="{Binding TotalSteps}"

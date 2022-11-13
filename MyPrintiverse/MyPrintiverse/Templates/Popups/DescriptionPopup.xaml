@@ -7,8 +7,11 @@
                x:Name="this">
 
     <Frame Style="{StaticResource BaseFrame}"
-           BindingContext="{x:Reference this}">
-        <StackLayout WidthRequest="300" 
+           BindingContext="{x:Reference this}"
+           CornerRadius="0">
+        <StackLayout WidthRequest="300"
+                     
+                     BackgroundColor="Transparent"
                      HeightRequest="100">
             <headers:SecondaryHeader Margin="10,10,10,0"
                                      x:Name="header" 
