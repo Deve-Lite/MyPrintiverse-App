@@ -16,7 +16,7 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
 
     #region Services
 
-    private IItemService<FilamentType> TypeService;
+    protected IItemService<FilamentType> TypeService;
 
     protected IToast Toast;
 
@@ -59,15 +59,8 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
     {
         base.OnAppearing();
 
-        Task.Run(async () =>
-        {
-            foreach (var item in await TypeService.GetItemsAsync())
-                FilamentTypes.Add(item);
-        });
-
         // TODO : Load from Settings
-        (Item as FilamentValidator).Diameter.Value = "1.75";
-        
+        (Item as FilamentValidator).Diameter.Value = "1.75";    
     }
 
     [RelayCommand]

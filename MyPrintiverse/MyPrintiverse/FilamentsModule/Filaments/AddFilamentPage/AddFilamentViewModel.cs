@@ -1,4 +1,5 @@
 ﻿
+using System.Threading.Tasks;
 using MyPrintiverse.FilamentsModule.Types;
 using MyPrintiverse.Tools;
 
@@ -12,6 +13,18 @@ public partial class AddFilamentViewModel : FilamentFormViewModel
     }
 
     #region Overrides
+
+    public override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Task.Run(async () =>
+        {
+            foreach (var item in await TypeService.GetItemsAsync())
+                FilamentTypes.Add(item);
+        });
+    }
+
 
     [RelayCommand]
     public override async Task NextStep() => await Next(AddItem);

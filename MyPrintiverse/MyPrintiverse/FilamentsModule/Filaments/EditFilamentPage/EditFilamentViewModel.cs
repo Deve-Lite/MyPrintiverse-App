@@ -24,6 +24,9 @@ public partial class EditFilamentViewModel : FilamentFormViewModel
 
         Task.Run(async () =>
         {
+            foreach (var item in await TypeService.GetItemsAsync())
+                FilamentTypes.Add(item);
+
             Item = new FilamentValidator(await ItemService.GetItemAsync(Id));
             ColorHex = (Item as FilamentValidator).ColorHex.Value;
             SelectedFilamentType = FilamentTypes!.FirstOrDefault(x => x.Id == (Item as FilamentValidator)!.TypeId.Value);

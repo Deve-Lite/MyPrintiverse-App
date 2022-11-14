@@ -58,9 +58,9 @@ public partial class FilamentValidator : BaseValidator<Filament>
         BaseModelMap(fialmentMap);
         
         fialmentMap.TypeId = TypeId.Value;
-        fialmentMap.Brand = Brand.Value;
+        fialmentMap.Brand = Brand.Value.Trim();
         fialmentMap.Description = Description.Value.Trim();
-        fialmentMap.ColorName = Color.Value;
+        fialmentMap.ColorName = Color.Value.Trim();
         fialmentMap.ColorHex = ColorHex.Value;
 
         /* Parse will not throw Exception because of NumberRules */
