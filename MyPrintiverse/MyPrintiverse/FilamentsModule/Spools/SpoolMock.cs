@@ -7,7 +7,7 @@ public class SpoolMock : BaseMock<Spool>
         var item = new Spool();
 
         item.FilamentId = filamentId;
-        item.IsSample = Rand();
+        item.IsOnSpool = Rand();
         item.StandardWeight = Rand(1);
         double weight = Rand(1);
         if (Rand(-1, 2)>0)

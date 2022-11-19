@@ -14,7 +14,7 @@ public class SpoolValidator : BaseValidator<Spool>
     public ExtendedValidatable<string> Cost { get; set; }
 
     public bool IsFinished { get; set; }
-    public bool IsOnSpool { get; set; }
+    public ExtendedValidatable<bool> IsOnSpool { get; set; }
 
     public SpoolValidator()
     {
@@ -50,7 +50,7 @@ public class SpoolValidator : BaseValidator<Spool>
         spoolMap.FilamentId = FilamentId;
         spoolMap.Description = Description.Value.Trim();
         spoolMap.IsFinished = IsFinished;
-        spoolMap.IsSample = IsOnSpool;
+        spoolMap.IsOnSpool = IsOnSpool.Value;
 
         /* Parse will not throw Exception because of NumberRules */
         spoolMap.AvaliableWeight = double.Parse(AvaliableWeight.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
@@ -79,11 +79,13 @@ public class SpoolValidator : BaseValidator<Spool>
 
         Description = ExtendedValidator.Build<string>()
             .WithRule(new RangeRule<string>(maxLength:500), "Too long data.");
+
+        IsOnSpool = ExtendedValidator.Build<bool>();
     }
 
     private void InitializeFields()
     {
-        IsOnSpool = true;
+        IsOnSpool.Value = true;
         IsFinished = false;
         Cost.Value = ""; 
         AvaliableWeight.Value = "";
@@ -101,7 +103,7 @@ public class SpoolValidator : BaseValidator<Spool>
         FilamentId = spool.FilamentId;
 
         IsFinished = spool.IsFinished;
-        IsOnSpool = spool.IsSample;
+        IsOnSpool.Value = spool.IsOnSpool;
 
         AvaliableWeight.Value = spool.AvaliableWeight.ToString("0.###");
         StandardWeight.Value = spool.StandardWeight.ToString("0.###");

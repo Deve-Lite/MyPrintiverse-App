@@ -4,7 +4,8 @@
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentPage"
              x:Class="MyPrintiverse.FilamentsModule.Spools.SpoolPage.SpoolView"
              xmlns:spoolTemplate="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Tip" 
@@ -33,6 +34,8 @@
                                         StandardWeight="{Binding Item.StandardWeight,StringFormat='{0:0.00}'}"
                                         Cost="{Binding Item.Cost}"
                                         Currency="{Binding Currency}"
+                                        IsOnSpool="{Binding Item.IsOnSpool}"
+                                        IsFinished="{Binding Item.IsFinished}"
                                         Description="{Binding Item.Description}"
                                         EditedAt="{Binding Item.EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"/>
         

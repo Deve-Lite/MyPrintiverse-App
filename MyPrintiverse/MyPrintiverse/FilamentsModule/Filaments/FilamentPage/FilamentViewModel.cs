@@ -4,16 +4,18 @@ using MyPrintiverse.FilamentsModule.Spools;
 using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.EditSpoolPage;
 using MyPrintiverse.FilamentsModule.Spools.SpoolPage;
-using System.Collections.ObjectModel;
 
 namespace MyPrintiverse.FilamentsModule.Filaments.FilamentPage;
 
-public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, EditFilamentView, Spool, AddSpoolView, EditSpoolView, SpoolView>
+public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Filament, EditFilamentView, Spool, EditSpoolView, AddSpoolView, SpoolView>
 {
 
     [ObservableProperty]
     private bool _isFinishedFilamentsVisible;
 
+    protected override string OpenRoute(Spool item) => $"{nameof(SpoolView)}?Id={item?.Id}&FilamentId={Item.Id}";
+    protected override string EditRoute(Spool item) => $"{nameof(EditSpoolView)}?Id={item?.Id}&FilamentId={Item.Id}";
+    protected override string AddRoute() => $"{nameof(AddSpoolView)}?FilamentId={Item.Id}";
 
     public FilamentViewModel(IMessageService messagingService, IItemService<Filament> itemService, IItemService<Spool> itemsService, IItemKeyService<Spool> itemsKeyService) : base(messagingService, itemService, itemsService, itemsKeyService)
     {
@@ -50,16 +52,6 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
             collection.RemoveAll(x => x.IsFinished);
 
         UpdateCollection(Items, collection);
-    }
-
-    protected override async Task AddItem() => await Shell.Current.GoToAsync($"{nameof(AddSpoolView)}?FilamentId={Item.Id}");
-
-    protected override async Task OpenItem(Spool item)
-    {
-        if (AnyActionStartedCommand())
-            return;
-
-         await OpenPage($"{nameof(SpoolView)}?Id={item?.Id}&FilamentId={Item.Id}");
     }
 
     #endregion

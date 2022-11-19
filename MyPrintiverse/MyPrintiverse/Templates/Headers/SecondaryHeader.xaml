@@ -20,7 +20,7 @@
                      HeightRequest="{Binding ImageSize}"
                      WidthRequest="{Binding ImageSize}"
                      Command="{Binding ImageCommand}"
-                     Margin="10,0,0,0"/>
+                     Margin="10,0,0,4"/>
 
     </Grid>
 </ContentView>

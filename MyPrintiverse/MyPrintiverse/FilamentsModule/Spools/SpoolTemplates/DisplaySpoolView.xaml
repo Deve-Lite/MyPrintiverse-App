@@ -4,100 +4,108 @@
              x:Class="MyPrintiverse.FilamentsModule.Spools.SpoolTemplates.DisplaySpoolView"
              x:Name="this">
     <ContentView.Content>
-        <Frame BindingContext="{x:Reference this}" Style="{StaticResource BaseFrame}" 
+        <Grid ColumnDefinitions="*, auto" BindingContext="{x:Reference this}">
+            <Frame Style="{StaticResource BaseFrame}" 
                Padding="15, 0, 15, 0"
                VerticalOptions="Center">
 
-            <Grid RowDefinitions="*,*,*,*,*,*,*,auto,*"
+                <Grid RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto"
                   ColumnDefinitions="*">
 
 
-                <Label Style="{StaticResource TitleOswald}" 
+                    <Label Style="{StaticResource TitleOswald}" 
                        Grid.Row="0"
                        Margin="3,3"
                        Text="{Binding Brand}"/>
 
 
-                <Label Grid.Row="1">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                    <Label Grid.Row="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Filament Type: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text="{Binding TypeId, Converter={StaticResource TypeIdToTypeConverter}}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                <Label Grid.Row="2">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                    <Label Grid.Row="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Color: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text="{Binding ColorName}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                <Label Grid.Row="3">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                    <Label Grid.Row="3">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Diameter: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text="{Binding Diameter, StringFormat='{0} mm'}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
 
-                <Label Style="{StaticResource MediumOswald}"
+                    <Label Style="{StaticResource MediumOswald}"
                        Grid.Row="4"
                        Margin="3,0,0,0"
                        Text="Spool Info"/>
 
-                <Label Grid.Row="5">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
-                                  Text="Spool status: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding AvaliableWeight}"/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text=" / "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding StandardWeight, StringFormat='{0} kg'}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-
-                <Label Grid.Row="6">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                    <Label Grid.Row="5">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Cost: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text="{Binding Cost}"/>
-                            <Span Style="{StaticResource DisplayFrameSpan}"
+                                <Span Style="{StaticResource DisplayFrameSpan}"
                                   Text=" "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text="{Binding Currency}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
 
-                <Button Grid.Row="7" 
+                    <Button Grid.Row="6" 
                         Style="{StaticResource NoteButton}"
                         Clicked="NoteClicked"/>
 
-                <Label Style="{StaticResource MicroRaleway}"
-                       Grid.Row="8"
+                    <Label Style="{StaticResource MicroRaleway}"
+                       Grid.Row="7"
                        Margin="0,5"
                        Text="{Binding EditedAt}" />
 
-            </Grid>
-        </Frame >
+                </Grid>
+            </Frame >
+
+            <StackLayout Grid.Column="1"
+                         VerticalOptions="Center"
+                         Margin="10,0,0,0">
+                
+                <Image x:Name="spoolImage"
+                       MaximumHeightRequest="64"
+                       MaximumWidthRequest="64"
+                       Aspect="AspectFit"/>
+
+                <Label HorizontalOptions="Center" Style="{StaticResource LargeRaleway}" Margin="0,5,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding AvaliableWeight}"/>
+                            <Span Text=" / "/>
+                            <Span Text="{Binding StandardWeight, StringFormat='{0} kg'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+            </StackLayout>
+        </Grid>
     </ContentView.Content>
 </ContentView>

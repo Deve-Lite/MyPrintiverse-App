@@ -39,7 +39,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filament">
                         <StackLayout>
-                            <Grid Margin="15,5,15,5"  ColumnDefinitions="*, 38">
+                            <Grid Margin="15,10,15,3"  ColumnDefinitions="*, 38">
                                 <Frame Style="{StaticResource CollectionFrame}"
                                        Padding="10,0,0,0"
                                        VerticalOptions="FillAndExpand">

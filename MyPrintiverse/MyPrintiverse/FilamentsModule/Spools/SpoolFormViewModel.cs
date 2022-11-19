@@ -76,8 +76,8 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
                 Step = 2;
                 StepDescription = StepDescriptionList[Step-1];
 
-                if (string.IsNullOrEmpty(Filament.Id))
-                    Filament = await FilamentService.GetItemAsync(FilamentId);
+                
+                Filament = await FilamentService.GetItemAsync(FilamentId);
             }
 
             NextIsRunning = false;
@@ -103,19 +103,14 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
     {
         base.OnAppearing();
         //TODO: odczytanie z ustawień
-        (Item as SpoolValidator).FilamentId = FilamentId;
         Currency = "PLN";
     }
 
     [RelayCommand]
     public override async Task StepBack()
     {
-        //TODO: Simulate Data Animation
-        await Task.Delay(DELAY);
-
         if (Step == 2)
-            DefaultPreviousStepAction();
-        
+            DefaultPreviousStepAction(); 
     }
 
     #endregion

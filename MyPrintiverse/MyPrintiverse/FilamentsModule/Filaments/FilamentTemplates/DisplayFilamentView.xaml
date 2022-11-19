@@ -9,7 +9,7 @@
                Style="{StaticResource BaseFrame}"
                Padding="15, 0, 0, 0"
                VerticalOptions="Center">
-            <Grid RowDefinitions="*,*,*,*,*,*,*,*,auto,*"
+            <Grid RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto"
                   ColumnDefinitions="*, 10, 2, 30">
 
                 <Frame Grid.Column="3" 
@@ -115,7 +115,7 @@
 
                 <Label Style="{StaticResource MicroRaleway}"
                        Grid.Row="9"
-                       Margin="0,5"
+                       Margin="2,4"
                        Text="{Binding EditedAt}" />
             </Grid>
         </Frame>

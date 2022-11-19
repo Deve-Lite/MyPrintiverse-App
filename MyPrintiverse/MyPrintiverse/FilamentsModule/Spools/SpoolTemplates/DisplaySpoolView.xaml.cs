@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Views;
 using MyPrintiverse.Templates.Popups;
+using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Spools.SpoolTemplates;
 
@@ -34,14 +35,14 @@ public partial class DisplaySpoolView : ContentView
         set => SetValue(DiameterProperty, value);
     }
 
-    public static readonly BindableProperty AvaliableWeightProperty = BindableProperty.Create(nameof(AvaliableWeight), typeof(string), typeof(DisplaySpoolView), "");
+    public static readonly BindableProperty AvaliableWeightProperty = BindableProperty.Create(nameof(AvaliableWeight), typeof(string), typeof(DisplaySpoolView), "", propertyChanged: SpoolChanged);
     public string AvaliableWeight
     {
         get => (string)GetValue(AvaliableWeightProperty);
         set => SetValue(AvaliableWeightProperty, value);
     }
 
-    public static readonly BindableProperty StandardWeightProperty = BindableProperty.Create(nameof(StandardWeight), typeof(string), typeof(DisplaySpoolView), "");
+    public static readonly BindableProperty StandardWeightProperty = BindableProperty.Create(nameof(StandardWeight), typeof(string), typeof(DisplaySpoolView), "", propertyChanged: SpoolChanged);
     public string StandardWeight
     {
         get => (string)GetValue(StandardWeightProperty);
@@ -76,12 +77,48 @@ public partial class DisplaySpoolView : ContentView
         set => SetValue(CurrencyProperty, value);
     }
 
+    public static readonly BindableProperty IsFinishedProperty = BindableProperty.Create(nameof(IsFinished), typeof(bool), typeof(DisplaySpoolView), false, propertyChanged: SpoolChanged);
+    public bool IsFinished
+    {
+        get => (bool)GetValue(IsFinishedProperty);
+        set => SetValue(IsFinishedProperty, value);
+    }
+
+    public static readonly BindableProperty IsOnSpoolProperty = BindableProperty.Create(nameof(IsOnSpool), typeof(bool), typeof(DisplaySpoolView), false, propertyChanged:SpoolChanged);
+    public bool IsOnSpool
+    {
+        get => (bool)GetValue(IsOnSpoolProperty);
+        set => SetValue(IsOnSpoolProperty, value);
+    }
+
+    private static void SpoolChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var spoolView = (DisplaySpoolView)bindable;
+
+        if (string.IsNullOrEmpty(spoolView.AvaliableWeight) || string.IsNullOrEmpty(spoolView.StandardWeight))
+            return;
+
+        double avaliableWeight = double.Parse(spoolView.AvaliableWeight.Replace(',', '.'), CultureInfo.InvariantCulture);
+        double standardWeight = double.Parse(spoolView.StandardWeight.Replace(',', '.'), CultureInfo.InvariantCulture);
+
+        if (!spoolView.IsOnSpool)
+            spoolView.spoolImage.Source = "rope.png";
+        else if (spoolView.IsFinished)
+            spoolView.spoolImage.Source = "emptyspool.png";
+        else if (avaliableWeight >= 0.8 * standardWeight)
+            spoolView.spoolImage.Source = "fullspool.png";
+        else if (avaliableWeight >= 0.2 * standardWeight)
+            spoolView.spoolImage.Source = "mediumspool.png";
+        else
+            spoolView.spoolImage.Source = "smallspool.png";
+    }
+
     #endregion
 
     public DisplaySpoolView()
 	{
 		InitializeComponent();
-	}
+    }
 
     private void NoteClicked(object sender, EventArgs e)
     {

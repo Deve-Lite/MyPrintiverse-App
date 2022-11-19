@@ -9,27 +9,33 @@
              xmlns:filamentTemplates="clr-namespace:MyPrintiverse.FilamentsModule.Filaments.FilamentTemplates"
              xmlns:othertemplates="clr-namespace:MyPrintiverse.FilamentsModule.FilamentTemplates.Others"
              xmlns:filamentmodule="clr-namespace:MyPrintiverse.FilamentsModule.Filaments"
-             Shell.TabBarIsVisible="False">
+             xmlns:spooltemplates="clr-namespace:MyPrintiverse.FilamentsModule.Spools.SpoolTemplates"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
 
     <ContentPage.Resources>
         <ResourceDictionary>
 
             <DataTemplate x:Key="footerTemplate">
-                <StackLayout Margin="0,0,15,0"/>
+                <StackLayout Margin="0,0,0,10"/>
             </DataTemplate>
 
-            <DataTemplate x:Key="avaliableSpool" x:DataType="model:Spool">
+            <!-- To Fix: 5 almost the same data template beacause multibinding didnt work as expected, also content view gave weird errors 
+            most likey with passing commands-->
+
+            <DataTemplate x:DataType="model:Spool" x:Key="notOnSpool">
                 <StackLayout VerticalOptions="Center">
                     <Frame Style="{StaticResource BaseFrame}"
                            Padding="8" 
                            Margin="0,10,0, 0">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
-                                                  CommandParameter="{Binding .}"/>
 
-                            <TapGestureRecognizer Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
-                                                  NumberOfTapsRequired="2"
-                                                  CommandParameter="{Binding .}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenItemCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      CommandParameter="{Binding .}"/>
+
+                            <TapGestureRecognizer Command="{Binding ItemOptionsCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      NumberOfTapsRequired="2"
+                                      CommandParameter="{Binding .}"/>
                         </Frame.GestureRecognizers>
 
                         <Grid Padding="5,2,5,2" RowDefinitions="*,*,*,auto" ColumnDefinitions="*,*,auto">
@@ -52,12 +58,11 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <Label Grid.Row="1"
-                                   Grid.ColumnSpan="2">
+                            <Label Grid.Row="1" Grid.ColumnSpan="2">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Status: "/>
-                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding IsSample, Converter={StaticResource IsSampleConverter}}"/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="not on spool"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -69,39 +74,37 @@
 
                             <Image Grid.RowSpan="4"
                                    Grid.Column="2"
-                                   HeightRequest="64" 
-                                   WidthRequest="64" 
+                                   HeightRequest="60" 
+                                   WidthRequest="60" 
+                                   Source="rope.png"
                                    VerticalOptions="Center"
                                    Aspect="AspectFit" 
-                                   Margin="5, 4, 0, 4"
-                                   Source=""/>
-                            
-                            <Label Style="{StaticResource MicroRaleway}" 
+                                   Margin="5, 4, 0, 4"/>
+
+                            <Label Style="{StaticResource MicroRaleway}"
                                    Grid.ColumnSpan="3"
                                    Grid.Row="3"
                                    HorizontalOptions="Start"
                                    Text="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}"/>
 
                         </Grid>
-
                     </Frame>
-
                 </StackLayout>
             </DataTemplate>
 
-            <DataTemplate x:Key="finishedSpool" x:DataType="model:Spool">
+            <DataTemplate x:DataType="model:Spool" x:Key="finishedSpool">
                 <StackLayout VerticalOptions="Center">
                     <Frame Style="{StaticResource BaseFrame}"
-                           BackgroundColor="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}"
                            Padding="8" 
                            Margin="0,10,0, 0">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
-                                                  CommandParameter="{Binding .}"/>
 
-                            <TapGestureRecognizer Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
-                                                  NumberOfTapsRequired="2"
-                                                  CommandParameter="{Binding .}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenItemCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      CommandParameter="{Binding .}"/>
+
+                            <TapGestureRecognizer Command="{Binding ItemOptionsCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      NumberOfTapsRequired="2"
+                                      CommandParameter="{Binding .}"/>
                         </Frame.GestureRecognizers>
 
                         <Grid Padding="5,2,5,2" RowDefinitions="*,*,*,auto" ColumnDefinitions="*,*,auto">
@@ -124,16 +127,14 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <Label Grid.Row="1"
-                                   Grid.ColumnSpan="2">
+                            <Label Grid.Row="1" Grid.ColumnSpan="2">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Status: "/>
-                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="Finished"/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="out of filament"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-
 
                             <Label Grid.Row="2"
                                    Grid.ColumnSpan="2"
@@ -142,40 +143,241 @@
 
                             <Image Grid.RowSpan="4"
                                    Grid.Column="2"
-                                   HeightRequest="64" 
-                                   WidthRequest="64" 
+                                   HeightRequest="60" 
+                                   WidthRequest="60" 
+                                   Source="emptyspool.png"
                                    VerticalOptions="Center"
                                    Aspect="AspectFit" 
-                                   Margin="5, 4, 0, 4">
-                                <Image.Source>
-                                    <MultiBinding Converter="{StaticResource SpoolSourceConverter}">
-                                        
-                                    </MultiBinding>
-                                </Image.Source>
-                            </Image>
+                                   Margin="5, 4, 0, 4"/>
 
-                            <Label Style="{StaticResource MicroRaleway}" 
+                            <Label Style="{StaticResource MicroRaleway}"
                                    Grid.ColumnSpan="3"
                                    Grid.Row="3"
                                    HorizontalOptions="Start"
                                    Text="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}"/>
 
                         </Grid>
-
                     </Frame>
+                </StackLayout>
+            </DataTemplate>
 
+            <DataTemplate x:DataType="model:Spool" x:Key="goodStatusSpool">
+                <StackLayout VerticalOptions="Center">
+                    <Frame Style="{StaticResource BaseFrame}"
+                           Padding="8" 
+                           Margin="0,10,0, 0">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenItemCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      CommandParameter="{Binding .}"/>
+
+                            <TapGestureRecognizer Command="{Binding ItemOptionsCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      NumberOfTapsRequired="2"
+                                      CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid Padding="5,2,5,2" RowDefinitions="*,*,*,auto" ColumnDefinitions="*,*,auto">
+
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Avaliable: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding AvaliableWeight,StringFormat='{0:0.00} kg'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Column="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Base: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding StandardWeight,StringFormat='{0:0.00} kg'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="1" Grid.ColumnSpan="2">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Status: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="small wear"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="2"
+                                   Grid.ColumnSpan="2"
+                                   Style="{StaticResource SmallRaleway}"
+                                   Text="TODOTAG"/>
+
+                            <Image Grid.RowSpan="4"
+                                   Grid.Column="2"
+                                   HeightRequest="60" 
+                                   WidthRequest="60" 
+                                   Source="fullspool.png"
+                                   VerticalOptions="Center"
+                                   Aspect="AspectFit" 
+                                   Margin="5, 4, 0, 4"/>
+
+                            <Label Style="{StaticResource MicroRaleway}"
+                                   Grid.ColumnSpan="3"
+                                   Grid.Row="3"
+                                   HorizontalOptions="Start"
+                                   Text="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}"/>
+
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:DataType="model:Spool" x:Key="mediumStatusSpool">
+                <StackLayout VerticalOptions="Center">
+                    <Frame Style="{StaticResource BaseFrame}"
+                           Padding="8" 
+                           Margin="0,10,0, 0">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenItemCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      CommandParameter="{Binding .}"/>
+
+                            <TapGestureRecognizer Command="{Binding ItemOptionsCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      NumberOfTapsRequired="2"
+                                      CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid Padding="5,2,5,2" RowDefinitions="*,*,*,auto" ColumnDefinitions="*,*,auto">
+
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Avaliable: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding AvaliableWeight,StringFormat='{0:0.00} kg'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Column="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Base: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding StandardWeight,StringFormat='{0:0.00} kg'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="1" Grid.ColumnSpan="2">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Status: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="medium wear"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="2"
+                                   Grid.ColumnSpan="2"
+                                   Style="{StaticResource SmallRaleway}"
+                                   Text="TODOTAG"/>
+
+                            <Image Grid.RowSpan="4"
+                                   Grid.Column="2"
+                                   HeightRequest="60" 
+                                   WidthRequest="60" 
+                                   Source="mediumspool.png"
+                                   VerticalOptions="Center"
+                                   Aspect="AspectFit" 
+                                   Margin="5, 4, 0, 4"/>
+
+                            <Label Style="{StaticResource MicroRaleway}"
+                                   Grid.ColumnSpan="3"
+                                   Grid.Row="3"
+                                   HorizontalOptions="Start"
+                                   Text="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}"/>
+
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:DataType="model:Spool" x:Key="smallStatusSpool">
+                <StackLayout VerticalOptions="Center">
+                    <Frame Style="{StaticResource BaseFrame}"
+                           Padding="8" 
+                           Margin="0,10,0, 0">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenItemCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      CommandParameter="{Binding .}"/>
+
+                            <TapGestureRecognizer Command="{Binding ItemOptionsCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentViewModel}}}"
+                                      NumberOfTapsRequired="2"
+                                      CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid Padding="5,2,5,2" RowDefinitions="*,*,*,auto" ColumnDefinitions="*,*,auto">
+
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Avaliable: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding AvaliableWeight, StringFormat='{0:0.00} kg'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Column="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Base: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="{Binding StandardWeight, StringFormat='{0:0.00} kg'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="1" Grid.ColumnSpan="2">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Style="{StaticResource CollectionFrameBoldSpan}" Text="Status: "/>
+                                        <Span Style="{StaticResource CollectionFrameSpan}" Text="heavy wear"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="2"
+                                   Grid.ColumnSpan="2"
+                                   Style="{StaticResource SmallRaleway}"
+                                   Text="TODOTAG"/>
+
+                            <Image Grid.RowSpan="4"
+                                   Grid.Column="2"
+                                   HeightRequest="60" 
+                                   WidthRequest="60" 
+                                   Source="smallspool.png"
+                                   VerticalOptions="Center"
+                                   Aspect="AspectFit" 
+                                   Margin="5, 4, 0, 4"/>
+
+                            <Label Style="{StaticResource MicroRaleway}"
+                                   Grid.ColumnSpan="3"
+                                   Grid.Row="3"
+                                   HorizontalOptions="Start"
+                                   Text="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}"/>
+
+                        </Grid>
+                    </Frame>
                 </StackLayout>
             </DataTemplate>
 
 
             <filamentmodule:SpoolCollectionDataTemplateSelector x:Key="SpoolCollectionDataTemplateSelector"
-                                          NormalTemplate="{StaticResource avaliableSpool}"
-                                          FinishedTemplate="{StaticResource finishedSpool}" />
+                                                                NotOnSpoolTemplate="{StaticResource notOnSpool}"
+                                                                FinishedTemplate="{StaticResource finishedSpool}"
+                                                                GoodStatusTemplate="{StaticResource goodStatusSpool}"
+                                                                MediumStatusTemplate="{StaticResource mediumStatusSpool}"
+                                                                SmallStatusTemplate="{StaticResource smallStatusSpool}"/>
 
         </ResourceDictionary>
     </ContentPage.Resources>
-
-
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Tip"
@@ -206,28 +408,22 @@
                                                EditedAt="{Binding Item.EditedAt, StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}"/>
 
 
-        <StackLayout HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
-            
-            <headers:SecondaryHeader Title="Spools"
-                                             ImageCommand="{Binding AddItemCommand}"
-                                             ImageSize="32"/>
-            
-            <RefreshView Style="{StaticResource BaseRefreshView}" 
+
+        <headers:SecondaryHeader Title="Spools"
+                                 Margin="15,15,15,0"
+                                 ImageCommand="{Binding AddItemCommand}"
+                                 ImageSize="32"/>
+
+        <RefreshView Style="{StaticResource BaseRefreshView}" 
                          Grid.Row="2" 
-                         Margin="15,5,15,0">
-                <StackLayout HorizontalOptions="FillAndExpand">
+                         Margin="15,0,15,0">
 
-
-                    <CollectionView Style="{StaticResource BaseCollectionView}"
+            <CollectionView Style="{StaticResource BaseCollectionView}"
                                     FooterTemplate="{StaticResource footerTemplate}"
                                     Footer="{Binding .}"
                                     EmptyView="No avaliable spools"
                                     ItemTemplate="{StaticResource SpoolCollectionDataTemplateSelector}">
-                        
-
-                    </CollectionView>
-                </StackLayout>
-            </RefreshView>
-        </StackLayout>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
 </ContentPage>

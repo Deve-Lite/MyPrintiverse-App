@@ -1,8 +1,5 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
-using MyPrintiverse.FilamentsModule.Filaments;
+﻿using MyPrintiverse.FilamentsModule.Filaments;
 using MyPrintiverse.Tools;
-using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
 

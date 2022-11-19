@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypePage.FilamentTypeView"
              xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypeTemplates"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
 
 
     <ContentPage.Resources>
@@ -20,7 +21,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Tip"
-                     IconImageSource="spool.png"/>
+                     IconImageSource="lightbulb.png"/>
         <ToolbarItem Order="Secondary" 
                      Text="Delete"
                      Command="{Binding DeleteItemCommand}" />

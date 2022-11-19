@@ -312,6 +312,7 @@
 		<None Remove="Resources\Images\back.png" />
 		<None Remove="Resources\Images\bio.png" />
 		<None Remove="Resources\Images\close.png" />
+		<None Remove="Resources\Images\emptyspool.png" />
 		<None Remove="Resources\Images\emptystar.png" />
 		<None Remove="Resources\Images\extruder.png" />
 		<None Remove="Resources\Images\fan.png" />
@@ -323,11 +324,12 @@
 		<None Remove="Resources\Images\heatrequired.png" />
 		<None Remove="Resources\Images\lightbulb.png" />
 		<None Remove="Resources\Images\material.png" />
+		<None Remove="Resources\Images\mediumspool.png" />
 		<None Remove="Resources\Images\melting.png" />
 		<None Remove="Resources\Images\not.png" />
 		<None Remove="Resources\Images\rope.png" />
 		<None Remove="Resources\Images\search.png" />
-		<None Remove="Resources\Images\spoolEmpty.png" />
+		<None Remove="Resources\Images\smallspool.png" />
 		<None Remove="Resources\Images\star.png" />
 		<None Remove="Resources\Images\uvresistance.png" />
 		<None Remove="RestSharp" />

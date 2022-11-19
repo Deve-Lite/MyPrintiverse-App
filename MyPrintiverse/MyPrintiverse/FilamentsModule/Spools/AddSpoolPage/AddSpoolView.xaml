@@ -10,7 +10,8 @@
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Spools.AddSpoolPage"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              Shell.NavBarIsVisible="False"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="60, auto, *, 70" 
           VerticalOptions="FillAndExpand" 
@@ -63,7 +64,7 @@
                                               ErrorMessage="{Binding Item.Description.Error}"/>
 
                     <inputs:TitledSwitch Title="Is on spool"
-                                         IsToggled="{Binding Item.IsOnSpool}"/>
+                                         IsToggled="{Binding Item.IsOnSpool.Value,Mode=TwoWay}"/>
 
                 </StackLayout>
             </ScrollView>
@@ -79,6 +80,8 @@
                                                      Description="{Binding Item.Description.Value}"
                                                      AvaliableWeight="{Binding Item.AvaliableWeight.Value, StringFormat='{0:0.000}'}"
                                                      StandardWeight="{Binding Item.StandardWeight.Value, StringFormat='{0:0.000}'}"
+                                                     IsOnSpool="{Binding Item.IsOnSpool.Value}"
+                                                     IsFinished="{Binding Item.IsFinished}"
                                                      Cost="{Binding Item.Cost.Value}"
                                                      EditedAt="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Created at: {0:dd/MM/yy HH:mm}'}"
                                                      Currency="{Binding Currency}"/>

@@ -26,6 +26,6 @@ public class Spool : BaseModel
     [JsonProperty("isFinished")]
     public bool IsFinished { get; set; }
     [JsonProperty("isSample")]
-    public bool IsSample { get; set; }
+    public bool IsOnSpool { get; set; }
 
 }
