@@ -124,19 +124,19 @@
                 <StackLayout Margin="15">
 
                     <inputs:TitledSwitch Title="Is food friendly"
-                                         IsToggled="{Binding Item.IsFoodFriendly,Mode=TwoWay}"/>
+                                         IsToggled="{Binding Item.IsFoodFriendly.Value,Mode=TwoWay}"/>
 
                     <inputs:TitledSwitch Title="Is bio"
-                                         IsToggled="{Binding Item.IsBio,Mode=TwoWay}"/>
+                                         IsToggled="{Binding Item.IsBio.Value ,Mode=TwoWay}"/>
 
                     <inputs:TitledSwitch Title="Is uv resistant"
-                                         IsToggled="{Binding Item.IsUVResistant,Mode=TwoWay}"/>
+                                         IsToggled="{Binding Item.IsUVResistant.Value,Mode=TwoWay}"/>
 
                     <inputs:TitledSwitch Title="Is flexible"
-                                         IsToggled="{Binding Item.IsFlexible,Mode=TwoWay}"/>
+                                         IsToggled="{Binding Item.IsFlexible.Value,Mode=TwoWay}"/>
 
                     <inputs:TitledSwitch Title="Is heated bed required"
-                                         IsToggled="{Binding Item.IsHeatedBedRequired,Mode=TwoWay}"/>
+                                         IsToggled="{Binding Item.IsHeatedBedRequired.Value,Mode=TwoWay}"/>
 
                 </StackLayout>
             </ScrollView>
@@ -152,11 +152,11 @@
                                                                NozzleTemperatureRange="{Binding Item.NozzleTemperatureRange}"
                                                                BedTemperatureRange="{Binding Item.BedTemperatureRange}"
                                                                CoolingRange="{Binding Item.CoolingRange}"
-                                                               IsFlexible="{Binding Item.IsFlexible}"
-                                                               IsFoodFriendly="{Binding Item.IsFoodFriendly}"
-                                                               IsBio="{Binding Item.IsBio}"
-                                                               IsUVResistant="{Binding Item.IsUVResistant}"
-                                                               IsHeatedBedRequired="{Binding Item.IsHeatedBedRequired}"/>
+                                                               IsFlexible="{Binding Item.IsFlexible.Value}"
+                                                               IsFoodFriendly="{Binding Item.IsFoodFriendly.Value}"
+                                                               IsBio="{Binding Item.IsBio.Value}"
+                                                               IsUVResistant="{Binding Item.IsUVResistant.Value}"
+                                                               IsHeatedBedRequired="{Binding Item.IsHeatedBedRequired.Value}"/>
 
                 </StackLayout>
             </ScrollView>

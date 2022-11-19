@@ -24,7 +24,7 @@ public partial class SecondaryHeader : ContentView
         set => SetValue(ImageCommandProperty, value);
     }
 
-    public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(string), typeof(SecondaryHeader), "spool.png");
+    public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(string), typeof(SecondaryHeader), "add.png");
     public string ImageSource
     {
         get => (string)GetValue(ImageSourceProperty);

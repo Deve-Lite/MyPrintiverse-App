@@ -19,11 +19,11 @@
 
         <Frame Style="{StaticResource PropertyFrame}">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding ClickedCommand}"/>
+                <TapGestureRecognizer Command="{Binding Command}"/>
             </Frame.GestureRecognizers>
 
             <StackLayout>
-                <Image x:Name="image" HeightRequest="64" Source="spool.png"/>
+                <Image x:Name="image" MaximumHeightRequest="64" Source="spool.png"/>
 
                 <Label Style="{StaticResource SmallRaleway}"
                        Margin="2,2,2,4"

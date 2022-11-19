@@ -43,11 +43,6 @@ public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType
 
     #region Overrides
 
-    public override void OnAppearing()
-    {
-        base.OnAppearing();
-    }
-
     [RelayCommand]
     public override async Task StepBack()
     {

@@ -20,7 +20,7 @@ public class MessageService : IMessageService
 		if (MainPage is null)
 			return await Task.Run(() => false);
 
-		return await MainPage.DisplayAlert(title, message, accept, cancel, flowDirection);
+        return await MainPage.DisplayAlert(title, message, accept, cancel, flowDirection);
 	}
 
 	public async Task<string> ShowActionSheetAsync(string title, string cancel = "Cancel", string delete = "Delete", FlowDirection flowDirection = FlowDirection.MatchParent, params string[] buttons)

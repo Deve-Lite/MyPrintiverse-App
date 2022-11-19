@@ -22,11 +22,11 @@ public partial class FilamentTypeValidator : BaseValidator<FilamentType>
     public ExtendedValidatable<string> CoolingMax { get; set; }
     public ExtendedValidatable<string> CoolingMin { get; set; }
 
-    public bool IsUVResistant { get; set; }
-    public bool IsFoodFriendly { get; set; }
-    public bool IsBio { get; set; }
-    public bool IsFlexible { get; set; }
-    public bool IsHeatedBedRequired { get; set; }
+    public ExtendedValidatable<bool> IsUVResistant { get; set; }
+    public ExtendedValidatable<bool> IsFoodFriendly { get; set; }
+    public ExtendedValidatable<bool> IsBio { get; set; }
+    public ExtendedValidatable<bool> IsFlexible { get; set; }
+    public ExtendedValidatable<bool> IsHeatedBedRequired { get; set; }
 
     [ObservableProperty]
     private string _nozzleTemperatureRange;
@@ -76,22 +76,22 @@ public partial class FilamentTypeValidator : BaseValidator<FilamentType>
         BaseModelMap(FilamentTypeMap);
 
         /* Parse will not throw Exception because of NumberRules */
-        FilamentTypeMap.Density = double.Parse(Density.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-        FilamentTypeMap.MaxServiceTempearature = double.Parse(MaxServiceTempearature.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        FilamentTypeMap.Density = double.Parse(Density.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
+        FilamentTypeMap.MaxServiceTempearature = double.Parse(MaxServiceTempearature.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
         
-        FilamentTypeMap.BedTemperatureRange = $"{BedMin.Value}-{BedMax.Value}";
-        FilamentTypeMap.NozzleTemperatureRange = $"{NozzleMin.Value}-{NozzleMax.Value}";
-        FilamentTypeMap.CoolingRange = $"{CoolingMin.Value}-{CoolingMax.Value}";
+        FilamentTypeMap.BedTemperatureRange = $"{BedMin.Value.Trim()}-{BedMax.Value.Trim()}";
+        FilamentTypeMap.NozzleTemperatureRange = $"{NozzleMin.Value.Trim()}-{NozzleMax.Value.Trim()}";
+        FilamentTypeMap.CoolingRange = $"{CoolingMin.Value.Trim()}-{CoolingMax.Value.Trim()}";
 
         FilamentTypeMap.Description = Description.Value.Trim();
-        FilamentTypeMap.ShortName = ShortName.Value;
-        FilamentTypeMap.FullName = FullName.Value;
+        FilamentTypeMap.ShortName = ShortName.Value.Trim();
+        FilamentTypeMap.FullName = FullName.Value.Trim();
 
-        FilamentTypeMap.IsBio = IsBio;
-        FilamentTypeMap.IsFlexible = IsFlexible;
-        FilamentTypeMap.IsFoodFriendly = IsFoodFriendly;
-        FilamentTypeMap.IsHeatedBedRequired = IsHeatedBedRequired;
-        FilamentTypeMap.IsUVResistant = IsUVResistant;
+        FilamentTypeMap.IsBio = IsBio.Value;
+        FilamentTypeMap.IsFlexible = IsFlexible.Value;
+        FilamentTypeMap.IsFoodFriendly = IsFoodFriendly.Value;
+        FilamentTypeMap.IsHeatedBedRequired = IsHeatedBedRequired.Value;
+        FilamentTypeMap.IsUVResistant = IsUVResistant.Value;
 
         return FilamentTypeMap;
     }
@@ -140,16 +140,22 @@ public partial class FilamentTypeValidator : BaseValidator<FilamentType>
             .WithRule(new IsNumber(), "Data is not a valid number.")
             .WithRule(new RangeRule<string>(maxLength: 4), "Too long data.")
             .WithRule(new HasNoDecimalPlace(), "Should be integer")
-            .WithRule(new BiggerOrEqualRule(NozzleMin), "Invalid range."); ;
+            .WithRule(new BiggerOrEqualRule(NozzleMin), "Invalid range.");
+
+        IsBio = ExtendedValidator.Build<bool>();
+        IsFlexible = ExtendedValidator.Build<bool>();
+        IsFoodFriendly = ExtendedValidator.Build<bool>();
+        IsUVResistant = ExtendedValidator.Build<bool>();
+        IsHeatedBedRequired = ExtendedValidator.Build<bool>();
     }
 
     private void InitializeFields()
     {
-        IsBio = false;
-        IsFlexible= false;
-        IsFoodFriendly = false;
-        IsUVResistant = false;
-        IsHeatedBedRequired = false;
+        IsBio.Value = false;
+        IsFlexible.Value = false;
+        IsFoodFriendly.Value = false;
+        IsUVResistant.Value = false;
+        IsHeatedBedRequired.Value = false;
 
         ShortName.Value = "";
         FullName.Value = "";
@@ -171,11 +177,11 @@ public partial class FilamentTypeValidator : BaseValidator<FilamentType>
 
         base.Map(filamentType);
 
-        IsBio = filamentType.IsBio;
-        IsFlexible= filamentType.IsFlexible;
-        IsFoodFriendly = filamentType.IsFoodFriendly;
-        IsUVResistant = filamentType.IsUVResistant;
-        IsHeatedBedRequired = filamentType.IsHeatedBedRequired;
+        IsBio.Value = filamentType.IsBio;
+        IsFlexible.Value = filamentType.IsFlexible;
+        IsFoodFriendly.Value = filamentType.IsFoodFriendly;
+        IsUVResistant.Value = filamentType.IsUVResistant;
+        IsHeatedBedRequired.Value = filamentType.IsHeatedBedRequired;
 
         ShortName.Value = filamentType.ShortName;
         FullName.Value = filamentType.FullName;

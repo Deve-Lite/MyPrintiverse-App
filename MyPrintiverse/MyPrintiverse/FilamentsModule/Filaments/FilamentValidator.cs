@@ -64,11 +64,11 @@ public partial class FilamentValidator : BaseValidator<Filament>
         fialmentMap.ColorHex = ColorHex.Value;
 
         /* Parse will not throw Exception because of NumberRules */
-        fialmentMap.Diameter = double.Parse(Diameter.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-        fialmentMap.BedTemperature = int.Parse(BedTemperature.Value, CultureInfo.InvariantCulture);
-        fialmentMap.CoolingRate = int.Parse(CoolingRate.Value, CultureInfo.InvariantCulture);
-        fialmentMap.NozzleTemperature = int.Parse(NozzleTemperature.Value, CultureInfo.InvariantCulture);
-        fialmentMap.Rating = int.Parse(Rating.Value, CultureInfo.InvariantCulture);
+        fialmentMap.Diameter = double.Parse(Diameter.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
+        fialmentMap.BedTemperature = int.Parse(BedTemperature.Value.Trim(), CultureInfo.InvariantCulture);
+        fialmentMap.CoolingRate = int.Parse(CoolingRate.Value.Trim(), CultureInfo.InvariantCulture);
+        fialmentMap.NozzleTemperature = int.Parse(NozzleTemperature.Value.Trim(), CultureInfo.InvariantCulture);
+        fialmentMap.Rating = int.Parse(Rating.Value.Trim(), CultureInfo.InvariantCulture);
 
         return fialmentMap;
     }

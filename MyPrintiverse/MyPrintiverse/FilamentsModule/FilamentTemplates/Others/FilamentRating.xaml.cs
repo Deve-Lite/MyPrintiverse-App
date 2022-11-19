@@ -15,29 +15,29 @@ public partial class FilamentRating : ContentView
         var filamentRating = (FilamentRating)bindable;
 
         if (filamentRating.Rating >= 1)
-            filamentRating.BottomImage.Source = "star.svg";
+            filamentRating.BottomImage.Source = "star.png";
         else
-            filamentRating.BottomImage.Source = "emptystar.svg";
+            filamentRating.BottomImage.Source = "emptystar.png";
 
         if (filamentRating.Rating >= 2)
-            filamentRating.BottomMiddleImage.Source = "star.svg";
+            filamentRating.BottomMiddleImage.Source = "star.png";
         else
-            filamentRating.BottomMiddleImage.Source = "emptystar.svg";
+            filamentRating.BottomMiddleImage.Source = "emptystar.png";
 
         if (filamentRating.Rating >= 3)
-            filamentRating.MiddleImage.Source = "star.svg";
+            filamentRating.MiddleImage.Source = "star.png";
         else
-            filamentRating.MiddleImage.Source = "emptystar.svg";
+            filamentRating.MiddleImage.Source = "emptystar.png";
 
         if (filamentRating.Rating >= 4)
-            filamentRating.TopMiddleImage.Source = "star.svg";
+            filamentRating.TopMiddleImage.Source = "star.png";
         else
-            filamentRating.TopMiddleImage.Source = "emptystar.svg";
+            filamentRating.TopMiddleImage.Source = "emptystar.png";
 
         if (filamentRating.Rating >= 5)
-            filamentRating.TopImage.Source = "star.svg";
+            filamentRating.TopImage.Source = "star.png";
         else
-            filamentRating.TopImage.Source = "emptystar.svg";
+            filamentRating.TopImage.Source = "emptystar.png";
     }
 
     #endregion

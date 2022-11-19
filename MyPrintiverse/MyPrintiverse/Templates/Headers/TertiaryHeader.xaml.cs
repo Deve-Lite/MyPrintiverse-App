@@ -24,7 +24,7 @@ public partial class TertiaryHeader : ContentView
         set => SetValue(FirstImageCommandProperty, value);
     }
 
-    public static readonly BindableProperty FirstImageSourceProperty = BindableProperty.Create(nameof(FirstImageSource), typeof(string), typeof(TertiaryHeader), "spool.png");
+    public static readonly BindableProperty FirstImageSourceProperty = BindableProperty.Create(nameof(FirstImageSource), typeof(string), typeof(TertiaryHeader), "search.png");
     public string FirstImageSource
     {
         get => (string)GetValue(FirstImageSourceProperty);
@@ -49,7 +49,7 @@ public partial class TertiaryHeader : ContentView
         set => SetValue(SecondImageCommandProperty, value);
     }
 
-    public static readonly BindableProperty SecondImageSourceProperty = BindableProperty.Create(nameof(SecondImageSource), typeof(string), typeof(TertiaryHeader), "spool.png");
+    public static readonly BindableProperty SecondImageSourceProperty = BindableProperty.Create(nameof(SecondImageSource), typeof(string), typeof(TertiaryHeader), "add.png");
     public string SecondImageSource
     {
         get => (string)GetValue(SecondImageSourceProperty);

@@ -34,6 +34,7 @@
                          Margin="15,15,15,0">
 
                 <Frame Style="{StaticResource BaseFrameVariant}"
+                       BorderColor="{Binding IsSelectedItemValid,Converter={StaticResource SelectedItemIsValidConverter}}"
                        Margin="0, 5, 0, 10"
                        Padding="15,0,15,0">
                     <StackLayout>

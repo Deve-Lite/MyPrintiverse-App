@@ -7,59 +7,68 @@
              x:Name="this">
 
     <StackLayout BindingContext="{x:Reference this}">
-        <Frame Style="{StaticResource BaseFrame}"
+        <Grid Margin="0"
+              Padding="0"
+              ColumnDefinitions="0.75*,0.25*">
+            <Frame Style="{StaticResource BaseFrame}"
+                   Margin="0"
                    Padding="10, 4, 10, 4">
 
-            <Grid RowDefinitions="auto,*,*,*,auto,*">
+                <Grid RowDefinitions="auto,*,*,auto, auto">
 
-                <Label Style="{StaticResource TitleOswald}" 
+                    <Label Style="{StaticResource TitleOswald}" 
                        Grid.Row="0"
                        Margin="3,3"
                        Text="{Binding ShortName}"/>
 
-                <Label Grid.Row="1">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                    <Label Grid.Row="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Full Name: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text="{Binding FullName}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                <Label Grid.Row="2">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
+                    <Label Grid.Row="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{StaticResource DisplayFrameBoldSpan}"
                                   Text="Density: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
+                                <Span Style="{StaticResource DisplayFrameSpan}" 
                                   Text="{Binding Density, StringFormat='{0} g/cm^3'}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                <Label Grid.Row="3">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Style="{StaticResource DisplayFrameBoldSpan}"
-                                  Text="Max. Service Tempearature: "/>
-                            <Span Style="{StaticResource DisplayFrameSpan}" 
-                                  Text="{Binding MaxServiceTempearature, StringFormat='{0} °C'}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-
-                <Button Grid.Row="4" 
+                    <Button Grid.Row="3" 
                         Style="{StaticResource NoteButton}"
                         Clicked="NoteClicked"/>
 
-                <Label Style="{StaticResource MicroRaleway}"
-                       Grid.Row="5"
+                    <Label Style="{StaticResource MicroRaleway}"
+                       Grid.Row="4"
                        Margin="0,5"
                        Text="{Binding EditedAt}" />
-            </Grid>
-        </Frame>
+                </Grid>
+            </Frame>
+
+            <StackLayout Grid.Column="1"
+                         VerticalOptions="Center"
+                         Margin="5,0,5,0">
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="MeltingClicked"/>
+                </StackLayout.GestureRecognizers>
+
+                <Image Source="melting.png" Aspect="AspectFit" MaximumHeightRequest="64"/>
+                <Label Style="{StaticResource MediumRaleway}"
+                       HorizontalOptions="Center"
+                       Text="{Binding MaxServiceTempearature}"/>
+            </StackLayout>
+
+        </Grid>
 
         <Frame Style="{StaticResource BaseFrameVariant}" 
                    
@@ -73,22 +82,28 @@
                            Grid.ColumnSpan="3"
                            Text="Print Settings Compartments"/>
 
-                
-                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
-                                                                  Grid.Column="0"
-                                                                  TopValue="330"
-                                                                  DisplayValue="{Binding NozzleTemperatureRange}"
-                                                                  Entity="°C"/>
 
-                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
-                                                                  Grid.Column="1"
-                                                                  TopValue="120"
-                                                                  DisplayValue="{Binding BedTemperatureRange}"
-                                                                  Entity="°C"/>
+                <valueindicatorstemplates:RangeValueIndicator x:Name="NozzleTemperatureRangeIndicator"
+                                                              Grid.Row="1" 
+                                                              Grid.Column="0"
+                                                              TopValue="330"
+                                                              Source="extruder.png"
+                                                              DisplayValue="{Binding NozzleTemperatureRange}"
+                                                              Entity="°C"/>
 
-                <valueindicatorstemplates:RangeValueIndicator Grid.Row="1" 
+                <valueindicatorstemplates:RangeValueIndicator x:Name="BedTemperatureRangeIndicator"
+                                                              Grid.Row="1" 
+                                                              Grid.Column="1"
+                                                              TopValue="120"
+                                                              Source="heating.png"
+                                                              DisplayValue="{Binding BedTemperatureRange}"
+                                                              Entity="°C"/>
+
+                <valueindicatorstemplates:RangeValueIndicator x:Name="CoolingRangeIndicator"
+                                                              Grid.Row="1" 
                                                               Grid.Column="2"
                                                               TopValue="100"
+                                                              Source="fan.png"
                                                               DisplayValue="{Binding CoolingRange}"
                                                               Entity="%"/> 
 
@@ -103,39 +118,39 @@
                   RowSpacing="10" 
                   Margin="0,15,0,30">
             
-            <valueindicatorstemplates:MaterialProperty Grid.Column="0"
+            <valueindicatorstemplates:MaterialProperty x:Name="FoodFriendlyIndicator"
+                                                       Grid.Column="0"
                                                        Grid.Row="0"
                                                        Title="Food Friendly"
-                                                       ImageSource="spool.png"
-                                                       InvalidImageSource="star.svg"
+                                                       ImageSource="foodfriendly.png"
                                                        IsValid="{Binding IsFoodFriendly}"/>
 
-            <valueindicatorstemplates:MaterialProperty Grid.Column="1" 
+            <valueindicatorstemplates:MaterialProperty x:Name="FlexibleIndicator"
+                                                       Grid.Column="1" 
                                                        Grid.Row="0"
                                                        Title="Flexible"
-                                                       ImageSource="spool.png"
-                                                       InvalidImageSource="star.svg"
+                                                       ImageSource="flexibility.png"
                                                        IsValid="{Binding IsFlexible}"/>
 
-            <valueindicatorstemplates:MaterialProperty Grid.Column="2" 
+            <valueindicatorstemplates:MaterialProperty x:Name="BioIndicator"
+                                                       Grid.Column="2" 
                                                        Grid.Row="0"
                                                        Title="BIO"
-                                                       ImageSource="spool.png"
-                                                       InvalidImageSource="star.svg"
+                                                       ImageSource="bio.png"
                                                        IsValid="{Binding IsBio}"/>
 
-            <valueindicatorstemplates:MaterialProperty Grid.Column="0" 
+            <valueindicatorstemplates:MaterialProperty x:Name="UVResistantIndicator"
+                                                       Grid.Column="0" 
                                                        Grid.Row="1"
                                                        Title="Uv Resistant"
-                                                       ImageSource="spool.png"
-                                                       InvalidImageSource="star.svg"
+                                                       ImageSource="uvresistance.png"
                                                        IsValid="{Binding IsUVResistant}"/>
 
-            <valueindicatorstemplates:MaterialProperty Grid.Column="1" 
+            <valueindicatorstemplates:MaterialProperty x:Name="HeatedBedRequiredIndicator"
+                                                       Grid.Column="1" 
                                                        Grid.Row="1"
                                                        Title="Heated Bed"
-                                                       ImageSource="spool.png"
-                                                       InvalidImageSource="star.svg"
+                                                       ImageSource="heatrequired.png"
                                                        IsValid="{Binding IsHeatedBedRequired}"/>
         </Grid>
     </StackLayout>

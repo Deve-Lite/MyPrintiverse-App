@@ -141,7 +141,10 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
         if (AnyActionStartedCommand())
             return;
 
-        await Shell.Current.GoToAsync("..");
+        if (await MessageService.ShowSelectAlertAsync("Warning", "If you leave now all your progress will be erased. Do you really want to leave?", "Yes", "No"))
+            await Shell.Current.GoToAsync("..");
+
+        IsBusy = false;
     }
 
     /// <summary>
@@ -175,10 +178,10 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
     /// Set of standard actions for previous step.
     /// </summary>
     /// <param name="newStepDescription"></param>
-    public virtual void DefaultPreviousStepAction() 
+    public async virtual void DefaultPreviousStepAction() 
     {
         PreviousIsRunning = true;
-        Task.Delay(DELAY);
+        await Task.Delay(DELAY);
         Step -= 1;
         StepDescription = StepDescriptionList[Step-1];
         PreviousIsRunning = false;
@@ -188,11 +191,11 @@ public abstract partial class BaseFormViewModel<T> : BaseViewModel where T : Bas
     /// Set of standard actions for next step.
     /// </summary>
     /// <param name="newStepDescription"></param>
-    public virtual void DefaultNextStepAction(bool isValid) 
+    public async virtual void DefaultNextStepAction(bool isValid) 
     {
 
         NextIsRunning = true;
-        Task.Delay(DELAY);
+        await Task.Delay(DELAY);
         if (isValid)
         {
             StepDescription = StepDescriptionList[Step];

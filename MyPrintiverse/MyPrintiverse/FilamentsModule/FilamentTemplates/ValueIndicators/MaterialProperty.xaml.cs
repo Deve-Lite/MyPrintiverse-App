@@ -6,11 +6,11 @@ public partial class MaterialProperty : ContentView
 {
     #region Display
 
-    public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(nameof(ClickedCommand), typeof(ICommand), typeof(MaterialProperty), null);
-    public ICommand ClickedCommand
+    public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(MaterialProperty), null);
+    public ICommand Command
     {
-        get => (ICommand)GetValue(ClickedCommandProperty);
-        set => SetValue(ClickedCommandProperty, value);
+        get => (ICommand)GetValue(CommandProperty);
+        set => SetValue(CommandProperty, value);
     }
 
     public static readonly BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(MaterialProperty), true, propertyChanged:IsValidChanged);
@@ -41,7 +41,7 @@ public partial class MaterialProperty : ContentView
         set => SetValue(ImageSourceProperty, value);
     }
 
-    public static readonly BindableProperty InvalidImageSourceProperty = BindableProperty.Create(nameof(InvalidImageSource), typeof(string), typeof(MaterialProperty), "emptystar.png");
+    public static readonly BindableProperty InvalidImageSourceProperty = BindableProperty.Create(nameof(InvalidImageSource), typeof(string), typeof(MaterialProperty), "not.png");
     public string InvalidImageSource
     {
         get => (string)GetValue(InvalidImageSourceProperty);

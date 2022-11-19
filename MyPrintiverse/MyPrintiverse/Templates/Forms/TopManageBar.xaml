@@ -5,9 +5,9 @@
              x:Name="this">
     <ContentView.Content>
         <Grid BindingContext="{x:Reference this}">
-            <Image Source="star.png"
+            <Image Source="back.png"
                    HorizontalOptions="Start"
-                   Margin="15,14,0,14" >
+                   Margin="15,17,0,17" >
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding BackCommand}" CommandParameter="{Binding .}"/>
                 </Image.GestureRecognizers>

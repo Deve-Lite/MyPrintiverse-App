@@ -122,9 +122,50 @@ public partial class FilamentTypeDisplay : ContentView
     public FilamentTypeDisplay()
 	{
 		InitializeComponent();
-	}
+
+        NozzleTemperatureRangeIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() => {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows noozle temperature requirements. Printing with other values may cause problems and break 3d printer.", "Nozzle"));
+        });
+        CoolingRangeIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() => {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows cooling reqirements. Ofcourse this is not required, but using cooling well may give insane results.", "Cooling"));
+        });
+        BedTemperatureRangeIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() => {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows heated bed requirements. Using heated bed gives better print adhesion and also reduces chaces for print detachment from printing surface", "Heated Bed"));
+        });
+
+        FoodFriendlyIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() =>
+        {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows if material could be used with food. " +
+                "When marking this field you should consider if material conatinas any dangerous substances. " +
+                "Remember that material can be friendly but material paint don't have to.", "Food Friendliness"));
+        });
+        BioIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() =>
+        {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows if material is bio. " +
+                "Remember that material could be bio but material paint don't have to be.", "Biodegradability"));
+        });
+        FlexibleIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() =>
+        {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows if material is flexible.", "Flexibility"));
+        });
+        UVResistantIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() =>
+        {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows if material is uv resistant.", "UV Resistance"));
+        });
+        HeatedBedRequiredIndicator.Command = new CommunityToolkit.Mvvm.Input.RelayCommand(() =>
+        {
+            Shell.Current.ShowPopup(new DescriptionPopup("This indicator shows if material requires heated bed for printing.", "Bed Heating"));
+        });
+
+    }
+
     private void NoteClicked(object sender, EventArgs e)
     {
         Shell.Current.ShowPopup(new DescriptionPopup(Description));
+    }
+
+    private void MeltingClicked(object sender, EventArgs e)
+    {
+        Shell.Current.ShowPopup(new DescriptionPopup("This value is representing temperature at which filament is softing and starts to change it's shapes.", "Softing Point"));
     }
 }

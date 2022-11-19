@@ -8,7 +8,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Tip" 
-                     IconImageSource="spool.png"
+                     IconImageSource="lightbulb.png"
                      IsEnabled="{Binding IsEnabled}"/>
 
         <ToolbarItem Order="Secondary" 

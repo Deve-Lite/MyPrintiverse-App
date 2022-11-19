@@ -11,6 +11,8 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
 
     [ObservableProperty]
     public FilamentType _selectedFilamentType;
+    [ObservableProperty]
+    private bool _isSelectedItemValid;
 
     #endregion
 
@@ -52,6 +54,7 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
         };
 
         StepDescription = StepDescriptionList[0];
+        IsSelectedItemValid = true;
     }
 
     #region Overrides
@@ -134,7 +137,22 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
             DefaultNextStepAction(IsStepTwoValid());
 
         if (Step == 1)
-            DefaultNextStepAction(IsStepOneValid());
+        {
+            NextIsRunning = true;
+            await Task.Delay(DELAY);
+            if (IsStepOneValid())
+            {
+                IsSelectedItemValid = true;
+                StepDescription = StepDescriptionList[Step];
+                Step += 1;
+            }
+            else
+            {
+                IsSelectedItemValid = false;
+            }
+
+            NextIsRunning = false;
+        }
         
     }
 

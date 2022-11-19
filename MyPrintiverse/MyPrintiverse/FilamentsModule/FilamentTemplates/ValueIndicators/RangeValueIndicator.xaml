@@ -5,7 +5,7 @@
              x:Name="this">
     <VerticalStackLayout BindingContext="{x:Reference this}">
         <VerticalStackLayout.GestureRecognizers>
-            <TapGestureRecognizer Command="{Binding}"/>
+            <TapGestureRecognizer Command="{Binding Command}"/>
         </VerticalStackLayout.GestureRecognizers>
 
         <Frame HeightRequest="100" 
@@ -13,13 +13,20 @@
                BackgroundColor="{AppThemeBinding Light={StaticResource OnBackground}, Dark={StaticResource OnBackgroundDark}}"
                Padding="0"
                CornerRadius="4">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Command}"/>
+            </Frame.GestureRecognizers>
             <Grid>
 
                 <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"
                        x:Name="indicator"
                        Padding="0"
                        VerticalOptions="Start"
-                       CornerRadius="4"/>
+                       CornerRadius="4">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Command}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
             </Grid>
         </Frame>
 
@@ -32,6 +39,6 @@
             </Label.FormattedText>
         </Label>
 
-        <Image Source="{Binding Source}" HeightRequest="32" WidthRequest="32"/>
+        <Image Source="{Binding Source}" MaximumHeightRequest="32" WidthRequest="32"/>
     </VerticalStackLayout>
 </ContentView>

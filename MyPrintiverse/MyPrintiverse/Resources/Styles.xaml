@@ -16,6 +16,11 @@
     <converters:StepThreeToBoolConverter x:Key="StepThreeToBoolConverter" />
     <converters:StepFourToBoolConverter x:Key="StepFourToBoolConverter" />
 
+    <converters:SelectedItemIsValidConverter x:Key="SelectedItemIsValidConverter"/>
+
+    <converters:IsSampleConverter x:Key="IsSampleConverter"/>
+    <converters:SpoolSourceConverter x:Key="SpoolSourceConverter"/>
+
     <!--  Connected with displaying collections  -->
 
     <Style x:Key="BaseRefreshView" TargetType="RefreshView">

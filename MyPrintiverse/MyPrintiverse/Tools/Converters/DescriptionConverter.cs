@@ -26,7 +26,7 @@ public class DescriptionConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value;
+        return null;
     }
 }
 

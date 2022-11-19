@@ -5,7 +5,8 @@
              x:Name="this">
     
     <Grid BindingContext="{x:Reference this}" 
-          RowDefinitions="*,*,*,*,*">
+          RowDefinitions="*,*,*,*,*"
+          MaximumHeightRequest="100">
         <Image x:Name="TopImage" Grid.Row="0"/>
         <Image x:Name="TopMiddleImage" Grid.Row="1"/>
         <Image x:Name="MiddleImage" Grid.Row="2"/>

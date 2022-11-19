@@ -17,7 +17,7 @@ public partial class AddToCollectionButton : ContentView
 
     #region Image
 
-    public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(string), typeof(AddToCollectionButton), "spool.png");
+    public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(string), typeof(AddToCollectionButton), "add.png");
     public string Source
     {
         get => (string)GetValue(SourceProperty);

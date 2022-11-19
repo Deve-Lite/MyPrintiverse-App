@@ -13,7 +13,7 @@ public partial class TopManageBar : ContentView
         set => SetValue(BackCommandProperty, value);
     }
 
-    public static readonly BindableProperty BackSourceProperty = BindableProperty.Create(nameof(BackSource), typeof(string), typeof(TopManageBar), "spool.png");
+    public static readonly BindableProperty BackSourceProperty = BindableProperty.Create(nameof(BackSource), typeof(string), typeof(TopManageBar), "back.png");
     public string BackSource
     {
         get => (string)GetValue(BackSourceProperty);

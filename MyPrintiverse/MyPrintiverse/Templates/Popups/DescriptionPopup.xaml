@@ -4,23 +4,24 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="MyPrintiverse.Templates.Popups.DescriptionPopup"
                xmlns:headers="clr-namespace:MyPrintiverse.Templates.Headers"
+               Color="#66000000"
                x:Name="this">
 
-    <Frame Style="{StaticResource BaseFrame}"
+    <StackLayout BackgroundColor="Transparent">
+        <Frame Style="{StaticResource BaseFrame}"
            BindingContext="{x:Reference this}"
-           CornerRadius="0">
-        <StackLayout WidthRequest="300"
-                     
-                     BackgroundColor="Transparent"
-                     HeightRequest="100">
-            <headers:SecondaryHeader Margin="10,10,10,0"
-                                     x:Name="header" 
-                                     Title="Note"
-                                     ImageCommand="{Binding CloseCommand}"/>
+           Margin="0">
+            <StackLayout MinimumWidthRequest="200"
+                     MaximumWidthRequest="350"
+                     MinimumHeightRequest="100">
+                <headers:SecondaryHeader Margin="10,10,10,0"
+                                     ImageSource="close.png"
+                                     x:Name="header" />
 
-            <Label x:Name="description"
+                <Label x:Name="description"
                    Margin="10"
                    Style="{StaticResource MediumRaleway}"/>
-        </StackLayout>
-    </Frame>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
 </toolkit:Popup>

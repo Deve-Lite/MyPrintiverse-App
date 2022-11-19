@@ -10,7 +10,7 @@
 
     <ContentPage.ToolbarItems>
         <!-- TODO Search bar -->
-        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="spool.png"/>
+        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="search.png"/>
     </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="*, 80">
@@ -155,12 +155,6 @@
                                                AddCommand="{Binding AddItemCommand}"/>
 
         
-        <ImageButton Style="{StaticResource CollectionImageButton}"
-                     Grid.Row="1"
-                     Source="spool.png"
-                     HorizontalOptions="End"
-                     IsVisible="False"
-                     Margin="0,0,10,0"/>
 
         <Border Style="{StaticResource CollectionHeaderBorder}"
                 Grid.Row="1"

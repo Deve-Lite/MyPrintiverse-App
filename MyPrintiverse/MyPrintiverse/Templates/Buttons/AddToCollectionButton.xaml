@@ -8,7 +8,7 @@
            HeightRequest="50"
            WidthRequest="50"
            Margin="15,0,0,0"
-           Padding="5"
+           Padding="8"
            BindingContext="{x:Reference this}">
         <Frame.GestureRecognizers>
             <TapGestureRecognizer Command="{Binding AddCommand}" />

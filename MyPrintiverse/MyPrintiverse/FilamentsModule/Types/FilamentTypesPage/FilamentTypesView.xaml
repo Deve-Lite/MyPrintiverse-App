@@ -6,10 +6,9 @@
              xmlns:viewmodel="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
              x:Class="MyPrintiverse.FilamentsModule.Types.FilamentTypesPage.FilamentTypesView"
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons">
-    
+
     <ContentPage.ToolbarItems>
-        <!-- TODO Search bar -->
-        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="spool.png"/>
+        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="search.png"/>
     </ContentPage.ToolbarItems>
     
     <Grid RowDefinitions="*,80">
@@ -29,7 +28,6 @@
                         <StackLayout>
                             <Grid Margin="15,5,15,5" ColumnDefinitions="0.75*,0.25*">
                                 <Frame Style="{StaticResource CollectionFrame}" Padding="10,0,10,0">
-
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding OpenItemCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
                                                               CommandParameter="{Binding .}"/>
@@ -39,7 +37,6 @@
                                                               Command="{Binding ItemOptionsCommand,Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"
                                                               CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
-
                                     <StackLayout VerticalOptions="Center">
 
                                         <Label Style="{StaticResource LargeRaleway}"
@@ -92,7 +89,7 @@
                                         </Label>
 
                                         <Label Style="{StaticResource MicroRaleway}"
-                                           Margin="0,5,0,0"
+                                           Margin="0,5,0,5"
                                            Text="{Binding EditedAt,StringFormat='Edited at: {0:dd/MM/yy HH:mm}'}" />
 
                                     </StackLayout>
@@ -101,16 +98,13 @@
                                 <StackLayout Grid.Column="1"
                                              VerticalOptions="Center"
                                              Margin="5,0,5,0">
-
-                                    <Image Source="spool.png" Aspect="AspectFit"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SoftingPointCommand, Source={RelativeSource AncestorType={x:Type viewmodel:FilamentTypesViewModel}}}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Image Source="melting.png" Aspect="AspectFit" MaximumHeightRequest="64"/>
                                     <Label Style="{StaticResource MediumRaleway}"
                                            HorizontalOptions="Center"
                                            Text="{Binding MaxServiceTempearature, StringFormat='{0} °C'}"/>
-                                    <Label Style="{StaticResource SmallRaleway}"
-                                           HorizontalOptions="Center"
-                                           Text="(Melting point)"/>
-
-
                                 </StackLayout>
                                 
                             </Grid>
@@ -130,17 +124,8 @@
         </RefreshView>
 
         <buttons:AddToCollectionButton HorizontalOptions="Start"
-                                               Grid.Row="1"
-                                               AddCommand="{Binding AddItemCommand}"/>
-
-        <!-- TODO Switch View-->
-        
-        <ImageButton Style="{StaticResource CollectionImageButton}"
-                     Grid.Row="1"
-                     Source="spool.png"
-                     HorizontalOptions="End"
-                     IsVisible="False"
-                     Margin="0,0,10,0"/>
+                                       Grid.Row="1"
+                                       AddCommand="{Binding AddItemCommand}"/>
 
         <Border Style="{StaticResource CollectionHeaderBorder}"
                 Grid.Row="1"

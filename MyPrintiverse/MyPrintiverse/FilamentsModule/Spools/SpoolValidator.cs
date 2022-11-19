@@ -53,9 +53,9 @@ public class SpoolValidator : BaseValidator<Spool>
         spoolMap.IsSample = IsOnSpool;
 
         /* Parse will not throw Exception because of NumberRules */
-        spoolMap.AvaliableWeight = double.Parse(AvaliableWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-        spoolMap.StandardWeight = double.Parse(StandardWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-        spoolMap.Cost = double.Parse(Cost.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+        spoolMap.AvaliableWeight = double.Parse(AvaliableWeight.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
+        spoolMap.StandardWeight = double.Parse(StandardWeight.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
+        spoolMap.Cost = double.Parse(Cost.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
 
         return spoolMap;
     }

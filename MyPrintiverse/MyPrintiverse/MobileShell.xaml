@@ -9,25 +9,17 @@
        xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
        xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage">
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IconOverride="back.png" TextOverride=" "/>
+    </Shell.BackButtonBehavior>
 
 
-    <!-- 
-            <FlyoutItem Title="Login">
-                <ShellContent
-                      Title="Login"
-                      ContentTemplate="{DataTemplate login:LoginView}"
-                      FlyoutItemIsVisible="False" />
-            </FlyoutItem> -->
-
-    <FlyoutItem Title="Filaments" Icon="spool.png">
-        <Tab  Title="Filaments" Icon="spool.png">
-            <ShellContent 
-                        ContentTemplate="{DataTemplate filaments:FilamentCollectionView}"
-                        />
+    <FlyoutItem Title="Filaments" Icon="filament.png">
+        <Tab  Title="Filaments" Icon="filament.png">
+            <ShellContent ContentTemplate="{DataTemplate filaments:FilamentCollectionView}"/>
         </Tab>
-        <Tab Title="Types" Icon="spool.png">
-            <ShellContent 
-                        ContentTemplate="{DataTemplate types:FilamentTypesView}" />
+        <Tab Title="Types" Icon="material.png">
+            <ShellContent ContentTemplate="{DataTemplate types:FilamentTypesView}" />
         </Tab>
     </FlyoutItem>
 

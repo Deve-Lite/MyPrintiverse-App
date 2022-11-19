@@ -25,4 +25,9 @@ public partial class AddFilamentTypeView : ContentPage
         base.OnAppearing();
         ViewModel.OnAppearing();
     }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return base.OnBackButtonPressed();
+    }
 }
