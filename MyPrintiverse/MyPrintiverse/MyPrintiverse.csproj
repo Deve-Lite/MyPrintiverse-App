@@ -323,6 +323,7 @@
 		<None Remove="Resources\Images\heating.png" />
 		<None Remove="Resources\Images\heatrequired.png" />
 		<None Remove="Resources\Images\lightbulb.png" />
+		<None Remove="Resources\Images\logo.svg" />
 		<None Remove="Resources\Images\material.png" />
 		<None Remove="Resources\Images\mediumspool.png" />
 		<None Remove="Resources\Images\melting.png" />

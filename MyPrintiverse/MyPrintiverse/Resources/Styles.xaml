@@ -115,7 +115,6 @@
 
     <Style x:Key="BaseBorder" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
-
     </Style>
 
     <Style x:Key="NoteButton" TargetType="Button">

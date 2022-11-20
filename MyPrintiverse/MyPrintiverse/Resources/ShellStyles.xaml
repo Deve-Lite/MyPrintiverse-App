@@ -25,10 +25,8 @@
 
     </Style>
 
-    <Style
-    ApplyToDerivedTypes="True"
-    BasedOn="{StaticResource BaseStyle}"
-    TargetType="ShellItem" />
-
+    <Style ApplyToDerivedTypes="True"
+           BasedOn="{StaticResource BaseStyle}"
+           TargetType="ShellItem" />
 
 </ResourceDictionary>
