@@ -95,6 +95,8 @@
             <DataTemplate x:DataType="model:Spool" x:Key="finishedSpool">
                 <StackLayout VerticalOptions="Center">
                     <Frame Style="{StaticResource BaseFrame}"
+
+                           BackgroundColor="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}"
                            Padding="8" 
                            Margin="0,10,0, 0">
 
