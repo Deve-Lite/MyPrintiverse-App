@@ -7,13 +7,86 @@
        xmlns:login="clr-namespace:MyPrintiverse.Authorization.Login"
        xmlns:sys="clr-namespace:System;assembly=netstandard"
        xmlns:test="clr-namespace:MyPrintiverse.Templates.Test"
-       xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage">
+       xmlns:types="clr-namespace:MyPrintiverse.FilamentsModule.Types.FilamentTypesPage"
+       xmlns:local="clr-namespace:MyPrintiverse"
+       x:Name="mobileShell">
 
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseBorderVariant" TargetType="Border">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
             </Style>
+
+            <DataTemplate x:Key="flyoutItem" x:DataType="FlyoutItem">
+                <Grid>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="FlyoutItemBorder" 
+                                            Property="Border.BackgroundColor" 
+                                            Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+
+                    <Border x:Name="FlyoutItemBorder" Style="{StaticResource BaseBorderVariant}"
+                        StrokeShape="RoundRectangle 8,8,8,8"
+                        Margin="15,5,15,5"
+                        Padding="8">
+                        <Grid  ColumnDefinitions="50,*">
+                            <Image Source="{Binding Icon}" 
+                               HeightRequest="{OnPlatform Android=32, iOS=30, Default=48}"
+                               WidthRequest="{OnPlatform Android=32, iOS=30, Default=48}"
+                               Aspect="AspectFit"/>
+                            <Label Style="{StaticResource LargeRaleway}"
+                           Grid.Column="1"
+                           FontAttributes="Bold"
+                           Text="{Binding Title}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="menuItem" x:DataType="FlyoutItem">
+                <Grid>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="FlyoutItemBorder" 
+                                            Property="Border.BackgroundColor" 
+                                            Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+
+                    <Border x:Name="FlyoutItemBorder" Style="{StaticResource BaseBorderVariant}"
+                        StrokeShape="RoundRectangle 8,8,8,8"
+                        Margin="15,5,15,5"
+                        Padding="10,5,10,7">
+                        <Grid ColumnDefinitions="*">
+                            <Label Style="{StaticResource LargeRaleway}"
+                           Grid.Column="1"
+                           FontAttributes="Bold"
+                           Text="{Binding Title}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+
+            <local:FloutItemDataTemplateSelector x:Key="FloutItemDataTemplateSelector"
+                                                 FlyoutItem="{StaticResource flyoutItem}"
+                                                 MenuItem="{StaticResource menuItem}"/>
+
         </ResourceDictionary>
     </Shell.Resources>
 
@@ -54,42 +127,9 @@
     </Shell.FlyoutFooterTemplate>
 
     <Shell.ItemTemplate>
-        <DataTemplate x:DataType="FlyoutItem">
-            <Grid>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal" />
-                            <VisualState x:Name="Selected">
-                                <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemBorder" 
-                                            Property="Border.BackgroundColor" 
-                                            Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"/>
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </VisualStateManager.VisualStateGroups>
-
-                <Border x:Name="FlyoutItemBorder" Style="{StaticResource BaseBorderVariant}"
-                        StrokeShape="RoundRectangle 8,8,8,8"
-                        Margin="15,5,15,5"
-                        Padding="8">
-                    <Grid  ColumnDefinitions="50,*">
-                        <Image Source="{Binding Icon}" 
-                               HeightRequest="{OnPlatform Android=32, iOS=30, Default=48}"
-                               WidthRequest="{OnPlatform Android=32, iOS=30, Default=48}"
-                               Aspect="AspectFit"/>
-                        <Label Style="{StaticResource LargeRaleway}"
-                           Grid.Column="1"
-                           FontAttributes="Bold"
-                           Text="{Binding Title}"/>
-                    </Grid>
-                </Border>
-            </Grid>
-        </DataTemplate>
+        <local:FloutItemDataTemplateSelector FlyoutItem="{StaticResource flyoutItem}"
+                                             MenuItem="{StaticResource menuItem}"/>
     </Shell.ItemTemplate>
-
 
     <Shell.MenuItemTemplate>
         <DataTemplate>
@@ -112,7 +152,7 @@
                 <Border x:Name="FlyoutItemBorder" Style="{StaticResource BaseBorderVariant}"
                         StrokeShape="RoundRectangle 8,8,8,8"
                         Margin="15,5,15,5"
-                        Padding="10,8,10,8">
+                        Padding="10,5,10,7">
                     <Grid ColumnDefinitions="*">
                         <Label Style="{StaticResource LargeRaleway}"
                            Grid.Column="1"
@@ -144,7 +184,12 @@
                     Route="admin" />
     </FlyoutItem>
 
-    <MenuItem Text="Text" IconImageSource="spoo.png"/>
+    <FlyoutItem Title="Help" >
+        <ShellContent Title="Test" ContentTemplate="{DataTemplate test:TestPage}" />
+    </FlyoutItem>
 
+    <FlyoutItem Title="About" >
+        <ShellContent Title="Test" ContentTemplate="{DataTemplate test:TestPage}" />
+    </FlyoutItem>
 
 </Shell>

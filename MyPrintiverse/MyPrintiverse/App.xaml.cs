@@ -9,14 +9,14 @@ namespace MyPrintiverse;
 
 public partial class App : Application
 {
-    public App(IToast toast)
+    public App(IToast toast, ISession session)
     {
         RegisterRoutes();
 
         InitializeComponent();
 
-        if (DeviceIdiom.Phone == DeviceInfo.Idiom)
-            MainPage = new MobileShell(toast);
+        if (DeviceIdiom.Phone == DeviceInfo.Idiom || DeviceIdiom.Tablet == DeviceInfo.Idiom)
+            MainPage = new MobileShell(toast, session);
         else
             MainPage = new DesktopShell();
     }
