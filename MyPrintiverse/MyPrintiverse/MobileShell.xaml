@@ -13,9 +13,7 @@
 
     <Shell.Resources>
         <ResourceDictionary>
-            <Style x:Key="BaseBorderVariant" TargetType="Border">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
-            </Style>
+
 
             <DataTemplate x:Key="flyoutItem" x:DataType="FlyoutItem">
                 <Grid>
@@ -69,7 +67,8 @@
                         </VisualStateGroupList>
                     </VisualStateManager.VisualStateGroups>
 
-                    <Border x:Name="FlyoutItemBorder" Style="{StaticResource BaseBorderVariant}"
+                    <Border x:Name="FlyoutItemBorder"
+                            Style="{StaticResource BaseBorderVariant}"
                         StrokeShape="RoundRectangle 8,8,8,8"
                         Margin="15,5,15,5"
                         Padding="10,5,10,7">
@@ -82,10 +81,6 @@
                     </Border>
                 </Grid>
             </DataTemplate>
-
-            <local:FloutItemDataTemplateSelector x:Key="FloutItemDataTemplateSelector"
-                                                 FlyoutItem="{StaticResource flyoutItem}"
-                                                 MenuItem="{StaticResource menuItem}"/>
 
         </ResourceDictionary>
     </Shell.Resources>

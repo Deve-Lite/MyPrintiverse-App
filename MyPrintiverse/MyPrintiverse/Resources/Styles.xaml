@@ -73,6 +73,10 @@
 
     <!--  Displaying Items  -->
 
+                <Style x:Key="BaseBorderVariant" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" />
+            </Style>
+
     <Style x:Key="BaseFrame" TargetType="Frame">
 
         <Setter Property="HasShadow" Value="False" />
