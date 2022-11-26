@@ -14,4 +14,9 @@ public partial class FilamentCollectionView : ContentPage
         base.OnAppearing();
 		ViewModel?.OnAppearing();
     }
+
+    private void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

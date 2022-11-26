@@ -9,7 +9,6 @@
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons">
 
     <ContentPage.ToolbarItems>
-        <!-- TODO Search bar -->
         <ToolbarItem Order="Primary" Text="Tip" IconImageSource="search.png"/>
     </ContentPage.ToolbarItems>
 
@@ -150,11 +149,10 @@
             </CollectionView>
         </RefreshView>
 
-        <buttons:AddToCollectionButton HorizontalOptions="Start"
-                                               Grid.Row="1"
-                                               AddCommand="{Binding AddItemCommand}"/>
-
-        
+        <buttons:AddToCollectionButton HorizontalOptions="End"
+                                       Grid.Row="1"
+                                       Margin="0,0,15,0"
+                                       AddCommand="{Binding AddItemCommand}"/>
 
         <Border Style="{StaticResource CollectionHeaderBorder}"
                 Grid.Row="1"

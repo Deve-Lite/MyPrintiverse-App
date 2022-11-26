@@ -45,19 +45,23 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     protected override async Task UpdateCollectionsOnAppearing()
     {
-        if (Id != PrevId || !string.IsNullOrEmpty(PrevId)) 
+        if (Id != PrevId || !string.IsNullOrEmpty(PrevId))
         {
             PrevId = Id;
-            Items.Clear();
-            RefreshCollection(Items, (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id), false);
+            Items = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
+            RefreshCollection(SearchedItems, Items, false);
         }
         else
-            UpdateCollection(Items, (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id));
+        {
+            Items = (List<TBaseModel>) await KeyItemsService.GetItemsByKeyAsync(Id);
+            UpdateCollection(SearchedItems, Items);
+        }
     }
 
     protected override async Task Refresh()
     {
-        RefreshCollection(Items, await KeyItemsService.GetItemsByKeyAsync(Id));
+        Items = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
+        RefreshCollection(SearchedItems, Items);
     }
 
     #endregion

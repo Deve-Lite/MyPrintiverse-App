@@ -11,7 +11,7 @@ public abstract partial class BaseViewModel : ObservableObject
     /// <summary>
     /// Default delay in milliseconds.
     /// </summary>
-    protected const int DELAY = 300;
+    protected const int DELAY = 150;
 
     #endregion
 

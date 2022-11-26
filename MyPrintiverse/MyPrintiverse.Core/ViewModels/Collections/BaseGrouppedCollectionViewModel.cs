@@ -15,51 +15,119 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     #region List
 
     /// <summary>
-    /// Collection of groupped items (TBaseModel).
+    /// Searched collection of Items.
     /// </summary>
-    public new ObservableCollection<GroupedItem<TBaseModel>> Items { get; set; }
+    public new ObservableCollection<GroupedItem<TBaseModel>> SearchedItems { get; set; }
 
     #endregion
 
     public GroupedCollectionViewModel(IMessageService messagingService, IItemService<TBaseModel> itemsService) : base(messagingService, itemsService)
     {
-        Items = new ObservableCollection<GroupedItem<TBaseModel>>();
+        SearchedItems = new ObservableCollection<GroupedItem<TBaseModel>>();
     }
 
     #region Overrides
+
+    protected virtual void SearchItems(string query)
+    {
+        var filteredItems = Items.Where(item => MatchQuery(item, query));
+
+        foreach (TBaseModel item in Items)
+        {
+
+            if (!filteredItems.Contains(item))
+            {
+                DeleteFromSearchedItems(item);
+                continue;
+            }
+
+            int itemCollectionIndex = GetIndex(item);
+
+            if(itemCollectionIndex == -1)
+                AddToCollection(SearchedItems, item);
+            else
+            {
+                if (!SearchedItems[itemCollectionIndex].Contains(item)) 
+                {
+                    SearchedItems[itemCollectionIndex].Add(item);
+                }
+            }
+        }
+
+    }
 
     protected override async Task UpdateCollectionsOnAppearing()
     {
         var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
-        var collections = new List<GroupedItem<TBaseModel>>(Items);
+        var collections = new List<GroupedItem<TBaseModel>>(SearchedItems);
 
         foreach (var collection in collections)
         {
             UpdateCollection(collection, data, false);
             if (collection.Count == 0)
-                Items.Remove(collection);
+                SearchedItems.Remove(collection);
         }
 
         foreach (var item in data)
-            AddToCollection(Items,item);
+            AddToCollection(SearchedItems, item);
 
-        SortCollection(Items);
+        SortCollection(SearchedItems);
     }
 
     protected override async Task Refresh()
     {
-        await RefreshCollection(Items, await ItemsService.GetItemsAsync());
+        Items = (List<TBaseModel>) await ItemsService.GetItemsAsync();
+        await RefreshCollection(SearchedItems, Items);
     }
 
-    protected override void DeleteFromItems(TBaseModel item)
+    protected override void DeleteFromSearchedItems(TBaseModel item)
     {
         int itemCollectionIndex = GetIndex(item);
 
-        RemoveFromCollection(Items[itemCollectionIndex], item);
+        if (itemCollectionIndex == -1)
+            return;
 
-        if (Items[itemCollectionIndex].Count == 0)
-            Items.Remove(Items[itemCollectionIndex]);
+        RemoveFromCollection(SearchedItems[itemCollectionIndex], item);
+
+        if (SearchedItems[itemCollectionIndex].Count == 0)
+            SearchedItems.Remove(SearchedItems[itemCollectionIndex]);
+    }
+
+
+    protected override void UpdateCollection(ObservableCollection<TBaseModel> collection, List<TBaseModel> items, bool addRemaingItems = true)
+    {
+        foreach (var oldItem in new List<TBaseModel>(collection))
+        {
+            var newItem = items.FirstOrDefault(x => x.Id == oldItem.Id);
+
+            if (newItem == null)
+            {
+                RemoveFromCollection(collection, oldItem);
+            }
+            else if (oldItem.EditedAt != newItem.EditedAt)
+            {
+                if (GetNewGroupName(oldItem) == GetNewGroupName(newItem))
+                {
+                    EditInCollection(collection, newItem, oldItem);
+                    items.Remove(newItem);
+                }
+                else
+                {
+                    collection.Remove(oldItem);
+                }
+            }
+            else if (newItem.EditedAt == oldItem.EditedAt)
+                items.Remove(newItem);
+        }
+
+        if (addRemaingItems)
+        {
+            foreach (TBaseModel item in items)
+                AddToCollection(collection, item);
+        }
+
+        SortCollection(collection);
     }
 
     #endregion
@@ -78,6 +146,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         SortCollection(Collection);
 
         IsRefreshing = false;
+
     }
 
     protected virtual void AddToCollection(ObservableCollection<GroupedItem<TBaseModel>> Collection, TBaseModel item)
@@ -85,12 +154,11 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         int i = GetIndex(item);
         if (i == -1)
         {
-            ObservableCollection<TBaseModel> newItems = new ObservableCollection<TBaseModel>();
-            newItems.Add(item);
-            Items.Add(new GroupedItem<TBaseModel>(GetNewGroupName(item), newItems));
+            ObservableCollection<TBaseModel> newItems = new ObservableCollection<TBaseModel> { item };
+            SearchedItems.Add(new GroupedItem<TBaseModel>(GetNewGroupName(item), newItems));
         }
         else
-            Items[i].Add(item);
+            SearchedItems[i].Add(item);
     }
 
     protected virtual void SortCollection(ObservableCollection<GroupedItem<TBaseModel>> Collection) => Collection.OrderBy(x => x.Name);

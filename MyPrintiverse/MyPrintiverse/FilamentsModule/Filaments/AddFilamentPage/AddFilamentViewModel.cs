@@ -29,7 +29,7 @@ public partial class AddFilamentViewModel : FilamentFormViewModel
     [RelayCommand]
     public override async Task NextStep() => await Next(AddItem);
 
-    public async Task AddItem() => await ManageItem(async (spool) => { return await ItemService.AddItemAsync(spool); });
+    public async Task AddItem() => await ManageItem(ItemService.AddItemAsync);
 
     #endregion
 }

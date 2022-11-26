@@ -12,6 +12,9 @@
     </ContentPage.ToolbarItems>
     
     <Grid RowDefinitions="*,80">
+
+        <SearchBar />
+
         <RefreshView Style="{StaticResource BaseRefreshView}" Grid.RowSpan="2">
             <CollectionView Style="{StaticResource BaseCollectionView}"
                             Footer="{Binding .}"
@@ -123,8 +126,9 @@
             </CollectionView>
         </RefreshView>
 
-        <buttons:AddToCollectionButton HorizontalOptions="Start"
+        <buttons:AddToCollectionButton HorizontalOptions="End"
                                        Grid.Row="1"
+                                       Margin="0,0,15,0"
                                        AddCommand="{Binding AddItemCommand}"/>
 
         <Border Style="{StaticResource CollectionHeaderBorder}"

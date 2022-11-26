@@ -1,5 +1,7 @@
 ﻿using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
+using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
 
 namespace MyPrintiverse.Core.ViewModels.Collections;
 
@@ -16,7 +18,12 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// <summary>
     /// Base collection of TBaseModel.
     /// </summary>
-    public ObservableCollection<TBaseModel> Items { get; set; }
+    protected List<TBaseModel> Items { get; set; }
+
+    /// <summary>
+    /// Searched collection of Items.
+    /// </summary>
+    public ObservableCollection<TBaseModel> SearchedItems { get; set; }
 
     #endregion
 
@@ -26,26 +33,37 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Command for refreshing collection.
     /// </summary>
     public AsyncRelayCommand RefreshCommand { get; }
+
     /// <summary>
     /// Command for adding new item to collection.
     /// </summary>
     public AsyncRelayCommand AddItemCommand { get; }
+
     /// <summary>
     /// Command for displaying multiple manage options for collection item. 
     /// </summary>
     public AsyncRelayCommand<TBaseModel> ItemOptionsCommand { get; }
+
     /// <summary>
     /// Command for displaying single item from collection.
     /// </summary>
     public AsyncRelayCommand<TBaseModel> OpenItemCommand { get; }
+
     /// <summary>
     /// Command for deleting one item from collection.
     /// </summary>
     public AsyncRelayCommand<TBaseModel> DeleteItemCommand { get; }
+
     /// <summary>
     /// Command for editing one item from collection.
     /// </summary>
     public AsyncRelayCommand<TBaseModel> EditItemCommand { get; }
+
+    /// <summary>
+    /// Searches items in collection.
+    /// </summary>
+    public RelayCommand<string> SearchItemsCommand { get; }
+
 
     #endregion
 
@@ -74,7 +92,8 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         MessageService = messageService;
         ItemsService = itemsService;
 
-        Items = new ObservableCollection<TBaseModel>();
+        Items = new List<TBaseModel>();
+        SearchedItems = new ObservableCollection<TBaseModel>();
 
         RefreshCommand = new AsyncRelayCommand(Refresh, CanExecute);
         AddItemCommand = new AsyncRelayCommand(AddItem, CanExecute);
@@ -82,6 +101,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         OpenItemCommand = new AsyncRelayCommand<TBaseModel>(OpenItem, CanExecute);
         DeleteItemCommand = new AsyncRelayCommand<TBaseModel>(DeleteItem, CanExecute);
         ItemOptionsCommand = new AsyncRelayCommand<TBaseModel>(ItemOptions, CanExecute);
+        SearchItemsCommand = new RelayCommand<string>(SearchItems);
     }
 
     #region OnAppearing
@@ -96,18 +116,46 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Task to perfrom when page is loading, designed for refresh collection with new data.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task UpdateCollectionsOnAppearing() => UpdateCollection(Items, (List<TBaseModel>)await ItemsService.GetItemsAsync());
+    protected virtual async Task UpdateCollectionsOnAppearing() 
+    {
+        Items = (List<TBaseModel>)await ItemsService.GetItemsAsync();
+
+        UpdateCollection(SearchedItems, Items);
+    }
 
     /// <summary>
     /// Task to perform when RefreshCommand occurs.
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task Refresh() => RefreshCollection(Items, await ItemsService.GetItemsAsync());
+    protected virtual async Task Refresh() 
+    {
+        Items = (List<TBaseModel>)await ItemsService.GetItemsAsync();
+        RefreshCollection(SearchedItems, Items);
+    }
 
 
     #endregion
 
     #region Collection
+
+    protected virtual void SearchItems(string query)
+    {
+        var filteredItems = Items.Where(item => MatchQuery(item, query));
+
+        foreach(TBaseModel item in Items) 
+        {
+            if (!filteredItems.Contains(item))
+                SearchedItems.Remove(item);
+            else if (!Items.Contains(item))
+                SearchedItems.Add(item);
+        }
+    }
+
+
+    protected virtual bool MatchQuery(TBaseModel item,string query) 
+    {
+        throw new NotImplementedException("Match query must be implemented.");
+    }
 
     /// <summary>
     /// Updates colection with new items and deletes items that not occure in items.
@@ -214,7 +262,8 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
         {
             if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
                 if (await ItemsService.DeleteItemAsync(item?.Id))
-                    DeleteFromItems(item);
+                    DeleteFromSearchedItems(item);
+
 
             IsBusy = false;
         }
@@ -232,6 +281,8 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             return;
 
         await OpenPage(AddRoute());
+
+        IsBusy = false;
     }
 
     /// <summary>
@@ -245,6 +296,9 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             return;
 
         await OpenPage(EditRoute(item));
+
+
+        IsBusy = false;
     }
 
     /// <summary>
@@ -258,6 +312,9 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
             return;
 
         await OpenPage(OpenRoute(item));
+
+
+        IsBusy = false;
     }
 
     /// <summary>
@@ -272,7 +329,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
         if (await MessageService.ShowSelectAlertAsync("Item Delete", "Do you really want to delete this item?", "Delete"))
             if (await ItemsService.DeleteItemAsync(item!.Id))
-                DeleteFromItems(item);
+                DeleteFromSearchedItems(item);
 
         IsBusy = false;
     }
@@ -281,7 +338,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     /// Method deletes item from collection. Method used in DeleteItem.
     /// </summary>
     /// <param name="item"> Model. </param>
-    protected virtual void DeleteFromItems(TBaseModel? item) => RemoveFromCollection(Items, item!);
+    protected virtual void DeleteFromSearchedItems(TBaseModel? item) => RemoveFromCollection(SearchedItems, item!);
 
     #endregion
 

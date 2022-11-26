@@ -39,7 +39,7 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
         if (!IsFinishedFilamentsVisible)
             collection.RemoveAll(x => x.IsFinished);
 
-        RefreshCollection(Items, collection, false);
+        RefreshCollection(SearchedItems, collection, false);
 
         IsRefreshing = false;
     }
@@ -51,7 +51,7 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
         if (!IsFinishedFilamentsVisible)
             collection.RemoveAll(x => x.IsFinished);
 
-        UpdateCollection(Items, collection);
+        UpdateCollection(SearchedItems, collection);
     }
 
     #endregion

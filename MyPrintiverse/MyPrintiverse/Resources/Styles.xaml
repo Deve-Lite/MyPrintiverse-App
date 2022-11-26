@@ -32,7 +32,7 @@
 
     <Style x:Key="BaseCollectionView" TargetType="CollectionView">
 
-        <Setter Property="ItemsSource" Value="{Binding Items}" />
+        <Setter Property="ItemsSource" Value="{Binding SearchedItems}" />
         <Setter Property="Margin" Value="0" />
     </Style>
 

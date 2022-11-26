@@ -127,7 +127,12 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
     protected async Task Next(Func<Task> manageItem)
     {
         if (Step == 4)
+        {
+            NextIsRunning = true;
+            await Task.Delay(DELAY);
             await manageItem.Invoke();
+            NextIsRunning = false;
+        }    
         
 
         if (Step == 3)

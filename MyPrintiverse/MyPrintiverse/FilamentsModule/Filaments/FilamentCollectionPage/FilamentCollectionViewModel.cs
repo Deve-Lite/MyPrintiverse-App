@@ -19,17 +19,17 @@ public class FilamentCollectionViewModel : GroupedCollectionViewModel<Filament, 
 
     protected override int GetIndex(Filament item)
     {
-        var foundItem = Items.FirstOrDefault(x => x.Name == item.Brand);
+        var foundItem = SearchedItems.FirstOrDefault(x => x.Name == item.Brand);
 
         if (foundItem == null)
                 return -1;
 
-        return Items.IndexOf(foundItem);
+        return SearchedItems.IndexOf(foundItem);
     }
 
-    protected override void DeleteFromItems(Filament item)
+    protected override void DeleteFromSearchedItems(Filament item)
     {
-        base.DeleteFromItems(item);
+        base.DeleteFromSearchedItems(item);
         _spoolService.DeleteItemsByKeyAsync(item.Id);
     }
     #endregion

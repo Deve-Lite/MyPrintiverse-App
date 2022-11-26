@@ -134,8 +134,13 @@ public abstract partial class TypeFormViewModel : BaseFormViewModel<FilamentType
     {
 
         if (Step == 4)
+        {
+            NextIsRunning = true;
+            await Task.Delay(DELAY);
             await manageItem.Invoke();
-        
+            NextIsRunning = false;
+        }
+
 
         if (Step == 3)
         {
