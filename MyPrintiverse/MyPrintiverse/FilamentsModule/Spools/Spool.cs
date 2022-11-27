@@ -22,6 +22,9 @@ public class Spool : BaseModel
     [JsonProperty("cost")]
     public double Cost { get; set; }
 
+    [JsonProperty("tag")]
+    public string Tag { get; set; }
+
 
     [JsonProperty("isFinished")]
     public bool IsFinished { get; set; }

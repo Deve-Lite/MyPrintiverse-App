@@ -21,10 +21,10 @@
             </DataTemplate>
 
             <DataTemplate x:DataType="model:Spool" x:Key="notOnSpool">
-                <spooltemplates:CollectionSpoolView Tag="TAGTODO"
+                <spooltemplates:CollectionSpoolView Tag="{Binding Tag}"
                                                     Status="not on spool"
                                                     Source="rope.png}"
-                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00} kg'}"
+                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00}'}"
                                                     StandardWeight="{Binding StandardWeight,StringFormat='{0:0.00} kg'}"
                                                     EditedAt="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}">
                     <spooltemplates:CollectionSpoolView.GestureRecognizers>
@@ -40,10 +40,10 @@
 
             <DataTemplate x:DataType="model:Spool" x:Key="finishedSpool">
 
-                <spooltemplates:CollectionSpoolView Tag="TAGTODO"
+                <spooltemplates:CollectionSpoolView Tag="{Binding Tag}"
                                                     Status="finished / empty"
                                                     Source="emptyspool.png}"
-                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00} kg'}"
+                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00}'}"
                                                     StandardWeight="{Binding StandardWeight,StringFormat='{0:0.00} kg'}"
                                                     EditedAt="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}">
                     <spooltemplates:CollectionSpoolView.GestureRecognizers>
@@ -58,10 +58,10 @@
             </DataTemplate>
 
             <DataTemplate x:DataType="model:Spool" x:Key="goodStatusSpool">
-                <spooltemplates:CollectionSpoolView Tag="TAGTODO"
+                <spooltemplates:CollectionSpoolView Tag="{Binding Tag}"
                                                     Status="full / minmal wear"
                                                     Source="fullspool.png}"
-                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00} kg'}"
+                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00}'}"
                                                     StandardWeight="{Binding StandardWeight,StringFormat='{0:0.00} kg'}"
                                                     EditedAt="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}">
                     <spooltemplates:CollectionSpoolView.GestureRecognizers>
@@ -76,10 +76,10 @@
             </DataTemplate>
 
             <DataTemplate x:DataType="model:Spool" x:Key="mediumStatusSpool">
-                <spooltemplates:CollectionSpoolView Tag="TAGTODO"
+                <spooltemplates:CollectionSpoolView Tag="{Binding Tag}"
                                                     Status="medium wear"
                                                     Source="mediumspool.png}"
-                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00} kg'}"
+                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00}'}"
                                                     StandardWeight="{Binding StandardWeight,StringFormat='{0:0.00} kg'}"
                                                     EditedAt="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}">
                     <spooltemplates:CollectionSpoolView.GestureRecognizers>
@@ -94,10 +94,10 @@
             </DataTemplate>
 
             <DataTemplate x:DataType="model:Spool" x:Key="smallStatusSpool">
-                <spooltemplates:CollectionSpoolView Tag="TAGTODO"
+                <spooltemplates:CollectionSpoolView Tag="{Binding Tag}"
                                                     Status="almost empty / big wear"
                                                     Source="smallspool.png}"
-                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00} kg'}"
+                                                    AvaliableWeight="{Binding AvaliableWeight,StringFormat='{0:0.00}'}"
                                                     StandardWeight="{Binding StandardWeight,StringFormat='{0:0.00} kg'}"
                                                     EditedAt="{Binding EditedAt,StringFormat='Used at {0:dd/MM/yy HH:mm}'}">
                     <spooltemplates:CollectionSpoolView.GestureRecognizers>
@@ -156,7 +156,24 @@
                                 Margin="15,15,15,0"
                                 FirstImageCommand="{Binding AddItemCommand}"
                                 FirstImageSource="add.png"
+                                SecondImageCommand="{Binding SearchBarEnableCommand}"
                                 SecondImageSource="search.png"/>
+
+
+        <Border x:Name="border"
+                Style="{StaticResource BaseBorderVariant}"
+                IsVisible="{Binding SearchBarIsVisible}"
+                StrokeShape="RoundRectangle 8,8,8,8"
+                Margin="15,0,15,0"
+                Padding="5">
+            <SearchBar x:Name="search" 
+                       HorizontalOptions="FillAndExpand"
+                       MaximumHeightRequest="30"
+                       IsVisible="{Binding SearchBarIsVisible}"
+                       SearchCommand="{Binding SearchItemsCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference search}}" />
+        </Border>
+       
 
         <RefreshView Style="{StaticResource BaseRefreshView}" 
                          Grid.Row="2" 

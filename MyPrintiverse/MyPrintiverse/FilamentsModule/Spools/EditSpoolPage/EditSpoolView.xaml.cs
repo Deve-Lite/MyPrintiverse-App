@@ -11,7 +11,8 @@ public partial class EditSpoolView : ContentPage
 
         costEntry.Completed += (s, e) => standardWeightEntry.Focus();
         standardWeightEntry.Completed += (s, e) => avaliableWeightEntry.Focus();
-        avaliableWeightEntry.Completed += (s, e) => descriptionEditor.Focus();
+        avaliableWeightEntry.Completed += (s, e) => tagEntry.Focus();
+        tagEntry.Completed += (s, e) => descriptionEditor.Focus();
 
         // TODO: Animate Views
         // TODO: Editor 3 characters and space problem

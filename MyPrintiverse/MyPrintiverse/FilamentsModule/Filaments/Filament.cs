@@ -36,5 +36,8 @@ public class Filament : BaseModel
 
     [JsonProperty("rating")]
     public int Rating { get; set; }
+
+    [JsonProperty("tag")]
+    public string Tag { get; set; }
 }
 

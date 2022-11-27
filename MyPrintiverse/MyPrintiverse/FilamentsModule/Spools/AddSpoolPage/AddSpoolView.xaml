@@ -56,6 +56,14 @@
                                                        ErrorMessage="{Binding Item.AvaliableWeight.Error}"
                                                        Entity="kg"/>
 
+                    <inputs:ValidatableEntry x:Name="tagEntry"
+                                             KeyboardFlag="CapitalizeCharacter"
+                                             Title="Tag"
+                                             Text="{Binding Item.Tag.Value}"
+                                             ValidationCommand="{Binding Item.Tag.ExtendedValidateCommand}"
+                                             IsValid="{Binding Item.Tag.IsValid}"
+                                             ErrorMessage="{Binding Item.Tag.Error}"/>
+
                     <inputs:ValidatableEditor x:Name="descriptionEditor"
                                               Title="Description"
                                               Text="{Binding Item.Description.Value}"
@@ -81,7 +89,7 @@
                                                      AvaliableWeight="{Binding Item.AvaliableWeight.Value, StringFormat='{0:0.000}'}"
                                                      StandardWeight="{Binding Item.StandardWeight.Value, StringFormat='{0:0.000}'}"
                                                      IsOnSpool="{Binding Item.IsOnSpool.Value}"
-                                                     IsFinished="{Binding Item.IsFinished}"
+                                                     IsFinished="{Binding Item.IsFinished.Value}"
                                                      Cost="{Binding Item.Cost.Value}"
                                                      EditedAt="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Created at: {0:dd/MM/yy HH:mm}'}"
                                                      Currency="{Binding Currency}"/>

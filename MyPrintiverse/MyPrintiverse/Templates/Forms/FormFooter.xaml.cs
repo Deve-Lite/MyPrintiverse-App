@@ -94,6 +94,9 @@ public partial class FormFooter : ContentView
 
         if (actstep == bindableFooter.TotalSteps)
         {
+            if (bindableFooter.previousButton.IsVisible == false)
+                bindableFooter.previousButton.IsVisible = true;
+
             bindableFooter.nextButton.Text = bindableFooter.FinishingStepText;
         }
         else if (actstep == 1)

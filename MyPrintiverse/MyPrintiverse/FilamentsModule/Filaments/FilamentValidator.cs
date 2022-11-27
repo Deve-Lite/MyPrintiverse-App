@@ -1,6 +1,5 @@
 ﻿
 using MyPrintiverse.Core.Extensions;
-using MyPrintiverse.Core.Validation.OtherValidation;
 using System.Globalization;
 
 namespace MyPrintiverse.FilamentsModule.Filaments;
@@ -12,6 +11,7 @@ public partial class FilamentValidator : BaseValidator<Filament>
     public ExtendedValidatable<string> Diameter { get; set; }
     public ExtendedValidatable<string> Brand { get; set; }
     public ExtendedValidatable<string> Color { get; set; }
+    public ExtendedValidatable<string> Tag { get; set; }
 
     public ExtendedValidatable<string> ColorHex { get; set; }
     public ExtendedValidatable<string> Description { get; set; }
@@ -43,13 +43,14 @@ public partial class FilamentValidator : BaseValidator<Filament>
     }
 
     public override bool Validate() => Diameter.Validate() &&
-                                       Brand.Validate() &&
-                                       Color.Validate() &&
-                                       Description.Validate() &&
-                                       NozzleTemperature.Validate() &&
-                                       CoolingRate.Validate() &&
-                                       BedTemperature.Validate() &&
-                                       Rating.Validate();
+            Brand.Validate() &&
+            Color.Validate() &&
+            Description.Validate() &&
+            NozzleTemperature.Validate() &&
+            CoolingRate.Validate() &&
+            BedTemperature.Validate() &&
+            Rating.Validate() &&
+            Tag.Validate();
 
     public override Filament Map()
     {
@@ -62,6 +63,7 @@ public partial class FilamentValidator : BaseValidator<Filament>
         fialmentMap.Description = Description.Value.Trim();
         fialmentMap.ColorName = Color.Value.Trim();
         fialmentMap.ColorHex = ColorHex.Value;
+        fialmentMap.Tag = Tag.Value;
 
         /* Parse will not throw Exception because of NumberRules */
         fialmentMap.Diameter = double.Parse(Diameter.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
@@ -89,6 +91,7 @@ public partial class FilamentValidator : BaseValidator<Filament>
         BedTemperature.Value = "";
         CoolingRate.Value = "";
         Rating.Value = "3";
+        Tag.Value = "";
     }
 
     private void AddValidation()
@@ -101,6 +104,8 @@ public partial class FilamentValidator : BaseValidator<Filament>
             .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Data should have from 3 to 50 characters.\n");
         Color = ExtendedValidator.Build<string>()
             .WithRule(new RangeRule<string>(minLength: 3, maxLength: 50), "Data should have from 3 to 50 characters.\n");
+        Tag = ExtendedValidator.Build<string>()
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 10), "Data should have from 3 to 10 characters.\n");
 
         Description = ExtendedValidator.Build<string>()
             .WithRule(new RangeRule<string>(maxLength: 500), "Too long data.");
@@ -131,9 +136,10 @@ public partial class FilamentValidator : BaseValidator<Filament>
         TypeId.Value = filament.TypeId;
         ColorHex.Value = filament.ColorHex;
 
-        Description.Value = filament.Description;
-        Color.Value = filament.ColorName;
-        Brand.Value = filament.Brand;
+        Description.Value = filament.Description.Trim();
+        Color.Value = filament.ColorName.Trim();
+        Brand.Value = filament.Brand.Trim();
+        Tag.Value = filament.Tag.Trim();
 
         Diameter.Value = filament.Diameter.ToString("0.##");
         NozzleTemperature.Value = filament.NozzleTemperature.ToString();

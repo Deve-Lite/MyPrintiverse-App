@@ -50,17 +50,6 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
         if (Step == 2)
         {
             NextIsRunning = true;
-
-            await Task.Delay(DELAY);
-
-            /* Parse will not throw Exception because of NumberRules */
-            var avaliableWeight = double.Parse((Item as SpoolValidator).AvaliableWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
-
-            if (avaliableWeight == 0)
-                (Item as SpoolValidator).IsFinished = true;
-            else
-                (Item as SpoolValidator).IsFinished = false;
-
             await manageItem.Invoke();
             NextIsRunning = false;
         }
@@ -71,12 +60,20 @@ public partial class SpoolFormViewModel : BaseFormViewModel<Spool>
 
             await Task.Delay(DELAY);
 
+
+            /* Parse will not throw Exception because of NumberRules */
+            var avaliableWeight = double.Parse((Item as SpoolValidator).AvaliableWeight.Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+
+            if (avaliableWeight == 0)
+                (Item as SpoolValidator).IsFinished.Value = true;
+            else
+                (Item as SpoolValidator).IsFinished.Value = false;
+
             if (IsStepOneValid())
             {
                 Step = 2;
                 StepDescription = StepDescriptionList[Step-1];
 
-                
                 Filament = await FilamentService.GetItemAsync(FilamentId);
             }
 

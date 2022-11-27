@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.Core.Services;
+﻿using Microsoft.IdentityModel.Tokens;
+using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
@@ -120,7 +121,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     {
         Items = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
-        UpdateCollection(SearchedItems, Items);
+        UpdateCollection(SearchedItems, new List<TBaseModel>(Items));
     }
 
     /// <summary>
@@ -130,7 +131,7 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
     protected virtual async Task Refresh() 
     {
         Items = (List<TBaseModel>)await ItemsService.GetItemsAsync();
-        RefreshCollection(SearchedItems, Items);
+        RefreshCollection(SearchedItems, new List<TBaseModel>(Items));
     }
 
 
@@ -138,17 +139,25 @@ public abstract class BaseCollectionViewModel<TBaseModel, TAddView, TEditView, T
 
     #region Collection
 
-    protected virtual void SearchItems(string query)
+    public virtual void SearchItems(string query)
     {
-        var filteredItems = Items.Where(item => MatchQuery(item, query));
+        if (query.IsNullOrEmpty())
+        {
+            UpdateCollection(SearchedItems, new List<TBaseModel>(Items));
+            return;
+        }
+
+        var filteredItems = Items.Where(item => MatchQuery(item, query)).ToList();
 
         foreach(TBaseModel item in Items) 
         {
             if (!filteredItems.Contains(item))
                 SearchedItems.Remove(item);
-            else if (!Items.Contains(item))
+            else if (!SearchedItems.Contains(item))
                 SearchedItems.Add(item);
         }
+
+        SortCollection(SearchedItems);
     }
 
 

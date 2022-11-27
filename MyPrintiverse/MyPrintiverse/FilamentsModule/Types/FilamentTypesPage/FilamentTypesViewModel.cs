@@ -17,4 +17,9 @@ public partial class FilamentTypesViewModel : BaseCollectionViewModel<FilamentTy
 	{
         Shell.Current.ShowPopup(new DescriptionPopup("This value is representing temperature at which filament is softing and starts to change it's shapes.", "Softing Point"));
     }
+
+    protected override bool MatchQuery(FilamentType item, string query)
+    {
+        return item.ShortName.Contains(query, StringComparison.CurrentCultureIgnoreCase) || item.FullName.Contains(query, StringComparison.CurrentCultureIgnoreCase);
+    }
 }

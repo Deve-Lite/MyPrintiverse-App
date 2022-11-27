@@ -115,14 +115,35 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
     }
 
 
-    protected virtual bool IsStepTwoValid() => (Item as FilamentValidator).Brand.Validate() &&
-                                               (Item as FilamentValidator).Diameter.Validate() &&
-                                               (Item as FilamentValidator).Color.Validate();
+    protected virtual bool IsStepTwoValid()
+    {
+        var validatableItem = (Item as FilamentValidator);
 
-    protected virtual bool IsStepThreeValid() => (Item as FilamentValidator).NozzleTemperature.Validate() &&
-                                                 (Item as FilamentValidator).BedTemperature.Validate() &&
-                                                 (Item as FilamentValidator).CoolingRate.Validate()&&
-                                                 (Item as FilamentValidator).Description.Validate();
+        validatableItem.Brand.Value.Trim();
+        validatableItem.Tag.Value.Trim();
+        validatableItem.Diameter.Value.Trim();
+        validatableItem.Color.Value.Trim();
+
+        return validatableItem.Brand.Validate() &&
+            validatableItem.Tag.Validate() &&
+            validatableItem.Diameter.Validate() &&
+            validatableItem.Color.Validate();
+    }
+
+    protected virtual bool IsStepThreeValid()
+    {
+        var validatableItem = (Item as FilamentValidator);
+
+        validatableItem?.NozzleTemperature.Value.Trim();
+        validatableItem?.BedTemperature.Value.Trim();
+        validatableItem?.CoolingRate.Value.Trim();
+        validatableItem?.Description.Value.Trim();
+
+        return validatableItem.NozzleTemperature.Validate() &&
+            validatableItem.BedTemperature.Validate() &&
+            validatableItem.CoolingRate.Validate()&&
+            validatableItem.Description.Validate();
+    }
 
     protected async Task Next(Func<Task> manageItem)
     {
@@ -154,6 +175,7 @@ public partial class FilamentFormViewModel : BaseFormViewModel<Filament>
             else
             {
                 IsSelectedItemValid = false;
+                await Toast.Toast("Please select material.");
             }
 
             NextIsRunning = false;

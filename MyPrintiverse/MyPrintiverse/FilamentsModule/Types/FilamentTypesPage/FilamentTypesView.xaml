@@ -8,14 +8,23 @@
              xmlns:buttons="clr-namespace:MyPrintiverse.Templates.Buttons">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="search.png"/>
+        <ToolbarItem Order="Primary" Text="Tip" IconImageSource="search.png" Clicked="SearchClicked"/>
     </ContentPage.ToolbarItems>
     
-    <Grid RowDefinitions="*,80">
+    <Grid RowDefinitions="auto,*,80">
 
-        <SearchBar />
+        <Border x:Name="border"
+                Style="{StaticResource BaseBorderVariant}"
+                StrokeShape="RoundRectangle 8,8,8,8"
+                Margin="15,0,15,0"
+                Padding="5">
+            <SearchBar x:Name="search" 
+                       MaximumHeightRequest="30"
+                       SearchCommand="{Binding SearchItemsCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference search}}" />
+        </Border>
 
-        <RefreshView Style="{StaticResource BaseRefreshView}" Grid.RowSpan="2">
+        <RefreshView Style="{StaticResource BaseRefreshView}" Grid.RowSpan="2" Grid.Row="1">
             <CollectionView Style="{StaticResource BaseCollectionView}"
                             Footer="{Binding .}"
                             Header="{Binding .}">
@@ -127,12 +136,12 @@
         </RefreshView>
 
         <buttons:AddToCollectionButton HorizontalOptions="End"
-                                       Grid.Row="1"
+                                       Grid.Row="2"
                                        Margin="0,0,15,0"
                                        AddCommand="{Binding AddItemCommand}"/>
 
         <Border Style="{StaticResource CollectionHeaderBorder}"
-                Grid.Row="1"
+                Grid.Row="2"
                 VerticalOptions="End"
                 Margin="15,0"/>
         

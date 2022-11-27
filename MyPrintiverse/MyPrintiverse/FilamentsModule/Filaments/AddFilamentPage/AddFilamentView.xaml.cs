@@ -7,7 +7,8 @@ public partial class AddFilamentView : ContentPage
 	{
 		InitializeComponent();
         BindingContext = vm;
-        brandEntry.Completed += (s, e) => diameterEntry.Focus();
+        brandEntry.Completed += (s, e) => tagEntry.Focus();
+        tagEntry.Completed += (s, e) =>  diameterEntry.Focus();
         diameterEntry.Completed += (s, e) => colorEntry.Focus();
 
         nozzleTemperatureEntry.Completed += (s, e) => bedTemperatureEntry.Focus();

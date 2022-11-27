@@ -138,6 +138,14 @@
                                                      IsValid="{Binding Item.Brand.IsValid}"
                                                      ErrorMessage="{Binding Item.Brand.Error}"/>
 
+                    <inputs:ValidatableEntry x:Name="tagEntry"
+                                             KeyboardFlag="CapitalizeCharacter"
+                                             Title="Tag"
+                                             Text="{Binding Item.Tag.Value}"
+                                             ValidationCommand="{Binding Item.Tag.ExtendedValidateCommand}"
+                                             IsValid="{Binding Item.Tag.IsValid}"
+                                             ErrorMessage="{Binding Item.Tag.Error}"/>
+
                     <inputs:EntityValidatableEntry x:Name="diameterEntry"
                                                            Title="Diameter"
                                                            Text="{Binding Item.Diameter.Value}"

@@ -117,14 +117,19 @@
 		<AndroidResource Remove="Authorization\Views\**" />
 		<Compile Remove="Authorization\ViewModels\**" />
 		<Compile Remove="Authorization\Views\**" />
+		<Compile Remove="FilamentsModule\Spools\SpoolForm\**" />
 		<EmbeddedResource Remove="Authorization\ViewModels\**" />
 		<EmbeddedResource Remove="Authorization\Views\**" />
+		<EmbeddedResource Remove="FilamentsModule\Spools\SpoolForm\**" />
 		<MauiCss Remove="Authorization\ViewModels\**" />
 		<MauiCss Remove="Authorization\Views\**" />
+		<MauiCss Remove="FilamentsModule\Spools\SpoolForm\**" />
 		<MauiXaml Remove="Authorization\ViewModels\**" />
 		<MauiXaml Remove="Authorization\Views\**" />
+		<MauiXaml Remove="FilamentsModule\Spools\SpoolForm\**" />
 		<None Remove="Authorization\ViewModels\**" />
 		<None Remove="Authorization\Views\**" />
+		<None Remove="FilamentsModule\Spools\SpoolForm\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -352,10 +357,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\MyPrintiverse.Core\MyPrintiverse.Core.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="FilamentsModule\Spools\SpoolForm\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyPrintiverseHideInfoBar="True" /></VisualStudio></ProjectExtensions>

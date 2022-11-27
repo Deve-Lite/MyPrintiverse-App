@@ -1,4 +1,5 @@
 ﻿
+using MongoDB.Bson;
 using MyPrintiverse.Core.Extensions;
 using System.Globalization;
 
@@ -12,8 +13,9 @@ public class SpoolValidator : BaseValidator<Spool>
     public ExtendedValidatable<string> StandardWeight { get; set; }
     public ExtendedValidatable<string> AvaliableWeight { get; set; }
     public ExtendedValidatable<string> Cost { get; set; }
+    public ExtendedValidatable<string> Tag { get; set; }
 
-    public bool IsFinished { get; set; }
+    public ExtendedValidatable<bool> IsFinished { get; set; }
     public ExtendedValidatable<bool> IsOnSpool { get; set; }
 
     public SpoolValidator()
@@ -37,6 +39,7 @@ public class SpoolValidator : BaseValidator<Spool>
     }
 
     public override bool Validate() => Cost.Validate() &&
+                                       Tag.Validate() &&
                                        StandardWeight.Validate() &&
                                        AvaliableWeight.Validate() &&     
                                        Description.Validate();
@@ -49,8 +52,9 @@ public class SpoolValidator : BaseValidator<Spool>
 
         spoolMap.FilamentId = FilamentId;
         spoolMap.Description = Description.Value.Trim();
-        spoolMap.IsFinished = IsFinished;
+        spoolMap.IsFinished = IsFinished.Value;
         spoolMap.IsOnSpool = IsOnSpool.Value;
+        spoolMap.Tag = Tag.Value;
 
         /* Parse will not throw Exception because of NumberRules */
         spoolMap.AvaliableWeight = double.Parse(AvaliableWeight.Value.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
@@ -77,21 +81,27 @@ public class SpoolValidator : BaseValidator<Spool>
             .WithRule( new MantissaLengthRule(3), "Too long number mantissa.")
             .WithRule( new LowerOrEqualRule(StandardWeight), "Should be lower than standard weight.");
 
+        Tag = ExtendedValidator.Build<string>()
+            .WithRule(new RangeRule<string>(minLength: 3, maxLength: 10), "Data should have from 3 to 10 characters.\n");
+
         Description = ExtendedValidator.Build<string>()
             .WithRule(new RangeRule<string>(maxLength:500), "Too long data.");
 
         IsOnSpool = ExtendedValidator.Build<bool>();
+
+        IsFinished = ExtendedValidator.Build<bool>();
     }
 
     private void InitializeFields()
     {
         IsOnSpool.Value = true;
-        IsFinished = false;
+        IsFinished.Value = false;
         Cost.Value = ""; 
         AvaliableWeight.Value = "";
         StandardWeight.Value = "";
         Description.Value = "";
         FilamentId = "";
+        Tag.Value = "";
     }
 
     public override void Map(Spool spool)
@@ -102,12 +112,13 @@ public class SpoolValidator : BaseValidator<Spool>
 
         FilamentId = spool.FilamentId;
 
-        IsFinished = spool.IsFinished;
+        IsFinished.Value = spool.IsFinished;
         IsOnSpool.Value = spool.IsOnSpool;
 
         AvaliableWeight.Value = spool.AvaliableWeight.ToString("0.###");
         StandardWeight.Value = spool.StandardWeight.ToString("0.###");
         Cost.Value = spool.Cost.ToString("0.##");
+        Tag.Value = spool.Tag;
 
         Description.Value = spool.Description;
     }

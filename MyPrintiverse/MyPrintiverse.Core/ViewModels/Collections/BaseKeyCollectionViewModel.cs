@@ -49,19 +49,19 @@ public class BaseKeyCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
         {
             PrevId = Id;
             Items = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
-            RefreshCollection(SearchedItems, Items, false);
+            RefreshCollection(SearchedItems, new List<TBaseModel>(Items), false);
         }
         else
         {
             Items = (List<TBaseModel>) await KeyItemsService.GetItemsByKeyAsync(Id);
-            UpdateCollection(SearchedItems, Items);
+            UpdateCollection(SearchedItems, new List<TBaseModel>(Items));
         }
     }
 
     protected override async Task Refresh()
     {
         Items = (List<TBaseModel>)await KeyItemsService.GetItemsByKeyAsync(Id);
-        RefreshCollection(SearchedItems, Items);
+        RefreshCollection(SearchedItems, new List<TBaseModel>(Items));
     }
 
     #endregion

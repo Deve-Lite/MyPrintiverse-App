@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.IdentityModel.Tokens;
 using MyPrintiverse.FilamentsModule.Filaments.EditFilamentPage;
 using MyPrintiverse.FilamentsModule.Spools;
 using MyPrintiverse.FilamentsModule.Spools.AddSpoolPage;
@@ -13,12 +14,29 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
     [ObservableProperty]
     private bool _isFinishedFilamentsVisible;
 
+    [ObservableProperty]
+    public bool _searchBarIsVisible;
+
     protected override string OpenRoute(Spool item) => $"{nameof(SpoolView)}?Id={item?.Id}&FilamentId={Item.Id}";
     protected override string EditRoute(Spool item) => $"{nameof(EditSpoolView)}?Id={item?.Id}&FilamentId={Item.Id}";
     protected override string AddRoute() => $"{nameof(AddSpoolView)}?FilamentId={Item.Id}";
 
     public FilamentViewModel(IMessageService messagingService, IItemService<Filament> itemService, IItemService<Spool> itemsService, IItemKeyService<Spool> itemsKeyService) : base(messagingService, itemService, itemsService, itemsKeyService)
     {
+    }
+
+    [RelayCommand]
+    public void SearchBarEnable() 
+    {
+        if (SearchBarIsVisible)
+        {
+            SearchBarIsVisible = false;
+            SearchItems("");
+        }
+        else
+        {
+            SearchBarIsVisible = true;
+        }
     }
 
     #region Overrides
@@ -30,11 +48,41 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
         IsFinishedFilamentsVisible = false;
     }
 
+    public override void SearchItems(string query)
+    {
+        if (query.IsNullOrEmpty())
+        {
+
+            var collection = new List<Spool>(Items);
+
+            if (!IsFinishedFilamentsVisible)
+                collection.RemoveAll(x => x.IsFinished);
+
+            UpdateCollection(SearchedItems, collection);
+            return;
+        }
+
+        var filteredItems = Items.Where(item => MatchQuery(item, query)).ToList();
+
+        if (!IsFinishedFilamentsVisible)
+            filteredItems.RemoveAll(x => x.IsFinished);
+
+        foreach (Spool item in Items)
+        {
+            if (!filteredItems.Contains(item))
+                SearchedItems.Remove(item);
+            else if (!SearchedItems.Contains(item))
+                SearchedItems.Add(item);
+        }
+    }
+
     protected override async Task Refresh()
     {
         IsRefreshing = true;
 
-        var collection = (List<Spool>) await KeyItemsService.GetItemsByKeyAsync(Id);
+        Items = (List<Spool>) await KeyItemsService.GetItemsByKeyAsync(Id);
+
+        var collection = new List<Spool>(Items);
 
         if (!IsFinishedFilamentsVisible)
             collection.RemoveAll(x => x.IsFinished);
@@ -46,12 +94,19 @@ public partial class FilamentViewModel : BaseKeyCollectionWithitemViewModel<Fila
 
     protected override async Task UpdateCollectionsOnAppearing()
     {
-        var collection = (List<Spool>)await KeyItemsService.GetItemsByKeyAsync(Id);
+        Items = (List<Spool>)await KeyItemsService.GetItemsByKeyAsync(Id);
+
+        var collection = new List<Spool>(Items);
 
         if (!IsFinishedFilamentsVisible)
             collection.RemoveAll(x => x.IsFinished);
 
         UpdateCollection(SearchedItems, collection);
+    }
+
+    protected override bool MatchQuery(Spool item, string query)
+    {
+        return item.Tag.Contains(query, StringComparison.CurrentCultureIgnoreCase);
     }
 
     #endregion

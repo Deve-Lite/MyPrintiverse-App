@@ -1,4 +1,5 @@
-﻿using MyPrintiverse.Core.Services;
+﻿using Microsoft.IdentityModel.Tokens;
+using MyPrintiverse.Core.Services;
 using MyPrintiverse.Core.Utilities;
 
 namespace MyPrintiverse.Core.ViewModels.Collections;
@@ -28,9 +29,30 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
 
     #region Overrides
 
-    protected virtual void SearchItems(string query)
+    public override void SearchItems(string query)
     {
-        var filteredItems = Items.Where(item => MatchQuery(item, query));
+
+        if (query.IsNullOrEmpty())
+        {
+            var collections = new List<GroupedItem<TBaseModel>>(SearchedItems);
+
+            var copy = new List<TBaseModel>(Items);
+
+            foreach (var collection in collections)
+            {
+                UpdateCollection(collection, copy, false);
+                if (collection.Count == 0)
+                    SearchedItems.Remove(collection);
+            }
+
+            foreach (var item in copy)
+                AddToCollection(SearchedItems, item);
+
+            SortCollection(SearchedItems);
+            return;
+        }
+
+        var filteredItems = Items.Where(item => MatchQuery(item, query)).ToList();
 
         foreach (TBaseModel item in Items)
         {
@@ -52,24 +74,29 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
                     SearchedItems[itemCollectionIndex].Add(item);
                 }
             }
+
+            SortCollection(SearchedItems);
         }
 
     }
 
     protected override async Task UpdateCollectionsOnAppearing()
     {
-        var data = (List<TBaseModel>)await ItemsService.GetItemsAsync();
+        Items = (List<TBaseModel>)await ItemsService.GetItemsAsync();
 
         var collections = new List<GroupedItem<TBaseModel>>(SearchedItems);
 
+
+        var copy = new List<TBaseModel>(Items);
+
         foreach (var collection in collections)
         {
-            UpdateCollection(collection, data, false);
+            UpdateCollection(collection, copy, false);
             if (collection.Count == 0)
                 SearchedItems.Remove(collection);
         }
 
-        foreach (var item in data)
+        foreach (var item in copy)
             AddToCollection(SearchedItems, item);
 
         SortCollection(SearchedItems);
@@ -78,7 +105,7 @@ public class GroupedCollectionViewModel<TBaseModel, TAddView, TEditView, TItemVi
     protected override async Task Refresh()
     {
         Items = (List<TBaseModel>) await ItemsService.GetItemsAsync();
-        await RefreshCollection(SearchedItems, Items);
+        await RefreshCollection(SearchedItems, new List<TBaseModel>(Items));
     }
 
     protected override void DeleteFromSearchedItems(TBaseModel item)

@@ -32,5 +32,11 @@ public class FilamentCollectionViewModel : GroupedCollectionViewModel<Filament, 
         base.DeleteFromSearchedItems(item);
         _spoolService.DeleteItemsByKeyAsync(item.Id);
     }
+
+    protected override bool MatchQuery(Filament item, string query)
+    {
+        return item.Brand.Contains(query, StringComparison.CurrentCultureIgnoreCase) || item.Tag.Contains(query, StringComparison.CurrentCultureIgnoreCase);
+    }
+
     #endregion
 }
