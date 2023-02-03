@@ -4,20 +4,17 @@
   <p> Let's print it. </p>
   
   <div>
-    <a href="">
-      <img src="https://img.shields.io/github/last-commit/Deve-Lite/MyPrintiverse-App" alt="last update" />
-    </a>
     <a href="https://github.com/psp515/ReadMeTemplate/network/members">
-      <img src="https://img.shields.io/github/forks/psp515/ReadMeTemplate" alt="forks" />
+      <img src="https://img.shields.io/github/forks/Deve-Lite/MyPrintiverse-App" alt="forks" />
     </a>
     <a href="https://github.com/psp515/ReadMeTemplate/stargazers">
-      <img src="https://img.shields.io/github/stars/psp515/ReadMeTemplate" alt="stars" />
+      <img src="https://img.shields.io/github/stars/Deve-Lite/MyPrintiverse-App" alt="stars" />
     </a>
     <a href="https://github.com/psp515/ReadMeTemplate/issues/">
-      <img src="https://img.shields.io/github/issues/psp515/ReadMeTemplate" alt="open issues" />
+      <img src="https://img.shields.io/github/issues/Deve-Lite/MyPrintiverse-App" alt="open issues" />
     </a>
     <a href="https://github.com/psp515/ReadMeTemplate/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/psp515/ReadMeTemplate" alt="license" />
+      <img src="https://img.shields.io/github/license/Deve-Lite/MyPrintiverse-App" alt="license" />
     </a>
   </div>
 </div>  
