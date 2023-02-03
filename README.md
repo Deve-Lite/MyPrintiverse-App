@@ -27,8 +27,6 @@
 Application was planned to have more modules than noting filaments and login, but we planned too much with small team and idea surpassed us.
 Also main idea was that users can use it without having account so some services are complex.
 
-***Course Project***
-
 Before we started with our first 2 modules we made <a href="https://github.com/Deve-Lite/MyPrintiverse-App/tree/main/MyPrintiverse/MyPrintiverse.Core"> MyPrintiverse.Core </a>. It is smaller project where we created base for our application, like base ViewModels, Validations, Services, Interfaces etc. 
 After we finished 'Core' we started to develop Authorization and Filament Module. And this is the moment where we stopped working for several reasons.
 
