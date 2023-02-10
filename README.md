@@ -66,7 +66,7 @@ Project had working backend written in node.js. Yet unfortunetly backend wasn't 
     <img src="https://img.shields.io/badge/-Newtonsoft.Json-FFFFFF" />
   </a>
   <a>
-    <img src="https://img.shields.io/badge/-Sqlite-net-pcl-FFFFFF" />
+    <img src="https://img.shields.io/badge/-sqlite_net_pcl-FFFFFF" />
   </a>
   <a>
     <img src="https://img.shields.io/badge/-.NET_MAUI_Community_Toolkit-FFFFFF" />
