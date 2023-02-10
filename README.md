@@ -44,7 +44,8 @@ This branch contains login flow - made by Kacper Żabiński.
 
 ***Backend***
 
-Project had working backend written in node.js. Yet unfortunetly backend wasn't well tested.
+Project had working backend written in node.js. Yet unfortunetly backend wasn't well tested with app. 
+(Made by <a href="https://github.com/dredziasty">Kamil Pasternak</a>)
 
 ### Built With
 
