@@ -30,7 +30,7 @@ Also main idea was that users can use it without having account so some services
 Before we started with our first 2 modules we made <a href="https://github.com/Deve-Lite/MyPrintiverse-App/tree/main/MyPrintiverse/MyPrintiverse.Core"> MyPrintiverse.Core </a>. It is smaller project where we created base for our application, like base ViewModels, Validations, Services, Interfaces etc. 
 After we finished 'Core' we started to develop Authorization and Filament Module. And this is the moment where we stopped working for several reasons.
 
-First of all team was tired of this project already we made a lot of conceptual work and unfortunelty didin't realised that.
+First of all team was tired of this project already we made a lot of conceptual work and unfortunelty didn't realised that.
 
 Next reason was that .NET MAUI wasn't ready at that time, when we first started to develop appliaction, framework had (still has) a lot of bugs and that was also a bit depressing. Key things wasn't working and because of that we couldn't go forward. That's why our work isn't connected and we have 2 main branches (except main).
 
@@ -86,7 +86,7 @@ Project had working backend written in node.js. Yet unfortunetly backend wasn't 
 
 There are no releases.
 
-So if you want to see the app you need to download this repository and upload it to your phone with Visual Studio.
+So if you want to see the app you need to download this repository and upload it to your phone using Visual Studio or any IDE supporting MAUI framework.
 
 ### License
 
